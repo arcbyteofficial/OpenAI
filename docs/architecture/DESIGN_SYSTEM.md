@@ -127,12 +127,12 @@ icons in the text color — no per-item colored accents), a translucent sticky h
 The product is branded **ArcByte | Open AI**. One constant, `BRAND` in
 `src/shared/constants/appConfig.ts`, feeds every surface:
 
-| Field       | Value                | Used for                                                 |
-| ----------- | -------------------- | -------------------------------------------------------- |
-| `name`      | `ArcByte \| Open AI` | page titles, lockups, PWA `name`, default `instanceName` |
-| `shortName` | `ArcByte`            | diagram/hub node labels, PWA `short_name`                |
-| `logoLight` | `/logo_white.png`    | logo on the light theme; favicon for light browser UI    |
-| `logoDark`  | `/logo_dark.png`     | logo on the dark theme; favicon for dark browser UI      |
+| Field       | Value                                      | Used for                                                 |
+| ----------- | ------------------------------------------ | -------------------------------------------------------- |
+| `name`      | `ArcByte \| Open AI`                       | page titles, lockups, PWA `name`, default `instanceName` |
+| `shortName` | `ArcByte`                                  | diagram/hub node labels, PWA `short_name`                |
+| `logoLight` | `https://cdn.arcbyte.co/favicon_white.png` | logo on the light theme; favicon for light browser UI    |
+| `logoDark`  | `https://cdn.arcbyte.co/favicon_dark.png`  | logo on the dark theme; favicon for dark browser UI      |
 
 - **Components.** `BrandMark` (`src/shared/components/BrandLogo.tsx`) renders both logo files and
   lets CSS (`dark:`) show the one for the active theme, so the server render already matches and
@@ -140,6 +140,10 @@ The product is branded **ArcByte | Open AI**. One constant, `BRAND` in
   login, landing navigation/footer/hub, home topology hub and docs navigation use them.
 - **Favicons.** `src/app/layout.tsx` links the two logos with `prefers-color-scheme` media queries.
   An operator's custom favicon (Settings → Appearance) still replaces them.
+- **CDN-hosted.** The logos load from `https://cdn.arcbyte.co` in the visitor's browser (the CSP
+  `img-src` allows `https:`), so an offline or air-gapped install shows the wordmark without the
+  mark. The PWA manifest, `apple-touch-icon.png`, service-worker notification icons and the
+  `/favicon.ico` liveness probe used by `omniroute doctor` still use the local files in `public/`.
 - **Overrides.** Settings → Appearance keeps whitelabeling per instance: a custom `instanceName` or
   logo replaces the default wordmark/mark in the sidebar and the page title.
 - **Copy.** Brand-only i18n strings (titles, the home greeting, diagram labels, copyright) carry the
@@ -162,7 +166,7 @@ The product is branded **ArcByte | Open AI**. One constant, `BRAND` in
 | ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Tokens & base rules | `src/app/globals.css`                                                                                                                                          |
 | Fonts               | `src/app/fonts/`                                                                                                                                               |
-| Brand               | `src/shared/constants/appConfig.ts` (`BRAND`), `src/shared/components/BrandLogo.tsx`, `public/logo_white.png`, `public/logo_dark.png`                          |
+| Brand               | `src/shared/constants/appConfig.ts` (`BRAND`), `src/shared/components/BrandLogo.tsx`; logos on `https://cdn.arcbyte.co`                                        |
 | Theme store         | `src/store/themeStore.ts`, `src/shared/components/ThemeProvider.tsx`, `src/shared/constants/appConfig.ts`                                                      |
 | Appearance settings | `src/app/(dashboard)/dashboard/settings/components/AppearanceTab.tsx`                                                                                          |
 | Shell               | `src/shared/components/{Sidebar,Header,CommandPalette,Breadcrumbs}.tsx`, `src/shared/components/layouts/`                                                      |

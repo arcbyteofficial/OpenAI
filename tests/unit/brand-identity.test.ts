@@ -18,8 +18,8 @@ test("BRAND is the single source of the product name and logo files", () => {
   assert.equal(BRAND.company, "ArcByte");
   assert.equal(BRAND.product, "Open AI");
   assert.equal(BRAND.shortName, "ArcByte");
-  assert.equal(BRAND.logoLight, "/logo_white.png");
-  assert.equal(BRAND.logoDark, "/logo_dark.png");
+  assert.equal(BRAND.logoLight, "https://cdn.arcbyte.co/favicon_white.png");
+  assert.equal(BRAND.logoDark, "https://cdn.arcbyte.co/favicon_dark.png");
   assert.equal(APP_CONFIG.name, BRAND.name);
 });
 
@@ -40,6 +40,21 @@ test("default favicons are the theme-matched brand logos", () => {
   const faviconRoute = read("src/app/api/settings/favicon/route.ts");
   assert.ok(!faviconRoute.includes("/favicon.svg"), "fallback redirects to the brand logo");
   assert.ok(faviconRoute.includes("NextResponse.redirect(BRAND.logoLight)"));
+});
+
+test("the Content-Security-Policy lets the CDN-hosted logos load", () => {
+  // The logos and favicons come from https://cdn.arcbyte.co; favicons and <img> are both
+  // governed by img-src, so it must keep allowing that origin (or https: in general).
+  const nextConfig = read("next.config.mjs");
+  const imgSrc = nextConfig.match(/"img-src ([^"]+)"/);
+  assert.ok(imgSrc, "next.config.mjs defines an img-src directive");
+  const sources = imgSrc[1].split(/\s+/);
+  const logoOrigin = new URL(BRAND.logoLight).origin;
+  assert.equal(new URL(BRAND.logoDark).origin, logoOrigin, "both logos share one origin");
+  assert.ok(
+    sources.includes("https:") || sources.includes(logoOrigin),
+    `img-src must allow ${logoOrigin}`
+  );
 });
 
 test("PWA manifest carries the brand in English", () => {

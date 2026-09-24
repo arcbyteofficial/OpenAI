@@ -27,7 +27,7 @@ const REDOC_HTML = `<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>${BRAND.name} API Reference</title>
     <meta name="description" content="Redoc-rendered OpenAPI 3.0 spec for the ${BRAND.name} v1 API." />
-    <link rel="icon" href="/favicon.ico" />
+    <link rel="icon" href="${BRAND.logoLight}" />
     <style>
       body { margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif; }
       #redoc-container { min-height: 100vh; }

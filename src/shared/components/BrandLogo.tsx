@@ -19,7 +19,7 @@ export function BrandMark({ size = 28, className, alt = "" }: BrandMarkProps) {
       className={cn("relative inline-flex shrink-0 overflow-hidden", className)}
       style={{ width: size, height: size }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- static brand asset in public/; images are unoptimized (next.config), so next/image adds nothing here */}
+      {/* eslint-disable-next-line @next/next/no-img-element -- brand asset from the ArcByte CDN; images are unoptimized (next.config), so next/image adds nothing here */}
       <img
         src={withBasePath(BRAND.logoLight)}
         alt={alt}
