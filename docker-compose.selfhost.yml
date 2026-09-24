@@ -1,6 +1,9 @@
 # ──────────────────────────────────────────────────────────────────────
-# OmniRoute — Self-Host Compose
+# ArcByte | Open AI — Self-Host Compose
 # ──────────────────────────────────────────────────────────────────────
+# Runs this fork's image, which .github/workflows/arcbyte-image.yml builds from
+# `master` and publishes to GHCR. The upstream diegosouzapw/omniroute images are
+# built from upstream's code and never carry this fork's UI or branding.
 
 services:
   redis:
@@ -20,7 +23,10 @@ services:
       retries: 3
 
   omniroute:
-    image: diegosouzapw/omniroute:latest
+    image: ghcr.io/arcbyteofficial/openai:latest
+    # Check the registry on every `up`, so a redeploy picks up the latest master build
+    # instead of reusing the copy of :latest already on this machine.
+    pull_policy: always
     container_name: omniroute
     restart: unless-stopped
     stop_grace_period: 40s
