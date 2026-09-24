@@ -10,32 +10,27 @@ interface BrandMarkProps {
 }
 
 /**
- * The ArcByte mark. Both theme variants are rendered and CSS (`dark:`) shows one, so the
- * server render and first paint already match the active theme — no hydration flash.
+ * The ArcByte mark. Each theme variant is a CSS background image and `dark:` shows one, so:
+ * - the server render and first paint already match the active theme (no hydration flash);
+ * - only the visible variant is downloaded (hidden elements don't fetch backgrounds);
+ * - if the CDN is unreachable the slot stays empty instead of showing a broken-image icon.
  */
 export function BrandMark({ size = 28, className, alt = "" }: BrandMarkProps) {
+  const a11y = alt ? { role: "img", "aria-label": alt } : { "aria-hidden": true as const };
+  const variant = "absolute inset-0 bg-contain bg-center bg-no-repeat";
   return (
     <span
+      {...a11y}
       className={cn("relative inline-flex shrink-0 overflow-hidden", className)}
       style={{ width: size, height: size }}
     >
-      {/* eslint-disable-next-line @next/next/no-img-element -- brand asset from the ArcByte CDN; images are unoptimized (next.config), so next/image adds nothing here */}
-      <img
-        src={withBasePath(BRAND.logoLight)}
-        alt={alt}
-        width={size}
-        height={size}
-        draggable={false}
-        className="size-full object-contain dark:hidden"
+      <span
+        className={cn(variant, "dark:hidden")}
+        style={{ backgroundImage: `url("${withBasePath(BRAND.logoLight)}")` }}
       />
-      {/* eslint-disable-next-line @next/next/no-img-element -- dark-theme variant of the same static asset */}
-      <img
-        src={withBasePath(BRAND.logoDark)}
-        alt={alt}
-        width={size}
-        height={size}
-        draggable={false}
-        className="hidden size-full object-contain dark:block"
+      <span
+        className={cn(variant, "hidden dark:block")}
+        style={{ backgroundImage: `url("${withBasePath(BRAND.logoDark)}")` }}
       />
     </span>
   );

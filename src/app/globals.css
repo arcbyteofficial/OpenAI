@@ -475,6 +475,13 @@ button .material-symbols-outlined,
   animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }
 
+/* Landing flow diagram: animated dashed connector paths (animate-[dash_2s_linear_infinite]). */
+@keyframes dash {
+  to {
+    stroke-dashoffset: -20;
+  }
+}
+
 @keyframes border-glow {
   0%,
   100% {

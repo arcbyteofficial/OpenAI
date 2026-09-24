@@ -14,7 +14,7 @@ export default function LandingPage() {
   const router = useRouter();
   return (
     <div className="relative text-text-main font-sans overflow-x-hidden antialiased selection:bg-contrast selection:text-contrast-fg">
-      {/* Animated Background */}
+      {/* Background */}
       <div className="fixed inset-0 z-0 overflow-hidden pointer-events-none bg-bg"></div>
 
       <div className="relative z-10">
@@ -62,39 +62,6 @@ export default function LandingPage() {
 
         <Footer />
       </div>
-
-      {/* Global styles for keyframes */}
-      <style jsx global>{`
-        @keyframes float {
-          0%,
-          100% {
-            transform: translateY(0);
-          }
-          50% {
-            transform: translateY(-10px);
-          }
-        }
-        @keyframes dash {
-          to {
-            stroke-dashoffset: -20;
-          }
-        }
-        @keyframes blob {
-          0%,
-          100% {
-            transform: translate(0, 0) scale(1);
-          }
-          33% {
-            transform: translate(30px, -50px) scale(1.1);
-          }
-          66% {
-            transform: translate(-20px, 20px) scale(0.9);
-          }
-        }
-        .animate-blob {
-          animation: blob 20s ease-in-out infinite;
-        }
-      `}</style>
     </div>
   );
 }

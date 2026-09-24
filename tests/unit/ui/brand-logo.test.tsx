@@ -1,7 +1,8 @@
 // @vitest-environment jsdom
 /**
  * BrandMark / BrandWordmark — the ArcByte lockup used by the sidebar, login, landing and docs.
- * Both logo variants must be in the markup so CSS (`dark:`) can pick one before hydration.
+ * Both logo variants must be in the markup so CSS (`dark:`) can pick one before hydration, and
+ * they are background images so an unreachable CDN leaves the slot empty (no broken-image icon).
  */
 import React from "react";
 import { act } from "react";
@@ -30,43 +31,45 @@ afterEach(() => {
 });
 
 describe("BrandMark", () => {
-  it("renders the light and dark logo files, one per theme", () => {
+  it("paints the light and dark logos as background images, one per theme", () => {
     const el = render(<BrandMark size={28} />);
-    const imgs = Array.from(el.querySelectorAll("img"));
-    expect(imgs).toHaveLength(2);
+    const box = el.firstElementChild as HTMLElement;
+    // No <img>: a failed load must never show a broken-image icon.
+    expect(el.querySelectorAll("img")).toHaveLength(0);
 
-    const [light, dark] = imgs;
-    expect(light.getAttribute("src")).toBe(BRAND.logoLight);
+    const [light, dark] = Array.from(box.children) as HTMLElement[];
+    expect(light.style.backgroundImage).toBe(`url("${BRAND.logoLight}")`);
     expect(light.className).toContain("dark:hidden");
-    expect(dark.getAttribute("src")).toBe(BRAND.logoDark);
+    expect(dark.style.backgroundImage).toBe(`url("${BRAND.logoDark}")`);
     expect(dark.className).toContain("hidden");
     expect(dark.className).toContain("dark:block");
+    for (const variant of [light, dark]) {
+      expect(variant.className).toContain("bg-contain");
+      expect(variant.className).toContain("bg-no-repeat");
+    }
   });
 
-  it("sizes the box and both images to the requested size", () => {
+  it("sizes the box to the requested size", () => {
     const el = render(<BrandMark size={40} className="rounded-lg" />);
     const box = el.firstElementChild as HTMLElement;
     expect(box.style.width).toBe("40px");
     expect(box.style.height).toBe("40px");
     expect(box.className).toContain("rounded-lg");
-    for (const img of Array.from(el.querySelectorAll("img"))) {
-      expect(img.getAttribute("width")).toBe("40");
-      expect(img.getAttribute("height")).toBe("40");
-    }
   });
 
   it("is decorative by default and takes an accessible name when standing alone", () => {
     const decorative = render(<BrandMark />);
-    for (const img of Array.from(decorative.querySelectorAll("img"))) {
-      expect(img.getAttribute("alt")).toBe("");
-    }
+    const hidden = decorative.firstElementChild as HTMLElement;
+    expect(hidden.getAttribute("aria-hidden")).toBe("true");
+    expect(hidden.getAttribute("role")).toBeNull();
     act(() => root?.unmount());
     container?.remove();
 
     const named = render(<BrandMark alt={BRAND.name} />);
-    for (const img of Array.from(named.querySelectorAll("img"))) {
-      expect(img.getAttribute("alt")).toBe(BRAND.name);
-    }
+    const labelled = named.firstElementChild as HTMLElement;
+    expect(labelled.getAttribute("role")).toBe("img");
+    expect(labelled.getAttribute("aria-label")).toBe(BRAND.name);
+    expect(labelled.getAttribute("aria-hidden")).toBeNull();
   });
 });
 

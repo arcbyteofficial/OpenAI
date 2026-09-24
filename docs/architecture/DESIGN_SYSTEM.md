@@ -134,10 +134,12 @@ The product is branded **ArcByte | Open AI**. One constant, `BRAND` in
 | `logoLight` | `https://cdn.arcbyte.co/favicon_white.png` | logo on the light theme; favicon for light browser UI    |
 | `logoDark`  | `https://cdn.arcbyte.co/favicon_dark.png`  | logo on the dark theme; favicon for dark browser UI      |
 
-- **Components.** `BrandMark` (`src/shared/components/BrandLogo.tsx`) renders both logo files and
-  lets CSS (`dark:`) show the one for the active theme, so the server render already matches and
-  nothing flashes on hydration. `BrandWordmark` renders the name with a muted separator. The sidebar,
-  login, landing navigation/footer/hub, home topology hub and docs navigation use them.
+- **Components.** `BrandMark` (`src/shared/components/BrandLogo.tsx`) paints each logo as a CSS
+  background image and lets `dark:` show the one for the active theme: the server render already
+  matches (no hydration flash), only the visible variant is downloaded, and an unreachable CDN
+  leaves the slot empty rather than showing a broken-image icon. `BrandWordmark` renders the name
+  with a muted separator. The sidebar, login, landing navigation/footer/hub, home topology hub and
+  docs navigation use them.
 - **Favicons.** `src/app/layout.tsx` links the two logos with `prefers-color-scheme` media queries.
   An operator's custom favicon (Settings → Appearance) still replaces them.
 - **CDN-hosted.** The logos load from `https://cdn.arcbyte.co` in the visitor's browser (the CSP
