@@ -1082,7 +1082,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
 
   if (loading) {
     return (
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         <CardSkeleton />
         <CardSkeleton />
       </div>
@@ -1138,27 +1138,27 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
     {
       running: {
         label: translateOrFallback("cloudflaredRunning", "Running"),
-        className: "bg-green-500/10 border-green-500/30 text-green-400",
+        className: "bg-success/10 border-success/30 text-success",
       },
       starting: {
         label: translateOrFallback("cloudflaredStarting", "Starting"),
-        className: "bg-blue-500/10 border-blue-500/30 text-blue-400",
+        className: "bg-primary/10 border-primary/30 text-primary",
       },
       stopped: {
         label: translateOrFallback("cloudflaredStoppedState", "Stopped"),
-        className: "bg-surface border-border/70 text-text-muted",
+        className: "bg-bg-subtle border-border text-text-muted",
       },
       not_installed: {
         label: translateOrFallback("cloudflaredNotInstalled", "Not installed"),
-        className: "bg-surface border-border/70 text-text-muted",
+        className: "bg-bg-subtle border-border text-text-muted",
       },
       unsupported: {
         label: translateOrFallback("cloudflaredUnsupported", "Unsupported"),
-        className: "bg-amber-500/10 border-amber-500/30 text-amber-400",
+        className: "bg-warning/10 border-warning/30 text-warning",
       },
       error: {
         label: translateOrFallback("cloudflaredError", "Error"),
-        className: "bg-red-500/10 border-red-500/30 text-red-400",
+        className: "bg-error/10 border-error/30 text-error",
       },
     };
   const cloudflaredActionLabel = cloudflaredStatus?.running
@@ -1170,27 +1170,27 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
   const tailscalePhaseMeta: Record<TailscaleTunnelPhase, { label: string; className: string }> = {
     running: {
       label: translateOrFallback("tailscaleRunning", "Running"),
-      className: "bg-green-500/10 border-green-500/30 text-green-400",
+      className: "bg-success/10 border-success/30 text-success",
     },
     needs_login: {
       label: translateOrFallback("tailscaleNeedsLogin", "Needs Login"),
-      className: "bg-blue-500/10 border-blue-500/30 text-blue-400",
+      className: "bg-primary/10 border-primary/30 text-primary",
     },
     stopped: {
       label: translateOrFallback("tailscaleStoppedState", "Stopped"),
-      className: "bg-surface border-border/70 text-text-muted",
+      className: "bg-bg-subtle border-border text-text-muted",
     },
     not_installed: {
       label: translateOrFallback("tailscaleNotInstalled", "Not installed"),
-      className: "bg-surface border-border/70 text-text-muted",
+      className: "bg-bg-subtle border-border text-text-muted",
     },
     unsupported: {
       label: translateOrFallback("tailscaleUnsupported", "Unsupported"),
-      className: "bg-amber-500/10 border-amber-500/30 text-amber-400",
+      className: "bg-warning/10 border-warning/30 text-warning",
     },
     error: {
       label: translateOrFallback("tailscaleError", "Error"),
-      className: "bg-red-500/10 border-red-500/30 text-red-400",
+      className: "bg-error/10 border-error/30 text-error",
     },
   };
   const tailscaleActionLabel = tailscaleStatus?.running
@@ -1209,31 +1209,31 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
   const ngrokPhaseMeta: Record<NgrokTunnelPhase, { label: string; className: string }> = {
     running: {
       label: translateOrFallback("ngrokRunning", "Running"),
-      className: "bg-green-500/10 border-green-500/30 text-green-400",
+      className: "bg-success/10 border-success/30 text-success",
     },
     starting: {
       label: translateOrFallback("ngrokStarting", "Starting"),
-      className: "bg-blue-500/10 border-blue-500/30 text-blue-400",
+      className: "bg-primary/10 border-primary/30 text-primary",
     },
     stopped: {
       label: translateOrFallback("ngrokStoppedState", "Stopped"),
-      className: "bg-surface border-border/70 text-text-muted",
+      className: "bg-bg-subtle border-border text-text-muted",
     },
     needs_auth: {
       label: translateOrFallback("ngrokNeedsAuth", "Needs Auth"),
-      className: "bg-amber-500/10 border-amber-500/30 text-amber-400",
+      className: "bg-warning/10 border-warning/30 text-warning",
     },
     not_installed: {
       label: translateOrFallback("ngrokNotInstalled", "Not installed"),
-      className: "bg-surface border-border/70 text-text-muted",
+      className: "bg-bg-subtle border-border text-text-muted",
     },
     unsupported: {
       label: translateOrFallback("ngrokUnsupported", "Unsupported"),
-      className: "bg-amber-500/10 border-amber-500/30 text-amber-400",
+      className: "bg-warning/10 border-warning/30 text-warning",
     },
     error: {
       label: translateOrFallback("ngrokError", "Error"),
-      className: "bg-red-500/10 border-red-500/30 text-red-400",
+      className: "bg-error/10 border-error/30 text-error",
     },
   };
   const ngrokActionLabel = ngrokStatus?.running
@@ -1242,16 +1242,16 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
   const ngrokUrlNotice = translateOrFallback("ngrokUrlNotice", "Creates a public ngrok tunnel.");
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       {/* Guided connection header (#11228): /v1 URL + test action lead; advanced protocols demoted */}
       <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-bold">{t("title")}</h1>
-        <p className="text-text-muted">{t("subtitle")}</p>
+        <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
+        <p className="text-sm text-text-muted">{t("subtitle")}</p>
         <div className="flex items-center gap-3 mt-2">
-          <code className="text-sm bg-card-subtle px-3 py-1 rounded-md text-text-main font-mono">
+          <code className="text-[13px] bg-bg-subtle border border-border px-2.5 py-1 rounded-md text-text-main font-mono">
             {displayBaseUrl}/v1
           </code>
-          <a href="#test" className="text-sm text-action font-medium hover:underline">
+          <a href="#test" className="text-[13px] text-primary font-medium hover:underline">
             {t("testEndpoint")}
           </a>
         </div>
@@ -1278,17 +1278,17 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
 
       {/* Endpoint Card */}
       <Card>
-        <h2 className="text-lg font-semibold mb-4">{t("title")}</h2>
+        <h2 className="text-base font-semibold tracking-tight mb-4">{t("title")}</h2>
 
         {/* Cloud Status Toast */}
         {cloudStatus && (
           <div
             className={`flex items-center gap-2 px-4 py-2.5 rounded-lg mb-4 text-sm font-medium animate-in fade-in slide-in-from-top-2 duration-300 ${
               cloudStatus.type === "success"
-                ? "bg-green-500/10 border border-green-500/30 text-green-400"
+                ? "bg-success/10 border border-success/30 text-success"
                 : cloudStatus.type === "warning"
-                  ? "bg-amber-500/10 border border-amber-500/30 text-amber-400"
-                  : "bg-red-500/10 border border-red-500/30 text-red-400"
+                  ? "bg-warning/10 border border-warning/30 text-warning"
+                  : "bg-error/10 border border-error/30 text-error"
             }`}
           >
             <span className="material-symbols-outlined text-[18px]">
@@ -1301,7 +1301,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             <span className="flex-1">{cloudStatus.message}</span>
             <button
               onClick={() => setCloudStatus(null)}
-              className="p-0.5 hover:bg-white/10 rounded transition-colors"
+              className="p-0.5 hover:bg-current/10 rounded transition-colors"
             >
               <span className="material-symbols-outlined text-[16px]">close</span>
             </button>
@@ -1310,21 +1310,21 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
 
         {/* Active URLs bar */}
         {activeUrls.length > 0 && (
-          <div className="mb-4 rounded-lg border border-primary/20 bg-primary/5 p-3">
-            <p className="text-[10px] font-semibold text-primary uppercase tracking-wider mb-2">
+          <div className="mb-4 rounded-lg border border-border bg-bg-subtle p-3">
+            <p className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-2">
               {t("activeEndpoints")}
             </p>
             <div className="flex flex-col gap-1.5">
               {activeUrls.map(({ label, url, key }) => (
                 <div key={key} className="flex items-center gap-2 min-w-0">
-                  <span className="w-1.5 h-1.5 rounded-full bg-green-400 shrink-0" />
+                  <span className="w-1.5 h-1.5 rounded-full bg-success shrink-0" />
                   <span className="text-xs text-text-muted w-20 shrink-0">{label}</span>
-                  <code className="text-xs font-mono text-text-main flex-1 truncate min-w-0">
+                  <code className="text-[12px] font-mono text-text-main flex-1 truncate min-w-0">
                     {url}
                   </code>
                   <button
                     onClick={() => void copy(url, key)}
-                    className="shrink-0 flex items-center gap-1 px-2 py-0.5 rounded border border-border/70 text-text-muted hover:text-text transition-colors"
+                    className="shrink-0 flex items-center gap-1 px-2 py-0.5 rounded-md border border-border text-text-muted hover:bg-surface hover:text-text-main transition-colors"
                   >
                     <span className="material-symbols-outlined text-[12px]">
                       {copied === key ? "check" : "content_copy"}
@@ -1340,7 +1340,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         <div className="flex flex-col">
           {/* Local Server */}
           <div className="flex items-center gap-3 py-3">
-            <span className="material-symbols-outlined text-[18px] text-emerald-500 shrink-0">
+            <span className="material-symbols-outlined text-[18px] text-text-muted shrink-0">
               computer
             </span>
             <div className="flex-1 min-w-0">
@@ -1354,7 +1354,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                     key={url}
                     onClick={() => void copy(url, `lan_${url}`)}
                     title={t("copyUrlTitle", { url })}
-                    className="inline-flex items-center gap-0.5 text-[10px] text-text-muted hover:text-text transition-colors"
+                    className="inline-flex items-center gap-0.5 text-[10px] text-text-muted hover:text-text-main transition-colors"
                   >
                     <code className="font-mono">{url.replace(/^https?:\/\//, "")}</code>
                     <span className="material-symbols-outlined text-[10px] opacity-60">
@@ -1364,13 +1364,13 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                 ))}
               </div>
             </div>
-            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-green-500/10 border border-green-500/30 text-green-400 shrink-0">
-              <span className="w-1.5 h-1.5 rounded-full bg-green-400 animate-pulse" />
+            <span className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium bg-success/10 border border-success/30 text-success shrink-0">
+              <span className="w-1.5 h-1.5 rounded-full bg-success animate-pulse" />
               {t("statusRunning")}
             </span>
             <button
               onClick={() => void copy(localApiUrl, "endpoint_url")}
-              className="shrink-0 flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-md border border-border/70 text-text-muted hover:text-text hover:border-border transition-colors"
+              className="shrink-0 flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-control border border-border-strong text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
             >
               <span className="material-symbols-outlined text-[14px]">
                 {copied === "endpoint_url" ? "check" : "content_copy"}
@@ -1380,15 +1380,15 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
           </div>
 
           {/* Tunnels section header */}
-          <div className="flex items-center gap-2 pt-4 pb-1 border-t border-border/50">
+          <div className="flex items-center gap-2 pt-4 pb-1 border-t border-border">
             <span className="material-symbols-outlined text-[14px] text-text-muted">
               network_node
             </span>
-            <span className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">
+            <span className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
               {t("tunnels")}
             </span>
-            <div className="flex-1 h-px bg-border/50" />
-            <span className="text-[10px] text-text-muted">
+            <div className="flex-1 h-px bg-border" />
+            <span className="text-[11px] text-text-subtle tabular-nums">
               {t("activeTunnelCount", {
                 active: activeTunnelCount,
                 total: visibleTunnelCount,
@@ -1398,7 +1398,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
 
           {/* Cloud OmniRoute */}
           <div className="flex items-center gap-3 py-3">
-            <span className="material-symbols-outlined text-[18px] text-blue-400 shrink-0">
+            <span className="material-symbols-outlined text-[18px] text-text-muted shrink-0">
               cloud
             </span>
             <div className="flex-1 min-w-0">
@@ -1407,12 +1407,12 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             <span
               className={`inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium border shrink-0 ${
                 cloudEnabled
-                  ? "bg-green-500/10 border-green-500/30 text-green-400"
-                  : "bg-surface border-border/70 text-text-muted"
+                  ? "bg-success/10 border-success/30 text-success"
+                  : "bg-bg-subtle border-border text-text-muted"
               }`}
             >
               <span
-                className={`w-1.5 h-1.5 rounded-full shrink-0 ${cloudEnabled ? "bg-green-400 animate-pulse" : "bg-text-muted"}`}
+                className={`w-1.5 h-1.5 rounded-full shrink-0 ${cloudEnabled ? "bg-success animate-pulse" : "bg-text-subtle"}`}
               />
               {cloudEnabled ? tc("active") : tc("disabled")}
             </span>
@@ -1423,7 +1423,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                 icon="cloud_off"
                 onClick={() => handleCloudToggle(false)}
                 disabled={cloudSyncing}
-                className="shrink-0 bg-red-500/10! text-red-500! hover:bg-red-500/20! border-red-500/30!"
+                className="shrink-0 bg-error/10! text-error! hover:bg-error/15! border-error/30!"
               >
                 {t("disableCloud")}
               </Button>
@@ -1439,7 +1439,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                 {t("enableCloud")}
               </Button>
             ) : (
-              <span className="text-xs text-text-muted shrink-0 px-2 py-1 rounded border border-border/70 bg-surface">
+              <span className="text-xs text-text-muted shrink-0 px-2 py-1 rounded-md border border-border bg-bg-subtle">
                 {tc("notConfigured")}
               </span>
             )}
@@ -1447,9 +1447,9 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
 
           {/* Cloudflare Quick Tunnel */}
           {showCloudflaredTunnel && (
-            <div className="border-t border-border/30">
+            <div className="border-t border-border">
               <div className="flex items-center gap-3 py-3">
-                <span className="material-symbols-outlined text-[18px] text-orange-400 shrink-0">
+                <span className="material-symbols-outlined text-[18px] text-text-muted shrink-0">
                   cloud_queue
                 </span>
                 <div className="flex-1 min-w-0">
@@ -1473,7 +1473,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                         cloudflaredStatus?.running ? "disable" : "enable"
                       );
                     }}
-                    className={`shrink-0 ${cloudflaredStatus?.running ? "border-border/70! text-text-muted! hover:text-text!" : ""}`}
+                    className={`shrink-0 ${cloudflaredStatus?.running ? "text-text-muted! hover:text-text-main!" : ""}`}
                   >
                     {cloudflaredActionLabel}
                   </Button>
@@ -1483,10 +1483,10 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                 <div
                   className={`mb-2 ml-7 flex items-center gap-2 rounded-lg border px-3 py-2 text-sm ${
                     cloudflaredNotice.type === "success"
-                      ? "border-green-500/30 bg-green-500/10 text-green-400"
+                      ? "border-success/30 bg-success/10 text-success"
                       : cloudflaredNotice.type === "info"
-                        ? "border-blue-500/30 bg-blue-500/10 text-blue-400"
-                        : "border-red-500/30 bg-red-500/10 text-red-400"
+                        ? "border-primary/30 bg-primary/10 text-primary"
+                        : "border-error/30 bg-error/10 text-error"
                   }`}
                 >
                   <span className="material-symbols-outlined text-[18px]">
@@ -1499,14 +1499,14 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                   <span className="flex-1">{cloudflaredNotice.message}</span>
                   <button
                     onClick={() => setCloudflaredNotice(null)}
-                    className="rounded p-0.5 transition-colors hover:bg-white/10"
+                    className="rounded p-0.5 transition-colors hover:bg-current/10"
                   >
                     <span className="material-symbols-outlined text-[16px]">close</span>
                   </button>
                 </div>
               )}
               {cloudflaredStatus?.lastError && (
-                <p className="mb-2 ml-7 text-xs text-red-400">
+                <p className="mb-2 ml-7 text-xs text-error">
                   {translateOrFallback("cloudflaredLastError", "Last error: {error}", {
                     error: cloudflaredStatus.lastError,
                   })}
@@ -1517,11 +1517,11 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
 
           {/* Tailscale Funnel */}
           {showTailscaleFunnel && (
-            <div className={showCloudflaredTunnel ? "border-t border-border/30" : ""}>
+            <div className={showCloudflaredTunnel ? "border-t border-border" : ""}>
               <div
                 role="button"
                 tabIndex={0}
-                className="w-full flex items-center gap-3 py-3 hover:bg-surface/40 transition-colors rounded -mx-1 px-1 text-left cursor-pointer"
+                className="w-full flex items-center gap-3 py-3 hover:bg-bg-subtle transition-colors rounded-md -mx-1 px-1 text-left cursor-pointer"
                 onClick={() => setExpandedTunnel(expandedTunnel === "ts" ? null : "ts")}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
@@ -1530,7 +1530,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                   }
                 }}
               >
-                <span className="material-symbols-outlined text-[18px] text-indigo-400 shrink-0">
+                <span className="material-symbols-outlined text-[18px] text-text-muted shrink-0">
                   vpn_lock
                 </span>
                 <div className="flex-1 min-w-0">
@@ -1545,7 +1545,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                           void copy(tailscaleIpUrl, "tailscale_ip_inline");
                         }}
                         title={`Copy ${tailscaleIpUrl}`}
-                        className="inline-flex items-center gap-0.5 text-[10px] text-text-muted hover:text-text transition-colors"
+                        className="inline-flex items-center gap-0.5 text-[10px] text-text-muted hover:text-text-main transition-colors"
                       >
                         <code className="font-mono">
                           {tailscaleIpUrl.replace(/^https?:\/\//, "")}
@@ -1578,7 +1578,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                         setShowTailscaleInstallModal(true);
                       }
                     }}
-                    className={`shrink-0 ${tailscaleStatus?.running ? "border-border/70! text-text-muted! hover:text-text!" : ""}`}
+                    className={`shrink-0 ${tailscaleStatus?.running ? "text-text-muted! hover:text-text-main!" : ""}`}
                   >
                     {tailscaleActionLabel}
                   </Button>
@@ -1598,10 +1598,10 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                     <div
                       className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm ${
                         tailscaleNotice.type === "success"
-                          ? "border-green-500/30 bg-green-500/10 text-green-400"
+                          ? "border-success/30 bg-success/10 text-success"
                           : tailscaleNotice.type === "info"
-                            ? "border-blue-500/30 bg-blue-500/10 text-blue-400"
-                            : "border-red-500/30 bg-red-500/10 text-red-400"
+                            ? "border-primary/30 bg-primary/10 text-primary"
+                            : "border-error/30 bg-error/10 text-error"
                       }`}
                     >
                       <span className="material-symbols-outlined text-[18px]">
@@ -1614,7 +1614,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                       <span className="flex-1">{tailscaleNotice.message}</span>
                       <button
                         onClick={() => setTailscaleNotice(null)}
-                        className="rounded p-0.5 transition-colors hover:bg-white/10"
+                        className="rounded p-0.5 transition-colors hover:bg-current/10"
                       >
                         <span className="material-symbols-outlined text-[16px]">close</span>
                       </button>
@@ -1622,7 +1622,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                   )}
                   <p className="text-xs text-text-muted">{tailscaleUrlNotice}</p>
                   {tailscaleStatus?.phase === "needs_login" && (
-                    <p className="text-xs text-blue-400">
+                    <p className="text-xs text-primary">
                       {translateOrFallback(
                         "tailscaleNeedsLoginHint",
                         "Authenticate this machine with Tailscale, then enable Funnel."
@@ -1658,7 +1658,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                     </p>
                   )}
                   {tailscaleStatus?.lastError && (
-                    <p className="text-xs text-red-400">
+                    <p className="text-xs text-error">
                       {translateOrFallback("tailscaleLastError", "Last error: {error}", {
                         error: tailscaleStatus.lastError,
                       })}
@@ -1673,13 +1673,13 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
           {showNgrokTunnel && (
             <div
               className={
-                showCloudflaredTunnel || showTailscaleFunnel ? "border-t border-border/30" : ""
+                showCloudflaredTunnel || showTailscaleFunnel ? "border-t border-border" : ""
               }
             >
               <div
                 role="button"
                 tabIndex={0}
-                className="w-full flex items-center gap-3 py-3 hover:bg-surface/40 transition-colors rounded -mx-1 px-1 text-left cursor-pointer"
+                className="w-full flex items-center gap-3 py-3 hover:bg-bg-subtle transition-colors rounded-md -mx-1 px-1 text-left cursor-pointer"
                 onClick={() => setExpandedTunnel(expandedTunnel === "ngrok" ? null : "ngrok")}
                 onKeyDown={(e) => {
                   if (e.key === "Enter" || e.key === " ") {
@@ -1688,7 +1688,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                   }
                 }}
               >
-                <span className="material-symbols-outlined text-[18px] text-purple-400 shrink-0">
+                <span className="material-symbols-outlined text-[18px] text-text-muted shrink-0">
                   public
                 </span>
                 <div className="flex-1 min-w-0">
@@ -1711,7 +1711,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                       e.stopPropagation();
                       void handleNgrokAction(ngrokStatus?.running ? "disable" : "enable");
                     }}
-                    className={`shrink-0 ${ngrokStatus?.running ? "border-border/70! text-text-muted! hover:text-text!" : ""}`}
+                    className={`shrink-0 ${ngrokStatus?.running ? "text-text-muted! hover:text-text-main!" : ""}`}
                   >
                     {ngrokActionLabel}
                   </Button>
@@ -1731,10 +1731,10 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                     <div
                       className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm ${
                         ngrokNotice.type === "success"
-                          ? "border-green-500/30 bg-green-500/10 text-green-400"
+                          ? "border-success/30 bg-success/10 text-success"
                           : ngrokNotice.type === "info"
-                            ? "border-blue-500/30 bg-blue-500/10 text-blue-400"
-                            : "border-red-500/30 bg-red-500/10 text-red-400"
+                            ? "border-primary/30 bg-primary/10 text-primary"
+                            : "border-error/30 bg-error/10 text-error"
                       }`}
                     >
                       <span className="material-symbols-outlined text-[18px]">
@@ -1747,7 +1747,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                       <span className="flex-1">{ngrokNotice.message}</span>
                       <button
                         onClick={() => setNgrokNotice(null)}
-                        className="rounded p-0.5 transition-colors hover:bg-white/10"
+                        className="rounded p-0.5 transition-colors hover:bg-current/10"
                       >
                         <span className="material-symbols-outlined text-[16px]">close</span>
                       </button>
@@ -1776,7 +1776,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
                     </div>
                   )}
                   {ngrokStatus?.lastError && (
-                    <p className="text-xs text-red-400">
+                    <p className="text-xs text-error">
                       {translateOrFallback("ngrokLastError", "Last error: {error}", {
                         error: ngrokStatus.lastError,
                       })}
@@ -1817,7 +1817,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
       <Card>
         <div className="flex items-center justify-between mb-5">
           <div>
-            <h2 className="text-lg font-semibold">{t("available")}</h2>
+            <h2 className="text-base font-semibold tracking-tight">{t("available")}</h2>
             <p className="text-sm text-text-muted">
               {modelsLoading
                 ? translateOrFallback("loadingModels", "Loading available models...")
@@ -1832,17 +1832,17 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         {/* Core APIs */}
         <div className="mb-5">
           <div className="flex items-center gap-2 mb-3">
-            <span className="material-symbols-outlined text-sm text-primary">hub</span>
-            <h3 className="text-xs font-semibold text-text-muted uppercase tracking-wider">
+            <span className="material-symbols-outlined text-sm text-text-muted">hub</span>
+            <h3 className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
               {t("categoryCore")}
             </h3>
-            <div className="flex-1 h-px bg-border/50" />
+            <div className="flex-1 h-px bg-border" />
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
             <EndpointCard
               icon="chat"
-              iconColor="text-blue-500"
-              iconBg="bg-blue-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("chatCompletions")}
               path="/v1/chat/completions"
               models={endpointData.chat}
@@ -1853,8 +1853,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             />
             <EndpointCard
               icon="code"
-              iconColor="text-indigo-500"
-              iconBg="bg-indigo-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("responses")}
               path="/v1/responses"
               models={endpointData.chat}
@@ -1865,8 +1865,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             />
             <EndpointCard
               icon="text_fields"
-              iconColor="text-orange-500"
-              iconBg="bg-orange-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("completionsLegacy")}
               path="/v1/completions"
               models={endpointData.chat}
@@ -1877,8 +1877,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             />
             <EndpointCard
               icon="psychology"
-              iconColor="text-violet-500"
-              iconBg="bg-violet-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("messagesApi")}
               path="/v1/messages"
               models={null}
@@ -1893,17 +1893,17 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         {/* Media & Multi-Modal */}
         <div className="mb-5">
           <div className="flex items-center gap-2 mb-3">
-            <span className="material-symbols-outlined text-sm text-purple-400">perm_media</span>
-            <h3 className="text-xs font-semibold text-text-muted uppercase tracking-wider">
+            <span className="material-symbols-outlined text-sm text-text-muted">perm_media</span>
+            <h3 className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
               {t("categoryMedia")}
             </h3>
-            <div className="flex-1 h-px bg-border/50" />
+            <div className="flex-1 h-px bg-border" />
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
             <EndpointCard
               icon="data_array"
-              iconColor="text-emerald-500"
-              iconBg="bg-emerald-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("embeddings")}
               path="/v1/embeddings"
               models={endpointData.embeddings}
@@ -1914,8 +1914,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             />
             <EndpointCard
               icon="image"
-              iconColor="text-purple-500"
-              iconBg="bg-purple-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("imageGeneration")}
               path="/v1/images/generations"
               models={endpointData.images}
@@ -1926,8 +1926,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             />
             <EndpointCard
               icon="edit_square"
-              iconColor="text-violet-500"
-              iconBg="bg-violet-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("imageEdits")}
               path="/v1/images/edits"
               models={endpointData.images}
@@ -1938,8 +1938,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             />
             <EndpointCard
               icon="mic"
-              iconColor="text-rose-500"
-              iconBg="bg-rose-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("audioTranscription")}
               path="/v1/audio/transcriptions"
               models={endpointData.audioTranscription}
@@ -1950,8 +1950,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             />
             <EndpointCard
               icon="record_voice_over"
-              iconColor="text-cyan-500"
-              iconBg="bg-cyan-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("textToSpeech")}
               path="/v1/audio/speech"
               models={endpointData.audioSpeech}
@@ -1962,8 +1962,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             />
             <EndpointCard
               icon="music_note"
-              iconColor="text-fuchsia-500"
-              iconBg="bg-fuchsia-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("musicGeneration")}
               path="/v1/music/generations"
               models={endpointData.music}
@@ -1974,8 +1974,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             />
             <EndpointCard
               icon="videocam"
-              iconColor="text-red-500"
-              iconBg="bg-red-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("videoGeneration")}
               path="/v1/videos/generations"
               models={endpointData.video}
@@ -1991,19 +1991,19 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         {searchProviders.length > 0 && (
           <div className="mb-5">
             <div className="flex items-center gap-2 mb-3">
-              <span className="material-symbols-outlined text-sm text-cyan-400">
+              <span className="material-symbols-outlined text-sm text-text-muted">
                 travel_explore
               </span>
-              <h3 className="text-xs font-semibold text-text-muted uppercase tracking-wider">
+              <h3 className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
                 {t("categorySearch")}
               </h3>
-              <div className="flex-1 h-px bg-border/50" />
+              <div className="flex-1 h-px bg-border" />
             </div>
             <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
               <EndpointCard
                 icon="search"
-                iconColor="text-cyan-500"
-                iconBg="bg-cyan-500/10"
+                iconColor="text-text-muted"
+                iconBg="bg-bg-subtle"
                 title={t("webSearch")}
                 path="/v1/search"
                 models={searchProviders.map((p) => ({ id: p.id, owned_by: p.id, type: "search" }))}
@@ -2018,17 +2018,17 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         {/* Utility & Management */}
         <div>
           <div className="flex items-center gap-2 mb-3">
-            <span className="material-symbols-outlined text-sm text-amber-400">build</span>
-            <h3 className="text-xs font-semibold text-text-muted uppercase tracking-wider">
+            <span className="material-symbols-outlined text-sm text-text-muted">build</span>
+            <h3 className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
               {t("categoryUtility")}
             </h3>
-            <div className="flex-1 h-px bg-border/50" />
+            <div className="flex-1 h-px bg-border" />
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
             <EndpointCard
               icon="sort"
-              iconColor="text-amber-500"
-              iconBg="bg-amber-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("rerank")}
               path="/v1/rerank"
               models={endpointData.rerank}
@@ -2039,8 +2039,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             />
             <EndpointCard
               icon="shield"
-              iconColor="text-orange-500"
-              iconBg="bg-orange-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("moderations")}
               path="/v1/moderations"
               models={endpointData.moderation}
@@ -2051,8 +2051,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             />
             <EndpointCard
               icon="view_list"
-              iconColor="text-teal-500"
-              iconBg="bg-teal-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("batchApi")}
               path="/v1/batches"
               models={null}
@@ -2063,8 +2063,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             />
             <EndpointCard
               icon="folder"
-              iconColor="text-yellow-500"
-              iconBg="bg-yellow-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("filesApi")}
               path="/v1/files"
               models={null}
@@ -2074,8 +2074,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             />
             <EndpointCard
               icon="list"
-              iconColor="text-teal-500"
-              iconBg="bg-teal-500/10"
+              iconColor="text-text-muted"
+              iconBg="bg-bg-subtle"
               title={t("listModels")}
               path="/v1/models"
               models={allModels}
@@ -2097,11 +2097,9 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         onClose={() => setShowCloudModal(false)}
       >
         <div className="flex flex-col gap-4">
-          <div className="bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-800 rounded-lg p-4">
-            <p className="text-sm text-blue-800 dark:text-blue-200 font-medium mb-2">
-              {t("whatYouGet")}
-            </p>
-            <ul className="text-sm text-blue-700 dark:text-blue-300 space-y-1">
+          <div className="bg-bg-subtle border border-border rounded-lg p-4">
+            <p className="text-sm text-text-main font-medium mb-2">{t("whatYouGet")}</p>
+            <ul className="text-sm text-text-muted space-y-1">
               <li>• {t("cloudBenefitAccess")}</li>
               <li>• {t("cloudBenefitShare")}</li>
               <li>• {t("cloudBenefitPorts")}</li>
@@ -2109,11 +2107,9 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
             </ul>
           </div>
 
-          <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4">
-            <p className="text-sm text-yellow-800 dark:text-yellow-200 font-medium mb-1">
-              {tc("note")}
-            </p>
-            <ul className="text-sm text-yellow-700 dark:text-yellow-300 space-y-1">
+          <div className="bg-warning/10 border border-warning/30 rounded-lg p-4">
+            <p className="text-sm text-warning font-medium mb-1">{tc("note")}</p>
+            <ul className="text-sm text-text-muted space-y-1">
               <li>• {t("cloudSessionNote")}</li>
               <li>• {t("cloudUnstableNote")}</li>
             </ul>
@@ -2122,16 +2118,12 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
           {/* Sync Progress / Success */}
           {(cloudSyncing || modalSuccess) && (
             <div
-              className={`flex items-center gap-3 p-3 rounded-lg border transition-all duration-300 ${
-                modalSuccess
-                  ? "bg-green-500/10 border-green-500/30"
-                  : "bg-primary/10 border-primary/30"
+              className={`flex items-center gap-3 p-3 rounded-lg border transition-colors duration-300 ${
+                modalSuccess ? "bg-success/10 border-success/30" : "bg-primary/10 border-primary/30"
               }`}
             >
               {modalSuccess ? (
-                <span className="material-symbols-outlined text-green-500 text-xl">
-                  check_circle
-                </span>
+                <span className="material-symbols-outlined text-success text-xl">check_circle</span>
               ) : (
                 <span className="material-symbols-outlined animate-spin text-primary">
                   progress_activity
@@ -2140,7 +2132,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
               <div className="flex-1">
                 <p
                   className={`text-sm font-medium ${
-                    modalSuccess ? "text-green-500" : "text-primary"
+                    modalSuccess ? "text-success" : "text-primary"
                   }`}
                 >
                   {modalSuccess && t("cloudConnected")}
@@ -2188,16 +2180,12 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         onClose={() => !cloudSyncing && setShowDisableModal(false)}
       >
         <div className="flex flex-col gap-4">
-          <div className="bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800 rounded-lg p-4">
+          <div className="bg-error/10 border border-error/30 rounded-lg p-4">
             <div className="flex items-start gap-3">
-              <span className="material-symbols-outlined text-red-600 dark:text-red-400">
-                warning
-              </span>
+              <span className="material-symbols-outlined text-error">warning</span>
               <div>
-                <p className="text-sm text-red-800 dark:text-red-200 font-medium mb-1">
-                  {tc("warning")}
-                </p>
-                <p className="text-sm text-red-700 dark:text-red-300">{t("disableWarning")}</p>
+                <p className="text-sm text-error font-medium mb-1">{tc("warning")}</p>
+                <p className="text-sm text-text-muted">{t("disableWarning")}</p>
               </div>
             </div>
           </div>
@@ -2224,7 +2212,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
               onClick={handleConfirmDisable}
               fullWidth
               disabled={cloudSyncing}
-              className="bg-red-500! hover:bg-red-600! text-white!"
+              className="bg-error! hover:bg-error/90! text-white!"
             >
               {cloudSyncing ? (
                 <span className="flex items-center gap-2">
@@ -2255,14 +2243,14 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         onClose={() => !tailscaleInstallBusy && setShowTailscaleInstallModal(false)}
       >
         <div className="flex flex-col gap-4">
-          <div className="rounded-lg border border-blue-500/30 bg-blue-500/10 p-4">
-            <p className="text-sm font-medium text-blue-300">
+          <div className="rounded-lg border border-border bg-bg-subtle p-4">
+            <p className="text-sm font-medium text-text-main">
               {translateOrFallback(
                 "tailscaleInstallIntro",
                 "Installs Tailscale on this machine and prepares OmniRoute to enable Funnel."
               )}
             </p>
-            <p className="mt-2 text-sm text-blue-200/80">
+            <p className="mt-2 text-sm text-text-muted">
               {translateOrFallback(
                 "tailscaleInstallPasswordHint",
                 "On macOS and Linux, sudo may be required for the package install and daemon start."
@@ -2279,8 +2267,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
           />
 
           {tailscaleInstallLog.length > 0 && (
-            <div className="max-h-48 overflow-auto rounded-lg border border-border/70 bg-surface/60 p-3">
-              <pre className="whitespace-pre-wrap text-xs text-text-muted">
+            <div className="max-h-48 overflow-auto rounded-lg border border-border bg-bg-subtle p-3">
+              <pre className="whitespace-pre-wrap font-mono text-[12px] text-text-muted">
                 {tailscaleInstallLog.join("\n")}
               </pre>
             </div>
@@ -2362,7 +2350,7 @@ function ProviderModelsModal({
     if (groupModels.length === 0) return null;
     return (
       <div className="mb-4">
-        <h4 className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-2 flex items-center gap-1.5">
+        <h4 className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-2 flex items-center gap-1.5">
           <span className="material-symbols-outlined text-sm">{icon}</span>
           {title} ({groupModels.length})
         </h4>
@@ -2372,9 +2360,9 @@ function ProviderModelsModal({
             return (
               <div
                 key={m.id}
-                className="flex items-center gap-2 px-3 py-2 rounded-lg hover:bg-surface/60 group"
+                className="flex items-center gap-2 px-3 py-2 rounded-md hover:bg-bg-subtle transition-colors group"
               >
-                <code className="text-sm font-mono flex-1 truncate">{m.id}</code>
+                <code className="text-[13px] font-mono flex-1 truncate">{m.id}</code>
                 {m.custom && (
                   <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary">
                     {t("custom")}
@@ -2382,7 +2370,7 @@ function ProviderModelsModal({
                 )}
                 <button
                   onClick={() => copy(m.id, copyKey)}
-                  className="p-1 hover:bg-sidebar rounded text-text-muted hover:text-primary opacity-0 group-hover:opacity-100 transition-opacity"
+                  className="p-1 hover:bg-surface rounded-md text-text-muted hover:text-text-main opacity-0 group-hover:opacity-100 transition-[opacity,background-color]"
                   title={tc("copy")}
                 >
                   <span className="material-symbols-outlined text-sm">
@@ -2450,16 +2438,18 @@ function EndpointCard({
   const fullUrl = `${baseUrl.replace(/\/v1$/, "")}${path}`;
 
   return (
-    <div className="border border-border rounded-lg p-3 hover:bg-surface/30 transition-colors flex flex-col gap-2">
+    <div className="border border-border rounded-lg p-3 hover:border-border-strong transition-colors flex flex-col gap-2">
       <div className="flex items-start gap-2.5">
-        <div className={`flex items-center justify-center size-8 rounded-lg ${iconBg} shrink-0`}>
-          <span className={`material-symbols-outlined text-base ${iconColor}`}>{icon}</span>
+        <div
+          className={`flex items-center justify-center size-8 rounded-md border border-border ${iconBg} shrink-0`}
+        >
+          <span className={`material-symbols-outlined text-[16px] ${iconColor}`}>{icon}</span>
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-1.5 flex-wrap">
-            <span className="font-semibold text-xs leading-tight">{title}</span>
+            <span className="font-medium text-[13px] leading-tight text-text-main">{title}</span>
             {badge && (
-              <span className="text-[9px] px-1.5 py-0.5 rounded-full border border-border/60 text-text-muted font-medium uppercase tracking-wider leading-none">
+              <span className="text-[9px] px-1.5 py-0.5 rounded-md border border-border text-text-muted font-medium uppercase tracking-wider leading-none">
                 {badge}
               </span>
             )}
@@ -2474,12 +2464,12 @@ function EndpointCard({
         </div>
       </div>
       <div className="flex items-center gap-1.5">
-        <code className="flex-1 text-[10px] font-mono text-text-muted bg-surface/80 px-2 py-1 rounded truncate">
+        <code className="flex-1 text-[11px] font-mono text-text-muted bg-bg-subtle px-2 py-1 rounded-md truncate">
           {path}
         </code>
         <button
           onClick={() => void copy(fullUrl, copyId)}
-          className="shrink-0 flex items-center justify-center size-6 rounded hover:bg-sidebar transition-colors"
+          className="shrink-0 flex items-center justify-center size-6 rounded-md hover:bg-bg-subtle transition-colors"
           title={t("copyUrl")}
         >
           <span className="material-symbols-outlined text-[12px] text-text-muted">

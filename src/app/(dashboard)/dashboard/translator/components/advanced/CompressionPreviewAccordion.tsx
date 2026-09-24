@@ -106,7 +106,7 @@ function CompressionPreviewContent({ inputContent = "" }: { inputContent?: strin
     <div className="space-y-4">
       {/* Empty state */}
       {!hasInput && (
-        <div className="flex items-center gap-2 px-3 py-2 rounded-md bg-black/5 dark:bg-white/5 text-sm text-text-muted">
+        <div className="flex items-center gap-2 px-3 py-2 rounded-md bg-bg-subtle text-sm text-text-muted">
           <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
             info
           </span>
@@ -139,7 +139,7 @@ function CompressionPreviewContent({ inputContent = "" }: { inputContent?: strin
 
       {/* Error */}
       {compressionError && (
-        <div className="text-sm text-red-500" role="alert">
+        <div className="text-sm text-error" role="alert">
           {compressionError}
         </div>
       )}
@@ -151,33 +151,39 @@ function CompressionPreviewContent({ inputContent = "" }: { inputContent?: strin
             className="grid grid-cols-2 md:grid-cols-4 gap-3"
             data-testid="compression-result-grid"
           >
-            <div className="card p-3 text-center bg-black/5 dark:bg-white/5 rounded-lg border border-border">
+            <div className="card p-3 text-center bg-surface-2 rounded-lg border border-border">
               <div className="text-xs text-text-muted">{t("compressionOriginal")}</div>
-              <div className="text-lg font-bold">{compressionResult.originalTokens}</div>
+              <div className="text-lg font-semibold tracking-tight tabular-nums text-text-main">
+                {compressionResult.originalTokens}
+              </div>
               <div className="text-xs text-text-muted">{t("tokens")}</div>
             </div>
-            <div className="card p-3 text-center bg-black/5 dark:bg-white/5 rounded-lg border border-border">
+            <div className="card p-3 text-center bg-surface-2 rounded-lg border border-border">
               <div className="text-xs text-text-muted">{t("compressionCompressed")}</div>
-              <div className="text-lg font-bold">{compressionResult.compressedTokens}</div>
+              <div className="text-lg font-semibold tracking-tight tabular-nums text-text-main">
+                {compressionResult.compressedTokens}
+              </div>
               <div className="text-xs text-text-muted">{t("tokens")}</div>
             </div>
-            <div className="card p-3 text-center bg-black/5 dark:bg-white/5 rounded-lg border border-border">
+            <div className="card p-3 text-center bg-surface-2 rounded-lg border border-border">
               <div className="text-xs text-text-muted">{t("compressionSaved")}</div>
-              <div className="text-lg font-bold text-green-500">
+              <div className="text-lg font-semibold tracking-tight tabular-nums text-success">
                 {compressionResult.tokensSaved}
               </div>
               <div className="text-xs text-text-muted">{compressionResult.savingsPct}%</div>
             </div>
-            <div className="card p-3 text-center bg-black/5 dark:bg-white/5 rounded-lg border border-border">
+            <div className="card p-3 text-center bg-surface-2 rounded-lg border border-border">
               <div className="text-xs text-text-muted">{t("compressionDuration")}</div>
-              <div className="text-lg font-bold">{compressionResult.durationMs}</div>
+              <div className="text-lg font-semibold tracking-tight tabular-nums text-text-main">
+                {compressionResult.durationMs}
+              </div>
               <div className="text-xs text-text-muted">ms</div>
             </div>
           </div>
 
           {compressionResult.techniquesUsed.length > 0 && (
             <div className="text-xs text-text-muted">
-              <span className="font-semibold">{t("techniques")}</span>{" "}
+              <span className="font-medium text-text-main">{t("techniques")}</span>{" "}
               {compressionResult.techniquesUsed.join(", ")}
             </div>
           )}
@@ -247,14 +253,14 @@ export default function CompressionPreviewAccordion({
 
   return (
     <div
-      className="rounded-lg border border-black/5 dark:border-white/5 bg-surface w-full"
+      className="rounded-lg border border-border bg-surface w-full"
       data-testid="compression-accordion"
     >
       {/* Header row — matches Collapsible visual style */}
       <div
         className={cn(
-          "flex items-center gap-3 p-4 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors",
-          open && "border-b border-black/5 dark:border-white/5"
+          "flex items-center gap-3 p-4 hover:bg-bg-subtle/50 transition-colors",
+          open && "border-b border-border"
         )}
       >
         <button
@@ -262,7 +268,7 @@ export default function CompressionPreviewAccordion({
           onClick={handleToggle}
           aria-expanded={open}
           aria-controls="compression-preview-content"
-          className="flex items-center gap-3 flex-1 min-w-0 text-left -m-1 p-1 rounded"
+          className="flex items-center gap-3 flex-1 min-w-0 text-left -m-1 p-1 rounded-md"
         >
           <span
             className="material-symbols-outlined text-text-muted text-[20px] shrink-0"

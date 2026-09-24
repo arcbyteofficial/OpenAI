@@ -142,7 +142,7 @@ function DestinationForm({
           <textarea
             id={`field-${field.key}`}
             rows={6}
-            className="w-full rounded-control border border-border bg-surface p-2 font-mono text-xs text-text-main"
+            className="w-full rounded-control border border-border-strong bg-surface p-2 font-mono text-xs text-text-main focus:border-primary focus:outline-none focus:ring-[3px] focus:ring-primary/15"
             placeholder={secretPlaceholder(field)}
             value={typeof value === "string" ? value : ""}
             onChange={(event) => setValue(field.key, event.target.value)}
@@ -161,7 +161,7 @@ function DestinationForm({
           </label>
           <select
             id={`field-${field.key}`}
-            className="h-9 rounded-control border border-border bg-surface px-2 text-sm text-text-main"
+            className="h-9 rounded-control border border-border-strong bg-surface px-2 text-sm text-text-main focus:border-primary focus:outline-none focus:ring-[3px] focus:ring-primary/15"
             value={typeof value === "string" ? value : ""}
             onChange={(event) => setValue(field.key, event.target.value)}
           >
@@ -202,7 +202,7 @@ function DestinationForm({
         </label>
         <select
           id="destination-type"
-          className="h-9 rounded-control border border-border bg-surface px-2 text-sm text-text-main disabled:opacity-60"
+          className="h-9 rounded-control border border-border-strong bg-surface px-2 text-sm text-text-main focus:border-primary focus:outline-none focus:ring-[3px] focus:ring-primary/15 disabled:opacity-60"
           value={typeId}
           disabled={Boolean(editing)}
           onChange={(event) => handleTypeChange(event.target.value)}
@@ -265,11 +265,7 @@ function DestinationForm({
         onChange={(event) => setEnabled(event.target.checked)}
       />
 
-      {error ? (
-        <p className="rounded-control bg-red-500/10 p-2 text-xs text-red-600 dark:text-red-400">
-          {error}
-        </p>
-      ) : null}
+      {error ? <p className="rounded-control bg-error/10 p-2 text-xs text-error">{error}</p> : null}
 
       <div className="flex justify-end gap-2">
         <Button variant="ghost" onClick={onClose} disabled={saving}>

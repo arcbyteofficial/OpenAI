@@ -84,8 +84,10 @@ export default function ZedImportCard({ fetchConnections, notify }: ZedImportCar
       <Card>
         <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
           <div className="flex-1 min-w-0">
-            <h2 className="text-lg font-semibold flex items-center gap-2">
-              <span className="material-symbols-outlined text-[20px]">download</span>
+            <h2 className="text-base font-semibold tracking-tight flex items-center gap-2">
+              <span className="material-symbols-outlined text-[18px] text-text-muted">
+                download
+              </span>
               {t("zedImportTitle")}
             </h2>
             <p className="text-sm text-text-muted mt-1">{t("zedImportDescription")}</p>
@@ -107,8 +109,8 @@ export default function ZedImportCard({ fetchConnections, notify }: ZedImportCar
             className="flex items-center justify-between w-full text-left"
             onClick={() => setShowZedManual((v) => !v)}
           >
-            <h2 className="text-lg font-semibold flex items-center gap-2">
-              <span className="material-symbols-outlined text-[20px]">edit</span>
+            <h2 className="text-base font-semibold tracking-tight flex items-center gap-2">
+              <span className="material-symbols-outlined text-[18px] text-text-muted">edit</span>
               {t("zedManualTitle")}
             </h2>
             <span className="material-symbols-outlined text-[18px] text-text-muted">
@@ -124,7 +126,7 @@ export default function ZedImportCard({ fetchConnections, notify }: ZedImportCar
               </p>
               <div className="flex gap-2 flex-col sm:flex-row">
                 <select
-                  className="input input-sm"
+                  className="input input-sm rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[13px] text-text-main focus:outline-none focus:border-primary"
                   value={zedManualProvider}
                   onChange={(e) => setZedManualProvider(e.target.value)}
                 >
@@ -138,7 +140,7 @@ export default function ZedImportCard({ fetchConnections, notify }: ZedImportCar
                 </select>
                 <input
                   type="password"
-                  className="input input-sm flex-1"
+                  className="input input-sm flex-1 rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
                   placeholder={t("zedPasteApiKey")}
                   value={zedManualToken}
                   onChange={(e) => setZedManualToken(e.target.value)}

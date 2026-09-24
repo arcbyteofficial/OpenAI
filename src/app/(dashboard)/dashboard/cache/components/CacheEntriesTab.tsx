@@ -93,7 +93,7 @@ export default function CacheEntriesTab() {
           value={search}
           onChange={(e) => setSearch(e.target.value)}
           onKeyDown={(e) => e.key === "Enter" && fetchEntries()}
-          className="flex-1 px-3 py-2 text-sm rounded-lg border border-border bg-surface text-text-main placeholder:text-text-muted"
+          className="flex-1 px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle"
         />
         <Button variant="secondary" size="sm" onClick={() => fetchEntries()}>
           {t("search")}
@@ -103,8 +103,8 @@ export default function CacheEntriesTab() {
       {loading ? (
         <div className="text-sm text-text-muted">{t("loading")}</div>
       ) : error ? (
-        <div className="flex items-center justify-between gap-3 rounded-xl border border-red-500/20 bg-red-500/5 px-4 py-3">
-          <div className="text-sm text-red-300">{error}</div>
+        <div className="flex items-center justify-between gap-3 rounded-lg border border-error/20 bg-error/5 px-4 py-3">
+          <div className="text-sm text-error">{error}</div>
           <Button variant="secondary" size="sm" onClick={() => fetchEntries(pagination.page)}>
             {t("refresh")}
           </Button>
@@ -114,27 +114,27 @@ export default function CacheEntriesTab() {
       ) : (
         <>
           <div className="overflow-x-auto bg-surface">
-            <table className="w-full text-sm">
+            <table className="w-full text-[13px]">
               <thead>
-                <tr className="text-left text-xs text-text-muted border-b border-border/30">
-                  <th className="pb-2 pr-4">{t("signature")}</th>
-                  <th className="pb-2 pr-4">{t("model")}</th>
-                  <th className="pb-2 pr-4">{t("hits")}</th>
-                  <th className="pb-2 pr-4">{t("tokensSaved")}</th>
-                  <th className="pb-2 pr-4">{t("created")}</th>
-                  <th className="pb-2 pr-4">{t("expires")}</th>
-                  <th className="pb-2">{t("actions")}</th>
+                <tr className="text-left text-xs text-text-muted border-b border-border">
+                  <th className="pb-2 pr-4 font-medium">{t("signature")}</th>
+                  <th className="pb-2 pr-4 font-medium">{t("model")}</th>
+                  <th className="pb-2 pr-4 font-medium">{t("hits")}</th>
+                  <th className="pb-2 pr-4 font-medium">{t("tokensSaved")}</th>
+                  <th className="pb-2 pr-4 font-medium">{t("created")}</th>
+                  <th className="pb-2 pr-4 font-medium">{t("expires")}</th>
+                  <th className="pb-2 font-medium">{t("actions")}</th>
                 </tr>
               </thead>
               <tbody>
                 {entries.map((entry) => (
-                  <tr key={entry.id} className="border-b border-border/20">
-                    <td className="py-2 pr-4 font-mono text-xs">
+                  <tr key={entry.id} className="border-b border-border">
+                    <td className="py-2 pr-4 font-mono text-[12px]">
                       {entry.signature.slice(0, 12)}...
                     </td>
                     <td className="py-2 pr-4">{entry.model}</td>
                     <td className="py-2 pr-4 tabular-nums">{entry.hit_count}</td>
-                    <td className="py-2 pr-4 tabular-nums text-green-500">
+                    <td className="py-2 pr-4 tabular-nums text-success">
                       {(entry.tokens_saved ?? 0).toLocaleString()}
                     </td>
                     <td className="py-2 pr-4 text-xs text-text-muted">
@@ -147,7 +147,7 @@ export default function CacheEntriesTab() {
                       <button
                         onClick={() => handleDelete(entry.signature)}
                         disabled={deleting === entry.signature}
-                        className="text-xs text-red-400 hover:text-red-300 disabled:opacity-50"
+                        className="text-xs text-error transition-opacity hover:opacity-80 disabled:opacity-50"
                       >
                         {deleting === entry.signature ? "..." : "🗑️"}
                       </button>

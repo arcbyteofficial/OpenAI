@@ -65,13 +65,15 @@ export default function UsageTokenBufferTab() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-sky-500/10 text-sky-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             pin
           </span>
         </div>
         <div>
-          <h3 className="text-lg font-semibold">{t("storageUsageTokenBuffer")}</h3>
+          <h3 className="text-base font-semibold tracking-tight text-text-main">
+            {t("storageUsageTokenBuffer")}
+          </h3>
           <p className="text-sm text-text-muted">{t("storageUsageTokenBufferDesc")}</p>
         </div>
       </div>
@@ -86,7 +88,7 @@ export default function UsageTokenBufferTab() {
           onKeyDown={(e) => {
             if (e.key === "Enter") void updateUsageTokenBuffer();
           }}
-          className="h-10 w-36 rounded-lg border border-border bg-surface px-3 text-sm text-text-main focus:outline-none focus:border-primary"
+          className="h-10 w-36 rounded-control border border-border-strong bg-surface px-3 text-sm tabular-nums text-text-main focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
           disabled={loading}
         />
         <Button

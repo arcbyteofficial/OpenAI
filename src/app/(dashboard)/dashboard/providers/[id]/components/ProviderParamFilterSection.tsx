@@ -197,9 +197,9 @@ function useProviderParamFilterConfig(providerId: string, t: Translate) {
 
 function ParamFilterSectionSkeleton() {
   return (
-    <div className="rounded-xl border border-border bg-white p-5 dark:bg-zinc-950">
-      <div className="h-5 w-48 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
-      <div className="mt-4 h-20 animate-pulse rounded bg-zinc-100 dark:bg-zinc-900" />
+    <div className="rounded-card border border-border bg-surface p-5">
+      <div className="h-5 w-48 animate-pulse rounded-md bg-bg-subtle" />
+      <div className="mt-4 h-20 animate-pulse rounded-md bg-bg-subtle" />
     </div>
   );
 }
@@ -207,13 +207,13 @@ function ParamFilterSectionSkeleton() {
 function ParamFilterSectionHeader({ t }: { t: (key: string) => string }) {
   return (
     <>
-      <h2 className="text-base font-semibold text-text-main mb-1">
+      <h2 className="text-base font-semibold tracking-tight text-text-main mb-1">
         {t("paramFiltersSectionTitle")}
       </h2>
       <p className="text-xs text-text-muted mb-4 leading-relaxed">
         {t.rich("paramFiltersSectionHint", {
           code: (chunks) => (
-            <code className="text-xs bg-zinc-100 dark:bg-zinc-800 px-1 rounded">{chunks}</code>
+            <code className="font-mono text-xs bg-bg-subtle px-1 rounded-md">{chunks}</code>
           ),
         })}
       </p>
@@ -238,7 +238,7 @@ function ParamListField({ label, hint, value, placeholder, onChange }: ParamList
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-lg border border-border bg-white px-3 py-2 text-xs text-text-main placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-primary dark:bg-zinc-900"
+        className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
       />
       <p className="text-[11px] text-text-muted mt-1">{hint}</p>
     </div>
@@ -285,7 +285,7 @@ function ParamFilterActions({ t, saving, dirty, onSave, onReset }: ParamFilterAc
         type="button"
         onClick={onSave}
         disabled={saving || !dirty}
-        className="inline-flex items-center gap-1.5 rounded-lg bg-primary px-3 py-1.5 text-xs font-medium text-primary-foreground hover:bg-primary/90 disabled:opacity-50 transition-colors"
+        className="inline-flex items-center gap-1.5 rounded-control bg-contrast px-3 py-1.5 text-xs font-medium text-contrast-fg hover:bg-contrast-hover disabled:opacity-50 transition-colors"
       >
         {saving ? (
           <span className="material-symbols-outlined text-sm animate-spin">progress_activity</span>
@@ -298,7 +298,7 @@ function ParamFilterActions({ t, saving, dirty, onSave, onReset }: ParamFilterAc
         type="button"
         onClick={onReset}
         disabled={saving}
-        className="inline-flex items-center gap-1.5 rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-text-muted hover:text-text-main hover:border-primary/40 disabled:opacity-50 transition-colors"
+        className="inline-flex items-center gap-1.5 rounded-control border border-border-strong px-3 py-1.5 text-xs font-medium text-text-main hover:bg-bg-subtle disabled:opacity-50 transition-colors"
       >
         <span className="material-symbols-outlined text-sm">delete</span>
         {t("paramFiltersResetToDefault")}
@@ -334,7 +334,7 @@ export default function ProviderParamFilterSection({
   }
 
   return (
-    <div className="rounded-xl border border-border bg-white p-5 dark:bg-zinc-950">
+    <div className="rounded-card border border-border bg-surface p-5">
       <ParamFilterSectionHeader t={t} />
       <ParamListField
         label={t("paramFiltersBlockedLabel")}

@@ -46,7 +46,7 @@ export default function UsageLogCard({ poolId, keyLabels }: UsageLogCardProps) {
       .then((data) => {
         if (!alive) return;
         const raw: unknown = data?.events;
-        setEvents(Array.isArray(raw) ? (raw as ConsumptionEvent[]) : [] ?? []);
+        setEvents(Array.isArray(raw) ? (raw as ConsumptionEvent[]) : ([] ?? []));
         setLoaded(true);
       })
       .catch(() => {
@@ -64,11 +64,11 @@ export default function UsageLogCard({ poolId, keyLabels }: UsageLogCardProps) {
     keyLabels?.[apiKeyId] ?? apiKeyId.slice(0, 10) + "…";
 
   return (
-    <div className="mt-2 pt-2 border-t border-border/30">
+    <div className="mt-2 pt-2 border-t border-border">
       <button
         type="button"
         onClick={() => setOpen((prev) => !prev)}
-        className="flex items-center gap-1 text-[10px] uppercase tracking-wide font-bold text-text-muted hover:text-text-main w-full text-left cursor-pointer"
+        className="flex items-center gap-1 text-[11px] font-medium uppercase tracking-wider text-text-subtle hover:text-text-main transition-colors w-full text-left cursor-pointer"
       >
         <span
           className={`material-symbols-outlined text-[13px] transition-transform ${open ? "rotate-90" : ""}`}
@@ -91,15 +91,15 @@ export default function UsageLogCard({ poolId, keyLabels }: UsageLogCardProps) {
                   key={`${ev.apiKeyId}-${ev.dimensionKey}-${ev.bucketIndex}-${i}`}
                   className="flex items-center gap-1.5 text-[11px] text-text-muted"
                 >
-                  <span className="tabular-nums text-text-muted/60 shrink-0 w-[52px]">
+                  <span className="tabular-nums text-text-subtle shrink-0 w-[52px]">
                     {formatTime(ev.updatedAt)}
                   </span>
                   <span className="truncate max-w-[80px]" title={ev.apiKeyId}>
                     {keyLabel(ev.apiKeyId)}
                   </span>
-                  <span className="text-text-muted/50">·</span>
+                  <span className="text-text-subtle">·</span>
                   <span className="truncate max-w-[80px]">{ev.unit}</span>
-                  <span className="text-text-muted/50">·</span>
+                  <span className="text-text-subtle">·</span>
                   <span className="tabular-nums text-text-main/80">
                     {ev.consumed.toFixed(0)} {ev.window}
                   </span>

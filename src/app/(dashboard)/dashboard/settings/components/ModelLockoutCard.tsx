@@ -104,7 +104,7 @@ function NumberField({
     <label className="flex flex-col gap-1">
       <span className="flex items-center justify-between text-xs text-text-muted">
         <span>{label}</span>
-        {hint ? <span className="text-text-soft">{hint}</span> : null}
+        {hint ? <span className="text-text-subtle">{hint}</span> : null}
       </span>
       <div className="flex items-center gap-2">
         <input
@@ -119,7 +119,7 @@ function NumberField({
               onChange(nextValue);
             }
           }}
-          className="w-full rounded-lg border border-border bg-bg-subtle px-3 py-2 text-sm"
+          className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:border-primary focus:outline-none"
         />
         {suffix ? <span className="text-xs text-text-muted">{suffix}</span> : null}
       </div>
@@ -346,8 +346,10 @@ export default function ModelLockoutCard() {
       <div className="mb-4 flex items-start justify-between gap-4">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-xl text-primary">gpp_maybe</span>
-            <h2 className="text-lg font-bold">{t("modelLockout")}</h2>
+            <span className="material-symbols-outlined text-[18px] text-text-muted">gpp_maybe</span>
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
+              {t("modelLockout")}
+            </h2>
           </div>
           <p className="text-sm text-text-muted">{t("modelLockoutPageDescription")}</p>
         </div>
@@ -398,13 +400,13 @@ export default function ModelLockoutCard() {
               {draft.errorCodes.map((code) => (
                 <span
                   key={code}
-                  className="inline-flex items-center gap-1 rounded-md bg-primary/10 text-primary border border-primary/20 px-2 py-1 text-sm font-medium"
+                  className="inline-flex items-center gap-1 rounded-md bg-surface text-text-main border border-border-strong px-2 py-1 font-mono text-[13px] font-medium"
                 >
                   {code}
                   <button
                     type="button"
                     onClick={() => removeErrorCode(code)}
-                    className="inline-flex size-4 items-center justify-center rounded-sm hover:bg-primary/20 transition-colors"
+                    className="inline-flex size-4 items-center justify-center rounded-sm text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
                     aria-label={t("removeErrorCode", { code })}
                   >
                     <span className="material-symbols-outlined text-sm leading-none">close</span>
@@ -431,13 +433,13 @@ export default function ModelLockoutCard() {
                 }
               }}
               placeholder={t("addErrorCode")}
-              className="w-32 rounded-lg border border-border bg-bg px-3 py-2 text-sm outline-none focus:border-primary transition-colors placeholder:text-text-muted/50"
+              className="w-32 rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main outline-none focus:border-primary transition-colors placeholder:text-text-subtle"
             />
             <button
               type="button"
               onClick={() => commitErrorCodes()}
               disabled={!errorCodesInput.trim()}
-              className="rounded-lg border border-border bg-bg px-3 py-2 text-sm text-text-muted hover:text-text-main hover:border-primary/40 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm font-medium text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             >
               {tc("add")}
             </button>
@@ -452,7 +454,7 @@ export default function ModelLockoutCard() {
                   key={code}
                   type="button"
                   onClick={() => commitErrorCodes(String(code))}
-                  className="inline-flex items-center px-2 py-0.5 rounded-full bg-surface text-xs text-text-muted border border-border/40 hover:border-primary/40 hover:text-primary transition-colors"
+                  className="inline-flex items-center px-2 py-0.5 rounded-full bg-surface font-mono text-xs text-text-muted border border-border hover:border-border-strong hover:text-text-main transition-colors"
                 >
                   +{code}
                 </button>

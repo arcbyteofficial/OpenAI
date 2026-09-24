@@ -322,14 +322,14 @@ export default function RadarPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">{t("title")}</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
           <p className="text-sm text-text-muted mt-1">{t("subtitle")}</p>
         </div>
         <div className="flex items-center gap-2">
           {(pageState === "empty" || pageState === "populated") && (
             <Link
               href="/dashboard/radar/intel"
-              className="px-4 py-2 text-sm font-medium rounded-lg border border-border text-text-main hover:border-violet-500 hover:text-violet-400 transition-colors"
+              className="px-3 py-1.5 text-[13px] font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors"
             >
               {t("intel")}
             </Link>
@@ -337,7 +337,7 @@ export default function RadarPage() {
           {(pageState === "empty" || pageState === "populated") && (
             <Link
               href="/dashboard/radar/offers"
-              className="px-4 py-2 text-sm font-medium rounded-lg border border-border text-text-main hover:border-violet-500 hover:text-violet-400 transition-colors"
+              className="px-3 py-1.5 text-[13px] font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors"
             >
               {t("offers")}
             </Link>
@@ -345,7 +345,7 @@ export default function RadarPage() {
           {(pageState === "empty" || pageState === "populated") && (
             <Link
               href="/dashboard/radar/combos"
-              className="px-4 py-2 text-sm font-medium rounded-lg border border-border text-text-main hover:border-violet-500 hover:text-violet-400 transition-colors"
+              className="px-3 py-1.5 text-[13px] font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors"
             >
               {t("guidedCombos")}
             </Link>
@@ -354,7 +354,7 @@ export default function RadarPage() {
             <button
               onClick={handleSync}
               disabled={syncing}
-              className="px-4 py-2 text-sm font-medium rounded-lg border border-violet-500 text-violet-400 hover:bg-violet-500/10 transition-colors disabled:opacity-50"
+              className="px-3 py-1.5 text-[13px] font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
             >
               {syncing ? t("syncing") : t("syncNow")}
             </button>
@@ -370,7 +370,7 @@ export default function RadarPage() {
           </span>
           <span>
             {t("feedTier")}:{" "}
-            <span className={meta.tier === "live" ? "text-green-400" : "text-amber-400"}>
+            <span className={meta.tier === "live" ? "text-success" : "text-warning"}>
               {meta.tier === "live" ? t("tierLive") : t("tierCommunity")}
             </span>
           </span>
@@ -380,7 +380,7 @@ export default function RadarPage() {
         </div>
       )}
 
-      {error && <div className="p-3 rounded-lg bg-red-500/10 text-red-400 text-sm">{error}</div>}
+      {error && <div className="p-3 rounded-lg bg-error/10 text-error text-sm">{error}</div>}
 
       {loading ? (
         <div className="flex items-center justify-center min-h-[200px]">
@@ -394,26 +394,28 @@ export default function RadarPage() {
               <div className="mx-auto flex max-w-5xl flex-col items-center gap-6 py-8 text-center">
                 <span
                   aria-hidden="true"
-                  className="material-symbols-outlined text-4xl text-violet-400"
+                  className="material-symbols-outlined text-[28px] text-text-muted"
                 >
                   radar
                 </span>
-                <h2 className="text-xl font-semibold">{t("activateTitle")}</h2>
-                <p className="max-w-2xl text-text-muted">{t("activateDescription")}</p>
+                <h2 className="text-xl font-semibold tracking-tight text-text-main">
+                  {t("activateTitle")}
+                </h2>
+                <p className="max-w-2xl text-sm text-text-muted">{t("activateDescription")}</p>
 
                 <RadarAccessExplainer />
 
                 {/* F4/T7 — ways to obtain a supporter key. These conditions
                     intentionally precede both activation actions (D32). */}
                 {contributorClaimUrl && supporterPlansUrl && (
-                  <div className="flex w-full flex-col gap-3 rounded-xl border border-border p-4">
-                    <p className="text-sm font-medium">{t("claimSectionTitle")}</p>
+                  <div className="flex w-full flex-col gap-3 rounded-lg border border-border p-4">
+                    <p className="text-sm font-medium text-text-main">{t("claimSectionTitle")}</p>
                     <div className="flex w-full flex-col gap-3 sm:flex-row">
                       <a
                         href={contributorClaimUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 rounded-lg border border-violet-500 px-4 py-2 text-center text-sm font-medium text-violet-400 transition-colors hover:bg-violet-500/10"
+                        className="flex-1 rounded-control border border-border-strong bg-surface px-4 py-2 text-center text-sm font-medium text-text-main transition-colors hover:bg-bg-subtle"
                       >
                         {t("contributorButton")}
                       </a>
@@ -421,7 +423,7 @@ export default function RadarPage() {
                         href={supporterPlansUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex-1 rounded-lg border border-violet-500 px-4 py-2 text-center text-sm font-medium text-violet-400 transition-colors hover:bg-violet-500/10"
+                        className="flex-1 rounded-control border border-border-strong bg-surface px-4 py-2 text-center text-sm font-medium text-text-main transition-colors hover:bg-bg-subtle"
                       >
                         {t("supporterButton")}
                       </a>
@@ -437,16 +439,16 @@ export default function RadarPage() {
                     form (supporterKeyMasked) is shown, with a "change key" escape
                     hatch to paste a new one. */}
                 <div className="w-full flex flex-col gap-3 text-left">
-                  <p className="text-sm font-medium">{t("keySectionTitle")}</p>
+                  <p className="text-sm font-medium text-text-main">{t("keySectionTitle")}</p>
                   {hasSupporterKey && !showKeyForm ? (
                     <div className="flex items-center justify-between gap-3 p-3 rounded-lg border border-border">
-                      <span className="font-mono text-sm text-text-muted">
+                      <span className="font-mono text-[13px] text-text-muted">
                         {supporterKeyMasked}
                       </span>
                       <button
                         type="button"
                         onClick={() => setShowKeyForm(true)}
-                        className="text-sm text-violet-400 hover:underline shrink-0"
+                        className="text-sm text-primary hover:underline shrink-0"
                       >
                         {t("changeKeyButton")}
                       </button>
@@ -459,13 +461,13 @@ export default function RadarPage() {
                         onChange={(e) => setKeyInput(e.target.value)}
                         placeholder="omr_..."
                         aria-label={t("keySectionTitle")}
-                        className="flex-1 px-3 py-2 text-sm font-mono rounded-lg border border-border bg-transparent focus:outline-none focus:ring-2 focus:ring-violet-500"
+                        className="flex-1 px-3 py-2 text-[13px] font-mono text-text-main rounded-control border border-border-strong bg-surface placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                       />
                       <button
                         type="button"
                         onClick={handleSubmitKey}
                         disabled={keySubmitting || keyInput.trim().length === 0}
-                        className="px-6 py-2 bg-violet-500 hover:bg-violet-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50 shrink-0"
+                        className="px-4 py-2 text-sm bg-contrast hover:bg-contrast-hover text-contrast-fg font-medium rounded-control transition-colors disabled:opacity-50 shrink-0"
                       >
                         {keySubmitting ? t("activating") : t("activateWithKeyButton")}
                       </button>
@@ -478,7 +480,7 @@ export default function RadarPage() {
                 <button
                   onClick={handleActivate}
                   disabled={activating}
-                  className="px-6 py-3 bg-violet-500 hover:bg-violet-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50"
+                  className="px-4 py-2 text-sm bg-contrast hover:bg-contrast-hover text-contrast-fg font-medium rounded-control transition-colors disabled:opacity-50"
                 >
                   {activating ? t("activating") : t("activateButton")}
                 </button>
@@ -496,7 +498,7 @@ export default function RadarPage() {
                 onClick={() => setActiveTab("catalog")}
                 className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
                   activeTab === "catalog"
-                    ? "border-violet-500 text-violet-400"
+                    ? "border-text-main text-text-main"
                     : "border-transparent text-text-muted hover:text-text-main"
                 }`}
               >
@@ -508,7 +510,7 @@ export default function RadarPage() {
                 onClick={() => setActiveTab("referrals")}
                 className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
                   activeTab === "referrals"
-                    ? "border-violet-500 text-violet-400"
+                    ? "border-text-main text-text-main"
                     : "border-transparent text-text-muted hover:text-text-main"
                 }`}
               >
@@ -524,14 +526,16 @@ export default function RadarPage() {
 
               {referrals.fixed.length === 0 ? (
                 <Card>
-                  <p className="text-text-muted text-center py-6">{t("fixedLinksEmpty")}</p>
+                  <p className="text-sm text-text-muted text-center py-6">{t("fixedLinksEmpty")}</p>
                 </Card>
               ) : (
                 <div className="grid gap-3 sm:grid-cols-2">
                   {referrals.fixed.map((referral) => (
                     <Card key={`${referral.provider}:fixed`} padding="sm">
                       <div className="flex flex-col gap-2">
-                        <span className="font-medium">{referral.provider}</span>
+                        <span className="text-sm font-medium text-text-main">
+                          {referral.provider}
+                        </span>
                         {referral.requiredAction && (
                           <p className="text-xs text-text-muted">
                             {t("requiredActionLabel")} {referral.requiredAction}
@@ -541,10 +545,10 @@ export default function RadarPage() {
                           href={referral.url}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1 text-sm font-medium text-violet-400 hover:underline w-fit"
+                          className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline w-fit"
                         >
                           {t("claimButton")}
-                          <span className="material-symbols-outlined text-sm">open_in_new</span>
+                          <span className="material-symbols-outlined text-[14px]">open_in_new</span>
                         </a>
                       </div>
                     </Card>
@@ -553,10 +557,12 @@ export default function RadarPage() {
               )}
 
               <div>
-                <h3 className="text-lg font-semibold mb-3">{t("campaignsTitle")}</h3>
+                <h3 className="text-base font-semibold tracking-tight text-text-main mb-3">
+                  {t("campaignsTitle")}
+                </h3>
                 {referrals.campaigns.length === 0 ? (
                   <Card>
-                    <p className="text-text-muted text-center py-6">
+                    <p className="text-sm text-text-muted text-center py-6">
                       {referrals.tier === "community"
                         ? t("campaignsUpsellCommunity")
                         : t("campaignsEmpty")}
@@ -567,14 +573,16 @@ export default function RadarPage() {
                     {referrals.campaigns.map((referral, idx) => (
                       <Card key={`${referral.provider}:campaign:${idx}`} padding="sm">
                         <div className="flex flex-col gap-2">
-                          <span className="font-medium">{referral.provider}</span>
+                          <span className="text-sm font-medium text-text-main">
+                            {referral.provider}
+                          </span>
                           {referral.requiredAction && (
                             <p className="text-xs text-text-muted">
                               {t("requiredActionLabel")} {referral.requiredAction}
                             </p>
                           )}
                           {referral.validUntil && (
-                            <p className="text-xs text-amber-400">
+                            <p className="text-xs text-warning">
                               {t("campaignsValidUntil", {
                                 date: new Date(referral.validUntil).toLocaleDateString(),
                               })}
@@ -584,10 +592,12 @@ export default function RadarPage() {
                             href={referral.url}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-sm font-medium text-violet-400 hover:underline w-fit"
+                            className="inline-flex items-center gap-1 text-sm font-medium text-primary hover:underline w-fit"
                           >
                             {t("claimButton")}
-                            <span className="material-symbols-outlined text-sm">open_in_new</span>
+                            <span className="material-symbols-outlined text-[14px]">
+                              open_in_new
+                            </span>
                           </a>
                         </div>
                       </Card>
@@ -602,11 +612,11 @@ export default function RadarPage() {
           {pageState === "empty" && activeTab === "catalog" && (
             <Card>
               <div className="flex flex-col items-center gap-4 py-12 text-center">
-                <p className="text-text-muted">{t("emptyState")}</p>
+                <p className="text-sm text-text-muted">{t("emptyState")}</p>
                 <button
                   onClick={handleSync}
                   disabled={syncing}
-                  className="px-6 py-3 bg-violet-500 hover:bg-violet-600 text-white font-medium rounded-lg transition-colors disabled:opacity-50"
+                  className="px-4 py-2 text-sm bg-contrast hover:bg-contrast-hover text-contrast-fg font-medium rounded-control transition-colors disabled:opacity-50"
                 >
                   {syncing ? t("syncing") : t("syncCta")}
                 </button>

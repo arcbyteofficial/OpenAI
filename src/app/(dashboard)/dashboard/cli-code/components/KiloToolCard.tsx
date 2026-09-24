@@ -266,7 +266,7 @@ export default function KiloToolCard({
       </div>
 
       {isExpanded && (
-        <div className="mt-6 pt-6 border-t border-border">
+        <div className="mt-4 pt-4 border-t border-border">
           {checkingKilo && (
             <div className="flex items-center gap-2 text-text-muted text-sm">
               <span className="material-symbols-outlined animate-spin text-base">
@@ -279,9 +279,9 @@ export default function KiloToolCard({
           {kiloStatus && !checkingKilo && (
             <div className="flex flex-col gap-4">
               {/* Runtime status */}
-              <div className="flex items-start gap-3 p-3 rounded-lg border bg-bg-secondary/50 border-border">
+              <div className="flex items-start gap-3 p-3 rounded-lg border bg-surface-2 border-border">
                 <span
-                  className={`material-symbols-outlined text-lg ${cliReady ? "text-green-500" : "text-yellow-500"}`}
+                  className={`material-symbols-outlined text-lg ${cliReady ? "text-success" : "text-warning"}`}
                 >
                   {cliReady ? "check_circle" : "warning"}
                 </span>
@@ -296,7 +296,7 @@ export default function KiloToolCard({
                   {kiloStatus.commandPath && (
                     <p className="text-xs text-text-muted">
                       {t("binary")}:{" "}
-                      <code className="px-1 py-0.5 rounded bg-black/5 dark:bg-white/10">
+                      <code className="px-1 py-0.5 rounded bg-bg-subtle font-mono text-[12px]">
                         {kiloStatus.commandPath}
                       </code>
                     </p>
@@ -304,7 +304,7 @@ export default function KiloToolCard({
                   {kiloStatus.authPath && (
                     <p className="text-xs text-text-muted">
                       {t("auth")}:{" "}
-                      <code className="px-1 py-0.5 rounded bg-black/5 dark:bg-white/10">
+                      <code className="px-1 py-0.5 rounded bg-bg-subtle font-mono text-[12px]">
                         {kiloStatus.authPath}
                       </code>
                     </p>
@@ -316,12 +316,12 @@ export default function KiloToolCard({
                 <>
                   {/* Current config info */}
                   {configStatus === "configured" && (
-                    <div className="flex items-start gap-3 p-3 bg-green-500/10 border border-green-500/30 rounded-lg">
-                      <span className="material-symbols-outlined text-green-500 text-lg">
+                    <div className="flex items-start gap-3 p-3 bg-success/10 border border-success/30 rounded-lg">
+                      <span className="material-symbols-outlined text-success text-lg">
                         check_circle
                       </span>
                       <div className="flex flex-col gap-1">
-                        <p className="text-sm text-green-700 dark:text-green-300">
+                        <p className="text-sm text-text-main">
                           {t("omnirouteConfiguredOpenAiCompatible")}
                         </p>
                         <p className="text-xs text-text-muted">
@@ -341,7 +341,7 @@ export default function KiloToolCard({
                         value={selectedModel}
                         onChange={(e) => setSelectedModel(e.target.value)}
                         placeholder={t("providerModelPlaceholder")}
-                        className="flex-1 px-3 py-2 bg-bg-secondary rounded-lg text-sm border border-border focus:outline-none focus:ring-1 focus:ring-primary/50"
+                        className="flex-1 px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
                       />
                       <Button
                         variant="outline"
@@ -368,7 +368,7 @@ export default function KiloToolCard({
                       <select
                         value={effectiveApiKeyId}
                         onChange={(e) => setSelectedApiKeyId(e.target.value)}
-                        className="px-3 py-2 bg-bg-secondary rounded-lg text-sm border border-border focus:outline-none focus:ring-1 focus:ring-primary/50"
+                        className="px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
                       >
                         {apiKeys.map((key) => (
                           <option key={key.id} value={key.id}>
@@ -408,7 +408,7 @@ export default function KiloToolCard({
                   {/* Message */}
                   {message && (
                     <div
-                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm ${message.type === "success" ? "bg-green-500/10 text-green-600" : "bg-red-500/10 text-red-600"}`}
+                      className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm ${message.type === "success" ? "bg-success/10 text-success" : "bg-error/10 text-error"}`}
                     >
                       <span className="material-symbols-outlined text-[16px]">
                         {message.type === "success" ? "check_circle" : "error"}
@@ -421,7 +421,7 @@ export default function KiloToolCard({
                   <div className="border-t border-border pt-3 mt-1">
                     <button
                       onClick={() => setShowBackups(!showBackups)}
-                      className="flex items-center gap-2 text-sm text-text-muted hover:text-text transition-colors"
+                      className="flex items-center gap-2 text-sm text-text-muted hover:text-text-main transition-colors"
                     >
                       <span
                         className={`material-symbols-outlined text-[16px] transition-transform ${showBackups ? "rotate-90" : ""}`}
@@ -436,7 +436,7 @@ export default function KiloToolCard({
                         {backups.map((b) => (
                           <div
                             key={b.id}
-                            className="flex items-center justify-between gap-2 p-2 rounded bg-bg-secondary/50 text-xs"
+                            className="flex items-center justify-between gap-2 p-2 rounded-md bg-bg-subtle text-xs"
                           >
                             <div className="flex flex-col">
                               <span className="font-medium">{b.originalFile}</span>

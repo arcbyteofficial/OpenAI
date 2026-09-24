@@ -54,14 +54,14 @@ export default function TokenHealthBadge() {
       onMouseLeave={() => setShowTooltip(false)}
     >
       <button
-        className="flex items-center gap-1 px-2 py-1.5 rounded-lg hover:bg-surface/30 transition-colors"
+        className="flex items-center gap-1 px-2 py-1.5 rounded-control hover:bg-bg-subtle transition-colors"
         title={t(`tokenHealthTooltips.${status.tooltipKey}`)}
       >
         <span className="material-symbols-outlined text-[18px]" style={{ color: status.color }}>
           {status.icon}
         </span>
         {health.errored > 0 && (
-          <span className="text-xs font-medium" style={{ color: status.color }}>
+          <span className="text-xs font-medium tabular-nums" style={{ color: status.color }}>
             {health.errored}
           </span>
         )}
@@ -69,37 +69,37 @@ export default function TokenHealthBadge() {
 
       {showTooltip && (
         <div
-          className="absolute top-full right-0 mt-1 z-50 min-w-[200px] p-3 rounded-lg shadow-lg"
+          className="absolute top-full right-0 mt-1 z-50 min-w-[200px] p-3 rounded-lg shadow-[var(--shadow-elevated)]"
           style={{
-            background: "rgba(15, 15, 25, 0.95)",
-            border: "1px solid rgba(255,255,255,0.1)",
-            backdropFilter: "blur(12px)",
+            background: "var(--color-surface)",
+            border: "1px solid var(--color-border)",
+            backdropFilter: "none",
           }}
         >
           <p className="text-xs font-medium text-text-main mb-2">{t("tokenHealth")}</p>
           <div className="flex flex-col gap-1 text-xs">
             <div className="flex justify-between">
               <span className="text-text-muted">{t("totalOAuth")}</span>
-              <span className="text-text-main">{health.total}</span>
+              <span className="text-text-main tabular-nums">{health.total}</span>
             </div>
             <div className="flex justify-between">
-              <span className="text-emerald-400">{t("healthy")}</span>
-              <span className="text-text-main">{health.healthy}</span>
+              <span className="text-success">{t("healthy")}</span>
+              <span className="text-text-main tabular-nums">{health.healthy}</span>
             </div>
             {health.errored > 0 && (
               <div className="flex justify-between">
-                <span className="text-red-400">{t("errored")}</span>
-                <span className="text-text-main">{health.errored}</span>
+                <span className="text-error">{t("errored")}</span>
+                <span className="text-text-main tabular-nums">{health.errored}</span>
               </div>
             )}
             {health.warning > 0 && (
               <div className="flex justify-between">
-                <span className="text-amber-400">{t("warning")}</span>
-                <span className="text-text-main">{health.warning}</span>
+                <span className="text-warning">{t("warning")}</span>
+                <span className="text-text-main tabular-nums">{health.warning}</span>
               </div>
             )}
             {health.lastCheckAt && (
-              <div className="flex justify-between mt-1 pt-1 border-t border-white/5">
+              <div className="flex justify-between mt-1 pt-1 border-t border-border">
                 <span className="text-text-muted">{t("lastCheck")}</span>
                 <span className="text-text-muted">
                   {new Date(health.lastCheckAt).toLocaleTimeString()}

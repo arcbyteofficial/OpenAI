@@ -295,7 +295,7 @@ export default function MemoriesTab() {
   if (isLoading) {
     return (
       <div className="flex items-center justify-center h-32">
-        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-violet-500" />
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-text-muted" />
       </div>
     );
   }
@@ -307,7 +307,7 @@ export default function MemoriesTab() {
         <div className="flex items-center gap-2">
           {health !== null && (
             <span
-              className={`inline-block w-3 h-3 rounded-full ${health.working ? "bg-green-500" : "bg-red-500"}`}
+              className={`inline-block w-3 h-3 rounded-full ${health.working ? "bg-success" : "bg-error"}`}
               title={
                 health.working
                   ? t("pipelineOk", { latencyMs: health.latencyMs })
@@ -317,7 +317,7 @@ export default function MemoriesTab() {
           )}
           {health === null && !checkingHealth && (
             <span
-              className="inline-block w-3 h-3 rounded-full bg-gray-400"
+              className="inline-block w-3 h-3 rounded-full bg-border-strong"
               title={t("healthUnknown")}
             />
           )}
@@ -354,7 +354,7 @@ export default function MemoriesTab() {
       </div>
 
       {importStatus && (
-        <div className="p-3 rounded-lg bg-surface/30 border border-border/60 text-xs text-text-muted">
+        <div className="p-3 rounded-lg bg-surface-2 border border-border text-xs text-text-muted">
           {importStatus}
         </div>
       )}
@@ -364,7 +364,7 @@ export default function MemoriesTab() {
         <Card>
           <div className="p-4">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs text-text-muted">{t("totalEntries")}</span>
+              <span className="text-[13px] text-text-muted">{t("totalEntries")}</span>
               <span
                 className="material-symbols-outlined text-[14px] text-text-muted cursor-help"
                 title={t("tooltip.totalEntries")}
@@ -372,13 +372,15 @@ export default function MemoriesTab() {
                 info
               </span>
             </div>
-            <div className="text-2xl font-bold">{stats.totalEntries}</div>
+            <div className="text-2xl font-semibold tabular-nums text-text-main">
+              {stats.totalEntries}
+            </div>
           </div>
         </Card>
         <Card>
           <div className="p-4">
             <div className="flex items-center gap-2 mb-1">
-              <span className="text-xs text-text-muted">{t("tokensUsed")}</span>
+              <span className="text-[13px] text-text-muted">{t("tokensUsed")}</span>
               <span
                 className="material-symbols-outlined text-[14px] text-text-muted cursor-help"
                 title={t("tooltip.tokensUsed")}
@@ -386,14 +388,16 @@ export default function MemoriesTab() {
                 info
               </span>
             </div>
-            <div className="text-2xl font-bold">{(stats.tokensUsed ?? 0).toLocaleString()}</div>
+            <div className="text-2xl font-semibold tabular-nums text-text-main">
+              {(stats.tokensUsed ?? 0).toLocaleString()}
+            </div>
           </div>
         </Card>
         {showHitRate && (
           <Card>
             <div className="p-4">
               <div className="flex items-center gap-2 mb-1">
-                <span className="text-xs text-text-muted">{t("hitRate")}</span>
+                <span className="text-[13px] text-text-muted">{t("hitRate")}</span>
                 <span
                   className="material-symbols-outlined text-[14px] text-text-muted cursor-help"
                   title={t("tooltip.hitRate")}
@@ -401,7 +405,9 @@ export default function MemoriesTab() {
                   info
                 </span>
               </div>
-              <div className="text-2xl font-bold">{((stats.hitRate ?? 0) * 100).toFixed(1)}%</div>
+              <div className="text-2xl font-semibold tabular-nums text-text-main">
+                {((stats.hitRate ?? 0) * 100).toFixed(1)}%
+              </div>
             </div>
           </Card>
         )}
@@ -411,7 +417,9 @@ export default function MemoriesTab() {
       <Card>
         <div className="p-4">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold">{t("memories")}</h2>
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
+              {t("memories")}
+            </h2>
             <div className="flex gap-2">
               <Input
                 placeholder={t("search")}
@@ -455,19 +463,32 @@ export default function MemoriesTab() {
           ) : (
             <>
               <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full text-[13px]">
                   <thead>
-                    <tr className="border-b">
-                      <th className="text-left py-2 px-4">{t("type")}</th>
-                      <th className="text-left py-2 px-4">{t("key")}</th>
-                      <th className="text-left py-2 px-4">{t("content")}</th>
-                      <th className="text-left py-2 px-4">{t("created")}</th>
-                      <th className="text-left py-2 px-4">{t("actions")}</th>
+                    <tr className="border-b border-border">
+                      <th className="text-left py-2 px-4 text-xs font-medium text-text-muted">
+                        {t("type")}
+                      </th>
+                      <th className="text-left py-2 px-4 text-xs font-medium text-text-muted">
+                        {t("key")}
+                      </th>
+                      <th className="text-left py-2 px-4 text-xs font-medium text-text-muted">
+                        {t("content")}
+                      </th>
+                      <th className="text-left py-2 px-4 text-xs font-medium text-text-muted">
+                        {t("created")}
+                      </th>
+                      <th className="text-left py-2 px-4 text-xs font-medium text-text-muted">
+                        {t("actions")}
+                      </th>
                     </tr>
                   </thead>
                   <tbody>
                     {memories.map((memory) => (
-                      <tr key={memory.id} className="border-b hover:bg-surface/30">
+                      <tr
+                        key={memory.id}
+                        className="border-b border-border transition-colors hover:bg-bg-subtle"
+                      >
                         <td className="py-2 px-4">
                           <Badge
                             variant={getTypeColor(memory.type)}
@@ -478,7 +499,9 @@ export default function MemoriesTab() {
                             {t(memory.type)}
                           </Badge>
                         </td>
-                        <td className="py-2 px-4 font-medium">{memory.key}</td>
+                        <td className="py-2 px-4 font-mono text-[12px] font-medium text-text-main">
+                          {memory.key}
+                        </td>
                         <td className="py-2 px-4 max-w-md truncate text-text-muted">
                           {memory.content}
                         </td>
@@ -663,7 +686,7 @@ export default function MemoriesTab() {
                 {summarizeCandidates.map((key, i) => (
                   <li
                     key={i}
-                    className="text-xs font-mono text-text-main truncate px-2 py-1 bg-surface/30 rounded"
+                    className="text-xs font-mono text-text-main truncate px-2 py-1 bg-bg-subtle rounded-md"
                   >
                     {key}
                   </li>

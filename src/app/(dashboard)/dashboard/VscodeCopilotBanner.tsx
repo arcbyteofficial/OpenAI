@@ -62,11 +62,14 @@ export default function VscodeCopilotBanner() {
     <div
       role="complementary"
       aria-label={t("title")}
-      className="mb-4 flex flex-col gap-3 rounded-lg border border-[#007ACC]/30 bg-[#007ACC]/5 px-4 py-3 dark:bg-[#007ACC]/10 sm:flex-row sm:items-center sm:justify-between"
+      className="mb-4 flex flex-col gap-3 rounded-card border border-border bg-surface px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
     >
       <div className="flex min-w-0 items-start gap-3">
-        <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#007ACC]/10">
-          <span className="material-symbols-outlined text-[22px] text-[#007ACC]" aria-hidden="true">
+        <div className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-border bg-bg-subtle">
+          <span
+            className="material-symbols-outlined text-[20px] text-text-muted"
+            aria-hidden="true"
+          >
             extension
           </span>
         </div>
@@ -82,14 +85,14 @@ export default function VscodeCopilotBanner() {
             href={MARKETPLACE_URL}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-[#007ACC] px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:brightness-110"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-control bg-contrast px-3 py-1.5 text-xs font-medium text-contrast-fg transition-colors hover:bg-contrast-hover"
           >
             {t("cta")}
             <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
               open_in_new
             </span>
           </a>
-          <span className="text-[9px] text-text-muted/70">{t("secondaryNote")}</span>
+          <span className="text-[10px] text-text-subtle">{t("secondaryNote")}</span>
         </div>
         <button
           type="button"

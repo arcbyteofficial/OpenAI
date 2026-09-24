@@ -44,29 +44,29 @@ export default function RequestCountTable({
 }: RequestCountTableProps) {
   return (
     <div className="overflow-x-auto">
-      <table className="w-full text-sm">
-        <thead className="text-xs text-text-muted uppercase bg-black/[0.02] dark:bg-white/[0.02]">
+      <table className="w-full text-[13px]">
+        <thead className="text-xs text-text-muted bg-surface-2 border-b border-border">
           <tr>
             <th
-              className="px-4 py-2.5 text-left cursor-pointer group"
+              className="px-4 py-2.5 text-left font-medium cursor-pointer group hover:text-text-main transition-colors"
               onClick={() => onToggleSort("date")}
             >
               {dateLabel} <SortIndicator active={sortBy === "date"} sortOrder={sortOrder} />
             </th>
             <th
-              className="px-4 py-2.5 text-left cursor-pointer group"
+              className="px-4 py-2.5 text-left font-medium cursor-pointer group hover:text-text-main transition-colors"
               onClick={() => onToggleSort("provider")}
             >
               {providerLabel} <SortIndicator active={sortBy === "provider"} sortOrder={sortOrder} />
             </th>
             <th
-              className="px-4 py-2.5 text-right cursor-pointer group"
+              className="px-4 py-2.5 text-right font-medium cursor-pointer group hover:text-text-main transition-colors"
               onClick={() => onToggleSort("requests")}
             >
               {requestsLabel} <SortIndicator active={sortBy === "requests"} sortOrder={sortOrder} />
             </th>
             <th
-              className="px-4 py-2.5 text-right cursor-pointer group"
+              className="px-4 py-2.5 text-right font-medium cursor-pointer group hover:text-text-main transition-colors"
               onClick={() => onToggleSort("totalTokens")}
             >
               {totalLabel} <SortIndicator active={sortBy === "totalTokens"} sortOrder={sortOrder} />
@@ -77,7 +77,7 @@ export default function RequestCountTable({
           {rows.map((row, i) => (
             <tr
               key={`${row.date}::${row.provider}`}
-              className="hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors"
+              className="hover:bg-bg-subtle transition-colors"
             >
               <td className="px-4 py-2.5 font-mono text-text-muted">{row.date}</td>
               <td className="px-4 py-2.5">
@@ -86,10 +86,10 @@ export default function RequestCountTable({
                     className="w-2 h-2 rounded-full shrink-0"
                     style={{ backgroundColor: PROVIDER_COLORS[i % PROVIDER_COLORS.length] }}
                   />
-                  <span className="font-medium capitalize">{row.provider}</span>
+                  <span className="font-medium capitalize text-text-main">{row.provider}</span>
                 </div>
               </td>
-              <td className="px-4 py-2.5 text-right font-mono font-semibold">
+              <td className="px-4 py-2.5 text-right font-mono font-medium text-text-main">
                 {fmtFull(row.requests)}
               </td>
               <td

@@ -118,7 +118,7 @@ export default function KiloPassMeter({
         <span className="text-[12px] font-medium text-text-main">
           {translateUsageOrFallback(t, "kiloPassUsageLabel", "This month's usage")}
         </span>
-        <span className="text-[12px] font-bold tabular-nums" style={{ color: colors.text }}>
+        <span className="text-[12px] font-semibold tabular-nums" style={{ color: colors.text }}>
           {formatCurrency(model.used)} / {formatCurrency(model.total)}
         </span>
       </div>
@@ -131,20 +131,20 @@ export default function KiloPassMeter({
           aria-valuenow={model.progressValue}
           aria-valuetext={`${formatCurrency(model.used)} of ${formatCurrency(model.total)}`}
           aria-label={translateUsageOrFallback(t, "kiloPassMeterLabel", "Kilo Pass usage meter")}
-          className="flex h-3 min-w-0 overflow-hidden rounded-full bg-bg-subtle ring-1 ring-inset ring-border/60"
+          className="flex h-3 min-w-0 overflow-hidden rounded-full bg-bg-subtle ring-1 ring-inset ring-border"
         >
           {model.hasPaidSegment && (
             <div
               data-kilo-pass-segment="paid"
               data-kilo-pass-boundary={model.hasBonusSegment ? "true" : undefined}
-              className={`relative min-w-0 bg-emerald-500/15 ${
+              className={`relative min-w-0 bg-success/15 ${
                 model.hasBonusSegment ? "border-r-2 border-text-muted" : ""
               }`}
               style={{ width: `${model.paidPercent}%` }}
               aria-hidden="true"
             >
               <div
-                className="absolute inset-y-0 left-0 bg-emerald-500 transition-[width] duration-300 ease-out"
+                className="absolute inset-y-0 left-0 bg-success transition-[width] duration-300 ease-out"
                 style={{ width: `${model.paidUsedPercent}%` }}
               />
             </div>
@@ -152,12 +152,12 @@ export default function KiloPassMeter({
           {model.hasBonusSegment && (
             <div
               data-kilo-pass-segment="bonus"
-              className="relative min-w-0 bg-sky-500/15"
+              className="relative min-w-0 bg-primary/15"
               style={{ width: `${model.bonusPercent}%` }}
               aria-hidden="true"
             >
               <div
-                className="absolute inset-y-0 left-0 bg-sky-500 transition-[width] duration-300 ease-out"
+                className="absolute inset-y-0 left-0 bg-primary transition-[width] duration-300 ease-out"
                 style={{ width: `${model.bonusUsedPercent}%` }}
               />
             </div>
@@ -169,7 +169,7 @@ export default function KiloPassMeter({
             <div className="min-w-0" style={{ width: `${model.paidPercent}%` }}>
               <div className="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-0.5 leading-4">
                 <span
-                  className="inline-block size-2 shrink-0 rounded-full bg-emerald-500"
+                  className="inline-block size-2 shrink-0 rounded-full bg-success"
                   aria-hidden="true"
                 />
                 <span>{translateUsageOrFallback(t, "kiloPassPaid", "Paid")}</span>
@@ -183,7 +183,7 @@ export default function KiloPassMeter({
             <div className="min-w-0" style={{ width: `${model.bonusPercent}%` }}>
               <div className="flex min-w-0 flex-wrap items-center gap-x-1.5 gap-y-0.5 leading-4">
                 <span
-                  className="inline-block size-2 shrink-0 rounded-full bg-sky-500"
+                  className="inline-block size-2 shrink-0 rounded-full bg-primary"
                   aria-hidden="true"
                 />
                 <span>{translateUsageOrFallback(t, "kiloPassBonus", "Available bonus")}</span>
@@ -226,7 +226,7 @@ export default function KiloPassMeter({
 
       {/* Account Balance (separate from Kilo Pass) */}
       {balance !== null && balance !== undefined && (
-        <div className="flex items-center justify-between gap-2 border-t border-border/40 pt-2 text-[11px]">
+        <div className="flex items-center justify-between gap-2 border-t border-border pt-2 text-[11px]">
           <div className="flex items-center gap-1.5">
             <span
               className="material-symbols-outlined text-[13px] text-text-muted"

@@ -115,20 +115,20 @@ export default function CustomCliCard({
   };
 
   const codeBlockClass =
-    "rounded-lg border border-border bg-bg-secondary/70 p-4 text-xs font-mono whitespace-pre-wrap break-all";
+    "rounded-lg border border-border bg-bg-subtle p-4 text-xs font-mono whitespace-pre-wrap break-all";
 
   return (
     <Card padding="sm" className="overflow-hidden">
       <div className="flex items-center justify-between hover:cursor-pointer" onClick={onToggle}>
         <div className="flex items-center gap-3">
-          <div className="size-8 rounded-lg flex items-center justify-center shrink-0 bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-            <span className="material-symbols-outlined text-xl">{tool.icon || "terminal"}</span>
+          <div className="size-8 rounded-lg flex items-center justify-center shrink-0 border border-border bg-bg-subtle text-text-muted">
+            <span className="material-symbols-outlined text-[18px]">{tool.icon || "terminal"}</span>
           </div>
           <div className="min-w-0">
             <div className="flex items-center gap-2">
               <h3 className="font-medium text-sm">{tool.name}</h3>
-              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] font-medium rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400">
-                <span className="size-1.5 rounded-full bg-emerald-500" />
+              <span className="inline-flex items-center gap-1.5 px-2 py-0.5 text-[11px] font-medium rounded-full bg-bg-subtle text-text-muted">
+                <span className="size-1.5 rounded-full bg-text-subtle" />
                 {translateOrFallback("custom", "Custom")}
               </span>
             </div>
@@ -143,16 +143,16 @@ export default function CustomCliCard({
       </div>
 
       {isExpanded && (
-        <div className="mt-6 pt-6 border-t border-border space-y-5">
-          <div className="flex items-start gap-3 p-3 bg-emerald-500/10 border border-emerald-500/30 rounded-lg">
-            <span className="material-symbols-outlined text-emerald-500 text-lg">
+        <div className="mt-4 pt-4 border-t border-border space-y-5">
+          <div className="flex items-start gap-3 p-3 bg-surface-2 border border-border rounded-lg">
+            <span className="material-symbols-outlined text-text-muted text-lg">
               tips_and_updates
             </span>
-            <div className="text-sm text-emerald-700 dark:text-emerald-300">
+            <div className="text-sm text-text-main">
               <p className="font-medium">
                 {translateOrFallback("customCliBuilderTitle", "OpenAI-compatible CLI builder")}
               </p>
-              <p className="mt-1 text-xs opacity-90">
+              <p className="mt-1 text-xs text-text-muted">
                 {translateOrFallback(
                   "customCliBuilderDescription",
                   "Generate env vars and JSON snippets for any CLI or SDK that accepts an OpenAI-compatible base URL, API key, and model ID."
@@ -162,13 +162,13 @@ export default function CustomCliCard({
           </div>
 
           {!hasActiveProviders && (
-            <div className="flex items-start gap-3 p-3 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
-              <span className="material-symbols-outlined text-yellow-500 text-lg">warning</span>
+            <div className="flex items-start gap-3 p-3 bg-warning/10 border border-warning/30 rounded-lg">
+              <span className="material-symbols-outlined text-warning text-lg">warning</span>
               <div>
-                <p className="text-sm font-medium text-yellow-700 dark:text-yellow-300">
+                <p className="text-sm font-medium text-warning">
                   {translateOrFallback("noActiveProviders", "No active providers")}
                 </p>
-                <p className="text-xs text-yellow-700/80 dark:text-yellow-300/80">
+                <p className="text-xs text-text-muted">
                   {translateOrFallback(
                     "customCliNoModels",
                     "Connect at least one provider to populate the model selectors."
@@ -189,7 +189,7 @@ export default function CustomCliCard({
                   value={cliName}
                   onChange={(e) => setCliName(e.target.value)}
                   placeholder={translateOrFallback("customCliNamePlaceholder", "e.g. My Team CLI")}
-                  className="w-full px-3 py-2 bg-bg-secondary rounded-lg text-sm border border-border focus:outline-none focus:ring-1 focus:ring-primary/50"
+                  className="w-full px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
                 />
               </div>
 
@@ -201,7 +201,7 @@ export default function CustomCliCard({
                   value={effectiveDefaultModel}
                   onChange={(e) => setDefaultModel(e.target.value)}
                   disabled={!hasActiveProviders}
-                  className="w-full px-3 py-2 bg-bg-secondary rounded-lg text-sm border border-border focus:outline-none focus:ring-1 focus:ring-primary/50 disabled:opacity-60"
+                  className="w-full px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50 disabled:opacity-60"
                 >
                   <option value="">
                     {translateOrFallback("modelPlaceholder", "Select a model")}
@@ -228,7 +228,7 @@ export default function CustomCliCard({
                   <select
                     value={effectiveSelectedApiKeyId}
                     onChange={(e) => setSelectedApiKeyId(e.target.value)}
-                    className="w-full px-3 py-2 bg-bg-secondary rounded-lg text-sm border border-border focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    className="w-full px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
                   >
                     {apiKeys.map((key) => (
                       <option key={key.id} value={key.id}>
@@ -237,7 +237,7 @@ export default function CustomCliCard({
                     ))}
                   </select>
                 ) : (
-                  <div className="px-3 py-2 rounded-lg border border-border bg-bg-secondary text-sm text-text-muted">
+                  <div className="px-3 py-2 rounded-control border border-border bg-bg-subtle text-sm text-text-muted">
                     {keyToUse}
                   </div>
                 )}
@@ -291,13 +291,13 @@ export default function CustomCliCard({
                           "customCliAliasPlaceholder",
                           "e.g. review"
                         )}
-                        className="px-3 py-2 bg-bg-secondary rounded-lg text-sm border border-border focus:outline-none focus:ring-1 focus:ring-primary/50"
+                        className="px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
                       />
                       <select
                         value={mapping.model}
                         onChange={(e) => handleUpdateMapping(mapping.id, "model", e.target.value)}
                         disabled={!hasActiveProviders}
-                        className="px-3 py-2 bg-bg-secondary rounded-lg text-sm border border-border focus:outline-none focus:ring-1 focus:ring-primary/50 disabled:opacity-60"
+                        className="px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50 disabled:opacity-60"
                       >
                         <option value="">
                           {translateOrFallback("customCliTargetModelLabel", "Target model")}
@@ -322,7 +322,7 @@ export default function CustomCliCard({
             </div>
           </div>
 
-          <div className="rounded-lg border border-border/60 bg-black/[0.02] dark:bg-white/[0.02] p-3 text-xs text-text-muted">
+          <div className="rounded-lg border border-border bg-surface-2 p-3 text-xs text-text-muted">
             <p className="font-medium text-text-main">
               {translateOrFallback("customCliEndpointHintLabel", "How to wire the endpoint")}
             </p>

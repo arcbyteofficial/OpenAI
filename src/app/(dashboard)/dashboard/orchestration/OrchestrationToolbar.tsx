@@ -32,8 +32,10 @@ const SOURCE_KEY: Record<(typeof SOURCES)[number], string> = {
 const SEARCH_DEBOUNCE_MS = 300;
 
 const chipClass = (active: boolean) =>
-  `text-[10px] px-2 py-0.5 rounded-full border whitespace-nowrap ${
-    active ? "border-primary bg-primary/10 text-primary" : "border-border text-muted"
+  `text-[11px] px-2 py-0.5 rounded-full border whitespace-nowrap transition-colors ${
+    active
+      ? "border-border-strong bg-bg-subtle text-text-main font-medium"
+      : "border-border text-text-muted hover:bg-bg-subtle hover:text-text-main"
   }`;
 
 /**
@@ -56,7 +58,7 @@ function ChipGroup<T extends string>({
 }) {
   return (
     <div className="flex flex-wrap items-center gap-1">
-      <span className="text-[10px] text-muted">{label}</span>
+      <span className="text-[11px] text-text-subtle">{label}</span>
       {values.map((v) => (
         <button
           key={v}
@@ -127,7 +129,7 @@ export function OrchestrationToolbar({
         onChange={(e) => handleSearchChange(e.target.value)}
         placeholder={t("searchPlaceholder")}
         aria-label={t("searchPlaceholder")}
-        className="text-xs px-2 py-1 rounded border border-border bg-transparent min-w-[160px]"
+        className="text-xs px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none transition-colors min-w-[160px]"
       />
       <ChipGroup
         label={t("filterStates")}
@@ -155,7 +157,7 @@ export function OrchestrationToolbar({
       {!isEmptyFilter(filter) && (
         <button
           type="button"
-          className="text-[10px] underline text-muted ml-auto"
+          className="text-[11px] underline underline-offset-2 text-text-muted hover:text-text-main transition-colors ml-auto"
           onClick={handleClear}
         >
           {t("clearFilters")}

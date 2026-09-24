@@ -30,11 +30,11 @@ export default function PresetSlider({
             type="button"
             onClick={() => onChange(preset.value)}
             className={cn(
-              "px-3 py-1.5 text-xs font-medium rounded-full transition-colors",
+              "px-2.5 py-1 text-xs font-medium tabular-nums rounded-full transition-colors",
               "border",
               value === preset.value
-                ? "bg-primary text-white border-primary"
-                : "bg-transparent text-text-muted border-black/10 dark:border-white/10 hover:border-primary/30 hover:text-text-main"
+                ? "bg-primary/10 text-primary border-primary/30"
+                : "bg-transparent text-text-muted border-border-strong hover:bg-bg-subtle hover:text-text-main"
             )}
           >
             {preset.label}
@@ -50,11 +50,11 @@ export default function PresetSlider({
         onChange={(e) => onChange(Number(e.target.value))}
         className={cn(
           "w-full h-1.5 rounded-full appearance-none cursor-pointer",
-          "bg-black/10 dark:bg-white/10",
+          "bg-border-strong",
           "accent-primary"
         )}
       />
-      <div className="flex justify-between text-[10px] text-text-muted">
+      <div className="flex justify-between text-[11px] text-text-subtle tabular-nums">
         <span>{min}</span>
         <span className="font-medium text-text-main">{value}</span>
         <span>{max}</span>

@@ -79,14 +79,14 @@ export default function RtkLearnDiscoverCard() {
 
   return (
     <section
-      className="rounded-lg border border-border bg-surface p-4"
+      className="rounded-card border border-border bg-surface p-4"
       data-testid="rtk-learn-discover"
     >
       <h2 className="text-sm font-semibold text-text-main">{t("learnDiscoverTitle")}</h2>
       <p className="mt-1 text-xs text-text-muted">{t("learnDiscoverDesc")}</p>
 
       {error && (
-        <p className="mt-3 text-xs text-red-600 dark:text-red-400" data-testid="rtk-ld-error">
+        <p className="mt-3 text-xs text-error" data-testid="rtk-ld-error">
           {error}
         </p>
       )}
@@ -100,7 +100,7 @@ export default function RtkLearnDiscoverCard() {
             onClick={runDiscover}
             disabled={discovering}
             data-testid="rtk-discover-button"
-            className="mt-2 rounded border border-border px-2.5 py-1 text-xs font-medium text-text-main hover:bg-surface-hover disabled:opacity-50"
+            className="mt-2 rounded-control border border-border-strong px-2.5 py-1 text-xs font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-50"
           >
             {discovering ? t("discoverScanning") : t("discoverButton")}
           </button>
@@ -119,7 +119,9 @@ export default function RtkLearnDiscoverCard() {
                       key={`${candidate.pattern}-${index}`}
                       className="flex items-start justify-between gap-2 text-[11px]"
                     >
-                      <code className="min-w-0 truncate text-text-main">{candidate.pattern}</code>
+                      <code className="min-w-0 truncate font-mono text-text-main">
+                        {candidate.pattern}
+                      </code>
                       <span className="shrink-0 text-text-muted">
                         {t("discoverHits", { hits: candidate.hits })}
                       </span>
@@ -141,14 +143,14 @@ export default function RtkLearnDiscoverCard() {
               onChange={(event) => setCommand(event.target.value)}
               placeholder={t("learnCommandPlaceholder")}
               data-testid="rtk-learn-command"
-              className="min-w-0 flex-1 rounded border border-border bg-surface px-2 py-1 text-xs text-text-main"
+              className="min-w-0 flex-1 rounded-control border border-border-strong bg-surface px-2 py-1 font-mono text-xs text-text-main"
             />
             <button
               type="button"
               onClick={runLearn}
               disabled={learning || !command.trim()}
               data-testid="rtk-learn-button"
-              className="shrink-0 rounded border border-border px-2.5 py-1 text-xs font-medium text-text-main hover:bg-surface-hover disabled:opacity-50"
+              className="shrink-0 rounded-control border border-border-strong px-2.5 py-1 text-xs font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-50"
             >
               {t("learnButton")}
             </button>
@@ -161,7 +163,7 @@ export default function RtkLearnDiscoverCard() {
               <p className="text-[11px] text-text-muted">
                 {t("learnSamplesUsed", { count: learnCount })}
               </p>
-              <pre className="mt-2 max-h-48 overflow-auto rounded bg-surface-hover p-2 text-[10px] text-text-main">
+              <pre className="mt-2 max-h-48 overflow-auto rounded-lg border border-border bg-bg-subtle p-2 font-mono text-[10px] text-text-main">
                 {JSON.stringify(suggested, null, 2)}
               </pre>
             </div>

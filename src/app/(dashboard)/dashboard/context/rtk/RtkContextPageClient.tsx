@@ -157,9 +157,11 @@ export default function RtkContextPageClient() {
       <header className="flex flex-col gap-2">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-[30px] text-primary">filter_alt</span>
+            <span className="material-symbols-outlined text-[24px] text-text-muted">
+              filter_alt
+            </span>
             <div>
-              <h1 className="text-2xl font-bold text-text-main">{t("title")}</h1>
+              <h1 className="text-2xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
               <p className="text-sm text-text-muted">{t("description")}</p>
             </div>
           </div>
@@ -176,22 +178,22 @@ export default function RtkContextPageClient() {
 
       <section className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
         {statCards.map(([label, value]) => (
-          <div key={label} className="rounded-lg border border-border bg-surface p-4">
-            <p className="text-xs uppercase text-text-muted">{label}</p>
-            <p className="mt-1 text-xl font-semibold text-text-main">{value}</p>
+          <div key={label} className="rounded-card border border-border bg-surface p-4">
+            <p className="text-[13px] text-text-muted">{label}</p>
+            <p className="mt-1 text-2xl font-semibold tabular-nums text-text-main">{value}</p>
           </div>
         ))}
       </section>
 
       {masterEnabled === false && (
-        <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-700 dark:text-amber-300 flex items-start gap-2">
+        <div className="rounded-lg border border-warning/30 bg-warning/10 px-4 py-3 text-sm text-warning flex items-start gap-2">
           <span className="material-symbols-outlined text-[18px]">info</span>
           <p>{t("masterSwitchOffAlert")}</p>
         </div>
       )}
 
       {config && (
-        <section className="rounded-lg border border-border bg-surface p-4">
+        <section className="rounded-card border border-border bg-surface p-4">
           {/* On/off + intensity now live in the panel (/dashboard/context/settings). This
               page edits RTK's detailed configuration only. */}
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2 xl:grid-cols-4">
@@ -204,7 +206,7 @@ export default function RtkContextPageClient() {
                 onChange={(event) =>
                   saveConfig({ maxLinesPerResult: Number(event.target.value) || 0 })
                 }
-                className="rounded border border-border bg-bg px-2 py-1 text-sm"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main"
               />
             </label>
             <label className="flex flex-col gap-1 text-sm text-text-main">
@@ -216,7 +218,7 @@ export default function RtkContextPageClient() {
                 onChange={(event) =>
                   saveConfig({ maxCharsPerResult: Number(event.target.value) || 0 })
                 }
-                className="rounded border border-border bg-bg px-2 py-1 text-sm"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main"
               />
             </label>
             <label className="flex flex-col gap-1 text-sm text-text-main">
@@ -229,7 +231,7 @@ export default function RtkContextPageClient() {
                 onChange={(event) =>
                   saveConfig({ deduplicateThreshold: Number(event.target.value) || 2 })
                 }
-                className="rounded border border-border bg-bg px-2 py-1 text-sm"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main"
               />
             </label>
             <label className="flex flex-col gap-1 text-sm text-text-main">
@@ -241,7 +243,7 @@ export default function RtkContextPageClient() {
                 onChange={(event) =>
                   saveConfig({ rawOutputMaxBytes: Number(event.target.value) || 1024 })
                 }
-                className="rounded border border-border bg-bg px-2 py-1 text-sm"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main"
               />
             </label>
           </div>
@@ -277,7 +279,7 @@ export default function RtkContextPageClient() {
                     rawOutputRetention: event.target.value as RtkConfig["rawOutputRetention"],
                   })
                 }
-                className="rounded border border-border bg-bg px-2 py-1 text-sm"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main"
               >
                 <option value="never">{t("rawOutputNever")}</option>
                 <option value="failures">{t("rawOutputFailures")}</option>
@@ -290,12 +292,12 @@ export default function RtkContextPageClient() {
 
       {viewMode === "advanced" && (
         <section className="grid grid-cols-1 gap-4 xl:grid-cols-[1fr_1fr]">
-          <div className="rounded-lg border border-border bg-surface p-4">
+          <div className="rounded-card border border-border bg-surface p-4">
             <div className="mb-3 flex items-center justify-between">
               <h2 className="text-sm font-semibold text-text-main">{t("filterTesting")}</h2>
               <button
                 onClick={runPreview}
-                className="rounded-lg bg-primary px-3 py-2 text-sm font-medium text-white"
+                className="rounded-control bg-contrast px-3 py-2 text-sm font-medium text-contrast-fg transition-colors hover:bg-contrast-hover"
               >
                 {t("run")}
               </button>
@@ -304,10 +306,10 @@ export default function RtkContextPageClient() {
               value={sample}
               onChange={(event) => setSample(event.target.value)}
               placeholder={t("pasteOutput")}
-              className="h-72 w-full rounded-lg border border-border bg-bg p-3 font-mono text-xs text-text-main"
+              className="h-72 w-full rounded-control border border-border-strong bg-surface p-3 font-mono text-xs text-text-main"
             />
           </div>
-          <div className="rounded-lg border border-border bg-surface p-4">
+          <div className="rounded-card border border-border bg-surface p-4">
             <h2 className="mb-3 text-sm font-semibold text-text-main">{t("result")}</h2>
             {preview?.detection && (
               <p className="mb-2 text-xs text-text-muted">
@@ -315,7 +317,7 @@ export default function RtkContextPageClient() {
                 {Math.round(preview.detection.confidence * 100)}%)
               </p>
             )}
-            <pre className="h-72 overflow-auto rounded-lg border border-border bg-bg p-3 text-xs text-text-main">
+            <pre className="h-72 overflow-auto rounded-lg border border-border bg-bg-subtle p-3 font-mono text-xs text-text-main">
               {preview ? JSON.stringify(preview, null, 2) : t("previewEmpty")}
             </pre>
           </div>
@@ -335,7 +337,7 @@ export default function RtkContextPageClient() {
       >
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2 xl:grid-cols-3">
           {Object.entries(groupedFilters).map(([category, items]) => (
-            <div key={category} className="rounded-lg border border-border bg-bg p-3">
+            <div key={category} className="rounded-lg border border-border bg-bg-subtle p-3">
               <h3 className="text-xs font-semibold capitalize text-text-main">{category}</h3>
               <div className="mt-2 space-y-2">
                 {items.map((filter) => {

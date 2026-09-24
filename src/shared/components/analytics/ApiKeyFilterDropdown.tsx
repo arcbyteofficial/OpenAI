@@ -93,10 +93,10 @@ export default function ApiKeyFilterDropdown({
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
-        className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-all ${
+        className={`flex items-center gap-1.5 rounded-control border px-3 py-1.5 text-xs font-medium transition-colors ${
           isAllSelected
-            ? "border-border/50 bg-black/[0.03] text-text-muted hover:text-text-main dark:bg-white/[0.03]"
-            : "border-primary/40 bg-primary/10 text-primary"
+            ? "border-border-strong bg-surface text-text-muted hover:text-text-main hover:bg-bg-subtle"
+            : "border-primary/30 bg-primary/10 text-primary"
         }`}
       >
         <span className="material-symbols-outlined text-[14px]">vpn_key</span>
@@ -112,18 +112,18 @@ export default function ApiKeyFilterDropdown({
 
       {open && (
         <div
-          className="absolute left-0 top-full z-50 mt-1.5 w-[260px] rounded-xl border border-border/50 bg-surface shadow-xl"
-          style={{ backdropFilter: "blur(16px)" }}
+          className="absolute left-0 top-full z-50 mt-1.5 w-[260px] rounded-lg border border-border bg-surface shadow-[var(--shadow-elevated)]"
+          style={{ backdropFilter: "none" }}
         >
           {/* Search */}
           {available.length > 5 && (
-            <div className="border-b border-border/30 p-2">
+            <div className="border-b border-border p-2">
               <input
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={t("filterSearchKeys")}
-                className="w-full rounded-md border border-border/30 bg-black/[0.03] px-2.5 py-1.5 text-xs text-text-main placeholder:text-text-muted focus:outline-none focus:border-primary dark:bg-white/[0.03]"
+                className="w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
                 autoFocus
               />
             </div>
@@ -134,17 +134,17 @@ export default function ApiKeyFilterDropdown({
             <button
               type="button"
               onClick={selectAll}
-              className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-xs transition-colors ${
+              className={`flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-xs transition-colors ${
                 isAllSelected
-                  ? "bg-primary/10 text-primary font-semibold"
-                  : "text-text-muted hover:bg-black/[0.04] hover:text-text-main dark:hover:bg-white/[0.04]"
+                  ? "bg-bg-subtle text-text-main font-medium"
+                  : "text-text-muted hover:bg-bg-subtle hover:text-text-main"
               }`}
             >
               <span
                 className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border text-[10px] ${
                   isAllSelected
                     ? "border-primary bg-primary text-white"
-                    : "border-border/60 bg-transparent"
+                    : "border-border-strong bg-transparent"
                 }`}
               >
                 {isAllSelected && (
@@ -152,13 +152,13 @@ export default function ApiKeyFilterDropdown({
                 )}
               </span>
               {t("filterAllKeys")}
-              <span className="ml-auto text-[10px] text-text-muted font-normal">
+              <span className="ml-auto text-[10px] tabular-nums text-text-subtle font-normal">
                 {available.length}
               </span>
             </button>
 
             {/* Divider */}
-            <div className="my-1 h-px bg-border/20" />
+            <div className="my-1 h-px bg-border" />
 
             {/* Individual keys */}
             {filtered.map((key) => {
@@ -169,10 +169,10 @@ export default function ApiKeyFilterDropdown({
                   key={key.id}
                   type="button"
                   onClick={() => toggleKey(key.id)}
-                  className={`flex w-full items-center gap-2.5 rounded-lg px-2.5 py-2 text-left text-xs transition-colors ${
+                  className={`flex w-full items-center gap-2.5 rounded-md px-2.5 py-2 text-left text-xs transition-colors ${
                     isChecked
-                      ? "bg-primary/[0.06] text-text-main"
-                      : "text-text-muted hover:bg-black/[0.04] hover:text-text-main dark:hover:bg-white/[0.04]"
+                      ? "bg-bg-subtle text-text-main"
+                      : "text-text-muted hover:bg-bg-subtle hover:text-text-main"
                   }`}
                   title={key.name || key.id}
                 >
@@ -180,7 +180,7 @@ export default function ApiKeyFilterDropdown({
                     className={`flex h-4 w-4 shrink-0 items-center justify-center rounded border text-[10px] ${
                       isChecked
                         ? "border-primary bg-primary text-white"
-                        : "border-border/60 bg-transparent"
+                        : "border-border-strong bg-transparent"
                     }`}
                   >
                     {isChecked && (

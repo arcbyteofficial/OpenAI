@@ -104,17 +104,19 @@ export default function ConnectionsHeaderToolbar({
   return (
     <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
       <div className="flex min-w-0 flex-wrap items-center gap-2">
-        <h2 className="text-lg font-semibold">{t("connections")}</h2>
+        <h2 className="text-base font-semibold tracking-tight text-text-main">
+          {t("connections")}
+        </h2>
         {providerId === "claude" && (
           <div
-            className="inline-flex items-center gap-2 rounded-lg border border-orange-500/20 bg-orange-500/5 px-2 py-1 text-xs font-medium text-text-muted"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface-2 px-2 py-1 text-xs font-medium text-text-muted"
             title={providerText(
               t,
               "preferClaudeCodeForUnprefixedClaudeModelsTooltip",
               "Route bare claude-* model IDs from Claude Code clients through the Claude Code account instead of asking for a provider prefix."
             )}
           >
-            <span className="material-symbols-outlined text-[14px] text-orange-500">alt_route</span>
+            <span className="material-symbols-outlined text-[14px] text-text-muted">alt_route</span>
             <span>
               {providerText(
                 t,
@@ -155,7 +157,7 @@ export default function ConnectionsHeaderToolbar({
               <button
                 type="button"
                 onClick={() => void loadClaudeRoutingSettings()}
-                className="rounded border border-orange-500/30 px-2 py-0.5 text-[11px] font-medium text-orange-600 hover:bg-orange-500/10 dark:text-orange-300"
+                className="rounded-md border border-border-strong px-2 py-0.5 text-[11px] font-medium text-text-main transition-colors hover:bg-bg-subtle"
                 title={claudeRoutingSettingsLoadError}
               >
                 {providerText(t, "retry", "Retry")}
@@ -165,7 +167,7 @@ export default function ConnectionsHeaderToolbar({
         )}
         {providerId === "codex" && (
           <div
-            className="inline-flex items-center gap-2 rounded-lg border border-sky-500/20 bg-sky-500/5 px-2 py-1 text-xs font-medium text-text-muted"
+            className="inline-flex items-center gap-2 rounded-lg border border-border bg-surface-2 px-2 py-1 text-xs font-medium text-text-muted"
             title={providerText(
               t,
               "providerDetailServiceModeTooltip",
@@ -180,7 +182,7 @@ export default function ConnectionsHeaderToolbar({
               }
               disabled={savingCodexGlobalServiceMode || !codexSettingsLoaded}
               aria-label={providerText(t, "globalCodexServiceMode", "Global Codex service mode")}
-              className="rounded-md border border-border bg-bg px-2 py-1 text-xs text-text-main outline-none transition-colors focus:border-primary disabled:opacity-60"
+              className="rounded-control border border-border-strong bg-surface px-2 py-1 text-xs text-text-main outline-none transition-colors focus:border-primary disabled:opacity-60"
             >
               {codexGlobalServiceModeOptions.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -192,7 +194,7 @@ export default function ConnectionsHeaderToolbar({
               <button
                 type="button"
                 onClick={() => void loadCodexSettings()}
-                className="rounded border border-sky-500/30 px-2 py-0.5 text-[11px] font-medium text-sky-600 hover:bg-sky-500/10 dark:text-sky-300"
+                className="rounded-md border border-border-strong px-2 py-0.5 text-[11px] font-medium text-text-main transition-colors hover:bg-bg-subtle"
                 title={codexSettingsLoadError}
               >
                 {providerText(t, "retry", "Retry")}
@@ -209,10 +211,10 @@ export default function ConnectionsHeaderToolbar({
               label: providerInfo?.name || providerId,
             })
           }
-          className={`inline-flex items-center gap-1 px-2 py-1 rounded text-xs font-medium transition-all ${
+          className={`inline-flex items-center gap-1 px-2 py-1 rounded-md text-xs font-medium transition-colors ${
             proxyConfig?.providers?.[providerId]
-              ? "bg-amber-500/15 text-amber-500 hover:bg-amber-500/25"
-              : "bg-black/[0.03] dark:bg-white/[0.03] text-text-muted/50 hover:text-text-muted hover:bg-black/[0.06] dark:hover:bg-white/[0.06]"
+              ? "bg-warning/10 text-warning hover:bg-warning/15"
+              : "bg-bg-subtle text-text-subtle hover:text-text-main"
           }`}
           title={
             proxyConfig?.providers?.[providerId]
@@ -241,10 +243,10 @@ export default function ConnectionsHeaderToolbar({
           <button
             onClick={handleBatchTestAll}
             disabled={batchTesting || batchRetesting || !!retestingId}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
               batchTesting
-                ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                : "bg-surface border-border-strong text-text-main hover:bg-bg-subtle"
             }`}
             title={t("testAll")}
             aria-label={t("testAll")}

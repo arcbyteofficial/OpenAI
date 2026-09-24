@@ -42,11 +42,11 @@ interface TryItResult {
 }
 
 const METHOD_COLORS: Record<string, string> = {
-  GET: "bg-emerald-500/15 text-emerald-500 border-emerald-500/30",
-  POST: "bg-blue-500/15 text-blue-500 border-blue-500/30",
-  PUT: "bg-amber-500/15 text-amber-500 border-amber-500/30",
-  PATCH: "bg-orange-500/15 text-orange-500 border-orange-500/30",
-  DELETE: "bg-red-500/15 text-red-500 border-red-500/30",
+  GET: "bg-success/10 text-success border-success/30",
+  POST: "bg-primary/10 text-primary border-primary/30",
+  PUT: "bg-warning/10 text-warning border-warning/30",
+  PATCH: "bg-orange-500/10 text-orange-500 border-orange-500/30",
+  DELETE: "bg-error/10 text-error border-error/30",
 };
 
 /* ─── Main Component ─────────────────────────────────── */
@@ -59,7 +59,7 @@ export default function ApiEndpointsTab() {
       <div className="flex items-center gap-1 shrink-0">
         {ep.loopbackOnly && (
           <span
-            className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-blue-500/15 text-blue-500 border border-blue-500/30"
+            className="text-[9px] font-semibold px-1.5 py-0.5 rounded bg-primary/10 text-primary border border-primary/30"
             title={t("badgeLoopbackTooltip")}
           >
             {t("badgeLocal")}
@@ -67,7 +67,7 @@ export default function ApiEndpointsTab() {
         )}
         {ep.alwaysProtected && (
           <span
-            className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-red-500/15 text-red-500 border border-red-500/30"
+            className="text-[9px] font-semibold px-1.5 py-0.5 rounded bg-error/10 text-error border border-error/30"
             title={t("badgeAlwaysProtectedTooltip")}
           >
             {t("badgeProtected")}
@@ -75,7 +75,7 @@ export default function ApiEndpointsTab() {
         )}
         {ep.internal && (
           <span
-            className="text-[9px] font-bold px-1.5 py-0.5 rounded bg-gray-500/15 text-gray-400 border border-gray-500/30"
+            className="text-[9px] font-semibold px-1.5 py-0.5 rounded bg-bg-subtle text-text-muted border border-border"
             title={t("badgeInternalTooltip")}
           >
             {t("badgeInternal")}
@@ -311,8 +311,8 @@ export default function ApiEndpointsTab() {
   if (loading) {
     return (
       <div className="animate-pulse space-y-4">
-        <div className="h-8 bg-white/5 rounded-lg w-1/3" />
-        <div className="h-64 bg-white/5 rounded-xl" />
+        <div className="h-8 bg-bg-subtle rounded-lg w-1/3" />
+        <div className="h-64 bg-bg-subtle rounded-card" />
       </div>
     );
   }
@@ -324,13 +324,15 @@ export default function ApiEndpointsTab() {
         <Card className="p-5">
           <div className="flex items-center justify-between flex-wrap gap-3">
             <div className="flex items-center gap-3">
-              <div className="flex items-center justify-center size-10 rounded-xl bg-primary/10">
-                <span className="material-symbols-outlined text-primary text-[20px]">api</span>
+              <div className="flex items-center justify-center size-10 rounded-lg border border-border bg-bg-subtle">
+                <span className="material-symbols-outlined text-text-muted text-[20px]">api</span>
               </div>
               <div>
                 <div className="flex items-center gap-2">
-                  <h2 className="text-base font-semibold">{catalog.info.title || "API"}</h2>
-                  <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-primary/10 text-primary font-mono font-semibold">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main">
+                    {catalog.info.title || "API"}
+                  </h2>
+                  <span className="text-[11px] px-1.5 py-0.5 rounded-md border border-border bg-bg-subtle text-text-muted font-mono font-medium">
                     {catalog.info.version}
                   </span>
                 </div>
@@ -346,8 +348,7 @@ export default function ApiEndpointsTab() {
               <a
                 href="/docs/openapi.yaml"
                 download
-                className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium rounded-lg
-                           bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+                className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium rounded-control border border-border-strong text-text-main hover:bg-bg-subtle transition-colors"
               >
                 <span className="material-symbols-outlined text-[14px]">download</span>
                 YAML
@@ -356,8 +357,7 @@ export default function ApiEndpointsTab() {
                 href="/api/openapi/spec"
                 target="_blank"
                 rel="noopener"
-                className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium rounded-lg
-                           bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+                className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium rounded-control border border-border-strong text-text-main hover:bg-bg-subtle transition-colors"
               >
                 <span className="material-symbols-outlined text-[14px]">open_in_new</span>
                 JSON
@@ -372,8 +372,8 @@ export default function ApiEndpointsTab() {
         <>
           <Card className="p-6">
             <div className="flex items-start gap-3">
-              <div className="flex size-10 items-center justify-center rounded-lg bg-red-500/10">
-                <span className="material-symbols-outlined text-[20px] text-red-500">error</span>
+              <div className="flex size-10 items-center justify-center rounded-lg bg-error/10">
+                <span className="material-symbols-outlined text-[20px] text-error">error</span>
               </div>
               <div>
                 <h3 className="text-sm font-semibold text-text-main">
@@ -386,8 +386,7 @@ export default function ApiEndpointsTab() {
                   href="/api/openapi/spec"
                   target="_blank"
                   rel="noopener"
-                  className="inline-flex items-center gap-1 mt-3 px-2.5 py-1.5 text-xs font-medium rounded-lg
-                           bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+                  className="inline-flex items-center gap-1 mt-3 px-2.5 py-1.5 text-xs font-medium rounded-control border border-border-strong text-text-main hover:bg-bg-subtle transition-colors"
                 >
                   <span className="material-symbols-outlined text-[14px]">open_in_new</span>
                   {t("openJsonResponse")}
@@ -412,8 +411,7 @@ export default function ApiEndpointsTab() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder={t("apiEndpointsSearchPlaceholder")}
-                className="w-full pl-9 pr-3 py-2 text-xs rounded-lg border border-black/10 dark:border-white/10
-                           bg-white dark:bg-black/20 focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full pl-9 pr-3 py-2 text-[13px] rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
               />
             </div>
             <div className="flex gap-1 flex-wrap">
@@ -423,7 +421,7 @@ export default function ApiEndpointsTab() {
                   ${
                     !selectedTag
                       ? "bg-primary/10 text-primary"
-                      : "bg-black/5 dark:bg-white/5 text-text-muted hover:text-text-main"
+                      : "bg-bg-subtle text-text-muted hover:text-text-main"
                   }`}
               >
                 {t("all")}
@@ -436,7 +434,7 @@ export default function ApiEndpointsTab() {
                     ${
                       selectedTag === tag
                         ? "bg-primary/10 text-primary"
-                        : "bg-black/5 dark:bg-white/5 text-text-muted hover:text-text-main"
+                        : "bg-bg-subtle text-text-muted hover:text-text-main"
                     }`}
                 >
                   {tag}
@@ -449,7 +447,7 @@ export default function ApiEndpointsTab() {
               )}
             </div>
             {/* Security tier filter */}
-            <div className="flex items-center gap-1 ml-1 border-l border-black/10 dark:border-white/10 pl-2 flex-wrap">
+            <div className="flex items-center gap-1 ml-1 border-l border-border pl-2 flex-wrap">
               {(["all", "auth", "loopback", "always-protected", "public"] as const).map((tier) => (
                 <button
                   key={tier}
@@ -458,7 +456,7 @@ export default function ApiEndpointsTab() {
                     ${
                       securityTier === tier
                         ? "bg-primary/10 text-primary"
-                        : "bg-black/5 dark:bg-white/5 text-text-muted hover:text-text-main"
+                        : "bg-bg-subtle text-text-muted hover:text-text-main"
                     }`}
                 >
                   {tier === "all"
@@ -477,8 +475,8 @@ export default function ApiEndpointsTab() {
                 className={`px-2 py-1 text-[10px] font-medium rounded-md transition-colors ml-1
                   ${
                     showInternal
-                      ? "bg-amber-500/10 text-amber-500"
-                      : "bg-black/5 dark:bg-white/5 text-text-muted hover:text-text-main"
+                      ? "bg-warning/10 text-warning"
+                      : "bg-bg-subtle text-text-muted hover:text-text-main"
                   }`}
                 title={t("showInternalTooltip")}
               >
@@ -491,18 +489,20 @@ export default function ApiEndpointsTab() {
 
           {/* Endpoint groups */}
           {Object.entries(groupedEndpoints).map(([tag, endpoints]) => (
-            <Card key={tag} className="overflow-hidden">
-              <div className="flex items-center gap-2 px-4 py-3 border-b border-black/5 dark:border-white/5">
-                <span className="material-symbols-outlined text-[14px] text-primary">folder</span>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+            <Card key={tag} className="overflow-hidden p-0">
+              <div className="flex items-center gap-2 px-4 py-3 border-b border-border">
+                <span className="material-symbols-outlined text-[14px] text-text-muted">
+                  folder
+                </span>
+                <h3 className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {tag}
                 </h3>
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-black/5 dark:bg-white/5 text-text-muted">
+                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted tabular-nums">
                   {endpoints.length}
                 </span>
-                <div className="flex-1 h-px bg-border/30" />
+                <div className="flex-1 h-px bg-border" />
               </div>
-              <div className="divide-y divide-black/[0.03] dark:divide-white/[0.03]">
+              <div className="divide-y divide-border">
                 {endpoints.map((ep) => {
                   const key = `${ep.method}:${ep.path}`;
                   const isExpanded = expandedEndpoint === key;
@@ -511,17 +511,16 @@ export default function ApiEndpointsTab() {
                   return (
                     <div key={key}>
                       <div
-                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-black/[0.02] dark:hover:bg-white/[0.02]
-                                   cursor-pointer transition-colors"
+                        className="flex items-center gap-3 px-4 py-2.5 hover:bg-bg-subtle/60 cursor-pointer transition-colors"
                         onClick={() => setExpandedEndpoint(isExpanded ? null : key)}
                       >
                         <span
-                          className={`text-[10px] font-bold px-2 py-0.5 rounded border min-w-[42px] text-center font-mono
-                            ${METHOD_COLORS[ep.method] || "bg-gray-500/15 text-gray-500"}`}
+                          className={`text-[10px] font-semibold px-2 py-0.5 rounded border min-w-[42px] text-center font-mono
+                            ${METHOD_COLORS[ep.method] || "bg-bg-subtle text-text-muted border-border"}`}
                         >
                           {ep.method}
                         </span>
-                        <code className="text-xs font-mono text-text-main flex-1 truncate">
+                        <code className="text-[13px] font-mono text-text-main flex-1 truncate">
                           {ep.path}
                         </code>
                         <span className="text-[11px] text-text-muted hidden sm:inline truncate max-w-[200px]">
@@ -530,7 +529,7 @@ export default function ApiEndpointsTab() {
                         <EndpointBadges ep={ep} />
                         {ep.security && (
                           <span
-                            className="material-symbols-outlined text-[12px] text-amber-500"
+                            className="material-symbols-outlined text-[12px] text-warning"
                             title={t("apiEndpointsRequiresAuth")}
                           >
                             lock
@@ -545,7 +544,7 @@ export default function ApiEndpointsTab() {
 
                       {/* Expanded detail */}
                       {isExpanded && (
-                        <div className="px-4 pb-3 space-y-3 bg-black/[0.01] dark:bg-white/[0.01]">
+                        <div className="px-4 pb-3 space-y-3 bg-bg-subtle/40">
                           <div className="flex items-start justify-between gap-4">
                             <div>
                               <p className="text-xs text-text-main font-medium">{ep.summary}</p>
@@ -555,7 +554,7 @@ export default function ApiEndpointsTab() {
                               <div className="flex items-center gap-3 mt-2 text-[10px] text-text-muted">
                                 {ep.security && (
                                   <span className="flex items-center gap-1">
-                                    <span className="material-symbols-outlined text-[12px] text-amber-500">
+                                    <span className="material-symbols-outlined text-[12px] text-warning">
                                       lock
                                     </span>
                                     {t("bearerAuth")}
@@ -579,12 +578,11 @@ export default function ApiEndpointsTab() {
                                 e.stopPropagation();
                                 handleTryIt(ep);
                               }}
-                              className={`flex items-center gap-1 px-2.5 py-1 text-[10px] font-semibold rounded-lg
-                                         transition-colors shrink-0
+                              className={`flex items-center gap-1 px-2.5 py-1 text-[10px] font-semibold rounded-control transition-colors shrink-0
                                 ${
                                   isTrying
-                                    ? "bg-primary text-white"
-                                    : "bg-primary/10 text-primary hover:bg-primary/20"
+                                    ? "bg-contrast text-contrast-fg"
+                                    : "bg-primary/10 text-primary hover:bg-primary/15"
                                 }`}
                             >
                               <span className="material-symbols-outlined text-[12px]">
@@ -595,11 +593,11 @@ export default function ApiEndpointsTab() {
                           </div>
 
                           {/* curl example */}
-                          <div className="rounded-lg bg-black/5 dark:bg-black/30 p-3">
-                            <p className="text-[9px] font-semibold text-text-muted uppercase tracking-wider mb-1">
+                          <div className="rounded-lg border border-border bg-bg-subtle p-3">
+                            <p className="text-[10px] font-medium text-text-subtle uppercase tracking-wider mb-1">
                               {t("example")}
                             </p>
-                            <code className="text-[11px] font-mono text-text-main break-all">
+                            <code className="text-[12px] font-mono text-text-main break-all">
                               curl -X {ep.method} {baseUrl}
                               {ep.path}
                               {ep.security ? ' -H "Authorization: Bearer YOUR_KEY"' : ""}
@@ -611,17 +609,17 @@ export default function ApiEndpointsTab() {
 
                           {/* Try It panel */}
                           {isTrying && (
-                            <div className="rounded-lg border border-primary/20 bg-primary/[0.02] p-3 space-y-3">
+                            <div className="rounded-lg border border-border bg-surface p-3 space-y-3">
                               {ep.security && (
                                 <div>
                                   <div className="flex items-center justify-between mb-1">
-                                    <label className="text-[9px] font-semibold text-text-muted uppercase tracking-wider">
+                                    <label className="text-[10px] font-medium text-text-subtle uppercase tracking-wider">
                                       {t("apiKey")}
                                     </label>
                                     <button
                                       type="button"
                                       onClick={() => setUseManualKey(!useManualKey)}
-                                      className="text-[9px] text-primary hover:underline"
+                                      className="text-[10px] text-primary hover:underline"
                                     >
                                       {useManualKey ? t("switchToSelection") : t("enterManually")}
                                     </button>
@@ -633,17 +631,13 @@ export default function ApiEndpointsTab() {
                                       value={manualApiKey}
                                       onChange={(e) => setManualApiKey(e.target.value)}
                                       placeholder={t("pasteApiKey")}
-                                      className="w-full px-3 py-2 text-xs font-mono rounded-lg border border-black/10
-                                               dark:border-white/10 bg-white dark:bg-black/30 focus:outline-none
-                                               focus:ring-1 focus:ring-primary"
+                                      className="w-full px-3 py-2 text-[12px] font-mono rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                                     />
                                   ) : availableApiKeys.length > 0 ? (
                                     <select
                                       value={selectedApiKeyId}
                                       onChange={(e) => setSelectedApiKeyId(e.target.value)}
-                                      className="w-full px-3 py-2 text-xs font-mono rounded-lg border border-black/10
-                                               dark:border-white/10 bg-white dark:bg-black/30 focus:outline-none
-                                               focus:ring-1 focus:ring-primary"
+                                      className="w-full px-3 py-2 text-[12px] font-mono rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                                     >
                                       {availableApiKeys.map((apiKey) => (
                                         <option key={apiKey.id} value={apiKey.id}>
@@ -652,7 +646,7 @@ export default function ApiEndpointsTab() {
                                       ))}
                                     </select>
                                   ) : (
-                                    <p className="text-[11px] text-amber-500">
+                                    <p className="text-[11px] text-warning">
                                       {apiKeyLoadError || t("noActiveApiKeys")}
                                     </p>
                                   )}
@@ -660,16 +654,14 @@ export default function ApiEndpointsTab() {
                               )}
                               {ep.method !== "GET" && (
                                 <div>
-                                  <label className="text-[9px] font-semibold text-text-muted uppercase tracking-wider">
+                                  <label className="text-[10px] font-medium text-text-subtle uppercase tracking-wider">
                                     {t("requestBodyJson")}
                                   </label>
                                   <textarea
                                     value={tryBody}
                                     onChange={(e) => setTryBody(e.target.value)}
                                     rows={8}
-                                    className="w-full mt-1 px-3 py-2 text-xs font-mono rounded-lg border border-black/10
-                                             dark:border-white/10 bg-white dark:bg-black/30 focus:outline-none
-                                             focus:ring-1 focus:ring-primary resize-none"
+                                    className="w-full mt-1 px-3 py-2 text-[12px] font-mono rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 resize-none"
                                     placeholder='{ "model": "gpt-4o", "messages": [...] }'
                                   />
                                 </div>
@@ -677,8 +669,7 @@ export default function ApiEndpointsTab() {
                               <button
                                 onClick={() => executeTryIt(ep)}
                                 disabled={trying}
-                                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold rounded-lg
-                                           bg-primary text-white hover:bg-primary/90 disabled:opacity-50 transition-colors"
+                                className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover disabled:opacity-50 transition-colors"
                               >
                                 <span className="material-symbols-outlined text-[14px]">
                                   {trying ? "hourglass_empty" : "send"}
@@ -687,22 +678,24 @@ export default function ApiEndpointsTab() {
                               </button>
 
                               {tryResult && (
-                                <div className="rounded-lg bg-black/5 dark:bg-black/30 p-3 space-y-2">
+                                <div className="rounded-lg border border-border bg-bg-subtle p-3 space-y-2">
                                   <div className="flex items-center gap-3 text-xs">
                                     <span
-                                      className={`px-2 py-0.5 rounded font-bold ${
+                                      className={`px-2 py-0.5 rounded-md font-mono font-semibold ${
                                         tryResult.status >= 200 && tryResult.status < 300
-                                          ? "bg-emerald-500/15 text-emerald-500"
+                                          ? "bg-success/10 text-success"
                                           : tryResult.status >= 400
-                                            ? "bg-red-500/15 text-red-500"
-                                            : "bg-amber-500/15 text-amber-500"
+                                            ? "bg-error/10 text-error"
+                                            : "bg-warning/10 text-warning"
                                       }`}
                                     >
                                       {tryResult.status} {tryResult.statusText}
                                     </span>
-                                    <span className="text-text-muted">{tryResult.latencyMs}ms</span>
+                                    <span className="text-text-muted tabular-nums">
+                                      {tryResult.latencyMs}ms
+                                    </span>
                                   </div>
-                                  <pre className="text-[11px] font-mono text-text-main overflow-auto max-h-[300px] whitespace-pre-wrap">
+                                  <pre className="text-[12px] font-mono text-text-main overflow-auto max-h-[300px] whitespace-pre-wrap">
                                     {typeof tryResult.body === "string"
                                       ? tryResult.body
                                       : JSON.stringify(tryResult.body, null, 2)}
@@ -721,8 +714,8 @@ export default function ApiEndpointsTab() {
           ))}
 
           {filteredEndpoints.length === 0 && (
-            <Card className="p-8 text-center">
-              <span className="material-symbols-outlined text-[32px] text-text-muted">
+            <Card className="p-6 text-center">
+              <span className="material-symbols-outlined text-[32px] text-text-subtle">
                 search_off
               </span>
               <p className="text-sm text-text-muted mt-2">{t("apiEndpointsNoMatch")}</p>
@@ -733,13 +726,13 @@ export default function ApiEndpointsTab() {
           {catalog.schemas.length > 0 && (
             <Card className="p-4">
               <div className="flex items-center gap-2 mb-3">
-                <span className="material-symbols-outlined text-[14px] text-primary">
+                <span className="material-symbols-outlined text-[14px] text-text-muted">
                   data_object
                 </span>
-                <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+                <h3 className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {t("dataSchemas")}
                 </h3>
-                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-black/5 dark:bg-white/5 text-text-muted">
+                <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted tabular-nums">
                   {catalog.schemas.length}
                 </span>
               </div>
@@ -747,7 +740,7 @@ export default function ApiEndpointsTab() {
                 {catalog.schemas.map((schema) => (
                   <span
                     key={schema}
-                    className="text-[10px] px-2 py-1 rounded-md bg-purple-500/10 text-purple-500 dark:text-purple-300 font-mono"
+                    className="text-[11px] px-2 py-1 rounded-md border border-border bg-bg-subtle text-text-muted font-mono"
                   >
                     {schema}
                   </span>

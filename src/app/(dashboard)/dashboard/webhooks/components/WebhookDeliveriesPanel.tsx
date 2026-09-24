@@ -49,7 +49,7 @@ export function WebhookDeliveriesPanel({ webhookId, t }: WebhookDeliveriesPanelP
   }
 
   if (error) {
-    return <p className="py-4 text-center text-xs text-red-500">{error}</p>;
+    return <p className="py-4 text-center text-xs text-error">{error}</p>;
   }
 
   if (deliveries.length === 0) {
@@ -58,8 +58,8 @@ export function WebhookDeliveriesPanel({ webhookId, t }: WebhookDeliveriesPanelP
 
   return (
     <div className="overflow-x-auto">
-      <table className="w-full text-left text-xs">
-        <thead className="border-b border-border text-text-muted">
+      <table className="w-full text-left text-[13px]">
+        <thead className="border-b border-border text-xs text-text-muted">
           <tr>
             <th className="py-2 pr-3 font-medium">{t("deliveries.status")}</th>
             <th className="py-2 pr-3 font-medium">{t("deliveries.event")}</th>
@@ -73,14 +73,14 @@ export function WebhookDeliveriesPanel({ webhookId, t }: WebhookDeliveriesPanelP
               <td className="py-2 pr-3">
                 <DeliveryStatusBadge status={d.status} httpStatus={d.http_status} />
               </td>
-              <td className="py-2 pr-3 font-mono text-text-main">{d.event_type}</td>
-              <td className="py-2 pr-3 text-text-muted">
+              <td className="py-2 pr-3 font-mono text-[12px] text-text-main">{d.event_type}</td>
+              <td className="py-2 pr-3 font-mono text-[12px] tabular-nums text-text-muted">
                 {d.latency_ms != null ? `${d.latency_ms}ms` : "—"}
               </td>
-              <td className="py-2 text-text-muted">
+              <td className="py-2 tabular-nums text-text-muted">
                 {new Date(d.created_at).toLocaleString()}
                 {d.error && (
-                  <p className="mt-0.5 truncate text-red-400" title={d.error}>
+                  <p className="mt-0.5 truncate text-error" title={d.error}>
                     {d.error}
                   </p>
                 )}

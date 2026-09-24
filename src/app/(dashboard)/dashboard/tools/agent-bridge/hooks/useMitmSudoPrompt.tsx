@@ -47,10 +47,15 @@ export function MitmSudoPasswordModal({
   const displayError = error ?? localError;
 
   return (
-    <Modal isOpen={isOpen} onClose={handleClose} title={tCli("sudoPasswordRequiredTitle")} size="sm">
+    <Modal
+      isOpen={isOpen}
+      onClose={handleClose}
+      title={tCli("sudoPasswordRequiredTitle")}
+      size="sm"
+    >
       <div className="flex flex-col gap-4">
-        <div className="flex items-start gap-3 rounded-lg border border-yellow-500/30 bg-yellow-500/10 p-3">
-          <span className="material-symbols-outlined text-[20px] text-yellow-500">warning</span>
+        <div className="flex items-start gap-3 rounded-lg border border-warning/30 bg-warning/10 p-3">
+          <span className="material-symbols-outlined text-[18px] text-warning">warning</span>
           <p className="text-xs text-text-muted">{tCli("sudoPasswordHint")}</p>
         </div>
 
@@ -65,7 +70,7 @@ export function MitmSudoPasswordModal({
         />
 
         {displayError && (
-          <div className="flex items-center gap-2 rounded bg-red-500/10 px-2 py-1.5 text-xs text-red-600">
+          <div className="flex items-center gap-2 rounded-md bg-error/10 px-2 py-1.5 text-xs text-error">
             <span className="material-symbols-outlined text-[14px]">error</span>
             <span>{displayError}</span>
           </div>

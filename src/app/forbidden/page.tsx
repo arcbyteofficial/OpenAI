@@ -16,27 +16,17 @@ import Link from "next/link";
 export default function ForbiddenPage() {
   const t = useTranslations("auth");
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-[var(--bg-primary,#0a0a0f)] text-[var(--text-primary,#e0e0e0)] text-center">
-      <div
-        className="text-[96px] font-extrabold leading-none mb-2"
-        style={{
-          background: "linear-gradient(135deg, #ef4444 0%, #f97316 50%, #eab308 100%)",
-          WebkitBackgroundClip: "text",
-          WebkitTextFillColor: "transparent",
-        }}
-      >
+    <div className="flex flex-col items-center justify-center min-h-screen p-6 bg-bg text-text-main text-center">
+      <div className="text-[72px] font-semibold tracking-tight leading-none mb-4 text-text-subtle tabular-nums">
         403
       </div>
-      <h1 className="text-2xl font-semibold mb-2">{t("accessDenied")}</h1>
-      <p className="text-[15px] text-[var(--text-secondary,#888)] max-w-[400px] leading-relaxed mb-8">
+      <h1 className="text-2xl font-semibold tracking-tight mb-2">{t("accessDenied")}</h1>
+      <p className="text-sm text-text-muted max-w-[400px] leading-relaxed mb-6">
         {t("accessDeniedDescription")}
       </p>
       <Link
         href="/dashboard"
-        className="px-8 py-3 rounded-[10px] text-white text-sm font-semibold no-underline transition-all duration-200 shadow-[0_4px_16px_rgba(99,102,241,0.3)] hover:-translate-y-0.5"
-        style={{
-          background: "linear-gradient(135deg, #6366f1, #8b5cf6)",
-        }}
+        className="px-4 py-2.5 rounded-control bg-contrast text-contrast-fg text-sm font-medium no-underline hover:bg-contrast-hover transition-colors duration-150 motion-reduce:transition-none"
       >
         {t("goToDashboard")}
       </Link>

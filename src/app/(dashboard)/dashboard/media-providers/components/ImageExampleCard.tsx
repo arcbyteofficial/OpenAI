@@ -6,7 +6,10 @@ import { useTranslations } from "next-intl";
 import { useApiKey } from "../../providers/hooks/useApiKey";
 import { useProviderModels } from "../../providers/hooks/useProviderModels";
 import { buildCurl } from "../../providers/utils/buildCurl";
-import { PLAYGROUND_KEY_ID_HEADER, resolvePlaygroundKeyId } from "../../providers/utils/playgroundAuth";
+import {
+  PLAYGROUND_KEY_ID_HEADER,
+  resolvePlaygroundKeyId,
+} from "../../providers/utils/playgroundAuth";
 import { PlaygroundCard } from "./PlaygroundCard";
 
 interface SuggestedHfModel {
@@ -185,7 +188,7 @@ export function ImageExampleCard({ providerId }: Props) {
         <select
           value={model || firstModel}
           onChange={(e) => setModel(e.target.value)}
-          className="w-full rounded-md border border-border bg-bg-subtle text-sm px-2 py-1.5 text-text-main focus:outline-none focus:ring-1 focus:ring-primary"
+          className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
         >
           {modelOptions.map((m) => (
             <option key={m.id} value={m.id}>
@@ -223,7 +226,7 @@ export function ImageExampleCard({ providerId }: Props) {
         <select
           value={size}
           onChange={(e) => setSize(e.target.value)}
-          className="w-full rounded-md border border-border bg-bg-subtle text-sm px-2 py-1.5 text-text-main focus:outline-none focus:ring-1 focus:ring-primary"
+          className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
         >
           {IMAGE_SIZES.map((s) => (
             <option key={s} value={s}>
@@ -240,7 +243,7 @@ export function ImageExampleCard({ providerId }: Props) {
           onChange={(e) => setPrompt(e.target.value)}
           rows={2}
           placeholder={t("imageSample")}
-          className="w-full rounded-md border border-border bg-bg-subtle text-sm px-2 py-1.5 text-text-main focus:outline-none focus:ring-1 focus:ring-primary resize-none"
+          className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 resize-none"
         />
       </div>
     </PlaygroundCard>

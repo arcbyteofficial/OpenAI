@@ -26,9 +26,9 @@ test("QuotaCardHeader derives token expiry only for OAuth connections with a kno
   assert.match(source, /formatCountdown\(/, "must format the countdown");
 });
 
-test("QuotaCardHeader renders the expiry as a small blue (sky) informative line", () => {
+test("QuotaCardHeader renders the expiry as a small blue (accent) informative line", () => {
   assert.match(source, /text-\[10px\]/, "expiry line must be small (10px)");
-  assert.match(source, /text-sky-500/, "active expiry must be blue (sky-500)");
+  assert.match(source, /text-primary/, "active expiry must be blue (accent text-primary)");
   assert.match(source, /tokenExpiresIn/, "must use the tokenExpiresIn i18n key");
   assert.match(source, /tokenExpired/, "must use the tokenExpired i18n key");
 });

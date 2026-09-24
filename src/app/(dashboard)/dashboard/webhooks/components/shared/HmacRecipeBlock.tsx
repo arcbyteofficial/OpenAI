@@ -31,7 +31,7 @@ export function HmacRecipeBlock({ code, title, snippets }: HmacRecipeBlockProps)
   return (
     <div className="space-y-1">
       {title && (
-        <p className="text-xs font-medium uppercase tracking-wider text-text-muted">{title}</p>
+        <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">{title}</p>
       )}
       {tabs.length > 1 && (
         <div className="flex gap-1">
@@ -40,10 +40,10 @@ export function HmacRecipeBlock({ code, title, snippets }: HmacRecipeBlockProps)
               key={s.label}
               type="button"
               onClick={() => setActive(i)}
-              className={`rounded px-2 py-0.5 text-[11px] font-medium transition-colors ${
+              className={`rounded-md px-2 py-0.5 text-[11px] font-medium transition-colors ${
                 i === active
-                  ? "bg-primary/10 text-primary"
-                  : "text-text-muted hover:bg-sidebar hover:text-text-main"
+                  ? "bg-bg-subtle text-text-main"
+                  : "text-text-muted hover:bg-bg-subtle hover:text-text-main"
               }`}
             >
               {s.label}
@@ -52,14 +52,14 @@ export function HmacRecipeBlock({ code, title, snippets }: HmacRecipeBlockProps)
         </div>
       )}
       <div className="relative">
-        <pre className="overflow-x-auto rounded-lg bg-sidebar p-3 pr-10 text-xs text-text-main">
+        <pre className="overflow-x-auto rounded-lg border border-border bg-bg-subtle p-3 pr-10 font-mono text-[12px] text-text-main">
           {tabs[active]?.code}
         </pre>
         <button
           type="button"
           onClick={() => void copy()}
           title={copied ? "Copied!" : "Copy"}
-          className="absolute right-2 top-2 rounded p-1 text-text-muted transition-colors hover:bg-surface hover:text-text-main"
+          className="absolute right-2 top-2 rounded-md p-1 text-text-muted transition-colors hover:bg-surface hover:text-text-main"
         >
           <span className="material-symbols-outlined text-[14px]">
             {copied ? "check" : "content_copy"}

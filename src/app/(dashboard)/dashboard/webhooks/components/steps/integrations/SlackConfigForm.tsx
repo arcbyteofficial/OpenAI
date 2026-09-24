@@ -60,32 +60,30 @@ export function SlackConfigForm({ value, onChange, t }: SlackConfigFormProps) {
   return (
     <div className="space-y-4">
       <div>
-        <label className="text-xs font-medium uppercase tracking-wider text-text-muted">
-          {t("slack.webhookUrl")}
-        </label>
+        <label className="text-[13px] font-medium text-text-muted">{t("slack.webhookUrl")}</label>
         <input
           value={value.webhookUrl}
           onChange={(e) => onChange({ webhookUrl: e.target.value })}
           placeholder={t("slack.webhookUrlPlaceholder")}
-          className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40"
+          className="mt-1 w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
         />
         {urlHint && (
           <p
-            className={`mt-1 text-xs ${urlState === "ok" ? "text-emerald-500" : urlState === "checking" ? "text-text-muted" : "text-red-500"}`}
+            className={`mt-1 text-xs ${urlState === "ok" ? "text-success" : urlState === "checking" ? "text-text-muted" : "text-error"}`}
           >
             {urlHint}
           </p>
         )}
         <p className="mt-1 text-xs text-text-muted">{t("slack.webhookUrlHint")}</p>
       </div>
-      <details className="rounded-lg border border-border bg-sidebar p-3">
+      <details className="rounded-lg border border-border bg-bg-subtle p-3">
         <summary className="cursor-pointer text-xs font-medium text-text-muted hover:text-text-main">
           {t("slack.tutorial")}
         </summary>
         <ol className="mt-3 space-y-1.5 text-xs text-text-muted">
           {[1, 2, 3, 4].map((n) => (
             <li key={n} className="flex gap-2">
-              <span className="font-bold text-primary">{n}.</span>
+              <span className="font-semibold tabular-nums text-text-subtle">{n}.</span>
               {t(`slack.tutorialStep${n}`)}
             </li>
           ))}

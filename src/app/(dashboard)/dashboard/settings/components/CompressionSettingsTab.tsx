@@ -278,31 +278,33 @@ export default function CompressionSettingsTab() {
 
   if (loading) {
     return (
-      <Card className="p-6">
+      <Card className="p-5">
         <p className="text-sm text-text-muted">{t("loading")}</p>
       </Card>
     );
   }
 
   return (
-    <Card className="p-6">
+    <Card className="p-5">
       <div className="flex items-center gap-3 mb-5">
-        <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-2 rounded-lg border border-border bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             compress
           </span>
         </div>
         <div>
-          <h3 className="text-lg font-semibold">{t("compressionTitle")}</h3>
+          <h3 className="text-base font-semibold tracking-tight text-text-main">
+            {t("compressionTitle")}
+          </h3>
           <p className="text-sm text-text-muted">{t("compressionDesc")}</p>
         </div>
         {status === "saved" && (
-          <span className="ml-auto text-xs font-medium text-emerald-500 flex items-center gap-1">
+          <span className="ml-auto text-xs font-medium text-success flex items-center gap-1">
             <span className="material-symbols-outlined text-[14px]">check_circle</span> {t("saved")}
           </span>
         )}
         {status === "error" && (
-          <span className="ml-auto text-xs font-medium text-red-500 flex items-center gap-1">
+          <span className="ml-auto text-xs font-medium text-error flex items-center gap-1">
             <span className="material-symbols-outlined text-[14px]">error</span> {t("saveFailed")}
           </span>
         )}
@@ -320,15 +322,15 @@ export default function CompressionSettingsTab() {
                   key={m.value}
                   onClick={() => save({ defaultMode: m.value })}
                   disabled={saving}
-                  className={`flex items-start gap-3 p-3 rounded-lg border text-left transition-all ${
+                  className={`flex items-start gap-3 p-3 rounded-lg border text-left transition-colors ${
                     config.defaultMode === m.value
-                      ? "border-blue-500/50 bg-blue-500/5 ring-1 ring-blue-500/20"
-                      : "border-border/50 hover:border-border hover:bg-surface/30"
+                      ? "border-primary/50 bg-primary/5 ring-1 ring-primary/20"
+                      : "border-border hover:border-border-strong hover:bg-bg-subtle"
                   }`}
                 >
                   <span
-                    className={`material-symbols-outlined text-[20px] mt-0.5 ${
-                      config.defaultMode === m.value ? "text-blue-500" : "text-text-muted"
+                    className={`material-symbols-outlined text-[18px] mt-0.5 ${
+                      config.defaultMode === m.value ? "text-primary" : "text-text-muted"
                     }`}
                   >
                     {m.icon}
@@ -336,7 +338,7 @@ export default function CompressionSettingsTab() {
                   <div className="min-w-0">
                     <p
                       className={`text-sm font-medium ${
-                        config.defaultMode === m.value ? "text-blue-400" : ""
+                        config.defaultMode === m.value ? "text-text-main" : ""
                       }`}
                     >
                       {t(m.labelKey)}
@@ -350,7 +352,7 @@ export default function CompressionSettingsTab() {
         )}
 
         {config.enabled && (
-          <div className="space-y-3 pt-4 border-t border-border/30">
+          <div className="space-y-3 pt-4 border-t border-border">
             <h4 className="text-sm font-medium text-text-main">{t("compressionGeneral")}</h4>
 
             <label className="flex items-center justify-between">
@@ -362,7 +364,7 @@ export default function CompressionSettingsTab() {
                   max={100000}
                   value={config.autoTriggerTokens}
                   onChange={(e) => save({ autoTriggerTokens: parseInt(e.target.value) || 0 })}
-                  className="w-24 px-2 py-1 text-sm rounded border border-border bg-surface text-text-main"
+                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                 />
                 <span className="text-xs text-text-muted">{t("tokens")}</span>
               </div>
@@ -375,7 +377,7 @@ export default function CompressionSettingsTab() {
               <select
                 value={config.autoTriggerMode ?? "lite"}
                 onChange={(e) => save({ autoTriggerMode: e.target.value as CompressionMode })}
-                className="w-36 px-2 py-1 text-sm rounded border border-border bg-surface text-text-main"
+                className="w-36 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
               >
                 {MODES.filter((mode) => mode.value !== "off").map((mode) => (
                   <option key={mode.value} value={mode.value}>
@@ -394,7 +396,7 @@ export default function CompressionSettingsTab() {
                   max={1440}
                   value={config.cacheMinutes}
                   onChange={(e) => save({ cacheMinutes: parseInt(e.target.value) || 5 })}
-                  className="w-24 px-2 py-1 text-sm rounded border border-border bg-surface text-text-main"
+                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                 />
                 <span className="text-xs text-text-muted">{t("minutes")}</span>
               </div>
@@ -412,7 +414,7 @@ export default function CompressionSettingsTab() {
                     preserveSystemPromptMode: e.target.value as "always" | "whenNoCache" | "never",
                   })
                 }
-                className="w-36 px-2 py-1 text-sm rounded border border-border bg-surface text-text-main"
+                className="w-36 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                 data-testid="preserve-system-mode-select"
               >
                 <option value="always">{t("compressionPreserveSystemAlways")}</option>
@@ -433,11 +435,13 @@ export default function CompressionSettingsTab() {
                   })
                 }
                 className={`relative w-10 h-5 rounded-full transition-colors ${
-                  config.mcpDescriptionCompressionEnabled !== false ? "bg-green-500" : "bg-border"
+                  config.mcpDescriptionCompressionEnabled !== false
+                    ? "bg-primary"
+                    : "bg-border-strong"
                 }`}
               >
                 <span
-                  className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform ${
+                  className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.2)] transition-transform ${
                     config.mcpDescriptionCompressionEnabled !== false ? "left-5" : "left-0.5"
                   }`}
                 />
@@ -450,7 +454,7 @@ export default function CompressionSettingsTab() {
           config.defaultMode !== "off" &&
           config.defaultMode !== "lite" &&
           config.cavemanConfig && (
-            <div className="space-y-3 pt-4 border-t border-border/30">
+            <div className="space-y-3 pt-4 border-t border-border">
               {/* Engine on/off is owned by the single-source panel (/dashboard/context/settings):
                   the panel's `engines.caveman.enabled` is authoritative (planResolution.ts). This tab
                   keeps only the advanced caveman tuning the panel does not expose. */}
@@ -472,10 +476,10 @@ export default function CompressionSettingsTab() {
                       <button
                         key={opt.value}
                         onClick={() => toggleCavemanRole(opt.value)}
-                        className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
+                        className={`px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                           config.cavemanConfig!.compressRoles.includes(opt.value)
-                            ? "border-blue-500/50 bg-blue-500/10 text-blue-400"
-                            : "border-border/50 text-text-muted hover:border-border"
+                            ? "border-primary/40 bg-primary/10 text-primary"
+                            : "border-border text-text-muted hover:border-border-strong hover:text-text-main"
                         }`}
                       >
                         {t(opt.labelKey)}
@@ -499,7 +503,7 @@ export default function CompressionSettingsTab() {
                         },
                       })
                     }
-                    className="w-24 px-2 py-1 text-sm rounded border border-border bg-surface text-text-main"
+                    className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                   />
                 </label>
 
@@ -516,10 +520,10 @@ export default function CompressionSettingsTab() {
                         key={rule.name}
                         onClick={() => toggleCavemanRule(rule.name)}
                         title={`${rule.category} · ${rule.context} · ${(rule.intensities ?? [rule.minIntensity]).join("/")}`}
-                        className={`px-2 py-1 rounded text-xs border transition-all ${
+                        className={`px-2 py-1 rounded-md text-xs border transition-colors ${
                           config.cavemanConfig!.skipRules.includes(rule.name)
-                            ? "border-red-500/50 bg-red-500/10 text-red-400 line-through"
-                            : "border-border/50 text-text-muted hover:border-border"
+                            ? "border-error/40 bg-error/10 text-error line-through"
+                            : "border-border text-text-muted hover:border-border-strong hover:text-text-main"
                         }`}
                       >
                         {rule.name.replace(/_/g, " ")}
@@ -546,7 +550,7 @@ export default function CompressionSettingsTab() {
                       });
                     }}
                     placeholder="https?://\S+\n```[\s\S]*?```"
-                    className="w-full min-h-[80px] px-3 py-2 text-sm rounded-lg border border-border bg-surface text-text-main font-mono resize-y"
+                    className="w-full min-h-[80px] px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main font-mono resize-y placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                   />
                 </div>
               </>
@@ -554,7 +558,7 @@ export default function CompressionSettingsTab() {
           )}
 
         {config.enabled && config.cavemanOutputMode && (
-          <div className="space-y-3 pt-4 border-t border-border/30">
+          <div className="space-y-3 pt-4 border-t border-border">
             <div>
               <h4 className="text-sm font-medium text-text-main">
                 {t("compressionSettingsCavemanOutputMode")}
@@ -579,11 +583,11 @@ export default function CompressionSettingsTab() {
                   })
                 }
                 className={`relative w-10 h-5 rounded-full transition-colors ${
-                  config.cavemanOutputMode.autoClarity ? "bg-green-500" : "bg-border"
+                  config.cavemanOutputMode.autoClarity ? "bg-primary" : "bg-border-strong"
                 }`}
               >
                 <span
-                  className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform ${
+                  className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.2)] transition-transform ${
                     config.cavemanOutputMode.autoClarity ? "left-5" : "left-0.5"
                   }`}
                 />
@@ -593,7 +597,7 @@ export default function CompressionSettingsTab() {
         )}
 
         {config.enabled && config.defaultMode === "aggressive" && config.aggressive && (
-          <div className="space-y-3 pt-4 border-t border-border/30">
+          <div className="space-y-3 pt-4 border-t border-border">
             <div className="flex items-center justify-between">
               <div>
                 <h4 className="text-sm font-medium text-text-main">
@@ -617,11 +621,11 @@ export default function CompressionSettingsTab() {
                   })
                 }
                 className={`relative w-10 h-5 rounded-full transition-colors ${
-                  config.aggressive.summarizerEnabled ? "bg-green-500" : "bg-border"
+                  config.aggressive.summarizerEnabled ? "bg-primary" : "bg-border-strong"
                 }`}
               >
                 <span
-                  className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform ${
+                  className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.2)] transition-transform ${
                     config.aggressive.summarizerEnabled ? "left-5" : "left-0.5"
                   }`}
                 />
@@ -644,7 +648,7 @@ export default function CompressionSettingsTab() {
                       },
                     })
                   }
-                  className="w-24 px-2 py-1 text-sm rounded border border-border bg-surface text-text-main"
+                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                 />
                 <span className="text-xs text-text-muted">{t("tokens")}</span>
               </div>
@@ -667,7 +671,7 @@ export default function CompressionSettingsTab() {
                       },
                     })
                   }
-                  className="w-24 px-2 py-1 text-sm rounded border border-border bg-surface text-text-main"
+                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                 />
                 <span className="text-xs text-text-muted">%</span>
               </div>
@@ -682,7 +686,7 @@ export default function CompressionSettingsTab() {
                 {(["fullSummary", "moderate", "light", "verbatim"] as const).map((tier) => (
                   <label
                     key={tier}
-                    className="flex items-center justify-between p-2 rounded border border-border/50"
+                    className="flex items-center justify-between p-2 rounded-md border border-border"
                   >
                     <span className="text-xs text-text-muted capitalize">
                       {tier.replace(/([A-Z])/g, " $1").trim()}
@@ -703,7 +707,7 @@ export default function CompressionSettingsTab() {
                           },
                         })
                       }
-                      className="w-16 px-2 py-1 text-xs rounded border border-border bg-surface text-text-main"
+                      className="w-16 px-2 py-1 text-xs rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                     />
                   </label>
                 ))}
@@ -730,10 +734,10 @@ export default function CompressionSettingsTab() {
                         },
                       })
                     }
-                    className={`px-3 py-1.5 rounded-lg text-xs font-medium border transition-all ${
+                    className={`px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                       config.aggressive!.toolStrategies[strategy]
-                        ? "border-blue-500/50 bg-blue-500/10 text-blue-400"
-                        : "border-border/50 text-text-muted hover:border-border"
+                        ? "border-primary/40 bg-primary/10 text-primary"
+                        : "border-border text-text-muted hover:border-border-strong hover:text-text-main"
                     }`}
                   >
                     {strategy.replace(/([A-Z])/g, " $1").trim()}
@@ -745,7 +749,7 @@ export default function CompressionSettingsTab() {
         )}
 
         {config.enabled && config.defaultMode === "ultra" && config.ultra && (
-          <div className="space-y-3 pt-4 border-t border-border/30">
+          <div className="space-y-3 pt-4 border-t border-border">
             <div>
               <h4 className="text-sm font-medium text-text-main">{t("compressionUltraConfig")}</h4>
               <p className="text-xs text-text-muted mt-0.5">{t("compressionUltraConfigDesc")}</p>
@@ -763,11 +767,11 @@ export default function CompressionSettingsTab() {
                   })
                 }
                 className={`relative w-10 h-5 rounded-full transition-colors ${
-                  config.ultra.enabled ? "bg-green-500" : "bg-border"
+                  config.ultra.enabled ? "bg-primary" : "bg-border-strong"
                 }`}
               >
                 <span
-                  className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform ${
+                  className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.2)] transition-transform ${
                     config.ultra.enabled ? "left-5" : "left-0.5"
                   }`}
                 />
@@ -790,7 +794,7 @@ export default function CompressionSettingsTab() {
                     },
                   })
                 }
-                className="w-24 px-2 py-1 text-sm rounded border border-border bg-surface text-text-main"
+                className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
               />
             </label>
 
@@ -810,7 +814,7 @@ export default function CompressionSettingsTab() {
                     },
                   })
                 }
-                className="w-24 px-2 py-1 text-sm rounded border border-border bg-surface text-text-main"
+                className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
               />
             </label>
 
@@ -830,7 +834,7 @@ export default function CompressionSettingsTab() {
                       },
                     })
                   }
-                  className="w-24 px-2 py-1 text-sm rounded border border-border bg-surface text-text-main"
+                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                 />
                 <span className="text-xs text-text-muted">{t("tokens")}</span>
               </div>
@@ -848,11 +852,11 @@ export default function CompressionSettingsTab() {
                   })
                 }
                 className={`relative w-10 h-5 rounded-full transition-colors ${
-                  config.ultra.slmFallbackToAggressive ? "bg-green-500" : "bg-border"
+                  config.ultra.slmFallbackToAggressive ? "bg-primary" : "bg-border-strong"
                 }`}
               >
                 <span
-                  className={`absolute top-0.5 w-4 h-4 rounded-full bg-white transition-transform ${
+                  className={`absolute top-0.5 w-4 h-4 rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.2)] transition-transform ${
                     config.ultra.slmFallbackToAggressive ? "left-5" : "left-0.5"
                   }`}
                 />
@@ -873,7 +877,7 @@ export default function CompressionSettingsTab() {
                   })
                 }
                 placeholder="/path/to/model.onnx"
-                className="w-full px-2 py-1 text-sm rounded border border-border bg-surface text-text-main font-mono"
+                className="w-full px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main font-mono focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
               />
             </label>
           </div>

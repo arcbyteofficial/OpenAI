@@ -49,12 +49,14 @@ function StatCard({
   sub?: string;
 }) {
   return (
-    <div className="card p-4 flex flex-col gap-1">
-      <div className="flex items-center gap-2 text-text-muted text-sm">
-        <span className="material-symbols-outlined text-[18px]">{icon}</span>
+    <div className="bg-surface border border-border rounded-card p-4 flex flex-col gap-1">
+      <div className="flex items-center gap-2 text-text-muted text-[13px]">
+        <span className="material-symbols-outlined text-[16px]">{icon}</span>
         {label}
       </div>
-      <div className="text-2xl font-bold text-text">{value}</div>
+      <div className="text-2xl font-semibold tracking-tight tabular-nums text-text-main">
+        {value}
+      </div>
       {sub && <div className="text-xs text-text-muted">{sub}</div>}
     </div>
   );
@@ -78,7 +80,7 @@ function ModeBar({
   return (
     <div className="flex flex-col gap-1">
       <div className="flex justify-between text-sm">
-        <span className="font-medium text-text capitalize">{mode}</span>
+        <span className="font-medium text-text-main capitalize">{mode}</span>
         <span className="text-text-muted">
           {t("compressionAnalyticsModeStats", {
             count,
@@ -87,19 +89,19 @@ function ModeBar({
           {skipped > 0 && (
             // #4268: attempted-but-no-op runs (e.g. Stacked saved nothing) are
             // recorded now, so this mode is visible even when count is 0.
-            <span className="text-text-muted/70">
+            <span className="text-text-subtle">
               {t("compressionAnalyticsSkipped", { count: skipped.toLocaleString() })}
             </span>
           )}
         </span>
       </div>
-      <div className="h-2 rounded-full bg-bg-muted overflow-hidden">
+      <div className="h-2 rounded-full bg-bg-subtle overflow-hidden">
         <div
-          className="h-full rounded-full bg-primary transition-all"
+          className="h-full rounded-full bg-primary transition-[width]"
           style={{ width: `${pct}%` }}
         />
       </div>
-      <div className="text-xs text-text-muted text-right">{pct}%</div>
+      <div className="text-xs text-text-muted text-right tabular-nums">{pct}%</div>
     </div>
   );
 }
@@ -120,7 +122,7 @@ function ProviderBar({
   return (
     <div className="flex flex-col gap-1">
       <div className="flex justify-between text-sm">
-        <span className="font-medium text-text">{provider}</span>
+        <span className="font-medium text-text-main">{provider}</span>
         <span className="text-text-muted">
           {t("compressionAnalyticsModeStats", {
             count,
@@ -128,13 +130,13 @@ function ProviderBar({
           })}
         </span>
       </div>
-      <div className="h-2 rounded-full bg-bg-muted overflow-hidden">
+      <div className="h-2 rounded-full bg-bg-subtle overflow-hidden">
         <div
-          className="h-full rounded-full bg-primary transition-all"
+          className="h-full rounded-full bg-primary transition-[width]"
           style={{ width: `${pct}%` }}
         />
       </div>
-      <div className="text-xs text-text-muted text-right">{pct}%</div>
+      <div className="text-xs text-text-muted text-right tabular-nums">{pct}%</div>
     </div>
   );
 }
@@ -171,7 +173,7 @@ export default function CompressionAnalyticsTab() {
 
   if (error || !stats) {
     return (
-      <div className="card p-6 text-center text-text-muted">
+      <div className="bg-surface border border-border rounded-card p-6 text-center text-text-muted">
         <span className="material-symbols-outlined text-[32px] mb-2 block">compress</span>
         {error || t("compressionAnalyticsNoDataYet")}
         <p className="text-xs mt-2">{t("compressionAnalyticsNoDataDescription")}</p>
@@ -195,10 +197,10 @@ export default function CompressionAnalyticsTab() {
           <button
             key={range}
             onClick={() => setSince(range)}
-            className={`px-3 py-1 rounded text-sm transition-colors ${
+            className={`px-3 py-1 rounded-control text-sm transition-colors ${
               since === range
-                ? "bg-primary text-primary-foreground"
-                : "bg-bg-muted text-text-muted hover:bg-bg-muted/80"
+                ? "bg-bg-subtle text-text-main font-medium"
+                : "text-text-muted hover:bg-bg-subtle hover:text-text-main"
             }`}
           >
             {range === "24h"
@@ -251,33 +253,35 @@ export default function CompressionAnalyticsTab() {
       </div>
 
       {stats.realUsage.requestsWithReceipts > 0 && (
-        <div className="card p-5">
-          <h3 className="font-semibold text-text mb-4 flex items-center gap-2">
-            <span className="material-symbols-outlined text-primary text-[20px]">receipt_long</span>
+        <div className="bg-surface border border-border rounded-card p-5">
+          <h3 className="text-sm font-semibold text-text-main mb-4 flex items-center gap-2">
+            <span className="material-symbols-outlined text-text-muted text-[18px]">
+              receipt_long
+            </span>
             {t("compressionAnalyticsRealUsageReceipts")}
           </h3>
           <div className="grid grid-cols-1 md:grid-cols-5 gap-4 text-sm">
             <div>
               <div className="text-text-muted">{t("compressionAnalyticsPromptTokens")}</div>
-              <div className="text-lg font-semibold text-text">
+              <div className="text-lg font-semibold tabular-nums text-text-main">
                 {stats.realUsage.promptTokens.toLocaleString()}
               </div>
             </div>
             <div>
               <div className="text-text-muted">{t("compressionAnalyticsCompletionTokens")}</div>
-              <div className="text-lg font-semibold text-text">
+              <div className="text-lg font-semibold tabular-nums text-text-main">
                 {stats.realUsage.completionTokens.toLocaleString()}
               </div>
             </div>
             <div>
               <div className="text-text-muted">{t("compressionAnalyticsTotalTokens")}</div>
-              <div className="text-lg font-semibold text-text">
+              <div className="text-lg font-semibold tabular-nums text-text-main">
                 {stats.realUsage.totalTokens.toLocaleString()}
               </div>
             </div>
             <div>
               <div className="text-text-muted">{t("compressionAnalyticsCacheTokens")}</div>
-              <div className="text-lg font-semibold text-text">
+              <div className="text-lg font-semibold tabular-nums text-text-main">
                 {(
                   (stats.realUsage.cacheReadTokens ?? 0) + (stats.realUsage.cacheWriteTokens ?? 0)
                 ).toLocaleString()}
@@ -285,7 +289,7 @@ export default function CompressionAnalyticsTab() {
             </div>
             <div>
               <div className="text-text-muted">{t("compressionAnalyticsSources")}</div>
-              <div className="text-lg font-semibold text-text">
+              <div className="text-lg font-semibold tabular-nums text-text-main">
                 {Object.entries(stats.realUsage.bySource)
                   .map(([source, count]) => `${source}: ${count}`)
                   .join(", ")}
@@ -297,9 +301,9 @@ export default function CompressionAnalyticsTab() {
 
       {/* Mode Breakdown */}
       {modes.length > 0 && (
-        <div className="card p-5">
-          <h3 className="font-semibold text-text mb-4 flex items-center gap-2">
-            <span className="material-symbols-outlined text-primary text-[20px]">tune</span>
+        <div className="bg-surface border border-border rounded-card p-5">
+          <h3 className="text-sm font-semibold text-text-main mb-4 flex items-center gap-2">
+            <span className="material-symbols-outlined text-text-muted text-[18px]">tune</span>
             {t("compressionAnalyticsModeBreakdown")}
           </h3>
           <div className="flex flex-col gap-4">
@@ -319,9 +323,9 @@ export default function CompressionAnalyticsTab() {
 
       {/* Provider Breakdown */}
       {providers.length > 0 && (
-        <div className="card p-5">
-          <h3 className="font-semibold text-text mb-4 flex items-center gap-2">
-            <span className="material-symbols-outlined text-primary text-[20px]">hub</span>
+        <div className="bg-surface border border-border rounded-card p-5">
+          <h3 className="text-sm font-semibold text-text-main mb-4 flex items-center gap-2">
+            <span className="material-symbols-outlined text-text-muted text-[18px]">hub</span>
             {t("compressionAnalyticsProviderBreakdown")}
           </h3>
           <div className="flex flex-col gap-4">
@@ -340,9 +344,11 @@ export default function CompressionAnalyticsTab() {
 
       {/* Last 24h Hourly Chart (CSS-only height-based bars) */}
       {stats.last24h.length > 0 && (
-        <div className="card p-5">
-          <h3 className="font-semibold text-text mb-4 flex items-center gap-2">
-            <span className="material-symbols-outlined text-primary text-[20px]">show_chart</span>
+        <div className="bg-surface border border-border rounded-card p-5">
+          <h3 className="text-sm font-semibold text-text-main mb-4 flex items-center gap-2">
+            <span className="material-symbols-outlined text-text-muted text-[18px]">
+              show_chart
+            </span>
             {t("compressionAnalyticsLast24HoursActivity")}
           </h3>
           <div className="flex items-end gap-2 h-48">
@@ -352,7 +358,7 @@ export default function CompressionAnalyticsTab() {
               return (
                 <div key={idx} className="flex-1 flex flex-col items-center gap-2">
                   <div
-                    className="w-full rounded-t-sm bg-gradient-to-b from-primary to-primary/70 transition-all hover:opacity-80 cursor-pointer group relative"
+                    className="w-full rounded-t-sm bg-primary/80 transition-opacity hover:opacity-80 cursor-pointer group relative"
                     style={{ height: `${Math.max(countPct, 5)}%` }}
                     title={t("compressionAnalyticsChartPoint", {
                       hour: entry.hour,
@@ -384,14 +390,14 @@ export default function CompressionAnalyticsTab() {
 
       {/* Empty state */}
       {totalAttempts === 0 && (
-        <div className="card p-8 text-center text-text-muted">
-          <span className="material-symbols-outlined text-[48px] mb-3 block text-primary opacity-50">
+        <div className="bg-surface border border-border rounded-card p-6 text-center text-text-muted">
+          <span className="material-symbols-outlined text-[36px] mb-3 block text-text-subtle">
             compress
           </span>
-          <p className="font-medium text-text">{t("compressionAnalyticsNoDataYet")}</p>
+          <p className="font-medium text-text-main">{t("compressionAnalyticsNoDataYet")}</p>
           <p className="text-sm mt-1">
             {t.rich("compressionAnalyticsStartTracking", {
-              code: (chunks) => <code className="bg-bg-muted px-1 rounded">{chunks}</code>,
+              code: (chunks) => <code className="bg-bg-subtle px-1 rounded">{chunks}</code>,
             })}
           </p>
         </div>
@@ -399,7 +405,7 @@ export default function CompressionAnalyticsTab() {
 
       {/* Info note */}
       <div className="text-xs text-text-muted border border-border rounded-lg p-3 flex items-start gap-2">
-        <span className="material-symbols-outlined text-[16px] text-blue-500 mt-0.5">info</span>
+        <span className="material-symbols-outlined text-[16px] text-text-muted mt-0.5">info</span>
         <span>
           {t.rich("compressionAnalyticsInfo", {
             strong: (chunks) => <strong>{chunks}</strong>,

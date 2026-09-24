@@ -45,16 +45,16 @@ export type ModelCompatSavePatch = {
 function getModelSourceBadgeClass(source?: string): string {
   switch (normalizeModelCatalogSource(source)) {
     case "imported":
-      return "border-sky-500/30 bg-sky-500/10 text-sky-300";
+      return "border-border bg-bg-subtle text-text-main";
     case "custom":
-      return "border-emerald-500/30 bg-emerald-500/10 text-emerald-300";
+      return "border-primary/30 bg-primary/10 text-primary";
     case "fallback":
-      return "border-amber-500/30 bg-amber-500/10 text-amber-300";
+      return "border-warning/30 bg-warning/10 text-warning";
     case "alias":
-      return "border-violet-500/30 bg-violet-500/10 text-violet-300";
+      return "border-border bg-bg-subtle text-text-main";
     case "system":
     default:
-      return "border-border bg-sidebar/70 text-text-muted";
+      return "border-border bg-transparent text-text-muted";
   }
 }
 
@@ -132,18 +132,18 @@ export function ModelVisibilityToolbar({
           value={filterValue}
           onChange={(e) => onFilterChange(e.target.value)}
           placeholder={providerText(t, "filterModels", "Filter models…")}
-          className="w-full rounded-lg border border-border bg-sidebar/50 py-1.5 pl-7 pr-3 text-xs text-text-main placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-primary"
+          className="w-full rounded-control border border-border-strong bg-surface py-1.5 pl-7 pr-3 text-xs text-text-main placeholder:text-text-subtle transition-colors focus:outline-none focus:border-primary"
         />
       </div>
       {visibilityFilter !== undefined && onVisibilityFilterChange && (
-        <div className="flex items-center gap-1 rounded-lg border border-border bg-sidebar/50 p-0.5">
+        <div className="flex items-center gap-1 rounded-control border border-border bg-bg-subtle p-0.5">
           {(["all", "visible", "hidden"] as const).map((f) => (
             <button
               key={f}
               onClick={() => onVisibilityFilterChange(f)}
-              className={`rounded px-2 py-1 text-xs ${
+              className={`rounded px-2 py-1 text-xs font-medium transition-colors ${
                 visibilityFilter === f
-                  ? "bg-primary text-primary-foreground"
+                  ? "bg-surface text-text-main shadow-sm"
                   : "text-text-muted hover:text-text-main"
               }`}
             >
@@ -157,14 +157,14 @@ export function ModelVisibilityToolbar({
         </div>
       )}
       {freeFilter !== undefined && onFreeFilterChange && (
-        <div className="flex items-center gap-1 rounded-lg border border-border bg-sidebar/50 p-0.5">
+        <div className="flex items-center gap-1 rounded-control border border-border bg-bg-subtle p-0.5">
           {(["all", "free", "paid"] as const).map((f) => (
             <button
               key={f}
               onClick={() => onFreeFilterChange(f)}
-              className={`rounded px-2 py-1 text-xs ${
+              className={`rounded px-2 py-1 text-xs font-medium transition-colors ${
                 freeFilter === f
-                  ? "bg-primary text-primary-foreground"
+                  ? "bg-surface text-text-main shadow-sm"
                   : "text-text-muted hover:text-text-main"
               }`}
             >
@@ -181,10 +181,10 @@ export function ModelVisibilityToolbar({
         <button
           onClick={() => onSortFreeFirstChange(!sortFreeFirst)}
           aria-pressed={!!sortFreeFirst}
-          className={`flex items-center gap-1.5 rounded-lg border px-2.5 py-1 text-[12px] ${
+          className={`flex items-center gap-1.5 rounded-control border px-2.5 py-1 text-[12px] transition-colors ${
             sortFreeFirst
-              ? "border-primary bg-primary/10 text-primary"
-              : "border-border bg-transparent text-text-main"
+              ? "border-primary/40 bg-primary/10 text-primary"
+              : "border-border-strong bg-surface text-text-main hover:bg-bg-subtle"
           }`}
           title={providerText(t, "sortFreeFirst", "Free first")}
         >
@@ -205,7 +205,7 @@ export function ModelVisibilityToolbar({
             type="checkbox"
             checked={autoHideFailed ?? false}
             onChange={(e) => onAutoHideFailedChange(e.target.checked)}
-            className="rounded border-border bg-sidebar"
+            className="rounded border-border-strong bg-surface"
           />
           {providerText(t, "hideFailedAuto", "Auto-hide failed")}
         </label>
@@ -214,7 +214,7 @@ export function ModelVisibilityToolbar({
         <button
           onClick={onTestAll}
           disabled={testingAll}
-          className="flex items-center gap-1.5 rounded-lg border border-border bg-transparent px-2.5 py-1 text-[12px] text-text-main disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex items-center gap-1.5 rounded-control border border-border-strong bg-surface px-2.5 py-1 text-[12px] text-text-main transition-colors hover:bg-bg-subtle disabled:cursor-not-allowed disabled:opacity-50"
           title={providerText(t, "testAllModels", "Test all")}
         >
           <span className="material-symbols-outlined text-[16px]">
@@ -230,7 +230,7 @@ export function ModelVisibilityToolbar({
       <button
         onClick={onSelectAll}
         disabled={selectAllDisabled}
-        className="flex items-center gap-1.5 rounded-lg border border-border bg-transparent px-2.5 py-1 text-[12px] text-text-main disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex items-center gap-1.5 rounded-control border border-border-strong bg-surface px-2.5 py-1 text-[12px] text-text-main transition-colors hover:bg-bg-subtle disabled:cursor-not-allowed disabled:opacity-50"
         title={providerText(t, "showAllModels", "Show all")}
       >
         <span className="material-symbols-outlined text-[16px]">visibility</span>
@@ -239,7 +239,7 @@ export function ModelVisibilityToolbar({
       <button
         onClick={onDeselectAll}
         disabled={deselectAllDisabled}
-        className="flex items-center gap-1.5 rounded-lg border border-border bg-transparent px-2.5 py-1 text-[12px] text-text-main disabled:cursor-not-allowed disabled:opacity-50"
+        className="flex items-center gap-1.5 rounded-control border border-border-strong bg-surface px-2.5 py-1 text-[12px] text-text-main transition-colors hover:bg-bg-subtle disabled:cursor-not-allowed disabled:opacity-50"
         title={providerText(t, "hideAllModels", "Hide all")}
       >
         <span className="material-symbols-outlined text-[16px]">visibility_off</span>
@@ -344,7 +344,7 @@ export default function ModelRow({
 
   return (
     <div
-      className={`flex min-w-[220px] max-w-md items-center gap-2 rounded-lg border border-border px-3 py-2 hover:bg-sidebar/50 transition-opacity ${
+      className={`flex min-w-[220px] max-w-md items-center gap-2 rounded-lg border border-border px-3 py-2 hover:bg-bg-subtle transition-[opacity,background-color] ${
         isHidden ? "opacity-50" : ""
       }`}
     >
@@ -355,7 +355,7 @@ export default function ModelRow({
         >
           smart_toy
         </span>
-        <code className="rounded bg-sidebar px-1.5 py-0.5 font-mono text-xs text-text-muted">
+        <code className="rounded bg-bg-subtle px-1.5 py-0.5 font-mono text-xs text-text-muted">
           {fullModel}
         </code>
         <ModelSourceBadge source={model.source} />
@@ -374,7 +374,7 @@ export default function ModelRow({
               />
             ) : (
               <span
-                className={`truncate text-[9px] italic cursor-pointer hover:text-primary transition-colors ${alias ? "text-primary/80" : "text-text-muted/70"}`}
+                className={`truncate text-[9px] italic cursor-pointer hover:text-primary transition-colors ${alias ? "text-primary" : "text-text-subtle"}`}
                 onClick={startEditing}
                 title={
                   alias
@@ -391,7 +391,7 @@ export default function ModelRow({
         )}
         <button
           onClick={() => onCopy(fullModel, `model-${model.id}`)}
-          className="rounded p-0.5 text-text-muted hover:bg-sidebar hover:text-primary"
+          className="rounded p-0.5 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
           title={t("copyModel")}
         >
           <span className="material-symbols-outlined text-sm">
@@ -404,7 +404,7 @@ export default function ModelRow({
           <button
             onClick={() => onTestModel(model.id, fullModel)}
             disabled={testingModel}
-            className={`rounded p-0.5 hover:bg-sidebar transition-colors disabled:opacity-40 disabled:cursor-not-allowed ${testStatus === "ok" ? "text-green-500" : testStatus === "quota" ? "text-amber-500" : testStatus === "error" ? "text-red-500" : "text-text-muted hover:text-primary"}`}
+            className={`rounded p-0.5 hover:bg-bg-subtle transition-colors disabled:opacity-40 disabled:cursor-not-allowed ${testStatus === "ok" ? "text-success" : testStatus === "quota" ? "text-warning" : testStatus === "error" ? "text-error" : "text-text-muted hover:text-text-main"}`}
             title={
               testingModel
                 ? t("testingModel")
@@ -436,7 +436,7 @@ export default function ModelRow({
           <button
             onClick={() => onToggleHidden(model.id, !isHidden)}
             disabled={togglingHidden}
-            className="rounded p-0.5 text-text-muted hover:bg-sidebar hover:text-primary disabled:opacity-40 disabled:cursor-not-allowed"
+            className="rounded p-0.5 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main disabled:opacity-40 disabled:cursor-not-allowed"
             title={
               isHidden
                 ? providerText(t, "showModel", "Show model")

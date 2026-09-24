@@ -165,13 +165,13 @@ export default function ConsoleLogViewer() {
   return (
     <div className="flex flex-col gap-4">
       {/* Toolbar */}
-      <div className="flex flex-wrap items-center gap-3 p-4 rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)]">
+      <div className="flex flex-wrap items-center gap-3 p-4 rounded-card bg-surface border border-border">
         {/* Level filter */}
         <select
           value={levelFilter}
           onChange={(e) => setLevelFilter(e.target.value)}
           aria-label={tv("filterByLevel")}
-          className="px-3 py-2 rounded-lg text-sm bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-main)] focus:outline-2 focus:outline-[var(--color-accent)]"
+          className="px-3 py-2 rounded-control text-sm bg-surface border border-border-strong text-text-main focus:outline-2 focus:outline-primary"
         >
           <option value="all">{t("allLevels")}</option>
           <option value="debug">Debug+</option>
@@ -187,17 +187,17 @@ export default function ConsoleLogViewer() {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           aria-label={tv("searchAria")}
-          className="flex-1 min-w-[200px] px-3 py-2 rounded-lg text-sm bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-main)] placeholder:text-[var(--color-text-muted)] focus:outline-2 focus:outline-[var(--color-accent)]"
+          className="flex-1 min-w-[200px] px-3 py-2 rounded-control text-sm bg-surface border border-border-strong text-text-main placeholder:text-text-subtle focus:outline-2 focus:outline-primary"
         />
 
         {/* Auto-scroll toggle */}
         <button
           onClick={() => setAutoScroll(!autoScroll)}
           title={autoScroll ? tv("disableAutoScroll") : tv("enableAutoScroll")}
-          className={`px-3 py-2 rounded-lg text-sm font-medium border transition-colors ${
+          className={`px-3 py-2 rounded-control text-sm font-medium border transition-colors ${
             autoScroll
-              ? "bg-cyan-500/15 text-cyan-400 border-cyan-500/30"
-              : "bg-[var(--color-bg)] text-[var(--color-text-muted)] border-[var(--color-border)]"
+              ? "bg-primary/10 text-primary border-primary/30"
+              : "bg-surface text-text-muted border-border-strong hover:bg-bg-subtle hover:text-text-main"
           }`}
         >
           <span className="material-symbols-outlined text-[16px] align-middle mr-1">
@@ -211,7 +211,7 @@ export default function ConsoleLogViewer() {
           onClick={fetchLogs}
           disabled={loading}
           aria-label={tc("refresh")}
-          className="px-3 py-2 rounded-lg text-sm font-medium bg-[var(--color-bg)] border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-bg-alt)] disabled:opacity-50 transition-colors"
+          className="px-3 py-2 rounded-control text-sm font-medium bg-surface border border-border-strong text-text-main hover:bg-bg-subtle disabled:opacity-50 transition-colors"
         >
           <span className="material-symbols-outlined text-[16px] align-middle" aria-hidden="true">
             refresh
@@ -219,14 +219,14 @@ export default function ConsoleLogViewer() {
         </button>
 
         {/* Status */}
-        <div className="flex items-center gap-2 ml-auto text-xs text-[var(--color-text-muted)]">
-          <span className="inline-block w-2 h-2 rounded-full bg-green-500 animate-pulse" />
+        <div className="flex items-center gap-2 ml-auto text-xs text-text-muted tabular-nums">
+          <span className="inline-block w-2 h-2 rounded-full bg-success animate-pulse" />
           <span>{tv("entryCount", { count: filteredLogs.length })}</span>
-          <span className="text-[var(--color-text-muted)]/50">•</span>
+          <span className="text-text-subtle">•</span>
           <span>{tv("lastHour")}</span>
           {lastUpdated && (
             <>
-              <span className="text-[var(--color-text-muted)]/50">•</span>
+              <span className="text-text-subtle">•</span>
               <span>{tv("updatedAt", { time: lastUpdated.toLocaleTimeString(locale) })}</span>
             </>
           )}
@@ -236,7 +236,7 @@ export default function ConsoleLogViewer() {
       {/* Error */}
       {error && (
         <div
-          className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm"
+          className="p-4 rounded-lg bg-error/5 border border-error/25 text-error text-sm"
           role="alert"
         >
           <span className="material-symbols-outlined text-[16px] align-middle mr-2">error</span>
@@ -248,7 +248,7 @@ export default function ConsoleLogViewer() {
       {/* Console output */}
       <div
         ref={scrollRef}
-        className="rounded-xl border border-[var(--color-border)] bg-[#0d1117] overflow-auto font-mono text-xs leading-relaxed"
+        className="rounded-card border border-border bg-[#0d1117] overflow-auto font-mono text-xs leading-relaxed"
         style={{ maxHeight: "calc(100vh - 340px)", minHeight: "400px" }}
         role="log"
         aria-label={tv("consoleAria")}

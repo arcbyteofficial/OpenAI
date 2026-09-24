@@ -119,7 +119,7 @@ function StepPill({ active, done, label }: { active: boolean; done: boolean; lab
     <div
       className={`flex items-center gap-2 rounded-full border px-3 py-1 text-xs font-medium ${
         active
-          ? "border-primary/50 bg-primary/10 text-primary"
+          ? "border-primary/30 bg-primary/10 text-primary"
           : done
             ? "border-success/30 bg-success/10 text-success"
             : "border-border bg-bg-subtle text-text-muted"
@@ -135,14 +135,14 @@ function StepPill({ active, done, label }: { active: boolean; done: boolean; lab
 
 function getProviderIconClass(providerId: string): string {
   const classes = [
-    "bg-indigo-500",
-    "bg-sky-500",
-    "bg-emerald-500",
-    "bg-violet-500",
-    "bg-amber-500",
-    "bg-rose-500",
-    "bg-cyan-500",
-    "bg-fuchsia-500",
+    "bg-bg-subtle",
+    "bg-bg-subtle",
+    "bg-bg-subtle",
+    "bg-bg-subtle",
+    "bg-bg-subtle",
+    "bg-bg-subtle",
+    "bg-bg-subtle",
+    "bg-bg-subtle",
   ];
   const index = [...providerId].reduce((sum, char) => sum + char.charCodeAt(0), 0) % classes.length;
   return classes[index];
@@ -164,16 +164,16 @@ function ProviderOptionCard({
       type="button"
       onClick={onSelect}
       aria-pressed={selected}
-      className={`flex h-full flex-col gap-3 rounded-xl border p-4 text-left transition-colors ${
+      className={`flex h-full flex-col gap-3 rounded-card border p-4 text-left transition-colors ${
         selected
-          ? "border-primary/60 bg-primary/10"
-          : "border-border bg-bg-card hover:border-primary/40 hover:bg-bg-subtle"
+          ? "border-primary/60 bg-primary/5"
+          : "border-border bg-surface hover:border-border-strong hover:bg-bg-subtle"
       }`}
     >
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
           <div
-            className={`flex size-10 items-center justify-center rounded-lg text-white ${getProviderIconClass(
+            className={`flex size-10 items-center justify-center rounded-lg border border-border text-text-main ${getProviderIconClass(
               option.id
             )}`}
           >
@@ -186,8 +186,8 @@ function ProviderOptionCard({
             />
           </div>
           <div>
-            <div className="font-semibold text-text-main">{option.name}</div>
-            <div className="text-xs text-text-muted">{option.id}</div>
+            <div className="text-sm font-semibold text-text-main">{option.name}</div>
+            <div className="font-mono text-[12px] text-text-muted">{option.id}</div>
           </div>
         </div>
         {option.deprecated && (
@@ -228,15 +228,15 @@ function ResultSummary({
                 ? "bg-success/10 text-success"
                 : failed
                   ? "bg-error/10 text-error"
-                  : "bg-primary/10 text-primary"
+                  : "bg-bg-subtle text-text-muted"
             }`}
           >
-            <span className="material-symbols-outlined text-[28px]">
+            <span className="material-symbols-outlined text-[24px]">
               {valid ? "check_circle" : failed ? "error" : "dns"}
             </span>
           </div>
           <div>
-            <h2 className="text-xl font-semibold text-text-main">
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
               {valid
                 ? providerText(t, "onboardingProviderConnected", "Provider connected")
                 : failed
@@ -289,7 +289,7 @@ function ResultSummary({
               detailsHref && (
                 <Link
                   href={detailsHref}
-                  className="inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90"
+                  className="inline-flex items-center justify-center rounded-control bg-contrast px-4 py-2 text-sm font-medium text-contrast-fg transition-colors hover:bg-contrast-hover"
                 >
                   {providerText(t, "onboardingOpenProviderDetails", "Open provider details")}
                 </Link>
@@ -298,13 +298,13 @@ function ResultSummary({
           })()}
           <Link
             href="/dashboard/providers"
-            className="inline-flex items-center justify-center rounded-lg border border-border bg-bg-subtle px-4 py-2 text-sm font-medium text-text-main transition-colors hover:bg-bg-card"
+            className="inline-flex items-center justify-center rounded-control border border-border-strong bg-surface px-4 py-2 text-sm font-medium text-text-main transition-colors hover:bg-bg-subtle"
           >
             {providerText(t, "backToProviders", "Back to providers")}
           </Link>
           <Link
             href="/dashboard/playground"
-            className="inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-medium text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
+            className="inline-flex items-center justify-center rounded-control px-4 py-2 text-sm font-medium text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
           >
             {providerText(t, "onboardingTryInPlayground", "Try in playground")}
           </Link>
@@ -543,11 +543,11 @@ export default function ProviderOnboardingWizard() {
         <div>
           <Link
             href="/dashboard/providers"
-            className="text-sm text-text-muted hover:text-text-main"
+            className="text-sm text-text-muted hover:text-text-main transition-colors"
           >
             ← {text("backToProviders", "Back to providers")}
           </Link>
-          <h1 className="mt-2 text-3xl font-bold text-text-main">
+          <h1 className="mt-2 text-2xl font-semibold tracking-tight text-text-main">
             {text("onboardingWizard", "Provider Onboarding Wizard")}
           </h1>
           <p className="mt-2 max-w-2xl text-sm text-text-muted">
@@ -627,12 +627,14 @@ export default function ProviderOnboardingWizard() {
                 key={item.id}
                 type="button"
                 onClick={() => resetProviderSelection(item.id)}
-                className="rounded-xl border border-border bg-bg-card p-5 text-left transition-colors hover:border-primary/50 hover:bg-bg-subtle"
+                className="rounded-card border border-border bg-surface p-5 text-left transition-colors hover:border-border-strong hover:bg-bg-subtle"
               >
-                <span className="material-symbols-outlined text-[32px] text-primary">
+                <span className="material-symbols-outlined text-[24px] text-text-muted">
                   {item.icon}
                 </span>
-                <h2 className="mt-3 text-lg font-semibold text-text-main">{item.title}</h2>
+                <h2 className="mt-3 text-base font-semibold tracking-tight text-text-main">
+                  {item.title}
+                </h2>
                 <p className="mt-2 text-sm text-text-muted">{item.text}</p>
               </button>
             ))}
@@ -645,7 +647,7 @@ export default function ProviderOnboardingWizard() {
           <div className="flex flex-col gap-4">
             <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
               <div>
-                <h2 className="text-xl font-semibold text-text-main">
+                <h2 className="text-base font-semibold tracking-tight text-text-main">
                   {kind === "oauth"
                     ? text("onboardingChooseOAuthProvider", "Choose an OAuth provider")
                     : text("onboardingChooseApiKeyProvider", "Choose an API-key provider")}
@@ -687,7 +689,7 @@ export default function ProviderOnboardingWizard() {
           <div className="flex flex-col gap-4">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h2 className="text-xl font-semibold text-text-main">
+                <h2 className="text-base font-semibold tracking-tight text-text-main">
                   {text("onboardingAddProvider", "Add {provider}", {
                     provider: selectedProvider.name,
                   })}
@@ -769,7 +771,7 @@ export default function ProviderOnboardingWizard() {
           <div className="flex flex-col gap-4">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h2 className="text-xl font-semibold text-text-main">
+                <h2 className="text-base font-semibold tracking-tight text-text-main">
                   {text(
                     "onboardingCreateCustomCompatibleProvider",
                     "Create custom compatible provider"
@@ -790,7 +792,7 @@ export default function ProviderOnboardingWizard() {
               <label className="flex flex-col gap-1 text-sm font-medium text-text-main">
                 {text("onboardingProtocol", "Protocol")}
                 <select
-                  className="rounded-lg border border-border bg-bg-card px-3 py-2 text-sm text-text-main outline-none focus:border-primary"
+                  className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                   value={customForm.mode}
                   onChange={(event) =>
                     setCustomForm({
@@ -886,7 +888,7 @@ export default function ProviderOnboardingWizard() {
           <div className="flex flex-col gap-4">
             <div className="flex items-start justify-between gap-4">
               <div>
-                <h2 className="text-xl font-semibold text-text-main">
+                <h2 className="text-base font-semibold tracking-tight text-text-main">
                   {text("onboardingConnectProvider", "Connect {provider}", {
                     provider: selectedProvider.name,
                   })}

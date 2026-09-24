@@ -169,9 +169,9 @@ function ProviderQuotaSection({
     <details
       open={open}
       onToggle={(event) => setOpen((event.target as HTMLDetailsElement).open)}
-      className="rounded-lg border border-border bg-surface overflow-hidden"
+      className="rounded-card border border-border bg-surface overflow-hidden"
     >
-      <summary className="flex items-center gap-3 px-3 py-2.5 cursor-pointer select-none hover:bg-white/[0.03] [&::-webkit-details-marker]:hidden">
+      <summary className="flex items-center gap-3 px-3 py-2.5 cursor-pointer select-none transition-colors hover:bg-bg-subtle [&::-webkit-details-marker]:hidden">
         <span className="material-symbols-outlined text-[16px] text-text-muted">
           {open ? "expand_less" : "expand_more"}
         </span>

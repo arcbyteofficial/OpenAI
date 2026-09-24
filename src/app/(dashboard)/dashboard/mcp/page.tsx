@@ -34,14 +34,18 @@ function ServiceToggle({
           borderColor: loading
             ? "var(--color-border)"
             : online
-              ? "rgba(34,197,94,0.3)"
-              : "rgba(239,68,68,0.3)",
+              ? "color-mix(in srgb, var(--color-success) 30%, transparent)"
+              : "color-mix(in srgb, var(--color-error) 30%, transparent)",
           background: loading
             ? "transparent"
             : online
-              ? "rgba(34,197,94,0.1)"
-              : "rgba(239,68,68,0.1)",
-          color: loading ? "var(--color-text-muted)" : online ? "rgb(34,197,94)" : "rgb(239,68,68)",
+              ? "color-mix(in srgb, var(--color-success) 10%, transparent)"
+              : "color-mix(in srgb, var(--color-error) 10%, transparent)",
+          color: loading
+            ? "var(--color-text-muted)"
+            : online
+              ? "var(--color-success)"
+              : "var(--color-error)",
         }}
       >
         <span
@@ -50,8 +54,8 @@ function ServiceToggle({
             background: loading
               ? "var(--color-text-muted)"
               : online
-                ? "rgb(34,197,94)"
-                : "rgb(239,68,68)",
+                ? "var(--color-success)"
+                : "var(--color-error)",
             animation: online ? "pulse 2s infinite" : "none",
           }}
         />
@@ -61,17 +65,17 @@ function ServiceToggle({
       <button
         onClick={onToggle}
         disabled={toggling}
-        className="relative inline-flex items-center h-7 w-[52px] rounded-full transition-all duration-300 focus:outline-none border"
+        className="relative inline-flex items-center h-7 w-[52px] rounded-full transition-colors duration-200 focus:outline-none border"
         style={{
-          background: enabled ? "rgb(34,197,94)" : "var(--color-bg-tertiary)",
-          borderColor: enabled ? "rgba(34,197,94,0.5)" : "var(--color-border)",
+          background: enabled ? "var(--color-primary)" : "var(--color-bg-subtle)",
+          borderColor: enabled ? "var(--color-primary)" : "var(--color-border-strong)",
           opacity: toggling ? 0.6 : 1,
           cursor: toggling ? "wait" : "pointer",
         }}
         title={enabled ? t("disableLabel", { label }) : t("enableLabel", { label })}
       >
         <span
-          className="inline-block w-5 h-5 rounded-full shadow-md transition-all duration-300"
+          className="inline-block w-5 h-5 rounded-full shadow-sm transition-[transform,background-color] duration-200"
           style={{
             transform: enabled ? "translateX(26px)" : "translateX(3px)",
             background: enabled ? "#fff" : "var(--color-text-muted)",
@@ -81,7 +85,7 @@ function ServiceToggle({
 
       <span
         className="text-xs font-medium min-w-[24px]"
-        style={{ color: enabled ? "rgb(34,197,94)" : "var(--color-text-muted)" }}
+        style={{ color: enabled ? "var(--color-text-main)" : "var(--color-text-muted)" }}
       >
         {toggling ? "..." : enabled ? "ON" : "OFF"}
       </span>
@@ -119,17 +123,17 @@ function TransportSelector({
 
   return (
     <div
-      className="rounded-lg border p-4"
-      style={{ borderColor: "var(--color-border)", background: "var(--color-bg-secondary)" }}
+      className="rounded-card border p-4"
+      style={{ borderColor: "var(--color-border)", background: "var(--color-surface)" }}
     >
       <div className="flex items-center gap-2 mb-3">
         <span
-          className="material-symbols-rounded text-base"
-          style={{ color: "var(--color-primary)" }}
+          className="material-symbols-outlined text-base"
+          style={{ color: "var(--color-text-muted)" }}
         >
           swap_horiz
         </span>
-        <span className="text-sm font-medium" style={{ color: "var(--color-text)" }}>
+        <span className="text-sm font-semibold" style={{ color: "var(--color-text-main)" }}>
           {t("transportMode")}
         </span>
       </div>
@@ -140,12 +144,12 @@ function TransportSelector({
             key={opt.value}
             onClick={() => onChange(opt.value)}
             disabled={disabled}
-            className="flex flex-col items-start px-4 py-2.5 rounded-lg border transition-all duration-200 text-left"
+            className="flex flex-col items-start px-4 py-2.5 rounded-lg border transition-colors duration-150 text-left"
             style={{
               borderColor: value === opt.value ? "var(--color-primary)" : "var(--color-border)",
               background:
                 value === opt.value
-                  ? "rgba(var(--color-primary-rgb, 99,102,241), 0.1)"
+                  ? "color-mix(in srgb, var(--color-primary) 8%, transparent)"
                   : "transparent",
               opacity: disabled ? 0.5 : 1,
               cursor: disabled ? "wait" : "pointer",
@@ -154,7 +158,7 @@ function TransportSelector({
             <span
               className="text-sm font-semibold"
               style={{
-                color: value === opt.value ? "var(--color-primary)" : "var(--color-text)",
+                color: value === opt.value ? "var(--color-primary)" : "var(--color-text-main)",
               }}
             >
               {opt.label}
@@ -168,21 +172,24 @@ function TransportSelector({
 
       <div
         className="mt-3 rounded-md px-3 py-2 flex items-center gap-2"
-        style={{ background: "var(--color-bg-tertiary)" }}
+        style={{ background: "var(--color-bg-subtle)" }}
       >
         <span
-          className="material-symbols-rounded text-sm"
+          className="material-symbols-outlined text-sm"
           style={{ color: "var(--color-text-muted)" }}
         >
           {value === "stdio" ? "terminal" : "link"}
         </span>
-        <code className="text-xs break-all" style={{ color: "var(--color-text-muted)" }}>
+        <code
+          className="font-mono text-[12px] break-all"
+          style={{ color: "var(--color-text-muted)" }}
+        >
           {urlMap[value]}
         </code>
         {value !== "stdio" && (
           <button
-            className="ml-auto text-xs px-2 py-0.5 rounded border hover:opacity-80 transition-opacity"
-            style={{ borderColor: "var(--color-border)", color: "var(--color-text-muted)" }}
+            className="ml-auto text-xs font-medium px-2 py-0.5 rounded-control border hover:opacity-80 transition-opacity"
+            style={{ borderColor: "var(--color-border-strong)", color: "var(--color-text-main)" }}
             onClick={() => void copyToClipboard(urlMap[value])}
             title={t("mcpDashboardCopyUrl")}
           >
@@ -197,11 +204,11 @@ function TransportSelector({
 function DisabledPanel() {
   const t = useTranslations("mcpDashboard");
   return (
-    <Card className="p-6">
+    <Card className="p-5">
       <div className="flex items-start gap-3">
         <div
           className="flex size-10 shrink-0 items-center justify-center overflow-hidden rounded-lg"
-          style={{ background: "var(--color-bg-tertiary)" }}
+          style={{ background: "var(--color-bg-subtle)" }}
         >
           <span
             aria-hidden="true"
@@ -215,7 +222,7 @@ function DisabledPanel() {
           </span>
         </div>
         <div>
-          <h2 className="text-base font-semibold" style={{ color: "var(--color-text)" }}>
+          <h2 className="text-base font-semibold" style={{ color: "var(--color-text-main)" }}>
             {t("mcpDisabledTitle")}
           </h2>
           <p className="text-sm mt-1" style={{ color: "var(--color-text-muted)" }}>
@@ -327,7 +334,7 @@ export default function McpPage() {
             >
               <li>
                 {t.rich("mcpStep1", {
-                  code: (chunks) => <code className="text-xs">{chunks}</code>,
+                  code: (chunks) => <code className="font-mono text-[12px]">{chunks}</code>,
                 })}
               </li>
               <li>{t("mcpStep2")}</li>

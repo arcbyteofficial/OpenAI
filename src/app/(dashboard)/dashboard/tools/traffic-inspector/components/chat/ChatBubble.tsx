@@ -19,10 +19,10 @@ interface ChatBubbleProps {
 }
 
 const ROLE_STYLES: Record<NormalizedTurn["role"], string> = {
-  system: "border border-red-500/40 bg-red-900/20 text-red-200",
-  user: "ml-auto bg-blue-600/30 border border-blue-500/30 text-blue-100",
-  assistant: "bg-purple-900/30 border border-purple-500/30 text-purple-100",
-  tool: "bg-gray-800 border border-gray-600/30 text-gray-200",
+  system: "border border-dashed border-border-strong bg-surface-2 text-text-main",
+  user: "ml-auto bg-primary/10 border border-primary/20 text-text-main",
+  assistant: "bg-surface border border-border text-text-main",
+  tool: "bg-bg-subtle border border-border text-text-main",
 };
 
 const ROLE_LABEL_KEY: Record<NormalizedTurn["role"], string> = {
@@ -46,8 +46,8 @@ export function ChatBubble({ turn, onClick, isCurrent }: ChatBubbleProps) {
         "max-w-[85%] rounded-lg px-3 py-2",
         isUser ? "ml-auto" : "mr-auto",
         ROLE_STYLES[turn.role],
-        clickable && "cursor-pointer hover:brightness-110 transition-[filter]",
-        isCurrent && "ring-2 ring-primary/60"
+        clickable && "cursor-pointer hover:border-border-strong transition-colors",
+        isCurrent && "ring-2 ring-primary/40"
       )}
       onClick={clickable ? onClick : undefined}
       role={clickable ? "button" : undefined}
@@ -55,9 +55,13 @@ export function ChatBubble({ turn, onClick, isCurrent }: ChatBubbleProps) {
     >
       <div className="flex items-center justify-between gap-2 mb-1">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-medium opacity-70">{t(ROLE_LABEL_KEY[turn.role])}</span>
+          <span className="text-xs font-medium text-text-muted">
+            {t(ROLE_LABEL_KEY[turn.role])}
+          </span>
           {turn.timestamp && (
-            <span className="text-[10px] opacity-50 font-mono">{formatTime(turn.timestamp)}</span>
+            <span className="text-[10px] text-text-subtle font-mono">
+              {formatTime(turn.timestamp)}
+            </span>
           )}
         </div>
         {isSystem && (
@@ -67,7 +71,7 @@ export function ChatBubble({ turn, onClick, isCurrent }: ChatBubbleProps) {
               e.stopPropagation();
               setCollapsed((c) => !c);
             }}
-            className="text-xs opacity-70 hover:opacity-100 focus-ring rounded"
+            className="text-xs text-text-muted hover:text-text-main transition-colors focus-ring rounded"
           >
             {collapsed ? t("expand") : t("collapse")}
           </button>
@@ -75,7 +79,7 @@ export function ChatBubble({ turn, onClick, isCurrent }: ChatBubbleProps) {
       </div>
       {!collapsed && <MessageContent blocks={turn.blocks} />}
       {collapsed && isSystem && (
-        <p className="text-xs opacity-60 italic">{t("systemPromptHidden")}</p>
+        <p className="text-xs text-text-subtle italic">{t("systemPromptHidden")}</p>
       )}
     </div>
   );

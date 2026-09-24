@@ -201,10 +201,10 @@ export default function CompareTab({ providers, onMetrics }: CompareTabProps) {
   return (
     <div className="flex flex-col h-full p-4 space-y-4" data-testid="compare-tab">
       {/* Query + provider picker */}
-      <div className="bg-surface border border-border rounded-lg p-4 space-y-3">
+      <div className="bg-surface border border-border rounded-card p-4 space-y-3">
         <label
           htmlFor="compare-query"
-          className="block text-[10px] font-semibold text-text-muted uppercase tracking-wider"
+          className="block text-[11px] font-medium text-text-subtle uppercase tracking-wider"
         >
           {t("compareQuery")}
         </label>
@@ -215,14 +215,14 @@ export default function CompareTab({ providers, onMetrics }: CompareTabProps) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={t("compareQueryPlaceholder")}
-            className="flex-1 bg-bg-alt border border-border rounded-lg px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/30"
+            className="flex-1 bg-surface border border-border-strong rounded-control px-3 py-1.5 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
             onKeyDown={(e) => {
               if (e.key === "Enter") void handleRun();
             }}
             data-testid="compare-query-input"
           />
           <button
-            className="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3.5 py-1.5 rounded-control bg-contrast text-contrast-fg text-sm font-medium hover:bg-contrast-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() => void handleRun()}
             disabled={loading || selectedProviderIds.length === 0 || !query.trim()}
             data-testid="run-compare-button"
@@ -239,14 +239,14 @@ export default function CompareTab({ providers, onMetrics }: CompareTabProps) {
             </p>
             <div className="flex gap-2">
               <button
-                className="text-[10px] px-2 py-0.5 rounded border border-border text-text-muted hover:text-text-main hover:border-primary/30 transition-colors"
+                className="text-[10px] px-2 py-0.5 rounded-control border border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
                 onClick={selectAll}
                 data-testid="select-all-providers"
               >
                 {t("selectAll")}
               </button>
               <button
-                className="text-[10px] px-2 py-0.5 rounded border border-border text-text-muted hover:text-text-main hover:border-primary/30 transition-colors"
+                className="text-[10px] px-2 py-0.5 rounded-control border border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
                 onClick={clearAll}
                 data-testid="clear-providers"
               >
@@ -267,10 +267,10 @@ export default function CompareTab({ providers, onMetrics }: CompareTabProps) {
                 <button
                   key={p.id}
                   className={[
-                    "px-2.5 py-1 rounded-md text-xs font-medium transition-colors border",
+                    "px-2.5 py-1 rounded-control text-xs font-medium transition-colors border",
                     selected
-                      ? "bg-primary/15 text-primary border-primary/30"
-                      : "text-text-muted border-border hover:text-text-main hover:border-primary/30",
+                      ? "bg-primary/10 text-primary border-primary/30"
+                      : "text-text-muted border-border-strong hover:text-text-main hover:bg-bg-subtle",
                     atCap ? "opacity-40 cursor-not-allowed" : "",
                   ].join(" ")}
                   onClick={() => toggleProvider(p.id)}
@@ -290,7 +290,7 @@ export default function CompareTab({ providers, onMetrics }: CompareTabProps) {
       {loading && (
         <div className="flex items-center justify-center py-10" data-testid="compare-loading">
           <span
-            className="material-symbols-outlined text-[28px] text-primary animate-spin"
+            className="material-symbols-outlined text-[28px] text-text-muted animate-spin"
             aria-hidden="true"
           >
             progress_activity
@@ -301,11 +301,11 @@ export default function CompareTab({ providers, onMetrics }: CompareTabProps) {
       {/* Layout A — side-by-side columns */}
       {hasRun && !loading && results.length > 0 && (
         <div
-          className="bg-surface border border-border rounded-lg overflow-hidden"
+          className="bg-surface border border-border rounded-card overflow-hidden"
           data-testid="compare-results"
         >
-          <div className="px-4 py-2.5 bg-bg-alt border-b border-border">
-            <span className="text-xs font-semibold text-text-muted uppercase tracking-wider">
+          <div className="px-4 py-2.5 bg-surface-2 border-b border-border">
+            <span className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
               {t("compareResults", { query })}
             </span>
           </div>
@@ -322,18 +322,18 @@ export default function CompareTab({ providers, onMetrics }: CompareTabProps) {
                     data-testid={`compare-col-${cr.provider}`}
                   >
                     {/* Column header */}
-                    <div className="px-3 py-2 bg-bg-alt border-b border-border">
+                    <div className="px-3 py-2 bg-surface-2 border-b border-border">
                       <p className="text-xs font-semibold text-text-main truncate mb-1">
                         {cr.provider.replace("-search", "")}
                       </p>
                       {cr.error ? (
-                        <p className="text-[10px] text-red-400 truncate">{cr.error}</p>
+                        <p className="text-[10px] text-error truncate">{cr.error}</p>
                       ) : (
-                        <div className="flex flex-wrap gap-x-2 gap-y-0.5 text-[10px] text-text-muted">
-                          <span className={isBestLatency ? "text-emerald-400 font-medium" : ""}>
+                        <div className="flex flex-wrap gap-x-2 gap-y-0.5 text-[10px] text-text-muted font-mono tabular-nums">
+                          <span className={isBestLatency ? "text-success font-medium" : ""}>
                             {cr.latency}ms
                           </span>
-                          <span className={isBestCost ? "text-emerald-400 font-medium" : ""}>
+                          <span className={isBestCost ? "text-success font-medium" : ""}>
                             ${cr.cost.toFixed(4)}
                           </span>
                           <span>{t("resultCount", { count: cr.resultCount })}</span>
@@ -346,7 +346,7 @@ export default function CompareTab({ providers, onMetrics }: CompareTabProps) {
                     <div className="flex flex-col divide-y divide-border overflow-y-auto max-h-[600px]">
                       {cr.error ? (
                         <div className="p-3">
-                          <p className="text-xs text-red-400">{cr.error}</p>
+                          <p className="text-xs text-error">{cr.error}</p>
                         </div>
                       ) : cr.results.length === 0 ? (
                         <div className="p-3">
@@ -360,7 +360,7 @@ export default function CompareTab({ providers, onMetrics }: CompareTabProps) {
                               <div className="flex items-start gap-1">
                                 {isShared && (
                                   <span
-                                    className="text-emerald-400 text-[11px] mt-0.5 shrink-0"
+                                    className="text-success text-[11px] mt-0.5 shrink-0"
                                     title={t("sharedResultTitle")}
                                     aria-label={t("sharedResult")}
                                   >
@@ -371,7 +371,7 @@ export default function CompareTab({ providers, onMetrics }: CompareTabProps) {
                                   href={r.url}
                                   target="_blank"
                                   rel="noopener noreferrer"
-                                  className="font-medium text-sm text-text-main hover:text-primary leading-snug"
+                                  className="font-medium text-sm text-text-main hover:text-primary transition-colors leading-snug"
                                 >
                                   {r.title || r.url}
                                 </a>
@@ -381,7 +381,9 @@ export default function CompareTab({ providers, onMetrics }: CompareTabProps) {
                                   {r.snippet}
                                 </p>
                               )}
-                              <p className="text-[10px] text-text-muted truncate">{r.url}</p>
+                              <p className="text-[10px] font-mono text-text-subtle truncate">
+                                {r.url}
+                              </p>
                             </div>
                           );
                         })
@@ -395,7 +397,7 @@ export default function CompareTab({ providers, onMetrics }: CompareTabProps) {
 
           {/* Overlap summary footer */}
           {results.length >= 2 && (
-            <div className="px-4 py-2 bg-bg-alt border-t border-border">
+            <div className="px-4 py-2 bg-surface-2 border-t border-border">
               <div className="flex flex-wrap gap-3 text-[10px] text-text-muted">
                 {results.slice(1).map((cr) => {
                   const baseUrls = results[0]?.urls ?? [];

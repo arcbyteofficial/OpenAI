@@ -34,7 +34,7 @@ export default function ServicesPage() {
   return (
     <div className="space-y-6">
       <header>
-        <h1 className="text-xl font-semibold text-text-primary">{t("title")}</h1>
+        <h1 className="text-xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
         <p className="text-sm text-text-muted mt-1">{t("description")}</p>
       </header>
 
@@ -46,10 +46,10 @@ export default function ServicesPage() {
             type="button"
             onClick={() => setTab(tab.id)}
             className={cn(
-              "inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium border-b-2 -mb-px transition-colors",
+              "inline-flex items-center gap-1.5 px-3 py-2 text-sm font-medium border-b-2 -mb-px transition-colors",
               active === tab.id
-                ? "border-primary text-text-primary"
-                : "border-transparent text-text-muted hover:text-text-primary hover:border-border"
+                ? "border-text-main text-text-main"
+                : "border-transparent text-text-muted hover:text-text-main hover:border-border-strong"
             )}
             aria-current={active === tab.id ? "page" : undefined}
           >

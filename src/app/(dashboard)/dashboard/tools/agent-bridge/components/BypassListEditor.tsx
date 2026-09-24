@@ -3,12 +3,7 @@
 import { useState } from "react";
 import { useTranslations } from "next-intl";
 
-const DEFAULT_BYPASS_PATTERNS = [
-  "*.bank.*",
-  "*.gov.*",
-  "*.okta.com",
-  "*.auth0.com",
-];
+const DEFAULT_BYPASS_PATTERNS = ["*.bank.*", "*.gov.*", "*.okta.com", "*.auth0.com"];
 
 interface BypassListEditorProps {
   patterns: string[];
@@ -47,7 +42,7 @@ export function BypassListEditor({ patterns, onSave }: BypassListEditorProps) {
           {DEFAULT_BYPASS_PATTERNS.map((p) => (
             <span
               key={p}
-              className="inline-flex items-center px-2 py-0.5 rounded-full bg-surface text-xs text-text-muted border border-border/40"
+              className="inline-flex items-center px-2 py-0.5 rounded-md bg-bg-subtle text-xs font-mono text-text-muted border border-border"
             >
               {p}
             </span>
@@ -60,7 +55,7 @@ export function BypassListEditor({ patterns, onSave }: BypassListEditorProps) {
           {t("bypassUserLabel") || "Custom bypass patterns (one per line, glob or regex)"}
         </label>
         <textarea
-          className="w-full min-h-[80px] rounded-lg border border-border/50 bg-card px-3 py-2 text-sm font-mono focus:outline-none focus:ring-2 focus:ring-primary/50"
+          className="w-full min-h-[80px] rounded-control border border-border-strong bg-surface px-3 py-2 text-sm font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
           placeholder="*.internal.corp&#10;sso.example.com"
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}
@@ -72,7 +67,7 @@ export function BypassListEditor({ patterns, onSave }: BypassListEditorProps) {
           type="button"
           onClick={handleSave}
           disabled={saving}
-          className="rounded-lg bg-primary/10 text-primary px-4 py-2 text-sm font-medium hover:bg-primary/20 transition-colors disabled:opacity-50"
+          className="rounded-control bg-contrast text-contrast-fg px-3 py-1.5 text-[13px] font-medium hover:bg-contrast-hover transition-colors disabled:opacity-50"
         >
           {saving ? t("saving") || "Saving…" : t("saveBypassList") || "Save bypass list"}
         </button>

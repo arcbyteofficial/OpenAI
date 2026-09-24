@@ -34,17 +34,17 @@ export default function Toggle({
     sm: {
       track: "w-8 h-4",
       thumb: "size-3",
-      translate: "translate-x-4",
+      translate: "translate-x-[18px]",
     },
     md: {
       track: "w-11 h-6",
       thumb: "size-5",
-      translate: "translate-x-5",
+      translate: "translate-x-[22px]",
     },
     lg: {
       track: "w-14 h-7",
       thumb: "size-6",
-      translate: "translate-x-7",
+      translate: "translate-x-[30px]",
     },
   };
 
@@ -71,11 +71,11 @@ export default function Toggle({
         disabled={disabled}
         onClick={handleClick}
         className={cn(
-          "relative inline-flex shrink-0 cursor-pointer rounded-full",
+          "relative inline-flex items-center shrink-0 cursor-pointer rounded-full",
           "transition-colors duration-200 ease-in-out",
-          "border shadow-inner",
-          "focus:outline-none focus:ring-1 focus:ring-accent/30",
-          checked ? "border-primary bg-primary" : "border-border bg-surface-2 dark:bg-white/20",
+          "focus:outline-none",
+          "focus-visible:ring-[3px] focus-visible:ring-primary/25",
+          checked ? "bg-primary" : "bg-border-strong",
           sizes[size].track,
           disabled && "cursor-not-allowed"
         )}
@@ -83,17 +83,17 @@ export default function Toggle({
         <span
           aria-hidden="true"
           className={cn(
-            "pointer-events-none inline-block rounded-full bg-white shadow-sm",
-            "transform transition duration-200 ease-in-out",
+            "pointer-events-none inline-block rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_0_0.5px_rgba(0,0,0,0.06)]",
+            "transition-transform duration-200 ease-in-out",
             checked ? sizes[size].translate : "translate-x-0.5",
             sizes[size].thumb,
-            "mt-0.5"
+            "shrink-0"
           )}
         />
       </button>
       {(label || description) && (
         <div className="flex flex-col">
-          {label && <span className="text-sm font-medium text-text-main">{label}</span>}
+          {label && <span className="text-[13px] font-medium text-text-main">{label}</span>}
           {description && <span className="text-xs text-text-muted">{description}</span>}
         </div>
       )}

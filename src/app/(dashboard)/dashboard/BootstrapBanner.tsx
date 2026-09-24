@@ -22,18 +22,16 @@ export default function BootstrapBanner() {
   return (
     <div
       role="alert"
-      className="flex items-start gap-3 rounded-lg border border-amber-300 dark:border-amber-500/30 bg-amber-50 dark:bg-amber-500/10 px-4 py-3 text-sm text-amber-900 dark:text-amber-200 mb-4"
+      className="flex items-start gap-3 rounded-lg border border-warning/25 bg-warning/10 px-4 py-3 text-sm text-text-main mb-4"
     >
-      <span className="text-amber-500 dark:text-amber-400 text-base shrink-0 mt-0.5">⚠️</span>
+      <span className="text-warning text-base shrink-0 mt-0.5">⚠️</span>
       <div className="flex-1 min-w-0">
-        <p className="font-semibold text-amber-900 dark:text-amber-300">
-          {t("zeroConfigBannerTitle")}
-        </p>
-        <p className="mt-0.5 text-amber-800/80 dark:text-amber-200/80">
+        <p className="font-semibold text-text-main">{t("zeroConfigBannerTitle")}</p>
+        <p className="mt-0.5 text-text-muted">
           {t.rich("zeroConfigBannerBody", {
             dataDir,
             code: (chunks) => (
-              <code className="font-mono bg-amber-200/50 dark:bg-amber-500/20 px-1 rounded text-xs">
+              <code className="font-mono bg-warning/15 text-text-main px-1 rounded text-xs">
                 {chunks}
               </code>
             ),
@@ -42,7 +40,7 @@ export default function BootstrapBanner() {
       </div>
       <button
         onClick={() => setDismissed(true)}
-        className="shrink-0 text-amber-600/60 hover:text-amber-700 dark:text-amber-400/60 dark:hover:text-amber-300 transition-colors ml-1"
+        className="shrink-0 text-text-subtle hover:text-text-main transition-colors ml-1"
         aria-label={t("bootstrapBannerDismiss")}
       >
         ✕

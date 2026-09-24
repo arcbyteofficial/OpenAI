@@ -94,8 +94,8 @@ function MiniStat({ label, value }: { label: string; value: number }) {
   return (
     <Card>
       <div className="p-4">
-        <p className="text-lg font-bold text-text-main">{value}</p>
-        <p className="text-[10px] uppercase tracking-wider text-text-muted">{label}</p>
+        <p className="text-lg font-semibold tracking-tight tabular-nums text-text-main">{value}</p>
+        <p className="text-xs text-text-muted">{label}</p>
       </div>
     </Card>
   );
@@ -229,19 +229,19 @@ export default function StreamTransformerAccordion({
 
   // ── Render ────────────────────────────────────────────────────────────────
   return (
-    <div className="rounded-lg border border-black/5 dark:border-white/5 bg-surface">
+    <div className="rounded-lg border border-border bg-surface">
       {/* ── Collapsible header — mirrors Collapsible.tsx visual style ──── */}
       <div
         className={cn(
-          "flex items-center gap-3 p-4 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors",
-          open && "border-b border-black/5 dark:border-white/5"
+          "flex items-center gap-3 p-4 hover:bg-bg-subtle/50 transition-colors",
+          open && "border-b border-border"
         )}
       >
         <button
           type="button"
           onClick={handleToggle}
           aria-expanded={open}
-          className="flex items-center gap-3 flex-1 min-w-0 text-left -m-1 p-1 rounded"
+          className="flex items-center gap-3 flex-1 min-w-0 text-left -m-1 p-1 rounded-md"
         >
           <span
             className="material-symbols-outlined text-text-muted text-[20px] shrink-0"
@@ -267,9 +267,9 @@ export default function StreamTransformerAccordion({
         <div className={cn("p-4", !open && "hidden")}>
           <div className="space-y-5 min-w-0">
             {/* Info banner */}
-            <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-primary/5 border border-primary/10 text-sm text-text-muted">
+            <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-surface-2 border border-border text-sm text-text-muted">
               <span
-                className="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0"
+                className="material-symbols-outlined text-text-muted text-[18px] mt-0.5 shrink-0"
                 aria-hidden="true"
               >
                 swap_horiz
@@ -326,7 +326,7 @@ export default function StreamTransformerAccordion({
                   <div
                     role="alert"
                     data-testid="error-display"
-                    className="rounded-lg border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-600 dark:text-red-400"
+                    className="rounded-lg border border-error/30 bg-error/10 px-3 py-2 text-sm text-error"
                   >
                     {error}
                   </div>
@@ -337,7 +337,7 @@ export default function StreamTransformerAccordion({
                   {/* Raw SSE input */}
                   <div className="space-y-2">
                     <div className="flex items-center justify-between gap-2">
-                      <h3 className="text-sm font-semibold text-text-main">
+                      <h3 className="text-sm font-semibold tracking-tight text-text-main">
                         {translateOrFallback("rawChatSseInput", "Raw chat completions SSE")}
                       </h3>
                       <Button
@@ -355,7 +355,7 @@ export default function StreamTransformerAccordion({
                       value={rawSse}
                       onChange={(e) => setRawSse(e.target.value)}
                       data-testid="raw-sse-input"
-                      className="min-h-[360px] w-full rounded-lg border border-border bg-bg-secondary px-3 py-3 text-xs font-mono text-text-main focus:outline-none focus:ring-1 focus:ring-primary/50"
+                      className="min-h-[360px] w-full rounded-lg border border-border-strong bg-surface-2 px-3 py-3 text-[12px] font-mono text-text-main transition-colors focus:outline-none focus:border-primary"
                       spellCheck={false}
                       aria-label={translateOrFallback(
                         "rawChatSseInput",
@@ -367,7 +367,7 @@ export default function StreamTransformerAccordion({
                   {/* Transformed SSE output */}
                   <div className="space-y-2">
                     <div className="flex items-center justify-between gap-2">
-                      <h3 className="text-sm font-semibold text-text-main">
+                      <h3 className="text-sm font-semibold tracking-tight text-text-main">
                         {translateOrFallback(
                           "transformedResponsesSse",
                           "Transformed Responses API SSE"
@@ -387,7 +387,7 @@ export default function StreamTransformerAccordion({
                     </div>
                     <pre
                       data-testid="transformed-output"
-                      className="min-h-[360px] overflow-auto rounded-lg border border-border bg-bg-secondary px-3 py-3 text-xs font-mono whitespace-pre-wrap break-all"
+                      className="min-h-[360px] overflow-auto rounded-lg border border-border bg-surface-2 px-3 py-3 text-[12px] font-mono text-text-main whitespace-pre-wrap break-all"
                     >
                       {transformedSse || translateOrFallback("noResultsYet", "No results yet")}
                     </pre>
@@ -419,7 +419,7 @@ export default function StreamTransformerAccordion({
             {/* Event timeline */}
             <Card>
               <div className="p-4 space-y-3">
-                <h3 className="text-sm font-semibold text-text-main">
+                <h3 className="text-sm font-semibold tracking-tight text-text-main">
                   {translateOrFallback("transformedEventTimeline", "Transformed event timeline")}
                 </h3>
 
@@ -432,9 +432,9 @@ export default function StreamTransformerAccordion({
                   </p>
                 ) : (
                   <div className="overflow-x-auto">
-                    <table className="w-full text-sm">
+                    <table className="w-full text-[13px]">
                       <thead>
-                        <tr className="text-left text-xs text-text-muted border-b border-border">
+                        <tr className="text-left text-xs font-medium text-text-muted border-b border-border">
                           <th className="pb-2 pr-4">#</th>
                           <th className="pb-2 pr-4">
                             {translateOrFallback("eventType", "Event type")}
@@ -446,13 +446,15 @@ export default function StreamTransformerAccordion({
                         {transformedFrames.map((frame, index) => (
                           <tr
                             key={`${frame.event}_${index}`}
-                            className="border-b border-border/50 align-top"
+                            className="border-b border-border last:border-0 align-top"
                           >
-                            <td className="py-2 pr-4 text-xs text-text-muted">{index + 1}</td>
-                            <td className="py-2 pr-4 font-mono text-xs text-primary">
+                            <td className="py-2 pr-4 font-mono text-[12px] tabular-nums text-text-muted">
+                              {index + 1}
+                            </td>
+                            <td className="py-2 pr-4 font-mono text-[12px] text-text-main">
                               {frame.event}
                             </td>
-                            <td className="py-2 text-xs text-text-muted break-all">
+                            <td className="py-2 font-mono text-[12px] text-text-muted break-all">
                               {frame.preview}
                             </td>
                           </tr>

@@ -581,17 +581,16 @@ function getStrategyDescription(t, strategy) {
 }
 
 function getStrategyBadgeClass(strategy) {
-  if (strategy === "weighted") return "bg-amber-500/15 text-amber-600 dark:text-amber-400";
-  if (strategy === "round-robin") return "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400";
-  if (strategy === "context-relay")
-    return "bg-fuchsia-500/15 text-fuchsia-600 dark:text-fuchsia-400";
-  if (strategy === "random") return "bg-purple-500/15 text-purple-600 dark:text-purple-400";
-  if (strategy === "least-used") return "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400";
-  if (strategy === "cost-optimized") return "bg-teal-500/15 text-teal-600 dark:text-teal-400";
-  if (strategy === "reset-aware") return "bg-lime-500/15 text-lime-700 dark:text-lime-300";
-  if (strategy === "fill-first") return "bg-orange-500/15 text-orange-600 dark:text-orange-400";
-  if (strategy === "p2c") return "bg-indigo-500/15 text-indigo-600 dark:text-indigo-400";
-  return "bg-blue-500/15 text-blue-600 dark:text-blue-400";
+  if (strategy === "weighted") return "bg-bg-subtle text-text-muted";
+  if (strategy === "round-robin") return "bg-bg-subtle text-text-muted";
+  if (strategy === "context-relay") return "bg-bg-subtle text-text-muted";
+  if (strategy === "random") return "bg-bg-subtle text-text-muted";
+  if (strategy === "least-used") return "bg-bg-subtle text-text-muted";
+  if (strategy === "cost-optimized") return "bg-bg-subtle text-text-muted";
+  if (strategy === "reset-aware") return "bg-bg-subtle text-text-muted";
+  if (strategy === "fill-first") return "bg-bg-subtle text-text-muted";
+  if (strategy === "p2c") return "bg-bg-subtle text-text-muted";
+  return "bg-bg-subtle text-text-muted";
 }
 
 function getI18nOrFallback(t, key, fallback, values = undefined) {
@@ -702,7 +701,6 @@ function computeAllowedRestrictionSync(
 
   return result;
 }
-
 
 function getModelString(entry) {
   if (typeof entry === "string") return entry;
@@ -1214,7 +1212,7 @@ function CombosPageContent() {
     <div className="flex flex-col gap-6">
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold">{t("title")}</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
           <p className="text-sm text-text-muted mt-1">{t("description")}</p>
         </div>
 
@@ -1247,20 +1245,17 @@ function CombosPageContent() {
       )}
 
       {recentlyCreatedCombo && (
-        <Card
-          padding="sm"
-          className="border border-emerald-500/20 bg-emerald-500/[0.04] dark:bg-emerald-500/[0.08]"
-        >
+        <Card padding="sm" className="border border-success/20 bg-success/5">
           <div className="flex flex-wrap items-center justify-between gap-2">
             <div className="min-w-0">
-              <p className="text-sm font-medium text-emerald-700 dark:text-emerald-300">
+              <p className="text-sm font-medium text-success">
                 {getI18nOrFallback(
                   t,
                   "quickTestTitle",
                   `Combo "${recentlyCreatedCombo}" ready to validate`
                 )}
               </p>
-              <code className="inline-block text-[11px] mt-0.5 px-1.5 py-0.5 rounded bg-emerald-500/15 text-emerald-700 dark:text-emerald-300">
+              <code className="inline-block font-mono text-[11px] mt-0.5 px-1.5 py-0.5 rounded bg-success/10 text-success">
                 {recentlyCreatedCombo}
               </code>
               <p className="text-xs text-text-muted mt-0.5">
@@ -1290,7 +1285,7 @@ function CombosPageContent() {
           </div>
         </Card>
       )}
-      <div className="flex flex-wrap items-center gap-2 rounded-xl border border-black/8 dark:border-white/8 bg-black/[0.02] dark:bg-white/[0.02] p-1">
+      <div className="flex flex-wrap items-center gap-2 rounded-lg border border-border bg-bg-subtle p-1">
         {[
           {
             id: "all",
@@ -1320,15 +1315,15 @@ function CombosPageContent() {
               key={tab.id}
               type="button"
               onClick={() => handleFilterChange(tab.id)}
-              className={`inline-flex items-center gap-2 rounded-lg px-3 py-2 text-sm transition-all ${
+              className={`inline-flex items-center gap-2 rounded-md px-3 py-1.5 text-[13px] font-medium transition-colors ${
                 isActive
-                  ? "border border-primary/20 bg-primary/10 text-primary"
-                  : "border border-transparent text-text-muted hover:bg-black/5 dark:hover:bg-white/5 hover:text-text-main"
+                  ? "border border-border bg-surface text-text-main"
+                  : "border border-transparent text-text-muted hover:text-text-main"
               }`}
             >
               <span className="material-symbols-outlined text-[16px]">{tab.icon}</span>
               <span>{tab.label}</span>
-              <span className="rounded-full bg-black/5 dark:bg-white/5 px-1.5 py-0.5 text-[11px] text-text-muted">
+              <span className="rounded-full bg-border px-1.5 py-0.5 text-[11px] tabular-nums text-text-muted">
                 {tab.count}
               </span>
             </button>
@@ -1358,7 +1353,9 @@ function CombosPageContent() {
         <Card padding="sm">
           <div className="flex flex-col gap-2">
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-primary text-[18px]">filter_alt</span>
+              <span className="material-symbols-outlined text-text-muted text-[18px]">
+                filter_alt
+              </span>
               <p className="text-sm font-semibold text-text-main">
                 {getI18nOrFallback(t, "filterEmptyTitle", "No combos match this strategy filter.")}
               </p>
@@ -1512,8 +1509,8 @@ function ComboUsageGuide({ onHide, onHideForever, onCreateCombo }) {
     <Card padding="sm">
       <div className="flex items-start justify-between gap-2">
         <div className="flex items-center gap-2 min-w-0">
-          <div className="size-7 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-            <span className="material-symbols-outlined text-primary text-[16px]">
+          <div className="size-7 rounded-lg border border-border bg-bg-subtle flex items-center justify-center shrink-0">
+            <span className="material-symbols-outlined text-text-muted text-[16px]">
               tips_and_updates
             </span>
           </div>
@@ -1550,13 +1547,13 @@ function ComboUsageGuide({ onHide, onHideForever, onCreateCombo }) {
           return (
             <div
               key={step.step}
-              className="relative rounded-lg border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] p-2.5"
+              className="relative rounded-lg border border-border bg-surface-2 p-2.5"
             >
               <div className="flex items-center gap-1.5 mb-1.5">
-                <span className="inline-flex size-5 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
+                <span className="inline-flex size-5 items-center justify-center rounded-full border border-border bg-surface text-[10px] font-semibold tabular-nums text-text-main">
                   {step.step}
                 </span>
-                <span className="material-symbols-outlined text-[14px] text-primary">
+                <span className="material-symbols-outlined text-[14px] text-text-muted">
                   {step.icon}
                 </span>
               </div>
@@ -1576,8 +1573,8 @@ function ComboUsageGuide({ onHide, onHideForever, onCreateCombo }) {
         })}
       </div>
 
-      <div className="mt-3 rounded-lg border border-primary/20 bg-primary/5 px-3 py-2">
-        <p className="text-[11px] font-semibold text-primary">
+      <div className="mt-3 rounded-lg border border-border bg-bg-subtle px-3 py-2">
+        <p className="text-[11px] font-semibold text-text-main">
           {getI18nOrFallback(t, "usageGuideInvokeTitle", "How to call this combo")}
         </p>
         <p className="mt-1 text-[11px] leading-4 text-text-muted">
@@ -1618,7 +1615,7 @@ function ComboUsageGuide({ onHide, onHideForever, onCreateCombo }) {
 function StrategyGuidanceCard({ strategy }) {
   const t = useTranslations("combos");
   return (
-    <div className="rounded-lg border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] p-2.5">
+    <div className="rounded-lg border border-border bg-surface-2 p-2.5">
       <div className="text-[11px] text-text-muted">
         {getI18nOrFallback(t, "strategyGuideTitle", "How to use this strategy")}
       </div>
@@ -1654,14 +1651,14 @@ function StrategyRecommendationsPanel({ strategy, onApply, showNudge }) {
   const tips = getStrategyRecommendationText(t, strategy, "tips");
 
   return (
-    <div className="rounded-lg border border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.02] p-2.5">
+    <div className="rounded-lg border border-border bg-surface p-2.5">
       <div className="flex items-start justify-between gap-2">
         <div className="min-w-0">
           <p className="text-[11px] text-text-muted">
             {getI18nOrFallback(t, "recommendationsLabel", "Recommended setup")}
           </p>
           <p className="text-xs font-semibold text-text-main mt-0.5">
-            {title} · <span className="text-primary">{strategyLabel}</span>
+            {title} · <span className="text-text-muted">{strategyLabel}</span>
           </p>
           <p className="text-[10px] text-text-muted mt-0.5">{description}</p>
         </div>
@@ -1674,9 +1671,11 @@ function StrategyRecommendationsPanel({ strategy, onApply, showNudge }) {
         {tips.map((tip, index) => (
           <div
             key={`${strategy}-tip-${index + 1}`}
-            className="flex items-start gap-1 rounded-md bg-black/[0.02] dark:bg-white/[0.03] px-1.5 py-1"
+            className="flex items-start gap-1 rounded-md bg-bg-subtle px-1.5 py-1"
           >
-            <span className="material-symbols-outlined text-[12px] text-primary mt-0.5">check</span>
+            <span className="material-symbols-outlined text-[12px] text-text-muted mt-0.5">
+              check
+            </span>
             <p className="text-[10px] text-text-main">{tip}</p>
           </div>
         ))}
@@ -1707,17 +1706,13 @@ function ComboReadinessPanel({ checks, blockers, showDescription = true }) {
     <div
       data-testid="combo-readiness-panel"
       className={`rounded-lg border px-2.5 py-2 ${
-        hasBlockers
-          ? "border-amber-500/30 bg-amber-500/5"
-          : "border-emerald-500/20 bg-emerald-500/[0.04]"
+        hasBlockers ? "border-warning/30 bg-warning/5" : "border-success/20 bg-success/5"
       }`}
     >
       <div className="flex items-center gap-1.5">
         <span
           className={`material-symbols-outlined text-[14px] ${
-            hasBlockers
-              ? "text-amber-600 dark:text-amber-400"
-              : "text-emerald-600 dark:text-emerald-400"
+            hasBlockers ? "text-warning" : "text-success"
           }`}
         >
           {hasBlockers ? "rule" : "check_circle"}
@@ -1741,11 +1736,11 @@ function ComboReadinessPanel({ checks, blockers, showDescription = true }) {
         {checks.map((check) => (
           <div
             key={check.id}
-            className="flex items-center gap-1 rounded-md px-1.5 py-1 bg-black/[0.02] dark:bg-white/[0.02]"
+            className="flex items-center gap-1 rounded-md px-1.5 py-1 bg-surface/60"
           >
             <span
               className={`material-symbols-outlined text-[12px] ${
-                check.ok ? "text-emerald-500" : "text-amber-500"
+                check.ok ? "text-success" : "text-warning"
               }`}
             >
               {check.ok ? "task_alt" : "pending"}
@@ -1758,9 +1753,9 @@ function ComboReadinessPanel({ checks, blockers, showDescription = true }) {
       {hasBlockers && (
         <div
           data-testid="combo-save-blockers"
-          className="mt-2 rounded-md border border-amber-500/30 bg-amber-500/10 px-2 py-1.5"
+          className="mt-2 rounded-md border border-warning/30 bg-warning/10 px-2 py-1.5"
         >
-          <p className="text-[10px] font-medium text-amber-700 dark:text-amber-300">
+          <p className="text-[10px] font-medium text-warning">
             {getI18nOrFallback(
               t,
               "saveBlockedTitle",
@@ -1769,10 +1764,7 @@ function ComboReadinessPanel({ checks, blockers, showDescription = true }) {
           </p>
           <div className="mt-1 flex flex-col gap-0.5">
             {blockers.map((blocker, index) => (
-              <p
-                key={`${blocker}-${index}`}
-                className="text-[10px] text-amber-700 dark:text-amber-300"
-              >
+              <p key={`${blocker}-${index}`} className="text-[10px] text-warning">
                 • {blocker}
               </p>
             ))}
@@ -1816,7 +1808,7 @@ function ComboCardInner({
   return (
     <Card
       padding="sm"
-      className={`group transition-all ${
+      className={`group transition-colors ${
         isDisabled ? "opacity-50" : ""
       } ${isDropTarget ? "border border-primary/30 bg-primary/5" : ""} ${
         isDragged ? "opacity-60" : ""
@@ -1833,7 +1825,7 @@ function ComboCardInner({
             className={`p-1 rounded-md transition-colors shrink-0 ${
               dragDisabled
                 ? "cursor-not-allowed text-text-muted/40"
-                : "cursor-grab active:cursor-grabbing text-text-muted hover:text-primary hover:bg-black/5 dark:hover:bg-white/5"
+                : "cursor-grab active:cursor-grabbing text-text-muted hover:text-text-main hover:bg-bg-subtle"
             }`}
             title={getI18nOrFallback(t, "reorderHandle", "Drag to reorder combo")}
             aria-label={getI18nOrFallback(t, "reorderHandle", "Drag to reorder combo")}
@@ -1841,15 +1833,15 @@ function ComboCardInner({
             <span className="material-symbols-outlined text-[18px]">drag_indicator</span>
           </button>
 
-          <div className="size-8 rounded-lg bg-primary/10 flex items-center justify-center shrink-0">
-            <span className="material-symbols-outlined text-primary text-[18px]">layers</span>
+          <div className="size-8 rounded-lg border border-border bg-bg-subtle flex items-center justify-center shrink-0">
+            <span className="material-symbols-outlined text-text-muted text-[18px]">layers</span>
           </div>
           <div className="min-w-0 flex-1">
             <div className="flex items-center gap-2">
               <code className="text-sm font-medium font-mono truncate">{combo.name}</code>
               <Tooltip content={strategyDescription}>
                 <span
-                  className={`text-[9px] uppercase font-semibold px-1.5 py-0.5 rounded-full ${getStrategyBadgeClass(
+                  className={`text-[11px] font-medium px-1.5 py-0.5 rounded-md ${getStrategyBadgeClass(
                     strategy
                   )}`}
                 >
@@ -1858,7 +1850,7 @@ function ComboCardInner({
               </Tooltip>
               {hasProxy && (
                 <span
-                  className="text-[9px] uppercase font-semibold px-1.5 py-0.5 rounded-full bg-primary/15 text-primary flex items-center gap-0.5"
+                  className="text-[11px] font-medium px-1.5 py-0.5 rounded-md bg-primary/10 text-primary flex items-center gap-0.5"
                   title={t("proxyConfigured")}
                 >
                   <span className="material-symbols-outlined text-[11px]">vpn_lock</span>
@@ -1870,7 +1862,7 @@ function ComboCardInner({
                   e.stopPropagation();
                   onCopy(combo.name, `combo-${combo.id}`);
                 }}
-                className="p-0.5 hover:bg-black/5 dark:hover:bg-white/5 rounded text-text-muted hover:text-primary transition-colors opacity-100 md:opacity-0 md:group-hover:opacity-100"
+                className="p-0.5 hover:bg-bg-subtle rounded text-text-muted hover:text-text-main transition-colors opacity-100 md:opacity-0 md:group-hover:opacity-100"
                 title={t("copyComboName")}
               >
                 <span className="material-symbols-outlined text-[14px]">
@@ -1888,7 +1880,7 @@ function ComboCardInner({
                   return (
                     <code
                       key={index}
-                      className="text-[10px] font-mono bg-black/5 dark:bg-white/5 px-1.5 py-0.5 rounded text-text-muted"
+                      className="text-[11px] font-mono bg-bg-subtle px-1.5 py-0.5 rounded text-text-muted"
                     >
                       {formatComboEntryDisplay(entry, {
                         providerNodes,
@@ -1910,7 +1902,7 @@ function ComboCardInner({
             {metrics && (
               <div className="flex items-center gap-3 mt-1">
                 <span className="text-[10px] text-text-muted">
-                  <span className="text-emerald-500">{metrics.totalSuccesses}</span>/
+                  <span className="text-success">{metrics.totalSuccesses}</span>/
                   {metrics.totalRequests} {t("reqs")}
                 </span>
                 <span className="text-[10px] text-text-muted">
@@ -1918,16 +1910,14 @@ function ComboCardInner({
                 </span>
                 <span className="text-[10px] text-text-muted">~{metrics.avgLatencyMs}ms</span>
                 {metrics.fallbackRate > 0 && (
-                  <span className="text-[10px] text-amber-500">
-                    {metrics.fallbackRate}% fallback
-                  </span>
+                  <span className="text-[10px] text-warning">{metrics.fallbackRate}% fallback</span>
                 )}
               </div>
             )}
           </div>
         </div>
 
-        <div className="flex items-center justify-between md:justify-end gap-1.5 shrink-0 ml-0 md:ml-2 w-full md:w-auto mt-2 md:mt-0 pt-2 md:pt-0 border-t border-black/5 dark:border-white/5 md:border-t-0">
+        <div className="flex items-center justify-between md:justify-end gap-1.5 shrink-0 ml-0 md:ml-2 w-full md:w-auto mt-2 md:mt-0 pt-2 md:pt-0 border-t border-border md:border-t-0">
           <div className="flex items-center gap-2">
             <Toggle
               size="sm"
@@ -1944,13 +1934,13 @@ function ComboCardInner({
               <ComboCompressionModeSelect
                 combo={combo}
                 title={t("compressionOverride")}
-                className="text-xs py-1 px-2 rounded border border-black/10 dark:border-white/10 bg-surface text-text-main focus:border-primary focus:outline-none transition-colors disabled:opacity-50 max-w-[130px] md:max-w-none"
+                className="text-xs py-1 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none transition-colors disabled:opacity-50 max-w-[130px] md:max-w-none"
               />
             )}
             <Link
               href={`/dashboard/combos/${combo.id}`}
               onClick={(e) => e.stopPropagation()}
-              className="p-1.5 hover:bg-black/5 dark:hover:bg-white/5 rounded text-text-muted hover:text-primary transition-colors"
+              className="p-1.5 hover:bg-bg-subtle rounded-md text-text-muted hover:text-text-main transition-colors"
               title={getI18nOrFallback(t, "controlCenter", "Control Center")}
             >
               <span className="material-symbols-outlined text-[16px]">monitoring</span>
@@ -1958,7 +1948,7 @@ function ComboCardInner({
             <button
               onClick={onTest}
               disabled={testing}
-              className="p-1.5 hover:bg-black/5 dark:hover:bg-white/5 rounded text-text-muted hover:text-emerald-500 transition-colors"
+              className="p-1.5 hover:bg-bg-subtle rounded-md text-text-muted hover:text-text-main transition-colors"
               title={t("testCombo")}
             >
               <span
@@ -1969,28 +1959,28 @@ function ComboCardInner({
             </button>
             <button
               onClick={onDuplicate}
-              className="p-1.5 hover:bg-black/5 dark:hover:bg-white/5 rounded text-text-muted hover:text-primary transition-colors"
+              className="p-1.5 hover:bg-bg-subtle rounded-md text-text-muted hover:text-text-main transition-colors"
               title={t("duplicate")}
             >
               <span className="material-symbols-outlined text-[16px]">content_copy</span>
             </button>
             <button
               onClick={onProxy}
-              className="p-1.5 hover:bg-black/5 dark:hover:bg-white/5 rounded text-text-muted hover:text-primary transition-colors"
+              className="p-1.5 hover:bg-bg-subtle rounded-md text-text-muted hover:text-text-main transition-colors"
               title={t("proxyConfig")}
             >
               <span className="material-symbols-outlined text-[16px]">vpn_lock</span>
             </button>
             <button
               onClick={onEdit}
-              className="p-1.5 hover:bg-black/5 dark:hover:bg-white/5 rounded text-text-muted hover:text-primary transition-colors"
+              className="p-1.5 hover:bg-bg-subtle rounded-md text-text-muted hover:text-text-main transition-colors"
               title={tc("edit")}
             >
               <span className="material-symbols-outlined text-[16px]">edit</span>
             </button>
             <button
               onClick={onDelete}
-              className="p-1.5 hover:bg-red-500/10 rounded text-red-500 transition-colors"
+              className="p-1.5 hover:bg-error/10 rounded-md text-text-muted hover:text-error transition-colors"
               title={tc("delete")}
             >
               <span className="material-symbols-outlined text-[16px]">delete</span>
@@ -2008,7 +1998,7 @@ function TestResultsView({ results }) {
 
   if (results.error) {
     return (
-      <div className="flex items-center gap-2 text-red-500 text-sm">
+      <div className="flex items-center gap-2 text-error text-sm">
         <span className="material-symbols-outlined text-[18px]">error</span>
         {typeof results.error === "string" ? results.error : JSON.stringify(results.error)}
       </div>
@@ -2019,13 +2009,11 @@ function TestResultsView({ results }) {
     <div className="flex flex-col gap-2">
       {results.resolvedBy && (
         <div className="flex items-center gap-2 text-sm">
-          <span className="material-symbols-outlined text-emerald-500 text-[18px]">
-            check_circle
-          </span>
+          <span className="material-symbols-outlined text-success text-[18px]">check_circle</span>
           <div className="min-w-0">
             <div>
               Resolved by:{" "}
-              <code className="text-xs bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 px-1.5 py-0.5 rounded">
+              <code className="font-mono text-xs bg-success/10 text-success px-1.5 py-0.5 rounded">
                 {results.resolvedBy}
               </code>
             </div>
@@ -2046,15 +2034,15 @@ function TestResultsView({ results }) {
         <div
           key={i}
           title={r.error || undefined}
-          className="flex items-center gap-2 text-xs px-2 py-1.5 rounded bg-black/[0.02] dark:bg-white/[0.02]"
+          className="flex items-center gap-2 text-xs px-2 py-1.5 rounded-md bg-bg-subtle"
         >
           <span
             className={`material-symbols-outlined text-[14px] ${
               r.status === "ok"
-                ? "text-emerald-500"
+                ? "text-success"
                 : r.status === "skipped"
                   ? "text-text-muted"
-                  : "text-red-500"
+                  : "text-error"
             }`}
           >
             {r.status === "ok" ? "check_circle" : r.status === "skipped" ? "skip_next" : "error"}
@@ -2074,10 +2062,10 @@ function TestResultsView({ results }) {
           <span
             className={`text-[10px] uppercase font-medium ${
               r.status === "ok"
-                ? "text-emerald-500"
+                ? "text-success"
                 : r.status === "skipped"
                   ? "text-text-muted"
-                  : "text-red-500"
+                  : "text-error"
             }`}
           >
             {r.status}
@@ -3181,7 +3169,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
       >
         <div className="flex flex-col gap-3">
           {!isExpertMode && (
-            <div className="rounded-lg border border-black/8 dark:border-white/8 bg-black/[0.02] dark:bg-white/[0.02] p-3">
+            <div className="rounded-lg border border-border bg-surface-2 p-3">
               <div className="flex items-center justify-between gap-2 mb-2">
                 <div>
                   <p className="text-xs font-semibold text-text-main">
@@ -3227,19 +3215,19 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                         setBuilderStage(stageMeta.id);
                       }}
                       disabled={!canVisitStage}
-                      className={`text-left rounded-lg border px-3 py-2 transition-all ${
+                      className={`text-left rounded-lg border px-3 py-2 transition-colors ${
                         isActive
-                          ? "border-primary bg-primary/8"
+                          ? "border-primary/60 bg-primary/5"
                           : canVisitStage
-                            ? "border-black/8 dark:border-white/8 bg-white/60 dark:bg-white/[0.02] hover:border-primary/40"
-                            : "border-black/6 dark:border-white/6 bg-black/[0.015] dark:bg-white/[0.015] opacity-60 cursor-not-allowed"
+                            ? "border-border bg-surface hover:border-border-strong"
+                            : "border-border bg-bg-subtle opacity-60 cursor-not-allowed"
                       }`}
                     >
                       <div className="flex items-center gap-1.5">
                         <span
                           className={`material-symbols-outlined text-[14px] ${
                             isCompleted && !isActive
-                              ? "text-emerald-500"
+                              ? "text-success"
                               : isActive
                                 ? "text-primary"
                                 : "text-text-muted"
@@ -3310,12 +3298,12 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                     "comboDescriptionPlaceholder",
                     "Optional note describing this combo"
                   )}
-                  className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none resize-none"
+                  className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none resize-none"
                 />
               </div>
 
               {!isEdit && !isExpertMode && (
-                <div className="rounded-lg border border-black/8 dark:border-white/8 bg-black/[0.02] dark:bg-white/[0.02] p-3">
+                <div className="rounded-lg border border-border bg-surface-2 p-3">
                   <div className="mb-2">
                     <p className="text-xs font-medium">
                       {getI18nOrFallback(t, "templatesTitle", COMBO_TEMPLATE_FALLBACK.title)}
@@ -3335,15 +3323,15 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                         key={template.id}
                         onClick={() => applyTemplate(template)}
                         data-testid={`combo-template-${template.id}`}
-                        className={`text-left rounded-md border px-3 py-2 transition-all ${
+                        className={`text-left rounded-md border px-3 py-2 transition-colors ${
                           template.isFeatured
-                            ? "border-emerald-500/50 bg-emerald-500/5 hover:border-emerald-500/80 hover:bg-emerald-500/10 ring-1 ring-emerald-500/20"
-                            : "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.03] hover:border-primary/40 hover:bg-primary/5"
+                            ? "border-border-strong bg-surface hover:bg-bg-subtle"
+                            : "border-border bg-surface hover:border-border-strong hover:bg-bg-subtle"
                         }`}
                       >
                         <div className="flex items-center gap-2">
                           <span
-                            className={`material-symbols-outlined text-[16px] ${template.isFeatured ? "text-emerald-500" : "text-primary"}`}
+                            className={`material-symbols-outlined text-[16px] ${template.isFeatured ? "text-text-muted" : "text-text-muted"}`}
                           >
                             {template.icon}
                           </span>
@@ -3351,7 +3339,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             {getI18nOrFallback(t, template.titleKey, template.fallbackTitle)}
                           </span>
                           {template.isFeatured && (
-                            <span className="ml-auto text-[9px] font-bold uppercase tracking-wide bg-emerald-500/20 text-emerald-600 dark:text-emerald-400 px-1.5 py-0.5 rounded">
+                            <span className="ml-auto text-[10px] font-semibold uppercase tracking-wide bg-success/10 text-success px-1.5 py-0.5 rounded">
                               FREE
                             </span>
                           )}
@@ -3360,7 +3348,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                           {getI18nOrFallback(t, template.descKey, template.fallbackDesc)}
                         </p>
                         <p
-                          className={`text-[10px] mt-1.5 font-medium ${template.isFeatured ? "text-emerald-500" : "text-primary"}`}
+                          className={`text-[10px] mt-1.5 font-medium ${template.isFeatured ? "text-primary" : "text-primary"}`}
                         >
                           {getI18nOrFallback(t, "templateApply", COMBO_TEMPLATE_FALLBACK.apply)} →
                         </p>
@@ -3385,7 +3373,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                   </Tooltip>
                 )}
               </div>
-              <div className="grid grid-cols-3 gap-1 p-0.5 bg-black/5 dark:bg-white/5 rounded-lg">
+              <div className="grid grid-cols-3 gap-1 p-0.5 bg-bg-subtle rounded-lg">
                 {STRATEGY_OPTIONS.map((s) => (
                   <button
                     key={s.value}
@@ -3397,9 +3385,9 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                         ? getStrategyLabel(t, s.value)
                         : `${getStrategyLabel(t, s.value)}. ${getStrategyDescription(t, s.value)}`
                     }
-                    className={`py-1.5 px-2 rounded-md text-xs font-medium transition-all ${
+                    className={`py-1.5 px-2 rounded-md text-xs font-medium transition-colors ${
                       strategy === s.value
-                        ? "bg-white dark:bg-white/5 shadow-sm text-primary"
+                        ? "bg-surface text-text-main ring-1 ring-border"
                         : "text-text-muted hover:text-text-main"
                     }`}
                   >
@@ -3463,7 +3451,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                 )}
               </div>
 
-              <div className="rounded-lg border border-black/8 dark:border-white/8 bg-black/[0.02] dark:bg-white/[0.02] p-3 mb-2">
+              <div className="rounded-lg border border-border bg-surface-2 p-3 mb-2">
                 <div className="flex items-start justify-between gap-3">
                   <div>
                     <p className="text-xs font-semibold text-text-main">
@@ -3491,7 +3479,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                 </div>
 
                 {isExpertMode && (
-                  <div className="mt-3 rounded-md border border-black/8 dark:border-white/8 bg-white/70 dark:bg-white/[0.03] px-2.5 py-2">
+                  <div className="mt-3 rounded-md border border-border bg-surface px-2.5 py-2">
                     <label className="text-[10px] font-medium uppercase tracking-wide text-text-muted block mb-1">
                       {getI18nOrFallback(t, "manualModel", "Manual model")}
                     </label>
@@ -3511,7 +3499,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                         }}
                         placeholder="provider/model"
                         data-testid="combo-manual-model-input"
-                        className="flex-1 text-xs py-2 px-2 rounded border border-black/10 dark:border-white/10 bg-white dark:bg-white/5 text-text-main focus:border-primary focus:outline-none font-mono"
+                        className="flex-1 text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none font-mono"
                       />
                       <Button
                         onClick={handleAddManualModel}
@@ -3523,7 +3511,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                       </Button>
                     </div>
                     {(manualModelError || manualModelHasDuplicate) && (
-                      <div className="mt-2 rounded-md border border-amber-500/20 bg-amber-500/10 px-2 py-1.5 text-[10px] text-amber-700 dark:text-amber-300">
+                      <div className="mt-2 rounded-md border border-warning/20 bg-warning/10 px-2 py-1.5 text-[10px] text-warning">
                         {manualModelError ||
                           getI18nOrFallback(
                             t,
@@ -3558,7 +3546,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                           value={builderProviderId}
                           onChange={handleBuilderProviderChange}
                           data-testid="combo-builder-provider"
-                          className="w-full text-xs py-2 px-2 rounded border border-black/10 dark:border-white/10 bg-white dark:bg-white/5 text-text-main focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none"
                         >
                           <option value="">
                             {builderLoading
@@ -3587,7 +3575,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                           onChange={handleBuilderModelChange}
                           disabled={!selectedBuilderProvider}
                           data-testid="combo-builder-model"
-                          className="w-full text-xs py-2 px-2 rounded border border-black/10 dark:border-white/10 bg-white dark:bg-white/5 text-text-main focus:border-primary focus:outline-none disabled:opacity-50"
+                          className="w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none disabled:opacity-50"
                         >
                           <option value="">
                             {selectedBuilderProvider
@@ -3616,7 +3604,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                           onChange={handleBuilderConnectionChange}
                           disabled={!selectedBuilderModel}
                           data-testid="combo-builder-account"
-                          className="w-full text-xs py-2 px-2 rounded border border-black/10 dark:border-white/10 bg-white dark:bg-white/5 text-text-main focus:border-primary focus:outline-none disabled:opacity-50"
+                          className="w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none disabled:opacity-50"
                         >
                           <option value={COMBO_BUILDER_AUTO_CONNECTION}>
                             {getI18nOrFallback(
@@ -3641,7 +3629,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
 
                     {builderConnectionId === COMBO_BUILDER_AUTO_CONNECTION &&
                     selectedBuilderConnections.length > 1 ? (
-                      <div className="mt-2 rounded-md border border-black/8 dark:border-white/8 bg-white/70 dark:bg-white/[0.03] px-2.5 py-2">
+                      <div className="mt-2 rounded-md border border-border bg-surface px-2.5 py-2">
                         <label className="text-[10px] font-medium uppercase tracking-wide text-text-muted block mb-1.5">
                           {getI18nOrFallback(
                             t,
@@ -3661,10 +3649,10 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                                 key={connection.id}
                                 onClick={() => handleBuilderAllowedConnectionToggle(connection.id)}
                                 aria-pressed={checked}
-                                className={`text-[11px] px-2 py-1 rounded border transition-colors ${
+                                className={`text-[11px] px-2 py-1 rounded-md border transition-colors ${
                                   checked
                                     ? "border-primary bg-primary/10 text-primary"
-                                    : "border-black/10 dark:border-white/10 text-text-muted hover:border-primary/40"
+                                    : "border-border text-text-muted hover:border-border-strong hover:text-text-main"
                                 }`}
                               >
                                 {pickDisplayValue(
@@ -3697,7 +3685,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                           {getI18nOrFallback(t, "builderAddStep", "Add detailed step")}
                         </Button>
                         {builderHasDuplicate && (
-                          <span className="text-[10px] text-amber-600 dark:text-amber-300">
+                          <span className="text-[10px] text-warning">
                             {getI18nOrFallback(
                               t,
                               "builderDuplicateExact",
@@ -3707,7 +3695,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                         )}
                       </div>
                     ) : (
-                      <div className="mt-2 rounded-md border border-black/8 dark:border-white/8 bg-white/70 dark:bg-white/[0.03] px-2.5 py-2">
+                      <div className="mt-2 rounded-md border border-border bg-surface px-2.5 py-2">
                         <p className="text-[10px] uppercase tracking-wide text-text-muted">
                           {getI18nOrFallback(t, "builderPreview", "Current step preview")}
                         </p>
@@ -3730,7 +3718,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             {getI18nOrFallback(t, "builderAddStep", "Add detailed step")}
                           </Button>
                           {builderHasDuplicate && (
-                            <span className="text-[10px] text-amber-600 dark:text-amber-300">
+                            <span className="text-[10px] text-warning">
                               {getI18nOrFallback(
                                 t,
                                 "builderDuplicateExact",
@@ -3742,7 +3730,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                       </div>
                     )}
 
-                    <div className="mt-3 pt-3 border-t border-black/5 dark:border-white/5">
+                    <div className="mt-3 pt-3 border-t border-border">
                       <label className="text-[10px] font-medium uppercase tracking-wide text-text-muted block mb-1">
                         {getI18nOrFallback(t, "builderComboRef", "Reference another combo")}
                       </label>
@@ -3750,7 +3738,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                         <select
                           value={builderComboRefName}
                           onChange={(e) => setBuilderComboRefName(e.target.value)}
-                          className="flex-1 text-xs py-2 px-2 rounded border border-black/10 dark:border-white/10 bg-white dark:bg-white/5 text-text-main focus:border-primary focus:outline-none"
+                          className="flex-1 text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none"
                         >
                           <option value="">
                             {getI18nOrFallback(
@@ -3780,7 +3768,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                 )}
 
                 {builderError && (
-                  <div className="mt-2 rounded-md border border-amber-500/20 bg-amber-500/10 px-2 py-1.5 text-[10px] text-amber-700 dark:text-amber-300">
+                  <div className="mt-2 rounded-md border border-warning/20 bg-warning/10 px-2 py-1.5 text-[10px] text-warning">
                     {builderError}
                   </div>
                 )}
@@ -3795,7 +3783,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
               </div>
 
               {models.length === 0 ? (
-                <div className="text-center py-4 border border-dashed border-black/10 dark:border-white/10 rounded-lg bg-black/[0.01] dark:bg-white/[0.01]">
+                <div className="text-center py-4 border border-dashed border-border-strong rounded-lg bg-surface-2">
                   <span className="material-symbols-outlined text-text-muted text-xl mb-1">
                     layers
                   </span>
@@ -3811,10 +3799,10 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                       onDragEnd={handleDragEnd}
                       onDragOver={(e) => handleDragOver(e, index)}
                       onDrop={(e) => handleDrop(e, index)}
-                      className={`group/item flex items-center gap-1.5 px-2 py-1.5 rounded-md transition-all cursor-grab active:cursor-grabbing ${
+                      className={`group/item flex items-center gap-1.5 px-2 py-1.5 rounded-md transition-colors cursor-grab active:cursor-grabbing ${
                         dragOverIndex === index && dragIndex !== index
                           ? "bg-primary/10 border border-primary/30"
-                          : "bg-black/[0.02] dark:bg-white/[0.02] hover:bg-black/[0.04] dark:hover:bg-white/[0.04] border border-transparent"
+                          : "bg-surface-2 hover:bg-bg-subtle border border-transparent"
                       } ${dragIndex === index ? "opacity-50" : ""}`}
                     >
                       {/* Drag handle */}
@@ -3877,7 +3865,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             max="100"
                             value={entry.weight}
                             onChange={(e) => handleWeightChange(index, e.target.value)}
-                            className="w-10 text-[11px] text-center py-0.5 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                            className="w-10 text-[11px] text-center py-0.5 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                           />
                           <span className="text-[10px] text-text-muted">%</span>
                         </div>
@@ -3888,7 +3876,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                         <button
                           onClick={() => handleMoveUp(index)}
                           disabled={index === 0}
-                          className={`p-0.5 rounded ${index === 0 ? "text-text-muted/20 cursor-not-allowed" : "text-text-muted hover:text-primary hover:bg-black/5 dark:hover:bg-white/5"}`}
+                          className={`p-0.5 rounded ${index === 0 ? "text-text-muted/20 cursor-not-allowed" : "text-text-muted hover:text-text-main hover:bg-bg-subtle"}`}
                           title={t("moveUp")}
                         >
                           <span className="material-symbols-outlined text-[12px]">
@@ -3898,7 +3886,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                         <button
                           onClick={() => handleMoveDown(index)}
                           disabled={index === models.length - 1}
-                          className={`p-0.5 rounded ${index === models.length - 1 ? "text-text-muted/20 cursor-not-allowed" : "text-text-muted hover:text-primary hover:bg-black/5 dark:hover:bg-white/5"}`}
+                          className={`p-0.5 rounded ${index === models.length - 1 ? "text-text-muted/20 cursor-not-allowed" : "text-text-muted hover:text-text-main hover:bg-bg-subtle"}`}
                           title={t("moveDown")}
                         >
                           <span className="material-symbols-outlined text-[12px]">
@@ -3910,7 +3898,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                       {/* Remove */}
                       <button
                         onClick={() => handleRemoveModel(index)}
-                        className="p-0.5 hover:bg-red-500/10 rounded text-text-muted hover:text-red-500 transition-all"
+                        className="p-0.5 hover:bg-error/10 rounded text-text-muted hover:text-error transition-colors"
                         title={t("removeModel")}
                       >
                         <span className="material-symbols-outlined text-[12px]">close</span>
@@ -3924,7 +3912,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
               {strategy === "weighted" && models.length > 0 && <WeightTotalBar models={models} />}
 
               {strategy === "cost-optimized" && models.length > 0 && (
-                <div className="mt-2 rounded-md border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] px-2 py-1.5">
+                <div className="mt-2 rounded-md border border-border bg-surface-2 px-2 py-1.5">
                   <div className="flex items-center justify-between text-[10px]">
                     <span className="text-text-muted">
                       {getI18nOrFallback(t, "pricingCoverage", "Pricing coverage")}
@@ -3933,14 +3921,14 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                       {pricedModelCount}/{models.length} ({pricingCoveragePercent}%)
                     </span>
                   </div>
-                  <div className="h-1.5 mt-1 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden">
+                  <div className="h-1.5 mt-1 rounded-full bg-border overflow-hidden">
                     <div
-                      className={`h-full transition-all duration-300 ${
+                      className={`h-full transition-[width] duration-300 ${
                         pricingCoveragePercent === 100
-                          ? "bg-emerald-500"
+                          ? "bg-success"
                           : pricingCoveragePercent > 0
-                            ? "bg-amber-500"
-                            : "bg-red-500"
+                            ? "bg-warning"
+                            : "bg-error"
                       }`}
                       style={{ width: `${pricingCoveragePercent}%` }}
                     />
@@ -3958,14 +3946,14 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
               )}
 
               {hasNoModels && (
-                <div className="mt-2 rounded-md border border-amber-500/20 bg-amber-500/10 px-2 py-1.5 text-[10px] text-amber-700 dark:text-amber-300 flex items-center gap-1">
+                <div className="mt-2 rounded-md border border-warning/20 bg-warning/10 px-2 py-1.5 text-[10px] text-warning flex items-center gap-1">
                   <span className="material-symbols-outlined text-[12px]">warning</span>
                   <span>{t("noModelsYet")}</span>
                 </div>
               )}
 
               {hasInvalidWeightedTotal && (
-                <div className="mt-2 rounded-md border border-amber-500/20 bg-amber-500/10 px-2 py-1.5 text-[10px] text-amber-700 dark:text-amber-300 flex items-center gap-1">
+                <div className="mt-2 rounded-md border border-warning/20 bg-warning/10 px-2 py-1.5 text-[10px] text-warning flex items-center gap-1">
                   <span className="material-symbols-outlined text-[12px]">warning</span>
                   <span>
                     {t("weighted")} {weightTotal}% {"\u2260"} 100%. {t("autoBalance")}
@@ -3974,7 +3962,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
               )}
 
               {!isExpertMode && hasRoundRobinSingleModel && (
-                <div className="mt-2 rounded-md border border-blue-500/20 bg-blue-500/10 px-2 py-1.5 text-[10px] text-blue-700 dark:text-blue-300 flex items-center gap-1">
+                <div className="mt-2 rounded-md border border-primary/20 bg-primary/10 px-2 py-1.5 text-[10px] text-primary flex items-center gap-1">
                   <span className="material-symbols-outlined text-[12px]">info</span>
                   <span>
                     {getI18nOrFallback(
@@ -3987,7 +3975,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
               )}
 
               {hasCostOptimizedPartialPricing && (
-                <div className="mt-2 rounded-md border border-amber-500/20 bg-amber-500/10 px-2 py-1.5 text-[10px] text-amber-700 dark:text-amber-300 flex items-center gap-1">
+                <div className="mt-2 rounded-md border border-warning/20 bg-warning/10 px-2 py-1.5 text-[10px] text-warning flex items-center gap-1">
                   <span className="material-symbols-outlined text-[12px]">warning</span>
                   <span>
                     {typeof t.has === "function" && t.has("warningCostOptimizedPartialPricing")
@@ -4001,7 +3989,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
               )}
 
               {hasCostOptimizedWithoutPricing && (
-                <div className="mt-2 rounded-md border border-amber-500/20 bg-amber-500/10 px-2 py-1.5 text-[10px] text-amber-700 dark:text-amber-300 flex items-center gap-1">
+                <div className="mt-2 rounded-md border border-warning/20 bg-warning/10 px-2 py-1.5 text-[10px] text-warning flex items-center gap-1">
                   <span className="material-symbols-outlined text-[12px]">warning</span>
                   <span>
                     {getI18nOrFallback(
@@ -4025,7 +4013,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
 
               <button
                 onClick={() => setShowModelSelect(true)}
-                className="w-full mt-2 py-2 border border-dashed border-black/10 dark:border-white/10 rounded-lg text-xs text-text-muted hover:text-primary hover:border-primary/30 transition-colors flex items-center justify-center gap-1"
+                className="w-full mt-2 py-2 border border-dashed border-border-strong rounded-lg text-xs text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors flex items-center justify-center gap-1"
                 data-testid="combo-browse-catalog"
               >
                 <span className="material-symbols-outlined text-[16px]">travel_explore</span>
@@ -4050,7 +4038,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
               )}
 
               {advancedConfigVisible && (
-                <div className="flex flex-col gap-2 p-3 bg-black/[0.02] dark:bg-white/[0.02] rounded-lg border border-black/5 dark:border-white/5">
+                <div className="flex flex-col gap-2 p-3 bg-surface-2 rounded-lg border border-border">
                   <div className="grid grid-cols-2 gap-2">
                     <div>
                       <FieldLabelWithHelp
@@ -4074,7 +4062,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             maxRetries: e.target.value ? Number(e.target.value) : undefined,
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                       />
                     </div>
                     <div>
@@ -4100,7 +4088,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             retryDelayMs: e.target.value ? Number(e.target.value) : undefined,
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                       />
                     </div>
                     <ComboTimeoutFields
@@ -4110,7 +4098,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                       showHelp={!isExpertMode}
                     />
                   </div>
-                  <div className="grid grid-cols-2 gap-2 pt-2 border-t border-black/5 dark:border-white/5">
+                  <div className="grid grid-cols-2 gap-2 pt-2 border-t border-border">
                     <div className="col-span-2">
                       <div className="flex items-center gap-2 py-1">
                         <input
@@ -4123,7 +4111,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                               failoverBeforeRetry: e.target.checked || undefined,
                             })
                           }
-                          className="w-3.5 h-3.5 rounded border border-black/20 dark:border-white/20 accent-primary cursor-pointer"
+                          className="w-3.5 h-3.5 rounded border border-border-strong accent-primary cursor-pointer"
                         />
                         <label
                           htmlFor="failoverBeforeRetry"
@@ -4173,7 +4161,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                               e.target.value === "skip" ? "skip" : undefined,
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-surface-1 focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-surface focus:border-primary focus:outline-none"
                       >
                         <option value="skip">
                           {getI18nOrFallback(
@@ -4213,7 +4201,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             maxSetRetries: e.target.value ? Number(e.target.value) : undefined,
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                       />
                     </div>
                     <div>
@@ -4239,12 +4227,12 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             setRetryDelayMs: e.target.value ? Number(e.target.value) : undefined,
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                       />
                     </div>
                   </div>
                   {strategy === "round-robin" && (
-                    <div className="grid grid-cols-2 gap-2 pt-2 border-t border-black/5 dark:border-white/5">
+                    <div className="grid grid-cols-2 gap-2 pt-2 border-t border-border">
                       <div>
                         <FieldLabelWithHelp
                           label={t("concurrencyPerModel")}
@@ -4269,7 +4257,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                                 : undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                         />
                       </div>
                       <div>
@@ -4295,7 +4283,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                               queueTimeoutMs: e.target.value ? Number(e.target.value) : undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                         />
                       </div>
                       <div className="col-span-2">
@@ -4322,13 +4310,13 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                                 : undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                         />
                       </div>
                     </div>
                   )}
                   {strategy === "weighted" && (
-                    <div className="grid grid-cols-1 gap-2 pt-2 border-t border-black/5 dark:border-white/5">
+                    <div className="grid grid-cols-1 gap-2 pt-2 border-t border-border">
                       <div>
                         <FieldLabelWithHelp
                           label={getI18nOrFallback(
@@ -4357,12 +4345,12 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                                 : undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                         />
                       </div>
                     </div>
                   )}
-                  <div className="grid grid-cols-1 gap-2 pt-2 border-t border-black/5 dark:border-white/5">
+                  <div className="grid grid-cols-1 gap-2 pt-2 border-t border-border">
                     <div>
                       <FieldLabelWithHelp
                         label={getI18nOrFallback(t, "nestedComboMode", "Nested Combo Behavior")}
@@ -4381,7 +4369,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             nestedComboMode: e.target.value === "execute" ? "execute" : "flatten",
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-surface-1 focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-surface focus:border-primary focus:outline-none"
                       >
                         <option value="flatten">
                           {getI18nOrFallback(t, "nestedComboFlatten", "Flatten nested combos")}
@@ -4430,7 +4418,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                                   : undefined,
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-surface-1 focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-surface focus:border-primary focus:outline-none"
                       >
                         <option value="inherit">
                           {getI18nOrFallback(t, "stickyLimitInherit", "inherit")}
@@ -4445,7 +4433,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                     </div>
                   </div>
                   {strategy === "context-relay" && (
-                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 pt-2 border-t border-black/5 dark:border-white/5">
+                    <div className="grid grid-cols-1 md:grid-cols-3 gap-2 pt-2 border-t border-border">
                       <div>
                         <FieldLabelWithHelp
                           label={getI18nOrFallback(
@@ -4473,7 +4461,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                               handoffThreshold: e.target.value ? Number(e.target.value) : undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                         />
                       </div>
                       <div>
@@ -4504,7 +4492,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                                 : undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                         />
                       </div>
                       <div>
@@ -4527,12 +4515,12 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                               handoffModel: e.target.value || undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                         />
                       </div>
                       {!isExpertMode && (
-                        <div className="md:col-span-3 rounded-md border border-fuchsia-500/20 bg-fuchsia-500/5 px-2 py-1.5">
-                          <p className="text-[10px] text-fuchsia-700 dark:text-fuchsia-300">
+                        <div className="md:col-span-3 rounded-md border border-border bg-bg-subtle px-2 py-1.5">
+                          <p className="text-[10px] text-text-muted">
                             {getI18nOrFallback(
                               t,
                               "contextRelayProviderNote",
@@ -4544,7 +4532,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                     </div>
                   )}
                   {strategy === "fusion" && (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2 border-t border-black/5 dark:border-white/5">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-2 pt-2 border-t border-border">
                       <div className="md:col-span-2">
                         <FieldLabelWithHelp
                           label={getI18nOrFallback(t, "fusionJudgeModel", "Judge model")}
@@ -4562,7 +4550,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                           onChange={(e) =>
                             setConfig({ ...config, judgeModel: e.target.value || undefined })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                         />
                       </div>
                       <div>
@@ -4584,7 +4572,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                           onChange={(e) =>
                             setConfig(updateFusionTuning(config, "minPanel", e.target.value))
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                         />
                       </div>
                       <div>
@@ -4612,7 +4600,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                               updateFusionTuning(config, "stragglerGraceMs", e.target.value)
                             )
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                         />
                       </div>
                       <div className="md:col-span-2">
@@ -4640,7 +4628,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                               updateFusionTuning(config, "panelHardTimeoutMs", e.target.value)
                             )
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                         />
                       </div>
                     </div>
@@ -4655,9 +4643,9 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
 
           {/* Response Validation (4985) */}
           {showStrategySection && (
-            <div className="flex flex-col gap-2 p-3 bg-black/[0.02] dark:bg-white/[0.02] rounded-lg border border-black/5 dark:border-white/5">
+            <div className="flex flex-col gap-2 p-3 bg-surface-2 rounded-lg border border-border">
               <div className="flex items-center gap-1.5 mb-1">
-                <span className="material-symbols-outlined text-[14px] text-primary">rule</span>
+                <span className="material-symbols-outlined text-[14px] text-text-muted">rule</span>
                 <p className="text-xs font-medium">
                   {getI18nOrFallback(t, "responseValidationTitle", "Response validation")}
                 </p>
@@ -4672,9 +4660,9 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
 
           {/* Agent Features (#399 / #401 / #454) */}
           {showStrategySection && (
-            <div className="flex flex-col gap-2 p-3 bg-black/[0.02] dark:bg-white/[0.02] rounded-lg border border-black/5 dark:border-white/5">
+            <div className="flex flex-col gap-2 p-3 bg-surface-2 rounded-lg border border-border">
               <div className="flex items-center gap-1.5 mb-1">
-                <span className="material-symbols-outlined text-[14px] text-primary">
+                <span className="material-symbols-outlined text-[14px] text-text-muted">
                   smart_toy
                 </span>
                 <p className="text-xs font-medium">
@@ -4709,7 +4697,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                     "agentFeaturesSystemMessagePlaceholder",
                     "Optional system instructions for this combo"
                   )}
-                  className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none resize-none"
+                  className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none resize-none"
                 />
                 {!isExpertMode && (
                   <p className="text-[10px] text-text-muted mt-0.5">
@@ -4732,7 +4720,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                   value={agentToolFilter}
                   onChange={(e) => setAgentToolFilter(e.target.value)}
                   placeholder="e.g. ^(bash|computer)$"
-                  className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none font-mono"
+                  className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none font-mono"
                 />
                 {!isExpertMode && (
                   <p className="text-[10px] text-text-muted mt-0.5">
@@ -4807,10 +4795,10 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                     "agentFeaturesContextLengthPlaceholder",
                     "e.g. 128000"
                   )}
-                  className="w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                  className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
                 />
                 {contextLengthError && (
-                  <p className="text-[10px] text-red-500 mt-0.5">{contextLengthError}</p>
+                  <p className="text-[10px] text-error mt-0.5">{contextLengthError}</p>
                 )}
                 {!contextLengthError && !isExpertMode && (
                   <p className="text-[10px] text-text-muted mt-0.5">
@@ -4828,7 +4816,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
           {showReviewSection && (
             <div className="flex flex-col gap-3">
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                <div className="rounded-lg border border-black/8 dark:border-white/8 bg-black/[0.02] dark:bg-white/[0.02] p-3">
+                <div className="rounded-lg border border-border bg-surface-2 p-3">
                   <p className="text-[10px] uppercase tracking-wide text-text-muted">
                     {getI18nOrFallback(t, "reviewName", "Name")}
                   </p>
@@ -4836,7 +4824,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                     {name || "—"}
                   </p>
                 </div>
-                <div className="rounded-lg border border-black/8 dark:border-white/8 bg-black/[0.02] dark:bg-white/[0.02] p-3">
+                <div className="rounded-lg border border-border bg-surface-2 p-3">
                   <p className="text-[10px] uppercase tracking-wide text-text-muted">
                     {getI18nOrFallback(t, "reviewStrategy", "Strategy")}
                   </p>
@@ -4844,13 +4832,13 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                     {getStrategyLabel(t, strategy)}
                   </p>
                 </div>
-                <div className="rounded-lg border border-black/8 dark:border-white/8 bg-black/[0.02] dark:bg-white/[0.02] p-3">
+                <div className="rounded-lg border border-border bg-surface-2 p-3">
                   <p className="text-[10px] uppercase tracking-wide text-text-muted">
                     {getI18nOrFallback(t, "reviewSteps", "Steps")}
                   </p>
                   <p className="text-sm font-semibold text-text-main mt-1">{models.length}</p>
                 </div>
-                <div className="rounded-lg border border-black/8 dark:border-white/8 bg-black/[0.02] dark:bg-white/[0.02] p-3">
+                <div className="rounded-lg border border-border bg-surface-2 p-3">
                   <p className="text-[10px] uppercase tracking-wide text-text-muted">
                     {getI18nOrFallback(t, "reviewAccounts", "Pinned accounts")}
                   </p>
@@ -4859,19 +4847,19 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
               </div>
 
               <div className="grid grid-cols-2 md:grid-cols-4 gap-2">
-                <div className="rounded-lg border border-black/8 dark:border-white/8 bg-white/70 dark:bg-white/[0.03] p-3">
+                <div className="rounded-lg border border-border bg-surface p-3">
                   <p className="text-[10px] uppercase tracking-wide text-text-muted">
                     {getI18nOrFallback(t, "reviewProviders", "Providers")}
                   </p>
                   <p className="text-sm font-semibold text-text-main mt-1">{uniqueProviderCount}</p>
                 </div>
-                <div className="rounded-lg border border-black/8 dark:border-white/8 bg-white/70 dark:bg-white/[0.03] p-3">
+                <div className="rounded-lg border border-border bg-surface p-3">
                   <p className="text-[10px] uppercase tracking-wide text-text-muted">
                     {getI18nOrFallback(t, "reviewComboRefs", "Combo refs")}
                   </p>
                   <p className="text-sm font-semibold text-text-main mt-1">{comboRefCount}</p>
                 </div>
-                <div className="rounded-lg border border-black/8 dark:border-white/8 bg-white/70 dark:bg-white/[0.03] p-3">
+                <div className="rounded-lg border border-border bg-surface p-3">
                   <p className="text-[10px] uppercase tracking-wide text-text-muted">
                     {getI18nOrFallback(t, "reviewAdvanced", "Advanced config")}
                   </p>
@@ -4879,7 +4867,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                     {Object.keys(config || {}).length}
                   </p>
                 </div>
-                <div className="rounded-lg border border-black/8 dark:border-white/8 bg-white/70 dark:bg-white/[0.03] p-3">
+                <div className="rounded-lg border border-border bg-surface p-3">
                   <p className="text-[10px] uppercase tracking-wide text-text-muted">
                     {getI18nOrFallback(t, "reviewAgentFlags", "Agent flags")}
                   </p>
@@ -4896,9 +4884,9 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
               </div>
 
               {usesIntelligentBuilderStage && (
-                <div className="rounded-lg border border-primary/15 bg-primary/[0.04] p-3">
+                <div className="rounded-lg border border-border bg-surface-2 p-3">
                   <div className="flex items-center gap-2">
-                    <span className="material-symbols-outlined text-primary text-[16px]">
+                    <span className="material-symbols-outlined text-text-muted text-[16px]">
                       auto_awesome
                     </span>
                     <p className="text-sm font-semibold text-text-main">
@@ -4950,7 +4938,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                 </div>
               )}
 
-              <div className="rounded-lg border border-black/8 dark:border-white/8 bg-black/[0.02] dark:bg-white/[0.02] p-3">
+              <div className="rounded-lg border border-border bg-surface-2 p-3">
                 <p className="text-xs font-semibold text-text-main">
                   {getI18nOrFallback(t, "reviewSequence", "Execution sequence")}
                 </p>
@@ -4963,7 +4951,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                     models.map((entry, index) => (
                       <div
                         key={`${getModelString(entry) || "entry"}-${index}`}
-                        className="rounded-md border border-black/6 dark:border-white/6 bg-white/70 dark:bg-white/[0.03] px-2.5 py-2"
+                        className="rounded-md border border-border bg-surface px-2.5 py-2"
                       >
                         <div className="flex items-start gap-2">
                           <span className="text-[10px] font-semibold text-text-muted mt-0.5">
@@ -5054,7 +5042,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
           )}
 
           {(isExpertMode || builderStage !== "review") && !canAdvanceFromCurrentStage && (
-            <div className="rounded-md border border-amber-500/20 bg-amber-500/10 px-2 py-1.5 text-[10px] text-amber-700 dark:text-amber-300">
+            <div className="rounded-md border border-warning/20 bg-warning/10 px-2 py-1.5 text-[10px] text-warning">
               {builderStage === "basics"
                 ? getI18nOrFallback(
                     t,

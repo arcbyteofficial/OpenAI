@@ -49,7 +49,7 @@ function SortIndicator({ active, sortOrder }: { active: boolean; sortOrder: stri
     );
   }
   return (
-    <span className="material-symbols-outlined text-[12px] text-primary">
+    <span className="material-symbols-outlined text-[12px] text-text-main">
       {sortOrder === "asc" ? "expand_less" : "expand_more"}
     </span>
   );
@@ -80,24 +80,22 @@ export function ModelTable({ byModel, summary }: ModelTableProps) {
   );
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden p-0">
       <div className="p-4 border-b border-border">
-        <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider">
-          {t("chartModelBreakdown")}
-        </h3>
+        <h3 className="text-sm font-semibold text-text-main">{t("chartModelBreakdown")}</h3>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead className="text-xs text-text-muted uppercase bg-black/[0.02] dark:bg-white/[0.02]">
+        <table className="w-full text-[13px]">
+          <thead className="text-xs text-text-muted bg-surface-2 border-b border-border">
             <tr>
               {COLUMNS.map((col) => (
                 <th
                   key={col.field}
-                  className={`px-4 py-2.5 ${col.align === "right" ? "text-right" : "text-left"}`}
+                  className={`px-4 py-2.5 font-medium ${col.align === "right" ? "text-right" : "text-left"}`}
                 >
                   <button
                     type="button"
-                    className={`inline-flex items-center gap-1 cursor-pointer group hover:text-text-main ${
+                    className={`inline-flex items-center gap-1 cursor-pointer group hover:text-text-main transition-colors ${
                       col.align === "right" ? "justify-end w-full" : "justify-start"
                     }`}
                     onClick={() => toggleSort(col.field)}
@@ -107,53 +105,50 @@ export function ModelTable({ byModel, summary }: ModelTableProps) {
                   </button>
                 </th>
               ))}
-              <th className="px-4 py-2.5 text-right w-36">{t("chartShare")}</th>
+              <th className="px-4 py-2.5 text-right font-medium w-36">{t("chartShare")}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
             {sorted.map((m, i) => (
-              <tr
-                key={String(m.model ?? i)}
-                className="hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors"
-              >
+              <tr key={String(m.model ?? i)} className="hover:bg-bg-subtle transition-colors">
                 <td className="px-4 py-2.5">
                   <div className="flex items-center gap-2">
                     <span
                       className="w-2 h-2 rounded-full shrink-0"
                       style={{ backgroundColor: getModelColor(i) }}
                     />
-                    <span className="font-medium">{m.model}</span>
+                    <span className="font-medium text-text-main">{m.model}</span>
                   </div>
                 </td>
                 <td className="px-4 py-2.5 text-right font-mono text-text-muted">
                   {fmtFull(m.requests)}
                 </td>
                 <td
-                  className="px-4 py-2.5 text-right font-mono text-primary"
+                  className="px-4 py-2.5 text-right font-mono text-text-muted"
                   title={fmtFull(m.promptTokens)}
                 >
                   {fmt(m.promptTokens)}
                 </td>
                 <td
-                  className="px-4 py-2.5 text-right font-mono text-emerald-500"
+                  className="px-4 py-2.5 text-right font-mono text-text-muted"
                   title={fmtFull(m.completionTokens)}
                 >
                   {fmt(m.completionTokens)}
                 </td>
                 <td
-                  className="px-4 py-2.5 text-right font-mono font-semibold"
+                  className="px-4 py-2.5 text-right font-mono font-medium text-text-main"
                   title={fmtFull(m.totalTokens)}
                 >
                   {fmt(m.totalTokens)}
                 </td>
-                <td className="px-4 py-2.5 text-right font-mono text-amber-500">
+                <td className="px-4 py-2.5 text-right font-mono text-text-main">
                   {fmtCost(m.cost)}
                 </td>
                 <td className="px-4 py-2.5 text-right">
                   <div className="flex items-center gap-2 justify-end">
-                    <div className="w-16 h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+                    <div className="w-16 h-1.5 rounded-full bg-border overflow-hidden">
                       <div
-                        className="h-full rounded-full transition-all"
+                        className="h-full rounded-full transition-[width]"
                         style={{
                           width: `${m.pct ?? 0}%`,
                           backgroundColor: getModelColor(i),

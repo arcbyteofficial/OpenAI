@@ -13,12 +13,12 @@ interface ServiceLogsPanelProps {
 function LogLineRow({ line, locale }: { line: LogLine; locale: string }) {
   const ts = new Date(line.ts).toLocaleTimeString(locale, { hour12: false });
   return (
-    <div className="flex gap-2 text-[11px] leading-5 font-mono hover:bg-bg-subtle/50 px-2">
+    <div className="flex gap-2 text-[11px] leading-5 font-mono text-text-main hover:bg-bg-subtle px-2">
       <span className="text-text-muted shrink-0 select-none">{ts}</span>
       <span
         className={cn(
           "text-text-muted shrink-0 select-none",
-          line.stream === "stderr" && "text-red-400 dark:text-red-400"
+          line.stream === "stderr" && "text-error"
         )}
       >
         {line.stream === "stderr" ? "ERR" : "OUT"}
@@ -62,40 +62,40 @@ export function ServiceLogsPanel({ name }: ServiceLogsPanelProps) {
   }
 
   return (
-    <div className="border border-border rounded-lg overflow-hidden">
+    <div className="border border-border rounded-card overflow-hidden bg-surface">
       <div className="flex items-center gap-2 px-3 py-2 border-b border-border bg-bg-subtle">
         <input
           type="text"
           placeholder={t("filterLogs")}
           value={filterInput}
           onChange={(e) => applyFilter(e.target.value)}
-          className="flex-1 bg-transparent text-xs outline-none placeholder:text-text-muted min-w-0"
+          className="flex-1 bg-transparent text-xs text-text-main outline-none placeholder:text-text-subtle min-w-0"
         />
         <button
           type="button"
           onClick={togglePause}
-          className="text-xs text-text-muted hover:text-text-primary shrink-0"
+          className="text-xs text-text-muted hover:text-text-main transition-colors shrink-0"
         >
           {isPaused ? t("resume") : t("pause")}
         </button>
         <button
           type="button"
           onClick={clear}
-          className="text-xs text-text-muted hover:text-text-primary shrink-0"
+          className="text-xs text-text-muted hover:text-text-main transition-colors shrink-0"
         >
           {t("clear")}
         </button>
         <button
           type="button"
           onClick={downloadLogs}
-          className="text-xs text-text-muted hover:text-text-primary shrink-0"
+          className="text-xs text-text-muted hover:text-text-main transition-colors shrink-0"
         >
           {t("download")}
         </button>
       </div>
-      <div className="h-80 overflow-y-auto bg-bg-main py-1">
+      <div className="h-80 overflow-y-auto bg-surface py-1">
         {error ? (
-          <p className="text-xs text-red-600 dark:text-red-400 px-4 py-4">{error}</p>
+          <p className="text-xs text-error px-4 py-4">{error}</p>
         ) : lines.length === 0 ? (
           <p className="text-xs text-text-muted px-4 py-4">{t("noLogs")}</p>
         ) : (

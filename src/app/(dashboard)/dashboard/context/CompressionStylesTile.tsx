@@ -40,10 +40,10 @@ export default function CompressionStylesTile() {
   return (
     <div
       data-testid="compression-styles-tile"
-      className="rounded-lg border border-border/40 bg-surface p-4"
+      className="rounded-card border border-border bg-surface p-4"
     >
-      <p className="text-sm font-medium text-text-main">{t("compressionStylesTileTitle")}</p>
-      <p className="mt-1 text-2xl font-semibold text-text-main">
+      <p className="text-[13px] text-text-muted">{t("compressionStylesTileTitle")}</p>
+      <p className="mt-1 text-2xl font-semibold tabular-nums text-text-main">
         {summary.totalTokensSaved.toLocaleString(locale, { useGrouping: false })}
       </p>
       <p className="text-xs text-text-muted">
@@ -57,7 +57,10 @@ export default function CompressionStylesTile() {
           <span className="text-xs text-text-muted">{t("compressionStylesTileEmpty")}</span>
         ) : (
           styles.map(([id, count]) => (
-            <span key={id} className="rounded bg-border/30 px-2 py-0.5 text-xs text-text-main">
+            <span
+              key={id}
+              className="rounded-md bg-bg-subtle px-2 py-0.5 font-mono text-xs text-text-main"
+            >
               {id} · {count}
             </span>
           ))

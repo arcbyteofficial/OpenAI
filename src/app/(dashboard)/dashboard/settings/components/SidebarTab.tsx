@@ -102,16 +102,16 @@ function SortableSection({
       ref={setNodeRef}
       style={style}
       className={cn(
-        "rounded-lg border border-border bg-surface/40 transition-shadow",
-        isDragging && "shadow-lg opacity-80"
+        "rounded-lg border border-border bg-surface transition-shadow",
+        isDragging && "shadow-[var(--shadow-elevated)] opacity-80"
       )}
     >
       {/* Section header */}
-      <div className="flex items-center gap-2 px-4 py-3 border-b border-border/70">
+      <div className="flex items-center gap-2 px-4 py-3 border-b border-border">
         <button
           {...listeners}
           {...attributes}
-          className="text-text-muted/40 hover:text-text-muted/80 cursor-grab active:cursor-grabbing touch-none shrink-0"
+          className="text-text-subtle hover:text-text-muted cursor-grab active:cursor-grabbing touch-none shrink-0"
           title={tSidebar("dragReorderSection")}
           aria-label={tSidebar("dragReorderSection")}
         >
@@ -121,12 +121,12 @@ function SortableSection({
           onClick={() => setExpanded((p) => !p)}
           className="flex-1 flex items-center gap-2 text-left"
         >
-          <span className="text-xs font-semibold uppercase tracking-wider text-text-muted/70">
+          <span className="text-[11px] font-medium uppercase tracking-wider text-text-muted">
             {section.title}
           </span>
           <span
             className={cn(
-              "material-symbols-outlined text-[14px] text-text-muted/40 transition-transform ml-auto",
+              "material-symbols-outlined text-[14px] text-text-subtle transition-transform ml-auto",
               expanded && "rotate-180"
             )}
           >
@@ -143,7 +143,7 @@ function SortableSection({
           onDragEnd={handleItemDragEnd}
         >
           <SortableContext items={childIds} strategy={verticalListSortingStrategy}>
-            <div className="divide-y divide-border/70">
+            <div className="divide-y divide-border">
               {orderedChildren.map((child) => {
                 if ("type" in child && child.type === "group") {
                   const group = child as SidebarItemGroup;
@@ -197,7 +197,7 @@ function SortableChildRow({ id, children }: { id: string; children: React.ReactN
       <button
         {...listeners}
         {...attributes}
-        className="mt-3.5 ml-4 text-text-muted/30 hover:text-text-muted/70 cursor-grab active:cursor-grabbing touch-none shrink-0"
+        className="mt-3.5 ml-4 text-text-subtle/70 hover:text-text-muted cursor-grab active:cursor-grabbing touch-none shrink-0"
         title={tSidebar("dragReorderItem")}
         aria-label={tSidebar("dragReorderItem")}
       >
@@ -247,7 +247,7 @@ function GroupItemVisibilityControl({
 
   return (
     <span
-      className="material-symbols-outlined text-[16px] text-text-muted/40"
+      className="material-symbols-outlined text-[16px] text-text-subtle"
       title={tSidebar("cannotHide")}
       aria-label={tSidebar("alwaysVisible")}
     >
@@ -263,7 +263,7 @@ function ItemRow({ item, hiddenSet, onToggleItem, getLabel }: ItemRowProps) {
   return (
     <div className="flex items-center justify-between gap-4 px-4 py-3">
       <div className="flex items-center gap-2 min-w-0">
-        <span className="material-symbols-outlined text-[16px] text-text-muted/50 shrink-0">
+        <span className="material-symbols-outlined text-[16px] text-text-muted shrink-0">
           {item.icon}
         </span>
         <p className="font-medium truncate">
@@ -272,7 +272,7 @@ function ItemRow({ item, hiddenSet, onToggleItem, getLabel }: ItemRowProps) {
       </div>
       {isProtected ? (
         <span
-          className="material-symbols-outlined text-[16px] text-text-muted/40"
+          className="material-symbols-outlined text-[16px] text-text-subtle"
           title={tSidebar("cannotHide")}
           aria-label={tSidebar("alwaysVisible")}
         >
@@ -312,30 +312,30 @@ function GroupRow({
 
   return (
     <div className="w-full">
-      <div className="flex items-center gap-2 px-4 py-2.5 hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+      <div className="flex items-center gap-2 px-4 py-2.5 hover:bg-bg-subtle transition-colors">
         <button
           onClick={() => setOpen((p) => !p)}
           className="flex min-w-0 flex-1 items-center gap-2 text-left"
         >
           <span
             className={cn(
-              "material-symbols-outlined text-[12px] text-text-muted/40 transition-transform",
+              "material-symbols-outlined text-[12px] text-text-subtle transition-transform",
               open && "rotate-90"
             )}
           >
             chevron_right
           </span>
-          <span className="truncate text-[10px] font-semibold uppercase tracking-widest text-text-muted/50">
+          <span className="truncate text-[10px] font-medium uppercase tracking-wider text-text-subtle">
             {getLabel(group.titleKey, group.titleFallback)}
           </span>
         </button>
-        <span className="text-xs text-text-muted/40">
+        <span className="text-xs tabular-nums text-text-subtle">
           {group.items.filter((i) => !isHideableSidebarItemId(i.id) || !hiddenSet.has(i.id)).length}
           /{group.items.length}
         </span>
         {canToggleSeparator && (
-          <div className="flex items-center gap-2 border-l border-border/60 pl-3">
-            <span className="text-[10px] font-medium text-text-muted/50">{separatorLabel}</span>
+          <div className="flex items-center gap-2 border-l border-border pl-3">
+            <span className="text-[10px] font-medium text-text-subtle">{separatorLabel}</span>
             <Toggle
               size="sm"
               checked={separatorVisible}
@@ -345,11 +345,11 @@ function GroupRow({
         )}
       </div>
       {open && (
-        <div className="divide-y divide-border/50 pl-2">
+        <div className="divide-y divide-border pl-2">
           {group.items.map((item) => (
             <div key={item.id} className="flex items-center justify-between gap-4 px-4 py-2.5">
               <div className="flex items-center gap-2 min-w-0">
-                <span className="material-symbols-outlined text-[14px] text-text-muted/40 shrink-0">
+                <span className="material-symbols-outlined text-[14px] text-text-subtle shrink-0">
                   {item.icon}
                 </span>
                 <p className="text-sm font-medium truncate">
@@ -541,13 +541,13 @@ export default function SidebarTab() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             view_sidebar
           </span>
         </div>
         <div>
-          <h3 className="text-lg font-semibold">
+          <h3 className="text-base font-semibold tracking-tight text-text-main">
             {getSettingsLabel("settingsSidebarTitle", "Sidebar Customization")}
           </h3>
           <p className="text-sm text-text-muted">
@@ -614,12 +614,12 @@ export default function SidebarTab() {
                   className={cn(
                     "flex flex-col items-center gap-1.5 p-3 rounded-lg border transition-colors disabled:opacity-60",
                     isActive
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "border-border hover:border-primary/40 bg-surface/40 text-text-main"
+                      ? "border-primary/40 bg-primary/5 text-primary"
+                      : "border-border hover:border-border-strong hover:bg-bg-subtle bg-surface text-text-main"
                   )}
                 >
                   <span
-                    className="material-symbols-outlined text-[22px]"
+                    className="material-symbols-outlined text-[20px]"
                     style={isActive ? { fontVariationSettings: "'FILL' 1" } : {}}
                     aria-hidden="true"
                   >
@@ -641,8 +641,8 @@ export default function SidebarTab() {
 
           {/* Confirm preset dialog */}
           {confirmPreset && (
-            <div className="mt-3 p-3 rounded-lg border border-amber-500/30 bg-amber-500/5 flex items-center gap-3">
-              <span className="material-symbols-outlined text-amber-500 text-[18px] shrink-0">
+            <div className="mt-3 p-3 rounded-lg border border-warning/30 bg-warning/5 flex items-center gap-3">
+              <span className="material-symbols-outlined text-warning text-[18px] shrink-0">
                 warning
               </span>
               <p className="text-sm flex-1">
@@ -654,13 +654,13 @@ export default function SidebarTab() {
               <div className="flex gap-2 shrink-0">
                 <button
                   onClick={() => setConfirmPreset(null)}
-                  className="px-3 py-1.5 text-sm rounded-md border border-border hover:bg-surface/80 transition-colors"
+                  className="px-3 py-1.5 text-[13px] font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors"
                 >
                   {getSettingsLabel("cancelLabel", "Cancel")}
                 </button>
                 <button
                   onClick={() => applyPreset(confirmPreset)}
-                  className="px-3 py-1.5 text-sm rounded-md bg-primary text-white hover:bg-primary/90 transition-colors"
+                  className="px-3 py-1.5 text-[13px] font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors"
                 >
                   {getSettingsLabel("applyLabel", "Apply")}
                 </button>
@@ -686,7 +686,7 @@ export default function SidebarTab() {
             <button
               onClick={resetToDefault}
               disabled={loading}
-              className="shrink-0 text-sm text-text-muted hover:text-text-main border border-border rounded-md px-3 py-1.5 hover:bg-surface/80 transition-colors disabled:opacity-50"
+              className="shrink-0 text-[13px] font-medium text-text-muted hover:text-text-main border border-border-strong bg-surface rounded-control px-3 py-1.5 hover:bg-bg-subtle transition-colors disabled:opacity-50"
             >
               {getSettingsLabel("resetDefault", "Reset to default")}
             </button>

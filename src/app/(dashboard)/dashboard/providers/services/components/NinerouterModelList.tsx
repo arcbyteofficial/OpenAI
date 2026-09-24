@@ -108,11 +108,13 @@ export function NinerouterModelList() {
     <Card padding="md">
       <div className="flex items-center justify-between mb-3">
         <div className="flex items-center gap-3">
-          <div className="size-8 rounded-lg flex items-center justify-center bg-cyan-500/10">
-            <span className="material-symbols-outlined text-cyan-500 text-xl">list</span>
+          <div className="size-8 rounded-lg flex items-center justify-center bg-bg-subtle border border-border">
+            <span className="material-symbols-outlined text-text-muted text-[18px]">list</span>
           </div>
           <div>
-            <h3 className="font-medium text-sm">{t("availableModels")}</h3>
+            <h3 className="font-semibold text-sm tracking-tight text-text-main">
+              {t("availableModels")}
+            </h3>
             <p className="text-xs text-text-muted">
               {loading ? t("modelsLoading") : t("modelsDiscovered", { count: models.length })}
             </p>
@@ -139,7 +141,7 @@ export function NinerouterModelList() {
       </div>
 
       {error && (
-        <div className="flex items-center gap-1.5 mb-3 px-2 py-1.5 rounded text-xs bg-red-500/10 text-red-600 dark:text-red-400">
+        <div className="flex items-center gap-1.5 mb-3 px-2 py-1.5 rounded-md text-xs bg-error/10 text-error">
           <span className="material-symbols-outlined text-[12px]">error</span>
           {error}
         </div>
@@ -154,11 +156,11 @@ export function NinerouterModelList() {
           {visibleModels.map((model) => (
             <div
               key={model.id}
-              className="flex items-center justify-between px-2 py-1.5 rounded hover:bg-bg-subtle transition-colors"
+              className="flex items-center justify-between px-2 py-1.5 rounded-md hover:bg-bg-subtle transition-colors"
             >
-              <code className="text-xs font-mono text-text truncate">{model.id}</code>
+              <code className="text-[12px] font-mono text-text-main truncate">{model.id}</code>
               {model.available === false && (
-                <span className="ml-2 text-[10px] font-medium text-text-muted bg-bg-subtle px-1.5 py-0.5 rounded shrink-0">
+                <span className="ml-2 text-[10px] font-medium text-text-muted bg-bg-subtle border border-border px-1.5 py-0.5 rounded shrink-0">
                   {t("unavailable")}
                 </span>
               )}
@@ -177,14 +179,14 @@ export function NinerouterModelList() {
             <button
               onClick={() => setPage((p) => Math.max(1, p - 1))}
               disabled={page <= 1}
-              className="px-2 py-1 text-xs rounded border border-border disabled:opacity-40 hover:bg-bg-subtle transition-colors"
+              className="px-2 py-1 text-xs rounded-control border border-border-strong text-text-main disabled:opacity-40 hover:bg-bg-subtle transition-colors"
             >
               {t("previous")}
             </button>
             <button
               onClick={() => setPage((p) => Math.min(totalPages, p + 1))}
               disabled={page >= totalPages}
-              className="px-2 py-1 text-xs rounded border border-border disabled:opacity-40 hover:bg-bg-subtle transition-colors"
+              className="px-2 py-1 text-xs rounded-control border border-border-strong text-text-main disabled:opacity-40 hover:bg-bg-subtle transition-colors"
             >
               {t("next")}
             </button>

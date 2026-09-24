@@ -88,20 +88,22 @@ export default function ThinkingBudgetTab() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-5">
-        <div className="p-2 rounded-lg bg-violet-500/10 text-violet-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             psychology
           </span>
         </div>
         <div>
-          <h3 className="text-lg font-semibold">{t("thinkingBudgetTitle")}</h3>
+          <h3 className="text-base font-semibold tracking-tight text-text-main">
+            {t("thinkingBudgetTitle")}
+          </h3>
           <p className="text-sm text-text-muted">{t("thinkingBudgetDesc")}</p>
           <p className="text-xs text-text-muted mt-1 leading-relaxed">
             {t("thinkingBudgetIndependenceHint")}
           </p>
         </div>
         {status === "saved" && (
-          <span className="ml-auto text-xs font-medium text-emerald-500 flex items-center gap-1">
+          <span className="ml-auto text-xs font-medium text-success flex items-center gap-1">
             <span className="material-symbols-outlined text-[14px]">check_circle</span> {t("saved")}
           </span>
         )}
@@ -114,23 +116,21 @@ export default function ThinkingBudgetTab() {
             key={m.value}
             onClick={() => save({ mode: m.value })}
             disabled={loading || saving}
-            className={`flex items-start gap-3 p-3 rounded-lg border text-left transition-all ${
+            className={`flex items-start gap-3 p-3 rounded-lg border text-left transition-colors ${
               config.mode === m.value
-                ? "border-violet-500/50 bg-violet-500/5 ring-1 ring-violet-500/20"
-                : "border-border/50 hover:border-border hover:bg-surface/30"
+                ? "border-primary/40 bg-primary/5"
+                : "border-border hover:border-border-strong hover:bg-bg-subtle"
             }`}
           >
             <span
-              className={`material-symbols-outlined text-[20px] mt-0.5 ${
-                config.mode === m.value ? "text-violet-500" : "text-text-muted"
+              className={`material-symbols-outlined text-[18px] mt-0.5 ${
+                config.mode === m.value ? "text-primary" : "text-text-muted"
               }`}
             >
               {m.icon}
             </span>
             <div className="min-w-0">
-              <p
-                className={`text-sm font-medium ${config.mode === m.value ? "text-violet-400" : ""}`}
-              >
+              <p className={`text-sm font-medium ${config.mode === m.value ? "text-primary" : ""}`}>
                 {t(m.labelKey)}
               </p>
               <p className="text-xs text-text-muted mt-0.5 leading-relaxed">{t(m.descKey)}</p>
@@ -141,10 +141,10 @@ export default function ThinkingBudgetTab() {
 
       {/* Custom budget slider */}
       {config.mode === "custom" && (
-        <div className="p-4 rounded-lg bg-surface/30 border border-border/30 mb-4">
+        <div className="p-4 rounded-lg bg-surface-2 border border-border mb-4">
           <div className="flex items-center justify-between mb-3">
             <p className="text-sm font-medium">{t("tokenBudget")}</p>
-            <span className="text-sm font-mono tabular-nums text-violet-400">
+            <span className="text-[13px] font-mono tabular-nums text-text-main">
               {config.customBudget.toLocaleString()} {t("tokens")}
             </span>
           </div>
@@ -155,7 +155,7 @@ export default function ThinkingBudgetTab() {
             step="1024"
             value={config.customBudget}
             onChange={(e) => save({ customBudget: parseInt(e.target.value) })}
-            className="w-full accent-violet-500"
+            className="w-full accent-primary"
           />
           <div className="flex justify-between text-xs text-text-muted mt-1">
             <span>{t("off")}</span>
@@ -169,7 +169,7 @@ export default function ThinkingBudgetTab() {
 
       {/* Adaptive effort level */}
       {config.mode === "adaptive" && (
-        <div className="p-4 rounded-lg bg-surface/30 border border-border/30">
+        <div className="p-4 rounded-lg bg-surface-2 border border-border">
           <p className="text-sm font-medium mb-3">{t("baseEffortLevel")}</p>
           <p className="text-xs text-text-muted mb-3">{t("adaptiveHint")}</p>
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">
@@ -178,10 +178,10 @@ export default function ThinkingBudgetTab() {
                 key={e.value}
                 onClick={() => save({ effortLevel: e.value })}
                 disabled={loading || saving}
-                className={`px-3 py-2 rounded-lg text-xs font-medium border transition-all ${
+                className={`px-3 py-2 rounded-control text-xs font-medium border transition-colors ${
                   config.effortLevel === e.value
-                    ? "border-violet-500/50 bg-violet-500/10 text-violet-400"
-                    : "border-border/50 text-text-muted hover:border-border"
+                    ? "border-primary/40 bg-primary/10 text-primary"
+                    : "border-border text-text-muted hover:border-border-strong hover:text-text-main"
                 }`}
               >
                 {t(e.labelKey)}

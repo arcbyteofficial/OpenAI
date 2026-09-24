@@ -520,7 +520,7 @@ export default function ModelCompatPopover({
   }, [open, updatePortalPanelRect]);
 
   const panelChromeClass =
-    "flex max-h-[min(82vh,42rem)] flex-col overflow-hidden rounded-xl border-2 border-zinc-200 bg-white shadow-2xl dark:border-zinc-600 dark:bg-zinc-950";
+    "flex max-h-[min(82vh,42rem)] flex-col overflow-hidden rounded-card border border-border bg-surface shadow-[var(--shadow-elevated)]";
 
   return (
     <div className="relative inline-flex" ref={ref}>
@@ -528,7 +528,7 @@ export default function ModelCompatPopover({
         type="button"
         onClick={handleToggleOpen}
         disabled={disabled}
-        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-lg border border-border bg-background text-text-muted hover:bg-muted hover:text-text-main disabled:opacity-50 transition-colors"
+        className="inline-flex items-center gap-1.5 px-2.5 py-1.5 text-xs font-medium rounded-control border border-border-strong bg-surface text-text-muted hover:bg-bg-subtle hover:text-text-main disabled:opacity-50 transition-colors"
         title={t("compatAdjustmentsTitle")}
       >
         <span className="material-symbols-outlined text-base leading-none">tune</span>
@@ -551,13 +551,13 @@ export default function ModelCompatPopover({
               zIndex: 10040,
             }}
           >
-            <div className="shrink-0 border-b-2 border-zinc-200 bg-zinc-100 px-3 py-2.5 dark:border-zinc-600 dark:bg-zinc-900">
+            <div className="shrink-0 border-b border-border bg-surface-2 px-3 py-2.5">
               <p className="text-xs font-semibold text-text-main">{t("compatAdjustmentsTitle")}</p>
               <p className="text-[11px] text-text-muted mt-1 leading-relaxed">
                 {t("compatProtocolHint")}
               </p>
             </div>
-            <div className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto bg-white p-3 [scrollbar-gutter:stable] [scrollbar-width:thin] dark:bg-zinc-950">
+            <div className="min-h-0 flex-1 overflow-x-hidden overflow-y-auto bg-surface p-3 [scrollbar-gutter:stable] [scrollbar-width:thin]">
               <label className="block text-[11px] font-medium text-text-muted mb-1.5">
                 {t("compatProtocolLabel")}
               </label>
@@ -565,7 +565,7 @@ export default function ModelCompatPopover({
                 value={protocol}
                 onChange={(e) => handleProtocolChange(e.target.value)}
                 disabled={disabled}
-                className="mb-4 w-full rounded-lg border border-zinc-200 bg-white px-2.5 py-2 text-xs text-text-main focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/30 dark:border-zinc-600 dark:bg-zinc-900"
+                className="mb-4 w-full rounded-control border border-border-strong bg-surface px-2.5 py-2 text-xs text-text-main transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
               >
                 {MODEL_COMPAT_PROTOCOL_KEYS.map((p) => (
                   <option key={p} value={p}>
@@ -609,7 +609,7 @@ export default function ModelCompatPopover({
                     onBlur={() => saveModelParamFilters()}
                     placeholder={t("compatBlockedParamsPlaceholder")}
                     disabled={disabled}
-                    className="mb-1 w-full rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-[11px] font-mono text-text-main placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/30 dark:border-zinc-600 dark:bg-zinc-900"
+                    className="mb-1 w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[11px] font-mono text-text-main placeholder:text-text-subtle transition-colors focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/30"
                   />
                   <p className="text-[10px] text-text-muted">
                     {providerText(
@@ -621,7 +621,7 @@ export default function ModelCompatPopover({
                     {paramSaveFailed && !paramSaving && (
                       <span
                         role="alert"
-                        className="ml-1 font-medium text-red-600 dark:text-red-400"
+                        className="ml-1 font-medium text-error"
                         title={t("failedSaveConnectionRetry")}
                       >
                         ● {t("failed")}
@@ -637,7 +637,7 @@ export default function ModelCompatPopover({
                     onBlur={() => saveModelParamFilters()}
                     placeholder={t("compatAllowedParamsPlaceholder")}
                     disabled={disabled}
-                    className="mb-1 w-full rounded-lg border border-zinc-200 bg-white px-2.5 py-1.5 text-[11px] font-mono text-text-main placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/30 dark:border-zinc-600 dark:bg-zinc-900"
+                    className="mb-1 w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[11px] font-mono text-text-main placeholder:text-text-subtle transition-colors focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/30"
                   />
                   <p className="text-[10px] text-text-muted">
                     {providerText(
@@ -649,7 +649,7 @@ export default function ModelCompatPopover({
                 </div>
               </div>
 
-              <div className="mt-4 rounded-lg border-2 border-zinc-200 bg-zinc-100 p-3 dark:border-zinc-600 dark:bg-zinc-900">
+              <div className="mt-4 rounded-lg border border-border bg-surface-2 p-3">
                 <label className="block text-[11px] font-semibold text-text-main mb-1">
                   {t("compatUpstreamHeadersLabel")}
                 </label>
@@ -674,7 +674,7 @@ export default function ModelCompatPopover({
                         disabled={disabled}
                         placeholder={t("compatUpstreamHeaderNamePlaceholder")}
                         className="gap-0 min-w-0"
-                        inputClassName="h-9 bg-white py-1.5 px-2 text-xs font-mono dark:bg-zinc-900"
+                        inputClassName="h-9 bg-surface py-1.5 px-2 text-xs font-mono"
                         autoComplete="off"
                       />
                       <div
@@ -700,7 +700,7 @@ export default function ModelCompatPopover({
                           disabled={disabled}
                           placeholder={t("compatUpstreamHeaderValuePlaceholder")}
                           className="gap-0 min-w-0"
-                          inputClassName="h-9 bg-white py-1.5 px-2 text-xs dark:bg-zinc-900"
+                          inputClassName="h-9 bg-surface py-1.5 px-2 text-xs"
                           autoComplete="off"
                           spellCheck={false}
                         />
@@ -713,7 +713,7 @@ export default function ModelCompatPopover({
                         }
                         onClick={() => removeHeaderRow(row.id)}
                         title={t("compatUpstreamRemoveRow")}
-                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg border border-border/80 text-text-muted hover:bg-red-500/10 hover:text-red-600 dark:hover:text-red-400 disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-text-muted transition-colors"
+                        className="flex h-9 w-9 shrink-0 items-center justify-center rounded-control border border-border text-text-muted hover:bg-error/10 hover:text-error disabled:opacity-30 disabled:hover:bg-transparent disabled:hover:text-text-muted transition-colors"
                       >
                         <span className="material-symbols-outlined text-lg leading-none">
                           close
@@ -726,7 +726,7 @@ export default function ModelCompatPopover({
                   type="button"
                   disabled={disabled || !canAddHeaderRow}
                   onClick={addHeaderRow}
-                  className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-lg border border-dashed border-border py-2 text-xs font-medium text-primary hover:bg-primary/5 disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
+                  className="mt-3 flex w-full items-center justify-center gap-1.5 rounded-control border border-dashed border-border-strong py-2 text-xs font-medium text-text-muted hover:bg-bg-subtle hover:text-text-main disabled:opacity-40 disabled:hover:bg-transparent transition-colors"
                 >
                   <span className="material-symbols-outlined text-base leading-none">add</span>
                   {t("compatUpstreamAddRow")}

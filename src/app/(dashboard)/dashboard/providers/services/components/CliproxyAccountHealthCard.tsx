@@ -27,7 +27,7 @@ function AccountRow({ account }: { account: CliproxyAccountHealth }) {
     <li className="flex flex-wrap items-center justify-between gap-3 border-t border-border py-3 first:border-t-0">
       <div className="min-w-0">
         <div className="flex items-center gap-2">
-          <span className="truncate font-medium text-text-main">
+          <span className="truncate text-sm font-medium text-text-main">
             {account.label || account.authIndex}
           </span>
           <Badge variant={account.disabled || account.unavailable ? "warning" : "success"}>
@@ -40,7 +40,7 @@ function AccountRow({ account }: { account: CliproxyAccountHealth }) {
             .join(" · ")}
         </p>
       </div>
-      <div className="text-right text-xs text-text-muted">
+      <div className="text-right text-xs text-text-muted tabular-nums">
         <div>{account.success.toLocaleString()} succeeded</div>
         <div>{account.failed.toLocaleString()} failed</div>
       </div>

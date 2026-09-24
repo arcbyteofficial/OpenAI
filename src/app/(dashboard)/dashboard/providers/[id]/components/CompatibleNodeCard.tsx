@@ -56,7 +56,7 @@ export default function CompatibleNodeCard({
             />
           )}
           <div>
-            <h2 className="text-lg font-semibold">
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
               {isCcCompatible
                 ? t("ccCompatibleDetailsTitle")
                 : isAnthropicCompatible
@@ -79,12 +79,7 @@ export default function CompatibleNodeCard({
           <Button size="sm" icon="add" onClick={() => gateConnectionFlow(openApiKeyAddFlow)}>
             {t("add")}
           </Button>
-          <Button
-            size="sm"
-            variant="secondary"
-            icon="edit"
-            onClick={onOpenEditNodeModal}
-          >
+          <Button size="sm" variant="secondary" icon="edit" onClick={onOpenEditNodeModal}>
             {t("edit")}
           </Button>
           <Button
@@ -122,9 +117,9 @@ export default function CompatibleNodeCard({
         </div>
       </div>
       {isCcCompatible && (
-        <div className="mb-4 rounded-lg border border-amber-500/25 bg-amber-500/10 px-3 py-2 text-sm text-text-muted">
+        <div className="mb-4 rounded-lg border border-warning/25 bg-warning/10 px-3 py-2 text-sm text-text-muted">
           <div className="flex items-start gap-2">
-            <span className="material-symbols-outlined mt-0.5 text-[18px] text-amber-500">
+            <span className="material-symbols-outlined mt-0.5 text-[18px] text-warning">
               warning
             </span>
             <p>{t("ccCompatibleValidationHint")}</p>

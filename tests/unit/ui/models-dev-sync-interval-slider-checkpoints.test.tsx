@@ -39,7 +39,7 @@ function getSlider(container: HTMLDivElement): HTMLInputElement {
 }
 
 function getLabel(container: HTMLDivElement): string {
-  const span = container.querySelector("span.text-blue-400");
+  const span = container.querySelector("span.font-mono.tabular-nums");
   if (!span?.textContent) throw new Error("interval label not found");
   return span.textContent;
 }
@@ -49,10 +49,7 @@ async function setSliderValue(container: HTMLDivElement, value: string) {
   // NOTE: synchronous act() on purpose — wrapping this in async act() lets the
   // commit flush late, so the change handler would read the pre-dispatch value.
   act(() => {
-    const setter = Object.getOwnPropertyDescriptor(
-      window.HTMLInputElement.prototype,
-      "value"
-    )?.set;
+    const setter = Object.getOwnPropertyDescriptor(window.HTMLInputElement.prototype, "value")?.set;
     setter?.call(input, value);
     input.dispatchEvent(new Event("input", { bubbles: true }));
   });

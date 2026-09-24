@@ -38,7 +38,7 @@ const linesToArray = (text: string): string[] =>
 const arrayToLines = (arr?: string[]): string => (arr ?? []).join("\n");
 
 const INPUT_CLASS =
-  "w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none";
+  "w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none";
 const LABEL_CLASS = "text-[11px] font-medium text-text-muted block mb-0.5";
 
 const CONDITIONS: JsonPathCondition[] = ["exists", "nonEmpty", "equals", "notEquals"];
@@ -134,7 +134,11 @@ export function ResponseValidationEditor({
         </label>
         <div className="flex flex-col gap-1.5">
           {predicates.map((predicate, index) => (
-            <div key={index} className="flex flex-wrap items-center gap-1.5" data-testid="rv-predicate-row">
+            <div
+              key={index}
+              className="flex flex-wrap items-center gap-1.5"
+              data-testid="rv-predicate-row"
+            >
               <input
                 type="text"
                 value={predicate.path}
@@ -173,7 +177,7 @@ export function ResponseValidationEditor({
                   emit({ ...v, jsonPathPredicates: predicates.filter((_, i) => i !== index) })
                 }
                 data-testid="rv-predicate-remove"
-                className="text-[10px] px-1.5 py-1 rounded border border-black/10 dark:border-white/10 text-text-muted hover:text-red-500"
+                className="text-[10px] px-1.5 py-1 rounded-control border border-border text-text-muted transition-colors hover:border-border-strong hover:text-error"
               >
                 ✕
               </button>
@@ -188,7 +192,7 @@ export function ResponseValidationEditor({
               })
             }
             data-testid="rv-predicate-add"
-            className="self-start text-[10px] px-2 py-1 rounded border border-black/10 dark:border-white/10 text-text-muted hover:text-primary"
+            className="self-start text-[10px] px-2 py-1 rounded-control border border-border text-text-muted transition-colors hover:border-border-strong hover:bg-bg-subtle hover:text-text-main"
           >
             {tr(t, "responseValidationAddCheck", "+ Add check")}
           </button>

@@ -119,22 +119,26 @@ export default function ComboPlaygroundClient() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold">{t("playgroundTitle")}</h1>
+          <h1 className="text-xl font-semibold tracking-tight text-text-main">
+            {t("playgroundTitle")}
+          </h1>
           <p className="text-sm text-text-muted mt-1">{t("playgroundDescription")}</p>
         </div>
       </div>
 
       {/* Configuration Panel */}
       <Card>
-        <div className="p-4 space-y-4">
-          <h2 className="text-sm font-semibold">{t("playgroundConfiguration")}</h2>
+        <div className="space-y-4">
+          <h2 className="text-sm font-semibold text-text-main">{t("playgroundConfiguration")}</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             {/* Combo Selector */}
             <div>
-              <label className="block text-sm font-medium mb-1">{t("comboLabel")}</label>
+              <label className="block text-[13px] font-medium text-text-main mb-1.5">
+                {t("comboLabel")}
+              </label>
               <select
-                className="w-full border border-border rounded-lg px-3 py-2 bg-surface text-sm"
+                className="w-full border border-border-strong rounded-control px-3 py-1.5 bg-surface text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                 value={selectedComboId}
                 onChange={(e) => setSelectedComboId(e.target.value)}
               >
@@ -151,7 +155,7 @@ export default function ComboPlaygroundClient() {
 
             {/* Prompt Tokens */}
             <div>
-              <label className="block text-sm font-medium mb-1">
+              <label className="block text-[13px] font-medium text-text-main mb-1.5">
                 {t("playgroundEstimatedPromptTokens")}: <strong>{promptTokens}</strong>
               </label>
               <input
@@ -161,7 +165,7 @@ export default function ComboPlaygroundClient() {
                 step={100}
                 value={promptTokens}
                 onChange={(e) => setPromptTokens(Number(e.target.value))}
-                className="w-full"
+                className="w-full accent-[var(--color-primary)]"
               />
               <div className="flex justify-between text-xs text-text-muted mt-1">
                 <span>100</span>
@@ -181,9 +185,11 @@ export default function ComboPlaygroundClient() {
         <>
           {/* Combo Overview */}
           <Card>
-            <div className="p-4 space-y-3">
+            <div className="space-y-3">
               <div className="flex items-center justify-between">
-                <h2 className="text-sm font-semibold">{t("playgroundRoutingPath")}</h2>
+                <h2 className="text-sm font-semibold text-text-main">
+                  {t("playgroundRoutingPath")}
+                </h2>
                 <div className="flex items-center gap-3 text-sm">
                   <span className="text-text-muted">
                     {t("playgroundStrategy")}: <strong>{result.strategy}</strong>
@@ -234,32 +240,34 @@ export default function ComboPlaygroundClient() {
 
                     {/* Target Card */}
                     <div
-                      className={`border rounded-lg p-3 ${
+                      className={`border rounded-lg p-3 transition-colors ${
                         target.status === "available"
-                          ? "border-green-500/30 bg-green-500/5"
+                          ? "border-success/30 bg-success/5"
                           : target.status === "error"
-                            ? "border-red-500/30 bg-red-500/5"
+                            ? "border-error/30 bg-error/5"
                             : target.status === "unknown"
-                              ? "border-yellow-500/30 bg-yellow-500/5"
-                              : "border-border bg-surface/50"
+                              ? "border-warning/30 bg-warning/5"
+                              : "border-border bg-surface"
                       }`}
                     >
                       <div className="flex items-center justify-between">
                         <div className="flex items-center gap-3">
-                          <div className="flex items-center justify-center w-6 h-6 rounded-full bg-primary/10 text-primary text-xs font-bold">
+                          <div className="flex items-center justify-center w-6 h-6 rounded-full bg-bg-subtle text-text-main text-xs font-medium tabular-nums">
                             {target.rank}
                           </div>
                           <div>
-                            <div className="font-medium text-sm">{target.provider}</div>
+                            <div className="font-medium text-sm text-text-main">
+                              {target.provider}
+                            </div>
                             <div className="text-xs text-text-muted font-mono">{target.model}</div>
                           </div>
                         </div>
                         <div className="flex items-center gap-3">
                           <StatusTag status={target.status} />
-                          <span className="text-xs text-text-muted">
+                          <span className="text-xs text-text-muted font-mono tabular-nums">
                             ${target.estimatedCost.toFixed(6)}
                           </span>
-                          <span className="text-xs text-text-muted">
+                          <span className="text-xs text-text-muted font-mono tabular-nums">
                             {target.estimatedLatencyMs}ms
                           </span>
                           {target.contextWindow && (
@@ -279,13 +287,13 @@ export default function ComboPlaygroundClient() {
           {/* Warnings & Errors */}
           {result.warnings.length > 0 && (
             <Card>
-              <div className="p-4 space-y-2">
-                <h3 className="text-sm font-semibold text-yellow-600 dark:text-yellow-400">
+              <div className="space-y-2">
+                <h3 className="text-sm font-semibold text-warning">
                   {t("playgroundWarningCount", { count: result.warnings.length })}
                 </h3>
                 {result.warnings.map((w, i) => (
                   <p key={i} className="text-sm text-text-muted flex items-start gap-2">
-                    <span className="text-yellow-500 mt-0.5">⚠️</span>
+                    <span className="text-warning mt-0.5">⚠️</span>
                     {w}
                   </p>
                 ))}
@@ -295,12 +303,12 @@ export default function ComboPlaygroundClient() {
 
           {result.errors.length > 0 && (
             <Card>
-              <div className="p-4 space-y-2">
-                <h3 className="text-sm font-semibold text-red-600 dark:text-red-400">
+              <div className="space-y-2">
+                <h3 className="text-sm font-semibold text-error">
                   {t("playgroundErrorCount", { count: result.errors.length })}
                 </h3>
                 {result.errors.map((e, i) => (
-                  <p key={i} className="text-sm text-red-500 flex items-start gap-2">
+                  <p key={i} className="text-sm text-error flex items-start gap-2">
                     <span className="mt-0.5">🚫</span>
                     {e}
                   </p>
@@ -314,8 +322,8 @@ export default function ComboPlaygroundClient() {
       {/* Empty State */}
       {!result && combos.length > 0 && (
         <Card>
-          <div className="p-8 text-center">
-            <p className="text-text-muted">
+          <div className="py-6 text-center">
+            <p className="text-sm text-text-muted">
               {t.rich("playgroundEmptyHint", {
                 strong: (chunks) => <strong>{chunks}</strong>,
               })}
@@ -326,8 +334,8 @@ export default function ComboPlaygroundClient() {
 
       {combos.length === 0 && (
         <Card>
-          <div className="p-8 text-center">
-            <p className="text-text-muted">
+          <div className="py-6 text-center">
+            <p className="text-sm text-text-muted">
               {t("playgroundNoCombosYet")}{" "}
               <Link href="/dashboard/combos" className="text-primary hover:underline">
                 {t("playgroundCreateFirst")}

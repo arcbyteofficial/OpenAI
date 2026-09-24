@@ -23,16 +23,16 @@ export function ChaosModeSelector({
   collaborativeDesc: string;
 }) {
   return (
-    <div className="p-3 rounded-lg border border-border bg-surface/40">
+    <div className="p-4 rounded-card border border-border bg-surface">
       <p className="text-sm font-medium text-text-main mb-2">{label}</p>
       <div className="flex gap-2">
         <button
           type="button"
           onClick={() => onChange("parallel")}
-          className={`flex-1 px-3 py-2 rounded-md text-xs font-semibold transition-all ${
+          className={`flex-1 px-3 py-2 rounded-control text-xs font-medium transition-colors ${
             mode === "parallel"
-              ? "bg-primary text-white"
-              : "bg-black/5 dark:bg-white/5 text-text-muted hover:bg-black/10 dark:hover:bg-white/10"
+              ? "bg-primary/10 text-primary ring-1 ring-inset ring-primary/30"
+              : "bg-bg-subtle text-text-muted ring-1 ring-inset ring-transparent hover:text-text-main hover:ring-border-strong"
           }`}
         >
           <span className="material-symbols-outlined text-[16px] align-middle mr-1">
@@ -44,10 +44,10 @@ export function ChaosModeSelector({
         <button
           type="button"
           onClick={() => onChange("collaborative")}
-          className={`flex-1 px-3 py-2 rounded-md text-xs font-semibold transition-all ${
+          className={`flex-1 px-3 py-2 rounded-control text-xs font-medium transition-colors ${
             mode === "collaborative"
-              ? "bg-primary text-white"
-              : "bg-black/5 dark:bg-white/5 text-text-muted hover:bg-black/10 dark:hover:bg-white/10"
+              ? "bg-primary/10 text-primary ring-1 ring-inset ring-primary/30"
+              : "bg-bg-subtle text-text-muted ring-1 ring-inset ring-transparent hover:text-text-main hover:ring-border-strong"
           }`}
         >
           <span className="material-symbols-outlined text-[16px] align-middle mr-1">merge</span>

@@ -31,12 +31,14 @@ export default function KimiCodeAuthMethodModal({
         <button
           type="button"
           onClick={onSelectOAuth}
-          className="w-full rounded-lg border border-border p-4 text-left transition-colors hover:bg-sidebar"
+          className="w-full rounded-lg border border-border p-4 text-left transition-colors hover:border-border-strong hover:bg-bg-subtle"
         >
           <div className="flex items-start gap-3">
-            <span className="material-symbols-outlined mt-0.5 text-primary">passkey</span>
+            <span className="material-symbols-outlined mt-0.5 text-[18px] text-text-muted">
+              passkey
+            </span>
             <div className="min-w-0 flex-1">
-              <h3 className="mb-1 font-semibold">{t("oauthLabel")}</h3>
+              <h3 className="mb-1 text-sm font-semibold text-text-main">{t("oauthLabel")}</h3>
               <p className="text-sm text-text-muted">{t("oauth2Desc")}</p>
             </div>
           </div>
@@ -45,12 +47,14 @@ export default function KimiCodeAuthMethodModal({
         <button
           type="button"
           onClick={onSelectApiKey}
-          className="w-full rounded-lg border border-border p-4 text-left transition-colors hover:bg-sidebar"
+          className="w-full rounded-lg border border-border p-4 text-left transition-colors hover:border-border-strong hover:bg-bg-subtle"
         >
           <div className="flex items-start gap-3">
-            <span className="material-symbols-outlined mt-0.5 text-primary">key</span>
+            <span className="material-symbols-outlined mt-0.5 text-[18px] text-text-muted">
+              key
+            </span>
             <div className="min-w-0 flex-1">
-              <h3 className="mb-1 font-semibold">
+              <h3 className="mb-1 text-sm font-semibold text-text-main">
                 {providerText(t, "kimiCodeApiKeyLabel", "Kimi Code API Key")}
               </h3>
               <p className="text-sm text-text-muted">{t("apiKeySecure")}</p>

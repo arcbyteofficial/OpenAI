@@ -16,15 +16,15 @@ export function HowItWorksSidebar({ t, showCustomNote }: HowItWorksSidebarProps)
   ];
 
   return (
-    <aside className="space-y-4 rounded-xl border border-border bg-surface p-5">
+    <aside className="space-y-4 rounded-card border border-border bg-surface p-5">
       <h3 className="flex items-center gap-2 text-sm font-semibold text-text-main">
-        <span className="material-symbols-outlined text-[18px] text-primary">info</span>
+        <span className="material-symbols-outlined text-[18px] text-text-muted">info</span>
         {t("howItWorks.title")}
       </h3>
       <ol className="space-y-3">
         {steps.map((step, i) => (
           <li key={i} className="flex gap-3 text-xs text-text-muted">
-            <span className="flex size-5 shrink-0 items-center justify-center rounded-full bg-primary/10 text-[10px] font-bold text-primary">
+            <span className="flex size-5 shrink-0 items-center justify-center rounded-full border border-border bg-bg-subtle text-[10px] font-semibold tabular-nums text-text-muted">
               {i + 1}
             </span>
             {step}

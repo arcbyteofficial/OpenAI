@@ -21,7 +21,7 @@ export default function AccountEmailVisibilitySetting() {
     <div className="pt-4 border-t border-border">
       <div className="flex items-center justify-between gap-4">
         <div>
-          <p className="font-medium">
+          <p className="text-sm font-medium">
             {label("accountEmailVisibility", "Account email visibility")}
           </p>
           <p className="text-sm text-text-muted">

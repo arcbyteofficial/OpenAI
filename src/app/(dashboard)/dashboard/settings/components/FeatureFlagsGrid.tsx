@@ -266,18 +266,18 @@ export default function FeatureFlagsGrid() {
       {/* Header */}
       <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
         <div>
-          <h1 className="text-2xl font-semibold text-text-primary">{t("title")}</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
           {summary && (
             <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1 text-sm">
-              <span className="font-medium text-emerald-700 dark:text-emerald-300">
+              <span className="font-medium text-success">
                 {t("activeCount", { count: summary.active })}
               </span>
-              <span className="text-text-muted/60">·</span>
+              <span className="text-text-subtle">·</span>
               <span className="text-text-muted">
                 {t("inactiveCount", { count: summary.inactive })}
               </span>
-              <span className="text-text-muted/60">·</span>
-              <span className="font-medium text-sky-700 dark:text-sky-300">
+              <span className="text-text-subtle">·</span>
+              <span className="font-medium text-primary">
                 {t("dbOverrideCount", { count: summary.overriddenByDb })}
               </span>
             </div>
@@ -288,7 +288,7 @@ export default function FeatureFlagsGrid() {
         <div className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row">
           {/* Search input with search icon */}
           <div className="relative">
-            <span className="material-symbols-outlined absolute left-2.5 top-2 text-sm text-text-muted">
+            <span className="material-symbols-outlined absolute left-2.5 top-2 text-sm text-text-subtle">
               search
             </span>
             <input
@@ -296,7 +296,7 @@ export default function FeatureFlagsGrid() {
               placeholder={t("searchPlaceholder")}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-lg border border-border bg-bg-subtle py-1.5 pl-8 pr-4 text-sm text-text-primary placeholder:text-text-muted focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/15 sm:w-64"
+              className="w-full rounded-control border border-border-strong bg-surface py-1.5 pl-8 pr-4 text-sm text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/15 sm:w-64"
             />
           </div>
 
@@ -304,10 +304,10 @@ export default function FeatureFlagsGrid() {
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full rounded-lg border border-border bg-bg-subtle px-3 py-1.5 text-sm text-text-primary focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/15 sm:w-auto"
+            className="w-full rounded-control border border-border-strong bg-surface px-3 py-1.5 text-sm text-text-main focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/15 sm:w-auto"
           >
             {CATEGORIES.map((cat) => (
-              <option key={cat.value} value={cat.value} className="bg-card text-text-primary">
+              <option key={cat.value} value={cat.value} className="bg-surface text-text-main">
                 {t(`categories.${cat.labelKey}`)}
               </option>
             ))}
@@ -318,25 +318,23 @@ export default function FeatureFlagsGrid() {
       {/* Pending-restart banner — shown when at least one requiresRestart flag
           was toggled in this session. */}
       {pendingRestartKeys.size > 0 && (
-        <div className="rounded-xl border border-amber-300 bg-amber-50 p-4 dark:border-amber-500/40 dark:bg-amber-500/10">
+        <div className="rounded-card border border-warning/30 bg-warning/10 p-4">
           <div className="flex items-center justify-between gap-4">
             <div className="flex items-start gap-3">
-              <span className="material-symbols-outlined text-amber-600 dark:text-amber-300">
+              <span className="material-symbols-outlined text-[18px] text-warning">
                 restart_alt
               </span>
               <div>
-                <p className="text-sm font-medium text-amber-900 dark:text-amber-200">
+                <p className="text-sm font-medium text-text-main">
                   {t("restartRequiredCount", { count: pendingRestartKeys.size })}
                 </p>
-                <p className="mt-0.5 text-xs text-amber-800/80 dark:text-amber-200/80">
-                  {t("restartRequiredDescription")}
-                </p>
+                <p className="mt-0.5 text-xs text-text-muted">{t("restartRequiredDescription")}</p>
               </div>
             </div>
             {!showRestartConfirm ? (
               <button
                 onClick={() => setShowRestartConfirm(true)}
-                className="shrink-0 rounded-lg border border-amber-300 bg-white/70 px-4 py-2 text-sm font-medium text-amber-800 transition-colors hover:bg-amber-100 dark:border-amber-400/40 dark:bg-transparent dark:text-amber-300 dark:hover:bg-amber-500/20"
+                className="shrink-0 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle"
               >
                 {t("restartServer")}
               </button>
@@ -344,7 +342,7 @@ export default function FeatureFlagsGrid() {
               <div className="flex items-center gap-3">
                 <button
                   onClick={() => setShowRestartConfirm(false)}
-                  className="text-sm text-amber-800/80 hover:text-amber-950 dark:text-amber-300/80 dark:hover:text-amber-200"
+                  className="text-sm text-text-muted hover:text-text-main"
                   disabled={restarting}
                 >
                   {t("cancel")}
@@ -352,7 +350,7 @@ export default function FeatureFlagsGrid() {
                 <button
                   onClick={handleRestart}
                   disabled={restarting}
-                  className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-amber-700 disabled:opacity-50 dark:bg-amber-500/30 dark:text-amber-200 dark:hover:bg-amber-500/40"
+                  className="rounded-control bg-warning px-3 py-1.5 text-[13px] font-medium text-black transition-colors hover:brightness-95 disabled:opacity-50"
                 >
                   {restarting ? t("restarting") : t("confirmRestart")}
                 </button>
@@ -364,9 +362,9 @@ export default function FeatureFlagsGrid() {
 
       {/* Explanation banner for the synthetic "Requires Restart" view */}
       {category === "__restart" && (
-        <div className="rounded-xl border border-sky-200 bg-sky-50 p-3 text-sm text-sky-800 dark:border-blue-500/30 dark:bg-blue-500/10 dark:text-blue-200">
+        <div className="rounded-card border border-border bg-bg-subtle p-3 text-sm text-text-main">
           <div className="flex items-start gap-2">
-            <span className="material-symbols-outlined text-sky-600 dark:text-blue-300">info</span>
+            <span className="material-symbols-outlined text-[18px] text-primary">info</span>
             <p>
               {t.rich("restartViewDescription", { strong: (chunks) => <strong>{chunks}</strong> })}
             </p>
@@ -381,21 +379,18 @@ export default function FeatureFlagsGrid() {
           style={{ gridTemplateColumns: "repeat(auto-fill, minmax(min(100%, 320px), 1fr))" }}
         >
           {Array.from({ length: 9 }).map((_, i) => (
-            <div
-              key={i}
-              className="h-36 animate-pulse rounded-xl bg-black/[0.04] dark:bg-white/5"
-            />
+            <div key={i} className="h-36 animate-pulse rounded-card bg-bg-subtle" />
           ))}
         </div>
       )}
 
       {/* Error state */}
       {!loading && error && (
-        <div className="flex items-center justify-between rounded-xl border border-red-200 bg-red-50 p-4 dark:border-red-500/30 dark:bg-red-500/10">
-          <p className="text-sm text-red-700 dark:text-red-300">{error}</p>
+        <div className="flex items-center justify-between rounded-card border border-error/20 bg-error/10 p-4">
+          <p className="text-sm text-error">{error}</p>
           <button
             onClick={loadFlags}
-            className="text-sm font-medium text-red-700 underline hover:no-underline dark:text-red-300"
+            className="text-sm font-medium text-error underline hover:no-underline"
           >
             {t("retry")}
           </button>
@@ -407,7 +402,9 @@ export default function FeatureFlagsGrid() {
         <>
           {filteredFlags.length === 0 ? (
             <div className="py-16 text-center text-text-muted">
-              <span className="material-symbols-outlined text-4xl">search_off</span>
+              <span className="material-symbols-outlined text-[32px] text-text-subtle">
+                search_off
+              </span>
               <p className="mt-2 text-sm">{t("noSearchResults")}</p>
             </div>
           ) : (
@@ -441,7 +438,7 @@ export default function FeatureFlagsGrid() {
               {!showResetConfirm ? (
                 <button
                   onClick={() => setShowResetConfirm(true)}
-                  className="rounded-lg border border-red-200 bg-red-50/60 px-4 py-2 text-sm font-medium text-red-700 transition-colors hover:bg-red-100 dark:border-red-500/40 dark:bg-transparent dark:text-red-300 dark:hover:bg-red-500/10"
+                  className="rounded-control border border-error/30 bg-surface px-3 py-1.5 text-[13px] font-medium text-error transition-colors hover:bg-error/10"
                 >
                   {t("resetAllOverrides")}
                 </button>
@@ -452,14 +449,14 @@ export default function FeatureFlagsGrid() {
                   </p>
                   <button
                     onClick={() => setShowResetConfirm(false)}
-                    className="text-sm text-text-muted hover:text-text-primary"
+                    className="text-sm text-text-muted hover:text-text-main"
                   >
                     {t("cancel")}
                   </button>
                   <button
                     onClick={handleResetAll}
                     disabled={resettingAll}
-                    className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-red-700 disabled:opacity-50 dark:bg-red-500/20 dark:text-red-300 dark:hover:bg-red-500/30"
+                    className="rounded-control bg-error px-3 py-1.5 text-[13px] font-medium text-white transition-colors hover:brightness-95 disabled:opacity-50"
                   >
                     {resettingAll ? t("resetting") : t("confirmReset")}
                   </button>

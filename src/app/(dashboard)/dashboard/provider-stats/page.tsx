@@ -60,7 +60,7 @@ function SortIcon({
 }) {
   if (sortKey !== column) return null;
   return (
-    <span className="material-symbols-outlined text-[14px] ml-1 align-middle text-primary">
+    <span className="material-symbols-outlined text-[14px] ml-1 align-middle text-text-main">
       {sortDir === "desc" ? "arrow_downward" : "arrow_upward"}
     </span>
   );
@@ -166,8 +166,8 @@ export default function ProviderStatsPage() {
     return (
       <div className="flex items-center justify-center min-h-[400px]">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
-          <p className="text-text-muted mt-4">{t("loading")}</p>
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-text-muted" />
+          <p className="text-sm text-text-muted mt-4">{t("loading")}</p>
         </div>
       </div>
     );
@@ -176,12 +176,12 @@ export default function ProviderStatsPage() {
   if (error && !data) {
     return (
       <div>
-        <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6 text-center">
-          <span className="material-symbols-outlined text-red-500 text-[32px] mb-2">error</span>
-          <p className="text-red-400">{t("loadFailed", { error })}</p>
+        <div className="bg-error/10 border border-error/20 rounded-card p-6 text-center">
+          <span className="material-symbols-outlined text-error text-[32px] mb-2">error</span>
+          <p className="text-sm text-error">{t("loadFailed", { error })}</p>
           <button
             onClick={fetchData}
-            className="mt-4 px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors"
+            className="mt-4 px-4 py-2 rounded-control border border-border-strong bg-surface text-text-main text-sm font-medium hover:bg-bg-subtle transition-colors"
           >
             {t("retry")}
           </button>
@@ -201,7 +201,7 @@ export default function ProviderStatsPage() {
         )}
         <button
           onClick={fetchData}
-          className="p-2 rounded-lg bg-surface hover:bg-surface/80 text-text-muted hover:text-text-main transition-colors"
+          className="p-2 rounded-control border border-border bg-surface hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
           title={t("refresh")}
         >
           <span className="material-symbols-outlined text-[18px]">refresh</span>
@@ -212,52 +212,58 @@ export default function ProviderStatsPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="flex items-center justify-center size-8 rounded-lg bg-primary/10 text-primary">
+            <div className="flex items-center justify-center size-8 rounded-lg border border-border bg-bg-subtle text-text-muted">
               <span className="material-symbols-outlined text-[18px]">analytics</span>
             </div>
-            <span className="text-sm text-text-muted">{t("totalRequests")}</span>
+            <span className="text-[13px] text-text-muted">{t("totalRequests")}</span>
           </div>
-          <p className="text-xl font-semibold text-text-main">{formatNumber(totalRequests)}</p>
+          <p className="text-2xl font-semibold tabular-nums text-text-main">
+            {formatNumber(totalRequests)}
+          </p>
         </Card>
 
         <Card className="p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="flex items-center justify-center size-8 rounded-lg bg-blue-500/10 text-blue-500">
+            <div className="flex items-center justify-center size-8 rounded-lg border border-border bg-bg-subtle text-text-muted">
               <span className="material-symbols-outlined text-[18px]">timer</span>
             </div>
-            <span className="text-sm text-text-muted">{t("avgLatency")}</span>
+            <span className="text-[13px] text-text-muted">{t("avgLatency")}</span>
           </div>
-          <p className="text-xl font-semibold text-text-main">{formatLatency(avgLatency)}</p>
+          <p className="text-2xl font-semibold tabular-nums text-text-main">
+            {formatLatency(avgLatency)}
+          </p>
         </Card>
 
         <Card className="p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="flex items-center justify-center size-8 rounded-lg bg-green-500/10 text-green-500">
+            <div className="flex items-center justify-center size-8 rounded-lg border border-border bg-bg-subtle text-text-muted">
               <span className="material-symbols-outlined text-[18px]">check_circle</span>
             </div>
-            <span className="text-sm text-text-muted">{t("successRate")}</span>
+            <span className="text-[13px] text-text-muted">{t("successRate")}</span>
           </div>
-          <p className="text-xl font-semibold text-text-main">
+          <p className="text-2xl font-semibold tabular-nums text-text-main">
             {successRate(totalSuccessful, totalRequests)}
           </p>
         </Card>
 
         <Card className="p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="flex items-center justify-center size-8 rounded-lg bg-purple-500/10 text-purple-500">
+            <div className="flex items-center justify-center size-8 rounded-lg border border-border bg-bg-subtle text-text-muted">
               <span className="material-symbols-outlined text-[18px]">dns</span>
             </div>
-            <span className="text-sm text-text-muted">{t("activeProviders")}</span>
+            <span className="text-[13px] text-text-muted">{t("activeProviders")}</span>
           </div>
-          <p className="text-xl font-semibold text-text-main">{activeProviders}</p>
+          <p className="text-2xl font-semibold tabular-nums text-text-main">{activeProviders}</p>
         </Card>
       </div>
 
       {/* Provider Table */}
       <Card className="p-5">
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-text-main flex items-center gap-2">
-            <span className="material-symbols-outlined text-[20px] text-primary">table_chart</span>
+          <h2 className="text-sm font-semibold text-text-main flex items-center gap-2">
+            <span className="material-symbols-outlined text-[18px] text-text-muted">
+              table_chart
+            </span>
             {t("providerBreakdown")}
           </h2>
           <span className="text-xs text-text-muted">
@@ -266,55 +272,59 @@ export default function ProviderStatsPage() {
         </div>
 
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full text-[13px]">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left py-2 px-3 text-text-muted font-medium">{t("provider")}</th>
+                <th className="text-left py-2 px-3 text-xs text-text-muted font-medium">
+                  {t("provider")}
+                </th>
                 <th
-                  className="text-right py-2 px-3 text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
+                  className="text-right py-2 px-3 text-xs text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
                   onClick={() => handleSort("totalRequests")}
                 >
                   {t("requests")}{" "}
                   <SortIcon column="totalRequests" sortKey={sortKey} sortDir={sortDir} />
                 </th>
                 <th
-                  className="text-right py-2 px-3 text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
+                  className="text-right py-2 px-3 text-xs text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
                   onClick={() => handleSort("successfulRequests")}
                 >
                   {t("success")}{" "}
                   <SortIcon column="successfulRequests" sortKey={sortKey} sortDir={sortDir} />
                 </th>
-                <th className="text-right py-2 px-3 text-text-muted font-medium">{t("rate")}</th>
+                <th className="text-right py-2 px-3 text-xs text-text-muted font-medium">
+                  {t("rate")}
+                </th>
                 <th
-                  className="text-right py-2 px-3 text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
+                  className="text-right py-2 px-3 text-xs text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
                   onClick={() => handleSort("avgLatencyMs")}
                 >
                   {t("avgLatency")}{" "}
                   <SortIcon column="avgLatencyMs" sortKey={sortKey} sortDir={sortDir} />
                 </th>
                 <th
-                  className="text-right py-2 px-3 text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
+                  className="text-right py-2 px-3 text-xs text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
                   onClick={() => handleSort("totalTokensIn")}
                 >
                   {t("tokensIn")}{" "}
                   <SortIcon column="totalTokensIn" sortKey={sortKey} sortDir={sortDir} />
                 </th>
                 <th
-                  className="text-right py-2 px-3 text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
+                  className="text-right py-2 px-3 text-xs text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
                   onClick={() => handleSort("totalTokensOut")}
                 >
                   {t("tokensOut")}{" "}
                   <SortIcon column="totalTokensOut" sortKey={sortKey} sortDir={sortDir} />
                 </th>
                 <th
-                  className="text-right py-2 px-3 text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
+                  className="text-right py-2 px-3 text-xs text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
                   onClick={() => handleSort("avgTtftAfterToolMs")}
                 >
                   {t("ttftAfterTool")}{" "}
                   <SortIcon column="avgTtftAfterToolMs" sortKey={sortKey} sortDir={sortDir} />
                 </th>
                 <th
-                  className="text-right py-2 px-3 text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
+                  className="text-right py-2 px-3 text-xs text-text-muted font-medium cursor-pointer hover:text-text-main transition-colors select-none"
                   onClick={() => handleSort("avgGapAfterToolMs")}
                 >
                   {t("gapAfterTool")}{" "}
@@ -332,7 +342,7 @@ export default function ProviderStatsPage() {
                 return (
                   <Fragment key={p.provider}>
                     <tr
-                      className="border-b border-border/50 hover:bg-surface/50 transition-colors cursor-pointer"
+                      className="border-b border-border hover:bg-bg-subtle transition-colors cursor-pointer"
                       onClick={() =>
                         setExpandedProvider(
                           isExpanded ? null : models.length > 0 ? p.provider : null
@@ -351,11 +361,7 @@ export default function ProviderStatsPage() {
                       <td className="py-2.5 px-3 text-right tabular-nums">
                         <span
                           className={
-                            rate >= 99
-                              ? "text-green-500"
-                              : rate >= 95
-                                ? "text-amber-500"
-                                : "text-red-500"
+                            rate >= 99 ? "text-success" : rate >= 95 ? "text-warning" : "text-error"
                           }
                         >
                           {rate.toFixed(1)}%
@@ -391,7 +397,7 @@ export default function ProviderStatsPage() {
                     {isExpanded && models.length > 0 && (
                       <tr key={`${p.provider}-models`}>
                         <td colSpan={10} className="p-0">
-                          <div className="bg-black/[0.02] dark:bg-white/[0.02] border-b border-border/30">
+                          <div className="bg-surface-2 border-b border-border">
                             <table className="w-full text-xs">
                               <thead>
                                 <tr className="text-text-muted">
@@ -418,7 +424,7 @@ export default function ProviderStatsPage() {
                                   const mRate =
                                     m.requests > 0 ? (m.successfulRequests / m.requests) * 100 : 0;
                                   return (
-                                    <tr key={m.model} className="border-t border-border/20">
+                                    <tr key={m.model} className="border-t border-border">
                                       <td className="py-1.5 px-6 pl-12 font-mono text-text-main">
                                         {m.model}
                                       </td>
@@ -432,10 +438,10 @@ export default function ProviderStatsPage() {
                                         <span
                                           className={
                                             mRate >= 99
-                                              ? "text-green-500"
+                                              ? "text-success"
                                               : mRate >= 95
-                                                ? "text-amber-500"
-                                                : "text-red-500"
+                                                ? "text-warning"
+                                                : "text-error"
                                           }
                                         >
                                           {mRate.toFixed(1)}%
@@ -478,20 +484,20 @@ export default function ProviderStatsPage() {
           className="p-5"
         >
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full text-[13px]">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="text-left py-2 px-3 text-text-muted font-medium">Combo</th>
-                  <th className="text-right py-2 px-3 text-text-muted font-medium">
+                  <th className="text-left py-2 px-3 text-xs text-text-muted font-medium">Combo</th>
+                  <th className="text-right py-2 px-3 text-xs text-text-muted font-medium">
                     {t("requests")}
                   </th>
-                  <th className="text-right py-2 px-3 text-text-muted font-medium">
+                  <th className="text-right py-2 px-3 text-xs text-text-muted font-medium">
                     {t("avgTtft")}
                   </th>
-                  <th className="text-right py-2 px-3 text-text-muted font-medium">
+                  <th className="text-right py-2 px-3 text-xs text-text-muted font-medium">
                     {t("avgTotal")}
                   </th>
-                  <th className="text-right py-2 px-3 text-text-muted font-medium">
+                  <th className="text-right py-2 px-3 text-xs text-text-muted font-medium">
                     {t("success")}
                   </th>
                 </tr>
@@ -500,7 +506,7 @@ export default function ProviderStatsPage() {
                 {Object.entries(data.comboMetrics).map(([name, m]: [string, any]) => (
                   <tr
                     key={name}
-                    className="border-b border-border/50 hover:bg-surface/50 transition-colors"
+                    className="border-b border-border hover:bg-bg-subtle transition-colors"
                   >
                     <td className="py-2 px-3 font-medium text-text-main">{name}</td>
                     <td className="py-2 px-3 text-right tabular-nums text-text-main">
@@ -537,8 +543,8 @@ export default function ProviderStatsPage() {
             {Object.entries(data.telemetry).map(([key, val]: [string, any]) => {
               if (val == null || typeof val === "object") return null;
               return (
-                <div key={key} className="rounded-lg border border-border/40 bg-surface/30 p-3">
-                  <p className="text-xs text-text-muted uppercase tracking-wide">
+                <div key={key} className="rounded-lg border border-border bg-surface-2 p-3">
+                  <p className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
                     {key.replace(/([A-Z])/g, " $1").replace(/_/g, " ")}
                   </p>
                   <p className="text-lg font-semibold text-text-main mt-1 tabular-nums">

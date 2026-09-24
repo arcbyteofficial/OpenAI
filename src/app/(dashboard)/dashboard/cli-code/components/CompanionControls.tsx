@@ -26,14 +26,14 @@ export default function CompanionControls(props: Props) {
   return (
     <div className="grid gap-4 sm:grid-cols-2">
       <div className="flex min-w-0 flex-col gap-1.5">
-        <label htmlFor={id} className="text-sm font-medium text-text-main">
+        <label htmlFor={id} className="text-[13px] font-medium text-text-main">
           {t("target")}
         </label>
         <select
           id={id}
           value={props.selected.id}
           onChange={(event) => props.onTarget(event.target.value)}
-          className="h-10 w-full rounded-control border border-black/10 bg-surface px-3 text-sm text-text-main focus-visible:outline-2 focus-visible:outline-primary dark:border-white/10"
+          className="h-10 w-full rounded-control border border-border-strong bg-surface px-3 text-sm text-text-main focus-visible:outline-2 focus-visible:outline-primary"
         >
           {props.targets.map((target) => (
             <option key={target.id} value={target.id}>

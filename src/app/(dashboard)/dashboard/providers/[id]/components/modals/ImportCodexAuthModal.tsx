@@ -335,7 +335,7 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
               }}
               className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
                 topTab === id
-                  ? "border-primary text-primary"
+                  ? "border-text-main text-text-main"
                   : "border-transparent text-text-muted hover:text-text-main"
               }`}
             >
@@ -360,7 +360,7 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                   }}
                   className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors ${
                     singleTab === id
-                      ? "border-primary text-primary"
+                      ? "border-text-main text-text-main"
                       : "border-transparent text-text-muted hover:text-text-main"
                   }`}
                 >
@@ -380,7 +380,7 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                   type="file"
                   accept=".json"
                   onChange={handleSingleFileChange}
-                  className="text-sm text-text-muted file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border file:border-border file:text-xs file:bg-bg-subtle file:text-text-main hover:file:bg-bg-hover cursor-pointer"
+                  className="text-sm text-text-muted file:mr-3 file:py-1.5 file:px-3 file:rounded-control file:border file:border-border-strong file:text-xs file:bg-surface file:text-text-main hover:file:bg-bg-subtle file:transition-colors cursor-pointer"
                 />
                 <p className="text-xs text-text-muted">
                   {t("codexImportFileHint") ||
@@ -399,12 +399,12 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                   onChange={(e) => handleSinglePasteChange(e.target.value)}
                   rows={7}
                   placeholder='{ "auth_mode": "chatgpt", ... }'
-                  className="w-full rounded-lg border border-border bg-bg-subtle px-3 py-2 text-xs font-mono text-text-main placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/40 resize-none"
+                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[12px] font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] resize-none"
                 />
               </div>
             )}
 
-            {singleParseError && <p className="text-sm text-red-500">{singleParseError}</p>}
+            {singleParseError && <p className="text-sm text-error">{singleParseError}</p>}
             {singleDetectedEmail && !singleParseError && (
               <p className="text-xs text-text-muted">
                 {t("codexImportDetectedEmail", { email: singleDetectedEmail }) ||
@@ -422,7 +422,7 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                   value={singleEmail}
                   onChange={(e) => setSingleEmail(e.target.value)}
                   placeholder="user@example.com"
-                  className="rounded-lg border border-border bg-bg-subtle px-3 py-2 text-sm text-text-main placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/40"
+                  className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                 />
                 <p className="text-xs text-text-muted">
                   {t("codexImportEmailHint") || "Auto-detected from the file; edit if needed."}
@@ -437,7 +437,7 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                   value={singleName}
                   onChange={(e) => setSingleName(e.target.value)}
                   placeholder={singleEmail || "Codex (imported)"}
-                  className="rounded-lg border border-border bg-bg-subtle px-3 py-2 text-sm text-text-main placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/40"
+                  className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                 />
               </div>
               <label className="flex items-center gap-2 cursor-pointer">
@@ -455,7 +455,7 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
             </div>
 
             {singleError && (
-              <div className="rounded-lg bg-red-500/10 border border-red-500/20 px-4 py-3 text-sm text-red-400">
+              <div className="rounded-lg bg-error/10 border border-error/20 px-4 py-3 text-sm text-error">
                 {singleError}
               </div>
             )}
@@ -493,7 +493,7 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                   }}
                   className={`flex-1 px-3 py-1.5 text-xs font-medium rounded-md transition-colors ${
                     bulkMode === id
-                      ? "bg-bg-primary text-text-main shadow-sm"
+                      ? "bg-surface text-text-main ring-1 ring-border"
                       : "text-text-muted hover:text-text-main"
                   }`}
                 >
@@ -510,7 +510,7 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                   accept=".json"
                   multiple
                   onChange={handleBulkFilesChange}
-                  className="text-sm text-text-muted file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border file:border-border file:text-xs file:bg-bg-subtle file:text-text-main hover:file:bg-bg-hover cursor-pointer"
+                  className="text-sm text-text-muted file:mr-3 file:py-1.5 file:px-3 file:rounded-control file:border file:border-border-strong file:text-xs file:bg-surface file:text-text-main hover:file:bg-bg-subtle file:transition-colors cursor-pointer"
                 />
                 <p className="text-xs text-text-muted">
                   {t("codexImportBulkUploadHint") || "Select multiple .json files"}
@@ -526,7 +526,7 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                   onChange={(e) => handleBulkPasteChange(e.target.value)}
                   rows={7}
                   placeholder={'[{ "auth_mode": "chatgpt", ... }, ...]'}
-                  className="w-full rounded-lg border border-border bg-bg-subtle px-3 py-2 text-xs font-mono text-text-main placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/40 resize-none"
+                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[12px] font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] resize-none"
                 />
                 <p className="text-xs text-text-muted">
                   {t("codexImportBulkPasteHint") || "JSON array or multiple JSONs separated by ---"}
@@ -542,14 +542,14 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                   accept=".zip"
                   onChange={handleZipUpload}
                   disabled={bulkZipExtracting}
-                  className="text-sm text-text-muted file:mr-3 file:py-1.5 file:px-3 file:rounded-lg file:border file:border-border file:text-xs file:bg-bg-subtle file:text-text-main hover:file:bg-bg-hover cursor-pointer disabled:opacity-50"
+                  className="text-sm text-text-muted file:mr-3 file:py-1.5 file:px-3 file:rounded-control file:border file:border-border-strong file:text-xs file:bg-surface file:text-text-main hover:file:bg-bg-subtle file:transition-colors cursor-pointer disabled:opacity-50"
                 />
                 {bulkZipExtracting && (
                   <p className="text-xs text-text-muted animate-pulse">
                     {t("codexImportBulkZipExtracting") || "Extracting ZIP…"}
                   </p>
                 )}
-                {bulkZipError && <p className="text-sm text-red-500">{bulkZipError}</p>}
+                {bulkZipError && <p className="text-sm text-error">{bulkZipError}</p>}
                 <p className="text-xs text-text-muted">
                   {t("codexImportBulkZipHint") ||
                     "Upload a .zip containing auth.json files (max 50 files, 10 MB)"}
@@ -566,13 +566,13 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                 {bulkEntries.map((entry, i) => (
                   <div key={i} className="flex items-center gap-2 px-2 py-1 rounded">
                     <span
-                      className={`material-symbols-outlined text-[14px] ${entry.parseError ? "text-red-500" : "text-emerald-500"}`}
+                      className={`material-symbols-outlined text-[14px] ${entry.parseError ? "text-error" : "text-success"}`}
                     >
                       {entry.parseError ? "error" : "check_circle"}
                     </span>
                     <span className="text-xs text-text-main flex-1 truncate">{entry.name}</span>
                     {entry.parseError && (
-                      <span className="text-xs text-red-400">{entry.parseError}</span>
+                      <span className="text-xs text-error">{entry.parseError}</span>
                     )}
                   </div>
                 ))}
@@ -598,8 +598,8 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
               <div
                 className={`rounded-lg border px-4 py-3 text-sm ${
                   bulkResult.failed === 0
-                    ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
-                    : "bg-amber-500/10 border-amber-500/20 text-amber-400"
+                    ? "bg-success/10 border-success/20 text-success"
+                    : "bg-warning/10 border-warning/20 text-warning"
                 }`}
               >
                 <p className="font-medium">
@@ -691,7 +691,7 @@ export function ApplyCodexAuthModal({
       <div className="flex flex-col gap-4">
         <div>
           <div className="text-xs uppercase text-text-muted mb-1">{targetLabel}</div>
-          <code className="block rounded bg-sidebar px-2 py-1.5 text-xs font-mono text-text-main">
+          <code className="block rounded-md bg-bg-subtle px-2 py-1.5 text-[12px] font-mono text-text-main">
             ~/.codex/auth.json
           </code>
           <p className="mt-1 text-xs text-text-muted">{t("providerDetailPathAutoDetectedAllOs")}</p>
@@ -706,9 +706,9 @@ export function ApplyCodexAuthModal({
             <li>Centralized backup history (audit trail)</li>
           </ul>
         </div>
-        <div className="rounded-lg border border-amber-500/25 bg-amber-500/10 px-3 py-2 text-sm text-amber-200">
+        <div className="rounded-lg border border-warning/25 bg-warning/10 px-3 py-2 text-sm text-text-main">
           <div className="flex items-start gap-2">
-            <span className="material-symbols-outlined mt-0.5 text-[18px] text-amber-500">
+            <span className="material-symbols-outlined mt-0.5 text-[18px] text-warning">
               warning
             </span>
             <span>{warning}</span>

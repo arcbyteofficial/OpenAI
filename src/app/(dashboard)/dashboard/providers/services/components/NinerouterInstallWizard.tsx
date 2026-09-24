@@ -49,11 +49,13 @@ export function NinerouterInstallWizard() {
   return (
     <Card padding="md">
       <div className="flex items-center gap-3 mb-4">
-        <div className="size-8 rounded-lg flex items-center justify-center bg-blue-500/10">
-          <span className="material-symbols-outlined text-blue-500 text-xl">download</span>
+        <div className="size-8 rounded-lg flex items-center justify-center bg-bg-subtle border border-border">
+          <span className="material-symbols-outlined text-text-muted text-[18px]">download</span>
         </div>
         <div>
-          <h3 className="font-medium text-sm">{t("install9Router")}</h3>
+          <h3 className="font-semibold text-sm tracking-tight text-text-main">
+            {t("install9Router")}
+          </h3>
           <p className="text-xs text-text-muted">{t("install9RouterDescription")}</p>
         </div>
       </div>
@@ -61,13 +63,16 @@ export function NinerouterInstallWizard() {
       <div className="space-y-4">
         {/* Version field */}
         <div>
-          <label className="block text-xs font-medium mb-1" htmlFor="ninerouter-version">
+          <label
+            className="block text-[13px] font-medium text-text-main mb-1.5"
+            htmlFor="ninerouter-version"
+          >
             {t("version")}
           </label>
           <input
             id="ninerouter-version"
             type="text"
-            className="w-full rounded border border-border bg-bg-subtle px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+            className="w-full rounded-control border border-border-strong bg-surface px-3 py-1.5 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
             value={version}
             onChange={(e) => setVersion(e.target.value)}
             placeholder="latest"
@@ -78,13 +83,16 @@ export function NinerouterInstallWizard() {
 
         {/* Port field */}
         <div>
-          <label className="block text-xs font-medium mb-1" htmlFor="ninerouter-port">
+          <label
+            className="block text-[13px] font-medium text-text-main mb-1.5"
+            htmlFor="ninerouter-port"
+          >
             {t("servicePort")}
           </label>
           <input
             id="ninerouter-port"
             type="number"
-            className="w-full rounded border border-border bg-bg-subtle px-3 py-1.5 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+            className="w-full rounded-control border border-border-strong bg-surface px-3 py-1.5 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
             value={port}
             onChange={(e) => setPort(e.target.value)}
             min={1024}
@@ -97,10 +105,8 @@ export function NinerouterInstallWizard() {
         {/* Message */}
         {msg && (
           <div
-            className={`flex items-center gap-1.5 px-2 py-1.5 rounded text-xs ${
-              msg.ok
-                ? "bg-green-500/10 text-green-600 dark:text-green-400"
-                : "bg-red-500/10 text-red-600 dark:text-red-400"
+            className={`flex items-center gap-1.5 px-2 py-1.5 rounded-md text-xs ${
+              msg.ok ? "bg-success/10 text-success" : "bg-error/10 text-error"
             }`}
           >
             <span className="material-symbols-outlined text-[12px]">

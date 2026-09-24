@@ -83,21 +83,19 @@ export function CliproxyConnectionPanel() {
   return (
     <Card padding="md">
       <div className="flex items-center gap-3 mb-4">
-        <div className="size-8 rounded-lg flex items-center justify-center bg-indigo-500/10">
-          <span className="material-symbols-outlined text-indigo-500 text-xl">swap_horiz</span>
+        <div className="size-8 rounded-lg flex items-center justify-center bg-bg-subtle border border-border">
+          <span className="material-symbols-outlined text-text-muted text-[18px]">swap_horiz</span>
         </div>
         <div>
-          <h3 className="font-medium text-sm">{t("fallbackRouting")}</h3>
+          <h3 className="font-semibold text-sm text-text-main">{t("fallbackRouting")}</h3>
           <p className="text-xs text-text-muted">{t("fallbackRoutingDescription")}</p>
         </div>
       </div>
 
       {msg && (
         <div
-          className={`flex items-center gap-1.5 mb-3 px-2 py-1.5 rounded text-xs ${
-            msg.ok
-              ? "bg-green-500/10 text-green-600 dark:text-green-400"
-              : "bg-red-500/10 text-red-600 dark:text-red-400"
+          className={`flex items-center gap-1.5 mb-3 px-2 py-1.5 rounded-md text-xs ${
+            msg.ok ? "bg-success/10 text-success" : "bg-error/10 text-error"
           }`}
         >
           <span className="material-symbols-outlined text-[12px]">
@@ -109,7 +107,7 @@ export function CliproxyConnectionPanel() {
 
       <div className="space-y-4">
         <div className="flex items-center justify-between">
-          <label className="text-sm">{t("enableFallback")}</label>
+          <label className="text-sm text-text-main">{t("enableFallback")}</label>
           <Toggle
             checked={settings.cliproxyapi_fallback_enabled}
             onChange={(v) => saveSetting("cliproxyapi_fallback_enabled", v)}

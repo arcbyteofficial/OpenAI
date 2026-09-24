@@ -195,7 +195,7 @@ export default function ModalityBridgeVideoTab({
         {errorState === "save" ? (
           <div
             role="alert"
-            className="rounded-control border border-danger/30 p-3 text-sm text-danger"
+            className="rounded-control border border-error/30 bg-error/5 p-3 text-sm text-error"
           >
             {t("modalityBridgeTestError", { message: tRoot("common.error") })}
           </div>

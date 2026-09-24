@@ -13,22 +13,22 @@ interface FlowNodeProps {
 }
 
 const COLOR_MAP: Record<FlowNodeProps["color"], { border: string; bg: string; text: string }> = {
-  primary: { border: "border-primary/30", bg: "bg-primary/5", text: "text-primary" },
-  orange: { border: "border-orange-500/30", bg: "bg-orange-500/5", text: "text-orange-500" },
-  blue: { border: "border-blue-500/30", bg: "bg-blue-500/5", text: "text-blue-500" },
+  primary: { border: "border-border", bg: "bg-surface-2", text: "text-text-muted" },
+  orange: { border: "border-border", bg: "bg-surface-2", text: "text-text-muted" },
+  blue: { border: "border-border", bg: "bg-surface-2", text: "text-text-muted" },
   emerald: {
-    border: "border-emerald-500/30",
-    bg: "bg-emerald-500/5",
-    text: "text-emerald-500",
+    border: "border-border",
+    bg: "bg-surface-2",
+    text: "text-text-muted",
   },
-  amber: { border: "border-amber-500/30", bg: "bg-amber-500/5", text: "text-amber-500" },
+  amber: { border: "border-border", bg: "bg-surface-2", text: "text-text-muted" },
   purple: {
-    border: "border-purple-500/30",
-    bg: "bg-purple-500/5",
-    text: "text-purple-500",
+    border: "border-border",
+    bg: "bg-surface-2",
+    text: "text-text-muted",
   },
-  cyan: { border: "border-cyan-500/30", bg: "bg-cyan-500/5", text: "text-cyan-500" },
-  pink: { border: "border-pink-500/30", bg: "bg-pink-500/5", text: "text-pink-500" },
+  cyan: { border: "border-border", bg: "bg-surface-2", text: "text-text-muted" },
+  pink: { border: "border-border", bg: "bg-surface-2", text: "text-text-muted" },
 };
 
 function FlowNode({ icon, color, title, example, tooltipContent }: FlowNodeProps) {
@@ -37,7 +37,7 @@ function FlowNode({ icon, color, title, example, tooltipContent }: FlowNodeProps
     <div
       className={`flex flex-col items-center gap-1 rounded-lg border ${c.border} ${c.bg} px-3 py-2 text-center min-w-0`}
     >
-      <span className={`material-symbols-outlined text-[20px] ${c.text}`} aria-hidden="true">
+      <span className={`material-symbols-outlined text-[18px] ${c.text}`} aria-hidden="true">
         {icon}
       </span>
       <p className="text-[11px] font-semibold text-text-main leading-tight">{title}</p>
@@ -56,14 +56,16 @@ function FlowNode({ icon, color, title, example, tooltipContent }: FlowNodeProps
 
 function FlowArrow({ label }: { label?: string }) {
   return (
-    <div className="flex flex-col items-center justify-center text-text-muted">
+    <div className="flex flex-col items-center justify-center text-text-subtle">
       <span
         className="material-symbols-outlined text-[20px] rotate-90 sm:rotate-0"
         aria-hidden="true"
       >
         arrow_forward
       </span>
-      {label && <span className="text-[9px] uppercase tracking-wide mt-0.5">{label}</span>}
+      {label && (
+        <span className="text-[9px] uppercase tracking-wider text-text-subtle mt-0.5">{label}</span>
+      )}
     </div>
   );
 }

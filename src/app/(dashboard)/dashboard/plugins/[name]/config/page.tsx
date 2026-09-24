@@ -81,11 +81,13 @@ export default function PluginConfigPage({ params }: { params: Promise<{ name: s
 
   return (
     <div className="space-y-6 p-6">
-      <h1 className="text-2xl font-bold">{t("configure", { name })}</h1>
+      <h1 className="text-xl font-semibold tracking-tight text-text-main">
+        {t("configure", { name })}
+      </h1>
 
       {schemaKeys.length === 0 ? (
         <Card className="p-4">
-          <p className="text-gray-500">{t("noConfigSettings")}</p>
+          <p className="text-sm text-text-muted">{t("noConfigSettings")}</p>
         </Card>
       ) : (
         <Card className="space-y-4 p-4">
@@ -95,10 +97,10 @@ export default function PluginConfigPage({ params }: { params: Promise<{ name: s
 
             return (
               <div key={key} className="space-y-1">
-                <label className="text-sm font-medium">
+                <label className="text-sm font-medium text-text-main">
                   {key}
                   {field.description && (
-                    <span className="ml-2 text-xs text-gray-500">{field.description}</span>
+                    <span className="ml-2 text-xs text-text-muted">{field.description}</span>
                   )}
                 </label>
                 {field.type === "boolean" ? (
@@ -106,13 +108,13 @@ export default function PluginConfigPage({ params }: { params: Promise<{ name: s
                     type="checkbox"
                     checked={!!value}
                     onChange={(e) => handleChange(key, e.target.checked)}
-                    className="ml-2"
+                    className="ml-2 accent-[var(--color-primary)]"
                   />
                 ) : field.enum ? (
                   <select
                     value={String(value)}
                     onChange={(e) => handleChange(key, e.target.value)}
-                    className="w-full rounded border p-2"
+                    className="w-full rounded-control border border-border-strong bg-surface p-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                   >
                     {field.enum.map((opt) => (
                       <option key={opt} value={opt}>
@@ -127,14 +129,14 @@ export default function PluginConfigPage({ params }: { params: Promise<{ name: s
                     min={field.min}
                     max={field.max}
                     onChange={(e) => handleChange(key, Number(e.target.value))}
-                    className="w-full rounded border p-2"
+                    className="w-full rounded-control border border-border-strong bg-surface p-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                   />
                 ) : (
                   <input
                     type="text"
                     value={String(value)}
                     onChange={(e) => handleChange(key, e.target.value)}
-                    className="w-full rounded border p-2"
+                    className="w-full rounded-control border border-border-strong bg-surface p-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                   />
                 )}
               </div>

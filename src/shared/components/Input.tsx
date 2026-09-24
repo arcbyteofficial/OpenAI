@@ -72,10 +72,10 @@ export default function Input({
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
       {label && (
-        <label htmlFor={inputId} className="text-sm font-medium text-text-main">
+        <label htmlFor={inputId} className="text-[13px] font-medium text-text-main">
           {label}
           {required && (
-            <span className="text-red-500 ml-1" aria-hidden="true">
+            <span className="text-error ml-0.5" aria-hidden="true">
               *
             </span>
           )}
@@ -83,8 +83,8 @@ export default function Input({
       )}
       <div className="relative">
         {icon && (
-          <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none text-text-muted">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="absolute inset-y-0 left-0 flex items-center pl-2.5 pointer-events-none text-text-subtle">
+            <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
               {icon}
             </span>
           </div>
@@ -112,15 +112,15 @@ export default function Input({
             props.onBlur?.(e);
           }}
           className={cn(
-            "w-full py-2 px-3 text-sm text-text-main",
-            "bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-control",
-            "placeholder-text-muted/60",
-            "focus:ring-1 focus:ring-accent/30 focus:border-accent/50 focus:outline-none",
-            "transition-all shadow-inner disabled:opacity-50 disabled:cursor-not-allowed",
+            "w-full h-8 px-3 text-text-main",
+            "bg-surface border border-border-strong rounded-control",
+            "placeholder:text-text-subtle hover:border-text-subtle/50",
+            "focus:border-primary focus:ring-[3px] focus:ring-primary/15 focus:outline-none",
+            "transition-[border-color,box-shadow] duration-150 disabled:opacity-50 disabled:cursor-not-allowed",
             // iOS zoom fix
-            "text-[16px] sm:text-sm",
-            icon && "pl-10",
-            error ? "border-red-500 focus:border-red-500 focus:ring-red-500/20" : "",
+            "text-[16px] sm:text-[13px]",
+            icon && "pl-8",
+            error ? "border-error hover:border-error focus:border-error focus:ring-error/15" : "",
             inputClassName
           )}
           {...props}
@@ -129,7 +129,7 @@ export default function Input({
       {showCapsLock && (
         <p
           id={capsLockId}
-          className="text-xs text-amber-500 dark:text-amber-400 flex items-center gap-1 animate-in fade-in duration-200"
+          className="text-xs text-warning flex items-center gap-1 animate-in fade-in duration-200"
           role="status"
           aria-live="polite"
         >
@@ -140,7 +140,7 @@ export default function Input({
         </p>
       )}
       {error && (
-        <p id={errorId} className="text-xs text-red-500 flex items-center gap-1" role="alert">
+        <p id={errorId} className="text-xs text-error flex items-center gap-1" role="alert">
           <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
             error
           </span>

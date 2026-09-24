@@ -19,11 +19,11 @@ import { useTranslations } from "next-intl";
 // store — it is not a cloud/telemetry service). Internal state keys, the
 // `cloud_*` material icons and the cloudSync.* wiring are intentionally kept.
 const STATUS_CONFIG = {
-  connected: { icon: "cloud_done", color: "text-green-500", labelKey: "synced" },
-  syncing: { icon: "cloud_sync", color: "text-blue-400 animate-pulse", labelKey: "syncing" },
-  disconnected: { icon: "cloud_off", color: "text-amber-500", labelKey: "off" },
-  error: { icon: "cloud_off", color: "text-red-400", labelKey: "error" },
-  disabled: { icon: "cloud_off", color: "text-text-muted/50", labelKey: "disabled" },
+  connected: { icon: "cloud_done", color: "text-success", labelKey: "synced" },
+  syncing: { icon: "cloud_sync", color: "text-primary animate-pulse", labelKey: "syncing" },
+  disconnected: { icon: "cloud_off", color: "text-warning", labelKey: "off" },
+  error: { icon: "cloud_off", color: "text-error", labelKey: "error" },
+  disabled: { icon: "cloud_off", color: "text-text-subtle", labelKey: "disabled" },
 };
 
 export default function CloudSyncStatus({ collapsed = false }) {
@@ -84,7 +84,7 @@ export default function CloudSyncStatus({ collapsed = false }) {
   return (
     <button
       onClick={() => router.push("/dashboard/endpoint")}
-      className="flex items-center gap-2 px-3 py-1.5 text-xs rounded-lg hover:bg-white/5 transition-colors cursor-pointer w-full"
+      className="flex items-center gap-2 px-3 py-1.5 text-xs rounded-md hover:bg-bg-subtle transition-colors cursor-pointer w-full"
       title={
         lastSync
           ? t("lastSync", {
@@ -100,7 +100,7 @@ export default function CloudSyncStatus({ collapsed = false }) {
       </span>
       {!collapsed && (
         <span
-          className={`truncate ${status === "connected" ? "text-green-500" : "text-text-muted"}`}
+          className={`truncate ${status === "connected" ? "text-text-main" : "text-text-muted"}`}
         >
           {label}
         </span>

@@ -168,21 +168,23 @@ export default function ModelRoutingSection({ combos: externalCombos }: { combos
     <Card>
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-primary/10 text-primary">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="p-2 rounded-lg bg-bg-subtle text-text-muted">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               route
             </span>
           </div>
           <div>
-            <h3 className="text-lg font-semibold">{t("modelRoutingTitle")}</h3>
+            <h3 className="text-base font-semibold tracking-tight text-text-main">
+              {t("modelRoutingTitle")}
+            </h3>
             <p className="text-sm text-text-muted">{t("modelRoutingDesc")}</p>
           </div>
         </div>
         {!adding && (
           <button
             onClick={() => setAdding(true)}
-            className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg
-                       bg-primary/10 text-primary hover:bg-primary/20 transition-colors"
+            className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-control
+                       border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors"
           >
             <span className="material-symbols-outlined text-[14px]">add</span>
             {t("addRule")}
@@ -192,36 +194,36 @@ export default function ModelRoutingSection({ combos: externalCombos }: { combos
 
       {/* Inline form */}
       {adding && (
-        <div className="mt-3 p-3 rounded-lg border border-primary/20 bg-primary/[0.03] dark:bg-primary/[0.06]">
+        <div className="mt-3 p-3 rounded-lg border border-border bg-bg-subtle">
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
             <div>
-              <label className="text-[10px] font-medium text-text-muted uppercase tracking-wider">
+              <label className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
                 {t("pattern")}
               </label>
               <input
                 value={pattern}
                 onChange={(e) => setPattern(e.target.value)}
                 placeholder="claude-sonnet*"
-                className="w-full mt-0.5 px-2.5 py-1.5 text-xs rounded-lg border border-black/10 dark:border-white/10
-                           bg-white dark:bg-black/20 focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full mt-0.5 px-2.5 py-1.5 text-xs rounded-control border border-border-strong
+                           bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
               />
-              <p className="text-[9px] text-text-muted mt-0.5">{t("patternHint")}</p>
+              <p className="text-[11px] text-text-subtle mt-0.5">{t("patternHint")}</p>
               {patternIsPaidOnly && (
-                <p className="text-[9px] text-amber-500 mt-0.5">
+                <p className="text-[11px] text-warning mt-0.5">
                   {t("paidModelPatternWarning") ||
                     "This pattern only matches paid models — enable paid models or adjust the pattern."}
                 </p>
               )}
             </div>
             <div>
-              <label className="text-[10px] font-medium text-text-muted uppercase tracking-wider">
+              <label className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
                 {t("routeToCombo")}
               </label>
               <select
                 value={comboId}
                 onChange={(e) => setComboId(e.target.value)}
-                className="w-full mt-0.5 px-2.5 py-1.5 text-xs rounded-lg border border-black/10 dark:border-white/10
-                           bg-white dark:bg-black/20 focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full mt-0.5 px-2.5 py-1.5 text-xs rounded-control border border-border-strong
+                           bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
               >
                 <option value="">{t("selectCombo")}</option>
                 {combos.map((c) => (
@@ -232,28 +234,28 @@ export default function ModelRoutingSection({ combos: externalCombos }: { combos
               </select>
             </div>
             <div>
-              <label className="text-[10px] font-medium text-text-muted uppercase tracking-wider">
+              <label className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
                 {t("priority")}
               </label>
               <input
                 type="number"
                 value={priority}
                 onChange={(e) => setPriority(Number(e.target.value))}
-                className="w-full mt-0.5 px-2.5 py-1.5 text-xs rounded-lg border border-black/10 dark:border-white/10
-                           bg-white dark:bg-black/20 focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full mt-0.5 px-2.5 py-1.5 text-xs rounded-control border border-border-strong
+                           bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
               />
-              <p className="text-[9px] text-text-muted mt-0.5">{t("priorityHint")}</p>
+              <p className="text-[11px] text-text-subtle mt-0.5">{t("priorityHint")}</p>
             </div>
             <div>
-              <label className="text-[10px] font-medium text-text-muted uppercase tracking-wider">
+              <label className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
                 {t("description")}
               </label>
               <input
                 value={description}
                 onChange={(e) => setDescription(e.target.value)}
                 placeholder={t("modelRoutingDescriptionPlaceholder")}
-                className="w-full mt-0.5 px-2.5 py-1.5 text-xs rounded-lg border border-black/10 dark:border-white/10
-                           bg-white dark:bg-black/20 focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full mt-0.5 px-2.5 py-1.5 text-xs rounded-control border border-border-strong
+                           bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
               />
             </div>
           </div>
@@ -261,15 +263,15 @@ export default function ModelRoutingSection({ combos: externalCombos }: { combos
             <button
               onClick={handleSave}
               disabled={!pattern.trim() || !comboId || patternIsPaidOnly}
-              className="px-3 py-1 text-xs font-medium rounded-lg bg-primary text-white
-                         hover:bg-primary/90 disabled:opacity-40 transition-colors"
+              className="px-3 py-1 text-xs font-medium rounded-control bg-contrast text-contrast-fg
+                         hover:bg-contrast-hover disabled:opacity-40 transition-colors"
             >
               {editingId ? t("update") : t("save")}
             </button>
             <button
               onClick={resetForm}
-              className="px-3 py-1 text-xs font-medium rounded-lg
-                         bg-black/5 dark:bg-white/5 hover:bg-black/10 dark:hover:bg-white/10 transition-colors"
+              className="px-3 py-1 text-xs font-medium rounded-control
+                         text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
             >
               {t("cancel")}
             </button>
@@ -283,7 +285,7 @@ export default function ModelRoutingSection({ combos: externalCombos }: { combos
       ) : mappings.length === 0 ? (
         <div className="mt-3 text-center py-4">
           <p className="text-xs text-text-muted">{t("noRoutingRules")}</p>
-          <p className="text-[10px] text-text-muted mt-1">{t("routingRuleHint")}</p>
+          <p className="text-[11px] text-text-subtle mt-1">{t("routingRuleHint")}</p>
         </div>
       ) : (
         <div className="mt-3 flex flex-col gap-1.5">
@@ -293,16 +295,16 @@ export default function ModelRoutingSection({ combos: externalCombos }: { combos
               className={`flex items-center justify-between px-3 py-2 rounded-lg border transition-colors
                 ${
                   m.enabled
-                    ? "border-black/10 dark:border-white/10 bg-white/70 dark:bg-white/[0.02]"
-                    : "border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.01] opacity-50"
+                    ? "border-border bg-surface hover:border-border-strong"
+                    : "border-border bg-bg-subtle opacity-50"
                 }`}
             >
               <div className="flex items-center gap-3 min-w-0">
-                <code className="text-xs px-1.5 py-0.5 rounded bg-amber-500/10 text-amber-700 dark:text-amber-300 font-mono shrink-0">
+                <code className="text-[12px] px-1.5 py-0.5 rounded bg-bg-subtle text-text-main font-mono shrink-0">
                   {m.pattern}
                 </code>
                 <span className="text-text-muted text-[10px]">→</span>
-                <span className="text-xs font-medium text-primary truncate">
+                <span className="text-xs font-medium text-text-main truncate">
                   {m.comboName || m.comboId.slice(0, 8)}
                 </span>
                 {m.description && (
@@ -310,25 +312,25 @@ export default function ModelRoutingSection({ combos: externalCombos }: { combos
                     {m.description}
                   </span>
                 )}
-                <span className="text-[9px] px-1 py-0.5 rounded bg-black/5 dark:bg-white/5 text-text-muted shrink-0">
+                <span className="text-[10px] px-1 py-0.5 rounded bg-bg-subtle text-text-muted font-mono tabular-nums shrink-0">
                   P{m.priority}
                 </span>
               </div>
               <div className="flex items-center gap-1 shrink-0">
                 <button
                   onClick={() => handleToggle(m)}
-                  className="p-1 rounded hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+                  className="p-1 rounded-md text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
                   title={m.enabled ? t("disable") : t("enable")}
                 >
                   <span
-                    className={`material-symbols-outlined text-[14px] ${m.enabled ? "text-emerald-500" : "text-text-muted"}`}
+                    className={`material-symbols-outlined text-[14px] ${m.enabled ? "text-primary" : "text-text-muted"}`}
                   >
                     {m.enabled ? "toggle_on" : "toggle_off"}
                   </span>
                 </button>
                 <button
                   onClick={() => handleEdit(m)}
-                  className="p-1 rounded hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+                  className="p-1 rounded-md text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
                   title={tCommon("edit")}
                 >
                   <span className="material-symbols-outlined text-[14px] text-text-muted">
@@ -337,10 +339,10 @@ export default function ModelRoutingSection({ combos: externalCombos }: { combos
                 </button>
                 <button
                   onClick={() => handleDelete(m.id)}
-                  className="p-1 rounded hover:bg-red-500/10 transition-colors"
+                  className="p-1 rounded-md hover:bg-error/10 transition-colors"
                   title={tCommon("delete")}
                 >
-                  <span className="material-symbols-outlined text-[14px] text-red-500">delete</span>
+                  <span className="material-symbols-outlined text-[14px] text-error">delete</span>
                 </button>
               </div>
             </div>

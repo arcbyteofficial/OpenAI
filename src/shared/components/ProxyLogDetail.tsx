@@ -67,91 +67,93 @@ export default function ProxyLogDetail({ log, onClose }) {
       aria-modal="true"
       aria-label={t("detailAriaLabel")}
     >
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
       <div
-        className="relative bg-bg-primary border border-border rounded-xl w-full max-w-[700px] max-h-[90vh] overflow-y-auto shadow-2xl"
+        className="relative bg-surface border border-border rounded-card w-full max-w-[700px] max-h-[90vh] overflow-y-auto shadow-[var(--shadow-elevated)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
-        <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b border-border bg-bg-primary/95 backdrop-blur-sm rounded-t-xl">
+        <div className="sticky top-0 z-10 flex items-center justify-between px-6 py-4 border-b border-border bg-surface/95 backdrop-blur-sm rounded-t-card">
           <div className="flex items-center gap-3">
             <span
-              className="inline-block px-2.5 py-1 rounded text-xs font-bold uppercase"
+              className="inline-block px-2 py-0.5 rounded-md text-[11px] font-semibold uppercase tracking-wide"
               style={{ backgroundColor: statusStyle.bg, color: statusStyle.text }}
             >
               {log.status}
             </span>
-            <span className="font-bold text-lg">{t("event")}</span>
+            <span className="font-semibold text-base tracking-tight text-text-main">
+              {t("event")}
+            </span>
           </div>
           <button
             onClick={onClose}
-            className="p-1.5 rounded-lg hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors"
+            className="p-1.5 rounded-control hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
             aria-label={t("close")}
           >
-            <span className="material-symbols-outlined">close</span>
+            <span className="material-symbols-outlined text-[18px]">close</span>
           </button>
         </div>
 
         <div className="p-6 flex flex-col gap-6">
           {/* Metadata Grid */}
-          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 p-4 bg-bg-subtle rounded-xl border border-border">
+          <div className="grid grid-cols-2 md:grid-cols-3 gap-4 p-4 bg-bg-subtle rounded-lg border border-border">
             <div>
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
+              <div className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
                 {t("time")}
               </div>
               <div className="text-sm font-medium">{formatDate(log.timestamp)}</div>
             </div>
             <div>
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
+              <div className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
                 {t("latency")}
               </div>
               <div className="text-sm font-medium">{formatLatency(log.latencyMs)}</div>
             </div>
             <div>
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
+              <div className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
                 {t("clientIp")}
               </div>
-              <div className="text-sm font-medium font-mono text-emerald-400">
+              <div className="text-[13px] font-medium font-mono text-text-main">
                 {log.clientIp || "—"}
               </div>
             </div>
             <div>
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
+              <div className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
                 {t("proxy")}
               </div>
-              <div className="text-sm font-medium font-mono text-primary">
+              <div className="text-[13px] font-medium font-mono text-text-main">
                 {formatProxyLabel(log.proxy, t("direct"))}
               </div>
             </div>
             <div>
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
+              <div className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
                 {t("type")}
               </div>
               <span
-                className="inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase"
+                className="inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wide"
                 style={{ backgroundColor: typeColor.bg, color: typeColor.text }}
               >
                 {typeColor.label}
               </span>
             </div>
             <div>
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
+              <div className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
                 {t("level")}
               </div>
               <span
-                className="inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase"
+                className="inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wide"
                 style={{ backgroundColor: levelColor.bg, color: levelColor.text }}
               >
                 {levelColor.label}
               </span>
             </div>
             <div>
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
+              <div className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
                 {t("provider")}
               </div>
               {log.provider ? (
                 <span
-                  className="inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase"
+                  className="inline-block px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wide"
                   style={{ backgroundColor: providerColor.bg, color: providerColor.text }}
                 >
                   {providerColor.label}
@@ -161,13 +163,13 @@ export default function ProxyLogDetail({ log, onClose }) {
               )}
             </div>
             <div>
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
+              <div className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
                 {t("tlsFingerprint")}
               </div>
               {log.tlsFingerprint ? (
                 <span
-                  className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-[10px] font-bold uppercase"
-                  style={{ backgroundColor: "rgba(6, 182, 212, 0.15)", color: "#22d3ee" }}
+                  className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md text-[10px] font-semibold uppercase tracking-wide"
+                  style={{ backgroundColor: "var(--color-border)", color: "inherit" }}
                 >
                   <span style={{ fontSize: "12px" }}>🔒</span> Chrome 124
                 </span>
@@ -176,10 +178,10 @@ export default function ProxyLogDetail({ log, onClose }) {
               )}
             </div>
             <div className="col-span-2">
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
+              <div className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
                 {t("targetUrl")}
               </div>
-              <div className="text-sm font-medium font-mono text-text-muted break-all">
+              <div className="text-[13px] font-medium font-mono text-text-muted break-all">
                 {log.targetUrl || "—"}
               </div>
             </div>
@@ -187,21 +189,21 @@ export default function ProxyLogDetail({ log, onClose }) {
 
           {/* Error */}
           {log.error && (
-            <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30">
-              <div className="text-[10px] text-red-400 uppercase tracking-wider mb-1 font-bold">
+            <div className="p-4 rounded-lg bg-error/10 border border-error/20">
+              <div className="text-[11px] text-error uppercase tracking-wider mb-1 font-medium">
                 {t("error")}
               </div>
-              <div className="text-sm text-red-300 font-mono">{log.error}</div>
+              <div className="text-[13px] text-error font-mono">{log.error}</div>
             </div>
           )}
 
           {/* Proxy Config Details */}
           {log.proxy && (
-            <div className="p-4 rounded-xl bg-bg-subtle border border-border">
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-2 font-bold">
+            <div className="p-4 rounded-lg bg-bg-subtle border border-border">
+              <div className="text-[11px] text-text-subtle uppercase tracking-wider mb-2 font-medium">
                 {t("configuration")}
               </div>
-              <pre className="text-xs font-mono text-text-primary bg-black/20 rounded-lg p-3 overflow-x-auto">
+              <pre className="text-[12px] font-mono text-text-main bg-surface border border-border rounded-md p-3 overflow-x-auto">
                 {JSON.stringify(log.proxy, null, 2)}
               </pre>
             </div>

@@ -33,7 +33,7 @@ export default function MarkdownMessage({ content, className }: MarkdownMessageP
       if (isBlock) {
         return (
           <pre
-            className="overflow-x-auto rounded bg-neutral-900 p-3 text-sm text-neutral-100 my-2"
+            className="overflow-x-auto rounded-lg border border-border bg-bg-subtle p-3 font-mono text-[13px] text-text-main my-2"
             data-language={language}
           >
             <code className={codeClassName ?? ""} {...props}>
@@ -46,7 +46,7 @@ export default function MarkdownMessage({ content, className }: MarkdownMessageP
       // Inline code
       return (
         <code
-          className="rounded bg-neutral-200 dark:bg-neutral-800 px-1 py-0.5 text-sm font-mono text-neutral-800 dark:text-neutral-200"
+          className="rounded-md bg-bg-subtle px-1 py-0.5 text-[13px] font-mono text-text-main"
           {...props}
         >
           {children}
@@ -63,21 +63,17 @@ export default function MarkdownMessage({ content, className }: MarkdownMessageP
       );
     },
     thead({ children }) {
-      return <thead className="bg-neutral-100 dark:bg-neutral-800">{children}</thead>;
+      return <thead className="bg-bg-subtle">{children}</thead>;
     },
     th({ children }) {
       return (
-        <th className="border border-neutral-300 dark:border-neutral-600 px-3 py-1.5 text-left font-semibold">
+        <th className="border border-border px-3 py-1.5 text-left text-xs font-medium text-text-muted">
           {children}
         </th>
       );
     },
     td({ children }) {
-      return (
-        <td className="border border-neutral-300 dark:border-neutral-600 px-3 py-1.5">
-          {children}
-        </td>
-      );
+      return <td className="border border-border px-3 py-1.5">{children}</td>;
     },
 
     // Links — open in new tab with rel noopener for security
@@ -87,7 +83,7 @@ export default function MarkdownMessage({ content, className }: MarkdownMessageP
           href={href}
           target="_blank"
           rel="noopener noreferrer"
-          className="text-blue-600 dark:text-blue-400 underline hover:no-underline"
+          className="text-primary underline underline-offset-2 hover:no-underline"
         >
           {children}
         </a>
@@ -112,22 +108,22 @@ export default function MarkdownMessage({ content, className }: MarkdownMessageP
 
     // Headings
     h1({ children }) {
-      return <h1 className="text-2xl font-bold my-2">{children}</h1>;
+      return <h1 className="text-xl font-semibold tracking-tight my-2">{children}</h1>;
     },
     h2({ children }) {
-      return <h2 className="text-xl font-bold my-2">{children}</h2>;
+      return <h2 className="text-lg font-semibold tracking-tight my-2">{children}</h2>;
     },
     h3({ children }) {
-      return <h3 className="text-lg font-semibold my-1.5">{children}</h3>;
+      return <h3 className="text-base font-semibold my-1.5">{children}</h3>;
     },
     h4({ children }) {
-      return <h4 className="text-base font-semibold my-1">{children}</h4>;
+      return <h4 className="text-sm font-semibold my-1">{children}</h4>;
     },
 
     // Blockquotes
     blockquote({ children }) {
       return (
-        <blockquote className="border-l-4 border-neutral-400 pl-3 italic text-neutral-600 dark:text-neutral-400 my-2">
+        <blockquote className="border-l-2 border-border-strong pl-3 text-text-muted my-2">
           {children}
         </blockquote>
       );
@@ -135,7 +131,7 @@ export default function MarkdownMessage({ content, className }: MarkdownMessageP
 
     // Horizontal rule
     hr() {
-      return <hr className="my-3 border-neutral-300 dark:border-neutral-600" />;
+      return <hr className="my-3 border-border" />;
     },
 
     // Strong / emphasis

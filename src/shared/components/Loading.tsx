@@ -8,10 +8,10 @@ type SpinnerSize = "sm" | "md" | "lg" | "xl";
 type LoadingType = "spinner" | "page" | "skeleton" | "card";
 
 const spinnerSizes: Record<SpinnerSize, string> = {
-  sm: "size-4",
-  md: "size-6",
-  lg: "size-8",
-  xl: "size-12",
+  sm: "size-4 text-[16px]",
+  md: "size-6 text-[24px]",
+  lg: "size-8 text-[32px]",
+  xl: "size-12 text-[48px]",
 };
 
 interface SpinnerProps {
@@ -52,7 +52,7 @@ export function Spinner({ size = "md", className, label }: SpinnerProps) {
       <span
         aria-hidden="true"
         className={cn(
-          "material-symbols-outlined text-primary animate-spin motion-reduce:animate-none",
+          "material-symbols-outlined text-text-muted animate-spin motion-reduce:animate-none",
           spinnerSizes[size]
         )}
       >
@@ -76,7 +76,7 @@ export function PageLoading({ message, className }: PageLoadingProps) {
       aria-busy="true"
     >
       <Spinner size="xl" />
-      <p className="mt-4 text-text-muted text-center">{message ?? t("loading")}</p>
+      <p className="mt-3 text-sm text-text-muted text-center">{message ?? t("loading")}</p>
     </div>
   );
 }
@@ -86,7 +86,7 @@ export function Skeleton({ className, ...props }: SkeletonProps) {
   return (
     <div
       aria-hidden="true"
-      className={cn("animate-pulse motion-reduce:animate-none rounded-lg bg-border", className)}
+      className={cn("animate-pulse motion-reduce:animate-none rounded-md bg-border", className)}
       {...props}
     />
   );
@@ -95,7 +95,7 @@ export function Skeleton({ className, ...props }: SkeletonProps) {
 // Card skeleton
 export function CardSkeleton() {
   return (
-    <div className="p-6 rounded-xl border border-border bg-surface" aria-hidden="true">
+    <div className="p-5 rounded-card border border-border bg-surface" aria-hidden="true">
       <div className="flex items-center justify-between mb-4 gap-4">
         <Skeleton className="h-4 w-24" />
         <Skeleton className="size-10 rounded-lg" />

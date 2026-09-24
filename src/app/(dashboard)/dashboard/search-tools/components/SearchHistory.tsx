@@ -45,7 +45,7 @@ export default function SearchHistory({ onReplay }: SearchHistoryProps) {
 
   return (
     <div className="p-4 flex-1">
-      <span className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">
+      <span className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
         {t("searchHistory")}
       </span>
       <div className="mt-2 space-y-1.5">
@@ -53,7 +53,7 @@ export default function SearchHistory({ onReplay }: SearchHistoryProps) {
           <button
             key={`${entry.timestamp}:${entry.provider}:${entry.query}`}
             onClick={() => onReplay(entry)}
-            className="w-full text-left p-2 bg-surface border border-border rounded-lg hover:border-primary/30 transition-colors"
+            className="w-full text-left p-2 bg-surface border border-border rounded-lg hover:border-border-strong hover:bg-bg-subtle transition-colors"
           >
             <div className="text-xs text-text-main truncate">{entry.query}</div>
             <div className="flex justify-between mt-0.5">

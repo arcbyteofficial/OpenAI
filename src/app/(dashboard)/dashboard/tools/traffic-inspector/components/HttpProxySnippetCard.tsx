@@ -29,8 +29,8 @@ export function HttpProxySnippetCard({ port, onClose }: HttpProxySnippetCardProp
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="w-full max-w-lg rounded-xl border border-border bg-surface shadow-xl p-5">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+      <div className="w-full max-w-lg rounded-card border border-border bg-surface shadow-[var(--shadow-elevated)] p-5">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-base font-semibold text-text-main">
             {t("httpProxyTitle", { port })}
@@ -38,10 +38,10 @@ export function HttpProxySnippetCard({ port, onClose }: HttpProxySnippetCardProp
           <button
             type="button"
             onClick={onClose}
-            className="text-text-muted hover:text-text-main focus-ring rounded"
+            className="text-text-muted hover:text-text-main transition-colors focus-ring rounded-md"
             aria-label={t("close")}
           >
-            <span className="material-symbols-outlined" aria-hidden="true">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               close
             </span>
           </button>
@@ -54,9 +54,9 @@ export function HttpProxySnippetCard({ port, onClose }: HttpProxySnippetCardProp
               type="button"
               onClick={() => setLang(l)}
               className={cn(
-                "px-3 py-1 text-xs rounded border focus-ring",
+                "px-3 py-1 text-xs font-medium rounded-md border transition-colors focus-ring",
                 lang === l
-                  ? "border-blue-500 bg-blue-900/30 text-blue-300"
+                  ? "border-border-strong bg-bg-subtle text-text-main"
                   : "border-border text-text-muted hover:text-text-main"
               )}
             >
@@ -65,7 +65,7 @@ export function HttpProxySnippetCard({ port, onClose }: HttpProxySnippetCardProp
           ))}
         </div>
 
-        <pre className="rounded bg-bg-subtle border border-border p-3 text-xs font-mono text-text-main overflow-x-auto whitespace-pre">
+        <pre className="rounded-lg bg-bg-subtle border border-border p-3 text-xs font-mono text-text-main overflow-x-auto whitespace-pre">
           {snippets[lang]}
         </pre>
 
@@ -73,7 +73,7 @@ export function HttpProxySnippetCard({ port, onClose }: HttpProxySnippetCardProp
           <button
             type="button"
             onClick={copy}
-            className="inline-flex items-center gap-1.5 rounded border border-border px-3 py-1.5 text-xs text-text-main hover:bg-bg-subtle focus-ring"
+            className="inline-flex items-center gap-1.5 rounded-control border border-border-strong px-3 py-1.5 text-xs font-medium text-text-main hover:bg-bg-subtle transition-colors focus-ring"
           >
             <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
               {copied ? "check" : "content_copy"}

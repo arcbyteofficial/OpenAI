@@ -28,10 +28,10 @@ const KIND_ICONS: Record<WebhookKind, string> = {
 };
 
 const KIND_COLORS: Record<WebhookKind, string> = {
-  slack: "text-emerald-500",
-  telegram: "text-blue-500",
-  discord: "text-violet-500",
-  custom: "text-amber-500",
+  slack: "text-text-muted",
+  telegram: "text-text-muted",
+  discord: "text-text-muted",
+  custom: "text-text-muted",
 };
 
 function getStatus(wh: WebhookItem): "active" | "inactive" | "errored" {
@@ -64,10 +64,10 @@ export function WebhookCard({
   const isTesting = testingId === webhook.id;
 
   return (
-    <div className="rounded-xl border border-border bg-surface transition-shadow hover:shadow-sm">
+    <div className="rounded-card border border-border bg-surface transition-colors hover:border-border-strong">
       <div className="flex items-center gap-3 p-4">
         <span
-          className={`material-symbols-outlined shrink-0 text-[22px] ${KIND_COLORS[webhook.kind]}`}
+          className={`material-symbols-outlined shrink-0 text-[20px] ${KIND_COLORS[webhook.kind]}`}
         >
           {KIND_ICONS[webhook.kind]}
         </span>
@@ -75,15 +75,15 @@ export function WebhookCard({
           <p className="truncate text-sm font-semibold text-text-main">
             {webhook.description || t("unnamedWebhook")}
           </p>
-          <p className="truncate text-xs text-text-muted">{webhook.url}</p>
+          <p className="truncate font-mono text-[12px] text-text-muted">{webhook.url}</p>
         </div>
         <span
           className={`shrink-0 rounded-full border px-2 py-0.5 text-xs font-medium ${
             status === "active"
-              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-300"
+              ? "border-success/30 bg-success/10 text-success"
               : status === "errored"
-                ? "border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-300"
-                : "border-border bg-sidebar text-text-muted"
+                ? "border-error/30 bg-error/10 text-error"
+                : "border-border bg-bg-subtle text-text-muted"
           }`}
         >
           {t(status)}
@@ -94,7 +94,7 @@ export function WebhookCard({
             onClick={() => onTest(webhook)}
             disabled={isTesting}
             title={t("testWebhook")}
-            className="rounded-lg p-2 text-text-muted transition-colors hover:bg-primary/10 hover:text-primary disabled:opacity-40"
+            className="rounded-control p-2 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main disabled:opacity-40"
           >
             <span
               className={`material-symbols-outlined text-[18px] ${isTesting ? "animate-spin" : ""}`}
@@ -106,7 +106,7 @@ export function WebhookCard({
             type="button"
             onClick={() => onToggleEnabled(webhook)}
             title={webhook.enabled ? t("disable") : t("enable")}
-            className="rounded-lg p-2 text-text-muted transition-colors hover:bg-surface/60 hover:text-text-main"
+            className="rounded-control p-2 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
           >
             <span className="material-symbols-outlined text-[18px]">
               {webhook.enabled ? "toggle_on" : "toggle_off"}
@@ -116,7 +116,7 @@ export function WebhookCard({
             type="button"
             onClick={() => onEdit(webhook)}
             title={t("edit")}
-            className="rounded-lg p-2 text-text-muted transition-colors hover:bg-surface/60 hover:text-text-main"
+            className="rounded-control p-2 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
           >
             <span className="material-symbols-outlined text-[18px]">edit</span>
           </button>
@@ -124,7 +124,7 @@ export function WebhookCard({
             type="button"
             onClick={() => onDelete(webhook)}
             title={t("delete")}
-            className="rounded-lg p-2 text-red-500 transition-colors hover:bg-red-500/10"
+            className="rounded-control p-2 text-text-muted transition-colors hover:bg-error/10 hover:text-error"
           >
             <span className="material-symbols-outlined text-[18px]">delete</span>
           </button>
@@ -132,7 +132,7 @@ export function WebhookCard({
             type="button"
             onClick={() => setExpanded((v) => !v)}
             title={expanded ? "Collapse" : "Expand"}
-            className="rounded-lg p-2 text-text-muted transition-colors hover:bg-surface/60 hover:text-text-main"
+            className="rounded-control p-2 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
           >
             <span className="material-symbols-outlined text-[18px]">
               {expanded ? "expand_less" : "expand_more"}
@@ -147,13 +147,13 @@ export function WebhookCard({
             {webhook.events.map((ev) => (
               <span
                 key={ev}
-                className="rounded-full border border-border bg-sidebar px-2 py-0.5 text-xs text-text-muted"
+                className="rounded-md border border-border bg-bg-subtle px-2 py-0.5 font-mono text-[11px] text-text-muted"
               >
                 {ev === "*" ? t("allEvents") : ev}
               </span>
             ))}
           </div>
-          <p className="mb-2 text-xs font-medium uppercase tracking-wider text-text-muted">
+          <p className="mb-2 text-[11px] font-medium uppercase tracking-wider text-text-subtle">
             {t("deliveries.title")}
           </p>
           <WebhookDeliveriesPanel webhookId={webhook.id} t={t} />

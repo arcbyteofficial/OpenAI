@@ -79,9 +79,9 @@ export function AgentList({
   ];
 
   return (
-    <div className="rounded-xl border border-border/60 bg-card overflow-hidden">
+    <div className="rounded-card border border-border bg-surface overflow-hidden">
       {/* Controls */}
-      <div className="flex flex-wrap items-center gap-3 px-5 py-4 border-b border-border/30">
+      <div className="flex flex-wrap items-center gap-3 px-5 py-4 border-b border-border">
         <h2 className="text-sm font-semibold text-text-main mr-auto">
           {t("agentListTitle") || "IDE Agents"}{" "}
           <span className="text-text-muted font-normal">({targets.length})</span>
@@ -94,10 +94,10 @@ export function AgentList({
               key={opt.id}
               type="button"
               onClick={() => setFilter(opt.id)}
-              className={`px-2.5 py-1 rounded-lg text-xs font-medium transition-colors ${
+              className={`px-2.5 py-1 rounded-control text-xs font-medium transition-colors ${
                 filter === opt.id
-                  ? "bg-primary/10 text-primary"
-                  : "text-text-muted hover:text-text-main hover:bg-surface"
+                  ? "bg-bg-subtle text-text-main"
+                  : "text-text-muted hover:text-text-main hover:bg-bg-subtle"
               }`}
             >
               {opt.label}
@@ -107,12 +107,12 @@ export function AgentList({
 
         {/* Search */}
         <div className="relative">
-          <span className="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-[16px] text-text-muted pointer-events-none">
+          <span className="material-symbols-outlined absolute left-2 top-1/2 -translate-y-1/2 text-[16px] text-text-subtle pointer-events-none">
             search
           </span>
           <input
             type="text"
-            className="rounded-lg border border-border/50 bg-surface pl-8 pr-3 py-1.5 text-xs focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="rounded-control border border-border-strong bg-surface pl-8 pr-3 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
             placeholder={t("searchAgents") || "Search agents…"}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
@@ -124,7 +124,7 @@ export function AgentList({
       <div className="p-5 flex flex-col gap-3">
         {filtered.length === 0 ? (
           <div className="py-8 text-center text-text-muted">
-            <span className="material-symbols-outlined text-[36px] block mb-2 text-text-muted/40">
+            <span className="material-symbols-outlined text-[32px] block mb-2 text-text-subtle">
               search_off
             </span>
             <p className="text-sm">{t("noAgentsMatch") || "No agents match the current filter"}</p>

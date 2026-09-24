@@ -42,8 +42,8 @@ test("permissions modal uses i18n for management access description", () => {
 test("API manager page renders purpose-first header", () => {
   const source = readApiManagerPage();
   const headerBlock = source.slice(
-    source.indexOf('<h1 className="text-3xl'),
-    source.indexOf("{/* Filter Bar", source.indexOf('<h1 className="text-3xl'))
+    source.indexOf('<h1 className="text-2xl'),
+    source.indexOf("{/* Filter Bar", source.indexOf('<h1 className="text-2xl'))
   );
 
   assert.match(headerBlock, /\{t\("keyManagement"\)\}/);

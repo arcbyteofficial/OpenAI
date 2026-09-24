@@ -242,6 +242,6 @@ describe("NoAuthAccountCard proxy pool dropdown (#5217 Gap 1)", () => {
       .querySelector<HTMLButtonElement>("button[title]")!;
     // Tooltip is resolved from the referenced pool record, not an inline proxy.
     expect(firstShield.getAttribute("title")).toContain("1.2.3.4");
-    expect(firstShield.className).toContain("text-blue-400");
+    expect(firstShield.className).toContain("text-primary");
   });
 });

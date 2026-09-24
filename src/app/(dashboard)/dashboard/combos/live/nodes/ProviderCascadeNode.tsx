@@ -26,11 +26,11 @@ function getStateBorderColor(state: TargetState): string {
 function getStateGlow(state: TargetState): string {
   switch (state) {
     case "attempting":
-      return `0 0 12px ${flowColorAlpha(FLOW_EDGE_COLORS.last, 25)}`;
+      return `0 0 0 3px ${flowColorAlpha(FLOW_EDGE_COLORS.last, 25)}`;
     case "failed":
-      return `0 0 12px ${flowColorAlpha(FLOW_EDGE_COLORS.error, 25)}`;
+      return `0 0 0 3px ${flowColorAlpha(FLOW_EDGE_COLORS.error, 25)}`;
     case "succeeded":
-      return `0 0 12px ${flowColorAlpha(FLOW_EDGE_COLORS.active, 25)}`;
+      return `0 0 0 3px ${flowColorAlpha(FLOW_EDGE_COLORS.active, 25)}`;
     default:
       return "none";
   }
@@ -133,7 +133,7 @@ export function ProviderCascadeNode({ data }: NodeProps) {
 
   return (
     <div
-      className="flex flex-col rounded-lg border-2 bg-bg transition-all duration-300 min-w-[150px] max-w-[190px]"
+      className="flex flex-col rounded-lg border-2 bg-surface transition-[border-color,box-shadow] duration-300 min-w-[150px] max-w-[190px]"
       style={{ borderColor, boxShadow: glow }}
       data-testid={`provider-cascade-node-${targetIndex}`}
     >
@@ -164,7 +164,7 @@ export function ProviderCascadeNode({ data }: NodeProps) {
         {isAttempting && <StatusDot color={FLOW_EDGE_COLORS.last} sizeClass="size-1.5" />}
         {isFailed && <StatusDot color={FLOW_EDGE_COLORS.error} error sizeClass="size-1.5" />}
         {isSucceeded && (
-          <span className="text-[9px] font-bold" style={{ color: FLOW_EDGE_COLORS.active }}>
+          <span className="text-[9px] font-semibold" style={{ color: FLOW_EDGE_COLORS.active }}>
             ✓
           </span>
         )}
@@ -173,14 +173,14 @@ export function ProviderCascadeNode({ data }: NodeProps) {
       {/* Body: model + latency */}
       <div className="px-2.5 py-1.5 flex flex-col gap-0.5">
         <span
-          className="text-[10px] text-muted font-mono truncate"
+          className="text-[10px] text-text-muted font-mono truncate"
           title={model as string}
           data-testid="model-name"
         >
           {model as string}
         </span>
         {latencyMs != null && (
-          <span className="text-[10px] text-muted">{(latencyMs as number).toFixed(0)}ms</span>
+          <span className="text-[10px] text-text-muted">{(latencyMs as number).toFixed(0)}ms</span>
         )}
       </div>
 

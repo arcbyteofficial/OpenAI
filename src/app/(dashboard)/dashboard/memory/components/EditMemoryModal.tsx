@@ -111,12 +111,12 @@ export default function EditMemoryModal({ memory, isOpen, onClose, onSaved }: Pr
     >
       <div className="space-y-4">
         {error && (
-          <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-xs text-red-400">
+          <div className="p-3 rounded-lg bg-error/10 border border-error/20 text-xs text-error">
             {error}
           </div>
         )}
         <div>
-          <label className="block text-sm font-medium mb-1">{t("type")}</label>
+          <label className="block text-[13px] font-medium text-text-main mb-1">{t("type")}</label>
           <Select
             value={type}
             onChange={(e) => setType(e.target.value as typeof type)}
@@ -129,7 +129,7 @@ export default function EditMemoryModal({ memory, isOpen, onClose, onSaved }: Pr
           </Select>
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1">{t("key")}</label>
+          <label className="block text-[13px] font-medium text-text-main mb-1">{t("key")}</label>
           <Input
             value={key}
             onChange={(e) => setKey(e.target.value)}
@@ -138,27 +138,31 @@ export default function EditMemoryModal({ memory, isOpen, onClose, onSaved }: Pr
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1">{t("content")}</label>
+          <label className="block text-[13px] font-medium text-text-main mb-1">
+            {t("content")}
+          </label>
           <textarea
             value={content}
             onChange={(e) => setContent(e.target.value)}
             placeholder={t("contentPlaceholder")}
             rows={4}
-            className="w-full px-3 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring-1 focus:ring-violet-500 resize-y"
+            className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 resize-y"
           />
         </div>
         <div>
-          <label className="block text-sm font-medium mb-1">{t("editModal.metadataLabel")}</label>
+          <label className="block text-[13px] font-medium text-text-main mb-1">
+            {t("editModal.metadataLabel")}
+          </label>
           <textarea
             value={metadataStr}
             onChange={(e) => handleMetadataChange(e.target.value)}
             rows={4}
             spellCheck={false}
-            className={`w-full px-3 py-2 rounded-lg bg-background border text-xs font-mono focus:outline-none focus:ring-1 focus:ring-violet-500 resize-y ${
-              metadataError ? "border-red-500" : "border-border"
+            className={`w-full px-3 py-2 rounded-control bg-surface border text-xs font-mono text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 resize-y ${
+              metadataError ? "border-error" : "border-border-strong"
             }`}
           />
-          {metadataError && <p className="text-xs text-red-400 mt-1">{metadataError}</p>}
+          {metadataError && <p className="text-xs text-error mt-1">{metadataError}</p>}
         </div>
       </div>
     </Modal>

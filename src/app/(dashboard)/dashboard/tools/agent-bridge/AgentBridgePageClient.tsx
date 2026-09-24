@@ -232,14 +232,14 @@ export default function AgentBridgePageClient({
       {actionError && (
         <div
           role="alert"
-          className="flex items-center gap-2 rounded-xl border border-red-500/30 bg-red-500/5 px-4 py-3 text-sm text-red-600 dark:text-red-400"
+          className="flex items-center gap-2 rounded-card border border-error/30 bg-error/5 px-4 py-3 text-sm text-error"
         >
           <span className="material-symbols-outlined text-[16px]">error</span>
           {actionError}
           <button
             type="button"
             onClick={() => setActionError(null)}
-            className="ml-auto text-red-500 hover:text-red-400"
+            className="ml-auto text-error/80 hover:text-error transition-colors"
             aria-label={tc("dismissNotification")}
           >
             <span className="material-symbols-outlined text-[16px]">close</span>
@@ -251,7 +251,7 @@ export default function AgentBridgePageClient({
       {certGuide && (
         <div
           role="status"
-          className="rounded-xl border border-amber-500/30 bg-amber-500/5 px-4 py-3 text-sm text-amber-700 dark:text-amber-300"
+          className="rounded-card border border-warning/30 bg-warning/5 px-4 py-3 text-sm text-warning"
         >
           <div className="flex items-center gap-2 font-medium">
             <span className="material-symbols-outlined text-[16px]">info</span>
@@ -259,7 +259,7 @@ export default function AgentBridgePageClient({
             <button
               type="button"
               onClick={() => setCertGuide(null)}
-              className="ml-auto text-amber-600 hover:text-amber-500"
+              className="ml-auto text-warning/80 hover:text-warning transition-colors"
               aria-label={tc("dismissNotification")}
             >
               <span className="material-symbols-outlined text-[16px]">close</span>
@@ -320,8 +320,8 @@ export default function AgentBridgePageClient({
           />
 
           {/* Quick links */}
-          <div className="rounded-xl border border-border/40 bg-card px-5 py-4">
-            <h3 className="text-xs font-semibold text-text-muted mb-2 uppercase tracking-wide">
+          <div className="rounded-card border border-border bg-surface px-5 py-4">
+            <h3 className="text-[11px] font-medium text-text-subtle mb-2 uppercase tracking-wider">
               {t("quickLinks")}
             </h3>
             <div className="flex flex-wrap gap-3">

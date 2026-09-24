@@ -73,21 +73,17 @@ export function Step3EventsAndTest({
   return (
     <div className="space-y-5">
       <div>
-        <label className="text-xs font-medium uppercase tracking-wider text-text-muted">
-          {t("name")}
-        </label>
+        <label className="text-[13px] font-medium text-text-muted">{t("name")}</label>
         <input
           value={description}
           onChange={(e) => onChangeDescription(e.target.value)}
           placeholder={t("namePlaceholder")}
-          className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40"
+          className="mt-1 w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
         />
       </div>
 
       <div>
-        <label className="mb-2 block text-xs font-medium uppercase tracking-wider text-text-muted">
-          {t("events")}
-        </label>
+        <label className="mb-2 block text-[13px] font-medium text-text-muted">{t("events")}</label>
         <EventChecklist
           selected={events}
           onChange={onChangeEvents}
@@ -115,7 +111,7 @@ export function Step3EventsAndTest({
             type="button"
             onClick={() => void sendTest()}
             disabled={testState === "sending"}
-            className="inline-flex items-center gap-2 rounded-lg border border-border px-4 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar disabled:opacity-40"
+            className="inline-flex items-center gap-2 rounded-control border border-border-strong bg-surface px-4 py-2 text-sm font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-40"
           >
             <span
               className={`material-symbols-outlined text-[18px] ${
@@ -129,7 +125,7 @@ export function Step3EventsAndTest({
 
           {testState === "ok" && testResult && (
             <div className="space-y-3">
-              <p className="text-xs font-medium text-emerald-500">
+              <p className="text-xs font-medium tabular-nums text-success">
                 ✅ {testResult.status} &middot; {testResult.latencyMs}ms &middot; {t("testSuccess")}
               </p>
               {testResult.payloadSent && (
@@ -146,7 +142,7 @@ export function Step3EventsAndTest({
 
           {testState === "fail" && testResult && (
             <div className="space-y-3">
-              <p className="text-xs text-red-500">{testResult.error ?? t("testFailed")}</p>
+              <p className="text-xs text-error">{testResult.error ?? t("testFailed")}</p>
               {testResult.payloadSent && (
                 <PayloadPreview payload={testResult.payloadSent} label={t("testPayloadSent")} />
               )}

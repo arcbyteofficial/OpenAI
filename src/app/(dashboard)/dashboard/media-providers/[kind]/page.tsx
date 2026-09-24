@@ -43,16 +43,16 @@ export default async function MediaProviderKindPage({ params }: PageProps) {
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-2">
-        <h1 className="text-2xl font-semibold">{kindLabel}</h1>
+      <div className="flex flex-col gap-1">
+        <h1 className="text-2xl font-semibold tracking-tight text-text-main">{kindLabel}</h1>
         <p className="text-sm text-text-muted">{t("noProviders")}</p>
       </div>
 
       <MediaProviderKindNav activeKind={validKind} />
 
       {matchingProviders.length === 0 ? (
-        <div className="flex flex-col items-center justify-center py-16 gap-3 border border-dashed border-border rounded-xl text-text-muted">
-          <span className="material-symbols-outlined text-[32px]">category</span>
+        <div className="flex flex-col items-center justify-center py-16 gap-3 border border-dashed border-border-strong rounded-card text-text-muted">
+          <span className="material-symbols-outlined text-[24px] text-text-subtle">category</span>
           <p className="text-sm">{t("noProviders")}</p>
         </div>
       ) : (
@@ -71,7 +71,7 @@ export default async function MediaProviderKindPage({ params }: PageProps) {
                 href={`/dashboard/media-providers/${validKind}/${p.id}`}
                 className="group"
               >
-                <div className="rounded-xl border border-border bg-bg-card p-3 hover:bg-black/5 dark:hover:bg-white/5 hover:border-primary/40 transition-colors cursor-pointer h-full flex flex-col gap-2">
+                <div className="rounded-card border border-border bg-surface p-3 hover:bg-bg-subtle hover:border-border-strong transition-colors cursor-pointer h-full flex flex-col gap-2">
                   <div className="flex items-center gap-2">
                     <div
                       className="size-7 rounded-lg flex items-center justify-center shrink-0"
@@ -79,10 +79,12 @@ export default async function MediaProviderKindPage({ params }: PageProps) {
                     >
                       <ProviderIcon providerId={p.id} size={20} type="color" />
                     </div>
-                    <span className="text-sm font-medium truncate">{p.name}</span>
+                    <span className="text-[13px] font-medium text-text-main truncate">
+                      {p.name}
+                    </span>
                   </div>
                   {p.hasFree && (
-                    <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400 w-fit">
+                    <span className="text-[10px] font-medium px-1.5 py-0.5 rounded-full bg-success/10 text-success w-fit">
                       Free
                     </span>
                   )}

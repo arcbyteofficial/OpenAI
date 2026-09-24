@@ -52,7 +52,9 @@ export function OmniMarketplaceTab({
       if (!res.ok) {
         setMpError((data as { error?: string }).error || t("marketplaceError"));
       } else {
-        setMpResults(Array.isArray(data) ? data : (data as { skills?: MarketplaceSkill[] }).skills || []);
+        setMpResults(
+          Array.isArray(data) ? data : (data as { skills?: MarketplaceSkill[] }).skills || []
+        );
       }
     } catch (err) {
       setMpError(err instanceof Error ? err.message : t("marketplaceError"));
@@ -138,10 +140,12 @@ export function OmniMarketplaceTab({
   return (
     <div className="grid gap-4">
       <Card>
-        <h3 className="font-semibold mb-2">{t("skillsMarketplace")}</h3>
+        <h3 className="text-sm font-semibold tracking-tight text-text-main mb-2">
+          {t("skillsMarketplace")}
+        </h3>
         <p className="text-sm text-text-muted mb-4">
           {t("activeProvider")}{" "}
-          <span className="font-medium">
+          <span className="font-medium text-text-main">
             {skillsProvider === "skillsmp" ? "SkillsMP" : "skills.sh"}
           </span>
           . {t("changeInSettings")}
@@ -151,19 +155,21 @@ export function OmniMarketplaceTab({
             type="text"
             value={skillsProvider === "skillsmp" ? mpQuery : shQuery}
             onChange={(e) =>
-              skillsProvider === "skillsmp" ? setMpQuery(e.target.value) : setShQuery(e.target.value)
+              skillsProvider === "skillsmp"
+                ? setMpQuery(e.target.value)
+                : setShQuery(e.target.value)
             }
             onKeyDown={(e) =>
               e.key === "Enter" &&
               (skillsProvider === "skillsmp" ? searchMarketplace() : searchSkillsSh())
             }
             placeholder={t("searchMarketplacePlaceholder")}
-            className="flex-1 px-3 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring-1 focus:ring-violet-500"
+            className="flex-1 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
           />
           <button
             onClick={() => (skillsProvider === "skillsmp" ? searchMarketplace() : searchSkillsSh())}
             disabled={skillsProvider === "skillsmp" ? mpLoading : shLoading}
-            className="px-4 py-2 text-sm font-medium rounded-lg bg-violet-500 text-white hover:bg-violet-600 disabled:opacity-50 transition-colors"
+            className="px-4 py-2 text-sm font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover disabled:opacity-50 transition-colors"
           >
             {skillsProvider === "skillsmp"
               ? mpLoading
@@ -175,7 +181,7 @@ export function OmniMarketplaceTab({
           </button>
         </div>
         {(skillsProvider === "skillsmp" ? mpError : shError) && (
-          <div className="p-3 rounded-lg bg-red-500/10 text-red-400 text-sm mb-4">
+          <div className="p-3 rounded-lg bg-error/10 text-error text-sm mb-4">
             {skillsProvider === "skillsmp" ? mpError : shError}
           </div>
         )}
@@ -187,13 +193,13 @@ export function OmniMarketplaceTab({
             <Card key={skill.name}>
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="font-semibold">{skill.name}</h4>
+                  <h4 className="text-sm font-semibold text-text-main">{skill.name}</h4>
                   <p className="text-sm text-text-muted mt-1">{skill.description}</p>
                 </div>
                 <button
                   onClick={() => installFromMarketplace(skill)}
                   disabled={mpInstallingId === skill.name}
-                  className="px-4 py-1.5 text-sm font-medium rounded-lg bg-violet-500 text-white hover:bg-violet-600 disabled:opacity-50 transition-colors"
+                  className="px-4 py-1.5 text-sm font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle disabled:opacity-50 transition-colors"
                 >
                   {mpInstallingId === skill.name ? t("installing") : t("installSkillButton")}
                 </button>
@@ -209,7 +215,7 @@ export function OmniMarketplaceTab({
             <Card key={skill.id}>
               <div className="flex items-center justify-between">
                 <div>
-                  <h4 className="font-semibold">{skill.name}</h4>
+                  <h4 className="text-sm font-semibold text-text-main">{skill.name}</h4>
                   <p className="text-sm text-text-muted mt-1">
                     {skill.source} · {skill.installs.toLocaleString()} {t("installs")}
                   </p>
@@ -217,7 +223,7 @@ export function OmniMarketplaceTab({
                 <button
                   onClick={() => installFromSkillsSh(skill)}
                   disabled={shInstallingId === skill.id}
-                  className="px-4 py-1.5 text-sm font-medium rounded-lg bg-violet-500 text-white hover:bg-violet-600 disabled:opacity-50 transition-colors"
+                  className="px-4 py-1.5 text-sm font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle disabled:opacity-50 transition-colors"
                 >
                   {shInstallingId === skill.id ? t("installing") : t("installSkillButton")}
                 </button>
@@ -229,12 +235,16 @@ export function OmniMarketplaceTab({
 
       {skillsProvider === "skillsmp" && !mpLoading && mpResults.length === 0 && !mpError && (
         <Card>
-          <div className="text-center py-8 text-text-muted">{t("marketplaceSkillsMpHint")}</div>
+          <div className="text-center py-8 text-sm text-text-muted">
+            {t("marketplaceSkillsMpHint")}
+          </div>
         </Card>
       )}
       {skillsProvider === "skillssh" && !shLoading && shResults.length === 0 && !shError && (
         <Card>
-          <div className="text-center py-8 text-text-muted">{t("marketplaceSkillsShHint")}</div>
+          <div className="text-center py-8 text-sm text-text-muted">
+            {t("marketplaceSkillsShHint")}
+          </div>
         </Card>
       )}
     </div>

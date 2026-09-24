@@ -139,11 +139,11 @@ function ResetCreditConfirmation({
 }) {
   return (
     <div className="space-y-4">
-      <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-4">
+      <div className="rounded-lg border border-warning/30 bg-warning/10 p-4">
         <div className="flex items-start gap-3">
-          <span className="material-symbols-outlined text-amber-500">warning</span>
+          <span className="material-symbols-outlined text-[18px] text-warning">warning</span>
           <div>
-            <p className="font-semibold text-text-main">
+            <p className="text-sm font-semibold text-text-main">
               {tr("confirmRedeemResetCreditTitle", "Redeem this reset credit?")}
             </p>
             <p className="mt-1 text-sm text-text-muted">
@@ -174,7 +174,7 @@ function ResetCreditList({
 }) {
   if (credits.length === 0) {
     return (
-      <div className="rounded-lg border border-border p-5 text-center text-sm text-text-muted">
+      <div className="rounded-lg border border-dashed border-border p-5 text-center text-sm text-text-muted">
         {availableCount > 0
           ? tr(
               "resetCreditsDetailsUnavailable",
@@ -317,7 +317,7 @@ function CreditSummary({
           {getResetCreditWindowTitle(provider, credit, tr)}
         </span>
         {recommended && (
-          <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">
+          <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">
             {tr("resetCreditExpiresFirst", "Expires first")}
           </span>
         )}

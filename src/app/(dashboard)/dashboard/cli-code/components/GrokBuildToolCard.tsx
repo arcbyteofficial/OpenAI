@@ -360,7 +360,7 @@ export default function GrokBuildToolCard({
   const rowClass = "flex items-center gap-2";
   const labelClass = "w-32 shrink-0 text-right text-sm font-semibold text-text-main";
   const inputClass =
-    "min-w-0 flex-1 rounded border border-border bg-surface px-2 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-primary/50";
+    "min-w-0 flex-1 rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-primary/50";
 
   return (
     <Card padding="sm" className="overflow-hidden">
@@ -398,10 +398,10 @@ export default function GrokBuildToolCard({
           )}
 
           {!checking && status && !cliReady && (
-            <div className="flex items-center gap-3 rounded-lg border border-yellow-500/30 bg-yellow-500/10 p-4">
-              <span className="material-symbols-outlined text-yellow-500">warning</span>
+            <div className="flex items-center gap-3 rounded-lg border border-warning/30 bg-warning/10 p-4">
+              <span className="material-symbols-outlined text-warning">warning</span>
               <div>
-                <p className="font-medium text-yellow-600 dark:text-yellow-400">
+                <p className="font-medium text-warning">
                   {status.installed
                     ? t("cliNotRunnable", { tool: "Grok Build" })
                     : t("cliNotInstalled", { tool: "Grok Build" })}
@@ -508,7 +508,7 @@ export default function GrokBuildToolCard({
             {model && (
               <button
                 type="button"
-                className="rounded p-1 text-text-muted transition-colors hover:text-red-500"
+                className="rounded-md p-1 text-text-muted transition-colors hover:text-error"
                 title={t("clear")}
                 onClick={() => setModel("")}
               >
@@ -517,7 +517,7 @@ export default function GrokBuildToolCard({
             )}
           </div>
 
-          <div className="my-2 h-px bg-border/50" />
+          <div className="my-2 h-px bg-border" />
           <div className="mb-2 text-right text-[11px] font-medium uppercase tracking-wider text-text-muted">
             Subagent model overrides
           </div>
@@ -526,7 +526,7 @@ export default function GrokBuildToolCard({
               <span className="w-32 shrink-0 truncate text-right text-[11px] font-mono text-text-main opacity-70 transition-opacity group-hover:opacity-100">
                 {modelLabel(type)}
               </span>
-              <span className="material-symbols-outlined text-[14px] text-border transition-colors group-hover:text-primary">
+              <span className="material-symbols-outlined text-[14px] text-text-subtle transition-colors group-hover:text-text-muted">
                 arrow_forward
               </span>
               <Button
@@ -549,7 +549,7 @@ export default function GrokBuildToolCard({
               {subagentModels[type] && (
                 <button
                   type="button"
-                  className="rounded p-1 text-text-muted transition-colors hover:text-red-500"
+                  className="rounded-md p-1 text-text-muted transition-colors hover:text-error"
                   title={t("clear")}
                   onClick={() =>
                     setSubagentModels((current) => ({ ...current, [type]: undefined }))
@@ -564,7 +564,7 @@ export default function GrokBuildToolCard({
           {message && (
             <p
               role="status"
-              className={`rounded px-2 py-1.5 text-xs ${message.type === "success" ? "bg-green-500/10 text-green-600" : "bg-red-500/10 text-red-600"}`}
+              className={`rounded-md px-2 py-1.5 text-xs ${message.type === "success" ? "bg-success/10 text-success" : "bg-error/10 text-error"}`}
             >
               {message.text}
             </p>
@@ -623,7 +623,7 @@ export default function GrokBuildToolCard({
                   {backups.map((backup) => (
                     <div
                       key={backup.id}
-                      className="flex items-center gap-2 rounded bg-black/5 px-2 py-1.5 text-xs dark:bg-white/5"
+                      className="flex items-center gap-2 rounded-md bg-bg-subtle px-2 py-1.5 text-xs"
                     >
                       <span className="material-symbols-outlined text-[14px] text-text-muted">
                         description
@@ -636,7 +636,7 @@ export default function GrokBuildToolCard({
                       </span>
                       <button
                         type="button"
-                        className="rounded bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary transition-colors hover:bg-primary/20 disabled:opacity-50"
+                        className="rounded-md border border-border-strong bg-surface px-2 py-0.5 text-[10px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-50"
                         disabled={restoringBackup === backup.id}
                         onClick={() => void restoreBackup(backup.id)}
                       >

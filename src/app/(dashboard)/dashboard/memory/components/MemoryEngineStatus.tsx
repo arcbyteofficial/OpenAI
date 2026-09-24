@@ -14,9 +14,9 @@ type ChipColor = "green" | "gray" | "red";
 
 function StatusChip({ color }: { color: ChipColor }) {
   const colorMap: Record<ChipColor, string> = {
-    green: "bg-emerald-500",
-    gray: "bg-border",
-    red: "bg-red-500",
+    green: "bg-success",
+    gray: "bg-border-strong",
+    red: "bg-error",
   };
   return (
     <span
@@ -40,7 +40,7 @@ function ConfigureLink({
       type="button"
       data-testid={testId}
       onClick={onClick}
-      className="text-xs text-violet-400 hover:text-violet-300 underline-offset-2 hover:underline mt-1 inline-flex items-center gap-0.5"
+      className="text-xs font-medium text-primary underline-offset-2 hover:underline mt-1 inline-flex items-center gap-0.5"
     >
       {label}
       <span aria-hidden="true">→</span>
@@ -85,12 +85,12 @@ export default function MemoryEngineStatus({ status, onConfigure }: Props) {
       reason: status.vectorStore.reason,
       cta:
         status.vectorStore.backend === "none" ? (
-          <span className="text-xs text-amber-400 flex items-center gap-1">
+          <span className="text-xs text-warning flex items-center gap-1">
             <span className="material-symbols-outlined text-[12px]">terminal</span>
             {t("engine.vectorStoreInstallHint")}
           </span>
         ) : status.vectorStore.needsReindex > 0 ? (
-          <span className="text-xs text-amber-400 flex items-center gap-1">
+          <span className="text-xs text-warning flex items-center gap-1">
             <span className="material-symbols-outlined text-[12px]">warning</span>
             {t("engine.needsReindex", { count: status.vectorStore.needsReindex })}
           </span>
@@ -133,7 +133,7 @@ export default function MemoryEngineStatus({ status, onConfigure }: Props) {
       {rows.map((row, i) => (
         <div
           key={i}
-          className="flex items-start gap-3 p-3 rounded-lg border border-border/60 bg-surface/30"
+          className="flex items-start gap-3 p-3 rounded-lg border border-border bg-surface"
         >
           <StatusChip color={row.chip} />
           <div className="flex-1 min-w-0">

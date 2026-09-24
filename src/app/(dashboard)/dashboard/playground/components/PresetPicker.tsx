@@ -106,11 +106,15 @@ export default function PresetPicker({ configState, setConfigState }: PresetPick
               }
             }}
             defaultValue=""
-            className="flex-1 text-xs bg-surface border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label={t("loadPreset")}
           >
             <option value="" disabled>
-              {loading ? t("loadingPresets") : presets.length === 0 ? t("noPresets") : t("loadPresetPlaceholder")}
+              {loading
+                ? t("loadingPresets")
+                : presets.length === 0
+                  ? t("noPresets")
+                  : t("loadPresetPlaceholder")}
             </option>
             {presets.map((preset) => (
               <option key={preset.id} value={preset.id}>
@@ -121,7 +125,7 @@ export default function PresetPicker({ configState, setConfigState }: PresetPick
 
           <button
             onClick={openSave}
-            className="text-xs px-2.5 py-1.5 rounded border border-border text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5 transition-colors shrink-0"
+            className="text-xs px-2.5 py-1.5 rounded-control border border-border text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors shrink-0"
             aria-label={t("savePreset")}
           >
             {t("save")}
@@ -146,7 +150,7 @@ export default function PresetPicker({ configState, setConfigState }: PresetPick
                 </button>
                 <button
                   onClick={() => void remove(preset.id)}
-                  className="opacity-0 group-hover:opacity-100 p-0.5 text-text-muted hover:text-destructive transition-all"
+                  className="opacity-0 group-hover:opacity-100 p-0.5 text-text-muted hover:text-error transition-[color,opacity]"
                   aria-label={`Delete preset "${preset.name}"`}
                 >
                   <span className="material-symbols-outlined text-[12px]">delete</span>
@@ -160,14 +164,14 @@ export default function PresetPicker({ configState, setConfigState }: PresetPick
       {/* Save preset modal */}
       {saveModalOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
           onClick={closeSave}
           role="dialog"
           aria-modal="true"
           aria-label={t("savePreset")}
         >
           <div
-            className="bg-surface border border-border rounded-xl p-5 w-80 shadow-2xl"
+            className="bg-surface border border-border rounded-card p-5 w-80 shadow-[var(--shadow-elevated)]"
             onClick={(e) => e.stopPropagation()}
           >
             <h3 className="text-sm font-semibold text-text-main mb-4">{t("savePreset")}</h3>
@@ -183,24 +187,22 @@ export default function PresetPicker({ configState, setConfigState }: PresetPick
                 }}
                 placeholder={t("presetNamePlaceholder")}
                 autoFocus
-                className="text-xs bg-bg-alt border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+                className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
               />
 
-              {saveError && (
-                <p className="text-xs text-destructive">{saveError}</p>
-              )}
+              {saveError && <p className="text-xs text-error">{saveError}</p>}
 
               <div className="flex items-center justify-end gap-2">
                 <button
                   onClick={closeSave}
-                  className="text-xs px-3 py-1.5 rounded border border-border text-text-muted hover:text-text-main transition-colors"
+                  className="text-xs font-medium px-3 py-1.5 rounded-control border border-border-strong text-text-main hover:bg-bg-subtle transition-colors"
                 >
                   {t("cancel")}
                 </button>
                 <button
                   onClick={() => void handleSave()}
                   disabled={saving}
-                  className="text-xs px-3 py-1.5 rounded bg-primary text-white hover:bg-primary/90 transition-colors disabled:opacity-50"
+                  className="text-xs font-medium px-3 py-1.5 rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors disabled:opacity-50"
                 >
                   {saving ? t("savingPreset") : t("save")}
                 </button>

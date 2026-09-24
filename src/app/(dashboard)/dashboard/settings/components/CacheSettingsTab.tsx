@@ -335,13 +335,15 @@ export default function CacheSettingsTab() {
   return (
     <div className="flex flex-col gap-6 mt-4">
       {/* ── 1. Semantic Caching Card ── */}
-      <Card className="p-6">
+      <Card className="p-5">
         <div className="flex flex-col gap-5">
           {/* Card Header & Master Toggle */}
-          <div className="flex items-center justify-between pb-4 border-b border-border/50">
+          <div className="flex items-center justify-between pb-4 border-b border-border">
             <div>
               <div className="flex items-center gap-2">
-                <h3 className="font-semibold text-base text-text-primary">Semantic Caching</h3>
+                <h3 className="text-base font-semibold tracking-tight text-text-main">
+                  Semantic Caching
+                </h3>
                 <Badge variant={semEnabled ? "success" : "default"} size="sm">
                   {semEnabled ? "Active" : "Disabled"}
                 </Badge>
@@ -457,7 +459,7 @@ export default function CacheSettingsTab() {
                     <label className="text-sm font-medium text-text-primary">
                       Similarity Threshold
                     </label>
-                    <span className="text-xs font-mono font-bold text-primary">
+                    <span className="text-xs font-mono font-semibold tabular-nums text-text-main">
                       {semThreshold.toFixed(2)}
                     </span>
                   </div>
@@ -487,7 +489,7 @@ export default function CacheSettingsTab() {
                       max={10080}
                       value={semTtlMinutes}
                       onChange={(e) => setSemTtlMinutes(Math.max(1, parseInt(e.target.value) || 1))}
-                      className="w-28 px-3 py-1.5 rounded bg-surface-2 border border-border text-sm text-text-primary"
+                      className="w-28 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                       disabled={semSaving}
                     />
                     <span className="text-xs text-text-muted">minutes</span>
@@ -499,7 +501,7 @@ export default function CacheSettingsTab() {
               </div>
 
               {/* Storage Backend Selection */}
-              <div className="pt-2 border-t border-border/40">
+              <div className="pt-2 border-t border-border">
                 <label className="block text-sm font-medium text-text-primary mb-2">
                   Storage Engine
                 </label>
@@ -523,7 +525,7 @@ export default function CacheSettingsTab() {
                       max={100000}
                       value={semMaxSize}
                       onChange={(e) => setSemMaxSize(parseInt(e.target.value) || 100)}
-                      className="w-32 px-3 py-1.5 rounded bg-surface-2 border border-border text-sm text-text-primary"
+                      className="w-32 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                       disabled={semSaving}
                     />
                   </div>
@@ -538,7 +540,7 @@ export default function CacheSettingsTab() {
                         placeholder="redis://127.0.0.1:6379"
                         value={semRedisUrl}
                         onChange={(e) => setSemRedisUrl(e.target.value)}
-                        className="w-full px-3 py-1.5 rounded bg-surface-2 border border-border text-sm text-text-primary"
+                        className="w-full px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                         disabled={semSaving}
                       />
                     </div>
@@ -550,7 +552,7 @@ export default function CacheSettingsTab() {
                         type="text"
                         value={semRedisPrefix}
                         onChange={(e) => setSemRedisPrefix(e.target.value)}
-                        className="w-full px-3 py-1.5 rounded bg-surface-2 border border-border text-sm text-text-primary"
+                        className="w-full px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                         disabled={semSaving}
                       />
                     </div>
@@ -559,7 +561,7 @@ export default function CacheSettingsTab() {
               </div>
 
               {/* Determinism Toggle */}
-              <div className="flex items-center justify-between pt-2 border-t border-border/40">
+              <div className="flex items-center justify-between pt-2 border-t border-border">
                 <div>
                   <p className="text-sm font-medium text-text-primary">
                     Require Strict Determinism (temperature = 0)
@@ -577,7 +579,7 @@ export default function CacheSettingsTab() {
               </div>
 
               {/* Advanced Overrides Accordion */}
-              <div className="pt-2 border-t border-border/40">
+              <div className="pt-2 border-t border-border">
                 <button
                   type="button"
                   onClick={() => setShowAdvanced(!showAdvanced)}
@@ -589,7 +591,7 @@ export default function CacheSettingsTab() {
                 </button>
 
                 {showAdvanced && (
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3 p-3 rounded-lg bg-surface-2/40 border border-border/40">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3 p-3 rounded-lg bg-surface-2 border border-border">
                     <div>
                       <label className="block text-xs font-medium text-text-muted mb-1">
                         Custom Embedding Base URL
@@ -599,7 +601,7 @@ export default function CacheSettingsTab() {
                         placeholder="https://custom-embedding.internal/v1"
                         value={semBaseUrl}
                         onChange={(e) => setSemBaseUrl(e.target.value)}
-                        className="w-full px-3 py-1.5 rounded bg-surface-2 border border-border text-xs text-text-primary"
+                        className="w-full px-3 py-1.5 rounded-control bg-surface border border-border-strong text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                       />
                     </div>
                     <div>
@@ -611,7 +613,7 @@ export default function CacheSettingsTab() {
                         placeholder="Bearer token or API key"
                         value={semApiKey}
                         onChange={(e) => setSemApiKey(e.target.value)}
-                        className="w-full px-3 py-1.5 rounded bg-surface-2 border border-border text-xs text-text-primary"
+                        className="w-full px-3 py-1.5 rounded-control bg-surface border border-border-strong text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                       />
                     </div>
                   </div>
@@ -619,7 +621,7 @@ export default function CacheSettingsTab() {
               </div>
 
               {/* Action Buttons & Feedback */}
-              <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-border/50">
+              <div className="flex flex-wrap items-center justify-between gap-3 pt-3 border-t border-border">
                 <div className="flex items-center gap-2">
                   <Button
                     size="sm"
@@ -635,7 +637,7 @@ export default function CacheSettingsTab() {
                     variant="ghost"
                     onClick={handleClearCache}
                     disabled={clearingCache}
-                    className="text-red-500 hover:text-red-600 hover:bg-red-500/10"
+                    className="text-error hover:text-error hover:bg-error/10"
                   >
                     {clearingCache ? "Purging..." : "Clear Cache"}
                   </Button>
@@ -654,15 +656,15 @@ export default function CacheSettingsTab() {
               {/* Test Connection Output */}
               {testResult && (
                 <div
-                  className={`p-3 rounded-md text-xs border ${
+                  className={`p-3 rounded-lg text-xs border ${
                     testResult.ok
-                      ? "bg-green-500/10 border-green-500/20 text-green-700 dark:text-green-300"
-                      : "bg-red-500/10 border-red-500/20 text-red-700 dark:text-red-300"
+                      ? "bg-success/10 border-success/20 text-success"
+                      : "bg-error/10 border-error/20 text-error"
                   }`}
                 >
                   {testResult.ok ? (
                     <div className="flex items-center gap-2">
-                      <span className="font-bold">Connection Verified:</span>
+                      <span className="font-semibold">Connection Verified:</span>
                       <span>
                         Successfully generated {testResult.dimensions}-dim embedding in{" "}
                         {testResult.latencyMs}ms
@@ -671,7 +673,7 @@ export default function CacheSettingsTab() {
                     </div>
                   ) : (
                     <div>
-                      <span className="font-bold">Connection Test Failed: </span>
+                      <span className="font-semibold">Connection Test Failed: </span>
                       <span>{testResult.error || "Unknown error"}</span>
                     </div>
                   )}
@@ -685,9 +687,7 @@ export default function CacheSettingsTab() {
               {semMessage && (
                 <p
                   className={`text-xs ${
-                    semMessage.type === "success"
-                      ? "text-green-600 dark:text-green-400 font-medium"
-                      : "text-red-600 dark:text-red-400"
+                    semMessage.type === "success" ? "text-success font-medium" : "text-error"
                   }`}
                 >
                   {semMessage.text}
@@ -699,10 +699,12 @@ export default function CacheSettingsTab() {
       </Card>
 
       {/* ── 2. Model Catalog Cache Card (Preserved Compatibility) ── */}
-      <Card className="p-6">
+      <Card className="p-5">
         <div className="flex flex-col gap-3">
           <div>
-            <p className="font-medium">{t("modelCatalogCacheTtl")}</p>
+            <p className="text-base font-semibold tracking-tight text-text-main">
+              {t("modelCatalogCacheTtl")}
+            </p>
             <p className="text-sm text-text-muted mt-1">{t("modelCatalogCacheTtlDescription")}</p>
           </div>
           <div className="flex items-center gap-3">
@@ -723,7 +725,7 @@ export default function CacheSettingsTab() {
               onKeyDown={(event) => {
                 if (event.key === "Enter" && catalogDirty) void saveCatalogTtl();
               }}
-              className="w-32 px-3 py-1.5 rounded bg-surface-2 border border-border text-sm text-text-primary"
+              className="w-32 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
               disabled={catalogLoading || catalogSaving}
             />
             <span className="text-xs text-text-muted">ms</span>
@@ -741,15 +743,11 @@ export default function CacheSettingsTab() {
               </span>
             )}
           </div>
-          {catalogValidationError && (
-            <p className="text-xs text-red-500">{catalogValidationError}</p>
-          )}
+          {catalogValidationError && <p className="text-xs text-error">{catalogValidationError}</p>}
           {catalogMessage && (
             <p
               className={`text-xs ${
-                catalogMessage.type === "success"
-                  ? "text-green-600 dark:text-green-400"
-                  : "text-red-600 dark:text-red-400"
+                catalogMessage.type === "success" ? "text-success" : "text-error"
               }`}
             >
               {catalogMessage.text}

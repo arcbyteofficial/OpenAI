@@ -19,7 +19,7 @@ export function HeaderTable({ headers }: HeaderTableProps) {
         <button
           type="button"
           onClick={() => setMasked((m) => !m)}
-          className="text-xs text-blue-400 hover:text-blue-300 focus-ring rounded"
+          className="text-xs text-primary hover:underline focus-ring rounded"
         >
           {masked ? t("show") : t("hide")}
         </button>
@@ -27,8 +27,12 @@ export function HeaderTable({ headers }: HeaderTableProps) {
       <table className="w-full text-xs font-mono border-collapse bg-surface">
         <thead>
           <tr className="border-b border-border">
-            <th className="text-left px-2 py-1 text-text-muted font-medium">{t("name")}</th>
-            <th className="text-left px-2 py-1 text-text-muted font-medium">{t("value")}</th>
+            <th className="text-left px-2 py-1 font-sans text-text-muted font-medium">
+              {t("name")}
+            </th>
+            <th className="text-left px-2 py-1 font-sans text-text-muted font-medium">
+              {t("value")}
+            </th>
           </tr>
         </thead>
         <tbody>
@@ -39,7 +43,7 @@ export function HeaderTable({ headers }: HeaderTableProps) {
               <tr key={name} className="border-b border-border/50 hover:bg-bg-subtle">
                 <td className="px-2 py-1 text-text-muted select-text">{name}</td>
                 <td
-                  className={`px-2 py-1 break-all select-text ${isSensitive ? "text-amber-400" : "text-text-main"}`}
+                  className={`px-2 py-1 break-all select-text ${isSensitive ? "text-warning" : "text-text-main"}`}
                 >
                   {display}
                 </td>

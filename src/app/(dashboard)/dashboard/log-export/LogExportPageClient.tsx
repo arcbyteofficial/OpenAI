@@ -203,8 +203,8 @@ export function LogExportPageClient() {
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h1 className="text-lg font-semibold text-text-main">Log export</h1>
-          <p className="text-xs text-text-muted">
+          <h1 className="text-2xl font-semibold tracking-tight text-text-main">Log export</h1>
+          <p className="text-sm text-text-muted">
             Continuously ship the call logs from the Logs tab to an external analytics store.
           </p>
         </div>
@@ -224,8 +224,8 @@ export function LogExportPageClient() {
         <p
           className={
             feedback.type === "success"
-              ? "rounded-control bg-green-500/10 p-2 text-xs text-green-600 dark:text-green-400"
-              : "rounded-control bg-red-500/10 p-2 text-xs text-red-600 dark:text-red-400"
+              ? "rounded-control bg-success/10 p-2 text-xs text-success"
+              : "rounded-control bg-error/10 p-2 text-xs text-error"
           }
         >
           {feedback.message}

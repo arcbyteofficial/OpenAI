@@ -53,14 +53,14 @@ export default function LogToolSourcesCard() {
     <Card>
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-primary/10 text-primary">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="p-2 rounded-lg bg-bg-subtle text-text-muted">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               troubleshoot
             </span>
           </div>
           <div>
-            <h3 className="text-lg font-semibold">{t("logToolSourcesToggle")}</h3>
-            <p className="text-sm text-muted-foreground">{t("logToolSourcesDescription")}</p>
+            <h3 className="text-sm font-semibold text-text-main">{t("logToolSourcesToggle")}</h3>
+            <p className="text-[13px] text-text-muted">{t("logToolSourcesDescription")}</p>
           </div>
         </div>
         <Toggle checked={logToolSources} onChange={updateLogToolSources} disabled={loading} />

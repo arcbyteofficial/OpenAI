@@ -16,9 +16,7 @@ import { useEffect, useState } from "react";
  */
 export default function CallbackPage() {
   const [status, setStatus] = useState<"processing" | "success" | "done" | "manual">("processing");
-  const [currentUrl] = useState(() =>
-    typeof window === "undefined" ? "" : window.location.href
-  );
+  const [currentUrl] = useState(() => (typeof window === "undefined" ? "" : window.location.href));
   const t = useTranslations("auth");
 
   useEffect(() => {
@@ -86,10 +84,7 @@ export default function CallbackPage() {
     if (window.opener) {
       for (const origin of trustedTargetOrigins) {
         try {
-          window.opener.postMessage(
-            { type: "oauth_callback", data: callbackData },
-            origin
-          );
+          window.opener.postMessage({ type: "oauth_callback", data: callbackData }, origin);
           sent = true;
         } catch (e) {
           console.log("postMessage failed:", e);
@@ -142,28 +137,32 @@ export default function CallbackPage() {
 
   return (
     <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center p-8 max-w-md">
+      <div className="text-center p-6 max-w-md">
         {status === "processing" && (
           <>
-            <div className="size-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-              <span className="material-symbols-outlined text-3xl text-primary animate-spin">
+            <div className="size-16 mx-auto mb-4 rounded-full bg-bg-subtle border border-border flex items-center justify-center">
+              <span className="material-symbols-outlined text-[28px] text-text-muted animate-spin">
                 progress_activity
               </span>
             </div>
-            <h1 className="text-xl font-semibold mb-2">{t("processing")}</h1>
-            <p className="text-text-muted">{t("pleaseWait")}</p>
+            <h1 className="text-xl font-semibold tracking-tight text-text-main mb-2">
+              {t("processing")}
+            </h1>
+            <p className="text-sm text-text-muted">{t("pleaseWait")}</p>
           </>
         )}
 
         {(status === "success" || status === "done") && (
           <>
-            <div className="size-16 mx-auto mb-4 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-              <span className="material-symbols-outlined text-3xl text-green-600">
+            <div className="size-16 mx-auto mb-4 rounded-full bg-success/10 flex items-center justify-center">
+              <span className="material-symbols-outlined text-[28px] text-success">
                 check_circle
               </span>
             </div>
-            <h1 className="text-xl font-semibold mb-2">{t("authSuccess")}</h1>
-            <p className="text-text-muted">
+            <h1 className="text-xl font-semibold tracking-tight text-text-main mb-2">
+              {t("authSuccess")}
+            </h1>
+            <p className="text-sm text-text-muted">
               {status === "success" ? t("windowWillClose") : t("closeTabNow")}
             </p>
           </>
@@ -171,13 +170,15 @@ export default function CallbackPage() {
 
         {status === "manual" && (
           <>
-            <div className="size-16 mx-auto mb-4 rounded-full bg-yellow-100 dark:bg-yellow-900/30 flex items-center justify-center">
-              <span className="material-symbols-outlined text-3xl text-yellow-600">info</span>
+            <div className="size-16 mx-auto mb-4 rounded-full bg-warning/10 flex items-center justify-center">
+              <span className="material-symbols-outlined text-[28px] text-warning">info</span>
             </div>
-            <h1 className="text-xl font-semibold mb-2">{t("copyUrl")}</h1>
-            <p className="text-text-muted mb-4">{t("copyUrlManual")}</p>
-            <div className="bg-surface border border-border rounded-lg p-3 text-left">
-              <code className="text-xs break-all">{currentUrl}</code>
+            <h1 className="text-xl font-semibold tracking-tight text-text-main mb-2">
+              {t("copyUrl")}
+            </h1>
+            <p className="text-sm text-text-muted mb-4">{t("copyUrlManual")}</p>
+            <div className="bg-surface border border-border rounded-card p-3 text-left">
+              <code className="font-mono text-xs text-text-muted break-all">{currentUrl}</code>
             </div>
           </>
         )}

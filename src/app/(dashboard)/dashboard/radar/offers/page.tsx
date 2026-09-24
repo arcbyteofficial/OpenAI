@@ -150,7 +150,7 @@ export default function RadarOffersPage() {
         </Link>
         <div className="flex flex-wrap items-start justify-between gap-3">
           <div>
-            <h1 className="text-2xl font-bold">{t("title")}</h1>
+            <h1 className="text-xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
             <p className="text-sm text-text-muted mt-1">{t("subtitle")}</p>
           </div>
           {hasSupporterKey && (
@@ -158,7 +158,7 @@ export default function RadarOffersPage() {
               type="button"
               onClick={() => void syncAndLoad()}
               disabled={refreshing}
-              className="px-4 py-2 text-sm font-medium rounded-lg border border-violet-500 text-violet-400 hover:bg-violet-500/10 transition-colors disabled:opacity-50"
+              className="px-3 py-1.5 text-[13px] font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
             >
               {refreshing ? t("refreshing") : t("refresh")}
             </button>
@@ -166,7 +166,7 @@ export default function RadarOffersPage() {
         </div>
       </div>
 
-      {error && <div className="p-3 rounded-lg bg-red-500/10 text-red-400 text-sm">{error}</div>}
+      {error && <div className="p-3 rounded-lg bg-error/10 text-error text-sm">{error}</div>}
 
       {loading ? (
         <div className="flex min-h-48 items-center justify-center text-text-muted">
@@ -175,16 +175,18 @@ export default function RadarOffersPage() {
       ) : !hasSupporterKey ? (
         <Card>
           <div className="flex flex-col items-center gap-4 py-8 text-center">
-            <span className="material-symbols-outlined text-4xl text-violet-400">redeem</span>
-            <h2 className="text-xl font-semibold">{t("keyRequiredTitle")}</h2>
-            <p className="max-w-xl text-text-muted">{t("keyRequiredDescription")}</p>
+            <span className="material-symbols-outlined text-[28px] text-text-muted">redeem</span>
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
+              {t("keyRequiredTitle")}
+            </h2>
+            <p className="max-w-xl text-sm text-text-muted">{t("keyRequiredDescription")}</p>
             <div className="flex flex-col sm:flex-row gap-3">
               {contributorClaimUrl && (
                 <a
                   href={contributorClaimUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-lg border border-violet-500 text-violet-400 hover:bg-violet-500/10"
+                  className="px-3 py-1.5 text-[13px] font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors"
                 >
                   {t("contributorButton")}
                 </a>
@@ -194,7 +196,7 @@ export default function RadarOffersPage() {
                   href={supporterPlansUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="px-4 py-2 rounded-lg bg-violet-500 text-white hover:bg-violet-600"
+                  className="px-3 py-1.5 text-[13px] font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors"
                 >
                   {t("supporterButton")}
                 </a>
@@ -213,30 +215,30 @@ export default function RadarOffersPage() {
               <div className="flex h-full flex-col gap-4">
                 <div className="flex items-start justify-between gap-3">
                   <div>
-                    <p className="text-xs uppercase tracking-wide text-text-muted">
+                    <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                       {offer.provider}
                     </p>
-                    <h2 className="text-lg font-semibold">
+                    <h2 className="text-base font-semibold tracking-tight text-text-main">
                       {localizeRadarOfferText(offer.title, locale)}
                     </h2>
                   </div>
                   <span
                     className={`rounded-full px-2 py-1 text-xs font-medium ${
-                      offer.partner
-                        ? "bg-violet-500/15 text-violet-300"
-                        : "bg-green-500/15 text-green-300"
+                      offer.partner ? "bg-primary/10 text-primary" : "bg-success/10 text-success"
                     }`}
                   >
                     {offer.partner ? t("partnerBadge") : t("officialBadge")}
                   </span>
                 </div>
 
-                <p className="text-2xl font-bold text-violet-300">{formatBenefit(offer.benefit)}</p>
+                <p className="text-2xl font-semibold tracking-tight tabular-nums text-text-main">
+                  {formatBenefit(offer.benefit)}
+                </p>
                 <p className="text-sm text-text-muted">
                   {localizeRadarOfferText(offer.description, locale)}
                 </p>
                 <div className="text-sm">
-                  <span className="font-medium">{t("conditionsLabel")}</span>{" "}
+                  <span className="font-medium text-text-main">{t("conditionsLabel")}</span>{" "}
                   <span className="text-text-muted">
                     {localizeRadarOfferText(offer.conditions, locale)}
                   </span>
@@ -252,10 +254,10 @@ export default function RadarOffersPage() {
                   href={offer.url}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="mt-auto inline-flex w-fit items-center gap-1 text-sm font-medium text-violet-400 hover:underline"
+                  className="mt-auto inline-flex w-fit items-center gap-1 text-sm font-medium text-primary hover:underline"
                 >
                   {t("openOffer")}
-                  <span className="material-symbols-outlined text-sm">open_in_new</span>
+                  <span className="material-symbols-outlined text-[14px]">open_in_new</span>
                 </a>
               </div>
             </Card>

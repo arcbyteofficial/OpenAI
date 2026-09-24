@@ -34,13 +34,13 @@ export function LlmDetailsTab({ request }: LlmDetailsTabProps) {
 
   return (
     <div className="p-4 h-full overflow-auto space-y-4">
-      <div className="rounded border border-border bg-bg-subtle">
-        <table className="w-full text-sm">
+      <div className="rounded-lg border border-border bg-surface">
+        <table className="w-full text-[13px]">
           <tbody>
             {rows.map(({ label, value }) => (
               <tr key={label} className="border-b border-border/50 last:border-b-0">
                 <td className="px-3 py-2 text-text-muted font-medium w-[40%]">{label}</td>
-                <td className="px-3 py-2 text-text-main font-mono">{value ?? "—"}</td>
+                <td className="px-3 py-2 text-text-main font-mono text-[12px]">{value ?? "—"}</td>
               </tr>
             ))}
           </tbody>
@@ -50,7 +50,7 @@ export function LlmDetailsTab({ request }: LlmDetailsTabProps) {
       <div className="flex items-center gap-2">
         <TokenBadge tokensIn={meta.tokensIn} tokensOut={meta.tokensOut} />
         {(meta.tokensIn != null || meta.tokensOut != null) && (
-          <span className="text-xs text-text-muted">
+          <span className="text-xs text-text-muted tabular-nums">
             Total: {(meta.tokensIn ?? 0) + (meta.tokensOut ?? 0)} tokens
           </span>
         )}

@@ -93,24 +93,26 @@ export default function ClaudeFastModeTab() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-3">
-        <div className="p-2 rounded-lg bg-sky-500/10 text-sky-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-2 rounded-lg border border-border bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             bolt
           </span>
         </div>
         <div className="flex-1">
-          <h3 className="text-lg font-semibold">{t("claudeFastModeTitle")}</h3>
+          <h3 className="text-base font-semibold tracking-tight text-text-main">
+            {t("claudeFastModeTitle")}
+          </h3>
           <p className="text-sm text-text-muted">{t("claudeFastModeDesc")}</p>
         </div>
         <div className="flex items-center gap-3">
           {status === "saved" && (
-            <span className="text-xs font-medium text-emerald-500 flex items-center gap-1">
+            <span className="text-xs font-medium text-success flex items-center gap-1">
               <span className="material-symbols-outlined text-[14px]">check_circle</span>{" "}
               {t("saved")}
             </span>
           )}
           {status === "error" && (
-            <span className="text-xs font-medium text-rose-500 flex items-center gap-1">
+            <span className="text-xs font-medium text-error flex items-center gap-1">
               <span className="material-symbols-outlined text-[14px]">error</span>{" "}
               {t("claudeFastModeSaveError")}
             </span>
@@ -145,10 +147,10 @@ export default function ClaudeFastModeTab() {
                       checked={checked}
                       onChange={(e) => toggleModel(modelId, e.target.checked)}
                       disabled={loading || saving}
-                      className="h-4 w-4 rounded border-black/20 dark:border-white/20"
+                      className="h-4 w-4 rounded border-border-strong accent-primary"
                       aria-label={t("claudeFastModeModelCheckbox", { model: modelId })}
                     />
-                    <span className="font-mono text-xs">{modelId}</span>
+                    <span className="font-mono text-xs text-text-main">{modelId}</span>
                   </label>
                 );
               })}

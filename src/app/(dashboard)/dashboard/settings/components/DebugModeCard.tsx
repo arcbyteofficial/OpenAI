@@ -53,13 +53,15 @@ export default function DebugModeCard() {
     <Card>
       <div className="flex items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-primary/10 text-primary">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="p-2 rounded-lg border border-border bg-bg-subtle text-text-muted">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               bug_report
             </span>
           </div>
           <div>
-            <h3 className="text-lg font-semibold">{t("debugToggle")}</h3>
+            <h3 className="text-base font-semibold tracking-tight text-text-main">
+              {t("debugToggle")}
+            </h3>
           </div>
         </div>
         <Toggle checked={debugMode} onChange={updateDebugMode} disabled={loading} />

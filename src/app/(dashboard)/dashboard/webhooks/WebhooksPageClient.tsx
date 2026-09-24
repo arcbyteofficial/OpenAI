@@ -147,13 +147,13 @@ export function WebhooksPageClient() {
     <div className="space-y-6">
       <div className="flex items-center justify-between gap-3">
         <div>
-          <h1 className="text-xl font-semibold text-text-main">{t("title")}</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
           <p className="mt-0.5 text-sm text-text-muted">{t("description")}</p>
         </div>
         <button
           type="button"
           onClick={handleAddWebhook}
-          className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90"
+          className="inline-flex items-center gap-2 rounded-control bg-contrast px-4 py-2 text-sm font-medium text-contrast-fg transition-colors hover:bg-contrast-hover"
         >
           <span className="material-symbols-outlined text-[18px]">add</span>
           {t("addWebhook")}
@@ -164,8 +164,8 @@ export function WebhooksPageClient() {
         <div
           className={`rounded-lg border px-4 py-3 text-sm ${
             feedback.type === "success"
-              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600 dark:text-emerald-300"
-              : "border-red-500/30 bg-red-500/10 text-red-600 dark:text-red-300"
+              ? "border-success/30 bg-success/10 text-success"
+              : "border-error/30 bg-error/10 text-error"
           }`}
         >
           {feedback.message}
@@ -176,12 +176,12 @@ export function WebhooksPageClient() {
         <div className="space-y-6">
           <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
             {[
-              { label: t("total"), value: stats.total, icon: "webhook", tone: "text-primary" },
+              { label: t("total"), value: stats.total, icon: "webhook", tone: "text-text-muted" },
               {
                 label: t("active"),
                 value: stats.active,
                 icon: "check_circle",
-                tone: "text-emerald-500",
+                tone: "text-success",
               },
               {
                 label: t("inactive"),
@@ -189,17 +189,17 @@ export function WebhooksPageClient() {
                 icon: "pause_circle",
                 tone: "text-text-muted",
               },
-              { label: t("errored"), value: stats.errored, icon: "error", tone: "text-red-500" },
+              { label: t("errored"), value: stats.errored, icon: "error", tone: "text-error" },
             ].map((stat) => (
               <Card key={stat.label} className="p-4">
                 <div className="flex items-center justify-between gap-3">
                   <div>
-                    <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
-                      {stat.label}
+                    <p className="text-[13px] text-text-muted">{stat.label}</p>
+                    <p className="mt-1 text-2xl font-semibold tabular-nums text-text-main">
+                      {stat.value}
                     </p>
-                    <p className="mt-1 text-2xl font-semibold text-text-main">{stat.value}</p>
                   </div>
-                  <span className={`material-symbols-outlined text-[24px] ${stat.tone}`}>
+                  <span className={`material-symbols-outlined text-[20px] ${stat.tone}`}>
                     {stat.icon}
                   </span>
                 </div>
@@ -211,7 +211,7 @@ export function WebhooksPageClient() {
             <div className="border-b border-border p-4">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <h2 className="text-base font-semibold text-text-main">
+                  <h2 className="text-sm font-semibold text-text-main">
                     {t("configuredWebhooks")}
                   </h2>
                   <p className="mt-1 text-xs text-text-muted">{t("configuredWebhooksDesc")}</p>
@@ -221,7 +221,7 @@ export function WebhooksPageClient() {
                   onClick={() => void load()}
                   disabled={loading}
                   title={t("refresh")}
-                  className="rounded-lg border border-border p-2 text-text-muted transition-colors hover:bg-surface/60 hover:text-text-main disabled:opacity-40"
+                  className="rounded-control border border-border p-2 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main disabled:opacity-40"
                 >
                   <span
                     className={`material-symbols-outlined text-[18px] ${loading ? "animate-spin" : ""}`}

@@ -50,10 +50,10 @@ export default function ProxyTab() {
             role="tab"
             aria-selected={activeTab === tab.id}
             onClick={() => handleTabChange(tab.id)}
-            className={`px-4 py-2 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
+            className={`px-3 py-2 text-sm font-medium border-b-2 whitespace-nowrap transition-colors ${
               activeTab === tab.id
-                ? "border-primary text-primary"
-                : "border-transparent text-text-muted hover:text-text"
+                ? "border-text-main text-text-main"
+                : "border-transparent text-text-muted hover:text-text-main"
             }`}
           >
             {translateOrFallback(tab.labelKey, tab.fallback)}

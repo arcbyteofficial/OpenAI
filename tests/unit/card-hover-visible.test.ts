@@ -9,8 +9,10 @@ import { fileURLToPath } from "node:url";
 // highlighted". Root cause was a 1%-opacity hover (`hover:bg-black/[0.01]` /
 // `hover:bg-white/[0.01]`) — effectively invisible. The fix switches both card
 // surfaces to the dashboard's dominant, visible hover (`hover:bg-*/5`) plus a
-// `hover:border-primary/40` highlight. This pins it so the near-invisible hover
-// can't silently come back.
+// `hover:border-primary/40` highlight. The neutral redesign expresses the same
+// visible hover through theme tokens (`hover:bg-bg-subtle` +
+// `hover:border-border-strong`), so either form is accepted. This pins it so the
+// near-invisible hover can't silently come back.
 
 const ROOT = fileURLToPath(new URL("../../", import.meta.url));
 
@@ -31,11 +33,12 @@ for (const rel of CARD_FILES) {
       `${rel} still uses the near-invisible 1% hover (dark)`
     );
     assert.ok(
-      src.includes("hover:bg-black/5") && src.includes("hover:bg-white/5"),
-      `${rel} should use a visible hover background (hover:bg-*/5)`
+      src.includes("hover:bg-bg-subtle") ||
+        (src.includes("hover:bg-black/5") && src.includes("hover:bg-white/5")),
+      `${rel} should use a visible hover background (hover:bg-bg-subtle or hover:bg-*/5)`
     );
     assert.ok(
-      src.includes("hover:border-primary/40"),
+      src.includes("hover:border-border-strong") || src.includes("hover:border-primary/40"),
       `${rel} should add a visible hover border highlight`
     );
   });

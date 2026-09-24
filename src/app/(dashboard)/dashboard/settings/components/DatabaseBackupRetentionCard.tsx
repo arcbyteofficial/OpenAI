@@ -45,8 +45,8 @@ function StatusAlert({ status }: { status: BackupRetentionStatus }) {
     <div
       className={`mt-3 p-3 rounded-lg text-sm ${
         isSuccess
-          ? "bg-green-500/10 text-green-500 border border-green-500/20"
-          : "bg-red-500/10 text-red-500 border border-red-500/20"
+          ? "bg-success/10 text-success border border-success/20"
+          : "bg-error/10 text-error border border-error/20"
       }`}
       role="alert"
     >
@@ -77,7 +77,7 @@ export default function DatabaseBackupRetentionCard({
   const t = useTranslations("settings");
 
   return (
-    <div className={`p-3 rounded-lg bg-bg border border-border ${className}`}>
+    <div className={`p-3 rounded-lg bg-surface-2 border border-border ${className}`}>
       <div className="flex items-start justify-between gap-3 flex-wrap mb-3">
         <div>
           <p className="text-sm font-medium text-text-main">{title}</p>
@@ -116,7 +116,7 @@ export default function DatabaseBackupRetentionCard({
                 keepLatest: Number.isFinite(parsed) ? Math.max(1, parsed) : 1,
               }));
             }}
-            className="h-9 w-32 rounded-lg border border-border bg-background px-3 text-sm text-text-main"
+            className="h-9 w-32 rounded-control border border-border-strong bg-surface px-3 text-sm text-text-main tabular-nums focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
           />
         </label>
         <label className="flex flex-col gap-1 text-xs text-text-muted">
@@ -134,7 +134,7 @@ export default function DatabaseBackupRetentionCard({
                 retentionDays: Number.isFinite(parsed) ? Math.max(0, parsed) : 0,
               }));
             }}
-            className="h-9 w-32 rounded-lg border border-border bg-background px-3 text-sm text-text-main"
+            className="h-9 w-32 rounded-control border border-border-strong bg-surface px-3 text-sm text-text-main tabular-nums focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
           />
         </label>
         <Button

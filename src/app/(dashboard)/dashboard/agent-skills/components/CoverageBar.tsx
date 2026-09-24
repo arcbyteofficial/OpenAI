@@ -9,16 +9,16 @@ interface CoverageBarProps {
 
 function barColor(have: number, total: number): string {
   const pct = total > 0 ? have / total : 0;
-  if (pct >= 1) return "bg-emerald-500";
-  if (pct >= 0.75) return "bg-amber-400";
-  return "bg-red-500";
+  if (pct >= 1) return "bg-success";
+  if (pct >= 0.75) return "bg-warning";
+  return "bg-error";
 }
 
 function trackColor(have: number, total: number): string {
   const pct = total > 0 ? have / total : 0;
-  if (pct >= 1) return "bg-emerald-500/20";
-  if (pct >= 0.75) return "bg-amber-400/20";
-  return "bg-red-500/20";
+  if (pct >= 1) return "bg-success/15";
+  if (pct >= 0.75) return "bg-warning/15";
+  return "bg-error/15";
 }
 
 export function CoverageBar({ coverage }: CoverageBarProps): JSX.Element {
@@ -40,11 +40,11 @@ export function CoverageBar({ coverage }: CoverageBarProps): JSX.Element {
             aria-valuemin={0}
             aria-valuemax={api.total}
             aria-label={`${t("categoryApi")} ${api.have}/${api.total}`}
-            className={`h-full rounded-full transition-all duration-500 ${barColor(api.have, api.total)}`}
+            className={`h-full rounded-full transition-[width] duration-500 ${barColor(api.have, api.total)}`}
             style={{ width: `${api.total > 0 ? (api.have / api.total) * 100 : 0}%` }}
           />
         </div>
-        <span className="shrink-0 text-text-muted w-12 text-right">
+        <span className="shrink-0 text-text-muted w-12 text-right tabular-nums">
           {api.total > 0 ? Math.round((api.have / api.total) * 100) : 0}%
         </span>
       </div>
@@ -62,11 +62,11 @@ export function CoverageBar({ coverage }: CoverageBarProps): JSX.Element {
             aria-valuemin={0}
             aria-valuemax={config.total}
             aria-label={`${t("categoryConfig")} ${config.have}/${config.total}`}
-            className={`h-full rounded-full transition-all duration-500 ${barColor(config.have, config.total)}`}
+            className={`h-full rounded-full transition-[width] duration-500 ${barColor(config.have, config.total)}`}
             style={{ width: `${config.total > 0 ? (config.have / config.total) * 100 : 0}%` }}
           />
         </div>
-        <span className="shrink-0 text-text-muted w-12 text-right">
+        <span className="shrink-0 text-text-muted w-12 text-right tabular-nums">
           {config.total > 0 ? Math.round((config.have / config.total) * 100) : 0}%
         </span>
       </div>
@@ -84,11 +84,11 @@ export function CoverageBar({ coverage }: CoverageBarProps): JSX.Element {
             aria-valuemin={0}
             aria-valuemax={cli.total}
             aria-label={`${t("categoryCli")} ${cli.have}/${cli.total}`}
-            className={`h-full rounded-full transition-all duration-500 ${barColor(cli.have, cli.total)}`}
+            className={`h-full rounded-full transition-[width] duration-500 ${barColor(cli.have, cli.total)}`}
             style={{ width: `${cli.total > 0 ? (cli.have / cli.total) * 100 : 0}%` }}
           />
         </div>
-        <span className="shrink-0 text-text-muted w-12 text-right">
+        <span className="shrink-0 text-text-muted w-12 text-right tabular-nums">
           {cli.total > 0 ? Math.round((cli.have / cli.total) * 100) : 0}%
         </span>
       </div>

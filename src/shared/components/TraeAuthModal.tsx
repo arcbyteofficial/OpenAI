@@ -216,13 +216,13 @@ export default function TraeAuthModal({
     <Modal isOpen={isOpen} title={t("title")} onClose={onClose}>
       <div className="flex flex-col gap-4">
         {/* Primary path: browser-based OAuth via trae.ai/authorization */}
-        <div className="bg-emerald-50 dark:bg-emerald-900/20 p-4 rounded-lg border border-emerald-200 dark:border-emerald-800">
-          <p className="text-sm text-emerald-900 dark:text-emerald-200 mb-2">
+        <div className="bg-bg-subtle p-4 rounded-lg border border-border">
+          <p className="text-sm text-text-main mb-2">
             {t.rich("authorizeDescription", {
               code: (chunks) => <span className="font-mono">{chunks}</span>,
             })}
           </p>
-          <p className="text-xs text-emerald-800 dark:text-emerald-300 mb-3">
+          <p className="text-xs text-text-muted mb-3">
             {t.rich("authorizeImportant", {
               strong: (chunks) => <strong>{chunks}</strong>,
               code: (chunks) => <span className="font-mono">{chunks}</span>,
@@ -249,8 +249,8 @@ export default function TraeAuthModal({
           <span className="flex-1 border-t border-border" />
         </div>
 
-        <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg border border-blue-200 dark:border-blue-800">
-          <p className="text-sm text-blue-800 dark:text-blue-200">
+        <div className="bg-bg-subtle p-3 rounded-lg border border-border">
+          <p className="text-sm text-text-muted">
             {t.rich("manualInstructions", {
               code: (chunks) => <span className="font-mono">{chunks}</span>,
               tokenPlaceholder: "<token>",
@@ -260,14 +260,14 @@ export default function TraeAuthModal({
 
         <div>
           <label className="block text-sm font-medium mb-2">
-            {t("accessTokenLabel")} <span className="text-red-500">*</span>
+            {t("accessTokenLabel")} <span className="text-error">*</span>
           </label>
           <textarea
             value={accessToken}
             onChange={(e) => setAccessToken(e.target.value)}
             placeholder="eyJhbGciOiJSUzI1NiIs..."
             rows={3}
-            className="w-full px-3 py-2 text-sm font-mono border border-border rounded-lg bg-background focus:outline-none focus:border-primary resize-none"
+            className="w-full px-3 py-2 text-[13px] font-mono border border-border-strong rounded-control bg-surface placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] resize-none"
           />
         </div>
 
@@ -320,8 +320,8 @@ export default function TraeAuthModal({
         </div>
 
         {error && (
-          <div className="bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border border-red-200 dark:border-red-800">
-            <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+          <div className="bg-error/10 p-3 rounded-lg border border-error/20">
+            <p className="text-sm text-error">{error}</p>
           </div>
         )}
 

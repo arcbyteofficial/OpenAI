@@ -31,16 +31,16 @@ export function SessionRecorderBar({
   return (
     <div
       className={cn(
-        "flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm border",
+        "flex items-center gap-2 rounded-lg px-3 py-1.5 text-sm border transition-colors",
         recording
-          ? "border-red-500/40 bg-red-900/20 text-red-200"
+          ? "border-error/30 bg-error/10 text-error"
           : "border-border bg-bg-subtle text-text-muted"
       )}
     >
       {recording ? (
         <>
-          <span className="inline-block h-2 w-2 rounded-full bg-red-500 animate-pulse" />
-          <span className="font-mono text-xs">{formatElapsed(elapsed)}</span>
+          <span className="inline-block h-2 w-2 rounded-full bg-error animate-pulse" />
+          <span className="font-mono text-xs tabular-nums">{formatElapsed(elapsed)}</span>
           {session?.name && (
             <span className="text-xs opacity-70 truncate max-w-[120px]">{session.name}</span>
           )}
@@ -48,20 +48,20 @@ export function SessionRecorderBar({
             type="button"
             onClick={onStop}
             aria-label={t("stopSession")}
-            className="ml-auto rounded border border-red-500/50 px-2 py-0.5 text-xs hover:bg-red-800/30 focus-ring"
+            className="ml-auto rounded-control border border-error/40 px-2 py-0.5 text-xs font-medium hover:bg-error/10 transition-colors focus-ring"
           >
             {t("stopSession")}
           </button>
         </>
       ) : (
         <>
-          <span className="inline-block h-2 w-2 rounded-full bg-gray-500" />
+          <span className="inline-block h-2 w-2 rounded-full bg-text-subtle" />
           <span className="text-xs">{t("notRecording")}</span>
           <button
             type="button"
             onClick={() => onStart()}
             aria-label={t("recordSession")}
-            className="ml-auto rounded border border-border px-2 py-0.5 text-xs hover:bg-surface focus-ring"
+            className="ml-auto rounded-control border border-border-strong bg-surface px-2 py-0.5 text-xs font-medium text-text-main hover:bg-bg-subtle transition-colors focus-ring"
           >
             {t("recordSession")}
           </button>

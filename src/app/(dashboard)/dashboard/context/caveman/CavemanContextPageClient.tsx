@@ -137,9 +137,9 @@ export default function CavemanContextPageClient() {
       <header className="flex flex-col gap-2">
         <div className="flex items-center justify-between gap-3">
           <div className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-[30px] text-primary">compress</span>
+            <span className="material-symbols-outlined text-[24px] text-text-muted">compress</span>
             <div>
-              <h1 className="text-2xl font-bold text-text-main">{t("title")}</h1>
+              <h1 className="text-2xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
               <p className="text-sm text-text-muted">{t("description")}</p>
             </div>
           </div>
@@ -156,14 +156,14 @@ export default function CavemanContextPageClient() {
 
       <section className="grid grid-cols-1 gap-3 sm:grid-cols-4">
         {statCards.map(([label, value]) => (
-          <div key={label} className="rounded-lg border border-border bg-surface p-4">
-            <p className="text-xs uppercase text-text-muted">{label}</p>
-            <p className="mt-1 text-xl font-semibold text-text-main">{value}</p>
+          <div key={label} className="rounded-card border border-border bg-surface p-4">
+            <p className="text-[13px] text-text-muted">{label}</p>
+            <p className="mt-1 text-2xl font-semibold tabular-nums text-text-main">{value}</p>
           </div>
         ))}
       </section>
 
-      <section className="rounded-lg border border-border bg-surface p-4">
+      <section className="rounded-card border border-border bg-surface p-4">
         <div className="flex flex-col gap-1">
           <h2 className="text-sm font-semibold text-text-main">{t("languagePacks")}</h2>
           <p className="text-xs text-text-muted">{t("languagePacksDesc")}</p>
@@ -191,7 +191,7 @@ export default function CavemanContextPageClient() {
             value={languageConfig.defaultLanguage}
             disabled={saving || languageConfig.autoDetect}
             onChange={(event) => updateLanguageConfig({ defaultLanguage: event.target.value })}
-            className="rounded-lg border border-border bg-bg px-3 py-2 text-sm"
+            className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main"
           >
             {languageOptions.map((lang) => (
               <option key={lang} value={lang}>
@@ -204,7 +204,7 @@ export default function CavemanContextPageClient() {
           {languagePacks.map((pack) => (
             <label
               key={pack.language}
-              className="flex items-center justify-between rounded-lg border border-border bg-bg p-3 text-sm text-text-main"
+              className="flex items-center justify-between rounded-lg border border-border bg-bg-subtle p-3 text-sm text-text-main"
             >
               <span>
                 {pack.language} - {t("rulesCount", { count: pack.ruleCount })}
@@ -221,14 +221,14 @@ export default function CavemanContextPageClient() {
       </section>
 
       {!masterEnabled && (
-        <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-700 dark:text-amber-300 flex items-start gap-2">
+        <div className="rounded-lg border border-warning/30 bg-warning/10 px-4 py-3 text-sm text-warning flex items-start gap-2">
           <span className="material-symbols-outlined text-[18px]">info</span>
           <p>{t("masterDisabledWarning")}</p>
         </div>
       )}
 
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
-        <div className="rounded-lg border border-border bg-surface p-4">
+        <div className="rounded-card border border-border bg-surface p-4">
           <h2 className="text-sm font-semibold text-text-main">{t("analyticsTitle")}</h2>
           <div className="mt-3 space-y-2 text-sm text-text-main">
             {modeBreakdown.length === 0 ? (
@@ -246,7 +246,7 @@ export default function CavemanContextPageClient() {
           </div>
         </div>
 
-        <div className="rounded-lg border border-border bg-surface p-4">
+        <div className="rounded-card border border-border bg-surface p-4">
           <h2 className="text-sm font-semibold text-text-main">{t("outputModeTitle")}</h2>
           <p className="mt-1 text-xs text-text-muted">{t("outputModeDesc")}</p>
           {/* On/off + intensity for caveman output mode live in the panel
@@ -262,7 +262,7 @@ export default function CavemanContextPageClient() {
               {t("autoClarity")}
             </label>
           </div>
-          <pre className="mt-3 overflow-auto rounded-lg border border-border bg-bg p-3 text-xs text-text-main">
+          <pre className="mt-3 overflow-auto rounded-lg border border-border bg-bg-subtle p-3 font-mono text-xs text-text-main">
             {previewPrompt}
           </pre>
           <p className="mt-3 text-xs text-text-muted">

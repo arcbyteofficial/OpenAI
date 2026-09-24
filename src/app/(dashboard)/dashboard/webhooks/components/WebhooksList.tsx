@@ -30,7 +30,7 @@ export function WebhooksList({
   if (webhooks.length === 0) {
     return (
       <div className="flex flex-col items-center gap-3 py-14 text-center">
-        <span className="material-symbols-outlined text-[48px] text-text-muted">webhook</span>
+        <span className="material-symbols-outlined text-[32px] text-text-subtle">webhook</span>
         <p className="text-sm text-text-muted">{t("noWebhooks")}</p>
       </div>
     );

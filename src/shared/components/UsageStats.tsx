@@ -24,7 +24,7 @@ function SortIcon({
 
 function MiniBarGraph({
   data,
-  colorClass = "bg-primary",
+  colorClass = "bg-text-muted/40",
 }: {
   data: number[];
   colorClass?: string;
@@ -35,7 +35,7 @@ function MiniBarGraph({
       {data.slice(-9).map((val, idx) => (
         <div
           key={`bar-${idx}-${val}`}
-          className={`flex-1 rounded-t-sm transition-all duration-500 ${colorClass}`}
+          className={`flex-1 rounded-t-sm transition-[height] duration-500 ${colorClass}`}
           style={{ height: `${Math.max((val / max) * 100, 5)}%` }}
           title={String(val)}
         />
@@ -224,26 +224,26 @@ export default function UsageStats() {
     <div className="flex flex-col gap-6">
       {/* Header with Auto Refresh Toggle and View Toggle */}
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-semibold">{t("usageOverview")}</h2>
+        <h2 className="text-xl font-semibold tracking-tight">{t("usageOverview")}</h2>
         <div className="flex items-center gap-2">
           {/* View Toggle */}
-          <div className="flex items-center gap-1 bg-bg-subtle rounded-lg p-1 border border-border">
+          <div className="flex items-center gap-1 bg-bg-subtle rounded-lg p-0.5">
             <button
               onClick={() => setViewMode("tokens")}
-              className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+              className={`px-3 py-1 rounded-md text-[13px] font-medium transition-colors ${
                 viewMode === "tokens"
-                  ? "bg-primary text-white shadow-sm"
-                  : "text-text-muted hover:text-text hover:bg-bg-hover"
+                  ? "bg-surface dark:bg-white/10 text-text-main shadow-[0_1px_2px_rgba(0,0,0,0.08),0_0_0_0.5px_rgba(0,0,0,0.06)]"
+                  : "text-text-muted hover:text-text-main"
               }`}
             >
               {t("tokens")}
             </button>
             <button
               onClick={() => setViewMode("costs")}
-              className={`px-3 py-1 rounded-md text-sm font-medium transition-colors ${
+              className={`px-3 py-1 rounded-md text-[13px] font-medium transition-colors ${
                 viewMode === "costs"
-                  ? "bg-primary text-white shadow-sm"
-                  : "text-text-muted hover:text-text hover:bg-bg-hover"
+                  ? "bg-surface dark:bg-white/10 text-text-main shadow-[0_1px_2px_rgba(0,0,0,0.08),0_0_0_0.5px_rgba(0,0,0,0.06)]"
+                  : "text-text-muted hover:text-text-main"
               }`}
             >
               {t("costs")}
@@ -260,7 +260,7 @@ export default function UsageStats() {
               aria-checked={autoRefresh}
               aria-label={t("toggleAutoRefresh")}
               className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary/50 ${
-                autoRefresh ? "bg-primary" : "bg-bg-subtle border border-border"
+                autoRefresh ? "bg-primary" : "bg-border-strong"
               }`}
             >
               <span
@@ -275,12 +275,12 @@ export default function UsageStats() {
 
       {/* Active Requests Summary */}
       {(stats.activeRequests || []).length > 0 && (
-        <Card className="p-3 border-primary/20 bg-primary/5">
+        <Card className="p-3">
           <div className="flex flex-col gap-2">
-            <div className="flex items-center gap-2 text-primary font-semibold text-sm uppercase tracking-wider">
+            <div className="flex items-center gap-2 text-text-muted font-medium text-xs uppercase tracking-wider">
               <span className="relative flex h-2 w-2">
-                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
-                <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-success opacity-75"></span>
+                <span className="relative inline-flex rounded-full h-2 w-2 bg-success"></span>
               </span>
               {t("activeRequests")}
             </div>
@@ -288,15 +288,15 @@ export default function UsageStats() {
               {stats.activeRequests.map((req) => (
                 <div
                   key={`${req.model}-${req.provider}-${req.account}`}
-                  className="px-3 py-1.5 rounded-md bg-bg-subtle border border-primary/20 text-xs font-mono shadow-sm"
+                  className="px-3 py-1.5 rounded-md bg-bg-subtle border border-border text-xs font-mono"
                 >
-                  <span className="text-primary font-bold">{req.model}</span>
+                  <span className="text-text-main font-medium">{req.model}</span>
                   <span className="mx-1 text-text-muted">|</span>
-                  <span className="text-text">{req.provider}</span>
+                  <span className="text-text-muted">{req.provider}</span>
                   <span className="mx-1 text-text-muted">|</span>
-                  <span className="text-text font-medium">{req.account}</span>
+                  <span className="text-text-main font-medium">{req.account}</span>
                   {req.count > 1 && (
-                    <span className="ml-2 px-1.5 py-0.5 rounded bg-primary text-white font-bold">
+                    <span className="ml-2 px-1.5 py-0.5 rounded bg-contrast text-contrast-fg font-medium tabular-nums">
                       x{req.count}
                     </span>
                   )}
@@ -312,10 +312,10 @@ export default function UsageStats() {
         <Card className="px-4 py-3 flex flex-col gap-1">
           <div className="flex justify-between items-start">
             <div className="flex flex-col gap-1">
-              <span className="text-text-muted text-sm uppercase font-semibold">
-                {t("totalRequests")}
+              <span className="text-text-muted text-[13px] font-medium">{t("totalRequests")}</span>
+              <span className="text-2xl font-semibold tracking-tight tabular-nums">
+                {fmt(stats.totalRequests)}
               </span>
-              <span className="text-2xl font-bold">{fmt(stats.totalRequests)}</span>
             </div>
             <MiniBarGraph
               data={(stats.last10Minutes || []).map((m) => m.requests)}
@@ -326,35 +326,33 @@ export default function UsageStats() {
         <Card className="px-4 py-3 flex flex-col gap-1">
           <div className="flex justify-between items-start">
             <div className="flex flex-col gap-1">
-              <span className="text-text-muted text-sm uppercase font-semibold">
+              <span className="text-text-muted text-[13px] font-medium">
                 {t("totalInputTokens")}
               </span>
-              <span className="text-2xl font-bold text-primary">
+              <span className="text-2xl font-semibold tracking-tight tabular-nums">
                 {fmt(stats.totalPromptTokens)}
               </span>
             </div>
             <MiniBarGraph
               data={(stats.last10Minutes || []).map((m) => m.promptTokens)}
-              colorClass="bg-primary/50"
+              colorClass="bg-text-muted/60"
             />
           </div>
         </Card>
         <Card className="px-4 py-2 flex flex-col gap-1">
           <div className="flex justify-between items-start gap-4">
             <div className="flex flex-col gap-1 flex-1">
-              <span className="text-text-muted text-sm uppercase font-semibold">
-                {t("outputTokens")}
-              </span>
-              <span className="text-2xl font-bold text-success">
+              <span className="text-text-muted text-[13px] font-medium">{t("outputTokens")}</span>
+              <span className="text-2xl font-semibold tracking-tight tabular-nums">
                 {fmt(stats.totalCompletionTokens)}
               </span>
             </div>
             <div className="w-px bg-border self-stretch mx-2" />
             <div className="flex flex-col gap-1 flex-1">
-              <span className="text-text-muted text-sm uppercase font-semibold">
-                {t("totalCost")}
+              <span className="text-text-muted text-[13px] font-medium">{t("totalCost")}</span>
+              <span className="text-2xl font-semibold tracking-tight tabular-nums">
+                {fmtCost(stats.totalCost)}
               </span>
-              <span className="text-2xl font-bold text-warning">{fmtCost(stats.totalCost)}</span>
             </div>
           </div>
         </Card>
@@ -362,36 +360,36 @@ export default function UsageStats() {
 
       {/* {t("usageByModel")} Table */}
       <Card className="overflow-hidden">
-        <div className="p-4 border-b border-border bg-bg-subtle/50">
-          <h3 className="font-semibold">{t("usageByModel")}</h3>
+        <div className="px-4 py-3 border-b border-border">
+          <h3 className="text-sm font-semibold">{t("usageByModel")}</h3>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm text-left">
-            <thead className="bg-bg-subtle/30 text-text-muted uppercase text-xs">
+          <table className="w-full text-[13px] text-left tabular-nums">
+            <thead className="bg-bg-subtle/50 text-text-muted text-xs font-medium">
               <tr>
                 <th
-                  className="px-6 py-3 cursor-pointer hover:bg-bg-subtle/50"
+                  className="px-6 py-3 cursor-pointer hover:text-text-main transition-colors"
                   onClick={() => toggleSort("rawModel")}
                 >
                   {t("model")}{" "}
                   <SortIcon field="rawModel" currentSort={sortBy} currentOrder={sortOrder} />
                 </th>
                 <th
-                  className="px-6 py-3 cursor-pointer hover:bg-bg-subtle/50"
+                  className="px-6 py-3 cursor-pointer hover:text-text-main transition-colors"
                   onClick={() => toggleSort("provider")}
                 >
                   {t("provider")}{" "}
                   <SortIcon field="provider" currentSort={sortBy} currentOrder={sortOrder} />
                 </th>
                 <th
-                  className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                  className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                   onClick={() => toggleSort("requests")}
                 >
                   {t("requests")}{" "}
                   <SortIcon field="requests" currentSort={sortBy} currentOrder={sortOrder} />
                 </th>
                 <th
-                  className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                  className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                   onClick={() => toggleSort("lastUsed")}
                 >
                   {t("lastUsed")}{" "}
@@ -400,7 +398,7 @@ export default function UsageStats() {
                 {viewMode === "tokens" ? (
                   <>
                     <th
-                      className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                      className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                       onClick={() => toggleSort("promptTokens")}
                     >
                       {t("inputTokens")}{" "}
@@ -411,7 +409,7 @@ export default function UsageStats() {
                       />
                     </th>
                     <th
-                      className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                      className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                       onClick={() => toggleSort("completionTokens")}
                     >
                       {t("outputTokens")}{" "}
@@ -422,7 +420,7 @@ export default function UsageStats() {
                       />
                     </th>
                     <th
-                      className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                      className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                       onClick={() => toggleSort("totalTokens")}
                     >
                       {t("totalTokens")}{" "}
@@ -432,7 +430,7 @@ export default function UsageStats() {
                 ) : (
                   <>
                     <th
-                      className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                      className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                       onClick={() => toggleSort("promptTokens")}
                     >
                       {t("inputCost")}{" "}
@@ -443,7 +441,7 @@ export default function UsageStats() {
                       />
                     </th>
                     <th
-                      className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                      className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                       onClick={() => toggleSort("completionTokens")}
                     >
                       {t("outputCost")}{" "}
@@ -454,7 +452,7 @@ export default function UsageStats() {
                       />
                     </th>
                     <th
-                      className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                      className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                       onClick={() => toggleSort("cost")}
                     >
                       {t("totalCost")}{" "}
@@ -466,7 +464,7 @@ export default function UsageStats() {
             </thead>
             <tbody className="divide-y divide-border">
               {sortedModels.map((data) => (
-                <tr key={data.key} className="hover:bg-bg-subtle/20">
+                <tr key={data.key} className="hover:bg-bg-subtle/60 transition-colors">
                   <td
                     className={`px-6 py-3 font-medium transition-colors ${
                       data.pending > 0 ? "text-primary" : ""
@@ -501,7 +499,7 @@ export default function UsageStats() {
                       <td className="px-6 py-3 text-right text-text-muted">
                         {fmtCost(data.outputCost)}
                       </td>
-                      <td className="px-6 py-3 text-right font-medium text-warning">
+                      <td className="px-6 py-3 text-right font-medium">
                         {fmtCost(data.totalCost)}
                       </td>
                     </>
@@ -522,43 +520,43 @@ export default function UsageStats() {
 
       {/* {t("usageByAccount")} Table */}
       <Card className="overflow-hidden">
-        <div className="p-4 border-b border-border bg-bg-subtle/50">
-          <h3 className="font-semibold">{t("usageByAccount")}</h3>
+        <div className="px-4 py-3 border-b border-border">
+          <h3 className="text-sm font-semibold">{t("usageByAccount")}</h3>
         </div>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm text-left">
-            <thead className="bg-bg-subtle/30 text-text-muted uppercase text-xs">
+          <table className="w-full text-[13px] text-left tabular-nums">
+            <thead className="bg-bg-subtle/50 text-text-muted text-xs font-medium">
               <tr>
                 <th
-                  className="px-6 py-3 cursor-pointer hover:bg-bg-subtle/50"
+                  className="px-6 py-3 cursor-pointer hover:text-text-main transition-colors"
                   onClick={() => toggleSort("rawModel")}
                 >
                   {t("model")}{" "}
                   <SortIcon field="rawModel" currentSort={sortBy} currentOrder={sortOrder} />
                 </th>
                 <th
-                  className="px-6 py-3 cursor-pointer hover:bg-bg-subtle/50"
+                  className="px-6 py-3 cursor-pointer hover:text-text-main transition-colors"
                   onClick={() => toggleSort("provider")}
                 >
                   {t("provider")}{" "}
                   <SortIcon field="provider" currentSort={sortBy} currentOrder={sortOrder} />
                 </th>
                 <th
-                  className="px-6 py-3 cursor-pointer hover:bg-bg-subtle/50"
+                  className="px-6 py-3 cursor-pointer hover:text-text-main transition-colors"
                   onClick={() => toggleSort("accountName")}
                 >
                   {t("account")}{" "}
                   <SortIcon field="accountName" currentSort={sortBy} currentOrder={sortOrder} />
                 </th>
                 <th
-                  className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                  className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                   onClick={() => toggleSort("requests")}
                 >
                   {t("requests")}{" "}
                   <SortIcon field="requests" currentSort={sortBy} currentOrder={sortOrder} />
                 </th>
                 <th
-                  className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                  className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                   onClick={() => toggleSort("lastUsed")}
                 >
                   {t("lastUsed")}{" "}
@@ -567,7 +565,7 @@ export default function UsageStats() {
                 {viewMode === "tokens" ? (
                   <>
                     <th
-                      className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                      className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                       onClick={() => toggleSort("promptTokens")}
                     >
                       {t("inputTokens")}{" "}
@@ -578,7 +576,7 @@ export default function UsageStats() {
                       />
                     </th>
                     <th
-                      className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                      className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                       onClick={() => toggleSort("completionTokens")}
                     >
                       {t("outputTokens")}{" "}
@@ -589,7 +587,7 @@ export default function UsageStats() {
                       />
                     </th>
                     <th
-                      className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                      className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                       onClick={() => toggleSort("totalTokens")}
                     >
                       {t("totalTokens")}{" "}
@@ -599,7 +597,7 @@ export default function UsageStats() {
                 ) : (
                   <>
                     <th
-                      className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                      className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                       onClick={() => toggleSort("promptTokens")}
                     >
                       {t("inputCost")}{" "}
@@ -610,7 +608,7 @@ export default function UsageStats() {
                       />
                     </th>
                     <th
-                      className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                      className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                       onClick={() => toggleSort("completionTokens")}
                     >
                       {t("outputCost")}{" "}
@@ -621,7 +619,7 @@ export default function UsageStats() {
                       />
                     </th>
                     <th
-                      className="px-6 py-3 text-right cursor-pointer hover:bg-bg-subtle/50"
+                      className="px-6 py-3 text-right cursor-pointer hover:text-text-main transition-colors"
                       onClick={() => toggleSort("cost")}
                     >
                       {t("totalCost")}{" "}
@@ -633,7 +631,7 @@ export default function UsageStats() {
             </thead>
             <tbody className="divide-y divide-border">
               {sortedAccounts.map((data) => (
-                <tr key={data.key} className="hover:bg-bg-subtle/20">
+                <tr key={data.key} className="hover:bg-bg-subtle/60 transition-colors">
                   <td
                     className={`px-6 py-3 font-medium transition-colors ${
                       data.pending > 0 ? "text-primary" : ""
@@ -678,7 +676,7 @@ export default function UsageStats() {
                       <td className="px-6 py-3 text-right text-text-muted">
                         {fmtCost(data.outputCost)}
                       </td>
-                      <td className="px-6 py-3 text-right font-medium text-warning">
+                      <td className="px-6 py-3 text-right font-medium">
                         {fmtCost(data.totalCost)}
                       </td>
                     </>

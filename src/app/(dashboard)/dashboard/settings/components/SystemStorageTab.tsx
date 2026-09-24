@@ -717,10 +717,10 @@ export default function SystemStorageTab() {
     const className =
       "p-3 rounded-lg text-sm " +
       (isSuccess
-        ? "bg-green-500/10 text-green-500 border border-green-500/20"
+        ? "bg-success/10 text-success border border-success/20"
         : isInfo
-          ? "bg-blue-500/10 text-blue-500 border border-blue-500/20"
-          : "bg-red-500/10 text-red-500 border border-red-500/20");
+          ? "bg-primary/10 text-primary border border-primary/20"
+          : "bg-error/10 text-error border border-error/20");
 
     return (
       <div key={index} className={className} role="alert">
@@ -741,7 +741,10 @@ export default function SystemStorageTab() {
       <div className="mb-4 p-4 rounded-lg border border-border bg-bg">
         <div className="flex items-center justify-between gap-3 mb-3">
           <h4 className="text-sm font-semibold flex items-center gap-2">
-            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
+            <span
+              className="material-symbols-outlined text-[18px] text-text-muted"
+              aria-hidden="true"
+            >
               analytics
             </span>
             {t("storageDatabaseStatistics")}
@@ -759,45 +762,47 @@ export default function SystemStorageTab() {
           </Button>
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div className="p-3 rounded-lg bg-black/[0.02] dark:bg-white/[0.02]">
+          <div className="p-3 rounded-lg border border-border bg-surface">
             <p className="text-xs text-text-muted mb-1">{t("storageDatabaseSize")}</p>
-            <p className="text-sm font-semibold">
+            <p className="text-sm font-semibold tabular-nums">
               {formatBytes(dbSettings.stats.databaseSizeBytes)}
             </p>
           </div>
-          <div className="p-3 rounded-lg bg-black/[0.02] dark:bg-white/[0.02]">
+          <div className="p-3 rounded-lg border border-border bg-surface">
             <p className="text-xs text-text-muted mb-1">{t("storagePageCount")}</p>
-            <p className="text-sm font-semibold">{dbSettings.stats.pageCount.toLocaleString()}</p>
+            <p className="text-sm font-semibold tabular-nums">
+              {dbSettings.stats.pageCount.toLocaleString()}
+            </p>
           </div>
-          <div className="p-3 rounded-lg bg-black/[0.02] dark:bg-white/[0.02]">
+          <div className="p-3 rounded-lg border border-border bg-surface">
             <p className="text-xs text-text-muted mb-1">{t("storageFreelistCount")}</p>
-            <p className="text-sm font-semibold">
+            <p className="text-sm font-semibold tabular-nums">
               {dbSettings.stats.freelistCount.toLocaleString()}
             </p>
           </div>
-          <div className="p-3 rounded-lg bg-black/[0.02] dark:bg-white/[0.02]">
+          <div className="p-3 rounded-lg border border-border bg-surface">
             <p className="text-xs text-text-muted mb-1">{t("storageLastVacuum")}</p>
-            <p className="text-sm font-semibold">
+            <p className="text-sm font-semibold tabular-nums">
               {dbSettings.stats.lastVacuumAt
                 ? new Date(dbSettings.stats.lastVacuumAt).toLocaleString(locale)
                 : t("never")}
             </p>
           </div>
-          <div className="p-3 rounded-lg bg-black/[0.02] dark:bg-white/[0.02]">
+          <div className="p-3 rounded-lg border border-border bg-surface">
             <p className="text-xs text-text-muted mb-1">{t("storageLastOptimization")}</p>
-            <p className="text-sm font-semibold">
+            <p className="text-sm font-semibold tabular-nums">
               {dbSettings.stats.lastOptimizationAt
                 ? new Date(dbSettings.stats.lastOptimizationAt).toLocaleString(locale)
                 : t("never")}
             </p>
           </div>
-          <div className="p-3 rounded-lg bg-black/[0.02] dark:bg-white/[0.02]">
+          <div className="p-3 rounded-lg border border-border bg-surface">
             <p className="text-xs text-text-muted mb-1">{t("storageIntegrityCheck")}</p>
-            <p className="text-sm font-semibold">
+            <p className="text-sm font-semibold tabular-nums">
               {dbSettings.stats.integrityCheck === "ok" ? (
-                <span className="text-green-500">{t("storageIntegrityOk")}</span>
+                <span className="text-success">{t("storageIntegrityOk")}</span>
               ) : dbSettings.stats.integrityCheck === "error" ? (
-                <span className="text-red-500">{t("storageIntegrityError")}</span>
+                <span className="text-error">{t("storageIntegrityError")}</span>
               ) : (
                 t("storageIntegrityNotChecked")
               )}
@@ -852,12 +857,12 @@ export default function SystemStorageTab() {
             {backups.map((backup) => (
               <div
                 key={backup.id}
-                className="flex items-center justify-between p-3 rounded-lg bg-black/[0.02] dark:bg-white/[0.02] border border-border/50 hover:border-border transition-colors"
+                className="flex items-center justify-between p-3 rounded-lg bg-surface border border-border hover:border-border-strong transition-colors"
               >
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-1">
                     <span
-                      className="material-symbols-outlined text-[16px] text-amber-500"
+                      className="material-symbols-outlined text-[16px] text-text-muted"
                       aria-hidden="true"
                     >
                       description
@@ -887,13 +892,13 @@ export default function SystemStorageTab() {
                 <div className="flex items-center gap-2 ml-3">
                   {confirmRestoreId === backup.id ? (
                     <>
-                      <span className="text-xs text-amber-500 font-medium">{t("confirm")}</span>
+                      <span className="text-xs text-warning font-medium">{t("confirm")}</span>
                       <Button
                         variant="primary"
                         size="sm"
                         onClick={() => handleRestore(backup.id)}
                         loading={restoringId === backup.id}
-                        className="!bg-amber-500 hover:!bg-amber-600"
+                        className="!bg-warning !text-black hover:!brightness-95"
                       >
                         {t("yes")}
                       </Button>
@@ -945,7 +950,10 @@ export default function SystemStorageTab() {
         <div className="flex items-start justify-between gap-3 flex-wrap mb-3">
           <div>
             <h4 className="text-sm font-semibold flex items-center gap-2">
-              <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
+              <span
+                className="material-symbols-outlined text-[18px] text-text-muted"
+                aria-hidden="true"
+              >
                 schedule
               </span>
               {t("storageRetentionCleanup")}
@@ -984,7 +992,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-bg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
               />
             </div>
           ))}
@@ -999,7 +1007,7 @@ export default function SystemStorageTab() {
             {t("saveRetentionSettings")}
           </Button>
         </div>
-        <div className="mt-5 border-t border-border/50 pt-4">
+        <div className="mt-5 border-t border-border pt-4">
           <DatabaseBackupRetentionCard
             title={t("storageDatabaseBackups")}
             className="mb-0"
@@ -1025,7 +1033,10 @@ export default function SystemStorageTab() {
     return (
       <div className="mt-6 p-4 rounded-lg border border-border bg-bg">
         <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
-          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
+          <span
+            className="material-symbols-outlined text-[18px] text-text-muted"
+            aria-hidden="true"
+          >
             tune
           </span>
           {t("storageOptimizationSettings")}
@@ -1047,7 +1058,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-bg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
               >
                 <option value="NONE">{t("storageJournalModeNone")}</option>
                 <option value="FULL">{t("storageJournalModeFull")}</option>
@@ -1069,7 +1080,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-bg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
               >
                 <option value="never">{t("storageVacuumNever")}</option>
                 <option value="daily">{t("storageVacuumDaily")}</option>
@@ -1093,7 +1104,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-bg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
               />
             </div>
             <div>
@@ -1113,7 +1124,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-bg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
               />
             </div>
             <div>
@@ -1134,7 +1145,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-bg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
               />
             </div>
           </div>
@@ -1179,7 +1190,10 @@ export default function SystemStorageTab() {
     return (
       <div className="mt-6 p-4 rounded-lg border border-border bg-bg">
         <h4 className="text-sm font-semibold mb-3 flex items-center gap-2">
-          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
+          <span
+            className="material-symbols-outlined text-[18px] text-text-muted"
+            aria-hidden="true"
+          >
             compress
           </span>
           {t("storageCompressionAggregation")}
@@ -1221,7 +1235,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-bg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
               />
             </div>
             <div>
@@ -1239,7 +1253,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-lg border border-border bg-bg focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
               >
                 <option value="hourly">{t("storageHourly")}</option>
                 <option value="daily">{t("storageDaily")}</option>
@@ -1265,13 +1279,15 @@ export default function SystemStorageTab() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-green-500/10 text-green-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             database
           </span>
         </div>
         <div className="flex-1">
-          <h3 className="text-lg font-semibold">{t("systemStorage")}</h3>
+          <h3 className="text-base font-semibold tracking-tight text-text-main">
+            {t("systemStorage")}
+          </h3>
           <p className="text-xs text-text-muted">{t("allDataLocal")}</p>
         </div>
         <Badge variant="success" size="sm">
@@ -1284,7 +1300,7 @@ export default function SystemStorageTab() {
           <p className="text-[11px] text-text-muted uppercase tracking-wide mb-1">
             {t("databasePath")}
           </p>
-          <p className="text-sm font-mono text-text-main break-all">
+          <p className="text-[13px] font-mono text-text-main break-all">
             {storageHealth.dbPath || "~/.omniroute/storage.sqlite"}
           </p>
         </div>
@@ -1293,10 +1309,10 @@ export default function SystemStorageTab() {
       {dbSettingsAuthRequired && !dbSettingsLoading && <AuthRequiredBanner t={t} />}
       {renderDatabaseStatistics()}
 
-      <div className="pt-3 border-t border-border/50 mb-4">
+      <div className="pt-3 border-t border-border mb-4">
         <div className="flex items-center gap-2 mb-3">
           <span
-            className="material-symbols-outlined text-[18px] text-emerald-500"
+            className="material-symbols-outlined text-[18px] text-text-muted"
             aria-hidden="true"
           >
             file_export
@@ -1377,16 +1393,16 @@ export default function SystemStorageTab() {
         </div>
 
         {confirmImport && pendingImportFile && (
-          <div className="p-4 rounded-lg mt-3 bg-amber-500/10 border border-amber-500/30">
+          <div className="p-4 rounded-lg mt-3 bg-warning/5 border border-warning/30">
             <div className="flex items-start gap-3">
               <span
-                className="material-symbols-outlined text-[20px] text-amber-500 mt-0.5"
+                className="material-symbols-outlined text-[20px] text-warning mt-0.5"
                 aria-hidden="true"
               >
                 warning
               </span>
               <div className="flex-1">
-                <p className="text-sm font-medium text-amber-500 mb-1">{t("confirmDbImport")}</p>
+                <p className="text-sm font-medium text-warning mb-1">{t("confirmDbImport")}</p>
                 <p className="text-xs text-text-muted mb-2">
                   {t("confirmDbImportDesc", { file: pendingImportFile.name })}
                 </p>
@@ -1395,7 +1411,7 @@ export default function SystemStorageTab() {
                     variant="primary"
                     size="sm"
                     onClick={handleImportConfirm}
-                    className="!bg-amber-500 hover:!bg-amber-600"
+                    className="!bg-warning !text-black hover:!brightness-95"
                   >
                     {t("yesImport")}
                   </Button>
@@ -1411,9 +1427,12 @@ export default function SystemStorageTab() {
         {importStatus.message && <div className="mt-3">{renderStatusAlert(importStatus, 0)}</div>}
       </div>
 
-      <div className="pt-3 border-t border-border/50 mb-4">
+      <div className="pt-3 border-t border-border mb-4">
         <div className="flex items-center gap-2 mb-3">
-          <span className="material-symbols-outlined text-[18px] text-blue-500" aria-hidden="true">
+          <span
+            className="material-symbols-outlined text-[18px] text-text-muted"
+            aria-hidden="true"
+          >
             build
           </span>
           <p className="font-medium">{t("maintenance")}</p>
@@ -1497,7 +1516,7 @@ export default function SystemStorageTab() {
             {t("resetUsageData")}
           </Button>
         </div>
-        <div className="mt-4 border-t border-border/50 pt-3">
+        <div className="mt-4 border-t border-border pt-3">
           <div className="flex flex-col gap-2">
             {[
               clearCacheStatus,
@@ -1514,7 +1533,10 @@ export default function SystemStorageTab() {
 
       <div className="flex items-center justify-between p-3 rounded-lg bg-bg border border-border mb-4">
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-[16px] text-amber-500" aria-hidden="true">
+          <span
+            className="material-symbols-outlined text-[16px] text-text-muted"
+            aria-hidden="true"
+          >
             schedule
           </span>
           <div>
@@ -1578,7 +1600,7 @@ export default function SystemStorageTab() {
             <select
               value={resetUsagePeriod}
               onChange={(e) => setResetUsagePeriod(e.target.value)}
-              className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-red-500/40"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-1 focus:ring-error/40"
             >
               {RESET_USAGE_PERIOD_VALUES.map((value) => (
                 <option key={value} value={value}>

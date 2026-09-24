@@ -37,10 +37,10 @@ interface UserBadge {
 
 const TIER_CONFIG: Record<string, { labelKey: string; color: string; bg: string }> = {
   bronze: { labelKey: "tiers.bronze", color: "text-amber-600", bg: "bg-amber-600/10" },
-  silver: { labelKey: "tiers.silver", color: "text-gray-300", bg: "bg-gray-300/10" },
-  gold: { labelKey: "tiers.gold", color: "text-yellow-400", bg: "bg-yellow-400/10" },
-  platinum: { labelKey: "tiers.platinum", color: "text-cyan-300", bg: "bg-cyan-300/10" },
-  diamond: { labelKey: "tiers.diamond", color: "text-violet-400", bg: "bg-violet-400/10" },
+  silver: { labelKey: "tiers.silver", color: "text-text-muted", bg: "bg-bg-subtle" },
+  gold: { labelKey: "tiers.gold", color: "text-warning", bg: "bg-warning/10" },
+  platinum: { labelKey: "tiers.platinum", color: "text-primary", bg: "bg-primary/10" },
+  diamond: { labelKey: "tiers.diamond", color: "text-violet-500", bg: "bg-violet-500/10" },
 };
 
 const BADGE_ICONS: Record<string, string> = {
@@ -88,11 +88,11 @@ function readStreakCount(data: { streak?: { current?: unknown } | null }): numbe
 }
 
 const RARITY_COLORS: Record<string, string> = {
-  common: "text-gray-400 border-gray-500/30",
-  uncommon: "text-green-400 border-green-500/30",
-  rare: "text-blue-400 border-blue-500/30",
-  epic: "text-purple-400 border-purple-500/30",
-  legendary: "text-amber-400 border-amber-500/30",
+  common: "text-text-muted border-border",
+  uncommon: "text-success border-success/30",
+  rare: "text-primary border-primary/30",
+  epic: "text-purple-500 border-purple-500/30",
+  legendary: "text-warning border-warning/30",
 };
 
 export default function ProfilePage() {
@@ -188,7 +188,10 @@ export default function ProfilePage() {
     <div className="flex flex-col gap-6">
       <h1 className="sr-only lg:hidden">{t("profile")}</h1>
       {error && (
-        <div role="alert" className="p-3 rounded-lg bg-red-500/10 text-red-400 text-sm">
+        <div
+          role="alert"
+          className="p-3 rounded-lg border border-error/20 bg-error/10 text-error text-sm"
+        >
           {error}
         </div>
       )}
@@ -198,12 +201,12 @@ export default function ProfilePage() {
         <div className="flex flex-col md:flex-row md:items-center gap-6">
           <div className="flex items-center gap-4">
             <div
-              className={`w-20 h-20 rounded-2xl flex items-center justify-center text-3xl font-black ${tierConfig.bg} ${tierConfig.color}`}
+              className={`w-20 h-20 rounded-card flex items-center justify-center text-3xl font-semibold tracking-tight tabular-nums ${tierConfig.bg} ${tierConfig.color}`}
             >
               {level}
             </div>
             <div>
-              <h2 className="text-xl font-bold">
+              <h2 className="text-xl font-semibold tracking-tight">
                 {tg(`levelTitles.${getLevelTitle(level).toLowerCase()}`)}
               </h2>
               <div className="flex items-center gap-2 mt-1">
@@ -211,7 +214,7 @@ export default function ProfilePage() {
                   {tg("tierLabel", { tier: tg(tierConfig.labelKey) })}
                 </Badge>
                 {streak > 0 && (
-                  <span className="text-sm text-orange-400 flex items-center gap-1">
+                  <span className="text-sm text-warning flex items-center gap-1">
                     🔥 {tg("dayStreak", { count: streak })}
                   </span>
                 )}
@@ -224,7 +227,7 @@ export default function ProfilePage() {
               <span className="text-text-muted">
                 {tg("levelProgress", { current: level, next: level + 1 })}
               </span>
-              <span className="text-text-muted">
+              <span className="text-text-muted tabular-nums">
                 {xpInCurrentLevel.toLocaleString()} / {xpForNext.toLocaleString()} XP
               </span>
             </div>
@@ -234,10 +237,10 @@ export default function ProfilePage() {
               aria-valuemin={0}
               aria-valuemax={xpForNext}
               aria-valuenow={Math.min(Math.max(xpInCurrentLevel, 0), xpForNext)}
-              className="w-full h-3 rounded-full bg-border overflow-hidden"
+              className="w-full h-3 rounded-full bg-bg-subtle overflow-hidden"
             >
               <div
-                className="h-full rounded-full bg-gradient-to-r from-violet-500 to-fuchsia-500 transition-all duration-500"
+                className="h-full rounded-full bg-primary transition-[width] duration-500"
                 style={{ width: `${Math.min(xpProgress, 100)}%` }}
               />
             </div>
@@ -254,7 +257,9 @@ export default function ProfilePage() {
           <div className="flex items-center gap-4">
             <div className="text-5xl">🔥</div>
             <div>
-              <p className="text-2xl font-bold">{tg("dayStreak", { count: streak })}</p>
+              <p className="text-2xl font-semibold tracking-tight tabular-nums">
+                {tg("dayStreak", { count: streak })}
+              </p>
               <p className="text-sm text-text-muted">{tg("maintainStreak")}</p>
             </div>
           </div>
@@ -263,7 +268,7 @@ export default function ProfilePage() {
 
       {/* Badges Grid */}
       <div>
-        <h3 className="text-lg font-semibold mb-4">
+        <h3 className="text-base font-semibold tracking-tight mb-4">
           {tg("badgesTitle", { earned: earnedBadges.length, total: allBadges.length })}
         </h3>
 
@@ -284,10 +289,10 @@ export default function ProfilePage() {
                   key={badge.id}
                   onClick={() => !isHiddenAndLocked && setSelectedBadge(badge)}
                   disabled={isHiddenAndLocked}
-                  className={`relative p-4 rounded-xl border transition-all text-left ${
+                  className={`relative p-4 rounded-card border transition-[opacity,background-color,border-color] text-left ${
                     isEarned
-                      ? `${rarityColor} bg-surface hover:shadow-md`
-                      : "border-border/50 bg-surface/50 opacity-50 grayscale enabled:hover:opacity-70 disabled:cursor-default"
+                      ? `${rarityColor} bg-surface hover:bg-bg-subtle`
+                      : "border-border bg-surface/50 opacity-50 grayscale enabled:hover:opacity-70 disabled:cursor-default"
                   }`}
                 >
                   <div className="text-3xl mb-2">
@@ -310,8 +315,8 @@ export default function ProfilePage() {
                   )}
                   {!isEarned && badge.criteria && (
                     <div className="mt-2">
-                      <div className="w-full h-1.5 rounded-full bg-border overflow-hidden">
-                        <div className="h-full w-0 rounded-full bg-violet-500/50" />
+                      <div className="w-full h-1.5 rounded-full bg-bg-subtle overflow-hidden">
+                        <div className="h-full w-0 rounded-full bg-primary/50" />
                       </div>
                     </div>
                   )}
@@ -324,17 +329,19 @@ export default function ProfilePage() {
 
       {/* Badge Detail Modal */}
       {selectedBadge && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-          <div className="bg-surface border border-border rounded-xl p-6 w-full max-w-md mx-4">
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+          <div className="bg-surface border border-border rounded-card shadow-[var(--shadow-elevated)] p-6 w-full max-w-md mx-4">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-3">
                 <span className="text-4xl">
                   <BadgeIcon icon={selectedBadge.icon} earned={earnedIds.has(selectedBadge.id)} />
                 </span>
                 <div>
-                  <h2 className="text-lg font-semibold">{translateBadge(selectedBadge, "name")}</h2>
+                  <h2 className="text-base font-semibold tracking-tight">
+                    {translateBadge(selectedBadge, "name")}
+                  </h2>
                   <span
-                    className={`text-xs px-2 py-0.5 rounded ${RARITY_COLORS[selectedBadge.rarity] || RARITY_COLORS.common} bg-surface`}
+                    className={`text-xs font-medium px-2 py-0.5 rounded-md ${RARITY_COLORS[selectedBadge.rarity] || RARITY_COLORS.common} bg-surface`}
                   >
                     {translateRarity(selectedBadge.rarity)}
                   </span>
@@ -343,7 +350,7 @@ export default function ProfilePage() {
               <button
                 type="button"
                 onClick={() => setSelectedBadge(null)}
-                className="text-text-muted hover:text-text-main text-xl"
+                className="text-text-muted hover:text-text-main text-xl transition-colors"
                 aria-label={t("close")}
               >
                 ×
@@ -364,14 +371,14 @@ export default function ProfilePage() {
             )}
 
             {selectedBadge.criteria && (
-              <div className="p-3 rounded-lg bg-surface/50 border border-border/50">
+              <div className="p-3 rounded-lg bg-bg-subtle border border-border">
                 <p className="text-xs font-medium text-text-muted mb-1">{t("profileHowToEarn")}</p>
                 <p className="text-sm">{translateBadge(selectedBadge, "criteria")}</p>
               </div>
             )}
 
             {earnedIds.has(selectedBadge.id) && (
-              <div className="mt-4 p-3 rounded-lg bg-emerald-500/10 text-emerald-400 text-sm">
+              <div className="mt-4 p-3 rounded-lg bg-success/10 text-success text-sm">
                 ✓{" "}
                 {tg("earnedOn", {
                   date: new Date(
@@ -385,7 +392,7 @@ export default function ProfilePage() {
               <button
                 type="button"
                 onClick={() => setSelectedBadge(null)}
-                className="px-4 py-2 text-sm rounded-lg border border-border text-text-muted hover:text-text-main transition-colors"
+                className="px-3 py-1.5 text-[13px] font-medium rounded-control border border-border-strong text-text-main hover:bg-bg-subtle transition-colors"
               >
                 {t("close")}
               </button>

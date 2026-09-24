@@ -13,15 +13,11 @@ export default function ProviderCountBadge({ configured, total }: ProviderCountB
   if (total === 0) return null;
 
   const colorClass =
-    configured === 0
-      ? "text-text-muted"
-      : configured === total
-        ? "text-green-500"
-        : "text-amber-500";
+    configured === 0 ? "text-text-muted" : configured === total ? "text-success" : "text-warning";
 
   return (
     <span
-      className={`text-xs font-medium ${colorClass}`}
+      className={`text-xs font-medium tabular-nums ${colorClass}`}
       title={t("configuredCount", { configured, total })}
     >
       {configured}/{total}

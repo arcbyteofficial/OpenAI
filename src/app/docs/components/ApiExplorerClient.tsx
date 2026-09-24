@@ -194,7 +194,7 @@ export function ApiExplorerClient() {
               >
                 <div className="flex items-center gap-2">
                   <span
-                    className={`px-1.5 py-0.5 text-[10px] font-mono font-bold rounded border ${METHOD_COLORS[endpoint.method] || "border-border"}`}
+                    className={`px-1.5 py-0.5 text-[10px] font-mono font-medium rounded border ${METHOD_COLORS[endpoint.method] || "border-border"}`}
                   >
                     {endpoint.method}
                   </span>
@@ -213,7 +213,7 @@ export function ApiExplorerClient() {
           <div className="space-y-4">
             <div className="flex items-center gap-3 flex-wrap">
               <span
-                className={`px-2 py-1 text-xs font-mono font-bold rounded border ${METHOD_COLORS[selected.method]}`}
+                className={`px-2 py-1 text-xs font-mono font-medium rounded border ${METHOD_COLORS[selected.method]}`}
               >
                 {selected.method}
               </span>

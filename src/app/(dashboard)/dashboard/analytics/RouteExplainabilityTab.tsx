@@ -203,12 +203,14 @@ function getStatusVariant(status: number) {
 
 function RouteMetric({ icon, label, value }: { icon: string; label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-black/5 bg-black/2 p-4 dark:border-white/5 dark:bg-white/2">
-      <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-text-muted">
+    <div className="rounded-lg border border-border bg-surface-2 p-4">
+      <div className="flex items-center gap-2 text-[13px] text-text-muted">
         <span className="material-symbols-outlined text-[16px]">{icon}</span>
         {label}
       </div>
-      <div className="mt-2 text-xl font-semibold text-text-main">{value}</div>
+      <div className="mt-2 text-xl font-semibold tracking-tight tabular-nums text-text-main">
+        {value}
+      </div>
     </div>
   );
 }
@@ -216,8 +218,8 @@ function RouteMetric({ icon, label, value }: { icon: string; label: string; valu
 function ExplainabilitySkeleton() {
   return (
     <div className="grid gap-4 lg:grid-cols-[0.8fr_1.2fr]">
-      <Skeleton className="h-72 rounded-lg" />
-      <Skeleton className="h-72 rounded-lg" />
+      <Skeleton className="h-72 rounded-card" />
+      <Skeleton className="h-72 rounded-card" />
     </div>
   );
 }
@@ -228,7 +230,7 @@ function FactorCard({ factor }: { factor: ExplanationFactor }) {
   const weightPct = Math.round(factor.weight * 100);
 
   return (
-    <div className="rounded-lg border border-black/5 bg-black/2 p-4 dark:border-white/5 dark:bg-white/2">
+    <div className="rounded-lg border border-border bg-surface-2 p-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="text-sm font-semibold text-text-main">{factor.name}</div>
@@ -238,7 +240,7 @@ function FactorCard({ factor }: { factor: ExplanationFactor }) {
           {contributionPct}%
         </Badge>
       </div>
-      <div className="mt-3 h-2 overflow-hidden rounded-full bg-black/5 dark:bg-white/5">
+      <div className="mt-3 h-2 overflow-hidden rounded-full bg-border">
         <div className="h-full rounded-full bg-primary" style={{ width: `${contributionPct}%` }} />
       </div>
       <div className="mt-2 text-xs text-text-muted">
@@ -264,7 +266,7 @@ function TargetTimeline({ targets }: { targets: ExplainTarget[] }) {
             "rounded-lg border p-4",
             target.outcome === "selected"
               ? "border-primary/30 bg-primary/5"
-              : "border-black/5 bg-black/2 dark:border-white/5 dark:bg-white/2"
+              : "border-border bg-surface-2"
           )}
         >
           <div className="flex flex-wrap items-start justify-between gap-3">
@@ -351,7 +353,7 @@ function WhyThisTargetCard({ replay }: { replay: DecisionReplay | undefined }) {
         </div>
 
         {recompute ? (
-          <div className="rounded-lg border border-black/5 bg-black/2 p-4 dark:border-white/5 dark:bg-white/2">
+          <div className="rounded-lg border border-border bg-surface-2 p-4">
             <div className="flex flex-wrap items-center justify-between gap-3">
               <div>
                 <div className="text-sm font-semibold text-text-main">
@@ -403,7 +405,7 @@ function WhyThisTargetCard({ replay }: { replay: DecisionReplay | undefined }) {
                   "rounded-lg border p-3",
                   candidate.isRuntimeSelected
                     ? "border-primary/30 bg-primary/5"
-                    : "border-black/5 bg-bg dark:border-white/5"
+                    : "border-border bg-bg"
                 )}
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
@@ -557,9 +559,9 @@ export default function RouteExplainabilityTab({
 
   return (
     <div className="flex flex-col gap-6">
-      <div className="flex flex-col gap-4 rounded-xl border border-black/5 bg-surface p-5 shadow-sm dark:border-white/5 lg:flex-row lg:items-center lg:justify-between">
+      <div className="flex flex-col gap-4 rounded-card border border-border bg-surface p-5 lg:flex-row lg:items-center lg:justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-text-main">
+          <h2 className="text-lg font-semibold tracking-tight text-text-main">
             {analyticsText(t, "routeTraceTitle", "Route Trace View")}
           </h2>
           <p className="mt-1 max-w-3xl text-sm text-text-muted">
@@ -571,14 +573,14 @@ export default function RouteExplainabilityTab({
           </p>
         </div>
         <div className="flex min-w-0 flex-col gap-2 sm:min-w-90">
-          <label className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+          <label className="text-xs font-medium text-text-muted">
             {analyticsText(t, "routeTraceRequestLog", "Request log")}
           </label>
           <select
             value={selectedId}
             onChange={(event) => setSelectedId(event.target.value)}
             disabled={logsLoading || logs.length === 0}
-            className="focus-ring rounded-lg border border-border bg-bg px-3 py-2 text-sm text-text-main disabled:cursor-not-allowed disabled:opacity-60"
+            className="focus-ring rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main disabled:cursor-not-allowed disabled:opacity-60"
           >
             {logs.map((log) => (
               <option key={log.id} value={log.id}>
@@ -594,15 +596,15 @@ export default function RouteExplainabilityTab({
       {logsLoading || explanationLoading ? <ExplainabilitySkeleton /> : null}
 
       {!logsLoading && !explanationLoading && error ? (
-        <Card className="p-8">
+        <Card className="p-6">
           <div className="flex flex-col items-center justify-center gap-3 text-center">
-            <span className="material-symbols-outlined text-[40px] text-error">route_off</span>
+            <span className="material-symbols-outlined text-[32px] text-error">route_off</span>
             <div className="font-medium text-text-main">{t("routeUnableToLoad")}</div>
             <div className="text-sm text-text-muted">{error}</div>
             <button
               type="button"
               onClick={() => fetchLogs()}
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-hover"
+              className="inline-flex items-center gap-2 rounded-control bg-contrast px-4 py-2 text-sm font-medium text-contrast-fg transition-colors hover:bg-contrast-hover"
             >
               <span className="material-symbols-outlined text-[18px]">refresh</span>
               {t("retry")}
@@ -612,9 +614,9 @@ export default function RouteExplainabilityTab({
       ) : null}
 
       {!logsLoading && !explanationLoading && !error && logs.length === 0 ? (
-        <Card className="p-10">
+        <Card className="p-6">
           <div className="flex flex-col items-center justify-center gap-4 text-center">
-            <span className="material-symbols-outlined text-[40px] text-text-muted/70">route</span>
+            <span className="material-symbols-outlined text-[32px] text-text-subtle">route</span>
             <div className="text-base font-medium text-text-main">{t("routeNoRequestLogs")}</div>
             <div className="max-w-md text-sm text-text-muted">
               {t("routeNoRequestLogsDescription")}
@@ -699,7 +701,7 @@ export default function RouteExplainabilityTab({
                 ].map(([label, value]) => (
                   <div
                     key={label}
-                    className="flex items-start justify-between gap-4 border-b border-black/5 pb-2 last:border-b-0 last:pb-0 dark:border-white/5"
+                    className="flex items-start justify-between gap-4 border-b border-border pb-2 last:border-b-0 last:pb-0"
                   >
                     <span className="text-text-muted">{label}</span>
                     <span className="max-w-[65%] truncate text-right font-medium text-text-main">
@@ -717,7 +719,7 @@ export default function RouteExplainabilityTab({
                 {explanation.evidence.map((item) => (
                   <div
                     key={item.label}
-                    className="flex items-center justify-between gap-3 rounded-lg bg-black/2 px-3 py-2 text-sm dark:bg-white/2"
+                    className="flex items-center justify-between gap-3 rounded-lg bg-surface-2 px-3 py-2 text-sm"
                   >
                     <span className="text-text-muted">{item.label}</span>
                     <Badge variant={getToneVariant(item.tone)} size="sm">

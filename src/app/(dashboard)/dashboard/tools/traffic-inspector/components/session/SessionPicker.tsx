@@ -22,21 +22,24 @@ export function SessionPicker({ sessions, selectedId, onSelect, onDelete }: Sess
       <button
         type="button"
         onClick={() => setOpen((o) => !o)}
-        className="flex items-center gap-1 rounded border border-border bg-bg-subtle px-2 py-1 text-xs text-text-main hover:bg-surface focus-ring"
+        className="flex items-center gap-1 rounded-control border border-border-strong bg-surface px-2 py-1 text-xs text-text-main hover:bg-bg-subtle transition-colors focus-ring"
       >
-        <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
+        <span className="material-symbols-outlined text-[14px] text-text-muted" aria-hidden="true">
           folder_open
         </span>
         {selected
           ? (selected.name ?? t("sessionName", { id: selected.id.slice(0, 6) }))
           : t("sessions")}
-        <span className="material-symbols-outlined text-[12px] ml-1" aria-hidden="true">
+        <span
+          className="material-symbols-outlined text-[12px] ml-1 text-text-muted"
+          aria-hidden="true"
+        >
           {open ? "expand_less" : "expand_more"}
         </span>
       </button>
 
       {open && (
-        <div className="absolute left-0 top-full z-50 mt-1 min-w-[200px] rounded-lg border border-border bg-surface shadow-lg py-1">
+        <div className="absolute left-0 top-full z-50 mt-1 min-w-[200px] rounded-lg border border-border bg-surface shadow-[var(--shadow-elevated)] py-1">
           <button
             type="button"
             onClick={() => {
@@ -48,7 +51,7 @@ export function SessionPicker({ sessions, selectedId, onSelect, onDelete }: Sess
             {t("allTraffic")}
           </button>
           {sessions.length === 0 && (
-            <p className="px-3 py-2 text-xs text-text-muted italic">{t("noSessionsYet")}</p>
+            <p className="px-3 py-2 text-xs text-text-subtle">{t("noSessionsYet")}</p>
           )}
           {sessions.map((s) => (
             <div key={s.id} className="flex items-center group">
@@ -59,11 +62,11 @@ export function SessionPicker({ sessions, selectedId, onSelect, onDelete }: Sess
                   setOpen(false);
                 }}
                 className={`flex-1 text-left px-3 py-1.5 text-xs hover:bg-bg-subtle focus-ring ${
-                  selectedId === s.id ? "text-blue-400 font-medium" : "text-text-main"
+                  selectedId === s.id ? "text-primary font-medium" : "text-text-main"
                 }`}
               >
                 {s.name ?? t("sessionName", { id: s.id.slice(0, 6) })}
-                <span className="text-text-muted ml-1">
+                <span className="text-text-subtle tabular-nums ml-1">
                   ({t("requestCountShort", { count: s.requestCount })})
                 </span>
               </button>
@@ -73,7 +76,7 @@ export function SessionPicker({ sessions, selectedId, onSelect, onDelete }: Sess
                   onDelete(s.id);
                   if (selectedId === s.id) onSelect(undefined);
                 }}
-                className="px-2 text-text-muted hover:text-red-400 opacity-0 group-hover:opacity-100 focus-ring rounded"
+                className="px-2 text-text-muted hover:text-error opacity-0 group-hover:opacity-100 focus-ring rounded"
                 aria-label={t("deleteSession")}
               >
                 <span className="material-symbols-outlined text-[14px]" aria-hidden="true">

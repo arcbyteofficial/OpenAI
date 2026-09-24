@@ -7,7 +7,7 @@ const HANDLE = "!bg-transparent !border-0 !w-0 !h-0";
 function OrchestratorNodeImpl({ data }: { data: OrchNode }) {
   return (
     <div
-      className="rounded-xl border-2 border-primary bg-surface px-5 py-3 text-sm font-semibold"
+      className="rounded-card border border-border-strong bg-surface px-5 py-3 text-sm font-semibold tracking-tight text-text-main"
       aria-label={data.label}
     >
       {data.label}

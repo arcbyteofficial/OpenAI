@@ -18,7 +18,7 @@ export default function BurnRateChartInner({ usage }: BurnRateChartInnerProps) {
 
   if (!hasData) {
     return (
-      <div className="h-20 flex items-center justify-center rounded-md bg-bg-subtle/30 border border-border/30">
+      <div className="h-20 flex items-center justify-center rounded-md bg-bg-subtle border border-border">
         <p className="text-[11px] text-text-muted italic">{t("burnRateTitle")} — no data yet</p>
       </div>
     );
@@ -55,8 +55,8 @@ export default function BurnRateChartInner({ usage }: BurnRateChartInnerProps) {
   return (
     <div className="space-y-1">
       <div className="flex items-center justify-between text-[10px] text-text-muted">
-        <span className="font-semibold uppercase tracking-wide">{t("burnRateTitle")}</span>
-        {exhaustionLabel && <span className="text-amber-400 font-semibold">{exhaustionLabel}</span>}
+        <span className="font-medium uppercase tracking-wider">{t("burnRateTitle")}</span>
+        {exhaustionLabel && <span className="text-warning font-medium">{exhaustionLabel}</span>}
       </div>
       <div className="h-24">
         <ResponsiveContainer width="100%" height="100%">
@@ -65,15 +65,15 @@ export default function BurnRateChartInner({ usage }: BurnRateChartInnerProps) {
             <YAxis hide />
             <Tooltip
               contentStyle={{
-                background: "var(--bg-surface, #1e1e2e)",
-                border: "1px solid var(--border)",
+                background: "var(--color-surface)",
+                border: "1px solid var(--color-border)",
                 fontSize: 10,
               }}
             />
             <Line
               type="monotone"
               dataKey="consumed"
-              stroke="#a78bfa"
+              stroke="var(--color-primary)"
               strokeWidth={2}
               dot={false}
               strokeDasharray="4 2"

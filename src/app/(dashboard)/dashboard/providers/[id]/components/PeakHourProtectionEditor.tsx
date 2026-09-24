@@ -120,7 +120,7 @@ export default function PeakHourProtectionEditor({
   };
 
   return (
-    <div className="flex flex-col gap-4 rounded-lg border border-amber-500/30 bg-amber-500/5 p-4">
+    <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-2 p-4">
       <Toggle
         checked={value.enabled}
         onChange={(enabled) => onChange({ ...value, enabled })}
@@ -176,7 +176,7 @@ export default function PeakHourProtectionEditor({
           </p>
         ) : (
           value.windows.map((window) => (
-            <div key={window.id} className="rounded-lg border border-border/70 bg-surface/50 p-3">
+            <div key={window.id} className="rounded-lg border border-border bg-surface p-3">
               <div className="mb-3 flex items-center justify-between gap-2">
                 <Input
                   label={providerText(t, "peakHourWindowName", "Window name")}
@@ -228,8 +228,8 @@ export default function PeakHourProtectionEditor({
                         onClick={() => toggleDay(window, day)}
                         className={`rounded-full px-2 py-1 text-xs font-medium transition-colors ${
                           active
-                            ? "bg-amber-500 text-white"
-                            : "bg-muted/60 text-text-muted hover:bg-muted"
+                            ? "bg-primary/10 text-primary"
+                            : "bg-bg-subtle text-text-muted hover:text-text-main"
                         }`}
                       >
                         {DAY_LABELS[day]}

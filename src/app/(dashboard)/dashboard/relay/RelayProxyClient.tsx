@@ -107,7 +107,7 @@ export default function RelayProxyClient() {
     <div className="space-y-6">
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-xl font-bold">{t("title")}</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
           <p className="text-sm text-text-muted mt-1">{t("description")}</p>
         </div>
         <Button onClick={() => setShowCreate(!showCreate)}>
@@ -118,41 +118,49 @@ export default function RelayProxyClient() {
       {/* Create Form */}
       {showCreate && (
         <Card>
-          <div className="p-4 space-y-4">
-            <h2 className="text-sm font-semibold">{t("createTitle")}</h2>
+          <div className="space-y-4">
+            <h2 className="text-sm font-semibold text-text-main">{t("createTitle")}</h2>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <div>
-                <label className="block text-sm font-medium mb-1">{t("nameRequired")}</label>
+                <label className="block text-[13px] font-medium text-text-main mb-1">
+                  {t("nameRequired")}
+                </label>
                 <input
-                  className="w-full border border-border rounded-lg px-3 py-2 bg-surface text-sm"
+                  className="w-full border border-border-strong rounded-control px-3 py-2 bg-surface text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                   value={form.name}
                   onChange={(e) => setForm({ ...form, name: e.target.value })}
                   placeholder="my-api-relay"
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">{t("tokenDescription")}</label>
+                <label className="block text-[13px] font-medium text-text-main mb-1">
+                  {t("tokenDescription")}
+                </label>
                 <input
-                  className="w-full border border-border rounded-lg px-3 py-2 bg-surface text-sm"
+                  className="w-full border border-border-strong rounded-control px-3 py-2 bg-surface text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                   value={form.description}
                   onChange={(e) => setForm({ ...form, description: e.target.value })}
                   placeholder={t("descriptionPlaceholder")}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">{t("maxPerMinute")}</label>
+                <label className="block text-[13px] font-medium text-text-main mb-1">
+                  {t("maxPerMinute")}
+                </label>
                 <input
                   type="number"
-                  className="w-full border border-border rounded-lg px-3 py-2 bg-surface text-sm"
+                  className="w-full border border-border-strong rounded-control px-3 py-2 bg-surface text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                   value={form.maxRpm}
                   onChange={(e) => setForm({ ...form, maxRpm: e.target.value })}
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium mb-1">{t("maxPerDay")}</label>
+                <label className="block text-[13px] font-medium text-text-main mb-1">
+                  {t("maxPerDay")}
+                </label>
                 <input
                   type="number"
-                  className="w-full border border-border rounded-lg px-3 py-2 bg-surface text-sm"
+                  className="w-full border border-border-strong rounded-control px-3 py-2 bg-surface text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                   value={form.maxRpd}
                   onChange={(e) => setForm({ ...form, maxRpd: e.target.value })}
                 />
@@ -168,18 +176,16 @@ export default function RelayProxyClient() {
       {/* Token Display (shown once after creation) */}
       {newTokenData && (
         <Card>
-          <div className="p-4 space-y-3">
-            <h2 className="text-sm font-semibold text-green-600 dark:text-green-400">
-              {t("createdTitle")}
-            </h2>
-            <div className="bg-surface/50 border border-border rounded-lg p-3">
+          <div className="space-y-3">
+            <h2 className="text-sm font-semibold text-success">{t("createdTitle")}</h2>
+            <div className="bg-bg-subtle border border-border rounded-lg p-3">
               <p className="text-xs text-text-muted mb-1">
                 {t.rich("tokenFor", {
                   name: newTokenData.name,
                   strong: (chunks) => <strong>{chunks}</strong>,
                 })}
               </p>
-              <code className="text-sm font-mono break-all select-all bg-black/10 dark:bg-white/10 px-2 py-1 rounded">
+              <code className="text-[13px] font-mono break-all select-all bg-surface border border-border px-2 py-1 rounded-md text-text-main">
                 {newTokenData.rawToken}
               </code>
             </div>
@@ -191,10 +197,10 @@ export default function RelayProxyClient() {
 
       {/* Usage Guide */}
       <Card>
-        <div className="p-4 space-y-2">
-          <h2 className="text-sm font-semibold">{t("usage")}</h2>
+        <div className="space-y-2">
+          <h2 className="text-sm font-semibold text-text-main">{t("usage")}</h2>
           <p className="text-xs text-text-muted">{t("usageDescription")}</p>
-          <pre className="text-xs bg-surface/50 border border-border rounded-lg p-3 overflow-x-auto">
+          <pre className="font-mono text-[12px] text-text-main bg-bg-subtle border border-border rounded-lg p-3 overflow-x-auto">
             {`curl ${displayBaseUrl}/v1/relay/chat/completions \\
   -H "Authorization: Bearer relay_..." \\
   -H "Content-Type: application/json" \\
@@ -205,8 +211,8 @@ export default function RelayProxyClient() {
 
       {/* Tokens List */}
       <Card>
-        <div className="p-4">
-          <h2 className="text-sm font-semibold mb-3">
+        <div className="text-text-main">
+          <h2 className="text-sm font-semibold text-text-main mb-3">
             {t("tokenCount", { count: tokens.length })}
           </h2>
           {loading ? (
@@ -222,11 +228,11 @@ export default function RelayProxyClient() {
                 >
                   <div className="flex items-center gap-3">
                     <div
-                      className={`w-2 h-2 rounded-full ${token.enabled ? "bg-green-500" : "bg-red-500"}`}
+                      className={`w-2 h-2 rounded-full ${token.enabled ? "bg-success" : "bg-text-subtle"}`}
                     />
                     <div>
-                      <div className="font-medium text-sm">{token.name}</div>
-                      <div className="text-xs text-text-muted font-mono">
+                      <div className="font-medium text-sm text-text-main">{token.name}</div>
+                      <div className="text-[12px] text-text-muted font-mono">
                         {token.tokenPrefix}...
                       </div>
                       {token.description && (
@@ -249,7 +255,7 @@ export default function RelayProxyClient() {
                     </button>
                     <button
                       onClick={() => deleteToken(token.id)}
-                      className="text-xs text-red-500 hover:underline"
+                      className="text-xs text-error hover:underline"
                     >
                       {t("delete")}
                     </button>

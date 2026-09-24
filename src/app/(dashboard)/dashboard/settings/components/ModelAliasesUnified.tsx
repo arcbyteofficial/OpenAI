@@ -118,10 +118,7 @@ export default function ModelAliasesUnified() {
       const currentWildcards = Array.isArray(settingsData.wildcardAliases)
         ? settingsData.wildcardAliases
         : wildcardAliases;
-      const updated = [
-        ...currentWildcards,
-        { pattern: fromValue.trim(), target: toValue.trim() },
-      ];
+      const updated = [...currentWildcards, { pattern: fromValue.trim(), target: toValue.trim() }];
       const res = await fetch("/api/settings", {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -181,16 +178,16 @@ export default function ModelAliasesUnified() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-5">
-        <div className="p-2 rounded-lg bg-purple-500/10 text-purple-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-2 rounded-lg bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             swap_horiz
           </span>
         </div>
         <div className="flex-1">
-          <h3 className="text-lg font-semibold">
+          <h3 className="text-sm font-semibold text-text-main">
             {translateOrFallback(t, "modelAliasesTitle", "Model Aliases")}
           </h3>
-          <p className="text-sm text-text-muted">
+          <p className="text-[13px] text-text-muted">
             {translateOrFallback(
               t,
               "modelAliasesDesc",
@@ -201,7 +198,7 @@ export default function ModelAliasesUnified() {
         {status.message && (
           <span
             className={`text-xs font-medium flex items-center gap-1 ${
-              status.type === "success" ? "text-emerald-500" : "text-red-500"
+              status.type === "success" ? "text-success" : "text-error"
             }`}
           >
             <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
@@ -212,7 +209,7 @@ export default function ModelAliasesUnified() {
         )}
       </div>
 
-      <div className="mb-5 rounded-lg border border-border/30 bg-surface/20 p-4">
+      <div className="mb-5 rounded-lg border border-border bg-surface-2 p-4">
         <div className="flex flex-wrap gap-2 mb-3">
           {[
             {
@@ -230,8 +227,8 @@ export default function ModelAliasesUnified() {
               onClick={() => setAliasMode(mode.value as AliasMode)}
               className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
                 aliasMode === mode.value
-                  ? "bg-white dark:bg-white/10 text-text-main shadow-sm"
-                  : "bg-black/5 dark:bg-white/5 text-text-muted hover:text-text-main"
+                  ? "bg-surface text-text-main ring-1 ring-border-strong"
+                  : "bg-bg-subtle text-text-muted hover:text-text-main"
               }`}
             >
               {mode.label}
@@ -290,10 +287,10 @@ export default function ModelAliasesUnified() {
       </div>
 
       <div className="mb-4">
-        <p className="text-xs font-medium text-text-muted uppercase tracking-wider mb-2">
+        <p className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-2">
           {translateOrFallback(t, "customAliases", "Custom Aliases")}
         </p>
-        <div className="rounded-lg border border-border/30 divide-y divide-border/20">
+        <div className="rounded-lg border border-border divide-y divide-border">
           {customEntries.length === 0 ? (
             <div className="px-4 py-3 text-sm text-text-muted">
               {translateOrFallback(
@@ -305,16 +302,16 @@ export default function ModelAliasesUnified() {
           ) : (
             customEntries.map(([from, to]) => (
               <div key={from} className="flex items-center gap-3 px-4 py-2.5">
-                <code className="text-xs text-red-400/80 flex-1 truncate">{from}</code>
+                <code className="text-xs text-text-muted flex-1 truncate">{from}</code>
                 <span className="material-symbols-outlined text-[14px] text-text-muted">
                   arrow_forward
                 </span>
-                <code className="text-xs text-emerald-400/80 flex-1 truncate">{to}</code>
+                <code className="text-xs text-text-main flex-1 truncate">{to}</code>
                 <button
                   type="button"
                   onClick={() => void removeExactAlias(from)}
                   disabled={saving}
-                  className="p-1 rounded hover:bg-red-500/10 text-text-muted hover:text-red-400 transition-all"
+                  className="p-1 rounded-md hover:bg-error/10 text-text-muted hover:text-error transition-colors"
                 >
                   <span className="material-symbols-outlined text-[16px]">close</span>
                 </button>
@@ -325,10 +322,10 @@ export default function ModelAliasesUnified() {
       </div>
 
       <div className="mb-4">
-        <p className="text-xs font-medium text-text-muted uppercase tracking-wider mb-2">
+        <p className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-2">
           {translateOrFallback(t, "wildcardRulesTitle", "Wildcard Rules")}
         </p>
-        <div className="rounded-lg border border-border/30 divide-y divide-border/20">
+        <div className="rounded-lg border border-border divide-y divide-border">
           {wildcardAliases.length === 0 ? (
             <div className="px-4 py-3 text-sm text-text-muted">
               {translateOrFallback(
@@ -343,16 +340,16 @@ export default function ModelAliasesUnified() {
                 key={`${alias.pattern}-${alias.target}-${index}`}
                 className="flex items-center gap-3 px-4 py-2.5"
               >
-                <code className="text-xs text-purple-400 flex-1 truncate">{alias.pattern}</code>
+                <code className="text-xs text-text-muted flex-1 truncate">{alias.pattern}</code>
                 <span className="material-symbols-outlined text-[14px] text-text-muted">
                   arrow_forward
                 </span>
-                <code className="text-xs text-emerald-400/80 flex-1 truncate">{alias.target}</code>
+                <code className="text-xs text-text-main flex-1 truncate">{alias.target}</code>
                 <button
                   type="button"
                   onClick={() => void removeWildcardAlias(index)}
                   disabled={saving}
-                  className="p-1 rounded hover:bg-red-500/10 text-text-muted hover:text-red-400 transition-all"
+                  className="p-1 rounded-md hover:bg-error/10 text-text-muted hover:text-error transition-colors"
                 >
                   <span className="material-symbols-outlined text-[16px]">close</span>
                 </button>
@@ -363,20 +360,20 @@ export default function ModelAliasesUnified() {
       </div>
 
       <details className="group">
-        <summary className="text-xs font-medium text-text-muted uppercase tracking-wider cursor-pointer flex items-center gap-1 mb-2">
+        <summary className="text-[11px] font-medium text-text-subtle uppercase tracking-wider cursor-pointer flex items-center gap-1 mb-2">
           <span className="material-symbols-outlined text-[14px] group-open:rotate-90 transition-transform">
             chevron_right
           </span>
           {translateOrFallback(t, "builtInAliases", "Built-in Aliases")} ({builtInEntries.length})
         </summary>
-        <div className="rounded-lg border border-border/30 divide-y divide-border/20 max-h-60 overflow-y-auto">
+        <div className="rounded-lg border border-border divide-y divide-border max-h-60 overflow-y-auto">
           {builtInEntries.map(([from, to]) => (
             <div key={from} className="flex items-center gap-3 px-4 py-2 opacity-60">
-              <code className="text-xs text-red-400/60 flex-1 truncate">{from}</code>
+              <code className="text-xs text-text-muted flex-1 truncate">{from}</code>
               <span className="material-symbols-outlined text-[14px] text-text-muted">
                 arrow_forward
               </span>
-              <code className="text-xs text-emerald-400/60 flex-1 truncate">{to}</code>
+              <code className="text-xs text-text-main flex-1 truncate">{to}</code>
               <span className="material-symbols-outlined text-[14px] text-text-muted">lock</span>
             </div>
           ))}

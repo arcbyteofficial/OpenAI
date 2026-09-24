@@ -66,14 +66,17 @@ export function AlibabaProviderRegionChoices({
           type="button"
           data-region={choice.value}
           onClick={() => onSelect(choice.value)}
-          className="w-full rounded-lg border border-border p-4 text-left transition-colors hover:bg-sidebar"
+          className="w-full rounded-lg border border-border p-4 text-left transition-colors hover:bg-bg-subtle hover:border-border-strong"
         >
           <div className="flex items-start gap-3">
-            <span className="material-symbols-outlined mt-0.5 text-primary" aria-hidden="true">
+            <span
+              className="material-symbols-outlined mt-0.5 text-[18px] text-text-muted"
+              aria-hidden="true"
+            >
               {choice.icon}
             </span>
             <div className="min-w-0 flex-1">
-              <h3 className="mb-1 font-semibold">{choice.label}</h3>
+              <h3 className="mb-1 text-sm font-semibold">{choice.label}</h3>
               <p className="text-sm text-text-muted">{choice.description}</p>
             </div>
           </div>

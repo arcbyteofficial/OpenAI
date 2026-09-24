@@ -324,27 +324,27 @@ export default function ComboDefaultsTab() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-2 rounded-lg border border-border bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             tune
           </span>
         </div>
-        <h3 className="text-lg font-semibold">
+        <h3 className="text-base font-semibold tracking-tight text-text-main">
           {translateOrFallback(t, "comboDefaultsTitle", "Default Routing & Combo Settings")}
         </h3>
         <span className="text-xs text-text-muted ml-auto">{t("globalComboConfig")}</span>
         {status.message && (
           <span
             className={`text-xs font-medium ml-2 ${
-              status.type === "success" ? "text-emerald-500" : "text-red-500"
+              status.type === "success" ? "text-success" : "text-error"
             }`}
           >
             {status.message}
           </span>
         )}
       </div>
-      <div className="mb-4 rounded-lg border border-blue-500/20 bg-blue-500/5 p-3">
-        <p className="text-xs font-medium text-blue-700 dark:text-blue-300">
+      <div className="mb-4 rounded-lg border border-border bg-bg-subtle p-3">
+        <p className="text-xs font-medium text-text-main">
           {translateOrFallback(t, "routingAdvancedGuideTitle", "Advanced routing guidance")}
         </p>
         <p className="text-xs text-text-muted mt-1">
@@ -362,10 +362,8 @@ export default function ComboDefaultsTab() {
           )}
         </p>
       </div>
-      <div className="mb-4 rounded-lg border border-amber-500/20 bg-amber-500/5 p-3">
-        <p className="text-xs font-medium text-amber-700 dark:text-amber-300">
-          {t("comboDefaultsGuideTitle")}
-        </p>
+      <div className="mb-4 rounded-lg border border-border bg-bg-subtle p-3">
+        <p className="text-xs font-medium text-text-main">{t("comboDefaultsGuideTitle")}</p>
         <p className="text-xs text-text-muted mt-1">{t("comboDefaultsGuideHint1")}</p>
         <p className="text-xs text-text-muted">{t("comboDefaultsGuideHint2")}</p>
       </div>
@@ -379,7 +377,7 @@ export default function ComboDefaultsTab() {
           <div
             role="tablist"
             aria-label={t("comboStrategyAria")}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1 p-0.5 rounded-md bg-black/5 dark:bg-white/5"
+            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-1 p-0.5 rounded-lg bg-bg-subtle"
           >
             {strategyOptions.map((s) => (
               <button
@@ -396,9 +394,9 @@ export default function ComboDefaultsTab() {
                   }
                 }}
                 className={cn(
-                  "px-2 py-1 rounded text-xs font-medium transition-all flex items-center justify-center gap-0.5",
+                  "px-2 py-1 rounded-md text-xs font-medium transition-colors flex items-center justify-center gap-0.5",
                   comboDefaults.strategy === s.value
-                    ? "bg-white dark:bg-white/10 text-text-main shadow-sm"
+                    ? "bg-surface dark:bg-white/10 text-text-main shadow-[0_1px_2px_rgba(0,0,0,0.08),0_0_0_0.5px_rgba(0,0,0,0.06)]"
                     : "text-text-muted hover:text-text-main"
                 )}
               >
@@ -410,7 +408,7 @@ export default function ComboDefaultsTab() {
         </div>
 
         {comboDefaults.strategy === "round-robin" && (
-          <div className="flex items-center justify-between pt-3 border-t border-border/30">
+          <div className="flex items-center justify-between pt-3 border-t border-border">
             <div>
               <p className="text-sm font-medium">{t("stickyLimit")}</p>
               <p className="text-xs text-text-muted">{t("stickyLimitDesc")}</p>
@@ -439,7 +437,7 @@ export default function ComboDefaultsTab() {
         )}
 
         {/* Numeric settings */}
-        <div className="grid grid-cols-2 gap-3 pt-3 border-t border-border/50">
+        <div className="grid grid-cols-2 gap-3 pt-3 border-t border-border">
           {numericSettings.map(({ key, label, min, max, step }) => (
             <Input
               key={key}
@@ -507,7 +505,7 @@ export default function ComboDefaultsTab() {
           )}
         </p>
 
-        <div className="grid grid-cols-1 gap-3 pt-3 border-t border-border/50">
+        <div className="grid grid-cols-1 gap-3 pt-3 border-t border-border">
           <div>
             <p className="font-medium text-sm">
               {translateOrFallback(t, "sessionAffinityTitle", "Session affinity")}
@@ -532,7 +530,7 @@ export default function ComboDefaultsTab() {
           />
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-3 border-t border-border/50">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-3 border-t border-border">
           <div className="md:col-span-2">
             <p className="font-medium text-sm">
               {translateOrFallback(t, "resetAwareQuotaCacheTitle", "Reset-aware quota cache")}
@@ -579,7 +577,7 @@ export default function ComboDefaultsTab() {
 
         {/* Round-Robin specific */}
         {comboDefaults.strategy === "round-robin" && (
-          <div className="grid grid-cols-2 gap-3 pt-3 border-t border-border/50">
+          <div className="grid grid-cols-2 gap-3 pt-3 border-t border-border">
             <Input
               label={t("concurrencyPerModel")}
               type="number"
@@ -630,7 +628,7 @@ export default function ComboDefaultsTab() {
         )}
 
         {comboDefaults.strategy === "context-relay" && (
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t border-border/50">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-3 pt-3 border-t border-border">
             <Input
               label={translateOrFallback(t, "contextRelayHandoffThreshold", "Handoff Threshold")}
               type="number"
@@ -674,8 +672,8 @@ export default function ComboDefaultsTab() {
               }
               className="text-sm"
             />
-            <div className="md:col-span-3 rounded-lg border border-blue-500/20 bg-blue-500/5 p-3">
-              <p className="text-xs text-blue-700 dark:text-blue-300">
+            <div className="md:col-span-3 rounded-lg border border-border bg-bg-subtle p-3">
+              <p className="text-xs text-text-muted">
                 {translateOrFallback(
                   t,
                   "contextRelayProviderNote",
@@ -691,7 +689,7 @@ export default function ComboDefaultsTab() {
         )}
 
         {/* Toggles */}
-        <div className="flex flex-col gap-3 pt-3 border-t border-border/50">
+        <div className="flex flex-col gap-3 pt-3 border-t border-border">
           <div className="flex items-center justify-between">
             <div>
               <p className="font-medium text-sm">{t("trackMetrics")}</p>
@@ -794,7 +792,7 @@ export default function ComboDefaultsTab() {
         </div>
 
         {/* Provider Overrides */}
-        <div className="pt-3 border-t border-border/50">
+        <div className="pt-3 border-t border-border">
           <p className="font-medium text-sm mb-2">{t("providerOverrides")}</p>
           <p className="text-xs text-text-muted mb-3">{t("providerOverridesDesc")}</p>
 
@@ -802,14 +800,14 @@ export default function ComboDefaultsTab() {
             ([provider, config]: [string, any], index: number) => (
               <div
                 key={provider}
-                className="flex items-center gap-1.5 mb-2 p-2 rounded-lg bg-black/[0.02] dark:bg-white/[0.02]"
+                className="flex items-center gap-1.5 mb-2 p-2 rounded-lg border border-border bg-surface-2"
               >
                 {/* Reorder arrows (combo-builder pattern) */}
                 <div className="flex flex-col gap-0.5">
                   <button
                     onClick={() => moveProviderOverride(provider, -1)}
                     disabled={index === 0}
-                    className={`p-0.5 rounded ${index === 0 ? "text-text-muted/20 cursor-not-allowed" : "text-text-muted hover:text-primary hover:bg-black/5 dark:hover:bg-white/5"}`}
+                    className={`p-0.5 rounded-md ${index === 0 ? "text-text-muted/20 cursor-not-allowed" : "text-text-muted hover:text-text-main hover:bg-bg-subtle"}`}
                     title={t("moveUp")}
                   >
                     <span className="material-symbols-outlined text-[12px]">arrow_upward</span>
@@ -817,7 +815,7 @@ export default function ComboDefaultsTab() {
                   <button
                     onClick={() => moveProviderOverride(provider, 1)}
                     disabled={index === Object.keys(providerOverrides).length - 1}
-                    className={`p-0.5 rounded ${index === Object.keys(providerOverrides).length - 1 ? "text-text-muted/20 cursor-not-allowed" : "text-text-muted hover:text-primary hover:bg-black/5 dark:hover:bg-white/5"}`}
+                    className={`p-0.5 rounded-md ${index === Object.keys(providerOverrides).length - 1 ? "text-text-muted/20 cursor-not-allowed" : "text-text-muted hover:text-text-main hover:bg-bg-subtle"}`}
                     title={t("moveDown")}
                   >
                     <span className="material-symbols-outlined text-[12px]">arrow_downward</span>
@@ -841,7 +839,7 @@ export default function ComboDefaultsTab() {
                 <span className="text-[10px] text-text-muted">{t("retries")}</span>
                 <button
                   onClick={() => removeProviderOverride(provider)}
-                  className="ml-auto text-red-400 hover:text-red-500 transition-colors"
+                  className="ml-auto text-text-muted hover:text-error transition-colors"
                   aria-label={t("removeProviderOverrideAria", { provider })}
                 >
                   <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
@@ -856,7 +854,7 @@ export default function ComboDefaultsTab() {
             <button
               type="button"
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="flex items-center gap-2 px-3 py-2 text-xs rounded-lg border border-border/50 bg-black/[0.02] dark:bg-white/[0.02] hover:bg-black/[0.05] dark:hover:bg-white/[0.05] transition-colors w-full mt-2"
+              className="flex items-center gap-2 px-3 py-2 text-xs rounded-control border border-border-strong bg-surface hover:bg-bg-subtle transition-colors w-full mt-2"
             >
               <span className="flex-1 text-left text-text-muted">
                 {t("selectProviderPlaceholder") || "Select provider..."}
@@ -870,8 +868,8 @@ export default function ComboDefaultsTab() {
             </button>
 
             {dropdownOpen && (
-              <div className="absolute z-50 mt-1 w-full rounded-lg border border-border/50 bg-white dark:bg-gray-900 shadow-lg overflow-hidden">
-                <div className="p-2 border-b border-border/50">
+              <div className="absolute z-50 mt-1 w-full rounded-lg border border-border bg-surface shadow-[var(--shadow-elevated)] overflow-hidden">
+                <div className="p-2 border-b border-border">
                   <input
                     type="text"
                     value={searchQuery}
@@ -879,7 +877,7 @@ export default function ComboDefaultsTab() {
                       setSearchQuery(e.target.value);
                       setHighlightedIdx(0);
                     }}
-                    className="w-full px-2 py-1.5 text-xs rounded-md border border-border/50 bg-transparent outline-none focus:border-amber-500 transition-colors"
+                    className="w-full px-2 py-1.5 text-xs rounded-md border border-border-strong bg-transparent text-text-main placeholder:text-text-subtle outline-none focus:border-primary transition-colors"
                     placeholder={t("searchProviderPlaceholder") || "Search providers..."}
                     aria-label={t("searchProviderAria") || "Search providers"}
                     onKeyDown={handleDropdownKeyDown}
@@ -901,8 +899,8 @@ export default function ComboDefaultsTab() {
                         aria-selected={idx === highlightedIdx}
                         className={`px-3 py-2 text-xs cursor-pointer transition-colors ${
                           idx === highlightedIdx
-                            ? "bg-black/[0.05] dark:bg-white/[0.05] font-medium"
-                            : "hover:bg-black/[0.03] dark:hover:bg-white/[0.03]"
+                            ? "bg-bg-subtle text-text-main font-medium"
+                            : "text-text-muted hover:bg-bg-subtle hover:text-text-main"
                         }`}
                         onClick={() => addProviderOverride(p.provider)}
                         onMouseEnter={() => setHighlightedIdx(idx)}
@@ -918,7 +916,7 @@ export default function ComboDefaultsTab() {
         </div>
 
         {/* Save */}
-        <div className="pt-3 border-t border-border/50">
+        <div className="pt-3 border-t border-border">
           <Button variant="primary" size="sm" onClick={saveComboDefaults} loading={saving}>
             {t("saveComboDefaults")}
           </Button>

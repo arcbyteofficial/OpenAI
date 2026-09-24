@@ -90,10 +90,12 @@ export default function ModelCooldownsCard() {
   const sorted = useMemo(() => [...items].sort((a, b) => b.remainingMs - a.remainingMs), [items]);
 
   return (
-    <Card className="p-6">
+    <Card className="p-5">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h2 className="text-lg font-bold text-text-main">{t("modelCooldownsTitle")}</h2>
+          <h2 className="text-sm font-semibold tracking-tight text-text-main">
+            {t("modelCooldownsTitle")}
+          </h2>
           <p className="mt-1 text-sm text-text-muted">{t("modelCooldownsDescription")}</p>
         </div>
         <div className="flex gap-2">
@@ -125,7 +127,7 @@ export default function ModelCooldownsCard() {
                 className="rounded-lg border border-border bg-bg-subtle px-3 py-2 flex items-center justify-between gap-3"
               >
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-text-main truncate">
+                  <p className="font-mono text-[13px] font-medium text-text-main truncate">
                     {item.provider}/{item.model}
                   </p>
                   <p className="text-xs text-text-muted">

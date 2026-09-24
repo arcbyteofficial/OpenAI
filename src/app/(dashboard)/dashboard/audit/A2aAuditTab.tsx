@@ -15,11 +15,11 @@ type TaskListResponse = {
 const A2A_PAGE_SIZE = 25;
 
 const STATE_STYLES: Record<TaskState, string> = {
-  submitted: "border-amber-500/30 bg-amber-500/10 text-amber-600",
-  working: "border-blue-500/30 bg-blue-500/10 text-blue-600",
-  completed: "border-emerald-500/30 bg-emerald-500/10 text-emerald-600",
-  failed: "border-red-500/30 bg-red-500/10 text-red-600",
-  cancelled: "border-border bg-sidebar/40 text-text-muted",
+  submitted: "border-warning/30 bg-warning/10 text-warning",
+  working: "border-primary/30 bg-primary/10 text-primary",
+  completed: "border-success/30 bg-success/10 text-success",
+  failed: "border-error/30 bg-error/10 text-error",
+  cancelled: "border-border bg-bg-subtle text-text-muted",
 };
 
 function taskDuration(task: A2ATask): string {
@@ -74,7 +74,7 @@ export default function A2aAuditTab() {
       <Card className="p-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <h2 className="text-xl font-semibold text-text-main">{t("a2aAudit")}</h2>
+            <h2 className="text-xl font-semibold tracking-tight text-text-main">{t("a2aAudit")}</h2>
             <p className="mt-1 text-sm text-text-muted">{t("a2aAuditDesc")}</p>
             <p className="mt-2 text-xs text-text-muted">
               {t("a2aShowingTasks", { count: data.tasks.length, total: data.total })}
@@ -83,7 +83,7 @@ export default function A2aAuditTab() {
           <button
             onClick={() => void fetchTasks()}
             disabled={loading}
-            className="inline-flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar disabled:opacity-40"
+            className="inline-flex items-center gap-2 rounded-control border border-border-strong px-3 py-2 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-40"
           >
             <span
               className={`material-symbols-outlined text-[16px] ${loading ? "animate-spin" : ""}`}
@@ -98,7 +98,7 @@ export default function A2aAuditTab() {
       <Card className="p-4">
         <div className="grid gap-3 md:grid-cols-3">
           <label className="space-y-1">
-            <span className="text-xs font-medium uppercase tracking-wider text-text-muted">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
               {t("a2aSkill")}
             </span>
             <input
@@ -108,11 +108,11 @@ export default function A2aAuditTab() {
                 setSkillFilter(e.target.value);
               }}
               placeholder={t("a2aSkillPlaceholder")}
-              className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
             />
           </label>
           <label className="space-y-1">
-            <span className="text-xs font-medium uppercase tracking-wider text-text-muted">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
               {t("a2aState")}
             </span>
             <select
@@ -121,7 +121,7 @@ export default function A2aAuditTab() {
                 setOffset(0);
                 setStateFilter(e.target.value as TaskState | "all");
               }}
-              className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
             >
               <option value="all">{t("a2aAllStates")}</option>
               <option value="submitted">{t("a2aStateSubmitted")}</option>
@@ -138,7 +138,7 @@ export default function A2aAuditTab() {
                 setStateFilter("all");
                 setOffset(0);
               }}
-              className="w-full rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar"
+              className="w-full rounded-control border border-border-strong px-3 py-2 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle"
             >
               {t("clearFilters")}
             </button>
@@ -146,20 +146,20 @@ export default function A2aAuditTab() {
         </div>
       </Card>
 
-      <Card className="overflow-hidden">
+      <Card className="overflow-hidden p-0">
         {loading ? (
           <div className="p-8 text-center text-sm text-text-muted">{t("a2aLoadingTasks")}</div>
         ) : data.tasks.length === 0 ? (
-          <div className="p-10 text-center">
-            <span className="material-symbols-outlined text-[40px] text-text-muted">
+          <div className="p-8 text-center">
+            <span className="material-symbols-outlined text-[32px] text-text-subtle">
               device_hub
             </span>
             <p className="mt-3 text-sm text-text-muted">{t("a2aNoTasks")}</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[760px] text-left text-sm">
-              <thead className="border-b border-border bg-sidebar/40 text-xs uppercase tracking-wider text-text-muted">
+            <table className="w-full min-w-[760px] text-left text-[13px]">
+              <thead className="border-b border-border bg-bg-subtle/50 text-xs text-text-muted">
                 <tr>
                   <th className="px-4 py-3 font-medium">{t("timestamp")}</th>
                   <th className="px-4 py-3 font-medium">{t("a2aTaskId")}</th>
@@ -172,7 +172,7 @@ export default function A2aAuditTab() {
               </thead>
               <tbody className="divide-y divide-border">
                 {data.tasks.map((task) => (
-                  <tr key={task.id} className="transition-colors hover:bg-sidebar/30">
+                  <tr key={task.id} className="transition-colors hover:bg-bg-subtle/60">
                     <td className="whitespace-nowrap px-4 py-3 font-mono text-xs text-text-muted">
                       {new Date(task.createdAt).toLocaleString()}
                     </td>
@@ -182,7 +182,7 @@ export default function A2aAuditTab() {
                     <td className="px-4 py-3 font-mono text-xs text-text-main">{task.skill}</td>
                     <td className="px-4 py-3">
                       <span
-                        className={`rounded-full border px-2 py-1 text-xs font-medium ${STATE_STYLES[task.state]}`}
+                        className={`rounded-full border px-2 py-0.5 text-xs font-medium ${STATE_STYLES[task.state]}`}
                       >
                         {t(`a2aState${task.state.charAt(0).toUpperCase()}${task.state.slice(1)}`)}
                       </span>
@@ -202,14 +202,14 @@ export default function A2aAuditTab() {
         <button
           onClick={() => setOffset((c) => Math.max(0, c - A2A_PAGE_SIZE))}
           disabled={offset === 0 || loading}
-          className="rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar disabled:opacity-40"
+          className="rounded-control border border-border-strong px-3 py-2 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-40"
         >
           {t("previous")}
         </button>
         <button
           onClick={() => setOffset((c) => c + A2A_PAGE_SIZE)}
           disabled={offset + A2A_PAGE_SIZE >= data.total || loading}
-          className="rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar disabled:opacity-40"
+          className="rounded-control border border-border-strong px-3 py-2 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-40"
         >
           {t("next")}
         </button>

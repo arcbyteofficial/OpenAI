@@ -40,7 +40,7 @@ function StatusBadge({ status }: { status: SearchProviderCatalogItem["status"] }
       className="inline-flex items-center gap-1 text-[10px] text-text-muted font-medium"
       data-testid="status-missing"
     >
-      <span className="w-1.5 h-1.5 rounded-full bg-border inline-block" aria-hidden="true" />
+      <span className="w-1.5 h-1.5 rounded-full bg-text-subtle inline-block" aria-hidden="true" />
       {t("statusMissing")}
     </span>
   );
@@ -63,7 +63,7 @@ function ProviderCard({
       className={[
         "border rounded-lg p-3 transition-colors",
         selected ? "border-primary/40 bg-primary/5" : "border-border bg-surface",
-        isClickable ? "cursor-pointer hover:border-primary/30" : "",
+        isClickable ? "cursor-pointer hover:border-border-strong" : "",
       ]
         .filter(Boolean)
         .join(" ")}
@@ -91,7 +91,10 @@ function ProviderCard({
 
       <div className="mt-2 flex flex-wrap gap-x-3 gap-y-1 text-[10px] text-text-muted">
         <span>
-          <span className="font-medium text-text-main">${item.costPerQuery.toFixed(4)}</span>/query
+          <span className="font-medium font-mono tabular-nums text-text-main">
+            ${item.costPerQuery.toFixed(4)}
+          </span>
+          /query
         </span>
         {item.freeMonthlyQuota > 0 && (
           <span>
@@ -111,7 +114,7 @@ function ProviderCard({
           {item.searchTypes.map((t) => (
             <span
               key={t}
-              className="text-[9px] px-1.5 py-0.5 rounded bg-bg-alt text-text-muted border border-border"
+              className="text-[9px] px-1.5 py-0.5 rounded bg-bg-subtle text-text-muted border border-border"
             >
               {t}
             </span>
@@ -124,7 +127,7 @@ function ProviderCard({
           {item.fetchFormats.map((f) => (
             <span
               key={f}
-              className="text-[9px] px-1.5 py-0.5 rounded bg-bg-alt text-text-muted border border-border"
+              className="text-[9px] px-1.5 py-0.5 rounded bg-bg-subtle text-text-muted border border-border"
             >
               {f}
             </span>
@@ -180,7 +183,7 @@ export default function ProviderCatalog({
     return (
       <div className="flex items-center justify-center py-8" data-testid="catalog-loading">
         <span
-          className="material-symbols-outlined text-[20px] text-primary animate-spin"
+          className="material-symbols-outlined text-[20px] text-text-muted animate-spin"
           aria-hidden="true"
         >
           progress_activity
@@ -205,10 +208,10 @@ export default function ProviderCatalog({
           <button
             key={kind}
             className={[
-              "text-[10px] px-2.5 py-1 rounded-md font-medium transition-colors",
+              "text-[10px] px-2.5 py-1 rounded-control font-medium transition-colors",
               filterKind === kind
-                ? "bg-primary/15 text-primary"
-                : "bg-black/5 dark:bg-white/5 text-text-muted hover:text-text-main",
+                ? "bg-primary/10 text-primary"
+                : "bg-bg-subtle text-text-muted hover:text-text-main",
             ].join(" ")}
             onClick={() => setFilterKind(kind)}
             data-testid={`filter-${kind}`}

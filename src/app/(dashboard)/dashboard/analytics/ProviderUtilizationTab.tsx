@@ -208,12 +208,12 @@ export default function ProviderUtilizationTab() {
         icon="monitoring"
         action={
           <div className="flex items-center gap-4">
-            <div className="flex rounded-lg border border-border/50 bg-black/5 p-1 dark:bg-white/5">
+            <div className="flex rounded-lg border border-border bg-bg-subtle p-1">
               <button
                 onClick={() => setAggregateBy("provider")}
                 className={`flex items-center gap-2 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
                   aggregateBy === "provider"
-                    ? "bg-surface text-text-main shadow-sm"
+                    ? "bg-surface text-text-main ring-1 ring-border"
                     : "text-text-muted hover:text-text-main"
                 }`}
               >
@@ -224,7 +224,7 @@ export default function ProviderUtilizationTab() {
                 onClick={() => setAggregateBy("connection")}
                 className={`flex items-center gap-2 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
                   aggregateBy === "connection"
-                    ? "bg-surface text-text-main shadow-sm"
+                    ? "bg-surface text-text-main ring-1 ring-border"
                     : "text-text-muted hover:text-text-main"
                 }`}
               >
@@ -257,7 +257,7 @@ export default function ProviderUtilizationTab() {
               type="button"
               onClick={handleRetry}
               disabled={retrying}
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white hover:bg-primary-hover disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex items-center gap-2 rounded-control bg-contrast px-4 py-2 text-sm font-medium text-contrast-fg transition-colors hover:bg-contrast-hover disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {retrying ? (
                 <>
@@ -276,16 +276,14 @@ export default function ProviderUtilizationTab() {
           </div>
         ) : !hasData ? (
           <div className="flex min-h-80 flex-col items-center justify-center gap-4 text-center">
-            <span className="material-symbols-outlined text-[40px] text-text-muted/70">
-              timeline
-            </span>
+            <span className="material-symbols-outlined text-[32px] text-text-subtle">timeline</span>
             <div className="flex flex-col gap-2">
               <p className="text-sm font-medium text-text-main">{t("providerUtilizationNoData")}</p>
               <p className="max-w-md text-sm text-text-muted">
                 {t("providerUtilizationNoDataDescription")}
               </p>
             </div>
-            <div className="rounded-lg border border-black/5 bg-black/[0.02] p-4 dark:border-white/5 dark:bg-white/[0.02]">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <p className="text-xs font-medium text-text-main">
                 {t("providerUtilizationGettingStarted")}
               </p>
@@ -349,7 +347,7 @@ export default function ProviderUtilizationTab() {
                   <Card.Section key={point.provider} className="flex h-full flex-col gap-4">
                     <div className="flex items-start justify-between gap-3">
                       <div className="flex items-center gap-3">
-                        <div className="flex h-11 w-11 items-center justify-center rounded-xl border border-black/5 bg-surface text-text-main dark:border-white/5">
+                        <div className="flex h-11 w-11 items-center justify-center rounded-lg border border-border bg-surface text-text-main">
                           <ProviderIcon providerId={providerPart} size={22} />
                         </div>
                         <div>
@@ -376,7 +374,7 @@ export default function ProviderUtilizationTab() {
 
                     <div className="flex items-end justify-between gap-3">
                       <div>
-                        <p className="text-3xl font-bold text-text-main">
+                        <p className="text-2xl font-semibold tracking-tight tabular-nums text-text-main">
                           {point.remainingPct.toFixed(point.remainingPct < 10 ? 1 : 0)}%
                         </p>
                         <p className="mt-1 text-xs text-text-muted">
@@ -390,9 +388,9 @@ export default function ProviderUtilizationTab() {
                     </div>
 
                     <div className="flex flex-col gap-2">
-                      <div className="h-2 overflow-hidden rounded-full bg-black/5 dark:bg-white/5">
+                      <div className="h-2 overflow-hidden rounded-full bg-border">
                         <div
-                          className={`h-full rounded-full transition-all ${
+                          className={`h-full rounded-full transition-[width] ${
                             point.isExhausted ? "bg-error" : isLow ? "bg-warning" : "bg-primary"
                           }`}
                           style={{ width: `${Math.max(point.remainingPct, 0)}%` }}

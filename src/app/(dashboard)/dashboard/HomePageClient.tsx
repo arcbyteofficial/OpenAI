@@ -104,7 +104,7 @@ function mergeUpdateStep(steps: UpdateStep[], nextStep: UpdateStep) {
 // prefetch={false} (#8281) — this file is size-frozen.
 const INLINE_LINK = "text-primary hover:underline";
 const DOCS_LINK =
-  "hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border border-border text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors";
+  "hidden sm:inline-flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border border-border text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors";
 
 // Stable no-op subscription for useSyncExternalStore reads of never-changing
 // browser globals (location.origin does not change without a full navigation).
@@ -781,7 +781,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
 
   if (loading) {
     return (
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         <CardSkeleton />
         <CardSkeleton />
       </div>
@@ -791,17 +791,17 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
   const currentEndpoint = baseUrl;
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       {/* Update Progress Overlay */}
       {showUpdateOverlay && (
-        <div className="fixed inset-0 z-[999] bg-black/60 backdrop-blur-sm flex items-center justify-center p-4">
-          <div className="bg-bg-main border border-border rounded-2xl shadow-2xl max-w-md w-full p-6">
+        <div className="fixed inset-0 z-[999] bg-black/40 flex items-center justify-center p-4">
+          <div className="bg-surface border border-border rounded-card shadow-[var(--shadow-elevated)] max-w-md w-full p-6">
             <div className="flex items-center gap-3 mb-5">
-              <span className="material-symbols-outlined text-primary text-[28px] animate-spin">
+              <span className="material-symbols-outlined text-primary text-[24px] animate-spin">
                 progress_activity
               </span>
               <div>
-                <h3 className="text-lg font-bold">
+                <h3 className="text-base font-semibold tracking-tight">
                   {updatePhase === "done"
                     ? t("updateCompleteTitle")
                     : updatePhase === "failed"
@@ -825,13 +825,13 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                 .map((s) => (
                   <div
                     key={s.step}
-                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg border transition-all ${
+                    className={`flex items-center gap-3 px-3 py-2.5 rounded-lg border transition-colors ${
                       s.status === "running"
-                        ? "border-primary/40 bg-primary/5"
+                        ? "border-primary/30 bg-primary/5"
                         : s.status === "done"
-                          ? "border-green-500/30 bg-green-500/5"
+                          ? "border-success/30 bg-success/5"
                           : s.status === "failed"
-                            ? "border-red-500/30 bg-red-500/5"
+                            ? "border-error/30 bg-error/5"
                             : "border-border bg-bg-subtle"
                     }`}
                   >
@@ -840,15 +840,15 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                         progress_activity
                       </span>
                     ) : s.status === "done" ? (
-                      <span className="material-symbols-outlined text-green-500 text-[18px]">
+                      <span className="material-symbols-outlined text-success text-[18px]">
                         check_circle
                       </span>
                     ) : s.status === "failed" ? (
-                      <span className="material-symbols-outlined text-red-500 text-[18px]">
+                      <span className="material-symbols-outlined text-error text-[18px]">
                         error
                       </span>
                     ) : (
-                      <span className="material-symbols-outlined text-amber-500 text-[18px]">
+                      <span className="material-symbols-outlined text-warning text-[18px]">
                         warning
                       </span>
                     )}
@@ -861,7 +861,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
 
               {/* Error message */}
               {updateSteps.find((s) => s.step === "error") && (
-                <div className="mt-1 px-3 py-2.5 rounded-lg border border-red-500/30 bg-red-500/5 text-red-500">
+                <div className="mt-1 px-3 py-2.5 rounded-lg border border-error/30 bg-error/5 text-error">
                   <p className="text-xs font-mono break-all">
                     {updateSteps.find((s) => s.step === "error")?.message}
                   </p>
@@ -870,8 +870,8 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
 
               {/* Completion message */}
               {updatePhase === "done" && (
-                <div className="mt-1 px-3 py-2.5 rounded-lg border border-green-500/30 bg-green-500/5">
-                  <p className="text-sm font-semibold text-green-500 flex items-center gap-2">
+                <div className="mt-1 px-3 py-2.5 rounded-lg border border-success/30 bg-success/5">
+                  <p className="text-sm font-semibold text-success flex items-center gap-2">
                     <span className="material-symbols-outlined text-[18px]">check_circle</span>
                     {updateSteps.find((s) => s.step === "complete")?.message || t("updateComplete")}
                   </p>
@@ -909,10 +909,10 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
       {/* Update Notification Banner */}
       {versionInfo?.updateAvailable && !showUpdateOverlay && (
         <div className="flex flex-col gap-3">
-          <div className="flex flex-col gap-3 rounded-lg border border-primary/20 bg-primary/10 px-5 py-4 text-primary">
+          <div className="flex flex-col gap-3 rounded-card border border-border bg-surface px-5 py-4 text-text-main">
             <div className="flex min-h-[48px] items-center justify-between">
               <div className="flex min-w-0 items-center gap-4">
-                <span className="material-symbols-outlined shrink-0 text-[24px]">
+                <span className="material-symbols-outlined shrink-0 text-[20px] text-primary">
                   {isElectron && electronUpdateStatus.status === "downloading"
                     ? "downloading"
                     : "system_update_alt"}
@@ -924,7 +924,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                       desktop: isElectron ? ` ${t("desktopAppLabel")}` : "",
                     })}
                   </p>
-                  <p className="text-xs opacity-80 mt-0.5">
+                  <p className="text-xs text-text-muted mt-0.5">
                     {isElectron ? (
                       <>
                         {electronUpdateStatus.status === "checking" && t("checkingForUpdates")}
@@ -956,17 +956,17 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                     <Button
                       size="sm"
                       onClick={() => globalThis.window.electronAPI?.downloadUpdate()}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {t("downloadUpdate")}
                     </Button>
                   )}
                   {electronUpdateStatus.status === "downloading" && (
-                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg bg-primary/20">
+                    <div className="flex items-center gap-2 px-3 py-1.5 rounded-control bg-primary/10">
                       <span className="material-symbols-outlined text-primary text-[16px] animate-spin">
                         progress_activity
                       </span>
-                      <span className="text-xs font-semibold">
+                      <span className="text-xs font-medium tabular-nums">
                         {electronUpdateStatus.percent || 0}%
                       </span>
                     </div>
@@ -975,7 +975,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                     <Button
                       size="sm"
                       onClick={() => globalThis.window.electronAPI?.installUpdate()}
-                      className="font-semibold animate-pulse"
+                      className="font-medium"
                     >
                       {t("restartAndInstall")}
                     </Button>
@@ -991,7 +991,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                           setElectronUpdateStatus({ status: "error", message: err.message });
                         });
                       }}
-                      className="font-semibold"
+                      className="font-medium"
                     >
                       {t("checkForUpdate")}
                     </Button>
@@ -1002,7 +1002,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                   size="sm"
                   onClick={versionInfo.autoUpdateSupported ? handleUpdate : undefined}
                   disabled={updating || !versionInfo.autoUpdateSupported}
-                  className="ml-4 shrink-0 font-semibold"
+                  className="ml-4 shrink-0"
                   title={versionInfo.autoUpdateError || ""}
                 >
                   {versionInfo.autoUpdateSupported ? t("updateNow") : t("manualUpdate")}
@@ -1016,8 +1016,8 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                 electronUpdateStatus.status === "idle" ||
                 electronUpdateStatus.status === "available" ||
                 electronUpdateStatus.status === "not-available") && (
-                <div className="flex flex-col sm:flex-row sm:items-center justify-between border-t border-primary/20 mt-2 pt-3 gap-2">
-                  <p className="text-xs opacity-75">{t("directDownloadHint")}</p>
+                <div className="flex flex-col sm:flex-row sm:items-center justify-between border-t border-border mt-2 pt-3 gap-2">
+                  <p className="text-xs text-text-muted">{t("directDownloadHint")}</p>
                   <div className="flex gap-2">
                     <Button
                       size="sm"
@@ -1027,14 +1027,14 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                           `https://github.com/diegosouzapw/OmniRoute/releases/tag/v${versionInfo.latest}`
                         )
                       }
-                      className="font-semibold text-xs py-1"
+                      className="text-xs py-1"
                     >
                       {t("releaseNotes")}
                     </Button>
                     <Button
                       size="sm"
                       onClick={() => openExternal(electronDownload.url)}
-                      className="font-semibold text-xs py-1"
+                      className="text-xs py-1"
                     >
                       {electronDownload.label}
                     </Button>
@@ -1051,7 +1051,7 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
           <div className="flex flex-col gap-5">
             <div className="flex items-center justify-between">
               <div>
-                <h2 className="text-lg font-semibold">{t("quickStart")}</h2>
+                <h2 className="text-base font-semibold tracking-tight">{t("quickStart")}</h2>
                 <p className="text-sm text-text-muted">{t("quickStartDesc")}</p>
               </div>
               <Link href="/docs" prefetch={false} className={DOCS_LINK}>
@@ -1062,11 +1062,11 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
 
             <ol className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
               <li className="rounded-lg border border-border bg-bg-subtle p-4 flex gap-3">
-                <div className="flex items-center justify-center size-8 rounded-lg bg-primary/10 text-primary shrink-0">
+                <div className="flex items-center justify-center size-8 rounded-lg border border-border bg-surface text-text-muted shrink-0">
                   <span className="material-symbols-outlined text-[18px]">key</span>
                 </div>
                 <div>
-                  <span className="font-semibold">{t("step1Title")}</span>
+                  <span className="font-medium">{t("step1Title")}</span>
                   <p className="text-text-muted mt-0.5">
                     {t.rich("step1Desc", {
                       endpoint: (chunks) => (
@@ -1083,11 +1083,11 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                 </div>
               </li>
               <li className="rounded-lg border border-border bg-bg-subtle p-4 flex gap-3">
-                <div className="flex items-center justify-center size-8 rounded-lg bg-green-500/10 text-green-500 shrink-0">
+                <div className="flex items-center justify-center size-8 rounded-lg border border-border bg-surface text-text-muted shrink-0">
                   <span className="material-symbols-outlined text-[18px]">dns</span>
                 </div>
                 <div>
-                  <span className="font-semibold">{t("step2Title")}</span>
+                  <span className="font-medium">{t("step2Title")}</span>
                   <p className="text-text-muted mt-0.5">
                     {t.rich("step2Desc", {
                       providers: (chunks) => (
@@ -1100,22 +1100,22 @@ export default function HomePageClient({ machineId }: HomePageClientProps) {
                 </div>
               </li>
               <li className="rounded-lg border border-border bg-bg-subtle p-4 flex gap-3">
-                <div className="flex items-center justify-center size-8 rounded-lg bg-blue-500/10 text-blue-500 shrink-0">
+                <div className="flex items-center justify-center size-8 rounded-lg border border-border bg-surface text-text-muted shrink-0">
                   <span className="material-symbols-outlined text-[18px]">link</span>
                 </div>
                 <div>
-                  <span className="font-semibold">{t("step3Title")}</span>
+                  <span className="font-medium">{t("step3Title")}</span>
                   <p className="text-text-muted mt-0.5">
                     {t("step3Desc", { url: currentEndpoint })}
                   </p>
                 </div>
               </li>
               <li className="rounded-lg border border-border bg-bg-subtle p-4 flex gap-3">
-                <div className="flex items-center justify-center size-8 rounded-lg bg-amber-500/10 text-amber-500 shrink-0">
+                <div className="flex items-center justify-center size-8 rounded-lg border border-border bg-surface text-text-muted shrink-0">
                   <span className="material-symbols-outlined text-[18px]">analytics</span>
                 </div>
                 <div>
-                  <span className="font-semibold">{t("step4Title")}</span>
+                  <span className="font-medium">{t("step4Title")}</span>
                   <p className="text-text-muted mt-0.5">
                     {t.rich("step4Desc", {
                       logs: (chunks) => (
@@ -1174,20 +1174,20 @@ function ProviderOverviewCard({
   const tc = useTranslations("common");
 
   const statusVariant =
-    item.errors > 0 ? "text-red-500" : item.connected > 0 ? "text-green-500" : "text-text-muted";
+    item.errors > 0 ? "text-error" : item.connected > 0 ? "text-success" : "text-text-muted";
 
   const authTypeConfig = {
-    "no-auth": { color: "bg-stone-500", label: t("noAuthLabel") },
-    free: { color: "bg-green-500", label: tc("free") },
-    oauth: { color: "bg-blue-500", label: t("oauthLabel") },
-    apikey: { color: "bg-amber-500", label: t("apiKeyLabel") },
+    "no-auth": { color: "bg-text-subtle", label: t("noAuthLabel") },
+    free: { color: "bg-success", label: tc("free") },
+    oauth: { color: "bg-primary", label: t("oauthLabel") },
+    apikey: { color: "bg-warning", label: t("apiKeyLabel") },
   };
   const authInfo = authTypeConfig[item.authType] || authTypeConfig.apikey;
 
   return (
     <button
       onClick={onClick}
-      className="border border-border rounded-lg p-3 hover:bg-surface/40 transition-colors text-left cursor-pointer w-full"
+      className="border border-border rounded-lg p-3 hover:bg-bg-subtle hover:border-border-strong transition-colors text-left cursor-pointer w-full"
     >
       <div className="flex items-center gap-2.5">
         <div
@@ -1213,7 +1213,7 @@ function ProviderOverviewCard({
           {metrics && metrics.totalRequests > 0 && (
             <div className="flex items-center gap-2 mt-0.5">
               <span className="text-[10px] text-text-muted">
-                <span className="text-emerald-500">{metrics.totalSuccesses}</span>/
+                <span className="text-success">{metrics.totalSuccesses}</span>/
                 {t("requestsShort", { count: metrics.totalRequests })}
               </span>
               <span className="text-[10px] text-text-muted">{metrics.successRate}%</span>
@@ -1273,7 +1273,7 @@ function ProviderModelsModal({
             ? t("modelAvailable", { count: models.length })
             : t("modelsAvailable", { count: models.length })}
           {provider.total > 0 && (
-            <span className="ml-auto text-xs text-green-500">
+            <span className="ml-auto text-xs text-success">
               ●{" "}
               {provider.connected === 1
                 ? t("connectionsActive", { count: provider.connected })
@@ -1297,7 +1297,7 @@ function ProviderModelsModal({
             {models.map((m) => (
               <div
                 key={m.fullModel}
-                className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-surface/50 transition-colors group"
+                className="flex items-center justify-between px-3 py-2 rounded-lg hover:bg-bg-subtle transition-colors group"
               >
                 <div className="min-w-0 flex-1">
                   <p className="font-mono text-sm text-text-main truncate">{m.fullModel}</p>

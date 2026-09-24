@@ -8,9 +8,9 @@ export default function MemoryConceptCard() {
   const [open, setOpen] = useState(false);
 
   return (
-    <div className="rounded-xl border border-border bg-bg-subtle/50 p-4">
+    <div className="rounded-card border border-border bg-surface p-4">
       <div className="flex items-start gap-3">
-        <div className="p-2 rounded-lg bg-violet-500/10 text-violet-500 shrink-0">
+        <div className="p-2 rounded-lg border border-border bg-bg-subtle text-text-muted shrink-0">
           <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
             psychology
           </span>
@@ -32,7 +32,7 @@ export default function MemoryConceptCard() {
             </span>
           </button>
           {open && (
-            <div className="mt-3 p-3 rounded-lg bg-surface/50 border border-border/60 text-xs text-text-muted leading-relaxed space-y-1.5">
+            <div className="mt-3 p-3 rounded-lg bg-bg-subtle border border-border text-xs text-text-muted leading-relaxed space-y-1.5">
               {(t("concept.howWorksContent") as string).split("\n").map((line, i) => (
                 <p key={i}>{line}</p>
               ))}

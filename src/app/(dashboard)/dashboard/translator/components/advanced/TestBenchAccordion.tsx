@@ -215,8 +215,8 @@ function TestBenchContent() {
   return (
     <div className="space-y-5 min-w-0">
       {/* Info Banner */}
-      <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-primary/5 border border-primary/10 text-sm text-text-muted">
-        <span className="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0">
+      <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-surface-2 border border-border text-sm text-text-muted">
+        <span className="material-symbols-outlined text-text-muted text-[18px] mt-0.5 shrink-0">
           info
         </span>
         <div>
@@ -230,7 +230,7 @@ function TestBenchContent() {
         <div className="p-4 flex flex-col gap-4">
           <div className="flex flex-col sm:flex-row items-end gap-4 min-w-0">
             <div className="flex-1 w-full">
-              <label className="block text-xs font-medium text-text-muted mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-medium text-text-muted mb-1.5">
                 {t("source")}
               </label>
               <Select
@@ -243,12 +243,12 @@ function TestBenchContent() {
               />
             </div>
             <div className="flex items-center justify-center px-2">
-              <span className="material-symbols-outlined text-[22px] text-text-muted">
+              <span className="material-symbols-outlined text-[18px] text-text-subtle">
                 arrow_forward
               </span>
             </div>
             <div className="flex-1 w-full">
-              <label className="block text-xs font-medium text-text-muted mb-1.5 uppercase tracking-wider">
+              <label className="block text-xs font-medium text-text-muted mb-1.5">
                 {t("targetProvider")}
               </label>
               <Select
@@ -271,9 +271,7 @@ function TestBenchContent() {
             </Button>
           </div>
           <div>
-            <label className="block text-xs font-medium text-text-muted mb-1.5 uppercase tracking-wider">
-              {t("model")}
-            </label>
+            <label className="block text-xs font-medium text-text-muted mb-1.5">{t("model")}</label>
             <div className="relative">
               <input
                 type="text"
@@ -281,7 +279,7 @@ function TestBenchContent() {
                 onChange={(e) => setModel(e.target.value)}
                 list="testbench-acc-model-suggestions"
                 placeholder={t("modelPlaceholder")}
-                className="w-full bg-bg-subtle border border-border rounded-lg px-3 py-2 text-sm text-text-main placeholder:text-text-muted focus:outline-none focus:border-primary transition-colors"
+                className="w-full bg-surface border border-border-strong rounded-control px-3 py-2 font-mono text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors"
               />
               <datalist id="testbench-acc-model-suggestions">
                 {availableModels.map((m) => (
@@ -299,7 +297,9 @@ function TestBenchContent() {
           <div className="p-4">
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">
-                <h3 className="text-sm font-semibold text-text-main">{t("compatibilityReport")}</h3>
+                <h3 className="text-sm font-semibold tracking-tight text-text-main">
+                  {t("compatibilityReport")}
+                </h3>
                 <Badge
                   variant={
                     compatibility >= 80 ? "success" : compatibility >= 50 ? "warning" : "error"
@@ -311,17 +311,17 @@ function TestBenchContent() {
               </div>
               <div className="flex items-center gap-3 text-xs text-text-muted">
                 <span className="flex items-center gap-1">
-                  <span className="size-2 rounded-full bg-green-500" /> {passCount} {t("passed")}
+                  <span className="size-2 rounded-full bg-success" /> {passCount} {t("passed")}
                 </span>
                 <span className="flex items-center gap-1">
-                  <span className="size-2 rounded-full bg-red-500" /> {failCount} {t("failed")}
+                  <span className="size-2 rounded-full bg-error" /> {failCount} {t("failed")}
                 </span>
               </div>
             </div>
             {/* Progress bar */}
             <div className="w-full h-2 bg-bg-subtle rounded-full overflow-hidden">
               <div
-                className="h-full bg-gradient-to-r from-green-500 to-emerald-400 rounded-full transition-all duration-500"
+                className="h-full bg-success rounded-full transition-[width] duration-500"
                 style={{ width: `${compatibility}%` }}
               />
             </div>
@@ -338,11 +338,11 @@ function TestBenchContent() {
           return (
             <Card
               key={scenario.id}
-              className={`transition-all ${
+              className={`transition-colors ${
                 result?.status === "pass"
-                  ? "border-green-500/30"
+                  ? "border-success/30"
                   : result?.status === "error"
-                    ? "border-red-500/30"
+                    ? "border-error/30"
                     : ""
               }`}
             >
@@ -350,15 +350,15 @@ function TestBenchContent() {
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-2">
                     <div
-                      className={`flex items-center justify-center w-9 h-9 rounded-lg ${
+                      className={`flex items-center justify-center w-9 h-9 rounded-md ${
                         result?.status === "pass"
-                          ? "bg-green-500/10 text-green-500"
+                          ? "bg-success/10 text-success"
                           : result?.status === "error"
-                            ? "bg-red-500/10 text-red-500"
-                            : "bg-bg-subtle text-text-muted"
+                            ? "bg-error/10 text-error"
+                            : "bg-bg-subtle border border-border text-text-muted"
                       }`}
                     >
-                      <span className="material-symbols-outlined text-[20px]">
+                      <span className="material-symbols-outlined text-[18px]">
                         {isRunning
                           ? "progress_activity"
                           : result?.status === "pass"
@@ -372,7 +372,7 @@ function TestBenchContent() {
                       <p className="text-sm font-medium text-text-main">
                         {scenarioLabels[scenario.id] || scenario.id}
                       </p>
-                      <p className="text-[10px] text-text-muted uppercase">
+                      <p className="text-[11px] text-text-muted">
                         {srcMeta.label} →{" "}
                         {providerOptions.find((o) => o.value === provider)?.label || provider}
                       </p>
@@ -385,8 +385,8 @@ function TestBenchContent() {
                   <div
                     className={`rounded-lg p-2 text-xs ${
                       result.status === "pass"
-                        ? "bg-green-500/5 text-green-600 dark:text-green-400"
-                        : "bg-red-500/5 text-red-600 dark:text-red-400"
+                        ? "bg-success/5 text-success"
+                        : "bg-error/5 text-error"
                     }`}
                   >
                     {result.status === "pass" ? (

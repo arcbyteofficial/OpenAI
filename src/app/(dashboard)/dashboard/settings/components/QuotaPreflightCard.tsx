@@ -102,13 +102,13 @@ export default function QuotaPreflightCard() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500 shrink-0">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-2 rounded-lg bg-bg-subtle text-text-muted shrink-0">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             battery_alert
           </span>
         </div>
         <div>
-          <h3 className="text-base sm:text-lg font-semibold">
+          <h3 className="text-sm font-semibold text-text-main">
             {tx("quotaPreflightTitle", "Quota Preflight Cutoff")}
           </h3>
           <p className="text-xs text-text-muted">
@@ -142,7 +142,7 @@ export default function QuotaPreflightCard() {
 
         {value.enabled && (
           <>
-            <div className="flex items-start sm:items-center justify-between gap-4 pt-2 border-t border-border/50">
+            <div className="flex items-start sm:items-center justify-between gap-4 pt-2 border-t border-border">
               <div className="flex-1 min-w-0">
                 <p className="font-medium text-sm sm:text-base">
                   {tx("quotaPreflightCutoff", "Global cutoff (min remaining %)")}

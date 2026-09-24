@@ -1825,11 +1825,6 @@
       "count": 2
     }
   },
-  "src/shared/components/analytics/charts.tsx": {
-    "@typescript-eslint/no-unused-vars": {
-      "count": 2
-    }
-  },
   "src/shared/components/analytics/rechartsUsageCharts.tsx": {
     "@typescript-eslint/no-unused-vars": {
       "count": 1

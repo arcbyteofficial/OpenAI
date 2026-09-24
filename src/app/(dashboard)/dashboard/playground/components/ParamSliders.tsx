@@ -61,7 +61,7 @@ function SliderRow({ label, value, min, max, step, onChange }: SliderRowProps) {
             const v = parseFloat(e.target.value);
             if (!isNaN(v)) onChange(Math.min(max, Math.max(min, v)));
           }}
-          className="w-16 text-xs text-right bg-surface border border-border rounded px-1.5 py-0.5 focus:outline-none focus:ring-1 focus:ring-primary"
+          className="w-16 text-xs text-right font-mono tabular-nums bg-surface border border-border-strong rounded-control px-1.5 py-0.5 focus:outline-none focus:ring-1 focus:ring-primary"
         />
       </div>
       <input
@@ -145,7 +145,7 @@ export default function ParamSliders({ params, setParams }: ParamSlidersProps) {
             const raw = e.target.value;
             update("seed", raw === "" ? null : parseInt(raw, 10));
           }}
-          className="w-full text-xs bg-surface border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary"
+          className="w-full text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary"
         />
       </div>
 
@@ -157,7 +157,7 @@ export default function ParamSliders({ params, setParams }: ParamSlidersProps) {
           value={params.stop}
           placeholder={t("stopSequencesPlaceholder")}
           onChange={(e) => update("stop", e.target.value)}
-          className="w-full text-xs bg-surface border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary"
+          className="w-full text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary"
         />
       </div>
 
@@ -170,7 +170,7 @@ export default function ParamSliders({ params, setParams }: ParamSlidersProps) {
           aria-checked={params.jsonMode}
           onClick={() => update("jsonMode", !params.jsonMode)}
           className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 ${
-            params.jsonMode ? "bg-primary" : "bg-neutral-300 dark:bg-neutral-600"
+            params.jsonMode ? "bg-primary" : "bg-border-strong"
           }`}
         >
           <span

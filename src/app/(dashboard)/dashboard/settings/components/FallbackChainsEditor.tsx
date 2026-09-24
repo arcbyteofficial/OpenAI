@@ -14,14 +14,14 @@ import { useNotificationStore } from "@/store/notificationStore";
 import { useTranslations } from "next-intl";
 
 const CHAIN_COLORS = [
-  "#6366f1",
-  "#22c55e",
-  "#f59e0b",
-  "#ef4444",
-  "#8b5cf6",
-  "#06b6d4",
-  "#ec4899",
-  "#14b8a6",
+  "#737373",
+  "#737373",
+  "#737373",
+  "#737373",
+  "#737373",
+  "#737373",
+  "#737373",
+  "#737373",
 ];
 
 async function fetchChainsData() {
@@ -131,7 +131,7 @@ export default function FallbackChainsEditor() {
     return (
       <Card>
         <div className="flex items-center gap-2 text-text-muted animate-pulse">
-          <span className="material-symbols-outlined text-[20px]">timeline</span>
+          <span className="material-symbols-outlined text-[18px]">timeline</span>
           {t("loadingFallbackChains")}
         </div>
       </Card>
@@ -143,11 +143,13 @@ export default function FallbackChainsEditor() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-500">
-          <span className="material-symbols-outlined text-[20px]">timeline</span>
+        <div className="p-2 rounded-lg border border-border bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]">timeline</span>
         </div>
         <div className="flex-1">
-          <h3 className="text-lg font-semibold">{t("fallbackChainsTitle")}</h3>
+          <h3 className="text-base font-semibold tracking-tight text-text-main">
+            {t("fallbackChainsTitle")}
+          </h3>
           <p className="text-sm text-text-muted">{t("fallbackChainsDesc")}</p>
         </div>
         <Button size="sm" variant="primary" onClick={() => setShowCreate(!showCreate)}>
@@ -157,7 +159,7 @@ export default function FallbackChainsEditor() {
 
       {/* Create Form */}
       {showCreate && (
-        <div className="p-4 rounded-lg border border-border/30 bg-surface/20 mb-4">
+        <div className="p-4 rounded-lg border border-border bg-surface-2 mb-4">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-3">
             <Input
               label={t("modelName")}
@@ -191,7 +193,7 @@ export default function FallbackChainsEditor() {
             {chainEntries.map(([model, chain]) => (
               <div
                 key={model}
-                className="flex items-center justify-between px-4 py-3 rounded-lg border border-border/20 bg-surface/20 hover:bg-surface/40 transition-colors"
+                className="flex items-center justify-between px-4 py-3 rounded-lg border border-border bg-surface hover:bg-bg-subtle transition-colors"
               >
                 <div className="flex items-center gap-3 flex-1 min-w-0">
                   <span className="font-mono text-sm text-text-main truncate max-w-[200px]">
@@ -204,7 +206,7 @@ export default function FallbackChainsEditor() {
                     {(Array.isArray(chain) ? chain : []).map((entry, i) => (
                       <span
                         key={`${entry.provider}-${i}`}
-                        className="text-xs px-2 py-0.5 rounded-full font-medium"
+                        className="font-mono text-xs px-2 py-0.5 rounded-md font-medium"
                         style={{
                           backgroundColor: `${CHAIN_COLORS[i % CHAIN_COLORS.length]}20`,
                           color: CHAIN_COLORS[i % CHAIN_COLORS.length],
@@ -218,7 +220,7 @@ export default function FallbackChainsEditor() {
                 </div>
                 <button
                   onClick={() => handleDelete(model)}
-                  className="text-text-muted hover:text-red-400 transition-colors ml-2"
+                  className="text-text-muted hover:text-error transition-colors ml-2"
                   title={t("deleteChain")}
                 >
                   <span className="material-symbols-outlined text-[16px]">close</span>

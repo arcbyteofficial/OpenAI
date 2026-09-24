@@ -84,14 +84,14 @@ function ProviderTestSlideOverPanel({
   return (
     <div className="fixed inset-0 z-[60] flex justify-end">
       <div
-        className="absolute inset-0 bg-black/40 backdrop-blur-sm animate-in fade-in duration-200"
+        className="absolute inset-0 bg-black/40 backdrop-blur-[2px] animate-in fade-in duration-200"
         onClick={onClose}
         aria-hidden
       />
       <div
         role="dialog"
         aria-label={t("dialogLabel", { provider: provider.name })}
-        className="relative w-full sm:w-[640px] md:w-[720px] lg:w-[820px] max-w-full bg-surface border-l border-black/10 dark:border-white/10 shadow-2xl flex flex-col animate-in slide-in-from-right duration-200"
+        className="relative w-full sm:w-[640px] md:w-[720px] lg:w-[820px] max-w-full bg-surface border-l border-border shadow-[var(--shadow-elevated)] flex flex-col animate-in slide-in-from-right duration-200"
       >
         <SlideOverHeader
           provider={provider}
@@ -149,7 +149,7 @@ function SlideOverHeader({
 }) {
   const t = useTranslations("providerTest");
   return (
-    <div className="flex items-center gap-3 px-4 py-3 border-b border-black/5 dark:border-white/5 shrink-0">
+    <div className="flex items-center gap-3 px-4 py-3 border-b border-border shrink-0">
       <div
         className="size-9 rounded-lg flex items-center justify-center shrink-0"
         style={{ backgroundColor: `${color}15` }}
@@ -178,7 +178,7 @@ function SlideOverHeader({
           {provider.subscriptionRisk && (
             <>
               <span>·</span>
-              <span className="flex items-center gap-0.5 text-amber-500">
+              <span className="flex items-center gap-0.5 text-warning">
                 <span className="material-symbols-outlined text-[12px]">info</span>
                 {t("risk")}
               </span>
@@ -190,9 +190,9 @@ function SlideOverHeader({
         type="button"
         onClick={onClose}
         aria-label={t("close")}
-        className="p-1.5 rounded-lg text-text-muted hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+        className="p-1.5 rounded-md text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
       >
-        <span className="material-symbols-outlined text-[20px]">close</span>
+        <span className="material-symbols-outlined text-[18px]">close</span>
       </button>
     </div>
   );
@@ -218,13 +218,13 @@ function TestToolbar({
   const t = useTranslations("providerTest");
   const hasMessages = controls?.hasMessages ?? false;
   return (
-    <div className="flex flex-wrap items-center gap-2 px-4 py-2 border-b border-black/5 dark:border-white/5 bg-bg-subtle/30 shrink-0">
+    <div className="flex flex-wrap items-center gap-2 px-4 py-2 border-b border-border bg-bg-subtle/30 shrink-0">
       <div className="flex items-center gap-1.5 min-w-0 flex-1">
         <label className="text-[11px] text-text-muted shrink-0">{t("model")}:</label>
         <select
           value={model}
           onChange={(e) => onModelChange(e.target.value)}
-          className="min-w-0 flex-1 rounded-md border border-border bg-bg-subtle text-xs px-2 py-1 text-text-main focus:outline-none focus:ring-1 focus:ring-primary"
+          className="min-w-0 flex-1 rounded-control border border-border-strong bg-surface text-xs px-2 py-1 text-text-main focus:outline-none focus:ring-1 focus:ring-primary"
         >
           {modelOptions.length === 0 && <option value="">—</option>}
           {modelOptions.map((m) => (
@@ -240,7 +240,7 @@ function TestToolbar({
           <select
             value={selectedKey}
             onChange={(e) => onSelectedKeyChange(e.target.value)}
-            className="rounded-md border border-border bg-bg-subtle text-xs px-2 py-1 text-text-main focus:outline-none focus:ring-1 focus:ring-primary"
+            className="rounded-control border border-border-strong bg-surface text-xs px-2 py-1 text-text-main focus:outline-none focus:ring-1 focus:ring-primary"
           >
             <option value="">({t("defaultKey")})</option>
             {keys.map((k) => (
@@ -271,7 +271,7 @@ function SlideOverTabs({ tab, onChange }: { tab: TabKey; onChange: (next: TabKey
   return (
     <div
       role="tablist"
-      className="flex items-center gap-1 px-4 pt-2 border-b border-black/5 dark:border-white/5 shrink-0"
+      className="flex items-center gap-1 px-4 pt-2 border-b border-border shrink-0"
     >
       {TABS.map((tabItem) => {
         const active = tabItem.key === tab;
@@ -283,16 +283,13 @@ function SlideOverTabs({ tab, onChange }: { tab: TabKey; onChange: (next: TabKey
             aria-selected={active}
             onClick={() => onChange(tabItem.key)}
             className={`relative flex items-center gap-1.5 px-3 py-2 text-xs font-medium transition-colors ${
-              active ? "text-accent" : "text-text-muted hover:text-text-main"
+              active ? "text-text-main" : "text-text-muted hover:text-text-main"
             }`}
           >
             <span className="material-symbols-outlined text-[16px]">{tabItem.icon}</span>
             <span>{translate(`tabs.${tabItem.label}`)}</span>
             {active && (
-              <span
-                aria-hidden
-                className="absolute left-0 right-0 -bottom-px h-0.5 bg-accent rounded-t"
-              />
+              <span aria-hidden className="absolute left-0 right-0 -bottom-px h-0.5 bg-text-main" />
             )}
           </button>
         );
@@ -303,9 +300,9 @@ function SlideOverTabs({ tab, onChange }: { tab: TabKey; onChange: (next: TabKey
 
 function TabPlaceholder({ icon, title, body }: { icon: string; title: string; body: ReactNode }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-3 p-10 text-center flex-1 min-h-0 overflow-y-auto">
-      <div className="size-12 rounded-full bg-accent/10 flex items-center justify-center">
-        <span className="material-symbols-outlined text-accent text-[24px]">{icon}</span>
+    <div className="flex flex-col items-center justify-center gap-3 p-6 text-center flex-1 min-h-0 overflow-y-auto">
+      <div className="size-12 rounded-full bg-bg-subtle border border-border flex items-center justify-center">
+        <span className="material-symbols-outlined text-text-muted text-[22px]">{icon}</span>
       </div>
       <h3 className="text-sm font-semibold text-text-main">{title}</h3>
       <div className="text-xs text-text-muted max-w-sm">{body}</div>
@@ -414,7 +411,7 @@ function LogsTab({ providerId }: { providerId: string }) {
             <p>{t("noLogsDescription")}</p>
             <a
               href={`/dashboard/logs?connection=${encodeURIComponent(providerId)}`}
-              className="mt-2 inline-flex items-center gap-1 text-accent hover:underline"
+              className="mt-2 inline-flex items-center gap-1 text-primary hover:underline"
               target="_blank"
               rel="noopener noreferrer"
             >
@@ -429,14 +426,14 @@ function LogsTab({ providerId }: { providerId: string }) {
 
   return (
     <div className="flex-1 min-h-0 flex flex-col">
-      <div className="flex items-center justify-between px-4 py-2 border-b border-black/5 dark:border-white/5 shrink-0">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-border shrink-0">
         <span className="inline-flex items-center gap-2 text-[10px] uppercase tracking-wider text-text-muted font-medium">
           <span className="inline-flex items-center gap-1.5">
             <span className="relative inline-flex h-2 w-2">
-              <span className="absolute inline-flex h-full w-full rounded-full bg-emerald-500 opacity-75 animate-ping" />
-              <span className="relative inline-flex h-2 w-2 rounded-full bg-emerald-500" />
+              <span className="absolute inline-flex h-full w-full rounded-full bg-success opacity-75 animate-ping" />
+              <span className="relative inline-flex h-2 w-2 rounded-full bg-success" />
             </span>
-            <span className="text-emerald-500">{t("live")}</span>
+            <span className="text-success">{t("live")}</span>
           </span>
           <span aria-hidden>·</span>
           <span>{t("tailingLast", { count: state.logs.length })}</span>
@@ -457,9 +454,9 @@ function LogsTab({ providerId }: { providerId: string }) {
           const isExpanded = expanded === key;
           const statusOk = typeof log.status === "number" && log.status >= 200 && log.status < 400;
           const statusColor = statusOk
-            ? "text-emerald-600 dark:text-emerald-400"
+            ? "text-success"
             : typeof log.status === "number"
-              ? "text-red-500"
+              ? "text-error"
               : "text-text-muted";
           const requester = formatRequester(log, t("unknownRequester"));
           return (
@@ -467,7 +464,7 @@ function LogsTab({ providerId }: { providerId: string }) {
               <button
                 type="button"
                 onClick={() => setExpanded(isExpanded ? null : key)}
-                className="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-black/[0.03] dark:hover:bg-white/[0.03] transition-colors"
+                className="w-full flex items-center gap-3 px-4 py-2 text-left hover:bg-bg-subtle transition-colors"
               >
                 <span className={`text-[11px] font-mono shrink-0 w-10 ${statusColor}`}>
                   {log.status ?? "—"}
@@ -503,7 +500,7 @@ function LogsTab({ providerId }: { providerId: string }) {
           );
         })}
       </ul>
-      <div className="px-4 py-2 border-t border-black/5 dark:border-white/5 text-[10px] text-text-muted text-center shrink-0">
+      <div className="px-4 py-2 border-t border-border text-[10px] text-text-muted text-center shrink-0">
         <a
           href={`/dashboard/logs?connection=${encodeURIComponent(providerId)}`}
           className="inline-flex items-center gap-1 hover:text-text-main hover:underline"
@@ -538,7 +535,7 @@ function LogDetail({ log }: { log: LogEntry }) {
     },
   ];
   return (
-    <dl className="px-4 py-3 bg-bg-subtle/40 border-t border-black/5 dark:border-white/5 grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5 text-[11px]">
+    <dl className="px-4 py-3 bg-bg-subtle/40 border-t border-border grid grid-cols-[max-content_1fr] gap-x-4 gap-y-1.5 text-[11px]">
       {rows.map((row) => (
         <div key={row.label} className="contents">
           <dt className="text-text-muted uppercase tracking-wider text-[10px] font-medium">

@@ -50,8 +50,8 @@ export default function EmptyConnectionsPlaceholder({
 }: EmptyConnectionsPlaceholderProps) {
   return (
     <div className="text-center py-12">
-      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
-        <span className="material-symbols-outlined text-[32px]">{isOAuth ? "lock" : "key"}</span>
+      <div className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-border bg-bg-subtle text-text-muted mb-4">
+        <span className="material-symbols-outlined text-[28px]">{isOAuth ? "lock" : "key"}</span>
       </div>
       <p className="text-text-main font-medium mb-1">{t("noConnectionsYet")}</p>
       <p className="text-sm text-text-muted mb-4">{t("addFirstConnectionHint")}</p>

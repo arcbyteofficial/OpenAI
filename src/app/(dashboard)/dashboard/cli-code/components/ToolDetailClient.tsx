@@ -289,13 +289,13 @@ export default function ToolDetailClient({ toolId, category }: ToolDetailClientP
       <div className="flex items-center gap-2">
         <Link
           href={backCategory}
-          className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-primary transition-colors"
+          className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-text-main transition-colors"
         >
           <span className="material-symbols-outlined text-[16px]">arrow_back</span>
           {category === "code" ? t("concept.code.title") : t("concept.agent.title")}
         </Link>
-        <span className="text-text-muted">/</span>
-        <span className="text-sm font-medium">{tool.name}</span>
+        <span className="text-text-subtle">/</span>
+        <span className="text-sm font-medium text-text-main">{tool.name}</span>
       </div>
 
       {/* Tool header */}
@@ -305,11 +305,11 @@ export default function ToolDetailClient({ toolId, category }: ToolDetailClientP
             {tool.vendor}
           </span>
         )}
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-primary/10 text-primary">
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-bg-subtle border border-border text-text-muted">
           {category === "code" ? t("comparison.code.title") : t("comparison.agent.title")}
         </span>
         {tool.baseUrlSupport && tool.baseUrlSupport !== "none" && (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-green-500/10 text-green-600 dark:text-green-400">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium bg-success/10 text-success">
             <span className="material-symbols-outlined text-[12px]">link</span>
             {tool.baseUrlSupport === "full" ? t("card.baseUrlFull") : t("card.baseUrlPartial")}
           </span>
@@ -319,7 +319,7 @@ export default function ToolDetailClient({ toolId, category }: ToolDetailClientP
       {/* Specialized card — always expanded */}
       {loading ? (
         <div className="flex flex-col gap-4">
-          <div className="h-24 rounded-xl bg-surface animate-pulse" />
+          <div className="h-24 rounded-card bg-bg-subtle animate-pulse" />
         </div>
       ) : (
         renderCard()

@@ -6,7 +6,12 @@ import DestinationStep from "./wizard/DestinationStep";
 import InputStep from "./wizard/InputStep";
 import JsonlValidationStep from "./wizard/JsonlValidationStep";
 import CostEstimateStep from "./wizard/CostEstimateStep";
-import type { WizardDestination, WizardInput, ValidationResult, CostEstimate } from "@/lib/batches/types";
+import type {
+  WizardDestination,
+  WizardInput,
+  ValidationResult,
+  CostEstimate,
+} from "@/lib/batches/types";
 
 // ── State ─────────────────────────────────────────────────────────────────────
 
@@ -102,7 +107,13 @@ const STEP_LABELS: Record<number, string> = {
   4: "wizardStep4Cost",
 };
 
-function StepIndicator({ current, t }: { current: 1 | 2 | 3 | 4; t: ReturnType<typeof useTranslations<"common">> }) {
+function StepIndicator({
+  current,
+  t,
+}: {
+  current: 1 | 2 | 3 | 4;
+  t: ReturnType<typeof useTranslations<"common">>;
+}) {
   return (
     <div className="flex items-center gap-1 sm:gap-2">
       {STEPS.map((s) => {
@@ -112,24 +123,16 @@ function StepIndicator({ current, t }: { current: 1 | 2 | 3 | 4; t: ReturnType<t
           <div key={s} className="flex items-center gap-1 sm:gap-2">
             <div
               className={`flex items-center justify-center w-6 h-6 rounded-full text-xs font-medium transition-colors
-                ${isDone ? "bg-emerald-500 text-white" : isCurrent ? "bg-[var(--color-accent)] text-white" : "bg-[var(--color-border)] text-[var(--color-text-muted)]"}`}
+                ${isDone ? "bg-contrast text-contrast-fg" : isCurrent ? "bg-primary text-white" : "bg-bg-subtle text-text-muted"}`}
             >
-              {isDone ? (
-                <span className="material-symbols-outlined text-sm">check</span>
-              ) : (
-                s
-              )}
+              {isDone ? <span className="material-symbols-outlined text-[14px]">check</span> : s}
             </div>
             <span
-              className={`hidden sm:inline text-xs ${isCurrent ? "text-[var(--color-text)]" : "text-[var(--color-text-muted)]"}`}
+              className={`hidden sm:inline text-xs ${isCurrent ? "text-text-main" : "text-text-muted"}`}
             >
               {t(STEP_LABELS[s] as Parameters<typeof t>[0])}
             </span>
-            {s < 4 && (
-              <div
-                className={`w-6 h-px ${isDone ? "bg-emerald-500" : "bg-[var(--color-border)]"}`}
-              />
-            )}
+            {s < 4 && <div className={`w-6 h-px ${isDone ? "bg-text-subtle" : "bg-border"}`} />}
           </div>
         );
       })}
@@ -310,15 +313,20 @@ export default function NewBatchWizard({
 
       {/* Panel */}
       <div
-        className="relative w-full sm:max-w-3xl max-h-[90vh] flex flex-col rounded-t-2xl sm:rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] shadow-2xl overflow-hidden"
+        className="relative w-full sm:max-w-3xl max-h-[90vh] flex flex-col rounded-t-card sm:rounded-card bg-surface border border-border shadow-[var(--shadow-elevated)] overflow-hidden"
         role="dialog"
         aria-modal="true"
         aria-labelledby="new-batch-wizard-title"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-[var(--color-border)] shrink-0">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-b border-border shrink-0">
           <div className="flex flex-col gap-2">
-            <h2 id="new-batch-wizard-title" className="text-base font-semibold text-[var(--color-text)]">{t("wizardTitle")}</h2>
+            <h2
+              id="new-batch-wizard-title"
+              className="text-base font-semibold tracking-tight text-text-main"
+            >
+              {t("wizardTitle")}
+            </h2>
             <StepIndicator current={state.step} t={t} />
           </div>
           <button
@@ -326,9 +334,9 @@ export default function NewBatchWizard({
             onClick={() => !state.creating && onClose()}
             disabled={state.creating}
             aria-label={t("wizardClose")}
-            className="text-[var(--color-text-muted)] hover:text-[var(--color-text)] disabled:opacity-40 transition-colors"
+            className="text-text-muted hover:text-text-main disabled:opacity-40 transition-colors"
           >
-            <span className="material-symbols-outlined">close</span>
+            <span className="material-symbols-outlined text-[18px]">close</span>
           </button>
         </div>
 
@@ -336,12 +344,12 @@ export default function NewBatchWizard({
         <div className="flex-1 overflow-y-auto px-4 sm:px-6 py-6">{stepContent}</div>
 
         {/* Footer */}
-        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-t border-[var(--color-border)] shrink-0">
+        <div className="flex items-center justify-between px-4 sm:px-6 py-4 border-t border-border shrink-0">
           <button
             type="button"
             onClick={() => !state.creating && onClose()}
             disabled={state.creating}
-            className="text-sm text-[var(--color-text-muted)] hover:text-[var(--color-text)] disabled:opacity-40 transition-colors"
+            className="text-sm text-text-muted hover:text-text-main disabled:opacity-40 transition-colors"
           >
             {t("wizardCancel")}
           </button>
@@ -352,7 +360,7 @@ export default function NewBatchWizard({
                 type="button"
                 onClick={handleBack}
                 disabled={state.creating}
-                className="rounded-lg px-4 py-2 text-sm font-medium border border-[var(--color-border)] text-[var(--color-text)] hover:bg-[var(--color-bg-alt)] disabled:opacity-40 transition-colors"
+                className="rounded-control px-4 py-2 text-sm font-medium bg-surface border border-border-strong text-text-main hover:bg-bg-subtle disabled:opacity-40 transition-colors"
               >
                 {t("wizardBack")}
               </button>
@@ -364,7 +372,7 @@ export default function NewBatchWizard({
                 data-wizard-next="true"
                 onClick={handleNext}
                 disabled={!canGoNext}
-                className="rounded-lg px-4 py-2 text-sm font-medium bg-[var(--color-accent)] text-white disabled:opacity-40 hover:opacity-90 transition-opacity"
+                className="rounded-control px-4 py-2 text-sm font-medium bg-contrast text-contrast-fg disabled:opacity-40 hover:bg-contrast-hover transition-colors"
               >
                 {t("wizardNext")}
               </button>

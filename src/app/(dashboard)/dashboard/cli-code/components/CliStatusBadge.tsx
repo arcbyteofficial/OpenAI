@@ -47,28 +47,28 @@ export default function CliStatusBadge({
 
   const badges = {
     configured: {
-      dotClass: "bg-green-500",
-      badgeClass: "bg-green-500/10 text-green-600 dark:text-green-400",
+      dotClass: "bg-success",
+      badgeClass: "bg-success/10 text-success",
       text: t("configured"),
     },
     not_configured: {
-      dotClass: "bg-yellow-500",
-      badgeClass: "bg-yellow-500/10 text-yellow-600 dark:text-yellow-400",
+      dotClass: "bg-warning",
+      badgeClass: "bg-warning/10 text-warning",
       text: t("notConfigured"),
     },
     not_installed: {
-      dotClass: "bg-zinc-400 dark:bg-zinc-500",
-      badgeClass: "bg-zinc-500/10 text-zinc-500 dark:text-zinc-400",
+      dotClass: "bg-text-subtle",
+      badgeClass: "bg-bg-subtle text-text-muted",
       text: t("notInstalled"),
     },
     other: {
-      dotClass: "bg-blue-500",
-      badgeClass: "bg-blue-500/10 text-blue-600 dark:text-blue-400",
+      dotClass: "bg-primary",
+      badgeClass: "bg-primary/10 text-primary",
       text: t("custom"),
     },
     unknown: {
-      dotClass: "bg-zinc-400 dark:bg-zinc-500",
-      badgeClass: "bg-zinc-500/10 text-zinc-500 dark:text-zinc-400",
+      dotClass: "bg-text-subtle",
+      badgeClass: "bg-bg-subtle text-text-muted",
       text: t("unknown"),
     },
   };

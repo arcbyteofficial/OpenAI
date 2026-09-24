@@ -23,7 +23,7 @@ function StatusPill({ on }: { on: boolean }) {
   return (
     <span
       className={`rounded px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${
-        on ? "bg-emerald-500/15 text-emerald-500" : "bg-border/50 text-text-muted"
+        on ? "bg-success/10 text-success" : "bg-bg-subtle text-text-muted"
       }`}
     >
       {on ? "on" : "off"}
@@ -50,7 +50,7 @@ function SummaryRow({
         {title}
         <Link
           href={href}
-          className="rounded border border-border bg-bg-subtle px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-text-muted hover:border-primary/40 hover:text-primary"
+          className="rounded border border-border bg-bg-subtle px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-text-muted transition-colors hover:border-border-strong hover:text-text-main"
         >
           {badge}
         </Link>
@@ -84,11 +84,11 @@ export default function CompressionTokenSaverCard({
   };
 
   return (
-    <section className="rounded-lg border border-border/70 bg-surface/40 p-4">
+    <section className="rounded-lg border border-border bg-surface-2 p-4">
       <div className="mb-1 flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
           <h4 className="flex items-center gap-2 text-base font-semibold text-text-main">
-            <span className="material-symbols-outlined text-[21px] text-amber-500">bolt</span>
+            <span className="material-symbols-outlined text-[18px] text-text-muted">bolt</span>
             {t("tokenSaverTitle")}
           </h4>
           <p className="mt-1 text-sm text-text-muted">{t("tokenSaverSubtitle")}</p>

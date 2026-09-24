@@ -95,7 +95,7 @@ export default function SessionInfoCard() {
   if (loading) {
     return (
       <Card>
-        <div className="animate-pulse h-32 bg-black/5 dark:bg-white/5 rounded-lg" />
+        <div className="animate-pulse h-32 bg-bg-subtle rounded-lg" />
       </Card>
     );
   }
@@ -103,12 +103,12 @@ export default function SessionInfoCard() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             person
           </span>
         </div>
-        <h3 className="text-lg font-semibold">{t("session")}</h3>
+        <h3 className="text-base font-semibold tracking-tight text-text-main">{t("session")}</h3>
       </div>
 
       <div className="flex flex-col gap-3" role="list" aria-label={t("sessionDetailsAria")}>
@@ -116,7 +116,7 @@ export default function SessionInfoCard() {
           <span className="text-text-muted">{t("status")}</span>
           <span className="flex items-center gap-1.5">
             <span
-              className={`w-2 h-2 rounded-full ${session?.authenticated ? "bg-green-500" : "bg-yellow-500"}`}
+              className={`w-2 h-2 rounded-full ${session?.authenticated ? "bg-success" : "bg-warning"}`}
               aria-hidden="true"
             />
             {session?.authenticated ? t("authenticated") : t("guest")}
@@ -141,7 +141,7 @@ export default function SessionInfoCard() {
         </div>
       </div>
 
-      <div className="flex gap-3 mt-4 pt-4 border-t border-border/50">
+      <div className="flex gap-3 mt-4 pt-4 border-t border-border">
         <Button variant="secondary" onClick={handleClearStorage}>
           {t("clearLocalData")}
         </Button>

@@ -50,10 +50,10 @@ export default function DistributeProxiesButton({
 
   const stateClasses =
     state === "distributing"
-      ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
+      ? "bg-primary/10 border-primary/30 text-primary"
       : state === "complete"
-        ? "bg-green-500/15 border-green-500/40 text-green-500"
-        : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40";
+        ? "bg-success/10 border-success/30 text-success"
+        : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle";
 
   const icon = state === "distributing" ? "sync" : state === "complete" ? "check" : "swap_horiz";
   const displayLabel =
@@ -67,7 +67,7 @@ export default function DistributeProxiesButton({
     <button
       onClick={handleClick}
       disabled={isDisabled}
-      className={`flex items-center gap-1.5 rounded-lg font-medium border transition-colors ${sizeClasses} ${stateClasses}`}
+      className={`flex items-center gap-1.5 rounded-control font-medium border transition-colors ${sizeClasses} ${stateClasses}`}
       title={displayLabel}
       aria-label={displayLabel}
     >

@@ -79,9 +79,11 @@ const ENGINE_ICON_ALIASES: Record<string, string> = {
 
 function StatCard({ label, value }: { label: string; value: string }) {
   return (
-    <div className="flex flex-col gap-0.5 rounded-lg border border-border bg-surface p-3">
-      <span className="text-xs text-text-muted">{label}</span>
-      <span className="text-lg font-semibold text-text">{value}</span>
+    <div className="flex flex-col gap-0.5 rounded-lg border border-border bg-surface-2 p-3">
+      <span className="text-[13px] text-text-muted">{label}</span>
+      <span className="text-xl font-semibold tracking-tight tabular-nums text-text-main">
+        {value}
+      </span>
     </div>
   );
 }
@@ -102,11 +104,11 @@ function renderDiffSegment(
     "";
 
   return (
-    <div key={`${label}-${index}`} className="rounded border border-border bg-background p-2">
-      <span className="mr-2 rounded bg-muted px-1.5 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-text-muted">
+    <div key={`${label}-${index}`} className="rounded-md border border-border bg-bg-subtle p-2">
+      <span className="mr-2 rounded border border-border bg-surface px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wider text-text-muted">
         {translateLabel(label)}
       </span>
-      <span className="whitespace-pre-wrap break-words text-text">{text}</span>
+      <span className="whitespace-pre-wrap break-words text-text-main">{text}</span>
     </div>
   );
 }
@@ -344,28 +346,31 @@ export function EngineConfigPage({ engineId }: { engineId: string }) {
         <div className="flex items-center gap-2">
           {engine.icon && (
             <span
-              className="material-symbols-outlined text-[28px] leading-none text-text-muted"
+              className="material-symbols-outlined text-[24px] leading-none text-text-muted"
               aria-hidden="true"
             >
               {ENGINE_ICON_ALIASES[engine.icon] || engine.icon}
             </span>
           )}
-          <h1 className="text-2xl font-bold text-text">{engineName}</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-text-main">{engineName}</h1>
         </div>
         {subtitle && <p className="text-sm text-text-muted">{subtitle}</p>}
       </div>
 
       {loadError && (
-        <p className="text-xs text-destructive border border-destructive/30 rounded px-3 py-2">
+        <p className="text-xs text-error bg-error/10 border border-error/20 rounded-control px-3 py-2">
           {loadError}
         </p>
       )}
 
       {/* ── Panel pointer (on/off + level live there now) ── */}
-      <div className="flex flex-col gap-1 rounded-lg border border-border bg-surface p-4">
+      <div className="flex flex-col gap-1 rounded-card border border-border bg-surface p-4">
         <p className="text-xs text-text-muted" data-testid="panel-pointer-notice">
           {t("panelPointerPrefix")}{" "}
-          <a href="/dashboard/context/settings" className="underline hover:text-text">
+          <a
+            href="/dashboard/context/settings"
+            className="text-text-main underline underline-offset-2 hover:text-primary transition-colors"
+          >
             {t("compressionSettings")}
           </a>
           {t("panelPointerSuffix")}
@@ -373,8 +378,10 @@ export function EngineConfigPage({ engineId }: { engineId: string }) {
       </div>
 
       {/* ── Config form ── */}
-      <div className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4">
-        <h2 className="text-sm font-semibold text-text">{t("configuration")}</h2>
+      <div className="flex flex-col gap-3 rounded-card border border-border bg-surface p-5">
+        <h2 className="text-sm font-semibold tracking-tight text-text-main">
+          {t("configuration")}
+        </h2>
         {visibleConfigSchema.length > 0 ? (
           <EngineConfigForm
             schema={visibleConfigSchema}
@@ -389,7 +396,7 @@ export function EngineConfigPage({ engineId }: { engineId: string }) {
             <button
               onClick={handleSave}
               disabled={saving}
-              className="px-4 py-1.5 rounded bg-primary text-primary-foreground text-sm font-medium disabled:opacity-50"
+              className="px-3 py-1.5 rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover text-[13px] font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {saving ? t("saving") : t("save")}
             </button>
@@ -398,15 +405,15 @@ export function EngineConfigPage({ engineId }: { engineId: string }) {
               {t("globalSettingsOnly")}
             </p>
           )}
-          {saveError && <p className="text-xs text-destructive">{saveError}</p>}
+          {saveError && <p className="text-xs text-error">{saveError}</p>}
         </div>
       </div>
 
       {/* ── Live preview ── */}
-      <div className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4">
-        <h2 className="text-sm font-semibold text-text">{t("preview")}</h2>
+      <div className="flex flex-col gap-3 rounded-card border border-border bg-surface p-5">
+        <h2 className="text-sm font-semibold tracking-tight text-text-main">{t("preview")}</h2>
         <textarea
-          className="border border-border rounded px-3 py-2 text-sm text-text bg-background resize-y min-h-[80px]"
+          className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none transition-colors resize-y min-h-[80px]"
           value={previewText}
           onChange={(e) => setPreviewText(e.target.value)}
           aria-label={t("previewInput")}
@@ -415,52 +422,58 @@ export function EngineConfigPage({ engineId }: { engineId: string }) {
           <button
             onClick={handlePreview}
             disabled={previewLoading}
-            className="px-4 py-1.5 rounded bg-primary text-primary-foreground text-sm font-medium disabled:opacity-50"
+            className="px-3 py-1.5 rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover text-[13px] font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {previewLoading ? t("processing") : t("preview")}
           </button>
         </div>
-        {previewError && <p className="text-xs text-destructive">{previewError}</p>}
+        {previewError && <p className="text-xs text-error">{previewError}</p>}
         {preview && (
           <div className="flex flex-col gap-3 pt-1 text-sm">
             <div className="flex flex-wrap gap-4">
               <span className="text-text-muted">
                 {t("originalTokens")}:{" "}
-                <strong className="text-text">{preview.originalTokens}</strong>
+                <strong className="font-semibold tabular-nums text-text-main">
+                  {preview.originalTokens}
+                </strong>
               </span>
               <span className="text-text-muted">
                 {t("compressedTokens")}:{" "}
-                <strong className="text-text">{preview.compressedTokens}</strong>
+                <strong className="font-semibold tabular-nums text-text-main">
+                  {preview.compressedTokens}
+                </strong>
               </span>
               <span className="text-text-muted">
                 {t("savings")}:{" "}
-                <strong className="text-primary">{preview.savingsPct.toFixed(1)}%</strong>
+                <strong className="font-semibold tabular-nums text-primary">
+                  {preview.savingsPct.toFixed(1)}%
+                </strong>
               </span>
             </div>
             <div className="grid gap-3 md:grid-cols-2">
               <div className="flex flex-col gap-1">
-                <h3 className="text-xs font-semibold uppercase tracking-wide text-text-muted">
+                <h3 className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {t("original")}
                 </h3>
-                <pre className="max-h-72 overflow-auto rounded border border-border bg-background p-3 whitespace-pre-wrap break-words text-text">
+                <pre className="max-h-72 overflow-auto rounded-lg border border-border bg-bg-subtle p-3 font-mono text-[12px] whitespace-pre-wrap break-words text-text-main">
                   {preview.original ?? ""}
                 </pre>
               </div>
               <div className="flex flex-col gap-1">
-                <h3 className="text-xs font-semibold uppercase tracking-wide text-text-muted">
+                <h3 className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {t("compressed")}
                 </h3>
-                <pre className="max-h-72 overflow-auto rounded border border-border bg-background p-3 whitespace-pre-wrap break-words text-text">
+                <pre className="max-h-72 overflow-auto rounded-lg border border-border bg-bg-subtle p-3 font-mono text-[12px] whitespace-pre-wrap break-words text-text-main">
                   {preview.compressed ?? ""}
                 </pre>
               </div>
             </div>
             {preview.diff && preview.diff.length > 0 && (
               <div className="flex flex-col gap-2" data-testid="compression-preview-diff">
-                <h3 className="text-xs font-semibold uppercase tracking-wide text-text-muted">
+                <h3 className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {t("diff")}
                 </h3>
-                <div className="flex max-h-72 flex-col gap-2 overflow-auto rounded border border-border p-2">
+                <div className="flex max-h-72 flex-col gap-2 overflow-auto rounded-lg border border-border p-2">
                   {preview.diff.map((segment, index) =>
                     renderDiffSegment(segment, index, (label) => {
                       const key = `diffLabels.${label}`;
@@ -475,8 +488,8 @@ export function EngineConfigPage({ engineId }: { engineId: string }) {
       </div>
 
       {/* ── Analytics strip ── */}
-      <div className="flex flex-col gap-3 rounded-lg border border-border bg-surface p-4">
-        <h2 className="text-sm font-semibold text-text">{t("last7Days")}</h2>
+      <div className="flex flex-col gap-3 rounded-card border border-border bg-surface p-5">
+        <h2 className="text-sm font-semibold tracking-tight text-text-main">{t("last7Days")}</h2>
         {analytics && analytics.runs === 0 ? (
           <p className="text-sm text-text-muted">{t("noDataYet")}</p>
         ) : analytics ? (

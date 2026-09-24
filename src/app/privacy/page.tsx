@@ -19,32 +19,35 @@ export default function PrivacyPage() {
       <div className="max-w-3xl mx-auto px-6 py-16">
         <Link
           href="/"
-          className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary transition-colors mb-8"
+          className="inline-flex items-center gap-1 text-[13px] text-text-muted hover:text-text-main transition-colors mb-8"
         >
-          <span className="material-symbols-outlined text-[18px]">arrow_back</span>
+          <span className="material-symbols-outlined text-[16px]">arrow_back</span>
           {t("backToHome")}
         </Link>
 
-        <h1 className="text-3xl font-bold mb-2">{t("privacyPolicy")}</h1>
-        <p className="text-sm text-text-muted mb-10">
+        <h1 className="text-2xl font-semibold tracking-tight mb-2">{t("privacyPolicy")}</h1>
+        <p className="text-sm text-text-muted mb-8">
           {t("lastUpdated", { date: t("policyLastUpdatedDate") })}
         </p>
 
         <div className="space-y-8 text-text-muted leading-relaxed">
           <section>
-            <h2 className="text-lg font-semibold text-text-main mb-3">
+            <h2 className="text-base font-semibold tracking-tight text-text-main mb-2">
               {t("privacySection1Title")}
             </h2>
             <p>{t("privacySection1Text")}</p>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-text-main mb-3">
+            <h2 className="text-base font-semibold tracking-tight text-text-main mb-2">
               {t("privacySection2Title")}
             </h2>
             <p className="mb-3">
               {t("privacyDataStoredIn")}{" "}
-              <code className="text-primary text-sm">~/.omniroute/storage.sqlite</code>:
+              <code className="font-mono text-[13px] text-text-main bg-bg-subtle border border-border rounded px-1">
+                ~/.omniroute/storage.sqlite
+              </code>
+              :
             </p>
             <ul className="list-disc pl-6 space-y-2">
               <li>
@@ -67,14 +70,14 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-text-main mb-3">
+            <h2 className="text-base font-semibold tracking-tight text-text-main mb-2">
               {t("privacySection3Title")}
             </h2>
             <p>{t("privacySection3Text")}</p>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-text-main mb-3">
+            <h2 className="text-base font-semibold tracking-tight text-text-main mb-2">
               {t("privacySection4Title")}
             </h2>
             <p>{t("privacySection4Text")}</p>
@@ -113,14 +116,14 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-text-main mb-3">
+            <h2 className="text-base font-semibold tracking-tight text-text-main mb-2">
               {t("privacySection5Title")}
             </h2>
             <p>{t("privacySection5Text")}</p>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-text-main mb-3">
+            <h2 className="text-base font-semibold tracking-tight text-text-main mb-2">
               {t("privacySection6Title")}
             </h2>
             <p>{t("privacyLoggingIntro")}</p>
@@ -133,18 +136,20 @@ export default function PrivacyPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-text-main mb-3">
+            <h2 className="text-base font-semibold tracking-tight text-text-main mb-2">
               {t("privacySection7Title")}
             </h2>
             <p>
               {t("privacySection7TextStart")}{" "}
-              <code className="text-primary text-sm">~/.omniroute/</code>{" "}
+              <code className="font-mono text-[13px] text-text-main bg-bg-subtle border border-border rounded px-1">
+                ~/.omniroute/
+              </code>{" "}
               {t("privacySection7TextEnd")}
             </p>
           </section>
         </div>
 
-        <div className="mt-12 pt-8 border-t border-white/[0.06] text-sm text-text-muted">
+        <div className="mt-12 pt-8 border-t border-border text-sm text-text-muted">
           <p>
             {t("questionsVisit")}{" "}
             <a

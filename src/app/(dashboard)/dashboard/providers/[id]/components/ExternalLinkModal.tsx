@@ -45,10 +45,10 @@ export default function ExternalLinkModal({
             {text("codexExternalLinkGenerating", "Generating link...")}
           </p>
         ) : error ? (
-          <p className="text-sm text-red-500">{error}</p>
+          <p className="text-sm text-error">{error}</p>
         ) : url ? (
           <>
-            <div className="rounded-lg border border-border bg-bg-base p-3 break-all text-sm text-text-main">
+            <div className="rounded-lg border border-border bg-bg-subtle p-3 break-all font-mono text-[13px] text-text-main">
               {url}
             </div>
             <div className="flex gap-2">

@@ -39,7 +39,13 @@ interface SearchFormProps extends SearchFormExtendedProps {
   providers: SearchProvider[];
 }
 
-export default function SearchForm({ onSearch, loading, onCancel, providers, catalogProviders }: SearchFormProps) {
+export default function SearchForm({
+  onSearch,
+  loading,
+  onCancel,
+  providers,
+  catalogProviders,
+}: SearchFormProps) {
   const t = useTranslations("search");
   const tc = useTranslations("common");
   const [query, setQuery] = useState("");
@@ -98,14 +104,14 @@ export default function SearchForm({ onSearch, loading, onCancel, providers, cat
     <div className="flex flex-col h-full">
       {/* Query */}
       <div className="p-4 border-b border-border">
-        <label className="block text-[10px] font-semibold text-text-muted uppercase tracking-wider mb-2">
+        <label className="block text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-2">
           {t("searchQuery")}
         </label>
         <textarea
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t("queryPlaceholder")}
-          className="w-full bg-surface border border-border rounded-lg p-2.5 text-sm text-text-main resize-none h-16 focus:outline-none focus:ring-2 focus:ring-primary/30"
+          className="w-full bg-surface border border-border-strong rounded-control p-2.5 text-sm text-text-main resize-none h-16 placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
@@ -119,7 +125,7 @@ export default function SearchForm({ onSearch, loading, onCancel, providers, cat
       <div className="p-4 border-b border-border space-y-2">
         <div className="flex gap-2">
           <div className="flex-1">
-            <label className="block text-[10px] text-text-muted uppercase tracking-wider mb-1">
+            <label className="block text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
               {t("provider")}
             </label>
             <Select
@@ -171,10 +177,7 @@ export default function SearchForm({ onSearch, loading, onCancel, providers, cat
                       : "● missing"}
                 </span>
                 {catalogInfo.status === "missing" && (
-                  <Link
-                    href={catalogInfo.configureHref}
-                    className="text-accent hover:underline"
-                  >
+                  <Link href={catalogInfo.configureHref} className="text-accent hover:underline">
                     Configure →
                   </Link>
                 )}
@@ -182,7 +185,7 @@ export default function SearchForm({ onSearch, loading, onCancel, providers, cat
             )}
           </div>
           <div className="flex-1">
-            <label className="block text-[10px] text-text-muted uppercase tracking-wider mb-1">
+            <label className="block text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
               {t("searchType")}
             </label>
             <Select
@@ -197,7 +200,7 @@ export default function SearchForm({ onSearch, loading, onCancel, providers, cat
           </div>
         </div>
         <div className="w-20">
-          <label className="block text-[10px] text-text-muted uppercase tracking-wider mb-1">
+          <label className="block text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
             {t("maxResults")}
           </label>
           <input
@@ -206,7 +209,7 @@ export default function SearchForm({ onSearch, loading, onCancel, providers, cat
             onChange={(e) => setMaxResults(parseInt(e.target.value) || 5)}
             min={1}
             max={100}
-            className="w-full bg-surface border border-border rounded-lg px-2.5 py-1.5 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/30"
+            className="w-full bg-surface border border-border-strong rounded-control px-2.5 py-1.5 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
           />
         </div>
       </div>
@@ -217,7 +220,7 @@ export default function SearchForm({ onSearch, loading, onCancel, providers, cat
           className="flex justify-between items-center w-full"
           onClick={() => setShowFilters(!showFilters)}
         >
-          <span className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">
+          <span className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
             {t("filters")}
           </span>
           <span className="text-text-muted text-xs">{showFilters ? "▼" : "▶"}</span>
@@ -231,7 +234,7 @@ export default function SearchForm({ onSearch, loading, onCancel, providers, cat
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
                   placeholder={t("optionAny")}
-                  className="w-full bg-surface border border-border rounded-md px-2 py-1.5 text-xs text-text-main focus:outline-none"
+                  className="w-full bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                 />
               </div>
               <div className="flex-1">
@@ -240,7 +243,7 @@ export default function SearchForm({ onSearch, loading, onCancel, providers, cat
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
                   placeholder={t("optionAny")}
-                  className="w-full bg-surface border border-border rounded-md px-2 py-1.5 text-xs text-text-main focus:outline-none"
+                  className="w-full bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                 />
               </div>
             </div>
@@ -268,10 +271,13 @@ export default function SearchForm({ onSearch, loading, onCancel, providers, cat
                   value={domainInput}
                   onChange={(e) => setDomainInput(e.target.value)}
                   placeholder={t("domainPlaceholder")}
-                  className="flex-1 bg-surface border border-border rounded-md px-2 py-1.5 text-xs text-text-main focus:outline-none"
+                  className="flex-1 bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                   onKeyDown={(e) => e.key === "Enter" && addDomain("include")}
                 />
-                <button onClick={() => addDomain("include")} className="text-primary text-lg px-1">
+                <button
+                  onClick={() => addDomain("include")}
+                  className="text-text-muted hover:text-text-main text-lg px-1 transition-colors"
+                >
                   +
                 </button>
               </div>
@@ -303,10 +309,13 @@ export default function SearchForm({ onSearch, loading, onCancel, providers, cat
                   value={excludeDomainInput}
                   onChange={(e) => setExcludeDomainInput(e.target.value)}
                   placeholder={t("domainPlaceholder")}
-                  className="flex-1 bg-surface border border-border rounded-md px-2 py-1.5 text-xs text-text-main focus:outline-none"
+                  className="flex-1 bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                   onKeyDown={(e) => e.key === "Enter" && addDomain("exclude")}
                 />
-                <button onClick={() => addDomain("exclude")} className="text-primary text-lg px-1">
+                <button
+                  onClick={() => addDomain("exclude")}
+                  className="text-text-muted hover:text-text-main text-lg px-1 transition-colors"
+                >
                   +
                 </button>
               </div>

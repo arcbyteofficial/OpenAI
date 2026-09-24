@@ -50,10 +50,10 @@ export function ResponseNode({ data }: NodeProps) {
 
   return (
     <div
-      className="flex flex-col items-center gap-1.5 px-3 py-2 rounded-lg border-2 bg-bg transition-all duration-300"
+      className="flex flex-col items-center gap-1.5 px-3 py-2 rounded-lg border-2 bg-surface transition-[border-color,box-shadow] duration-300"
       style={{
         borderColor: color,
-        boxShadow: `0 0 10px ${flowColorAlpha(color, 19)}`,
+        boxShadow: `0 0 0 3px ${flowColorAlpha(color, 19)}`,
         minWidth: "100px",
       }}
       data-testid="response-node"
@@ -75,13 +75,13 @@ export function ResponseNode({ data }: NodeProps) {
 
       {/* Finished timestamp */}
       {finishedAt != null && (
-        <span className="text-[9px] text-muted font-mono" data-testid="response-finished-at">
+        <span className="text-[9px] text-text-muted font-mono" data-testid="response-finished-at">
           {new Date(finishedAt as number).toLocaleTimeString()}
         </span>
       )}
 
       {/* Response label */}
-      <span className="text-xs font-bold" style={{ color }}>
+      <span className="text-xs font-semibold" style={{ color }}>
         Response
       </span>
     </div>

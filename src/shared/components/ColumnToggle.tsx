@@ -38,11 +38,11 @@ export default function ColumnToggle({ columns = [], visible = {}, onToggle }) {
         onClick={() => setOpen(!open)}
         title={t("toggleColumns")}
         style={{
-          padding: "6px 10px",
-          borderRadius: "6px",
-          border: "1px solid rgba(255,255,255,0.1)",
-          background: "rgba(255,255,255,0.05)",
-          color: "var(--text-secondary, #888)",
+          padding: "5px 10px",
+          borderRadius: "var(--radius-control)",
+          border: "1px solid var(--color-border-strong)",
+          background: "var(--color-surface)",
+          color: "var(--color-text-main)",
           fontSize: "13px",
           cursor: "pointer",
           display: "flex",
@@ -61,13 +61,14 @@ export default function ColumnToggle({ columns = [], visible = {}, onToggle }) {
             top: "100%",
             right: 0,
             marginTop: "4px",
-            background: "rgba(20,20,30,0.95)",
-            border: "1px solid rgba(255,255,255,0.1)",
+            background: "var(--color-surface)",
+            border: "1px solid var(--color-border)",
             borderRadius: "8px",
-            padding: "8px",
+            padding: "4px",
             zIndex: 50,
             minWidth: "160px",
-            backdropFilter: "blur(12px)",
+            backdropFilter: "none",
+            boxShadow: "var(--shadow-elevated)",
           }}
         >
           {columns.map((col) => (
@@ -77,12 +78,10 @@ export default function ColumnToggle({ columns = [], visible = {}, onToggle }) {
                 display: "flex",
                 alignItems: "center",
                 gap: "8px",
-                padding: "4px 8px",
+                padding: "6px 8px",
                 cursor: "pointer",
                 fontSize: "12px",
-                color: visible[col.key]
-                  ? "var(--text-primary, #e0e0e0)"
-                  : "var(--text-secondary, #888)",
+                color: visible[col.key] ? "var(--color-text-main)" : "var(--color-text-muted)",
                 borderRadius: "4px",
               }}
             >
@@ -90,7 +89,7 @@ export default function ColumnToggle({ columns = [], visible = {}, onToggle }) {
                 type="checkbox"
                 checked={visible[col.key] ?? true}
                 onChange={() => onToggle(col.key)}
-                style={{ accentColor: "#6366f1" }}
+                style={{ accentColor: "var(--color-primary)" }}
               />
               {col.label}
             </label>

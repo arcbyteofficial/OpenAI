@@ -77,9 +77,9 @@ function renderPlayground(
     case "imageToText":
       // Endpoint /api/v1/images/understanding does not exist yet — omitted.
       return (
-        <div className="flex flex-col gap-2 border border-dashed border-border rounded-xl p-6">
+        <div className="flex flex-col gap-2 border border-dashed border-border-strong rounded-card p-5">
           <div className="flex items-center gap-2 text-text-muted">
-            <span className="material-symbols-outlined text-[20px]">image_search</span>
+            <span className="material-symbols-outlined text-[18px]">image_search</span>
             <h3 className="text-sm font-medium">{bridgeCopy.imageToText.title}</h3>
           </div>
           <p className="text-xs text-text-muted">{bridgeCopy.imageToText.description}</p>
@@ -136,8 +136,8 @@ export default function MediaProviderPageClient({
   return (
     <div className="flex flex-col gap-6">
       {activeKind === "stt" && providerId === "openrouter" && (
-        <div className="text-xs text-text-muted border border-border rounded-lg p-3 flex items-start gap-2">
-          <span className="material-symbols-outlined text-[16px] text-blue-500 mt-0.5">info</span>
+        <div className="text-xs text-text-muted bg-surface border border-border rounded-lg p-3 flex items-start gap-2">
+          <span className="material-symbols-outlined text-[16px] text-primary mt-0.5">info</span>
           <span>
             <strong>{t("existingConnection")}:</strong> {t("openrouterSttDescription")}
           </span>
@@ -159,7 +159,7 @@ export default function MediaProviderPageClient({
       {/* Connections */}
       <div className="flex flex-col gap-3">
         <div className="flex items-center justify-between">
-          <h2 className="text-base font-semibold">
+          <h2 className="text-sm font-semibold tracking-tight text-text-main">
             {t("connections", { count: connections.length })}
           </h2>
           <Button
@@ -176,8 +176,8 @@ export default function MediaProviderPageClient({
         {loading ? (
           <div className="py-8 text-center text-sm text-text-muted">{t("loading")}</div>
         ) : connections.length === 0 ? (
-          <div className="flex flex-col items-center justify-center gap-2 py-12 border border-dashed border-border rounded-xl text-text-muted text-sm">
-            <span className="material-symbols-outlined text-[28px]">key_off</span>
+          <div className="flex flex-col items-center justify-center gap-2 py-12 border border-dashed border-border-strong rounded-card text-text-muted text-sm">
+            <span className="material-symbols-outlined text-[24px] text-text-subtle">key_off</span>
             <span>{t("noConnections")}</span>
             <Button
               size="sm"
@@ -190,21 +190,23 @@ export default function MediaProviderPageClient({
             </Button>
           </div>
         ) : (
-          <div className="flex flex-col divide-y divide-border rounded-xl border border-border overflow-hidden">
+          <div className="flex flex-col divide-y divide-border rounded-card border border-border overflow-hidden">
             {connections.map((conn) => (
-              <div key={conn.id} className="flex items-center gap-3 px-4 py-3 bg-bg-card">
+              <div key={conn.id} className="flex items-center gap-3 px-4 py-3 bg-surface">
                 <span
                   className={`size-2 rounded-full shrink-0 ${
                     conn.testStatus === "active" || conn.testStatus === "success"
-                      ? "bg-green-500"
+                      ? "bg-success"
                       : conn.testStatus === "error" || conn.testStatus === "unavailable"
-                        ? "bg-red-500"
-                        : "bg-text-muted"
+                        ? "bg-error"
+                        : "bg-text-subtle"
                   }`}
                 />
-                <span className="text-sm font-medium flex-1 truncate">{conn.name ?? conn.id}</span>
+                <span className="text-[13px] font-medium flex-1 truncate">
+                  {conn.name ?? conn.id}
+                </span>
                 {conn.isActive === false && (
-                  <span className="text-[10px] px-1.5 py-0.5 rounded bg-bg-subtle border border-border text-text-muted">
+                  <span className="text-[10px] px-1.5 py-0.5 rounded-md bg-bg-subtle border border-border text-text-muted">
                     {t("disabled")}
                   </span>
                 )}

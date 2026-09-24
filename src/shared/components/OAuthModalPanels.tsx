@@ -35,7 +35,7 @@ export function OAuthDeviceCodePanel({
     <>
       <div className="text-center py-4">
         <p className="text-sm text-text-muted mb-4">{t("deviceCodeVisitUrl")}</p>
-        <div className="bg-sidebar p-4 rounded-lg mb-4">
+        <div className="bg-bg-subtle border border-border p-4 rounded-lg mb-4">
           <p className="text-xs text-text-muted mb-1">{t("deviceCodeVerificationUrl")}</p>
           <div className="flex items-center gap-2">
             <a
@@ -54,10 +54,12 @@ export function OAuthDeviceCodePanel({
             />
           </div>
         </div>
-        <div className="bg-primary/10 p-4 rounded-lg">
+        <div className="bg-bg-subtle border border-border p-4 rounded-lg">
           <p className="text-xs text-text-muted mb-1">{t("deviceCodeYourCode")}</p>
           <div className="flex items-center justify-center gap-2">
-            <p className="text-2xl font-mono font-bold text-primary">{deviceData.user_code}</p>
+            <p className="text-2xl font-mono font-semibold text-text-main">
+              {deviceData.user_code}
+            </p>
             <Button
               size="sm"
               variant="ghost"
@@ -140,8 +142,8 @@ export function OAuthLoopbackMismatchPanel({
     <>
       <div className="space-y-4">
         <div className="flex items-start gap-3">
-          <div className="size-10 shrink-0 rounded-full bg-amber-500/15 flex items-center justify-center">
-            <span className="material-symbols-outlined text-xl text-amber-500">lan</span>
+          <div className="size-10 shrink-0 rounded-full bg-warning/10 flex items-center justify-center">
+            <span className="material-symbols-outlined text-xl text-warning">lan</span>
           </div>
           <div>
             <h3 className="text-base font-semibold">{t("loopbackMismatchTitle")}</h3>
@@ -151,8 +153,8 @@ export function OAuthLoopbackMismatchPanel({
           </div>
         </div>
 
-        <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-3">
-          <p className="text-xs font-semibold uppercase tracking-wide text-amber-500 mb-1">
+        <div className="rounded-lg border border-warning/25 bg-warning/5 p-3">
+          <p className="text-[11px] font-medium uppercase tracking-wider text-warning mb-1">
             {t("loopbackMismatchWhatHappened")}
           </p>
           <p className="text-sm text-text-muted">
@@ -169,7 +171,7 @@ export function OAuthLoopbackMismatchPanel({
           <ol className="space-y-3">
             {steps.map((step, index) => (
               <li key={step.key} className="flex gap-3">
-                <span className="size-5 shrink-0 mt-0.5 rounded-full bg-primary/15 text-primary text-xs font-semibold flex items-center justify-center">
+                <span className="size-5 shrink-0 mt-0.5 rounded-full bg-bg-subtle border border-border text-text-muted text-xs font-medium tabular-nums flex items-center justify-center">
                   {index + 1}
                 </span>
                 <div className="flex-1 min-w-0">
@@ -232,9 +234,9 @@ function OAuthGoogleLoopbackNotice({ hint }: { hint: GoogleLoopbackHint }) {
   );
 
   return (
-    <div className="rounded-lg border border-amber-500/30 bg-amber-500/10 p-3 space-y-3">
+    <div className="rounded-lg border border-warning/25 bg-warning/5 p-3 space-y-3">
       <div>
-        <p className="text-sm font-semibold text-amber-500">
+        <p className="text-sm font-semibold text-warning">
           <span className="material-symbols-outlined text-sm align-middle mr-1">warning</span>
           {t("googleLoopbackTitle")}
         </p>
@@ -304,7 +306,7 @@ function OAuthRemoteAccessNotices({
   }
 
   return (
-    <div className="rounded-lg border border-blue-500/30 bg-blue-500/10 p-3 text-xs text-blue-200">
+    <div className="rounded-lg border border-border bg-bg-subtle p-3 text-xs text-text-muted">
       <span className="material-symbols-outlined text-sm align-middle mr-1">info</span>
       {t("remoteAccessInfo")}
     </div>
@@ -370,10 +372,10 @@ export function OAuthManualInputPanel({
             })}
           </p>
           {provider === "zed-hosted" && (
-            <p className="text-xs text-amber-500 mb-2">
+            <p className="text-xs text-warning mb-2">
               After signing in, Zed redirects to a local address like{" "}
-              <code className="font-mono">http://127.0.0.1:&lt;port&gt;/?user_id=...</code> which the
-              browser may show as unreachable — that is expected. Copy the FULL URL from the
+              <code className="font-mono">http://127.0.0.1:&lt;port&gt;/?user_id=...</code> which
+              the browser may show as unreachable — that is expected. Copy the FULL URL from the
               browser address bar (the access token is inside it) and paste it above.
             </p>
           )}

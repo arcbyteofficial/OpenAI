@@ -94,7 +94,7 @@ export function FreeProviderOnboardingCard() {
   }
 
   return (
-    <section className="space-y-3 rounded-xl border border-primary/20 bg-primary/5 p-4">
+    <section className="space-y-3 rounded-card border border-border bg-surface p-4">
       <div>
         <h3 className="text-sm font-semibold text-text-main">{t("title")}</h3>
         <p className="mt-1 text-xs leading-relaxed text-text-muted">{t("description")}</p>
@@ -104,7 +104,7 @@ export function FreeProviderOnboardingCard() {
         {providers.map((provider) => (
           <label
             key={provider.id}
-            className="flex cursor-pointer items-start gap-3 rounded-lg border border-white/10 bg-white/[0.03] p-3"
+            className="flex cursor-pointer items-start gap-3 rounded-lg border border-border bg-surface-2 p-3 transition-colors hover:border-border-strong"
           >
             <input
               type="checkbox"
@@ -114,7 +114,7 @@ export function FreeProviderOnboardingCard() {
             />
             <span className="min-w-0 flex-1">
               <span className="block text-xs font-medium text-text-main">{provider.name}</span>
-              <span className="mt-1 block text-[11px] leading-relaxed text-amber-300/90">
+              <span className="mt-1 block text-[11px] leading-relaxed text-warning">
                 {provider.caution}
               </span>
               <a
@@ -142,7 +142,7 @@ export function FreeProviderOnboardingCard() {
         <span>{t("confirmation")}</span>
       </label>
 
-      {error && <p className="text-xs text-red-400">{error}</p>}
+      {error && <p className="text-xs text-error">{error}</p>}
       {results.length > 0 && (
         <ul className="space-y-1 text-xs text-text-muted">
           {results.map((result) => (
@@ -159,7 +159,7 @@ export function FreeProviderOnboardingCard() {
           type="button"
           disabled={!confirmed || selectedIds.length === 0 || submitting}
           onClick={() => void submit()}
-          className="rounded-lg bg-primary px-4 py-2 text-xs font-medium text-white disabled:cursor-not-allowed disabled:opacity-50"
+          className="rounded-control bg-contrast px-4 py-2 text-xs font-medium text-contrast-fg transition-colors hover:bg-contrast-hover disabled:cursor-not-allowed disabled:opacity-50"
         >
           {submitting ? t("settingUp") : t("setupSelected")}
         </button>
@@ -168,7 +168,7 @@ export function FreeProviderOnboardingCard() {
             type="button"
             disabled={submitting}
             onClick={() => void submit(failedIds)}
-            className="rounded-lg border border-white/10 px-4 py-2 text-xs text-text-main disabled:opacity-50"
+            className="rounded-control border border-border-strong px-4 py-2 text-xs font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-50"
           >
             {t("retryFailed")}
           </button>

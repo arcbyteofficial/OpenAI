@@ -141,17 +141,17 @@ export default function AppearanceTab() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-purple-500/10 text-purple-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-2 rounded-lg border border-border bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             palette
           </span>
         </div>
-        <h3 className="text-lg font-semibold">{t("appearance")}</h3>
+        <h3 className="text-base font-semibold tracking-tight text-text-main">{t("appearance")}</h3>
       </div>
       <div className="flex flex-col gap-4">
         <div className="flex items-center justify-between">
           <div>
-            <p className="font-medium">{t("darkMode")}</p>
+            <p className="text-sm font-medium">{t("darkMode")}</p>
             <p className="text-sm text-text-muted">{t("switchThemes")}</p>
           </div>
           <Toggle checked={isDark} onChange={() => setTheme(isDark ? "light" : "dark")} />
@@ -161,7 +161,7 @@ export default function AppearanceTab() {
           <div
             role="tablist"
             aria-label={t("themeSelectionAria")}
-            className="inline-flex p-1 rounded-lg bg-black/5 dark:bg-white/5"
+            className="inline-flex p-1 rounded-lg bg-bg-subtle"
           >
             {["light", "dark", "system"].map((option) => (
               <button
@@ -170,13 +170,13 @@ export default function AppearanceTab() {
                 aria-selected={theme === option}
                 onClick={() => setTheme(option)}
                 className={cn(
-                  "flex items-center gap-2 px-4 py-2 rounded-md font-medium transition-all",
+                  "flex items-center gap-2 px-4 py-2 rounded-md text-sm font-medium transition-colors",
                   theme === option
-                    ? "bg-white dark:bg-white/10 text-text-main shadow-sm"
+                    ? "bg-surface dark:bg-white/10 text-text-main shadow-[0_1px_2px_rgba(0,0,0,0.08),0_0_0_0.5px_rgba(0,0,0,0.06)]"
                     : "text-text-muted hover:text-text-main"
                 )}
               >
-                <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+                <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                   {option === "light" ? "light_mode" : option === "dark" ? "dark_mode" : "contrast"}
                 </span>
                 <span>{themeOptionLabels[option] || option}</span>
@@ -187,17 +187,19 @@ export default function AppearanceTab() {
 
         <div className="pt-4 border-t border-border">
           <div className="mb-3">
-            <p className="font-medium">
+            <p className="text-sm font-medium">
               {getSettingsLabel("homePinProviderQuotaToHome", "Pin Information to Home Page")}
             </p>
             <p className="text-sm text-text-muted">{t("homePinnedSectionsDesc")}</p>
           </div>
 
-          <div className="rounded-lg border border-border bg-surface/40 overflow-hidden">
-            <div className="divide-y divide-border/70">
+          <div className="rounded-lg border border-border bg-surface overflow-hidden">
+            <div className="divide-y divide-border">
               <div className="flex items-start justify-between gap-4 px-4 py-3">
                 <div>
-                  <p className="font-medium">{getSettingsLabel("homeQuickStart", "Quick Start")}</p>
+                  <p className="text-sm font-medium">
+                    {getSettingsLabel("homeQuickStart", "Quick Start")}
+                  </p>
                   <p className="text-sm text-text-muted">
                     {getSettingsLabel(
                       "homeQuickStartDesc",
@@ -216,7 +218,7 @@ export default function AppearanceTab() {
 
               <div className="flex items-start justify-between gap-4 px-4 py-3">
                 <div>
-                  <p className="font-medium">
+                  <p className="text-sm font-medium">
                     {getSettingsLabel("homeProviderTopology", "Provider Topology")}
                   </p>
                   <p className="text-sm text-text-muted">
@@ -240,7 +242,7 @@ export default function AppearanceTab() {
 
         <div className="pt-4 border-t border-border">
           <div className="mb-3">
-            <p className="font-medium">
+            <p className="text-sm font-medium">
               {getSettingsLabel("endpointTunnelVisibility", "Endpoint tunnel visibility")}
             </p>
             <p className="text-sm text-text-muted">
@@ -251,10 +253,10 @@ export default function AppearanceTab() {
             </p>
           </div>
 
-          <div className="rounded-lg border border-border bg-surface/40 divide-y divide-border/70">
+          <div className="rounded-lg border border-border bg-surface divide-y divide-border">
             <div className="flex items-center justify-between gap-4 px-4 py-3">
               <div>
-                <p className="font-medium">
+                <p className="text-sm font-medium">
                   {getSettingsLabel("showCloudflareTunnel", "Cloudflare Quick Tunnel")}
                 </p>
                 <p className="text-sm text-text-muted">
@@ -273,7 +275,7 @@ export default function AppearanceTab() {
 
             <div className="flex items-center justify-between gap-4 px-4 py-3">
               <div>
-                <p className="font-medium">
+                <p className="text-sm font-medium">
                   {getSettingsLabel("showTailscaleFunnel", "Tailscale Funnel")}
                 </p>
                 <p className="text-sm text-text-muted">
@@ -292,7 +294,9 @@ export default function AppearanceTab() {
 
             <div className="flex items-center justify-between gap-4 px-4 py-3">
               <div>
-                <p className="font-medium">{getSettingsLabel("showNgrokTunnel", "ngrok Tunnel")}</p>
+                <p className="text-sm font-medium">
+                  {getSettingsLabel("showNgrokTunnel", "ngrok Tunnel")}
+                </p>
                 <p className="text-sm text-text-muted">
                   {getSettingsLabel(
                     "showNgrokTunnelDesc",
@@ -311,7 +315,7 @@ export default function AppearanceTab() {
 
         <div className="pt-4 border-t border-border">
           <div className="mb-3">
-            <p className="font-medium">
+            <p className="text-sm font-medium">
               {getSettingsLabel("comboConfigMode", "Combo configuration mode")}
             </p>
             <p className="text-sm text-text-muted">
@@ -340,11 +344,11 @@ export default function AppearanceTab() {
                   className={cn(
                     "flex items-start gap-3 rounded-lg border p-3 text-left transition-colors disabled:opacity-60",
                     active
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "border-border bg-surface/40 text-text-main hover:border-primary/40"
+                      ? "border-primary/40 bg-primary/10 text-primary"
+                      : "border-border bg-surface text-text-main hover:border-border-strong hover:bg-bg-subtle"
                   )}
                 >
-                  <span className="material-symbols-outlined mt-0.5 text-[20px]" aria-hidden="true">
+                  <span className="material-symbols-outlined mt-0.5 text-[18px]" aria-hidden="true">
                     {option.icon}
                   </span>
                   <span className="min-w-0">
@@ -366,7 +370,7 @@ export default function AppearanceTab() {
 
         <div className="pt-4 border-t border-border">
           <div className="mb-3">
-            <p className="font-medium">
+            <p className="text-sm font-medium">
               {getSettingsLabel("providerQuotaAutoRefresh", "Provider Quota auto refresh")}
             </p>
             <p className="text-sm text-text-muted">
@@ -377,10 +381,10 @@ export default function AppearanceTab() {
             </p>
           </div>
 
-          <div className="rounded-lg border border-border bg-surface/40 divide-y divide-border/70">
+          <div className="rounded-lg border border-border bg-surface divide-y divide-border">
             <div className="flex items-center justify-between gap-4 px-4 py-3">
               <div>
-                <p className="font-medium">
+                <p className="text-sm font-medium">
                   {getSettingsLabel("providerQuotaAutoRefreshToggle", "Automatic refresh")}
                 </p>
                 <p className="text-sm text-text-muted">
@@ -404,7 +408,7 @@ export default function AppearanceTab() {
 
             <div className="flex items-center justify-between gap-4 px-4 py-3">
               <div>
-                <p className="font-medium">
+                <p className="text-sm font-medium">
                   {getSettingsLabel("providerQuotaAutoRefreshInterval", "Refresh interval")}
                 </p>
                 <p className="text-sm text-text-muted">
@@ -426,7 +430,7 @@ export default function AppearanceTab() {
                     await updateSetting("autoRefreshProviderQuotaInterval", next);
                   }}
                   disabled={loading || !autoRefreshProviderQuota}
-                  className="h-10 w-28 px-3 rounded-lg bg-surface border border-border text-sm text-text-main focus:outline-none focus:border-primary disabled:opacity-50"
+                  className="h-10 w-28 px-3 rounded-control bg-surface border border-border-strong text-sm text-text-main tabular-nums focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] disabled:opacity-50"
                 />
                 <span className="text-xs text-text-muted">{t("seconds")}</span>
               </div>
@@ -439,7 +443,7 @@ export default function AppearanceTab() {
         <div className="pt-4 border-t border-border">
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-medium">{t("hideHealthLogs")}</p>
+              <p className="text-sm font-medium">{t("hideHealthLogs")}</p>
               <p className="text-sm text-text-muted">{t("hideHealthLogsDesc")}</p>
             </div>
             <Toggle
@@ -451,7 +455,7 @@ export default function AppearanceTab() {
         </div>
 
         <div className="pt-4 border-t border-border">
-          <p className="font-medium mb-1">{t("themeAccent")}</p>
+          <p className="text-sm font-medium mb-1">{t("themeAccent")}</p>
           <p className="text-sm text-text-muted mb-3">{t("themeAccentDesc")}</p>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 mb-3">
@@ -464,13 +468,13 @@ export default function AppearanceTab() {
                   className={cn(
                     "flex items-center justify-between gap-2 p-2 rounded-lg border transition-colors",
                     active
-                      ? "border-primary bg-primary/10 text-primary"
-                      : "border-border hover:bg-surface/50 text-text-main"
+                      ? "border-primary/40 bg-primary/10 text-primary"
+                      : "border-border hover:bg-bg-subtle text-text-main"
                   )}
                 >
                   <span className="flex items-center gap-2">
                     <span
-                      className="size-4 rounded-full border border-black/10 dark:border-white/20"
+                      className="size-4 rounded-full border border-border-strong"
                       style={{ backgroundColor: item.color }}
                     />
                     <span className="text-sm font-medium">{item.label}</span>
@@ -485,7 +489,7 @@ export default function AppearanceTab() {
               type="color"
               value={customThemeColor}
               onChange={(e) => setCustomThemeColor(e.target.value)}
-              className="h-10 w-12 rounded border border-border bg-surface cursor-pointer"
+              className="h-10 w-12 rounded-control border border-border-strong bg-surface cursor-pointer"
               aria-label={t("themeCustom")}
             />
             <input
@@ -494,7 +498,7 @@ export default function AppearanceTab() {
               onChange={(e) => setCustomThemeColor(e.target.value)}
               placeholder="#3b82f6"
               maxLength={7}
-              className={`flex-1 h-10 px-3 rounded-lg bg-surface border text-sm text-text-main focus:outline-none ${isValidHex ? "border-border focus:border-primary" : "border-red-400 focus:border-red-500"}`}
+              className={`flex-1 h-10 px-3 rounded-control bg-surface border font-mono text-sm text-text-main focus:outline-none focus:ring-[3px] transition-[border-color,box-shadow] ${isValidHex ? "border-border-strong focus:border-primary focus:ring-primary/15" : "border-error focus:border-error focus:ring-error/15"}`}
             />
             <Button onClick={() => setCustomColorTheme(customThemeColor)} disabled={!isValidHex}>
               {t("themeCreate")}
@@ -504,13 +508,13 @@ export default function AppearanceTab() {
 
         <div className="pt-4 border-t border-border">
           <div className="flex items-center gap-3 mb-4">
-            <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500">
-              <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+            <div className="p-2 rounded-lg border border-border bg-bg-subtle text-text-muted">
+              <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                 badge
               </span>
             </div>
             <div>
-              <h4 className="font-semibold">{t("whitelabeling")}</h4>
+              <h4 className="text-sm font-semibold text-text-main">{t("whitelabeling")}</h4>
               <p className="text-sm text-text-muted">{t("whitelabelingDesc")}</p>
             </div>
           </div>
@@ -518,7 +522,7 @@ export default function AppearanceTab() {
           <div className="flex flex-col gap-4">
             <div className="flex items-center justify-between">
               <div>
-                <p className="font-medium">{t("appName")}</p>
+                <p className="text-sm font-medium">{t("appName")}</p>
                 <p className="text-sm text-text-muted">{t("appNameDesc")}</p>
               </div>
               <input
@@ -527,13 +531,13 @@ export default function AppearanceTab() {
                 onChange={(e) => updateSetting("instanceName", e.target.value)}
                 placeholder="OmniRoute"
                 maxLength={100}
-                className="h-10 px-3 rounded-lg bg-surface border border-border text-sm text-text-main focus:outline-none focus:border-primary w-48"
+                className="h-10 px-3 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] w-48"
               />
             </div>
 
             <div className="flex flex-col gap-2">
               <div>
-                <p className="font-medium">{t("customLogo")}</p>
+                <p className="text-sm font-medium">{t("customLogo")}</p>
                 <p className="text-sm text-text-muted">{t("customLogoDesc")}</p>
               </div>
               <div className="flex items-center gap-2">
@@ -541,7 +545,7 @@ export default function AppearanceTab() {
                   type="text"
                   value={settings.customLogoUrl || ""}
                   onChange={(e) => updateSetting("customLogoUrl", e.target.value)}
-                  className="flex-1 h-10 px-3 rounded-lg bg-surface border border-border text-sm text-text-main focus:outline-none focus:border-primary"
+                  className="flex-1 h-10 px-3 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                   placeholder="https://example.com/logo.png"
                   maxLength={2000}
                 />
@@ -549,7 +553,7 @@ export default function AppearanceTab() {
                   <img
                     src={settings.customLogoBase64 || settings.customLogoUrl}
                     alt={t("appearanceLogoPreviewAlt")}
-                    className="h-10 w-10 rounded border border-border object-contain bg-surface"
+                    className="h-10 w-10 rounded-md border border-border object-contain bg-surface"
                     onError={(e) => {
                       e.currentTarget.style.display = "none";
                     }}
@@ -559,9 +563,9 @@ export default function AppearanceTab() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <p className="font-medium">{t("uploadLogo")}</p>
+              <p className="text-sm font-medium">{t("uploadLogo")}</p>
               <div className="flex items-center gap-2">
-                <label className="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-border text-sm text-text-main cursor-pointer hover:bg-surface/80 transition-colors">
+                <label className="flex items-center gap-2 px-4 py-2 rounded-control bg-surface border border-border-strong text-sm font-medium text-text-main cursor-pointer hover:bg-bg-subtle transition-colors">
                   <input
                     type="file"
                     accept="image/png,image/jpeg,image/svg+xml,image/gif,image/webp"
@@ -611,10 +615,10 @@ export default function AppearanceTab() {
                 </Button>
               </div>
               {uploadError?.target === "logo" && (
-                <p className="text-sm text-red-500">{uploadError.message}</p>
+                <p className="text-sm text-error">{uploadError.message}</p>
               )}
               {(settings.customLogoBase64 || settings.customLogoUrl) && (
-                <div className="mt-2 p-3 bg-black/5 dark:bg-white/5 rounded-lg">
+                <div className="mt-2 p-3 bg-bg-subtle border border-border rounded-lg">
                   <p className="text-xs text-text-muted mb-2">{t("logoPreview")}</p>
                   <img
                     src={settings.customLogoBase64 || settings.customLogoUrl}
@@ -627,7 +631,7 @@ export default function AppearanceTab() {
 
             <div className="flex flex-col gap-2 pt-4 border-t border-border">
               <div>
-                <p className="font-medium">{t("customFavicon")}</p>
+                <p className="text-sm font-medium">{t("customFavicon")}</p>
                 <p className="text-sm text-text-muted">{t("customFaviconDesc")}</p>
               </div>
               <div className="flex items-center gap-2">
@@ -635,7 +639,7 @@ export default function AppearanceTab() {
                   type="text"
                   value={settings.customFaviconUrl || ""}
                   onChange={(e) => updateSetting("customFaviconUrl", e.target.value)}
-                  className="flex-1 h-10 px-3 rounded-lg bg-surface border border-border text-sm text-text-main focus:outline-none focus:border-primary"
+                  className="flex-1 h-10 px-3 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                   placeholder="https://example.com/favicon.ico"
                   maxLength={2000}
                 />
@@ -643,7 +647,7 @@ export default function AppearanceTab() {
                   <img
                     src={settings.customFaviconBase64 || settings.customFaviconUrl}
                     alt={t("appearanceFaviconPreviewAlt")}
-                    className="h-10 w-10 rounded border border-border object-contain bg-surface"
+                    className="h-10 w-10 rounded-md border border-border object-contain bg-surface"
                     onError={(e) => {
                       e.currentTarget.style.display = "none";
                     }}
@@ -653,9 +657,9 @@ export default function AppearanceTab() {
             </div>
 
             <div className="flex flex-col gap-2">
-              <p className="font-medium">{t("uploadFavicon")}</p>
+              <p className="text-sm font-medium">{t("uploadFavicon")}</p>
               <div className="flex items-center gap-2">
-                <label className="flex items-center gap-2 px-4 py-2 rounded-lg bg-surface border border-border text-sm text-text-main cursor-pointer hover:bg-surface/80 transition-colors">
+                <label className="flex items-center gap-2 px-4 py-2 rounded-control bg-surface border border-border-strong text-sm font-medium text-text-main cursor-pointer hover:bg-bg-subtle transition-colors">
                   <input
                     type="file"
                     accept="image/png,image/x-icon,image/svg+xml,image/gif,image/webp"
@@ -711,10 +715,10 @@ export default function AppearanceTab() {
                 </Button>
               </div>
               {uploadError?.target === "favicon" && (
-                <p className="text-sm text-red-500">{uploadError.message}</p>
+                <p className="text-sm text-error">{uploadError.message}</p>
               )}
               {(settings.customFaviconBase64 || settings.customFaviconUrl) && (
-                <div className="mt-2 p-3 bg-black/5 dark:bg-white/5 rounded-lg">
+                <div className="mt-2 p-3 bg-bg-subtle border border-border rounded-lg">
                   <p className="text-xs text-text-muted mb-2">{t("faviconPreview")}</p>
                   <img
                     src={settings.customFaviconBase64 || settings.customFaviconUrl}
@@ -728,8 +732,8 @@ export default function AppearanceTab() {
             {isElectron && (
               <div className="flex items-center justify-between pt-4 border-t border-border">
                 <div>
-                  <p className="font-medium">{t("startOnLogin")}</p>
-                  <p className="text-xs text-text-muted mt-0.5">{t("startOnLoginDesc")}</p>
+                  <p className="text-sm font-medium">{t("startOnLogin")}</p>
+                  <p className="text-sm text-text-muted mt-0.5">{t("startOnLoginDesc")}</p>
                 </div>
                 <Toggle
                   checked={autostartEnabled}

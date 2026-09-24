@@ -34,9 +34,9 @@ export function OmniExecutionsTab({
   return (
     <Card>
       <div className="overflow-x-auto">
-        <table className="w-full">
+        <table className="w-full text-[13px]">
           <thead>
-            <tr className="text-left text-sm text-text-muted border-b border-border">
+            <tr className="text-left text-xs text-text-muted border-b border-border">
               <th className="pb-3 font-medium">{t("skill")}</th>
               <th className="pb-3 font-medium">{t("status")}</th>
               <th className="pb-3 font-medium">{t("duration")}</th>
@@ -52,23 +52,25 @@ export function OmniExecutionsTab({
               </tr>
             ) : (
               executions.map((exec) => (
-                <tr key={exec.id} className="border-b border-border/50">
-                  <td className="py-3 font-medium">{exec.skillName}</td>
+                <tr key={exec.id} className="border-b border-border last:border-b-0">
+                  <td className="py-3 font-medium text-text-main">{exec.skillName}</td>
                   <td className="py-3">
                     <span
-                      className={`text-xs px-2 py-1 rounded ${
+                      className={`text-xs font-medium px-2 py-1 rounded-md ${
                         exec.status === "success"
-                          ? "bg-emerald-500/10 text-emerald-400"
+                          ? "bg-success/10 text-success"
                           : exec.status === "error"
-                            ? "bg-red-500/10 text-red-400"
-                            : "bg-amber-500/10 text-amber-400"
+                            ? "bg-error/10 text-error"
+                            : "bg-warning/10 text-warning"
                       }`}
                     >
                       {exec.status}
                     </span>
                   </td>
-                  <td className="py-3 text-text-muted">{exec.duration}ms</td>
-                  <td className="py-3 text-text-muted text-sm">
+                  <td className="py-3 font-mono text-xs tabular-nums text-text-muted">
+                    {exec.duration}ms
+                  </td>
+                  <td className="py-3 text-text-muted text-xs tabular-nums">
                     {new Date(exec.createdAt).toLocaleString()}
                   </td>
                 </tr>
@@ -78,7 +80,7 @@ export function OmniExecutionsTab({
         </table>
       </div>
       <div className="flex items-center justify-between mt-4 pt-4 border-t border-border">
-        <span className="text-sm text-text-muted">
+        <span className="text-[13px] text-text-muted">
           {t("pageInfo", { page: execPage, totalPages: execTotalPages, total: execTotal }) ||
             `Page ${execPage} of ${execTotalPages} (${execTotal} total)`}
         </span>
@@ -86,14 +88,14 @@ export function OmniExecutionsTab({
           <button
             onClick={onPagePrev}
             disabled={execPage === 1}
-            className="px-3 py-1 text-sm rounded border border-border text-text-muted hover:text-text-main disabled:opacity-40 transition-colors"
+            className="px-3 py-1 text-[13px] rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle disabled:opacity-40 transition-colors"
           >
             {t("previous") || "Prev"}
           </button>
           <button
             onClick={onPageNext}
             disabled={execPage === execTotalPages || execTotalPages === 0}
-            className="px-3 py-1 text-sm rounded border border-border text-text-muted hover:text-text-main disabled:opacity-40 transition-colors"
+            className="px-3 py-1 text-[13px] rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle disabled:opacity-40 transition-colors"
           >
             {t("next") || "Next"}
           </button>

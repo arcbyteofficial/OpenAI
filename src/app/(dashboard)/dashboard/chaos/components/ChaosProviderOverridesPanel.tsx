@@ -32,7 +32,7 @@ function ChaosProviderOverrideRow({
 }) {
   const t = useTranslations("chaosConfig");
   return (
-    <div className="flex items-center gap-2 p-2 rounded-md bg-black/5 dark:bg-white/5">
+    <div className="flex items-center gap-2 p-2 rounded-lg bg-bg-subtle">
       {/* Provider dropdown with available options */}
       <div className="flex-1 relative">
         <input
@@ -41,7 +41,7 @@ function ChaosProviderOverrideRow({
           placeholder={t("providerIdPlaceholder")}
           value={override.providerId}
           onChange={(e) => onUpdate(index, "providerId", e.target.value)}
-          className="w-full px-2 py-1 rounded border border-border bg-surface text-xs text-text-main"
+          className="w-full px-2 py-1 rounded-control border border-border-strong bg-surface text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
         />
         <datalist id={`provider-list-${index}`}>
           {availableProviders.map((p) => (
@@ -54,13 +54,13 @@ function ChaosProviderOverrideRow({
         placeholder={t("modelIdPlaceholder")}
         value={override.modelId || ""}
         onChange={(e) => onUpdate(index, "modelId", e.target.value)}
-        className="flex-1 px-2 py-1 rounded border border-border bg-surface text-xs text-text-main"
+        className="flex-1 px-2 py-1 rounded-control border border-border-strong bg-surface text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
       />
       <button
         type="button"
         onClick={() => onUpdate(index, "enabled", !override.enabled)}
-        className={`px-2 py-1 rounded text-xs ${
-          override.enabled ? "bg-green-500/10 text-green-600" : "bg-red-500/10 text-red-600"
+        className={`px-2 py-1 rounded-control text-xs font-medium transition-colors ${
+          override.enabled ? "bg-success/10 text-success" : "bg-surface text-text-muted"
         }`}
       >
         {override.enabled ? t("on") : t("off")}
@@ -68,7 +68,7 @@ function ChaosProviderOverrideRow({
       <button
         type="button"
         onClick={() => onRemove(index)}
-        className="px-2 py-1 rounded text-xs text-red-500 hover:bg-red-500/10"
+        className="px-2 py-1 rounded-control text-xs text-text-muted hover:text-error hover:bg-error/10 transition-colors"
       >
         <span className="material-symbols-outlined text-[14px]">close</span>
       </button>
@@ -90,7 +90,7 @@ function ChaosAvailableProvidersHint({
       </summary>
       <div className="mt-1 flex flex-wrap gap-1">
         {availableProviders.map((p) => (
-          <span key={p.id} className="px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/5">
+          <span key={p.id} className="px-1.5 py-0.5 rounded bg-bg-subtle font-mono">
             {p.provider}
             {p.defaultModel && <span className="opacity-60 ml-1">({p.defaultModel})</span>}
           </span>
@@ -126,7 +126,7 @@ export function ChaosProviderOverridesPanel({
 }) {
   const t = useTranslations("chaosConfig");
   return (
-    <div className="p-3 rounded-lg border border-border bg-surface/40 space-y-3">
+    <div className="p-4 rounded-card border border-border bg-surface space-y-3">
       <div className="flex items-center justify-between">
         <div>
           <p className="text-sm font-medium text-text-main">{title}</p>
@@ -135,7 +135,7 @@ export function ChaosProviderOverridesPanel({
         <button
           type="button"
           onClick={onAdd}
-          className="flex items-center gap-1 px-2 py-1 rounded-md text-xs font-semibold bg-primary/10 text-primary hover:bg-primary/20"
+          className="flex items-center gap-1 px-2 py-1 rounded-control text-xs font-medium bg-primary/10 text-primary hover:bg-primary/15 transition-colors"
         >
           <span className="material-symbols-outlined text-[14px]">add</span>
           {addLabel}

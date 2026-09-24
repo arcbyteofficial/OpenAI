@@ -69,24 +69,23 @@ export default function ResultNarrated({
     <Card className="flex flex-col gap-4 p-4">
       {/* Header */}
       <div className="flex items-center gap-2">
-        <span className="material-symbols-outlined text-[20px] text-primary" aria-hidden="true">
+        <span className="material-symbols-outlined text-[18px] text-text-muted" aria-hidden="true">
           translate
         </span>
-        <h3 className="text-sm font-semibold text-text-main">
+        <h3 className="text-sm font-semibold tracking-tight text-text-main">
           {tr("simpleResultPanelTitle", "Translation + Response")}
         </h3>
       </div>
 
       {/* Status area — aria-live for screen-reader announcements (D20) */}
-      <div
-        aria-live="polite"
-        aria-atomic="true"
-        className="flex flex-1 flex-col gap-3"
-      >
+      <div aria-live="polite" aria-atomic="true" className="flex flex-1 flex-col gap-3">
         {/* idle */}
         {result.status === "idle" && (
           <div className="flex flex-col items-center justify-center gap-2 py-8 text-center">
-            <span className="material-symbols-outlined text-[40px] text-text-muted/40" aria-hidden="true">
+            <span
+              className="material-symbols-outlined text-[32px] text-text-subtle"
+              aria-hidden="true"
+            >
               info
             </span>
             <p className="text-sm text-text-muted">
@@ -98,7 +97,10 @@ export default function ResultNarrated({
         {/* translating or sending */}
         {isSpinning && (
           <div className="flex items-center gap-3 py-6">
-            <span className="material-symbols-outlined animate-spin text-[24px] text-primary" aria-hidden="true">
+            <span
+              className="material-symbols-outlined animate-spin text-[20px] text-text-muted"
+              aria-hidden="true"
+            >
               progress_activity
             </span>
             <span className="text-sm text-text-muted">
@@ -135,8 +137,8 @@ export default function ResultNarrated({
 
             {/* Response preview */}
             {result.responsePreview && (
-              <div className="rounded-md border border-black/10 bg-black/5 p-3 dark:border-white/10 dark:bg-white/5">
-                <pre className="overflow-x-auto whitespace-pre-wrap break-words font-mono text-xs text-text-main">
+              <div className="rounded-lg border border-border bg-bg-subtle p-3">
+                <pre className="overflow-x-auto whitespace-pre-wrap break-words font-mono text-[12px] text-text-main">
                   {result.responsePreview.slice(0, 500)}
                 </pre>
               </div>

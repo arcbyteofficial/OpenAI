@@ -59,7 +59,7 @@ export function SkillPreviewPane({
   if (!skillId) {
     return (
       <div
-        className="flex flex-col items-center justify-center h-full min-h-[300px] rounded-xl border border-dashed border-border bg-bg-subtle/30 p-8 text-center"
+        className="flex flex-col items-center justify-center h-full min-h-[300px] rounded-card border border-dashed border-border bg-surface-2 p-8 text-center"
         data-testid="skill-preview-empty"
       >
         <span className="material-symbols-outlined text-[32px] text-text-muted mb-3">article</span>
@@ -70,7 +70,7 @@ export function SkillPreviewPane({
 
   return (
     <div
-      className="flex flex-col rounded-xl border border-border bg-bg h-full"
+      className="flex flex-col rounded-card border border-border bg-surface h-full"
       data-testid="skill-preview-pane"
     >
       {/* Header */}
@@ -83,7 +83,7 @@ export function SkillPreviewPane({
             <button
               onClick={onRefresh}
               disabled={loading}
-              className="flex items-center gap-1 rounded px-2 py-1 text-xs text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
+              className="flex items-center gap-1 rounded-control px-2 py-1 text-xs text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
               aria-label={t("refresh")}
             >
               <span
@@ -96,7 +96,7 @@ export function SkillPreviewPane({
           <button
             onClick={() => void handleCopyRawUrl()}
             disabled={!skillId}
-            className="flex items-center gap-1 rounded px-2 py-1 text-xs text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
+            className="flex items-center gap-1 rounded-control px-2 py-1 text-xs text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
             title={t("copyUrl")}
             aria-label={t("copyUrl")}
           >
@@ -107,7 +107,7 @@ export function SkillPreviewPane({
               href={githubUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="flex items-center gap-1 rounded px-2 py-1 text-xs text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
+              className="flex items-center gap-1 rounded-control px-2 py-1 text-xs text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
               title={t("viewOnGithub")}
               aria-label={t("viewOnGithub")}
             >
@@ -130,7 +130,7 @@ export function SkillPreviewPane({
           </div>
         ) : (
           <div
-            className="flex items-center gap-2 rounded-lg border border-red-300 bg-red-50 dark:bg-red-950/30 p-3 text-xs text-red-700 dark:text-red-400"
+            className="flex items-center gap-2 rounded-lg border border-error/30 bg-error/10 p-3 text-xs text-error"
             data-testid="skill-preview-error"
           >
             <span className="material-symbols-outlined text-[16px]">error</span>

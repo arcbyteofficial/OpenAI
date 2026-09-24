@@ -339,8 +339,8 @@ const ProviderCard = forwardRef<ProviderCardHandle, ProviderCardProps>(function 
         key="codex-service-tier"
         className={`inline-flex items-center gap-0.5 rounded-full px-1.5 py-0 text-[9px] font-semibold uppercase tracking-wide ${
           stats.codexServiceTier === "flex"
-            ? "bg-cyan-500/10 text-cyan-600 dark:text-cyan-400"
-            : "bg-sky-500/10 text-sky-600 dark:text-sky-400"
+            ? "bg-bg-subtle text-text-muted"
+            : "bg-primary/10 text-primary"
         }`}
         title={providerText(t, "codexServiceTierActive", "Codex {tier} service tier is active", {
           tier: codexServiceTierLabel,
@@ -462,7 +462,7 @@ const ProviderCard = forwardRef<ProviderCardHandle, ProviderCardProps>(function 
       >
         <Card
           padding="xs"
-          className={`h-full flex flex-col hover:bg-black/5 dark:hover:bg-white/5 transition-colors cursor-pointer ${
+          className={`h-full flex flex-col hover:bg-bg-subtle transition-colors cursor-pointer ${
             isKimiPartner
               ? // Kimi (Moonshot AI) official-partnership accent — official Kimi blue
                 // (#1783FF) border (2px, clearly legible) + a subtle whole-card tint
@@ -470,13 +470,13 @@ const ProviderCard = forwardRef<ProviderCardHandle, ProviderCardProps>(function 
                 // twMerge) + soft outer glow. Kept identical in light/dark since it
                 // is a raw (non-token) brand hex, not a theme color. Keep the hex in
                 // sync with KIMI_BRAND_COLOR (featuredProviders.ts).
-                "border-2 border-[#1783FF]/70 hover:border-[#1783FF]/90 shadow-[inset_0_0_0_100px_rgba(23,131,255,0.035),0_4px_16px_-4px_rgba(23,131,255,0.45)]"
+                "border-2 border-[#1783FF]/70 hover:border-[#1783FF]/90 shadow-[inset_0_0_0_100px_rgba(23,131,255,0.035)]"
               : isCheaperInferencePartner
                 ? // Cheaper Inference Open Source Friend accent — same construction in
                   // its brand green (#31f889 = rgb(49,248,137)). Keep in sync with
                   // CHEAPERINFERENCE_BRAND_COLOR (featuredProviders.ts).
-                  "border-2 border-[#31f889]/70 hover:border-[#31f889]/90 shadow-[inset_0_0_0_100px_rgba(49,248,137,0.035),0_4px_16px_-4px_rgba(49,248,137,0.45)]"
-                : "hover:border-primary/40"
+                  "border-2 border-[#31f889]/70 hover:border-[#31f889]/90 shadow-[inset_0_0_0_100px_rgba(49,248,137,0.035)]"
+                : "hover:border-border-strong"
           } ${allDisabled ? "opacity-50" : ""} ${provider.deprecated ? "opacity-60" : ""}`}
         >
           <div className="flex flex-col gap-2 h-full">
@@ -509,7 +509,7 @@ const ProviderCard = forwardRef<ProviderCardHandle, ProviderCardProps>(function 
                   <ProviderIcon providerId={provider.id || providerId} size={24} type="color" />
                 )}
               </div>
-              <h3 className="text-sm font-semibold leading-snug flex-1 min-w-0">
+              <h3 className="text-sm font-semibold tracking-tight text-text-main leading-snug flex-1 min-w-0">
                 <span
                   className={`block break-words ${provider.deprecated ? "line-through opacity-60" : ""}`}
                   title={provider.name}
@@ -530,7 +530,7 @@ const ProviderCard = forwardRef<ProviderCardHandle, ProviderCardProps>(function 
                 {provider.subscriptionRisk === true && (
                   <button
                     type="button"
-                    className="material-symbols-outlined text-[16px] leading-none text-amber-500 underline decoration-dotted decoration-1 underline-offset-2 hover:text-amber-400 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60 transition-colors"
+                    className="material-symbols-outlined text-[16px] leading-none text-warning underline decoration-dotted decoration-1 underline-offset-2 hover:text-warning/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60 transition-colors"
                     title={t("riskNotice.tooltip")}
                     aria-label={t("riskNotice.tooltip")}
                     aria-haspopup="dialog"
@@ -592,7 +592,7 @@ const ProviderCard = forwardRef<ProviderCardHandle, ProviderCardProps>(function 
             )}
 
             {/* Row 3 — Footer: connection status + controls (toggle, test) */}
-            <div className="flex items-center justify-between gap-2 mt-auto pt-1.5 border-t border-border/40">
+            <div className="flex items-center justify-between gap-2 mt-auto pt-1.5 border-t border-border">
               <div className="flex items-center gap-1.5 text-xs flex-nowrap min-w-0 overflow-hidden">
                 {allDisabled ? (
                   <Badge variant="default" size="sm">
@@ -650,7 +650,7 @@ const ProviderCard = forwardRef<ProviderCardHandle, ProviderCardProps>(function 
                     type="button"
                     onClick={handleTestClick}
                     title={tp("expandTest")}
-                    className="inline-flex items-center gap-0.5 rounded-md border border-border bg-bg-subtle px-2 py-0.5 text-[11px] text-text-muted hover:text-text-primary hover:border-primary/30 transition-colors"
+                    className="inline-flex items-center gap-0.5 rounded-md border border-border-strong bg-surface px-2 py-0.5 text-[11px] text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
                   >
                     <span className="material-symbols-outlined text-[11px] leading-none">
                       play_arrow
@@ -684,9 +684,9 @@ const ProviderCard = forwardRef<ProviderCardHandle, ProviderCardProps>(function 
           title={providerText(t, "riskNotice.detailsTitle", "Usage caveats")}
           size="sm"
         >
-          <div className="flex items-start gap-3 rounded-lg border border-amber-500/25 bg-amber-500/10 p-4">
+          <div className="flex items-start gap-3 rounded-lg border border-warning/25 bg-warning/10 p-4">
             <span
-              className="material-symbols-outlined mt-0.5 text-[22px] leading-none text-amber-500"
+              className="material-symbols-outlined mt-0.5 text-[20px] leading-none text-warning"
               aria-hidden="true"
             >
               info

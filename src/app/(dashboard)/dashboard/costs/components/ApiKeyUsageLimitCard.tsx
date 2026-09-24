@@ -63,9 +63,9 @@ function formatResetHint(resetAtIso: string | null, t: ReturnType<typeof useTran
 
 function UsageQuotaMetric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-border/20 bg-surface/20 px-4 py-3">
-      <p className="text-xs uppercase tracking-wide text-text-muted font-semibold">{label}</p>
-      <p className="text-lg font-semibold text-text-main mt-1">{value}</p>
+    <div className="rounded-lg border border-border bg-surface-2 px-4 py-3">
+      <p className="text-[13px] text-text-muted">{label}</p>
+      <p className="text-lg font-semibold tabular-nums text-text-main mt-1">{value}</p>
     </div>
   );
 }
@@ -127,14 +127,16 @@ export function ApiKeyUsageLimitCard({
   };
 
   return (
-    <Card className="p-5 border-emerald-500/20">
+    <Card className="p-5">
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-emerald-400 text-lg">paid</span>
-            <h3 className="text-sm font-semibold text-text-main">{t("apiKeyUsdQuota")}</h3>
+            <span className="material-symbols-outlined text-text-muted text-[18px]">paid</span>
+            <h3 className="text-sm font-semibold tracking-tight text-text-main">
+              {t("apiKeyUsdQuota")}
+            </h3>
             {payload?.key.name && (
-              <span className="truncate rounded bg-surface px-2 py-0.5 text-xs text-text-muted">
+              <span className="truncate rounded-md border border-border bg-bg-subtle px-2 py-0.5 font-mono text-[12px] text-text-muted">
                 {payload.key.name}
               </span>
             )}
@@ -147,10 +149,10 @@ export function ApiKeyUsageLimitCard({
           aria-checked={enabled}
           disabled={loading || !payload}
           onClick={() => setEnabled((prev) => !prev)}
-          className={`inline-flex shrink-0 items-center justify-center gap-1.5 rounded-md border px-3 py-2 text-xs font-semibold transition-colors ${
+          className={`inline-flex shrink-0 items-center justify-center gap-1.5 rounded-control border px-3 py-2 text-xs font-medium transition-colors ${
             enabled
-              ? "border-emerald-500/30 bg-emerald-500/15 text-emerald-700 dark:text-emerald-300"
-              : "border-border bg-black/5 text-text-muted dark:bg-white/5"
+              ? "border-primary/30 bg-primary/10 text-primary"
+              : "border-border-strong bg-bg-subtle text-text-muted hover:text-text-main"
           } ${loading || !payload ? "opacity-50" : ""}`}
         >
           <span className="material-symbols-outlined text-[14px]">paid</span>
@@ -167,46 +169,42 @@ export function ApiKeyUsageLimitCard({
           label={t("weeklySpend")}
           value={loading || !status ? "..." : formatter.format(status.weeklySpentUsd)}
         />
-        <div className="rounded-lg border border-border/20 bg-surface/20 px-4 py-3">
-          <label className="text-xs uppercase tracking-wide text-text-muted font-semibold">
-            {t("dailyQuota")}
-          </label>
+        <div className="rounded-lg border border-border bg-surface-2 px-4 py-3">
+          <label className="text-[13px] text-text-muted">{t("dailyQuota")}</label>
           <input
             type="number"
             min={0}
             step="0.01"
             value={dailyLimit}
             onChange={(event) => setDailyLimit(event.target.value)}
-            className="mt-2 w-full rounded-md border border-border bg-background px-2 py-1.5 text-sm text-text-main"
+            className="mt-2 w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 font-mono text-sm tabular-nums text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none transition-colors"
             placeholder="0.00"
           />
         </div>
-        <div className="rounded-lg border border-border/20 bg-surface/20 px-4 py-3">
-          <label className="text-xs uppercase tracking-wide text-text-muted font-semibold">
-            {t("weeklyQuota")}
-          </label>
+        <div className="rounded-lg border border-border bg-surface-2 px-4 py-3">
+          <label className="text-[13px] text-text-muted">{t("weeklyQuota")}</label>
           <input
             type="number"
             min={0}
             step="0.01"
             value={weeklyLimit}
             onChange={(event) => setWeeklyLimit(event.target.value)}
-            className="mt-2 w-full rounded-md border border-border bg-background px-2 py-1.5 text-sm text-text-main"
+            className="mt-2 w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 font-mono text-sm tabular-nums text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none transition-colors"
             placeholder="0.00"
           />
-          <p className="mt-1 text-[10px] text-text-muted">
+          <p className="mt-1 text-[11px] text-text-subtle">
             {formatResetHint(status?.weeklyResetAtIso ?? null, t)}
           </p>
         </div>
       </div>
 
-      {error && <p className="mt-3 text-xs text-red-500">{error}</p>}
+      {error && <p className="mt-3 text-xs text-error">{error}</p>}
       <div className="mt-4 flex justify-end">
         <button
           type="button"
           onClick={handleSave}
           disabled={saving || loading || !payload}
-          className="inline-flex items-center gap-1.5 rounded-md bg-primary px-3 py-2 text-xs font-semibold text-white transition-colors hover:bg-primary/90 disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 rounded-control bg-contrast px-3 py-2 text-xs font-medium text-contrast-fg transition-colors hover:bg-contrast-hover disabled:opacity-50 disabled:cursor-not-allowed"
         >
           <span className="material-symbols-outlined text-[14px]">
             {saving ? "hourglass_empty" : "save"}

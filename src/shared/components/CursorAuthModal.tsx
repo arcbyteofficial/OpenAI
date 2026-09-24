@@ -252,8 +252,8 @@ export default function CursorAuthModal({
 
             {loginPolling && (
               <div className="text-center py-4">
-                <div className="size-12 mx-auto mb-3 rounded-full bg-primary/10 flex items-center justify-center">
-                  <span className="material-symbols-outlined text-2xl text-primary animate-spin">
+                <div className="size-12 mx-auto mb-3 rounded-full bg-bg-subtle flex items-center justify-center">
+                  <span className="material-symbols-outlined text-2xl text-text-muted animate-spin">
                     progress_activity
                   </span>
                 </div>
@@ -275,8 +275,8 @@ export default function CursorAuthModal({
             )}
 
             {error && (
-              <div className="bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border border-red-200 dark:border-red-800">
-                <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+              <div className="bg-error/10 p-3 rounded-lg border border-error/20">
+                <p className="text-sm text-error">{error}</p>
               </div>
             )}
 
@@ -306,16 +306,14 @@ export default function CursorAuthModal({
             )}
 
             {!autoDetecting && autoDetected && (
-              <div className="bg-green-50 dark:bg-green-900/20 p-3 rounded-lg border border-green-200 dark:border-green-800">
-                <p className="text-sm text-green-800 dark:text-green-200">
-                  {t("tokensAutoDetected")}
-                </p>
+              <div className="bg-success/10 p-3 rounded-lg border border-success/20">
+                <p className="text-sm text-success">{t("tokensAutoDetected")}</p>
               </div>
             )}
 
             {!autoDetecting && !autoDetected && (
-              <div className="bg-blue-50 dark:bg-blue-900/20 p-3 rounded-lg border border-blue-200 dark:border-blue-800">
-                <p className="text-sm text-blue-800 dark:text-blue-200">
+              <div className="bg-bg-subtle p-3 rounded-lg border border-border">
+                <p className="text-sm text-text-muted">
                   {dockerHint ? t("dockerImportHint") : t("cursorNotDetected")}
                 </p>
               </div>
@@ -323,14 +321,14 @@ export default function CursorAuthModal({
 
             <div>
               <label className="block text-sm font-medium mb-2">
-                {t("accessToken")} <span className="text-red-500">{t("required")}</span>
+                {t("accessToken")} <span className="text-error">{t("required")}</span>
               </label>
               <textarea
                 value={accessToken}
                 onChange={(e) => setAccessToken(e.target.value)}
                 placeholder={t("accessTokenPlaceholder")}
                 rows={3}
-                className="w-full px-3 py-2 text-sm font-mono border border-border rounded-lg bg-background focus:outline-none focus:border-primary resize-none"
+                className="w-full px-3 py-2 text-[13px] font-mono border border-border-strong rounded-control bg-surface placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] resize-none"
               />
             </div>
 
@@ -343,7 +341,7 @@ export default function CursorAuthModal({
                 onChange={(e) => setRefreshToken(e.target.value)}
                 placeholder={t("refreshTokenPlaceholder")}
                 rows={2}
-                className="w-full px-3 py-2 text-sm font-mono border border-border rounded-lg bg-background focus:outline-none focus:border-primary resize-none"
+                className="w-full px-3 py-2 text-[13px] font-mono border border-border-strong rounded-control bg-surface placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] resize-none"
               />
             </div>
 
@@ -360,8 +358,8 @@ export default function CursorAuthModal({
             </div>
 
             {error && (
-              <div className="bg-red-50 dark:bg-red-900/20 p-3 rounded-lg border border-red-200 dark:border-red-800">
-                <p className="text-sm text-red-600 dark:text-red-400">{error}</p>
+              <div className="bg-error/10 p-3 rounded-lg border border-error/20">
+                <p className="text-sm text-error">{error}</p>
               </div>
             )}
 

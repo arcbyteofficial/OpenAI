@@ -960,7 +960,7 @@ export default function ApiManagerPageClient() {
     // The skeleton cards are aria-hidden, so without this status wrapper the page
     // has no accessible content at all until /api/keys settles (#12066).
     return (
-      <div className="flex flex-col gap-8" role="status" aria-live="polite" aria-busy="true">
+      <div className="flex flex-col gap-6" role="status" aria-live="polite" aria-busy="true">
         <span className="sr-only">{tc("loading")}</span>
         <CardSkeleton />
         <CardSkeleton />
@@ -969,15 +969,15 @@ export default function ApiManagerPageClient() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       {/* Error Banner */}
       {pageError && (
-        <div className="flex items-center gap-3 p-4 bg-red-500/10 border border-red-500/30 rounded-lg">
-          <span className="material-symbols-outlined text-red-500">error</span>
-          <p className="text-sm text-red-700 dark:text-red-300 flex-1">{pageError}</p>
+        <div className="flex items-center gap-3 p-4 bg-error/10 border border-error/20 rounded-lg">
+          <span className="material-symbols-outlined text-[18px] text-error">error</span>
+          <p className="text-sm text-error flex-1">{pageError}</p>
           <button
             onClick={clearPageError}
-            className="text-red-500 hover:text-red-700 transition-colors"
+            className="text-error/70 hover:text-error transition-colors"
           >
             <span className="material-symbols-outlined">close</span>
           </button>
@@ -987,32 +987,34 @@ export default function ApiManagerPageClient() {
       <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex flex-col gap-3">
           <div>
-            <h1 className="text-3xl font-bold text-text-main">{t("keyManagement")}</h1>
-            <p className="mt-1 text-text-muted">{t("keyManagementDesc")}</p>
+            <h1 className="text-2xl font-semibold tracking-tight text-text-main">
+              {t("keyManagement")}
+            </h1>
+            <p className="mt-1 text-sm text-text-muted">{t("keyManagementDesc")}</p>
           </div>
           <div
-            className="flex flex-wrap items-center gap-2 text-sm text-text-secondary"
+            className="flex flex-wrap items-center gap-2 text-[13px] text-text-muted"
             aria-label={t("requestFlowAria")}
           >
-            <span className="rounded-control border border-border bg-surface px-3 py-1.5 font-medium">
+            <span className="rounded-control border border-border bg-surface px-3 py-1.5 font-medium text-text-main">
               {t("requestFlowYourApp")}
             </span>
             <span
-              className="material-symbols-outlined text-base text-text-muted"
+              className="material-symbols-outlined text-base text-text-subtle"
               aria-hidden="true"
             >
               arrow_forward
             </span>
-            <span className="rounded-control border border-border bg-surface px-3 py-1.5 font-medium">
+            <span className="rounded-control border border-border bg-surface px-3 py-1.5 font-medium text-text-main">
               {t("requestFlowApiKey")}
             </span>
             <span
-              className="material-symbols-outlined text-base text-text-muted"
+              className="material-symbols-outlined text-base text-text-subtle"
               aria-hidden="true"
             >
               arrow_forward
             </span>
-            <span className="rounded-control border border-border bg-surface px-3 py-1.5 font-medium">
+            <span className="rounded-control border border-border bg-surface px-3 py-1.5 font-medium text-text-main">
               {t("requestFlowOmniRoute")}
             </span>
           </div>
@@ -1043,19 +1045,19 @@ export default function ApiManagerPageClient() {
       <Card>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="flex items-center justify-center size-10 rounded-lg bg-amber-500/10 shrink-0">
-              <span className="material-symbols-outlined text-xl text-amber-500">vpn_key</span>
+            <div className="flex items-center justify-center size-10 rounded-lg border border-border bg-bg-subtle shrink-0">
+              <span className="material-symbols-outlined text-[18px] text-text-muted">vpn_key</span>
             </div>
             <div>
-              <h3 className="font-semibold">
+              <h3 className="text-sm font-semibold tracking-tight text-text-main">
                 {t("registeredKeys")}
                 {isFiltered && (
-                  <span className="ml-1.5 text-sm font-normal text-text-muted">
+                  <span className="ml-1.5 text-[13px] font-normal text-text-muted tabular-nums">
                     ({t("shownOf", { shown: filteredKeys.length, total: keys.length })})
                   </span>
                 )}
                 {!isFiltered && (
-                  <span className="ml-1.5 text-sm font-normal text-text-muted">
+                  <span className="ml-1.5 text-[13px] font-normal text-text-muted tabular-nums">
                     ({keys.length})
                   </span>
                 )}
@@ -1083,9 +1085,9 @@ export default function ApiManagerPageClient() {
         <p className="text-sm text-text-muted mb-4">{t("keysSecurityNote")}</p>
 
         {keys.length === 0 ? (
-          <div className="text-center py-12 border border-dashed border-border rounded-lg">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
-              <span className="material-symbols-outlined text-[32px]">vpn_key</span>
+          <div className="text-center py-12 border border-dashed border-border-strong rounded-lg">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-border bg-bg-subtle text-text-muted mb-4">
+              <span className="material-symbols-outlined text-[28px]">vpn_key</span>
             </div>
             <p className="text-text-main font-medium mb-2">{t("noKeys")}</p>
             <p className="text-sm text-text-muted mb-4">{t("noKeysDesc")}</p>
@@ -1101,9 +1103,9 @@ export default function ApiManagerPageClient() {
             </Button>
           </div>
         ) : filteredKeys.length === 0 ? (
-          <div className="text-center py-12 border border-dashed border-border rounded-lg">
-            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 text-primary mb-4">
-              <span className="material-symbols-outlined text-[32px]">search_off</span>
+          <div className="text-center py-12 border border-dashed border-border-strong rounded-lg">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-full border border-border bg-bg-subtle text-text-muted mb-4">
+              <span className="material-symbols-outlined text-[28px]">search_off</span>
             </div>
             <p className="text-text-main font-medium mb-2">{t("emptyFilterTitle")}</p>
             <Button onClick={handleClearFilters}>{t("emptyFilterClear")}</Button>
@@ -1151,27 +1153,30 @@ export default function ApiManagerPageClient() {
               return (
                 <div
                   key={key.id}
-                  className="grid grid-cols-12 gap-4 px-4 py-3 border-b border-black/[0.03] dark:border-white/[0.03] last:border-b-0 hover:bg-surface/30 transition-colors group min-w-[760px]"
+                  className="grid grid-cols-12 gap-4 px-4 py-3 border-b border-border last:border-b-0 hover:bg-bg-subtle transition-colors group min-w-[760px]"
                 >
                   <div className="col-span-2 flex items-center gap-2">
                     <span
-                      className={`material-symbols-outlined text-sm ${isRestricted ? "text-amber-500" : "text-emerald-500"}`}
+                      className={`material-symbols-outlined text-sm ${isRestricted ? "text-warning" : "text-success"}`}
                     >
                       {isRestricted ? "lock" : "lock_open"}
                     </span>
-                    <span className="text-sm font-medium truncate" title={key.name}>
+                    <span
+                      className="text-[13px] font-medium text-text-main truncate"
+                      title={key.name}
+                    >
                       {key.name}
                     </span>
                   </div>
                   <div className="col-span-3 flex items-center gap-1.5">
-                    <code className="text-sm text-text-muted font-mono truncate">
+                    <code className="text-[12px] text-text-muted font-mono truncate">
                       {visibleKeys.has(key.id) ? (revealedKeys.get(key.id) ?? key.key) : key.key}
                     </code>
                     {allowKeyReveal ? (
                       <>
                         <button
                           onClick={() => handleToggleKeyVisibility(key.id)}
-                          className="p-1 text-text-muted/60 hover:text-primary transition-colors shrink-0"
+                          className="p-1 text-text-subtle hover:text-text-main transition-colors shrink-0"
                           title={visibleKeys.has(key.id) ? t("hideKey") : t("showKey")}
                           aria-label={visibleKeys.has(key.id) ? t("hideKey") : t("showKey")}
                           aria-pressed={visibleKeys.has(key.id)}
@@ -1182,7 +1187,7 @@ export default function ApiManagerPageClient() {
                         </button>
                         <button
                           onClick={() => handleCopyExistingKey(key.id)}
-                          className="p-1 text-text-muted/60 hover:text-primary transition-colors shrink-0"
+                          className="p-1 text-text-subtle hover:text-text-main transition-colors shrink-0"
                           title={tc("copy")}
                           aria-label={tc("copy")}
                         >
@@ -1193,7 +1198,7 @@ export default function ApiManagerPageClient() {
                       </>
                     ) : (
                       <span
-                        className="p-1 text-text-muted/40 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all shrink-0 cursor-help"
+                        className="p-1 text-text-subtle opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity shrink-0 cursor-help"
                         title={t("keyOnlyAvailableAtCreation")}
                       >
                         <span className="material-symbols-outlined text-[14px]">lock</span>
@@ -1204,7 +1209,7 @@ export default function ApiManagerPageClient() {
                     <div className="flex flex-col items-start gap-1">
                       {/* QUOTA differentiation chips — prepended before existing badges */}
                       {keyIsQuota && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-violet-500/10 text-violet-600 dark:text-violet-400 text-[11px] font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-primary/10 text-primary text-[11px] font-medium">
                           {t("quotaModeOnly")}
                         </span>
                       )}
@@ -1212,13 +1217,13 @@ export default function ApiManagerPageClient() {
                         visibleGroups.map((groupName) => (
                           <span
                             key={groupName}
-                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-600 dark:text-sky-400 text-[11px] font-medium truncate max-w-full"
+                            className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-bg-subtle text-text-muted text-[11px] font-medium truncate max-w-full"
                           >
                             {groupName}
                           </span>
                         ))}
                       {keyIsQuota && extraGroupCount > 0 && (
-                        <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-600 dark:text-sky-400 text-[11px] font-medium">
+                        <span className="inline-flex items-center px-2 py-0.5 rounded-md bg-bg-subtle text-text-muted text-[11px] font-medium tabular-nums">
                           +{extraGroupCount}
                         </span>
                       )}
@@ -1226,7 +1231,7 @@ export default function ApiManagerPageClient() {
                       {isModelRestricted ? (
                         <button
                           onClick={() => handleOpenPermissions(key)}
-                          className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-medium hover:bg-amber-500/20 transition-colors"
+                          className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-warning/10 text-warning text-xs font-medium hover:bg-warning/15 transition-colors"
                         >
                           <span className="material-symbols-outlined text-[14px]">lock</span>
                           {formatProviderModelPermissionSummary(providerCount, modelCount, t, tc)}
@@ -1234,7 +1239,7 @@ export default function ApiManagerPageClient() {
                       ) : (
                         <button
                           onClick={() => handleOpenPermissions(key)}
-                          className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-green-500/10 text-green-600 dark:text-green-400 text-xs font-medium hover:bg-green-500/20 transition-colors"
+                          className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-success/10 text-success text-xs font-medium hover:bg-success/15 transition-colors"
                         >
                           <span className="material-symbols-outlined text-[14px]">lock_open</span>
                           {t("allModels")}
@@ -1243,7 +1248,7 @@ export default function ApiManagerPageClient() {
                       {hasConnectionRestrictions && (
                         <button
                           onClick={() => handleOpenPermissions(key)}
-                          className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-blue-500/10 text-blue-600 dark:text-blue-400 text-xs font-medium hover:bg-blue-500/20 transition-colors"
+                          className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-bg-subtle text-text-muted text-xs font-medium hover:bg-border hover:text-text-main transition-colors"
                         >
                           <span className="material-symbols-outlined text-[14px]">cable</span>
                           {key.allowedConnections!.length} conn
@@ -1252,7 +1257,7 @@ export default function ApiManagerPageClient() {
                       {hasExclusiveLeaseScope && (
                         <button
                           onClick={() => handleOpenPermissions(key)}
-                          className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-purple-500/10 text-purple-600 dark:text-purple-400 text-xs font-medium hover:bg-purple-500/20 transition-colors"
+                          className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-bg-subtle text-text-muted text-xs font-medium hover:bg-border hover:text-text-main transition-colors"
                         >
                           <span className="material-symbols-outlined text-[14px]">
                             key_vertical
@@ -1263,14 +1268,14 @@ export default function ApiManagerPageClient() {
                       {hasComboRestrictions && (
                         <button
                           onClick={() => handleOpenPermissions(key)}
-                          className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-teal-500/10 text-teal-600 dark:text-teal-400 text-xs font-medium hover:bg-teal-500/20 transition-colors"
+                          className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-bg-subtle text-text-muted text-xs font-medium hover:bg-border hover:text-text-main transition-colors"
                         >
                           <span className="material-symbols-outlined text-[14px]">hub</span>
                           {key.allowedCombos!.length} combos
                         </button>
                       )}
                       {noLogEnabled && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-violet-500/10 text-violet-600 dark:text-violet-400 text-[11px] font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-bg-subtle text-text-muted text-[11px] font-medium">
                           <span className="material-symbols-outlined text-[12px]">
                             visibility_off
                           </span>
@@ -1278,7 +1283,7 @@ export default function ApiManagerPageClient() {
                         </span>
                       )}
                       {key.autoResolve && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-600 dark:text-cyan-400 text-[11px] font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-bg-subtle text-text-muted text-[11px] font-medium">
                           <span className="material-symbols-outlined text-[12px]">
                             auto_fix_high
                           </span>
@@ -1286,38 +1291,38 @@ export default function ApiManagerPageClient() {
                         </span>
                       )}
                       {hasJsonStreamDefault && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-sky-500/10 text-sky-600 dark:text-sky-400 text-[11px] font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-bg-subtle text-text-muted text-[11px] font-medium">
                           <span className="material-symbols-outlined text-[12px]">data_object</span>
                           {t("streamDefaultBadge")}
                         </span>
                       )}
                       {hasLocalUsageCommand && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-slate-500/10 text-slate-600 dark:text-slate-300 text-[11px] font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-bg-subtle text-text-muted text-[11px] font-medium">
                           <span className="material-symbols-outlined text-[12px]">terminal</span>
                           {t("localUsageCommandBadge")}
                         </span>
                       )}
                       {key.usageLimitEnabled === true && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-emerald-500/10 text-emerald-700 dark:text-emerald-300 text-[11px] font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-bg-subtle text-text-muted text-[11px] font-medium">
                           <span className="material-symbols-outlined text-[12px]">paid</span>
                           USD quota
                         </span>
                       )}
                       {hasProviderQuotaBypass && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-amber-500/10 text-amber-700 dark:text-amber-300 text-[11px] font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-warning/10 text-warning text-[11px] font-medium">
                           <span className="material-symbols-outlined text-[12px]">alt_route</span>
                           Bypass quota policy
                         </span>
                       )}
                       {hasSessionLimit && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-indigo-500/10 text-indigo-600 dark:text-indigo-400 text-[11px] font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-bg-subtle text-text-muted text-[11px] font-medium tabular-nums">
                           <span className="material-symbols-outlined text-[12px]">group</span>
                           Sessions: {activeSessions}/{maxSessions}
                         </span>
                       )}
                       {deviceCount > 0 && (
                         <span
-                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 text-[11px] font-medium"
+                          className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-bg-subtle text-text-muted text-[11px] font-medium"
                           title={t("devicesTooltip", { count: deviceCount })}
                         >
                           <span className="material-symbols-outlined text-[12px]">devices</span>
@@ -1325,13 +1330,13 @@ export default function ApiManagerPageClient() {
                         </span>
                       )}
                       {hasThrottle && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-yellow-500/10 text-yellow-700 dark:text-yellow-300 text-[11px] font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-bg-subtle text-text-muted text-[11px] font-medium tabular-nums">
                           <span className="material-symbols-outlined text-[12px]">speed</span>+
                           {throttleDelayMs}ms
                         </span>
                       )}
                       {hasManageScope && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-rose-500/10 text-rose-600 dark:text-rose-400 text-[11px] font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-bg-subtle text-text-main text-[11px] font-medium">
                           <span className="material-symbols-outlined text-[12px]">
                             admin_panel_settings
                           </span>
@@ -1339,25 +1344,25 @@ export default function ApiManagerPageClient() {
                         </span>
                       )}
                       {!keyIsActive && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-red-500/10 text-red-600 dark:text-red-400 text-[11px] font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-error/10 text-error text-[11px] font-medium">
                           <span className="material-symbols-outlined text-[12px]">block</span>
                           {t("disabled")}
                         </span>
                       )}
                       {hasSchedule && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-orange-500/10 text-orange-600 dark:text-orange-400 text-[11px] font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-bg-subtle text-text-muted text-[11px] font-medium">
                           <span className="material-symbols-outlined text-[12px]">schedule</span>
                           {t("scheduleActive")}
                         </span>
                       )}
                       {key.isBanned && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-red-600/10 text-red-700 dark:text-red-400 text-[11px] font-bold animate-pulse">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-error/10 text-error text-[11px] font-semibold">
                           <span className="material-symbols-outlined text-[12px]">gavel</span>
                           BANNED
                         </span>
                       )}
                       {key.expiresAt && new Date(key.expiresAt).getTime() < Date.now() && (
-                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-gray-500/10 text-gray-600 dark:text-gray-400 text-[11px] font-medium">
+                        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-md bg-bg-subtle text-text-muted text-[11px] font-medium">
                           <span className="material-symbols-outlined text-[12px]">event_busy</span>
                           EXPIRED
                         </span>
@@ -1365,12 +1370,12 @@ export default function ApiManagerPageClient() {
                     </div>
                   </div>
                   <div className="col-span-2 flex flex-col justify-center">
-                    <span className="text-sm font-medium tabular-nums">
+                    <span className="text-[13px] font-medium text-text-main tabular-nums">
                       {stats?.totalRequests ?? 0}{" "}
                       <span className="text-text-muted font-normal text-xs">{t("reqs")}</span>
                     </span>
                     {(stats?.totalRequests ?? 0) > 0 && (
-                      <span className="text-[10px] text-emerald-600 dark:text-emerald-400 tabular-nums">
+                      <span className="text-[10px] text-text-muted font-mono tabular-nums">
                         {formatUsdCost(stats?.totalCost ?? 0, locale)}
                       </span>
                     )}
@@ -1379,16 +1384,16 @@ export default function ApiManagerPageClient() {
                         {t("lastUsedOn", { date: new Date(stats.lastUsed).toLocaleDateString() })}
                       </span>
                     ) : (
-                      <span className="text-[10px] text-text-muted italic">{t("neverUsed")}</span>
+                      <span className="text-[10px] text-text-subtle">{t("neverUsed")}</span>
                     )}
                   </div>
-                  <div className="col-span-1 flex items-center text-sm text-text-muted">
+                  <div className="col-span-1 flex items-center text-[13px] text-text-muted tabular-nums">
                     {new Date(key.createdAt).toLocaleDateString()}
                   </div>
                   <div className="col-span-2 flex items-center justify-end gap-1">
                     <a
                       href={`/dashboard/costs?range=all&apiKeyIds=${encodeURIComponent(key.id)}&groupBy=model`}
-                      className="p-2 hover:bg-emerald-500/10 rounded text-text-muted hover:text-emerald-500 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all"
+                      className="p-2 hover:bg-bg-subtle rounded-control text-text-muted hover:text-text-main opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition"
                       title={`View costs for ${key.name}`}
                       aria-label={`View costs for ${key.name}`}
                     >
@@ -1396,21 +1401,21 @@ export default function ApiManagerPageClient() {
                     </a>
                     <button
                       onClick={() => handleRegenerateKey(key.id)}
-                      className="p-2 hover:bg-amber-500/10 rounded text-text-muted hover:text-amber-500 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all"
+                      className="p-2 hover:bg-bg-subtle rounded-control text-text-muted hover:text-text-main opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition"
                       title={t("regenerateKey")}
                     >
                       <span className="material-symbols-outlined text-[18px]">refresh</span>
                     </button>
                     <button
                       onClick={() => handleOpenPermissions(key)}
-                      className="p-2 hover:bg-primary/10 rounded text-text-muted hover:text-primary opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all"
+                      className="p-2 hover:bg-bg-subtle rounded-control text-text-muted hover:text-text-main opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition"
                       title={t("editPermissions")}
                     >
                       <span className="material-symbols-outlined text-[18px]">tune</span>
                     </button>
                     <button
                       onClick={() => handleDeleteKey(key.id)}
-                      className="p-2 hover:bg-red-500/10 rounded text-red-500 opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition-all"
+                      className="p-2 hover:bg-error/10 rounded-control text-text-muted hover:text-error opacity-100 sm:opacity-0 sm:group-hover:opacity-100 transition"
                       title={t("deleteKey")}
                     >
                       <span className="material-symbols-outlined text-[18px]">delete</span>
@@ -1421,7 +1426,7 @@ export default function ApiManagerPageClient() {
             };
 
             const tableHeader = (
-              <div className="grid grid-cols-12 gap-4 px-4 py-3 bg-surface/50 border-b border-border text-xs font-semibold text-text-muted uppercase tracking-wider min-w-[760px]">
+              <div className="grid grid-cols-12 gap-4 px-4 py-2.5 bg-bg-subtle border-b border-border text-xs font-medium text-text-muted min-w-[760px]">
                 <div className="col-span-2">{t("name")}</div>
                 <div className="col-span-3">{t("key")}</div>
                 <div className="col-span-2">{t("permissions")}</div>
@@ -1443,7 +1448,7 @@ export default function ApiManagerPageClient() {
                       <span className="text-sm font-medium text-text-main">
                         {t("normalKeysSection")}
                       </span>
-                      <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full bg-surface/80 border border-border text-[11px] font-semibold text-text-muted">
+                      <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full bg-bg-subtle border border-border text-[11px] font-medium text-text-muted tabular-nums">
                         {normalKeys.length}
                       </span>
                     </div>
@@ -1459,16 +1464,16 @@ export default function ApiManagerPageClient() {
                   <div>
                     {/* Quota keys section heading */}
                     <div className="flex items-center gap-2 mb-2">
-                      <span className="material-symbols-outlined text-base text-violet-500">
+                      <span className="material-symbols-outlined text-base text-text-muted">
                         toll
                       </span>
                       <span className="text-sm font-medium text-text-main">
                         {t("quotaKeysSection")}
                       </span>
-                      <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full bg-surface/80 border border-border text-[11px] font-semibold text-text-muted">
+                      <span className="inline-flex items-center justify-center px-2 py-0.5 rounded-full bg-bg-subtle border border-border text-[11px] font-medium text-text-muted tabular-nums">
                         {quotaKeys.length}
                       </span>
-                      <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-violet-500/10 text-violet-600 dark:text-violet-400 text-[11px] font-semibold">
+                      <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-primary/10 text-primary text-[11px] font-medium">
                         {t("quotaPill")}
                       </span>
                     </div>
@@ -1521,7 +1526,7 @@ export default function ApiManagerPageClient() {
             />
             <p className="text-xs text-text-muted mt-1.5">{t("keyNameDesc")}</p>
           </div>
-          <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface/40">
+          <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface-2">
             <div className="flex flex-col gap-1">
               <p className="text-sm font-medium text-text-main">{t("managementAccess")}</p>
               <p className="text-xs text-text-muted">{t("managementAccessDesc")}</p>
@@ -1531,17 +1536,17 @@ export default function ApiManagerPageClient() {
               role="switch"
               aria-checked={newKeyManageEnabled}
               onClick={() => setNewKeyManageEnabled((prev) => !prev)}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors shrink-0 ${
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors shrink-0 ${
                 newKeyManageEnabled
-                  ? "bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/30"
-                  : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+                  ? "bg-warning/10 text-warning border border-warning/20"
+                  : "bg-bg-subtle text-text-muted border border-border"
               }`}
             >
               <span className="material-symbols-outlined text-[14px]">admin_panel_settings</span>
               {newKeyManageEnabled ? tc("enabled") : tc("disabled")}
             </button>
           </div>
-          <div className="flex flex-col gap-3 p-3 rounded-lg border border-border bg-surface/40">
+          <div className="flex flex-col gap-3 p-3 rounded-lg border border-border bg-surface-2">
             <div className="flex flex-col gap-1">
               <p className="text-sm font-medium text-text-main">{t("selfServiceVisibility")}</p>
               <p className="text-xs text-text-muted">{t("selfServiceVisibilityDesc")}</p>
@@ -1561,10 +1566,10 @@ export default function ApiManagerPageClient() {
                     return !prev;
                   })
                 }
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors shrink-0 ${
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors shrink-0 ${
                   newKeySelfUsageEnabled
-                    ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30"
-                    : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+                    ? "bg-primary/10 text-primary border border-primary/20"
+                    : "bg-bg-subtle text-text-muted border border-border"
                 }`}
               >
                 <span className="material-symbols-outlined text-[14px]">query_stats</span>
@@ -1582,10 +1587,10 @@ export default function ApiManagerPageClient() {
                 aria-checked={newKeyAccountQuotaEnabled}
                 disabled={!newKeySelfUsageEnabled}
                 onClick={() => setNewKeyAccountQuotaEnabled((prev) => !prev)}
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors shrink-0 ${
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors shrink-0 ${
                   newKeyAccountQuotaEnabled
-                    ? "bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30"
-                    : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+                    ? "bg-primary/10 text-primary border border-primary/20"
+                    : "bg-bg-subtle text-text-muted border border-border"
                 } ${!newKeySelfUsageEnabled ? "opacity-50 cursor-not-allowed" : ""}`}
               >
                 <span className="material-symbols-outlined text-[14px]">account_balance</span>
@@ -1602,10 +1607,10 @@ export default function ApiManagerPageClient() {
                 role="switch"
                 aria-checked={newKeyAllowUsageCommand}
                 onClick={() => setNewKeyAllowUsageCommand((prev) => !prev)}
-                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors shrink-0 ${
+                className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors shrink-0 ${
                   newKeyAllowUsageCommand
-                    ? "bg-sky-500/15 text-sky-700 dark:text-sky-300 border border-sky-500/30"
-                    : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+                    ? "bg-primary/10 text-primary border border-primary/20"
+                    : "bg-bg-subtle text-text-muted border border-border"
                 }`}
               >
                 <span className="material-symbols-outlined text-[14px]">terminal</span>
@@ -1614,9 +1619,9 @@ export default function ApiManagerPageClient() {
             </div>
           </div>
           {createError && (
-            <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/30">
-              <span className="material-symbols-outlined text-red-500 text-sm">error</span>
-              <p className="text-sm text-red-700 dark:text-red-300 flex-1">{createError}</p>
+            <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-error/10 border border-error/20">
+              <span className="material-symbols-outlined text-error text-sm">error</span>
+              <p className="text-sm text-error flex-1">{createError}</p>
             </div>
           )}
           <div className="flex gap-2">
@@ -1651,21 +1656,19 @@ export default function ApiManagerPageClient() {
       {/* Created Key Modal */}
       <Modal isOpen={!!createdKey} title={t("keyCreated")} onClose={() => setCreatedKey(null)}>
         <div className="flex flex-col gap-4">
-          <div className="bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800 rounded-lg p-4">
+          <div className="bg-success/10 border border-success/20 rounded-lg p-4">
             <div className="flex items-start gap-3">
-              <span className="material-symbols-outlined text-green-600 dark:text-green-400">
+              <span className="material-symbols-outlined text-[18px] text-success">
                 check_circle
               </span>
               <div>
-                <p className="text-sm text-green-800 dark:text-green-200 font-medium mb-1">
-                  {t("keyCreatedSuccess")}
-                </p>
-                <p className="text-sm text-green-700 dark:text-green-300">{t("keyCreatedNote")}</p>
+                <p className="text-sm text-success font-medium mb-1">{t("keyCreatedSuccess")}</p>
+                <p className="text-sm text-text-muted">{t("keyCreatedNote")}</p>
               </div>
             </div>
           </div>
           <div className="flex gap-2">
-            <Input value={createdKey || ""} readOnly className="flex-1 font-mono text-sm" />
+            <Input value={createdKey || ""} readOnly className="flex-1 font-mono text-[13px]" />
             <Button
               variant="secondary"
               icon={copied === "created_key" ? "check" : "content_copy"}
@@ -2160,7 +2163,7 @@ const PermissionsModal = memo(function PermissionsModal({
     >
       <div className="flex flex-col gap-4">
         {/* Key Name */}
-        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex flex-col gap-1">
             <p className="text-sm font-medium text-text-main">{t("keyName")}</p>
             <p className="text-xs text-text-muted">{t("keyNameDesc")}</p>
@@ -2181,22 +2184,22 @@ const PermissionsModal = memo(function PermissionsModal({
 
         {/* Inline save error */}
         {saveError && (
-          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/30">
-            <span className="material-symbols-outlined text-red-500 text-sm">error</span>
-            <p className="text-sm text-red-700 dark:text-red-300 flex-1">{saveError}</p>
+          <div className="flex items-center gap-2 px-3 py-2 rounded-lg bg-error/10 border border-error/20">
+            <span className="material-symbols-outlined text-error text-sm">error</span>
+            <p className="text-sm text-error flex-1">{saveError}</p>
           </div>
         )}
 
         {apiKey?.id && <RoutingEntryLink apiKeyId={apiKey.id} />}
 
         {/* Access Mode Toggle */}
-        <div className="flex gap-2 p-1 bg-surface rounded-lg">
+        <div className="flex gap-2 p-1 bg-bg-subtle rounded-lg">
           <button
             onClick={handleSelectAll}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all ${
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
               allowAll
-                ? "bg-primary text-white"
-                : "text-text-muted hover:bg-black/5 dark:hover:bg-white/5"
+                ? "bg-surface text-text-main shadow-sm"
+                : "text-text-muted hover:text-text-main"
             }`}
           >
             <span className="material-symbols-outlined text-[18px]">lock_open</span>
@@ -2204,10 +2207,10 @@ const PermissionsModal = memo(function PermissionsModal({
           </button>
           <button
             onClick={handleRestrictMode}
-            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-all ${
+            className={`flex-1 flex items-center justify-center gap-2 px-3 py-2 rounded-md text-sm font-medium transition-colors ${
               !allowAll
-                ? "bg-primary text-white"
-                : "text-text-muted hover:bg-black/5 dark:hover:bg-white/5"
+                ? "bg-surface text-text-main shadow-sm"
+                : "text-text-muted hover:text-text-main"
             }`}
           >
             <span className="material-symbols-outlined text-[18px]">lock</span>
@@ -2219,22 +2222,18 @@ const PermissionsModal = memo(function PermissionsModal({
         <div
           className={`flex items-start gap-2 p-3 rounded-lg ${
             allowAll
-              ? "bg-green-500/10 border border-green-500/30"
-              : "bg-amber-500/10 border border-amber-500/30"
+              ? "bg-success/10 border border-success/20"
+              : "bg-warning/10 border border-warning/20"
           }`}
         >
           <span
             className={`material-symbols-outlined text-[18px] ${
-              allowAll ? "text-green-500" : "text-amber-500"
+              allowAll ? "text-success" : "text-warning"
             }`}
           >
             {allowAll ? "info" : "warning"}
           </span>
-          <p
-            className={`text-xs ${
-              allowAll ? "text-green-700 dark:text-green-300" : "text-amber-700 dark:text-amber-300"
-            }`}
-          >
+          <p className={`text-xs ${allowAll ? "text-success" : "text-warning"}`}>
             {allowAll
               ? t("allowAllDesc")
               : !modelsLoaded
@@ -2248,7 +2247,7 @@ const PermissionsModal = memo(function PermissionsModal({
         </div>
 
         {/* Key Active Toggle */}
-        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex flex-col gap-1">
             <p className="text-sm font-medium text-text-main">{t("keyActive")}</p>
             <p className="text-xs text-text-muted">{t("keyActiveDesc")}</p>
@@ -2258,10 +2257,10 @@ const PermissionsModal = memo(function PermissionsModal({
             role="switch"
             aria-checked={keyIsActive}
             onClick={() => setKeyIsActive((prev) => !prev)}
-            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors ${
               keyIsActive
-                ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30"
-                : "bg-red-500/15 text-red-700 dark:text-red-300 border border-red-500/30"
+                ? "bg-success/10 text-success border border-success/20"
+                : "bg-error/10 text-error border border-error/20"
             }`}
           >
             <span className="material-symbols-outlined text-[14px]">
@@ -2272,7 +2271,7 @@ const PermissionsModal = memo(function PermissionsModal({
         </div>
 
         {/* Max Sessions Limit (T08) */}
-        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex flex-col gap-1">
             <p className="text-sm font-medium text-text-main">{t("maxActiveSessions")}</p>
             <p className="text-xs text-text-muted">{t("maxActiveSessionsDescription")}</p>
@@ -2292,7 +2291,7 @@ const PermissionsModal = memo(function PermissionsModal({
         </div>
 
         {/* Soft Throttle */}
-        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex flex-col gap-1">
             <p className="text-sm font-medium text-text-main">{t("throttleDelay")}</p>
             <p className="text-xs text-text-muted">{t("throttleDelayDescription")}</p>
@@ -2316,7 +2315,7 @@ const PermissionsModal = memo(function PermissionsModal({
         </div>
 
         {/* Custom Rate Limits */}
-        <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex items-start justify-between gap-3">
             <div className="flex flex-col gap-1">
               <p className="text-sm font-medium text-text-main">
@@ -2327,7 +2326,7 @@ const PermissionsModal = memo(function PermissionsModal({
             <button
               type="button"
               onClick={() => setRateLimits((prev) => [...prev, { limit: 100, window: 60 }])}
-              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold bg-primary/10 text-primary hover:bg-primary/20 transition-colors shrink-0"
+              className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium bg-bg-subtle text-text-main hover:bg-border transition-colors shrink-0"
             >
               <span className="material-symbols-outlined text-[14px]">add</span>
               Add Limit
@@ -2372,7 +2371,7 @@ const PermissionsModal = memo(function PermissionsModal({
                   <button
                     type="button"
                     onClick={() => setRateLimits((prev) => prev.filter((_, i) => i !== index))}
-                    className="p-2 text-red-500 hover:bg-red-500/10 rounded transition-colors shrink-0"
+                    className="p-2 text-text-muted hover:text-error hover:bg-error/10 rounded-control transition-colors shrink-0"
                     title={t("apiManagerRemoveLimitTitle")}
                   >
                     <span className="material-symbols-outlined text-[18px]">delete</span>
@@ -2384,7 +2383,7 @@ const PermissionsModal = memo(function PermissionsModal({
         </div>
 
         {/* Access Schedule */}
-        <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex items-start justify-between gap-3">
             <div className="flex flex-col gap-1">
               <p className="text-sm font-medium text-text-main">{t("accessSchedule")}</p>
@@ -2395,10 +2394,10 @@ const PermissionsModal = memo(function PermissionsModal({
               role="switch"
               aria-checked={scheduleEnabled}
               onClick={() => setScheduleEnabled((prev) => !prev)}
-              className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors shrink-0 ${
+              className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors shrink-0 ${
                 scheduleEnabled
-                  ? "bg-orange-500/15 text-orange-700 dark:text-orange-300 border border-orange-500/30"
-                  : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+                  ? "bg-primary/10 text-primary border border-primary/20"
+                  : "bg-bg-subtle text-text-muted border border-border"
               }`}
             >
               <span className="material-symbols-outlined text-[14px]">schedule</span>
@@ -2414,7 +2413,7 @@ const PermissionsModal = memo(function PermissionsModal({
                     type="time"
                     value={scheduleFrom}
                     onChange={(e) => setScheduleFrom(e.target.value)}
-                    className="w-full px-2 py-1.5 text-sm border border-border rounded-md bg-background text-text-main"
+                    className="w-full px-2 py-1.5 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-primary"
                   />
                 </div>
                 <div>
@@ -2423,7 +2422,7 @@ const PermissionsModal = memo(function PermissionsModal({
                     type="time"
                     value={scheduleUntil}
                     onChange={(e) => setScheduleUntil(e.target.value)}
-                    className="w-full px-2 py-1.5 text-sm border border-border rounded-md bg-background text-text-main"
+                    className="w-full px-2 py-1.5 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-primary"
                   />
                 </div>
               </div>
@@ -2453,10 +2452,10 @@ const PermissionsModal = memo(function PermissionsModal({
                               : [...prev, dayIdx].sort((a, b) => a - b)
                           )
                         }
-                        className={`px-2 py-1 text-[11px] font-medium rounded transition-all ${
+                        className={`px-2 py-1 text-[11px] font-medium rounded-md transition-colors ${
                           selected
-                            ? "bg-primary text-white"
-                            : "bg-surface border border-border text-text-muted hover:border-primary/50"
+                            ? "bg-contrast text-contrast-fg"
+                            : "bg-surface border border-border text-text-muted hover:border-border-strong hover:text-text-main"
                         }`}
                       >
                         {label}
@@ -2474,7 +2473,7 @@ const PermissionsModal = memo(function PermissionsModal({
                   value={scheduleTz}
                   onChange={(e) => setScheduleTz(e.target.value)}
                   placeholder={t("apiManagerTimezonePlaceholder")}
-                  className="w-full px-2 py-1.5 text-sm border border-border rounded-md bg-background text-text-main font-mono"
+                  className="w-full px-2 py-1.5 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-primary font-mono"
                 />
                 <p className="text-[10px] text-text-muted mt-1">{t("scheduleTimezoneHint")}</p>
               </div>
@@ -2483,7 +2482,7 @@ const PermissionsModal = memo(function PermissionsModal({
         </div>
 
         {/* Privacy Toggle */}
-        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex flex-col gap-1">
             <p className="text-sm font-medium text-text-main">{t("noLogPayloadPrivacy")}</p>
             <p className="text-xs text-text-muted">
@@ -2495,10 +2494,10 @@ const PermissionsModal = memo(function PermissionsModal({
             role="switch"
             aria-checked={noLogEnabled}
             onClick={() => setNoLogEnabled((prev) => !prev)}
-            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors ${
               noLogEnabled
-                ? "bg-violet-500/15 text-violet-700 dark:text-violet-300 border border-violet-500/30"
-                : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+                ? "bg-primary/10 text-primary border border-primary/20"
+                : "bg-bg-subtle text-text-muted border border-border"
             }`}
           >
             <span className="material-symbols-outlined text-[14px]">
@@ -2509,7 +2508,7 @@ const PermissionsModal = memo(function PermissionsModal({
         </div>
 
         {/* Auto-Resolve Toggle */}
-        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex flex-col gap-1">
             <p className="text-sm font-medium text-text-main">{t("autoResolve")}</p>
             <p className="text-xs text-text-muted">{t("autoResolveDesc")}</p>
@@ -2519,10 +2518,10 @@ const PermissionsModal = memo(function PermissionsModal({
             role="switch"
             aria-checked={autoResolveEnabled}
             onClick={() => setAutoResolveEnabled((prev) => !prev)}
-            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors ${
               autoResolveEnabled
-                ? "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30"
-                : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+                ? "bg-primary/10 text-primary border border-primary/20"
+                : "bg-bg-subtle text-text-muted border border-border"
             }`}
           >
             <span className="material-symbols-outlined text-[14px]">
@@ -2533,19 +2532,19 @@ const PermissionsModal = memo(function PermissionsModal({
         </div>
 
         {/* Stream Default Compatibility */}
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-3 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex flex-col gap-1 min-w-0">
             <p className="text-sm font-medium text-text-main">{t("streamDefaultMode")}</p>
             <p className="text-xs text-text-muted">{t("streamDefaultModeDesc")}</p>
           </div>
-          <div className="flex gap-1 p-0.5 bg-surface rounded-md shrink-0 w-full sm:w-auto">
+          <div className="flex gap-1 p-0.5 bg-bg-subtle rounded-md shrink-0 w-full sm:w-auto">
             <button
               type="button"
               onClick={() => setStreamDefaultMode("legacy")}
-              className={`inline-flex flex-1 sm:flex-none items-center justify-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-semibold transition-all ${
+              className={`inline-flex flex-1 sm:flex-none items-center justify-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-medium transition-colors ${
                 streamDefaultMode === "legacy"
-                  ? "bg-primary text-white"
-                  : "text-text-muted hover:bg-black/5 dark:hover:bg-white/5"
+                  ? "bg-surface text-text-main shadow-sm"
+                  : "text-text-muted hover:text-text-main"
               }`}
             >
               <span className="material-symbols-outlined text-[14px]">settings_backup_restore</span>
@@ -2554,10 +2553,10 @@ const PermissionsModal = memo(function PermissionsModal({
             <button
               type="button"
               onClick={() => setStreamDefaultMode("json")}
-              className={`inline-flex flex-1 sm:flex-none items-center justify-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-semibold transition-all ${
+              className={`inline-flex flex-1 sm:flex-none items-center justify-center gap-1.5 px-2.5 py-1.5 rounded text-xs font-medium transition-colors ${
                 streamDefaultMode === "json"
-                  ? "bg-primary text-white"
-                  : "text-text-muted hover:bg-black/5 dark:hover:bg-white/5"
+                  ? "bg-surface text-text-main shadow-sm"
+                  : "text-text-muted hover:text-text-main"
               }`}
             >
               <span className="material-symbols-outlined text-[14px]">data_object</span>
@@ -2579,10 +2578,10 @@ const PermissionsModal = memo(function PermissionsModal({
         <ApiKeyCatalogScopeSelect value={catalogScope} onChange={setCatalogScope} />
 
         {/* Ban Toggle (SECURITY) */}
-        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-red-500/20 bg-red-500/5">
+        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-error/20 bg-error/5">
           <div className="flex flex-col gap-1">
-            <p className="text-sm font-bold text-red-700 dark:text-red-400">{t("bannedStatus")}</p>
-            <p className="text-xs text-red-600 dark:text-red-300">
+            <p className="text-sm font-semibold text-error">{t("bannedStatus")}</p>
+            <p className="text-xs text-text-muted">
               Immediately revoke all access. Used for suspected abuse or compromised keys.
             </p>
           </div>
@@ -2590,10 +2589,10 @@ const PermissionsModal = memo(function PermissionsModal({
             role="switch"
             aria-checked={keyIsBanned}
             onClick={() => setKeyIsBanned((prev) => !prev)}
-            className={`inline-flex shrink-0 items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-bold transition-colors ${
+            className={`inline-flex shrink-0 items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors ${
               keyIsBanned
-                ? "bg-red-500 text-white shadow-sm"
-                : "bg-black/5 dark:bg-white/5 text-text-muted hover:bg-black/10 dark:hover:bg-white/10"
+                ? "bg-error text-white"
+                : "bg-bg-subtle text-text-muted hover:bg-border hover:text-text-main"
             }`}
           >
             <span className="material-symbols-outlined text-[14px]">
@@ -2603,7 +2602,7 @@ const PermissionsModal = memo(function PermissionsModal({
           </button>
         </div>
         {/* Expiration Date */}
-        <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex flex-col gap-1">
             <p className="text-sm font-medium text-text-main">{t("expirationDate")}</p>
             <p className="text-xs text-text-muted">
@@ -2625,20 +2624,20 @@ const PermissionsModal = memo(function PermissionsModal({
                   setExpiresAt(date.toISOString());
                 }
               }}
-              className="min-w-0 flex-1 px-2 py-1.5 text-sm border border-border rounded-md bg-background text-text-main"
+              className="min-w-0 flex-1 px-2 py-1.5 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-primary"
             />
             <button
               type="button"
               onClick={() => setExpiresAt("")}
               disabled={!expiresAt}
-              className="shrink-0 px-3 py-1.5 text-sm font-medium border border-border rounded-md text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5 disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-transparent"
+              className="shrink-0 px-3 py-1.5 text-sm font-medium border border-border-strong rounded-control bg-surface text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-40 disabled:cursor-not-allowed disabled:hover:bg-surface"
             >
               {tc("clear")}
             </button>
           </div>
         </div>
         {/* Management Access */}
-        <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex flex-col gap-1">
             <p className="text-sm font-medium text-text-main">{t("managementAccess")}</p>
             <p className="text-xs text-text-muted">{t("managementAccessDesc")}</p>
@@ -2648,10 +2647,10 @@ const PermissionsModal = memo(function PermissionsModal({
             role="switch"
             aria-checked={manageEnabled}
             onClick={() => setManageEnabled((prev) => !prev)}
-            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors ${
               manageEnabled
-                ? "bg-rose-500/15 text-rose-700 dark:text-rose-300 border border-rose-500/30"
-                : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+                ? "bg-warning/10 text-warning border border-warning/20"
+                : "bg-bg-subtle text-text-muted border border-border"
             }`}
           >
             <span className="material-symbols-outlined text-[14px]">admin_panel_settings</span>
@@ -2659,7 +2658,7 @@ const PermissionsModal = memo(function PermissionsModal({
           </button>
         </div>
         {/* Self-service Visibility */}
-        <div className="flex flex-col gap-3 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex flex-col gap-3 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex flex-col gap-1">
             <p className="text-sm font-medium text-text-main">{t("selfServiceVisibility")}</p>
             <p className="text-xs text-text-muted">{t("selfServiceVisibilityDesc")}</p>
@@ -2674,10 +2673,10 @@ const PermissionsModal = memo(function PermissionsModal({
                 return !prev;
               })
             }
-            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors ${
               selfUsageEnabled
-                ? "bg-emerald-500/15 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30"
-                : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+                ? "bg-primary/10 text-primary border border-primary/20"
+                : "bg-bg-subtle text-text-muted border border-border"
             }`}
           >
             <span className="material-symbols-outlined text-[14px]">query_stats</span>
@@ -2690,10 +2689,10 @@ const PermissionsModal = memo(function PermissionsModal({
             aria-checked={selfAccountQuotaEnabled}
             disabled={!selfUsageEnabled}
             onClick={() => setSelfAccountQuotaEnabled((prev) => !prev)}
-            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors ${
               selfAccountQuotaEnabled
-                ? "bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30"
-                : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+                ? "bg-primary/10 text-primary border border-primary/20"
+                : "bg-bg-subtle text-text-muted border border-border"
             } ${!selfUsageEnabled ? "opacity-50 cursor-not-allowed" : ""}`}
           >
             <span className="material-symbols-outlined text-[14px]">account_balance</span>
@@ -2706,10 +2705,10 @@ const PermissionsModal = memo(function PermissionsModal({
             role="switch"
             aria-checked={usageCommandEnabled}
             onClick={() => setUsageCommandEnabled((prev) => !prev)}
-            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors ${
               usageCommandEnabled
-                ? "bg-sky-500/15 text-sky-700 dark:text-sky-300 border border-sky-500/30"
-                : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+                ? "bg-primary/10 text-primary border border-primary/20"
+                : "bg-bg-subtle text-text-muted border border-border"
             }`}
           >
             <span className="material-symbols-outlined text-[14px]">terminal</span>
@@ -2741,7 +2740,7 @@ const PermissionsModal = memo(function PermissionsModal({
         />
 
         {/* Disable Non-Public Models Toggle */}
-        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex flex-col gap-1">
             <p className="text-sm font-medium text-text-main">{t("disableNonPublicModels")}</p>
             <p className="text-xs text-text-muted">{t("disableNonPublicModelsDesc")}</p>
@@ -2751,10 +2750,10 @@ const PermissionsModal = memo(function PermissionsModal({
             role="switch"
             aria-checked={disableNonPublicModels}
             onClick={() => setDisableNonPublicModels((prev) => !prev)}
-            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+            className={`inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors ${
               disableNonPublicModels
-                ? "bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30"
-                : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+                ? "bg-primary/10 text-primary border border-primary/20"
+                : "bg-bg-subtle text-text-muted border border-border"
             }`}
           >
             <span className="material-symbols-outlined text-[14px]">
@@ -2778,7 +2777,7 @@ const PermissionsModal = memo(function PermissionsModal({
                 </button>
                 <button
                   onClick={handleDeselectAllModels}
-                  className="text-[10px] text-red-500 hover:bg-red-500/10 px-1.5 py-0.5 rounded transition-colors"
+                  className="text-[10px] text-error hover:bg-error/10 px-1.5 py-0.5 rounded transition-colors"
                 >
                   {t("clear")}
                 </button>
@@ -2786,7 +2785,7 @@ const PermissionsModal = memo(function PermissionsModal({
             </div>
             {selectedProviderCount > 0 && (
               <div className="flex flex-col gap-1">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-text-muted">
+                <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {tc("providers")}
                 </span>
                 <div className="flex flex-wrap gap-1">
@@ -2812,7 +2811,7 @@ const PermissionsModal = memo(function PermissionsModal({
                             <button
                               type="button"
                               onClick={() => handleToggleModel(scope)}
-                              className="text-text-muted hover:text-red-500 transition-colors"
+                              className="text-text-muted hover:text-error transition-colors"
                               title={t("removeClaudeCodeDefault")}
                             >
                               <span className="material-symbols-outlined text-[12px]">close</span>
@@ -2836,8 +2835,8 @@ const PermissionsModal = memo(function PermissionsModal({
                                     key={family.id}
                                     className={`inline-flex items-center gap-0.5 px-1.5 py-0.5 text-[10px] rounded border ${
                                       canBlock
-                                        ? "bg-white dark:bg-surface text-text-main border-border"
-                                        : "bg-black/5 dark:bg-white/5 text-text-muted border-border"
+                                        ? "bg-surface text-text-main border-border"
+                                        : "bg-bg-subtle text-text-muted border-border"
                                     }`}
                                     title={
                                       canBlock
@@ -2854,7 +2853,7 @@ const PermissionsModal = memo(function PermissionsModal({
                                             family.id as ClaudeCodeBlockableFamilyId
                                           )
                                         }
-                                        className="text-text-muted hover:text-red-500 transition-colors"
+                                        className="text-text-muted hover:text-error transition-colors"
                                         title={`Block ${family.label} family`}
                                       >
                                         <span className="material-symbols-outlined text-[12px]">
@@ -2882,7 +2881,7 @@ const PermissionsModal = memo(function PermissionsModal({
                         <button
                           type="button"
                           onClick={() => handleToggleModel(scope)}
-                          className="text-text-muted hover:text-red-500 transition-colors"
+                          className="text-text-muted hover:text-error transition-colors"
                         >
                           <span className="material-symbols-outlined text-[12px]">close</span>
                         </button>
@@ -2894,14 +2893,14 @@ const PermissionsModal = memo(function PermissionsModal({
             )}
             {selectedModelCount > 0 && (
               <div className="flex flex-col gap-1">
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-text-muted">
+                <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {tc("models")}
                 </span>
                 <div className="flex flex-wrap gap-1 max-h-28 overflow-y-auto content-start">
                   {selectedExactModels.map((modelId) => (
                     <span
                       key={modelId}
-                      className="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-white dark:bg-surface text-text-main text-[10px] rounded border border-border"
+                      className="inline-flex items-center gap-0.5 px-1.5 py-0.5 bg-surface text-text-main text-[10px] rounded border border-border"
                     >
                       <span className="font-mono truncate max-w-[120px]" title={modelId}>
                         {getModelDisplayName(modelId)}
@@ -2909,7 +2908,7 @@ const PermissionsModal = memo(function PermissionsModal({
                       <button
                         type="button"
                         onClick={() => handleToggleModel(modelId)}
-                        className="text-text-muted hover:text-red-500 transition-colors"
+                        className="text-text-muted hover:text-error transition-colors"
                       >
                         <span className="material-symbols-outlined text-[12px]">close</span>
                       </button>
@@ -2939,33 +2938,31 @@ const PermissionsModal = memo(function PermissionsModal({
 
         {/* Exclusive Lease Notice */}
         {hasExclusiveLeaseScope && (
-          <div className="flex flex-col gap-1 p-3 rounded-lg border border-purple-500/30 bg-purple-500/10">
-            <div className="flex items-center gap-1.5 text-purple-700 dark:text-purple-300 font-medium text-sm">
+          <div className="flex flex-col gap-1 p-3 rounded-lg border border-border bg-bg-subtle">
+            <div className="flex items-center gap-1.5 text-text-main font-medium text-sm">
               <span className="material-symbols-outlined text-[16px]">key_vertical</span>
               {t("exclusiveLeaseNoticeTitle")}
             </div>
-            <p className="text-xs text-purple-600/80 dark:text-purple-400/80">
-              {t("exclusiveLeaseNoticeDesc")}
-            </p>
+            <p className="text-xs text-text-muted">{t("exclusiveLeaseNoticeDesc")}</p>
           </div>
         )}
 
         {/* Allowed Connections Section */}
         {allConnections.length > 0 && (
-          <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface/40">
+          <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface-2">
             <div className="flex items-center justify-between">
               <p className="text-sm font-medium text-text-main">{t("allowedConnections")}</p>
-              <div className="flex gap-1 p-0.5 bg-surface rounded-md">
+              <div className="flex gap-1 p-0.5 bg-bg-subtle rounded-md">
                 <button
                   type="button"
                   onClick={() => {
                     setAllowAllConnections(true);
                     setSelectedConnections([]);
                   }}
-                  className={`px-2 py-1 rounded text-xs font-medium transition-all ${
+                  className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
                     allowAllConnections
-                      ? "bg-primary text-white"
-                      : "text-text-muted hover:bg-black/5 dark:hover:bg-white/5"
+                      ? "bg-surface text-text-main shadow-sm"
+                      : "text-text-muted hover:text-text-main"
                   }`}
                 >
                   {t("allConnections")}
@@ -2973,10 +2970,10 @@ const PermissionsModal = memo(function PermissionsModal({
                 <button
                   type="button"
                   onClick={() => setAllowAllConnections(false)}
-                  className={`px-2 py-1 rounded text-xs font-medium transition-all ${
+                  className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
                     !allowAllConnections
-                      ? "bg-primary text-white"
-                      : "text-text-muted hover:bg-black/5 dark:hover:bg-white/5"
+                      ? "bg-surface text-text-main shadow-sm"
+                      : "text-text-muted hover:text-text-main"
                   }`}
                 >
                   {t("onlySelectedConnections")}
@@ -3003,7 +3000,7 @@ const PermissionsModal = memo(function PermissionsModal({
                   .sort(([a], [b]) => compareTr(a, b))
                   .map(([provider, conns]) => (
                     <div key={provider}>
-                      <p className="text-[10px] font-semibold text-text-muted uppercase tracking-wider px-1 py-0.5">
+                      <p className="text-[11px] font-medium text-text-subtle uppercase tracking-wider px-1 py-0.5">
                         {provider}
                       </p>
                       {conns.map((conn) => {
@@ -3012,15 +3009,15 @@ const PermissionsModal = memo(function PermissionsModal({
                           <button
                             key={conn.id}
                             onClick={() => handleToggleConnection(conn.id)}
-                            className={`w-full flex items-center gap-2 px-2 py-1.5 rounded text-left text-xs transition-all ${
+                            className={`w-full flex items-center gap-2 px-2 py-1.5 rounded text-left text-xs transition-colors ${
                               isSelected
                                 ? "bg-primary/10 text-primary"
-                                : "text-text-muted hover:bg-surface/50 hover:text-text-main"
+                                : "text-text-muted hover:bg-bg-subtle hover:text-text-main"
                             }`}
                           >
                             <div
                               className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 ${
-                                isSelected ? "bg-primary border-primary" : "border-border"
+                                isSelected ? "bg-primary border-primary" : "border-border-strong"
                               }`}
                             >
                               {isSelected && (
@@ -3033,7 +3030,7 @@ const PermissionsModal = memo(function PermissionsModal({
                               {conn.name || conn.id.slice(0, 8)}
                             </span>
                             {!conn.isActive && (
-                              <span className="text-[9px] text-red-400 shrink-0">
+                              <span className="text-[9px] text-error shrink-0">
                                 {tc("inactive")}
                               </span>
                             )}
@@ -3061,7 +3058,7 @@ const PermissionsModal = memo(function PermissionsModal({
         />
 
         {/* Allowed Endpoints Section */}
-        <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface/40">
+        <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface-2">
           <div className="flex items-center justify-between">
             <div className="flex flex-col gap-1">
               <p className="text-sm font-medium text-text-main">{t("endpointRestrictions")}</p>
@@ -3073,26 +3070,26 @@ const PermissionsModal = memo(function PermissionsModal({
                     })}
               </p>
             </div>
-            <div className="flex gap-1 p-0.5 bg-surface rounded-md">
+            <div className="flex gap-1 p-0.5 bg-bg-subtle rounded-md">
               <button
                 onClick={() => {
                   setAllowAllEndpoints(true);
                   setSelectedEndpoints([]);
                 }}
-                className={`px-2 py-1 rounded text-xs font-medium transition-all ${
+                className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
                   allowAllEndpoints
-                    ? "bg-primary text-white"
-                    : "text-text-muted hover:bg-black/5 dark:hover:bg-white/5"
+                    ? "bg-surface text-text-main shadow-sm"
+                    : "text-text-muted hover:text-text-main"
                 }`}
               >
                 {t("all")}
               </button>
               <button
                 onClick={() => setAllowAllEndpoints(false)}
-                className={`px-2 py-1 rounded text-xs font-medium transition-all ${
+                className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
                   !allowAllEndpoints
-                    ? "bg-primary text-white"
-                    : "text-text-muted hover:bg-black/5 dark:hover:bg-white/5"
+                    ? "bg-surface text-text-main shadow-sm"
+                    : "text-text-muted hover:text-text-main"
                 }`}
               >
                 {t("restrict")}
@@ -3107,15 +3104,15 @@ const PermissionsModal = memo(function PermissionsModal({
                   <button
                     key={cat.id}
                     onClick={() => handleToggleEndpoint(cat.id)}
-                    className={`w-full flex items-center gap-2 px-2 py-1.5 rounded text-left text-xs transition-all ${
+                    className={`w-full flex items-center gap-2 px-2 py-1.5 rounded text-left text-xs transition-colors ${
                       isSelected
                         ? "bg-primary/10 text-primary"
-                        : "text-text-muted hover:bg-surface/50 hover:text-text-main"
+                        : "text-text-muted hover:bg-bg-subtle hover:text-text-main"
                     }`}
                   >
                     <div
                       className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 ${
-                        isSelected ? "bg-primary border-primary" : "border-border"
+                        isSelected ? "bg-primary border-primary" : "border-border-strong"
                       }`}
                     >
                       {isSelected && (

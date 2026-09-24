@@ -9,16 +9,14 @@ export default function ModalityBridgeMovedCard() {
   const t = useTranslations("settings");
 
   return (
-    <section className="rounded-lg border border-border/70 bg-surface/40 p-4">
+    <section className="rounded-card border border-border bg-surface p-4">
       <div className="flex items-start gap-3">
-        <span className="material-symbols-outlined text-[21px] text-fuchsia-500" aria-hidden="true">
+        <span className="material-symbols-outlined text-[18px] text-text-muted" aria-hidden="true">
           image_search
         </span>
         <div className="min-w-0 flex-1">
-          <h4 className="text-base font-semibold text-text-main">
-            {t("modalityBridgeMovedTitle")}
-          </h4>
-          <p className="mt-1 text-sm text-text-muted">{t("modalityBridgeMovedBody")}</p>
+          <h4 className="text-sm font-semibold text-text-main">{t("modalityBridgeMovedTitle")}</h4>
+          <p className="mt-1 text-[13px] text-text-muted">{t("modalityBridgeMovedBody")}</p>
         </div>
       </div>
 

@@ -191,8 +191,10 @@ function PresetButtons({
           key={p}
           type="button"
           aria-pressed={preset === p}
-          className={`px-2 py-1 text-xs rounded border ${
-            preset === p ? "border-primary bg-primary/10 font-medium" : "border-border text-muted"
+          className={`px-2 py-1 text-xs rounded-control border transition-colors ${
+            preset === p
+              ? "border-border-strong bg-bg-subtle text-text-main font-medium"
+              : "border-border text-text-muted hover:bg-bg-subtle hover:text-text-main"
           }`}
           onClick={() => onSelect(p)}
         >
@@ -220,8 +222,10 @@ function CompareToggle({
     <button
       type="button"
       aria-pressed={compareMode}
-      className={`px-2 py-1 text-xs rounded border ${
-        compareMode ? "border-primary bg-primary/10 font-medium" : "border-border text-muted"
+      className={`px-2 py-1 text-xs rounded-control border transition-colors ${
+        compareMode
+          ? "border-border-strong bg-bg-subtle text-text-main font-medium"
+          : "border-border text-text-muted hover:bg-bg-subtle hover:text-text-main"
       }`}
       onClick={onToggle}
     >
@@ -279,7 +283,7 @@ function HistoryGridTable({
     // Kept mounted (with the previous range's rows) while `isLoading` is true for a refetch —
     // only the very first load (no rows yet) falls through to the loading line above instead of
     // an empty bordered table.
-    <div className="flex-1 min-h-0 overflow-x-auto overflow-y-auto border border-border rounded">
+    <div className="flex-1 min-h-0 overflow-x-auto overflow-y-auto border border-border rounded-card bg-surface text-text-main">
       <table className="text-xs border-collapse w-full">
         <thead>
           <tr className="border-b border-border">
@@ -288,7 +292,7 @@ function HistoryGridTable({
               <th
                 key={i}
                 scope="col"
-                className="px-0.5 py-1 text-[9px] font-normal text-muted whitespace-nowrap"
+                className="px-0.5 py-1 text-[9px] font-normal text-text-subtle tabular-nums whitespace-nowrap"
               >
                 {formatBucketLabel(bucket.start, preset)}
               </th>
@@ -297,13 +301,18 @@ function HistoryGridTable({
         </thead>
         <tbody>
           {grid.rows.map((row) => (
-            <tr key={`${row.source}:${row.identity}`} className="border-b border-border">
+            <tr
+              key={`${row.source}:${row.identity}`}
+              className="border-b border-border last:border-b-0"
+            >
               <th
                 scope="row"
                 className="text-left px-2 py-1 sticky left-0 bg-surface whitespace-nowrap font-normal"
               >
-                <span className="font-medium">{row.identity}</span>{" "}
-                <span className="text-[9px] uppercase text-muted">{t(SOURCE_KEY[row.source])}</span>
+                <span className="font-medium text-text-main">{row.identity}</span>{" "}
+                <span className="text-[9px] uppercase tracking-wider text-text-subtle">
+                  {t(SOURCE_KEY[row.source])}
+                </span>
               </th>
               {row.cells.map((cell, i) => (
                 <td key={i} className="p-0.5 align-top">
@@ -317,8 +326,10 @@ function HistoryGridTable({
                         <button
                           key={item.id}
                           type="button"
-                          className={`w-3 h-3 rounded-sm motion-reduce:transition-none${
-                            isSelected ? " ring-2 ring-offset-1 ring-primary" : ""
+                          className={`w-3 h-3 rounded-sm transition-opacity hover:opacity-80 motion-reduce:transition-none${
+                            isSelected
+                              ? " ring-2 ring-offset-1 ring-offset-surface ring-primary"
+                              : ""
                           }`}
                           style={{ backgroundColor: orchStateColor(item.state) }}
                           title={meta}
@@ -356,11 +367,11 @@ function HistoryStatusRows({
   return (
     <>
       {isLoading && (
-        <div role="status" aria-live="polite" className="text-xs text-muted">
+        <div role="status" aria-live="polite" className="text-xs text-text-muted">
           {tCommon("loading")}
         </div>
       )}
-      {hasNoRows && !isLoading && <div className="text-xs text-muted p-4">{t("historyEmpty")}</div>}
+      {hasNoRows && !isLoading && <div className="text-xs p-4">{t("historyEmpty")}</div>}
     </>
   );
 }
@@ -439,12 +450,12 @@ export function HistoryTab() {
   };
 
   return (
-    <div className="flex flex-col h-full min-h-0 gap-2">
+    <div className="flex flex-col h-full min-h-0 gap-2 text-text-muted">
       <div className="flex items-center gap-2 flex-wrap">
         <PresetButtons preset={preset} t={t} onSelect={onSelectPreset} />
         <CompareToggle compareMode={compareMode} t={t} onToggle={onToggleCompareMode} />
-        {compareMode && <span className="text-[10px] text-muted">{t("compareHint")}</span>}
-        <span className="text-[10px] text-muted">{t("historyConductorNote")}</span>
+        {compareMode && <span className="text-[11px] text-text-muted">{t("compareHint")}</span>}
+        <span className="text-[11px] text-text-muted">{t("historyConductorNote")}</span>
       </div>
 
       <FailedSourcesList failedSources={failedSources} t={t} />

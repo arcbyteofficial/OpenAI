@@ -1012,20 +1012,20 @@ export default function OAuthModal({
           <div className="flex gap-2 border-b border-border pb-3">
             {provider === "grok-cli" && (
               <button
-                className={`text-sm px-3 py-1 rounded-t ${!showPasteToken && !grokBrowserMode ? "font-semibold border-b-2 border-primary text-primary" : "text-text-muted"}`}
+                className={`text-sm px-3 py-1 transition-colors ${!showPasteToken && !grokBrowserMode ? "font-medium border-b-2 border-text-main text-text-main" : "border-b-2 border-transparent text-text-muted hover:text-text-main"}`}
                 onClick={handleDeviceCodeMode}
               >
                 {t("tabDeviceCode")}
               </button>
             )}
             <button
-              className={`text-sm px-3 py-1 rounded-t ${!showPasteToken && (provider !== "grok-cli" || grokBrowserMode) ? "font-semibold border-b-2 border-primary text-primary" : "text-text-muted"}`}
+              className={`text-sm px-3 py-1 transition-colors ${!showPasteToken && (provider !== "grok-cli" || grokBrowserMode) ? "font-medium border-b-2 border-text-main text-text-main" : "border-b-2 border-transparent text-text-muted hover:text-text-main"}`}
               onClick={handleBrowserMode}
             >
               {t("tabBrowserLogin")}
             </button>
             <button
-              className={`text-sm px-3 py-1 rounded-t ${showPasteToken ? "font-semibold border-b-2 border-primary text-primary" : "text-text-muted"}`}
+              className={`text-sm px-3 py-1 transition-colors ${showPasteToken ? "font-medium border-b-2 border-text-main text-text-main" : "border-b-2 border-transparent text-text-muted hover:text-text-main"}`}
               onClick={handlePasteMode}
             >
               {provider === "grok-cli" ? t("tabImportAuthJson") : t("tabPasteApiKey")}
@@ -1045,7 +1045,7 @@ export default function OAuthModal({
             </p>
             {provider === "grok-cli" ? (
               <textarea
-                className="w-full h-32 p-3 text-sm font-mono bg-input border border-border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-primary"
+                className="w-full h-32 p-3 text-[13px] font-mono bg-surface border border-border-strong rounded-control resize-none placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                 value={pasteToken}
                 onChange={(e) => setPasteToken(e.target.value)}
                 placeholder={t("grokAuthJsonPlaceholder")}
@@ -1060,7 +1060,7 @@ export default function OAuthModal({
                 label={t("apiKeyTokenLabel")}
               />
             )}
-            {error && <p className="text-sm text-red-500">{error}</p>}
+            {error && <p className="text-sm text-error">{error}</p>}
             <div className="flex gap-2">
               <Button
                 onClick={handleSaveToken}
@@ -1140,12 +1140,12 @@ export default function OAuthModal({
         {/* Success Step — shown for both OAuth and paste-token flows */}
         {step === "success" && (
           <div className="text-center py-6">
-            <div className="size-16 mx-auto mb-4 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-              <span className="material-symbols-outlined text-3xl text-green-600">
-                check_circle
-              </span>
+            <div className="size-16 mx-auto mb-4 rounded-full bg-success/10 flex items-center justify-center">
+              <span className="material-symbols-outlined text-3xl text-success">check_circle</span>
             </div>
-            <h3 className="text-lg font-semibold mb-2">{t("success")}</h3>
+            <h3 className="text-base font-semibold tracking-tight text-text-main mb-2">
+              {t("success")}
+            </h3>
             <p className="text-sm text-text-muted mb-4">
               {t("successMessage", { providerName: providerInfo.name })}
             </p>

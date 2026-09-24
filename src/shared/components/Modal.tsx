@@ -10,7 +10,7 @@ import Button, { type ButtonVariant } from "./Button";
 // independent max-h/overflow), avoiding a double height cap that clips content.
 export const TALL_MODAL_PROPS = {
   className: "max-h-[90vh] overflow-y-auto",
-  bodyClassName: "p-6",
+  bodyClassName: "p-5",
 };
 
 interface ModalProps {
@@ -150,7 +150,7 @@ export default function Modal({
     <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
       {/* Overlay */}
       <div
-        className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+        className="absolute inset-0 bg-black/40 backdrop-blur-[2px]"
         onClick={closeOnOverlay ? onClose : undefined}
         aria-hidden="true"
       />
@@ -163,8 +163,8 @@ export default function Modal({
         aria-labelledby={title ? titleId : undefined}
         className={cn(
           "relative w-full bg-surface",
-          "border border-black/10 dark:border-white/10",
-          "rounded-card shadow-2xl",
+          "border border-border",
+          "rounded-card shadow-[var(--shadow-elevated)]",
           "animate-in fade-in zoom-in-95 duration-200",
           sizes[size],
           className
@@ -174,43 +174,17 @@ export default function Modal({
         {(title || showCloseButton) && (
           <div
             className={cn(
-              "flex items-center justify-between border-b border-black/5 dark:border-white/5",
-              compactHeader ? "px-4 py-2.5" : "p-6"
+              "flex items-center justify-between gap-3 border-b border-border",
+              compactHeader ? "px-4 py-2.5" : "px-5 py-4"
             )}
           >
             <div className="flex items-center min-w-0">
-              <div
-                className={cn(
-                  "flex items-center gap-1.5 mr-3 shrink-0",
-                  compactHeader ? "" : "gap-2 mr-4"
-                )}
-                aria-hidden="true"
-              >
-                <div
-                  className={cn(
-                    "rounded-full bg-[#FF5F56]",
-                    compactHeader ? "w-2.5 h-2.5" : "w-3 h-3"
-                  )}
-                />
-                <div
-                  className={cn(
-                    "rounded-full bg-[#FFBD2E]",
-                    compactHeader ? "w-2.5 h-2.5" : "w-3 h-3"
-                  )}
-                />
-                <div
-                  className={cn(
-                    "rounded-full bg-[#27C93F]",
-                    compactHeader ? "w-2.5 h-2.5" : "w-3 h-3"
-                  )}
-                />
-              </div>
               {title && (
                 <h2
                   id={titleId}
                   className={cn(
-                    "font-semibold text-text-main truncate min-w-0",
-                    compactHeader ? "text-sm" : "text-lg"
+                    "font-semibold tracking-tight text-text-main truncate min-w-0",
+                    compactHeader ? "text-sm" : "text-[15px]"
                   )}
                 >
                   {title}
@@ -221,9 +195,9 @@ export default function Modal({
               <button
                 onClick={onClose}
                 aria-label={t("close")}
-                className="p-1.5 rounded-lg text-text-muted hover:bg-black/5 dark:hover:bg-white/5 transition-colors shrink-0"
+                className="p-1.5 rounded-control text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors shrink-0"
               >
-                <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+                <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
                   close
                 </span>
               </button>
@@ -232,13 +206,13 @@ export default function Modal({
         )}
 
         {/* Body */}
-        <div className={bodyClassName ?? "p-6 max-h-[calc(80vh-140px)] overflow-y-auto"}>
+        <div className={bodyClassName ?? "p-5 max-h-[calc(80vh-140px)] overflow-y-auto"}>
           {children}
         </div>
 
         {/* Footer */}
         {footer && (
-          <div className="flex items-center justify-end gap-3 p-6 border-t border-black/5 dark:border-white/5">
+          <div className="flex items-center justify-end gap-2 px-5 py-4 border-t border-border">
             {footer}
           </div>
         )}
@@ -281,7 +255,7 @@ export function ConfirmModal({
         </>
       }
     >
-      <p className="text-text-muted">{message}</p>
+      <p className="text-sm text-text-muted">{message}</p>
     </Modal>
   );
 }

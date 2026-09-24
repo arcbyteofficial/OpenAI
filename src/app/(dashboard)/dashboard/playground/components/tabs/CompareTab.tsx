@@ -347,24 +347,24 @@ export default function CompareTab({ configState }: CompareTabProps) {
   return (
     <div className="flex flex-col h-full">
       {/* Prompt input area */}
-      <div className="px-4 pt-3 pb-2 border-b border-border bg-bg-alt shrink-0">
+      <div className="px-4 pt-3 pb-2 border-b border-border bg-surface shrink-0">
         <textarea
           value={prompt}
           onChange={(e) => setPrompt(e.target.value)}
           placeholder={t("comparePromptPlaceholder")}
           rows={3}
-          className="w-full text-sm bg-surface border border-border rounded px-3 py-2 focus:outline-none focus:ring-1 focus:ring-primary text-text-main resize-y"
+          className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main resize-y"
           aria-label={t("userPrompt")}
         />
       </div>
 
       {/* Compare toolbar */}
-      <div className="flex items-center gap-2 px-4 py-2 border-b border-border bg-bg-alt shrink-0">
+      <div className="flex items-center gap-2 px-4 py-2 border-b border-border bg-surface-2 shrink-0">
         {/* Run / Cancel all */}
         {isAnyStreaming ? (
           <button
             onClick={cancelAll}
-            className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded bg-destructive/10 text-destructive border border-destructive/30 hover:bg-destructive/20 transition-colors"
+            className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-control bg-error/10 text-error border border-error/30 hover:bg-error/15 transition-colors"
             aria-label={t("cancelAllStreams")}
           >
             <span className="material-symbols-outlined text-[14px]">stop</span>
@@ -374,7 +374,7 @@ export default function CompareTab({ configState }: CompareTabProps) {
           <button
             onClick={() => void runAll()}
             disabled={columns.length === 0 || !prompt.trim()}
-            className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded bg-primary text-white hover:bg-primary/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             aria-label={t("runAllColumns")}
           >
             <span className="material-symbols-outlined text-[14px]">play_arrow</span>
@@ -394,13 +394,13 @@ export default function CompareTab({ configState }: CompareTabProps) {
             }}
             placeholder={t("modelPlaceholderCompare")}
             disabled={atColumnLimit}
-            className="text-xs bg-surface border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main w-40 disabled:opacity-40"
+            className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main w-40 disabled:opacity-40"
             aria-label={t("newColumnModelName")}
           />
           <button
             onClick={addColumn}
             disabled={atColumnLimit}
-            className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded border border-border text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex items-center gap-1 text-xs font-medium px-2.5 py-1.5 rounded-control border border-border-strong text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
             title={atColumnLimit ? t("maxColumnsReached", { max: MAX_COLUMNS }) : t("addColumn")}
             aria-label={t("addModelColumn")}
           >
@@ -410,7 +410,7 @@ export default function CompareTab({ configState }: CompareTabProps) {
         </div>
 
         {/* Column count indicator */}
-        <span className="ml-auto text-[11px] text-text-muted">
+        <span className="ml-auto text-[11px] tabular-nums text-text-muted">
           {t("columnCount", { count: columns.length, max: MAX_COLUMNS })}
         </span>
       </div>
@@ -434,11 +434,11 @@ export default function CompareTab({ configState }: CompareTabProps) {
         {columns.length === 0 && (
           <div className="flex items-center justify-center h-full text-text-muted col-span-4">
             <div className="text-center space-y-2">
-              <span className="material-symbols-outlined text-[48px] text-text-muted/30">
+              <span className="material-symbols-outlined text-[40px] text-text-subtle/50">
                 compare
               </span>
               <p className="text-sm">{t("addModelToCompare")}</p>
-              <p className="text-xs text-text-muted/60">
+              <p className="text-xs text-text-subtle">
                 {t("modelsSimultaneously", { max: MAX_COLUMNS })}
               </p>
             </div>

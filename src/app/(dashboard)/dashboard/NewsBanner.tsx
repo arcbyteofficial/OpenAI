@@ -75,11 +75,14 @@ export default function NewsBanner() {
     <div
       role="complementary"
       aria-label={announcement.title}
-      className="mb-4 flex flex-col gap-3 rounded-lg border border-primary/30 bg-primary/5 px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
+      className="mb-4 flex flex-col gap-3 rounded-card border border-border bg-surface px-4 py-3 sm:flex-row sm:items-center sm:justify-between"
     >
       <div className="flex min-w-0 items-start gap-3">
-        <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-          <span className="material-symbols-outlined text-[22px] text-primary" aria-hidden="true">
+        <div className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-border bg-bg-subtle">
+          <span
+            className="material-symbols-outlined text-[20px] text-text-muted"
+            aria-hidden="true"
+          >
             {announcement.icon}
           </span>
         </div>
@@ -95,7 +98,7 @@ export default function NewsBanner() {
             href={announcement.link}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-lg bg-primary px-3 py-1.5 text-xs font-semibold text-white transition-colors hover:brightness-110"
+            className="inline-flex items-center gap-1.5 whitespace-nowrap rounded-control bg-contrast px-3 py-1.5 text-xs font-medium text-contrast-fg transition-colors hover:bg-contrast-hover"
           >
             {announcement.linkLabel ?? announcement.title}
             <span className="material-symbols-outlined text-[14px]" aria-hidden="true">

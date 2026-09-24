@@ -64,7 +64,7 @@ export default function CliToolCard({
           <span className="font-semibold text-text-main text-sm leading-tight truncate">
             {tool.name}
           </span>
-          <span className="text-[11px] text-text-muted font-mono bg-black/5 dark:bg-white/5 px-1.5 py-0.5 rounded">
+          <span className="text-[11px] text-text-muted font-mono bg-bg-subtle px-1.5 py-0.5 rounded-md">
             {version}
           </span>
         </div>
@@ -83,8 +83,8 @@ export default function CliToolCard({
       href={detailHref}
       className={cn(
         "block min-h-[180px]",
-        "bg-surface border border-black/5 dark:border-white/5 rounded-lg shadow-sm",
-        "hover:shadow-md hover:border-primary/30 transition-all",
+        "bg-surface border border-border rounded-card",
+        "hover:border-border-strong transition-colors",
         "p-4 flex flex-col gap-3"
       )}
     >
@@ -97,7 +97,7 @@ export default function CliToolCard({
         <span
           className={cn(
             "inline-flex items-center gap-1 text-[11px] font-medium px-1.5 py-0.5 rounded",
-            installed ? "text-green-600 dark:text-green-400" : "text-zinc-500 dark:text-zinc-400"
+            installed ? "text-success" : "text-text-subtle"
           )}
         >
           <span aria-hidden="true">{installed ? "✓" : "✗"}</span>
@@ -124,21 +124,21 @@ export default function CliToolCard({
       {/* Badges row */}
       <div className="flex items-center gap-1.5 flex-wrap">
         {tool.baseUrlSupport === "partial" && (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded-full bg-warning/10 text-warning">
             <span aria-hidden="true">⚠</span> {t("card.baseUrlPartial")}
           </span>
         )}
         {tool.acpSpawnable === true && (
-          <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded-full bg-blue-500/10 text-blue-600 dark:text-blue-400">
+          <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded-full bg-bg-subtle text-text-muted">
             {t("card.alsoAcp")}
           </span>
         )}
         {showInstallChips && (
           <>
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded-full bg-black/5 dark:bg-white/5 text-text-muted">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded-full bg-bg-subtle text-text-muted">
               📋 {t("card.manualConfig")}
             </span>
-            <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded-full bg-black/5 dark:bg-white/5 text-text-muted">
+            <span className="inline-flex items-center gap-1 px-2 py-0.5 text-[11px] font-medium rounded-full bg-bg-subtle text-text-muted">
               ⬇ {t("card.installGuide")}
             </span>
           </>

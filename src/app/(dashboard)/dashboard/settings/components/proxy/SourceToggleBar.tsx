@@ -47,16 +47,16 @@ export default function SourceToggleBar({ disabledSources, onToggle }: SourceTog
         return (
           <button
             key={s.id}
-            className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-medium border transition-colors ${
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-md text-xs font-medium border transition-colors ${
               enabled
-                ? "bg-primary/20 border-primary text-primary"
-                : "border-border text-text-muted hover:border-primary/50"
+                ? "bg-primary/10 border-primary/40 text-primary"
+                : "border-border text-text-muted hover:border-border-strong hover:text-text-main"
             }`}
             onClick={() => onToggle(s.id)}
             aria-pressed={enabled}
           >
             <span
-              className={`w-1.5 h-1.5 rounded-full ${enabled ? "bg-primary" : "bg-text-muted"}`}
+              className={`w-1.5 h-1.5 rounded-full ${enabled ? "bg-primary" : "bg-text-subtle"}`}
             />
             {s.label}
           </button>

@@ -29,7 +29,7 @@ export default function ExpirationBadge({ expiresAt, variant = "default" }: Prop
   const remaining = expiresAt - now;
   if (remaining <= 0) {
     return (
-      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-medium border bg-gray-500/15 text-gray-400 border-gray-500/25">
+      <span className="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md text-[11px] font-medium border bg-bg-subtle text-text-muted border-border">
         {t("expirationBadgeExpired")}
       </span>
     );
@@ -38,20 +38,20 @@ export default function ExpirationBadge({ expiresAt, variant = "default" }: Prop
   // Plan specifies "<24h normal" — in practice batches always expire ≤24h (OpenAI window),
   // so "else" maps to that case. If a provider (e.g. Gemini 48h) yields remaining >24h,
   // we still render normal — graceful, no separate tier needed.
-  let tone = "bg-emerald-500/15 text-emerald-400 border-emerald-500/25";
+  let tone = "bg-success/10 text-success border-success/20";
   let label = t("expirationBadgeNormal");
   if (remaining < 3600) {
-    tone = "bg-red-500/15 text-red-400 border-red-500/25";
+    tone = "bg-error/10 text-error border-error/20";
     label = t("expirationBadgeCritical");
   } else if (remaining < 6 * 3600) {
-    tone = "bg-yellow-500/15 text-yellow-400 border-yellow-500/25";
+    tone = "bg-warning/10 text-warning border-warning/20";
     label = t("expirationBadgeWarning");
   }
   const display = formatRemaining(remaining);
   if (variant === "compact") {
     return (
       <span
-        className={`inline-block px-1.5 py-0.5 rounded text-[11px] font-medium border ${tone}`}
+        className={`inline-block px-1.5 py-0.5 rounded-md text-[11px] font-medium tabular-nums border ${tone}`}
         title={label}
       >
         {/* P3 — sr-only label so screen-readers + colorblind users get the urgency
@@ -63,7 +63,7 @@ export default function ExpirationBadge({ expiresAt, variant = "default" }: Prop
   }
   return (
     <span
-      className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-[11px] font-medium border ${tone}`}
+      className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md text-[11px] font-medium tabular-nums border ${tone}`}
     >
       <span className="material-symbols-outlined text-[12px]">schedule</span>
       <span className="sr-only">{label}: </span>

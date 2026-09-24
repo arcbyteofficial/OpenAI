@@ -61,14 +61,14 @@ export default function ExportCodeModal({ state, onClose }: ExportCodeModalProps
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
       onClick={onClose}
       role="dialog"
       aria-modal="true"
       aria-label={t("exportCode")}
     >
       <div
-        className="bg-surface border border-border rounded-xl w-[640px] max-w-[96vw] max-h-[80vh] flex flex-col shadow-2xl"
+        className="bg-surface border border-border rounded-card w-[640px] max-w-[96vw] max-h-[80vh] flex flex-col shadow-[var(--shadow-elevated)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal header */}
@@ -79,7 +79,7 @@ export default function ExportCodeModal({ state, onClose }: ExportCodeModalProps
           </div>
           <button
             onClick={onClose}
-            className="p-1 rounded text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+            className="p-1 rounded-control text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
             aria-label={t("closeExportModal")}
           >
             <span className="material-symbols-outlined text-[18px]">close</span>
@@ -97,10 +97,10 @@ export default function ExportCodeModal({ state, onClose }: ExportCodeModalProps
                 setActiveLanguage(lang.id);
                 setCopied(false);
               }}
-              className={`px-3 py-1.5 text-xs font-medium rounded transition-colors ${
+              className={`px-3 py-1.5 text-xs font-medium rounded-control transition-colors ${
                 activeLanguage === lang.id
-                  ? "bg-primary/10 text-primary"
-                  : "text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5"
+                  ? "bg-bg-subtle text-text-main"
+                  : "text-text-muted hover:text-text-main hover:bg-bg-subtle"
               }`}
             >
               {lang.label}
@@ -111,11 +111,11 @@ export default function ExportCodeModal({ state, onClose }: ExportCodeModalProps
         {/* Code block */}
         <div className="flex-1 overflow-y-auto px-4 pt-3 pb-4 min-h-0">
           {hasRealKey ? (
-            <div className="text-xs text-destructive bg-destructive/10 rounded p-3">
+            <div className="text-xs text-error bg-error/10 rounded-md p-3">
               {t("exportRealKeyWarning")}
             </div>
           ) : (
-            <pre className="text-xs font-mono text-text-main bg-bg-alt border border-border rounded-lg p-4 overflow-x-auto whitespace-pre-wrap break-all">
+            <pre className="text-xs font-mono text-text-main bg-bg-subtle border border-border rounded-lg p-4 overflow-x-auto whitespace-pre-wrap break-all">
               <code>{currentCode}</code>
             </pre>
           )}
@@ -123,8 +123,8 @@ export default function ExportCodeModal({ state, onClose }: ExportCodeModalProps
           {/* Placeholder hint */}
           <p className="text-[11px] text-text-muted mt-2">
             {t("placeholderHintPrefix")}{" "}
-            <code className="font-mono text-primary">{API_KEY_PLACEHOLDER}</code>
-            {" "}{t("placeholderHintSuffix")}
+            <code className="font-mono text-primary">{API_KEY_PLACEHOLDER}</code>{" "}
+            {t("placeholderHintSuffix")}
           </p>
         </div>
 
@@ -132,17 +132,17 @@ export default function ExportCodeModal({ state, onClose }: ExportCodeModalProps
         <div className="flex items-center justify-end gap-3 px-5 py-3 border-t border-border shrink-0">
           <button
             onClick={onClose}
-            className="text-xs px-3 py-1.5 rounded border border-border text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+            className="text-xs font-medium px-3 py-1.5 rounded-control border border-border-strong text-text-main hover:bg-bg-subtle transition-colors"
           >
             {t("close")}
           </button>
           <button
             onClick={handleCopy}
             disabled={hasRealKey}
-            className={`flex items-center gap-1.5 text-xs px-3 py-1.5 rounded border transition-colors ${
+            className={`flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-control border transition-colors ${
               copied
-                ? "border-green-500 text-green-500 bg-green-500/10"
-                : "border-primary text-primary hover:bg-primary/10"
+                ? "border-success/30 text-success bg-success/10"
+                : "border-contrast bg-contrast text-contrast-fg hover:bg-contrast-hover"
             } disabled:opacity-40 disabled:cursor-not-allowed`}
             aria-label={t("copyLangCode", { language: activeLanguage })}
           >

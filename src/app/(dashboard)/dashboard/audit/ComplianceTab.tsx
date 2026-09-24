@@ -153,9 +153,9 @@ export default function ComplianceTab() {
   };
 
   const severityClass = (value: Severity) => {
-    if (value === "critical") return "border-red-500/30 bg-red-500/10 text-red-600";
-    if (value === "warning") return "border-amber-500/30 bg-amber-500/10 text-amber-600";
-    return "border-blue-500/30 bg-blue-500/10 text-blue-600";
+    if (value === "critical") return "border-error/30 bg-error/10 text-error";
+    if (value === "warning") return "border-warning/30 bg-warning/10 text-warning";
+    return "border-primary/30 bg-primary/10 text-primary";
   };
 
   return (
@@ -163,7 +163,7 @@ export default function ComplianceTab() {
       <Card className="p-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <h2 className="text-xl font-semibold text-text-main">{t("title")}</h2>
+            <h2 className="text-xl font-semibold tracking-tight text-text-main">{t("title")}</h2>
             <p className="mt-1 text-sm text-text-muted">{t("description")}</p>
             <p className="mt-2 text-xs text-text-muted">
               {t("showing", { count: visibleEntries.length, total: totalCount })}
@@ -173,7 +173,7 @@ export default function ComplianceTab() {
             <button
               onClick={() => void fetchEntries()}
               disabled={loading}
-              className="inline-flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar disabled:opacity-40"
+              className="inline-flex items-center gap-2 rounded-control border border-border-strong px-3 py-2 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-40"
             >
               <span
                 className={`material-symbols-outlined text-[16px] ${loading ? "animate-spin" : ""}`}
@@ -185,7 +185,7 @@ export default function ComplianceTab() {
             <button
               onClick={exportVisibleEntries}
               disabled={visibleEntries.length === 0}
-              className="inline-flex items-center gap-2 rounded-lg bg-primary px-3 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90 disabled:opacity-40"
+              className="inline-flex items-center gap-2 rounded-control bg-contrast px-3 py-2 text-[13px] font-medium text-contrast-fg transition-colors hover:bg-contrast-hover disabled:opacity-40"
             >
               <span className="material-symbols-outlined text-[16px]">download</span>
               {t("export")}
@@ -197,7 +197,7 @@ export default function ComplianceTab() {
       <Card className="p-4">
         <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-6">
           <label className="space-y-1">
-            <span className="text-xs font-medium uppercase tracking-wider text-text-muted">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
               {t("eventType")}
             </span>
             <input
@@ -208,7 +208,7 @@ export default function ComplianceTab() {
                 setEventType(event.target.value);
               }}
               placeholder={t("eventTypePlaceholder")}
-              className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
             />
             <datalist id="compliance-event-types">
               {eventTypes.map((type) => (
@@ -217,7 +217,7 @@ export default function ComplianceTab() {
             </datalist>
           </label>
           <label className="space-y-1">
-            <span className="text-xs font-medium uppercase tracking-wider text-text-muted">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
               {t("actor")}
             </span>
             <input
@@ -228,7 +228,7 @@ export default function ComplianceTab() {
                 setActor(event.target.value);
               }}
               placeholder={t("actorPlaceholder")}
-              className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
             />
             <datalist id="compliance-actors">
               {actors.map((a) => (
@@ -237,7 +237,7 @@ export default function ComplianceTab() {
             </datalist>
           </label>
           <label className="space-y-1">
-            <span className="text-xs font-medium uppercase tracking-wider text-text-muted">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
               {t("severity")}
             </span>
             <select
@@ -246,7 +246,7 @@ export default function ComplianceTab() {
                 setOffset(0);
                 setSeverity(event.target.value as "all" | Severity);
               }}
-              className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
             >
               <option value="all">{t("allSeverities")}</option>
               <option value="info">{t("info")}</option>
@@ -255,7 +255,7 @@ export default function ComplianceTab() {
             </select>
           </label>
           <label className="space-y-1">
-            <span className="text-xs font-medium uppercase tracking-wider text-text-muted">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
               {t("from")}
             </span>
             <input
@@ -265,11 +265,11 @@ export default function ComplianceTab() {
                 setOffset(0);
                 setFrom(event.target.value);
               }}
-              className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
             />
           </label>
           <label className="space-y-1">
-            <span className="text-xs font-medium uppercase tracking-wider text-text-muted">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
               {t("to")}
             </span>
             <input
@@ -279,13 +279,13 @@ export default function ComplianceTab() {
                 setOffset(0);
                 setTo(event.target.value);
               }}
-              className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
             />
           </label>
           <div className="flex items-end">
             <button
               onClick={resetFilters}
-              className="w-full rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar"
+              className="w-full rounded-control border border-border-strong px-3 py-2 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle"
             >
               {t("clearFilters")}
             </button>
@@ -294,23 +294,23 @@ export default function ComplianceTab() {
       </Card>
 
       {error && (
-        <div className="rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-600">
+        <div className="rounded-lg border border-error/30 bg-error/10 px-4 py-3 text-sm text-error">
           {error}
         </div>
       )}
 
-      <Card className="overflow-hidden">
+      <Card className="overflow-hidden p-0">
         {loading ? (
           <div className="p-8 text-center text-sm text-text-muted">{t("loading")}</div>
         ) : visibleEntries.length === 0 ? (
-          <div className="p-10 text-center">
-            <span className="material-symbols-outlined text-[40px] text-text-muted">policy</span>
+          <div className="p-8 text-center">
+            <span className="material-symbols-outlined text-[32px] text-text-subtle">policy</span>
             <p className="mt-3 text-sm text-text-muted">{t("noEvents")}</p>
           </div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[1040px] text-left text-sm">
-              <thead className="border-b border-border bg-sidebar/40 text-xs uppercase tracking-wider text-text-muted">
+            <table className="w-full min-w-[1040px] text-left text-[13px]">
+              <thead className="border-b border-border bg-bg-subtle/50 text-xs text-text-muted">
                 <tr>
                   <th className="px-4 py-3 font-medium">{t("timestamp")}</th>
                   <th className="px-4 py-3 font-medium">{t("eventType")}</th>
@@ -326,12 +326,12 @@ export default function ComplianceTab() {
                 {visibleEntries.map((entry) => {
                   const entrySeverity = getSeverity(entry);
                   return (
-                    <tr key={entry.id} className="transition-colors hover:bg-sidebar/30">
+                    <tr key={entry.id} className="transition-colors hover:bg-bg-subtle/60">
                       <td className="whitespace-nowrap px-4 py-3 font-mono text-xs text-text-muted">
                         {formatLocalDate(entry.timestamp)}
                       </td>
                       <td className="px-4 py-3">
-                        <span className="rounded-md border border-border bg-surface px-2 py-1 font-mono text-xs text-text-main">
+                        <span className="rounded-md border border-border bg-bg-subtle px-1.5 py-0.5 font-mono text-[12px] text-text-main">
                           {t.has(`eventTypes.${entry.action}`)
                             ? t(`eventTypes.${entry.action}`)
                             : entry.action}
@@ -339,7 +339,7 @@ export default function ComplianceTab() {
                       </td>
                       <td className="px-4 py-3">
                         <span
-                          className={`inline-flex rounded-full border px-2 py-1 text-xs font-medium ${severityClass(entrySeverity)}`}
+                          className={`inline-flex rounded-full border px-2 py-0.5 text-xs font-medium ${severityClass(entrySeverity)}`}
                         >
                           {t(entrySeverity)}
                         </span>
@@ -357,7 +357,7 @@ export default function ComplianceTab() {
                       <td className="px-4 py-3 text-right">
                         <button
                           onClick={() => setSelectedEntry(entry)}
-                          className="rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-text-main transition-colors hover:bg-sidebar"
+                          className="rounded-control border border-border-strong px-2.5 py-1 text-xs font-medium text-text-main transition-colors hover:bg-bg-subtle"
                         >
                           {t("viewDetails")}
                         </button>
@@ -375,14 +375,14 @@ export default function ComplianceTab() {
         <button
           onClick={() => setOffset((current) => Math.max(0, current - PAGE_SIZE))}
           disabled={offset === 0 || loading}
-          className="rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar disabled:opacity-40"
+          className="rounded-control border border-border-strong px-3 py-2 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-40"
         >
           {t("previous")}
         </button>
         <button
           onClick={() => setOffset((current) => current + PAGE_SIZE)}
           disabled={!canGoNext || loading}
-          className="rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar disabled:opacity-40"
+          className="rounded-control border border-border-strong px-3 py-2 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-40"
         >
           {t("next")}
         </button>
@@ -392,20 +392,22 @@ export default function ComplianceTab() {
         <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
           <button
             aria-label={t("closeDetails")}
-            className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+            className="absolute inset-0 bg-black/40 backdrop-blur-sm"
             onClick={() => setSelectedEntry(null)}
           />
-          <div className="relative w-full max-w-3xl rounded-xl border border-border bg-surface shadow-2xl">
+          <div className="relative w-full max-w-3xl rounded-card border border-border bg-surface shadow-[var(--shadow-elevated)]">
             <div className="flex items-center justify-between border-b border-border p-4">
-              <h3 className="text-lg font-semibold text-text-main">{t("details")}</h3>
+              <h3 className="text-base font-semibold tracking-tight text-text-main">
+                {t("details")}
+              </h3>
               <button
                 onClick={() => setSelectedEntry(null)}
-                className="rounded-lg p-2 text-text-muted hover:bg-sidebar hover:text-text-main"
+                className="rounded-control p-1.5 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
               >
-                <span className="material-symbols-outlined text-[20px]">close</span>
+                <span className="material-symbols-outlined text-[18px]">close</span>
               </button>
             </div>
-            <pre className="max-h-[70vh] overflow-auto p-4 text-xs text-text-main">
+            <pre className="max-h-[70vh] overflow-auto p-4 font-mono text-[12px] text-text-main">
               {formatJson(selectedEntry)}
             </pre>
           </div>

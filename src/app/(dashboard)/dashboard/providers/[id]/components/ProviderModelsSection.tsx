@@ -187,7 +187,7 @@ export default function ProviderModelsSection({
     <button
       onClick={handleToggleAutoFetchModels}
       disabled={togglingAutoFetchModels}
-      className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-border bg-transparent cursor-pointer text-[12px] disabled:opacity-50 disabled:cursor-not-allowed"
+      className="flex items-center gap-1.5 px-2.5 py-1 rounded-control border border-border-strong bg-surface cursor-pointer text-[12px] transition-colors hover:bg-bg-subtle disabled:opacity-50 disabled:cursor-not-allowed"
       title={providerText(
         t,
         "autoFetchModelsTooltip",
@@ -209,7 +209,7 @@ export default function ProviderModelsSection({
     <button
       onClick={handleToggleAutoSync}
       disabled={togglingAutoSync}
-      className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-border bg-transparent cursor-pointer text-[12px] disabled:opacity-50 disabled:cursor-not-allowed"
+      className="flex items-center gap-1.5 px-2.5 py-1 rounded-control border border-border-strong bg-surface cursor-pointer text-[12px] transition-colors hover:bg-bg-subtle disabled:opacity-50 disabled:cursor-not-allowed"
       title={t("autoSyncTooltip")}
     >
       <span
@@ -232,7 +232,7 @@ export default function ProviderModelsSection({
     <button
       onClick={handleClearAllModels}
       disabled={clearingModels}
-      className="flex items-center gap-1.5 px-2.5 py-1 rounded-lg border border-red-300 dark:border-red-800 bg-transparent cursor-pointer text-[12px] text-red-600 dark:text-red-400 hover:bg-red-50 dark:hover:bg-red-900/20 disabled:opacity-50 disabled:cursor-not-allowed"
+      className="flex items-center gap-1.5 px-2.5 py-1 rounded-control border border-error/30 bg-surface cursor-pointer text-[12px] text-error transition-colors hover:bg-error/10 disabled:opacity-50 disabled:cursor-not-allowed"
       title={t("clearAllModels")}
     >
       <span className="material-symbols-outlined text-[16px]">delete_sweep</span>

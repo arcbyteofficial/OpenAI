@@ -193,9 +193,9 @@ function useProviderCcAliasState(providerId: string, t: ProviderMessageTranslato
 
 function CcAliasSectionSkeleton() {
   return (
-    <div className="rounded-xl border border-border bg-white p-5 dark:bg-zinc-950">
-      <div className="h-5 w-64 animate-pulse rounded bg-zinc-200 dark:bg-zinc-800" />
-      <div className="mt-4 h-16 animate-pulse rounded bg-zinc-100 dark:bg-zinc-900" />
+    <div className="rounded-card border border-border bg-surface p-5">
+      <div className="h-5 w-64 animate-pulse rounded-md bg-bg-subtle" />
+      <div className="mt-4 h-16 animate-pulse rounded-md bg-bg-subtle" />
     </div>
   );
 }
@@ -228,7 +228,7 @@ function TriStateSelect({ t, value, disabled, onChange, ariaLabel }: TriStateSel
       disabled={disabled}
       value={toTriState(value)}
       onChange={(e) => onChange(fromTriState(e.target.value as TriState))}
-      className="rounded-md border border-border bg-sidebar/50 px-2 py-1 text-xs text-text-main focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+      className="rounded-control border border-border-strong bg-surface px-2 py-1 text-xs text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
     >
       <option value="inherit">{providerText(t, "ccAliasStateInherit", "Inherit")}</option>
       <option value="on">{providerText(t, "ccAliasStateOn", "On")}</option>
@@ -258,8 +258,8 @@ export default function ProviderCcAliasSection({ providerId }: ProviderCcAliasSe
   const modelEntries = Object.entries(state.models);
 
   return (
-    <div className="rounded-xl border border-border bg-white p-5 dark:bg-zinc-950">
-      <h2 className="text-base font-semibold text-text-main mb-1">
+    <div className="rounded-card border border-border bg-surface p-5">
+      <h2 className="text-base font-semibold tracking-tight text-text-main mb-1">
         {providerText(t, "ccAliasSectionTitle", "Expose in Claude Code (claude/…)")}
       </h2>
       <p className="text-xs text-text-muted mb-4 leading-relaxed">
@@ -320,7 +320,7 @@ function ModelOverrideList({
       </span>
       {entries.map(([modelId, value]) => (
         <div key={modelId} className="flex items-center justify-between gap-3">
-          <code className="rounded bg-sidebar px-1.5 py-0.5 font-mono text-xs text-text-muted truncate">
+          <code className="rounded-md bg-bg-subtle px-1.5 py-0.5 font-mono text-xs text-text-muted truncate">
             {modelId}
           </code>
           <TriStateSelect
@@ -363,13 +363,13 @@ function AddOverrideRow({
           onSubmit();
         }}
         placeholder={providerText(t, "ccAliasAddModelPlaceholder", "Model id (e.g. gpt-4o)")}
-        className="flex-1 rounded-lg border border-border bg-sidebar/50 px-3 py-1.5 text-xs text-text-main placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-primary"
+        className="flex-1 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
       />
       <button
         type="button"
         onClick={onSubmit}
         disabled={!value.trim() || disabled}
-        className="rounded-lg border border-border px-3 py-1.5 text-xs font-medium text-text-main hover:border-primary/40 disabled:cursor-not-allowed disabled:opacity-50"
+        className="rounded-control border border-border-strong bg-surface px-3 py-1.5 text-xs font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:cursor-not-allowed disabled:opacity-50"
       >
         {providerText(t, "ccAliasAddModelButton", "Add override")}
       </button>

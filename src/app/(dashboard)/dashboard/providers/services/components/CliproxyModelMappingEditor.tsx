@@ -146,15 +146,17 @@ export function CliproxyModelMappingEditor() {
   return (
     <Card padding="md">
       <div className="flex items-center gap-3 mb-4">
-        <div className="size-8 rounded-lg flex items-center justify-center bg-violet-500/10">
-          <span className="material-symbols-outlined text-violet-500 text-xl">account_tree</span>
+        <div className="size-8 rounded-lg flex items-center justify-center bg-bg-subtle border border-border">
+          <span className="material-symbols-outlined text-text-muted text-[18px]">
+            account_tree
+          </span>
         </div>
         <div>
-          <h3 className="font-medium text-sm">{t("modelMapping")}</h3>
+          <h3 className="font-semibold text-sm text-text-main">{t("modelMapping")}</h3>
           <p className="text-xs text-text-muted">
             {t.rich("modelMappingDescription", {
               example: () => (
-                <code className="font-mono bg-bg-subtle px-1 rounded">
+                <code className="font-mono text-[12px] bg-bg-subtle px-1 rounded">
                   {'"gpt-4o": "openai-gpt-4o"'}
                 </code>
               ),
@@ -165,10 +167,8 @@ export function CliproxyModelMappingEditor() {
 
       {msg && (
         <div
-          className={`flex items-center gap-1.5 mb-3 px-2 py-1.5 rounded text-xs ${
-            msg.ok
-              ? "bg-green-500/10 text-green-600 dark:text-green-400"
-              : "bg-red-500/10 text-red-600 dark:text-red-400"
+          className={`flex items-center gap-1.5 mb-3 px-2 py-1.5 rounded-md text-xs ${
+            msg.ok ? "bg-success/10 text-success" : "bg-error/10 text-error"
           }`}
         >
           <span className="material-symbols-outlined text-[12px]">
@@ -179,10 +179,10 @@ export function CliproxyModelMappingEditor() {
       )}
 
       <textarea
-        className={`w-full font-mono text-xs rounded border px-3 py-2 resize-y min-h-[120px] bg-bg-subtle focus:outline-none focus:ring-1 transition-colors ${
+        className={`w-full font-mono text-[12px] text-text-main rounded-control border px-3 py-2 resize-y min-h-[120px] bg-surface focus:outline-none focus:ring-[3px] transition-[border-color,box-shadow] ${
           !isValid && rawText !== EMPTY_MAPPING
-            ? "border-red-400 focus:ring-red-400"
-            : "border-border focus:ring-primary"
+            ? "border-error focus:ring-error/15"
+            : "border-border-strong focus:border-primary focus:ring-primary/15"
         }`}
         value={rawText}
         onChange={(e) => {
@@ -194,7 +194,7 @@ export function CliproxyModelMappingEditor() {
       />
 
       {validationMessage && rawText !== EMPTY_MAPPING && (
-        <p className="mt-1.5 text-xs text-red-600 dark:text-red-400 flex items-start gap-1">
+        <p className="mt-1.5 text-xs text-error flex items-start gap-1">
           <span className="material-symbols-outlined text-[12px] mt-0.5 shrink-0">error</span>
           {validationMessage}
         </p>
@@ -204,9 +204,9 @@ export function CliproxyModelMappingEditor() {
         <button
           onClick={handleSave}
           disabled={!canSave}
-          className={`inline-flex items-center gap-1.5 rounded px-3 py-1.5 text-xs font-medium transition-colors ${
+          className={`inline-flex items-center gap-1.5 rounded-control px-3 py-1.5 text-xs font-medium transition-colors ${
             canSave
-              ? "bg-primary text-primary-foreground hover:bg-primary/90"
+              ? "bg-contrast text-contrast-fg hover:bg-contrast-hover"
               : "bg-bg-subtle text-text-muted cursor-not-allowed"
           }`}
         >

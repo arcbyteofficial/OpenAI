@@ -20,12 +20,12 @@ export function TimingWaterfall({ request }: TimingWaterfallProps) {
     {
       label: t("timingProxyOverhead"),
       ms: proxyLatencyMs ?? 0,
-      color: "bg-blue-500",
+      color: "bg-text-subtle",
     },
     {
       label: t("timingUpstreamResponse"),
       ms: upstreamLatencyMs ?? 0,
-      color: "bg-green-500",
+      color: "bg-primary",
     },
   ];
 
@@ -36,9 +36,11 @@ export function TimingWaterfall({ request }: TimingWaterfallProps) {
           const pct = total > 0 ? (seg.ms / total) * 100 : 0;
           return (
             <div key={seg.label} className="space-y-1">
-              <div className="flex justify-between text-xs text-text-muted">
+              <div className="flex justify-between text-xs text-text-muted tabular-nums">
                 <span>{seg.label}</span>
-                <span>{seg.ms}ms ({pct.toFixed(1)}%)</span>
+                <span>
+                  {seg.ms}ms ({pct.toFixed(1)}%)
+                </span>
               </div>
               <div className="h-4 w-full rounded bg-bg-subtle">
                 <div
@@ -50,7 +52,7 @@ export function TimingWaterfall({ request }: TimingWaterfallProps) {
           );
         })}
       </div>
-      <div className="flex justify-between text-xs font-medium text-text-main border-t border-border pt-2">
+      <div className="flex justify-between text-xs font-medium text-text-main tabular-nums border-t border-border pt-2">
         <span>{t("timingTotalLatency")}</span>
         <span>{total}ms</span>
       </div>

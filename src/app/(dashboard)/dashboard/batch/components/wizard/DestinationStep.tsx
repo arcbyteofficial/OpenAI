@@ -32,15 +32,11 @@ export default function DestinationStep({
   if (batchProviders.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-12 gap-4 text-center">
-        <span className="material-symbols-outlined text-4xl text-[var(--color-text-muted)]">
-          cloud_off
-        </span>
-        <p className="text-sm text-[var(--color-text-muted)] max-w-sm">
-          {t("wizardEmptyProviders")}
-        </p>
+        <span className="material-symbols-outlined text-[32px] text-text-subtle">cloud_off</span>
+        <p className="text-sm text-text-muted max-w-sm">{t("wizardEmptyProviders")}</p>
         <Link
           href="/dashboard/providers"
-          className="text-sm text-[var(--color-accent)] underline underline-offset-2 hover:opacity-80"
+          className="text-sm text-primary underline underline-offset-2 hover:opacity-80"
         >
           {t("wizardDestinationConnectProvider")}
         </Link>
@@ -52,8 +48,7 @@ export default function DestinationStep({
   const selectedEndpoint = destination?.endpoint ?? "/v1/chat/completions";
   const selectedModel = destination?.model ?? "";
 
-  const providerModels =
-    batchProviders.find((p) => p.id === selectedProvider)?.models ?? [];
+  const providerModels = batchProviders.find((p) => p.id === selectedProvider)?.models ?? [];
 
   function handleProviderChange(providerId: string) {
     if (!providerId) {
@@ -93,17 +88,15 @@ export default function DestinationStep({
   }
 
   const selectClass =
-    "w-full rounded-lg border border-[var(--color-border)] bg-[var(--color-bg-alt)] " +
-    "px-3 py-2 text-sm text-[var(--color-text)] focus:outline-none " +
-    "focus:ring-1 focus:ring-[var(--color-accent)] disabled:opacity-50";
+    "w-full rounded-control border border-border-strong bg-surface " +
+    "px-3 py-2 text-sm text-text-main focus:outline-none " +
+    "focus:border-primary focus:ring-[3px] focus:ring-primary/15 disabled:opacity-50";
 
   return (
     <div className="flex flex-col gap-6">
       {/* Provider */}
       <div className="flex flex-col gap-2">
-        <label className="text-sm font-medium text-[var(--color-text-muted)]">
-          {t("wizardProviderLabel")}
-        </label>
+        <label className="text-sm font-medium text-text-muted">{t("wizardProviderLabel")}</label>
         <select
           className={selectClass}
           value={selectedProvider}
@@ -120,9 +113,7 @@ export default function DestinationStep({
 
       {/* Endpoint */}
       <div className="flex flex-col gap-2">
-        <label className="text-sm font-medium text-[var(--color-text-muted)]">
-          {t("wizardEndpointLabel")}
-        </label>
+        <label className="text-sm font-medium text-text-muted">{t("wizardEndpointLabel")}</label>
         <select
           className={selectClass}
           value={selectedEndpoint}
@@ -139,9 +130,7 @@ export default function DestinationStep({
 
       {/* Model */}
       <div className="flex flex-col gap-2">
-        <label className="text-sm font-medium text-[var(--color-text-muted)]">
-          {t("wizardModelLabel")}
-        </label>
+        <label className="text-sm font-medium text-text-muted">{t("wizardModelLabel")}</label>
         <select
           className={selectClass}
           value={selectedModel}

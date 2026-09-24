@@ -139,38 +139,35 @@ export default function Breadcrumbs() {
         alignItems: "center",
         gap: "6px",
         fontSize: "13px",
-        color: "var(--text-secondary, #888)",
-        padding: "8px 0",
-        marginBottom: "8px",
+        color: "var(--color-text-muted)",
+        padding: "0",
+        marginBottom: "12px",
       }}
     >
       {crumbs.map((crumb, i) => (
         <span key={crumb.href} style={{ display: "flex", alignItems: "center", gap: "6px" }}>
           {i > 0 && (
-            <span style={{ opacity: 0.4, fontSize: "11px" }} aria-hidden="true">
+            <span style={{ opacity: 0.4, fontSize: "12px" }} aria-hidden="true">
               ›
             </span>
           )}
           {crumb.isLast ? (
-            <span
-              aria-current="page"
-              style={{ color: "var(--text-primary, #e0e0e0)", fontWeight: 500 }}
-            >
+            <span aria-current="page" style={{ color: "var(--color-text-main)", fontWeight: 500 }}>
               {crumb.label}
             </span>
           ) : (
             <Link
               href={crumb.href}
               style={{
-                color: "var(--text-secondary, #888)",
+                color: "var(--color-text-muted)",
                 textDecoration: "none",
                 transition: "color 0.15s",
               }}
               onMouseEnter={(e) =>
-                ((e.currentTarget as HTMLElement).style.color = "var(--accent, #818cf8)")
+                ((e.currentTarget as HTMLElement).style.color = "var(--color-text-main)")
               }
               onMouseLeave={(e) =>
-                ((e.currentTarget as HTMLElement).style.color = "var(--text-secondary, #888)")
+                ((e.currentTarget as HTMLElement).style.color = "var(--color-text-muted)")
               }
             >
               {crumb.label}

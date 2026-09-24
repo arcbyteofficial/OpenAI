@@ -60,12 +60,12 @@ export function OmniSkillsList({
               value={searchTerm}
               onChange={(e) => onSearchTermChange(e.target.value)}
               placeholder={t("filterSkillsPlaceholder")}
-              className="px-3 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring-1 focus:ring-violet-500"
+              className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
             />
             <select
               value={modeFilter}
               onChange={(e) => onModeFilterChange(e.target.value as "all" | "on" | "off" | "auto")}
-              className="px-3 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring-1 focus:ring-violet-500"
+              className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
             >
               <option value="all">{t("allModes")}</option>
               <option value="on">{t("onMode")}</option>
@@ -74,7 +74,7 @@ export function OmniSkillsList({
             </select>
             <button
               onClick={onApplyFilters}
-              className="px-4 py-2 text-sm font-medium rounded-lg bg-violet-500 text-white hover:bg-violet-600 transition-colors"
+              className="px-4 py-2 text-sm font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors"
             >
               {t("applyFilters")}
             </button>
@@ -87,7 +87,7 @@ export function OmniSkillsList({
                 {popularDefaults.map((name) => (
                   <span
                     key={name}
-                    className="text-xs px-2 py-1 rounded bg-violet-500/10 text-violet-300 border border-violet-500/20"
+                    className="text-xs px-2 py-1 rounded-md bg-bg-subtle text-text-muted border border-border"
                   >
                     {name}
                   </span>
@@ -99,7 +99,7 @@ export function OmniSkillsList({
 
         {skills.length === 0 ? (
           <Card>
-            <div className="text-center py-8 text-text-muted">{t("noSkills")}</div>
+            <div className="text-center py-8 text-sm text-text-muted">{t("noSkills")}</div>
           </Card>
         ) : (
           <div className="flex flex-col gap-2">
@@ -115,7 +115,7 @@ export function OmniSkillsList({
         )}
 
         <div className="flex items-center justify-between pt-2 border-t border-border">
-          <span className="text-sm text-text-muted">
+          <span className="text-[13px] text-text-muted">
             {t("pageInfo", {
               page: skillsPage,
               totalPages: skillsTotalPages,
@@ -126,14 +126,14 @@ export function OmniSkillsList({
             <button
               onClick={onPagePrev}
               disabled={skillsPage === 1}
-              className="px-3 py-1 text-sm rounded border border-border text-text-muted hover:text-text-main disabled:opacity-40 transition-colors"
+              className="px-3 py-1 text-[13px] rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle disabled:opacity-40 transition-colors"
             >
               {t("previous")}
             </button>
             <button
               onClick={onPageNext}
               disabled={skillsPage === skillsTotalPages || skillsTotalPages === 0}
-              className="px-3 py-1 text-sm rounded border border-border text-text-muted hover:text-text-main disabled:opacity-40 transition-colors"
+              className="px-3 py-1 text-[13px] rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle disabled:opacity-40 transition-colors"
             >
               {t("next")}
             </button>
@@ -143,7 +143,7 @@ export function OmniSkillsList({
 
       {/* Right: inspector pane */}
       <div className="col-span-12 lg:col-span-5">
-        <div className="sticky top-4 rounded-xl border border-border bg-surface/30 overflow-hidden min-h-[400px]">
+        <div className="sticky top-4 rounded-card border border-border bg-surface overflow-hidden min-h-[400px]">
           <SkillInspectorPane
             selectedSkillId={selectedSkillId}
             skill={selectedSkill}

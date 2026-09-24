@@ -202,12 +202,12 @@ function RunHeader({ item, t, testId }: { item: HistoryItem; t: Translate; testI
           style={{ backgroundColor: orchStateColor(item.state) }}
           aria-hidden="true"
         />
-        <span className="text-xs font-semibold truncate">{item.identity}</span>
+        <span className="text-xs font-semibold text-text-main truncate">{item.identity}</span>
       </div>
-      <div className="text-[10px] text-muted">
+      <div className="text-[10px] text-text-muted">
         {t(sourceKey)} · {t(STATE_KEY[item.state])}
       </div>
-      <div className="text-[10px] text-muted">{formatDateTime(item.createdAt, "date")}</div>
+      <div className="text-[10px] text-text-muted">{formatDateTime(item.createdAt, "date")}</div>
     </div>
   );
 }
@@ -231,13 +231,13 @@ function MetricRow({
   deltaText: string;
 }) {
   return (
-    <div className="grid grid-cols-[70px_1fr_1fr_70px] gap-2 text-[11px] items-center min-w-[480px]">
-      <span className="text-muted uppercase text-[9px]">{label}</span>
+    <div className="grid grid-cols-[70px_1fr_1fr_70px] gap-2 text-[11px] tabular-nums items-center min-w-[480px]">
+      <span className="text-text-subtle uppercase tracking-wider text-[9px]">{label}</span>
       <span data-testid={`orchestration-compare-metric-${metricKey}-left`}>{leftText}</span>
       <span data-testid={`orchestration-compare-metric-${metricKey}-right`}>{rightText}</span>
       <span
         data-testid={`orchestration-compare-metric-${metricKey}-delta`}
-        className="text-right font-medium"
+        className="text-right font-medium text-text-main"
       >
         {deltaText}
       </span>
@@ -246,7 +246,7 @@ function MetricRow({
 }
 
 function EventCell({ event }: { event: RunEvent | null }) {
-  if (!event) return <span className="text-muted">—</span>;
+  if (!event) return <span className="text-text-subtle">—</span>;
   return (
     <span className="truncate block">
       {event.label}
@@ -267,7 +267,7 @@ function TimelineRows({ comparison, t }: { comparison: RunComparison; t: Transla
   }));
   return (
     <div className="mt-2">
-      <div className="text-[10px] font-semibold uppercase text-muted mb-1">
+      <div className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-1">
         {t("compareEvents")}
       </div>
       <div className="flex flex-col gap-1 min-w-[480px]">
@@ -287,12 +287,12 @@ function TimelineRows({ comparison, t }: { comparison: RunComparison; t: Transla
 }
 
 function MemoryList({ hits }: { hits: RunMemoryHit[] }) {
-  if (hits.length === 0) return <span className="text-muted">—</span>;
+  if (hits.length === 0) return <span className="text-text-subtle">—</span>;
   return (
     <ul className="flex flex-col gap-1">
       {hits.map((h) => (
         <li key={h.id} className="truncate">
-          <code className="text-[9px] text-muted mr-1">{h.type}</code>
+          <code className="font-mono text-[9px] text-text-muted mr-1">{h.type}</code>
           <span className="font-medium">{h.key}</span>
         </li>
       ))}
@@ -307,7 +307,9 @@ function MemorySection({ comparison, t }: { comparison: RunComparison; t: Transl
   if (left.memoryHits.length === 0 && right.memoryHits.length === 0) return null;
   return (
     <div className="mt-2">
-      <div className="text-[10px] font-semibold uppercase text-muted mb-1">{t("drawerMemory")}</div>
+      <div className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-1">
+        {t("drawerMemory")}
+      </div>
       <div className="grid grid-cols-2 gap-2 text-[11px] min-w-[480px]">
         <MemoryList hits={left.memoryHits} />
         <MemoryList hits={right.memoryHits} />
@@ -343,12 +345,14 @@ function SideErrorCell({
 function ComparePanelHeaderBar({ t, onClose }: { t: Translate; onClose: () => void }) {
   return (
     <div className="flex items-center justify-between mb-2 min-w-[480px]">
-      <span className="text-xs font-semibold">{t("compareTitle")}</span>
+      <span className="text-xs font-semibold tracking-tight text-text-main">
+        {t("compareTitle")}
+      </span>
       <button
         type="button"
         data-testid="orchestration-compare-close"
         aria-label={t("drawerClose")}
-        className="text-muted"
+        className="rounded-md px-1.5 py-0.5 text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
         onClick={onClose}
       >
         ✕
@@ -398,7 +402,7 @@ function ComparisonMetrics({
 }) {
   return (
     <div className="flex flex-col gap-1">
-      <div className="grid grid-cols-[70px_1fr_1fr_70px] gap-2 text-[9px] items-center min-w-[480px] text-muted">
+      <div className="grid grid-cols-[70px_1fr_1fr_70px] gap-2 text-[9px] items-center min-w-[480px] text-text-subtle">
         <span />
         <span />
         <span />
@@ -457,7 +461,7 @@ export function CompareRunsPanel({
   return (
     <div
       data-testid="orchestration-history-compare-panel"
-      className="border border-border rounded p-2 overflow-x-auto overflow-y-auto max-h-[45vh] shrink-0"
+      className="border border-border rounded-card bg-surface p-3 text-text-main overflow-x-auto overflow-y-auto max-h-[45vh] shrink-0"
     >
       <ComparePanelHeaderBar t={t} onClose={onClose} />
 

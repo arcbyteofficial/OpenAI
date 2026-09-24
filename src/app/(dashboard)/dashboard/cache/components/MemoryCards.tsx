@@ -23,7 +23,7 @@ function StatCard({
   label,
   value,
   sub,
-  valueClass = "text-text",
+  valueClass = "text-text-main",
 }: {
   icon: string;
   label: string;
@@ -32,14 +32,16 @@ function StatCard({
   valueClass?: string;
 }) {
   return (
-    <div className="flex flex-col gap-1 p-4 rounded-xl bg-surface-raised border border-border/40">
-      <div className="flex items-center gap-1.5 text-text-muted text-xs">
+    <div className="flex flex-col gap-1 p-4 rounded-card bg-surface border border-border">
+      <div className="flex items-center gap-1.5 text-text-muted text-[13px]">
         <span className="material-symbols-outlined text-base leading-none" aria-hidden="true">
           {icon}
         </span>
         {label}
       </div>
-      <div className={`text-2xl font-semibold tabular-nums ${valueClass}`}>{value}</div>
+      <div className={`text-2xl font-semibold tracking-tight tabular-nums ${valueClass}`}>
+        {value}
+      </div>
       {sub && <div className="text-xs text-text-muted">{sub}</div>}
     </div>
   );
@@ -51,7 +53,7 @@ function SkeletonCard() {
   return (
     <div
       data-testid="skeleton"
-      className="h-24 rounded-xl bg-surface-raised border border-border/40 animate-pulse"
+      className="h-24 rounded-card bg-bg-subtle border border-border animate-pulse"
     />
   );
 }
@@ -89,16 +91,16 @@ export default function MemoryCards({
     return (
       <div
         data-testid="memory-cards"
-        className="flex flex-col items-center gap-3 p-6 rounded-xl bg-surface-raised border border-border/40 text-center transition-opacity duration-200"
+        className="flex flex-col items-center gap-3 p-6 rounded-card bg-surface border border-border text-center transition-opacity duration-200"
       >
-        <span className="material-symbols-outlined text-3xl text-red-400" aria-hidden="true">
+        <span className="material-symbols-outlined text-3xl text-error" aria-hidden="true">
           error_outline
         </span>
         <p className="text-sm text-text-muted">{error}</p>
         {onRetry && (
           <button
             onClick={onRetry}
-            className="mt-1 px-4 py-1.5 rounded-lg bg-primary text-primary-foreground text-xs font-medium hover:opacity-90 transition-opacity"
+            className="mt-1 px-4 py-1.5 rounded-control bg-contrast text-contrast-fg text-xs font-medium hover:bg-contrast-hover transition-colors"
           >
             Retry
           </button>
@@ -124,14 +126,14 @@ export default function MemoryCards({
         label={t("cacheHits")}
         value={hits}
         sub={hitRate ?? ""}
-        valueClass="text-green-500"
+        valueClass="text-success"
       />
       <StatCard
         icon="token"
         label={t("tokensSaved")}
         value={tokensSaved}
         sub={t("tokensSavedSub")}
-        valueClass="text-blue-400"
+        valueClass="text-text-main"
       />
     </div>
   );

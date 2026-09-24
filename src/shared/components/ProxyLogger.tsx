@@ -200,12 +200,12 @@ export default function ProxyLogger() {
           onClick={() => setRecording(!recording)}
           className={`flex items-center gap-2 px-3 py-1.5 rounded-full text-sm font-medium border transition-colors ${
             recording
-              ? "bg-red-500/10 border-red-500/30 text-red-400"
-              : "bg-bg-subtle border-border text-text-muted"
+              ? "bg-error/10 border-error/30 text-error"
+              : "bg-surface border-border-strong text-text-muted hover:bg-bg-subtle"
           }`}
         >
           <span
-            className={`w-2 h-2 rounded-full ${recording ? "bg-red-500 animate-pulse" : "bg-text-muted"}`}
+            className={`w-2 h-2 rounded-full ${recording ? "bg-error animate-pulse" : "bg-text-subtle"}`}
           />
           {recording ? t("recording") : t("paused")}
         </button>
@@ -220,7 +220,7 @@ export default function ProxyLogger() {
             placeholder={t("searchPlaceholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full pl-10 pr-4 py-2 rounded-lg bg-bg-subtle border border-border text-sm text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary"
+            className="w-full pl-10 pr-4 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
           />
         </div>
 
@@ -228,7 +228,7 @@ export default function ProxyLogger() {
         <select
           value={selectedType}
           onChange={(e) => setSelectedType(e.target.value)}
-          className="px-3 py-2 rounded-lg bg-bg-subtle border border-border text-sm text-text-primary focus:outline-none focus:border-primary appearance-none cursor-pointer min-w-[120px]"
+          className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary appearance-none cursor-pointer min-w-[120px]"
         >
           <option value="">{t("allTypes")}</option>
           {uniqueTypes.map((t) => (
@@ -242,7 +242,7 @@ export default function ProxyLogger() {
         <select
           value={selectedLevel}
           onChange={(e) => setSelectedLevel(e.target.value)}
-          className="px-3 py-2 rounded-lg bg-bg-subtle border border-border text-sm text-text-primary focus:outline-none focus:border-primary appearance-none cursor-pointer min-w-[120px]"
+          className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary appearance-none cursor-pointer min-w-[120px]"
         >
           <option value="">{t("allLevels")}</option>
           {uniqueLevels.map((l) => (
@@ -256,7 +256,7 @@ export default function ProxyLogger() {
         <select
           value={selectedProvider}
           onChange={(e) => setSelectedProvider(e.target.value)}
-          className="px-3 py-2 rounded-lg bg-bg-subtle border border-border text-sm text-text-primary focus:outline-none focus:border-primary appearance-none cursor-pointer min-w-[140px]"
+          className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary appearance-none cursor-pointer min-w-[140px]"
         >
           <option value="">{t("allProviders")}</option>
           {uniqueProviders.map((p) => {
@@ -271,29 +271,29 @@ export default function ProxyLogger() {
 
         {/* Stats */}
         <div className="flex items-center gap-2 text-xs text-text-muted">
-          <span className="px-2 py-1 rounded bg-bg-subtle border border-border font-mono">
+          <span className="px-2 py-1 rounded-md bg-bg-subtle border border-border font-mono tabular-nums">
             {totalCount} {t("total")}
           </span>
-          <span className="px-2 py-1 rounded bg-emerald-500/10 text-emerald-400 font-mono">
+          <span className="px-2 py-1 rounded-md bg-success/10 text-success font-mono tabular-nums">
             {okCount} {t("ok")}
           </span>
           {errorCount > 0 && (
-            <span className="px-2 py-1 rounded bg-red-500/10 text-red-400 font-mono">
+            <span className="px-2 py-1 rounded-md bg-error/10 text-error font-mono tabular-nums">
               {errorCount} {t("err")}
             </span>
           )}
           {timeoutCount > 0 && (
-            <span className="px-2 py-1 rounded bg-amber-500/10 text-amber-400 font-mono">
+            <span className="px-2 py-1 rounded-md bg-warning/10 text-warning font-mono tabular-nums">
               {timeoutCount} {t("timeoutShort")}
             </span>
           )}
           {directCount > 0 && (
-            <span className="px-2 py-1 rounded bg-gray-500/10 text-gray-400 font-mono">
+            <span className="px-2 py-1 rounded-md bg-bg-subtle text-text-muted font-mono tabular-nums">
               {directCount} {t("direct")}
             </span>
           )}
           {tlsCount > 0 && (
-            <span className="px-2 py-1 rounded bg-cyan-500/10 text-cyan-400 font-mono">
+            <span className="px-2 py-1 rounded-md bg-bg-subtle text-text-muted font-mono tabular-nums">
               🔒 {tlsCount} TLS
             </span>
           )}
@@ -303,7 +303,7 @@ export default function ProxyLogger() {
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
-          className="px-3 py-2 rounded-lg bg-bg-subtle border border-border text-sm text-text-primary focus:outline-none focus:border-primary appearance-none cursor-pointer min-w-[140px]"
+          className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary appearance-none cursor-pointer min-w-[140px]"
         >
           <option value="newest">{t("newest")}</option>
           <option value="oldest">{t("oldest")}</option>
@@ -314,7 +314,7 @@ export default function ProxyLogger() {
         {/* Refresh */}
         <button
           onClick={() => fetchLogs(false)}
-          className="p-2 rounded-lg hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors"
+          className="p-2 rounded-control hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
           title={t("refresh")}
         >
           <span className="material-symbols-outlined text-[18px]">refresh</span>
@@ -327,16 +327,16 @@ export default function ProxyLogger() {
           <button
             key={f.key}
             onClick={() => setActiveFilter(activeFilter === f.key ? "all" : f.key)}
-            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-all ${
+            className={`flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium border transition-colors ${
               activeFilter === f.key
                 ? f.key === "error"
-                  ? "bg-red-500/20 text-red-400 border-red-500/40"
+                  ? "bg-error/10 text-error border-error/30"
                   : f.key === "ok"
-                    ? "bg-emerald-500/20 text-emerald-400 border-emerald-500/40"
+                    ? "bg-success/10 text-success border-success/30"
                     : f.key === "timeout"
-                      ? "bg-amber-500/20 text-amber-400 border-amber-500/40"
-                      : "bg-primary text-white border-primary"
-                : "bg-bg-subtle border-border text-text-muted hover:border-text-muted"
+                      ? "bg-warning/10 text-warning border-warning/30"
+                      : "bg-contrast text-contrast-fg border-contrast"
+                : "bg-surface border-border text-text-muted hover:border-border-strong hover:text-text-main"
             }`}
           >
             {f.icon && <span className="material-symbols-outlined text-[14px]">{f.icon}</span>}
@@ -353,9 +353,9 @@ export default function ProxyLogger() {
             <button
               key={p}
               onClick={() => setSelectedProvider(isActive ? "" : p)}
-              className={`px-3 py-1 rounded-full text-xs font-bold uppercase border transition-all ${
+              className={`px-3 py-1 rounded-full text-xs font-semibold uppercase border transition ${
                 isActive
-                  ? "border-white/40 ring-1 ring-white/20"
+                  ? "border-transparent ring-1 ring-text-main/30"
                   : "border-transparent opacity-70 hover:opacity-100"
               }`}
               style={{
@@ -371,17 +371,17 @@ export default function ProxyLogger() {
 
       {/* Column Visibility Toggles */}
       <div className="flex flex-wrap items-center gap-1.5">
-        <span className="text-[10px] text-text-muted uppercase tracking-wider mr-1">
+        <span className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mr-1">
           {t("columns")}
         </span>
         {columns.map((col) => (
           <button
             key={col.key}
             onClick={() => toggleColumn(col.key)}
-            className={`px-2 py-0.5 rounded text-[10px] font-medium border transition-all ${
+            className={`px-2 py-0.5 rounded-md text-[11px] font-medium border transition ${
               visibleColumns[col.key]
-                ? "bg-primary/15 text-primary border-primary/30"
-                : "bg-bg-subtle text-text-muted border-border opacity-50 hover:opacity-80"
+                ? "bg-surface text-text-main border-border-strong"
+                : "bg-transparent text-text-subtle border-border opacity-60 hover:opacity-100"
             }`}
           >
             {col.label}
@@ -439,7 +439,7 @@ export default function ProxyLogger() {
                   )}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border/30">
+              <tbody className="divide-y divide-border">
                 {sortedLogs.map((log) => {
                   const statusStyle = getStatusStyle(log.status);
                   const typeColor = TYPE_COLORS[log.proxy?.type] || {
@@ -462,12 +462,12 @@ export default function ProxyLogger() {
                     <tr
                       key={log.id}
                       onClick={() => setSelectedLog(selectedLog?.id === log.id ? null : log)}
-                      className={`cursor-pointer hover:bg-sky-500/10 dark:hover:bg-sky-400/10 transition-colors ${isError ? "bg-red-500/5" : ""}`}
+                      className={`cursor-pointer hover:bg-sky-500/10 dark:hover:bg-sky-400/10 transition-colors ${isError ? "bg-error/5" : ""}`}
                     >
                       {visibleColumns.status && (
                         <td className="px-3 py-2">
                           <span
-                            className="inline-block px-2 py-0.5 rounded text-[10px] font-bold min-w-[50px] text-center uppercase"
+                            className="inline-block px-2 py-0.5 rounded text-[10px] font-semibold min-w-[50px] text-center uppercase"
                             style={{ backgroundColor: statusStyle.bg, color: statusStyle.text }}
                           >
                             {log.status}
@@ -475,7 +475,7 @@ export default function ProxyLogger() {
                         </td>
                       )}
                       {visibleColumns.proxy && (
-                        <td className="px-3 py-2 font-mono text-[11px] text-primary">
+                        <td className="px-3 py-2 font-mono text-[11px] text-text-main">
                           {log.proxy
                             ? log.proxy.name || `${log.proxy.host}:${log.proxy.port}`
                             : "—"}
@@ -485,10 +485,11 @@ export default function ProxyLogger() {
                         <td className="px-3 py-2">
                           {log.tlsFingerprint ? (
                             <span
-                              className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-bold uppercase"
+                              className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[9px] font-semibold uppercase"
                               style={{
-                                backgroundColor: "rgba(6, 182, 212, 0.15)",
-                                color: "#22d3ee",
+                                backgroundColor:
+                                  "color-mix(in srgb, var(--color-success) 12%, transparent)",
+                                color: "var(--color-success)",
                               }}
                               title={t("tlsFingerprint")}
                             >
@@ -502,7 +503,7 @@ export default function ProxyLogger() {
                       {visibleColumns.type && (
                         <td className="px-3 py-2">
                           <span
-                            className="inline-block px-2 py-0.5 rounded text-[9px] font-bold uppercase"
+                            className="inline-block px-2 py-0.5 rounded text-[9px] font-semibold uppercase"
                             style={{ backgroundColor: typeColor.bg, color: typeColor.text }}
                           >
                             {typeColor.label}
@@ -512,7 +513,7 @@ export default function ProxyLogger() {
                       {visibleColumns.level && (
                         <td className="px-3 py-2">
                           <span
-                            className="inline-block px-2 py-0.5 rounded text-[9px] font-bold uppercase"
+                            className="inline-block px-2 py-0.5 rounded text-[9px] font-semibold uppercase"
                             style={{ backgroundColor: levelColor.bg, color: levelColor.text }}
                           >
                             {levelColor.label}
@@ -523,7 +524,7 @@ export default function ProxyLogger() {
                         <td className="px-3 py-2">
                           {log.provider ? (
                             <span
-                              className="inline-block px-2 py-0.5 rounded text-[9px] font-bold uppercase"
+                              className="inline-block px-2 py-0.5 rounded text-[9px] font-semibold uppercase"
                               style={{
                                 backgroundColor: providerColor.bg,
                                 color: providerColor.text,
@@ -545,17 +546,17 @@ export default function ProxyLogger() {
                         </td>
                       )}
                       {visibleColumns.latency && (
-                        <td className="px-3 py-2 text-right text-text-muted font-mono">
+                        <td className="px-3 py-2 text-right text-text-muted font-mono tabular-nums">
                           {formatLatency(log.latencyMs)}
                         </td>
                       )}
                       {visibleColumns.ip && (
-                        <td className="px-3 py-2 font-mono text-[11px] text-emerald-400">
+                        <td className="px-3 py-2 font-mono text-[11px] text-text-muted">
                           {log.clientIp || "—"}
                         </td>
                       )}
                       {visibleColumns.time && (
-                        <td className="px-3 py-2 text-right text-text-muted">
+                        <td className="px-3 py-2 text-right text-text-muted tabular-nums">
                           {formatTime(log.timestamp)}
                         </td>
                       )}

@@ -42,28 +42,28 @@ export function toToastText(value: unknown): string {
   return String(value);
 }
 
-const BG_DARK = "rgba(30, 30, 30, 0.95)";
+const BG_DARK = "var(--color-surface)";
 
 const COLORS = {
   success: {
     bg: BG_DARK,
-    border: "rgba(16, 185, 129, 0.6)",
-    icon: "#10b981",
+    border: "var(--color-border)",
+    icon: "var(--color-success)",
   },
   error: {
     bg: BG_DARK,
-    border: "rgba(239, 68, 68, 0.6)",
-    icon: "#ef4444",
+    border: "var(--color-border)",
+    icon: "var(--color-error)",
   },
   warning: {
     bg: BG_DARK,
-    border: "rgba(245, 158, 11, 0.6)",
-    icon: "#fbbf24",
+    border: "var(--color-border)",
+    icon: "var(--color-warning)",
   },
   info: {
     bg: BG_DARK,
-    border: "rgba(59, 130, 246, 0.6)",
-    icon: "#3b82f6",
+    border: "var(--color-border)",
+    icon: "var(--color-primary)",
   },
 };
 
@@ -78,8 +78,8 @@ function Toast({ notification, onDismiss }) {
 
   const color = COLORS[notification.type] || COLORS.info;
   const textColors = {
-    title: "var(--text-primary, #fff)",
-    message: "var(--text-secondary, #ccc)",
+    title: "var(--color-text-main)",
+    message: "var(--color-text-muted)",
   };
 
   return (
@@ -90,25 +90,25 @@ function Toast({ notification, onDismiss }) {
       style={{
         display: "flex",
         alignItems: "flex-start",
-        gap: "12px",
-        padding: "14px 16px",
-        borderRadius: "10px",
+        gap: "10px",
+        padding: "12px 14px",
+        borderRadius: "8px",
         backgroundColor: color.bg,
         border: `1px solid ${color.border}`,
-        backdropFilter: "blur(12px)",
-        boxShadow: "0 8px 32px rgba(0,0,0,0.2)",
+        backdropFilter: "none",
+        boxShadow: "var(--shadow-elevated)",
         minWidth: "320px",
         maxWidth: "420px",
         cursor: notification.onClick ? "pointer" : "default",
         animation: isExiting ? "toastOut 0.2s ease-in forwards" : "toastIn 0.3s ease-out forwards",
-        transition: "all 0.2s ease",
+        transition: "opacity 0.2s ease",
       }}
     >
       <span
         style={{
-          fontSize: "18px",
+          fontSize: "14px",
           color: color.icon,
-          fontWeight: "bold",
+          fontWeight: "600",
           lineHeight: 1,
           marginTop: "2px",
         }}
@@ -120,7 +120,7 @@ function Toast({ notification, onDismiss }) {
           <div
             style={{
               fontWeight: 600,
-              fontSize: "14px",
+              fontSize: "13px",
               color: textColors.title,
               marginBottom: "2px",
             }}
@@ -149,7 +149,7 @@ function Toast({ notification, onDismiss }) {
             background: "none",
             border: "none",
             cursor: "pointer",
-            color: "var(--text-secondary, #999)",
+            color: "var(--color-text-muted)",
             fontSize: "16px",
             padding: "0 2px",
             lineHeight: 1,

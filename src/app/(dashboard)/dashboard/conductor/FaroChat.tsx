@@ -192,8 +192,8 @@ export default function FaroChat() {
               <span
                 className={
                   m.role === "user"
-                    ? "inline-block rounded px-2 py-1 bg-primary/10"
-                    : "inline-block rounded px-2 py-1 bg-black/5 dark:bg-white/10 whitespace-pre-wrap"
+                    ? "inline-block rounded-md px-2 py-1 bg-primary/10 text-text-main"
+                    : "inline-block rounded-md px-2 py-1 bg-bg-subtle text-text-main whitespace-pre-wrap"
                 }
               >
                 {m.text}
@@ -219,7 +219,7 @@ export default function FaroChat() {
 
         <div className="flex items-center gap-2">
           <input
-            className="flex-1 rounded border border-black/10 dark:border-white/10 bg-transparent px-2 py-1 text-sm"
+            className="flex-1 rounded-control border border-border-strong bg-transparent px-2 py-1 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
             placeholder={t("faroPlaceholder")}
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -238,7 +238,7 @@ export default function FaroChat() {
           </button>
           <button
             type="button"
-            className={`text-sm px-2 py-1 rounded ${voice === "listening" ? "bg-red-500/20" : "bg-black/5 dark:bg-white/10"}`}
+            className={`text-sm px-2 py-1 rounded-control transition-colors ${voice === "listening" ? "bg-error/15 text-error" : "bg-bg-subtle text-text-main"}`}
             title={t("pushToTalk")}
             aria-pressed={voice === "listening"}
             onMouseDown={() => void startRecording()}
@@ -261,7 +261,7 @@ export default function FaroChat() {
             <label className="flex-1">
               STT
               <input
-                className="w-full rounded border border-black/10 dark:border-white/10 bg-transparent px-2 py-1"
+                className="w-full rounded-control border border-border-strong bg-transparent px-2 py-1 font-mono text-[12px] text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
                 value={sttModel}
                 onChange={(e) => persistModels(e.target.value, ttsModel)}
               />
@@ -269,7 +269,7 @@ export default function FaroChat() {
             <label className="flex-1">
               TTS
               <input
-                className="w-full rounded border border-black/10 dark:border-white/10 bg-transparent px-2 py-1"
+                className="w-full rounded-control border border-border-strong bg-transparent px-2 py-1 font-mono text-[12px] text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
                 value={ttsModel}
                 onChange={(e) => persistModels(sttModel, e.target.value)}
               />

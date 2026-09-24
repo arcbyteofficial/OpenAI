@@ -37,7 +37,7 @@ export default function CompareColumn({ column, onCancel, onRemove }: CompareCol
   return (
     <div className="flex flex-col h-full border-r border-border last:border-r-0 min-w-0 min-h-0 overflow-hidden">
       {/* Column header */}
-      <div className="flex items-center justify-between px-3 py-2 border-b border-border bg-bg-alt shrink-0">
+      <div className="flex items-center justify-between px-3 py-2 border-b border-border bg-surface-2 shrink-0">
         <div className="flex items-center gap-2 min-w-0">
           {/* Status indicator */}
           <span
@@ -45,9 +45,9 @@ export default function CompareColumn({ column, onCancel, onRemove }: CompareCol
               status === "streaming"
                 ? "bg-primary animate-pulse"
                 : status === "done"
-                  ? "bg-green-500"
+                  ? "bg-success"
                   : status === "error"
-                    ? "bg-destructive"
+                    ? "bg-error"
                     : "bg-text-muted/30"
             }`}
             aria-label={t("statusLabel", { status: t(`status.${status}`) })}
@@ -61,7 +61,7 @@ export default function CompareColumn({ column, onCancel, onRemove }: CompareCol
           {status === "streaming" && (
             <button
               onClick={() => onCancel(id)}
-              className="text-[10px] px-1.5 py-0.5 rounded border border-border text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+              className="text-[10px] px-1.5 py-0.5 rounded-control border border-border text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
               aria-label={t("cancelStream")}
             >
               {t("cancel")}
@@ -80,7 +80,7 @@ export default function CompareColumn({ column, onCancel, onRemove }: CompareCol
           </button>
           <button
             onClick={() => onRemove(id)}
-            className="p-0.5 rounded text-text-muted hover:text-destructive transition-colors"
+            className="p-0.5 rounded text-text-muted hover:text-error transition-colors"
             title={t("removeColumn")}
             aria-label={t("removeModelColumn", { model: model || t("noModel") })}
           >
@@ -101,7 +101,7 @@ export default function CompareColumn({ column, onCancel, onRemove }: CompareCol
         {status === "idle" && <p className="text-text-muted text-xs italic">{t("readyToRun")}</p>}
 
         {status === "error" && (
-          <div className="text-destructive text-xs bg-destructive/10 rounded p-2">
+          <div className="text-error text-xs bg-error/10 rounded-md p-2">
             <span className="font-medium">{t("errorLabel")}: </span>
             {errorMessage ?? t("unknownError")}
           </div>

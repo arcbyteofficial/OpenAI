@@ -24,14 +24,14 @@ export default function ClaudeCcDiscoveryInfoButton() {
         onClick={() => setOpen((v) => !v)}
         aria-expanded={open}
         title={t("ccDiscoveryInfoTooltip")}
-        className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-transparent px-2.5 py-1 text-[12px] text-text-main hover:border-primary/40 transition-colors"
+        className="inline-flex items-center gap-1.5 rounded-control border border-border-strong bg-transparent px-2.5 py-1 text-[12px] font-medium text-text-main hover:bg-bg-subtle transition-colors"
       >
-        <span className="material-symbols-outlined text-[16px]">help</span>
+        <span className="material-symbols-outlined text-[16px] text-text-muted">help</span>
         {t("ccDiscoveryInfoButton")}
       </button>
 
       {open && (
-        <div className="absolute z-10 mt-2 w-80 rounded-lg border border-border bg-surface p-3 text-xs shadow-lg">
+        <div className="absolute z-10 mt-2 w-80 rounded-lg border border-border bg-surface p-3 text-xs shadow-[var(--shadow-elevated)]">
           <p className="text-text-muted mb-2">{t("ccDiscoveryInfoTooltip")}</p>
           <Link
             href="/dashboard/settings/feature-flags"

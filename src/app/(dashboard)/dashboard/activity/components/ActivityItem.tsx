@@ -33,24 +33,22 @@ export default function ActivityItem({ entry, referenceNowMs }: ActivityItemProp
   }
 
   return (
-    <li className="flex items-start gap-3 px-4 py-3 hover:bg-[var(--color-bg-alt)] transition-colors">
+    <li className="flex items-start gap-3 px-4 py-3 hover:bg-bg-subtle transition-colors">
       <span
-        className="material-symbols-outlined flex-shrink-0 mt-0.5 text-[20px] text-[var(--color-accent)]"
+        className="material-symbols-outlined flex-shrink-0 mt-0.5 text-[18px] text-text-muted"
         aria-hidden="true"
       >
         {icon}
       </span>
       <div className="flex-1 min-w-0">
-        <p className="text-sm text-[var(--color-text-main)] truncate" title={phrase}>
+        <p className="text-sm text-text-main truncate" title={phrase}>
           {phrase}
         </p>
-        {target && (
-          <p className="text-xs text-[var(--color-text-muted)] truncate mt-0.5">{target}</p>
-        )}
+        {target && <p className="text-xs text-text-muted truncate mt-0.5">{target}</p>}
       </div>
       <time
         dateTime={timestamp}
-        className="flex-shrink-0 text-xs text-[var(--color-text-muted)] whitespace-nowrap mt-0.5"
+        className="flex-shrink-0 text-xs text-text-subtle tabular-nums whitespace-nowrap mt-0.5"
         title={timestamp}
       >
         {timeAgo}

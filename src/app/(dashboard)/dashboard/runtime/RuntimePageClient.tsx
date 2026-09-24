@@ -120,16 +120,16 @@ type BreakerTone = { dot: string; bg: string; ring: string; label: string; icon:
 
 const BREAKER_TONE: Record<string, BreakerTone> = {
   CLOSED: {
-    dot: "#22c55e",
-    bg: "rgba(34,197,94,0.10)",
-    ring: "rgba(34,197,94,0.30)",
+    dot: "var(--color-success)",
+    bg: "transparent",
+    ring: "var(--color-border)",
     label: "OK",
     icon: "check_circle",
   },
   HALF_OPEN: {
-    dot: "#eab308",
-    bg: "rgba(234,179,8,0.10)",
-    ring: "rgba(234,179,8,0.30)",
+    dot: "var(--color-warning)",
+    bg: "color-mix(in srgb, var(--color-warning) 8%, transparent)",
+    ring: "color-mix(in srgb, var(--color-warning) 30%, transparent)",
     label: "RECOV",
     icon: "sync",
   },
@@ -141,35 +141,35 @@ const BREAKER_TONE: Record<string, BreakerTone> = {
     icon: "warning",
   },
   OPEN: {
-    dot: "#ef4444",
-    bg: "rgba(239,68,68,0.10)",
-    ring: "rgba(239,68,68,0.30)",
+    dot: "var(--color-error)",
+    bg: "color-mix(in srgb, var(--color-error) 8%, transparent)",
+    ring: "color-mix(in srgb, var(--color-error) 30%, transparent)",
     label: "OPEN",
     icon: "block",
   },
 };
 
 const FALLBACK_BREAKER_TONE: BreakerTone = {
-  dot: "#64748b",
-  bg: "rgba(100,116,139,0.10)",
-  ring: "rgba(100,116,139,0.30)",
+  dot: "var(--color-text-subtle)",
+  bg: "transparent",
+  ring: "var(--color-border)",
   label: "UNK",
   icon: "help",
 };
 
 const FEED_KIND_META: Record<FeedEventKind, { icon: string; color: string; group: FeedFilter }> = {
-  "circuit-opened": { icon: "block", color: "#ef4444", group: "circuits" },
+  "circuit-opened": { icon: "block", color: "var(--color-error)", group: "circuits" },
   "circuit-degraded": { icon: "warning", color: "#f97316", group: "circuits" },
-  "circuit-recovered": { icon: "sync", color: "#eab308", group: "circuits" },
-  "circuit-closed": { icon: "check_circle", color: "#22c55e", group: "circuits" },
-  "cooldown-added": { icon: "ac_unit", color: "#3b82f6", group: "cooldowns" },
-  "cooldown-cleared": { icon: "lock_open", color: "#22c55e", group: "cooldowns" },
-  "lockout-added": { icon: "lock", color: "#f97316", group: "lockouts" },
-  "lockout-cleared": { icon: "lock_open", color: "#22c55e", group: "lockouts" },
-  "session-new": { icon: "fingerprint", color: "#06b6d4", group: "sessions" },
-  "quota-alert": { icon: "warning", color: "#eab308", group: "quotas" },
-  "quota-exhausted": { icon: "error", color: "#ef4444", group: "quotas" },
-  "quota-recovered": { icon: "check_circle", color: "#22c55e", group: "quotas" },
+  "circuit-recovered": { icon: "sync", color: "var(--color-warning)", group: "circuits" },
+  "circuit-closed": { icon: "check_circle", color: "var(--color-success)", group: "circuits" },
+  "cooldown-added": { icon: "ac_unit", color: "var(--color-primary)", group: "cooldowns" },
+  "cooldown-cleared": { icon: "lock_open", color: "var(--color-success)", group: "cooldowns" },
+  "lockout-added": { icon: "lock", color: "var(--color-warning)", group: "lockouts" },
+  "lockout-cleared": { icon: "lock_open", color: "var(--color-success)", group: "lockouts" },
+  "session-new": { icon: "fingerprint", color: "var(--color-text-muted)", group: "sessions" },
+  "quota-alert": { icon: "warning", color: "var(--color-warning)", group: "quotas" },
+  "quota-exhausted": { icon: "error", color: "var(--color-error)", group: "quotas" },
+  "quota-recovered": { icon: "check_circle", color: "var(--color-success)", group: "quotas" },
 };
 
 function fmtMs(ms: number | undefined | null): string {
@@ -528,8 +528,8 @@ export default function RuntimePageClient() {
       {/* Header */}
       <div className="flex items-start justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-xl font-bold text-text-main flex items-center gap-2">
-            <span className="material-symbols-outlined text-[24px] text-primary">bolt</span>
+          <h1 className="text-2xl font-semibold tracking-tight text-text-main flex items-center gap-2">
+            <span className="material-symbols-outlined text-[20px] text-text-muted">bolt</span>
             {t("title")}
           </h1>
           <p className="text-sm text-text-muted mt-0.5">{t("description")}</p>
@@ -541,7 +541,7 @@ export default function RuntimePageClient() {
           <button
             type="button"
             onClick={() => setPaused((p) => !p)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-bg-subtle border border-border text-text-main text-[12px] cursor-pointer hover:bg-black/[0.04] dark:hover:bg-white/[0.04]"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-text-main text-[12px] font-medium cursor-pointer transition-colors hover:bg-bg-subtle"
           >
             <span className="material-symbols-outlined text-[16px]">
               {paused ? "play_arrow" : "pause"}
@@ -552,7 +552,7 @@ export default function RuntimePageClient() {
             type="button"
             onClick={() => fetchAll()}
             disabled={loading}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-bg-subtle border border-border text-text-main text-[12px] cursor-pointer hover:bg-black/[0.04] dark:hover:bg-white/[0.04] disabled:opacity-50"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-text-main text-[12px] font-medium cursor-pointer transition-colors hover:bg-bg-subtle disabled:opacity-50"
             title={t("refreshNow")}
           >
             <span
@@ -571,7 +571,7 @@ export default function RuntimePageClient() {
           label={t("kpiSessions")}
           value={counts.sessions}
           hint={t("hintStickyBound", { count: counts.stickyBound })}
-          tone="#06b6d4"
+          tone="var(--color-text-main)"
           onClick={() => setFeedFilter("sessions")}
           active={feedFilter === "sessions"}
         />
@@ -590,10 +590,10 @@ export default function RuntimePageClient() {
           }
           tone={
             counts.openCircuits > 0
-              ? "#ef4444"
+              ? "var(--color-error)"
               : counts.halfCircuits + counts.degradedCircuits + counts.unknownCircuits > 0
-                ? "#eab308"
-                : "#22c55e"
+                ? "var(--color-warning)"
+                : "var(--color-text-main)"
           }
           onClick={() => setFeedFilter("circuits")}
           active={feedFilter === "circuits"}
@@ -603,7 +603,7 @@ export default function RuntimePageClient() {
           label={t("kpiCooldowns")}
           value={counts.cooldowns}
           hint={t("hintConnsCooling")}
-          tone={counts.cooldowns > 0 ? "#3b82f6" : "#22c55e"}
+          tone={counts.cooldowns > 0 ? "var(--color-primary)" : "var(--color-text-main)"}
           onClick={() => setFeedFilter("cooldowns")}
           active={feedFilter === "cooldowns"}
         />
@@ -612,7 +612,7 @@ export default function RuntimePageClient() {
           label={t("kpiLockouts")}
           value={counts.lockouts}
           hint={t("hintModelsBlocked")}
-          tone={counts.lockouts > 0 ? "#f97316" : "#22c55e"}
+          tone={counts.lockouts > 0 ? "var(--color-warning)" : "var(--color-text-main)"}
           onClick={() => setFeedFilter("lockouts")}
           active={feedFilter === "lockouts"}
         />
@@ -629,19 +629,19 @@ export default function RuntimePageClient() {
             subtitle={t("resilienceSubtitle")}
             trailing={
               <div className="flex items-center gap-3 text-[11px]">
-                <span className="text-green-500">✓ {overallHealthy}</span>
-                <span className="text-amber-500">
+                <span className="text-success tabular-nums">✓ {overallHealthy}</span>
+                <span className="text-warning tabular-nums">
                   ⚠ {counts.halfCircuits + counts.degradedCircuits + counts.unknownCircuits}
                 </span>
-                <span className="text-red-500">⛔ {counts.openCircuits}</span>
+                <span className="text-error tabular-nums">⛔ {counts.openCircuits}</span>
               </div>
             }
           />
 
           <div className="mb-4 mt-2">
-            <div className="h-2 rounded-sm bg-black/[0.06] dark:bg-white/[0.06] overflow-hidden">
+            <div className="h-2 rounded-full bg-bg-subtle overflow-hidden">
               <div
-                className="h-full rounded-sm bg-gradient-to-r from-green-500 via-amber-500 to-red-500/40"
+                className="h-full rounded-full bg-success"
                 style={{ width: `${overallPercent}%` }}
               />
             </div>
@@ -686,7 +686,7 @@ export default function RuntimePageClient() {
                         <span className="truncate flex-1">
                           {resolveProviderName(b.provider, nodeMap)}
                         </span>
-                        <span style={{ color: tone.dot }} className="text-[10px] font-bold">
+                        <span style={{ color: tone.dot }} className="text-[10px] font-semibold">
                           {tone.label}
                         </span>
                       </div>
@@ -713,7 +713,7 @@ export default function RuntimePageClient() {
             {cooldowns.length === 0 ? (
               <EmptyHint text={t("emptyCooldowns")} />
             ) : (
-              <div className="flex flex-col divide-y divide-border/60">
+              <div className="flex flex-col divide-y divide-border">
                 {cooldowns.slice(0, 8).map((c) => {
                   const remaining = untilMs(c.rateLimitedUntil);
                   const label = c.name || c.email || c.displayName || shortId(c.id);
@@ -738,7 +738,7 @@ export default function RuntimePageClient() {
                           )}
                         </div>
                       </div>
-                      <div className="text-[11px] tabular-nums text-blue-400">
+                      <div className="text-[11px] tabular-nums text-primary">
                         {fmtMs(remaining)}
                       </div>
                       <div className="text-[10px] text-text-muted truncate">
@@ -773,7 +773,7 @@ export default function RuntimePageClient() {
             {lockoutEntries.length === 0 ? (
               <EmptyHint text={t("emptyLockouts")} />
             ) : (
-              <div className="flex flex-col divide-y divide-border/60">
+              <div className="flex flex-col divide-y divide-border">
                 {lockoutEntries.slice(0, 8).map(([key, lk]) => {
                   const remaining =
                     typeof lk.remainingMs === "number" ? lk.remainingMs : untilMs(lk.until);
@@ -784,7 +784,7 @@ export default function RuntimePageClient() {
                       style={{ gridTemplateColumns: "minmax(0,1.5fr) minmax(0,1fr) 70px" }}
                     >
                       <div className="flex items-center gap-2 min-w-0">
-                        <span className="material-symbols-outlined text-[14px] text-orange-400 shrink-0">
+                        <span className="material-symbols-outlined text-[14px] text-warning shrink-0">
                           lock
                         </span>
                         <span className="text-[12px] text-text-main truncate font-medium">
@@ -794,7 +794,7 @@ export default function RuntimePageClient() {
                       <div className="text-[10px] text-text-muted truncate">
                         {lk.reason || "rate limit"}
                       </div>
-                      <div className="text-[11px] tabular-nums text-orange-400 text-right">
+                      <div className="text-[11px] tabular-nums text-warning text-right">
                         {remaining > 0 ? fmtMs(remaining) : "—"}
                       </div>
                     </div>
@@ -821,7 +821,7 @@ export default function RuntimePageClient() {
                 <select
                   value={feedFilter}
                   onChange={(e) => setFeedFilter(e.target.value as FeedFilter)}
-                  className="text-[10px] bg-bg-subtle border border-border rounded px-1.5 py-1 cursor-pointer text-text-main"
+                  className="text-[10px] bg-surface border border-border-strong rounded-md px-1.5 py-1 cursor-pointer text-text-main focus:outline-none focus:border-primary"
                 >
                   <option value="all">{t("feedFilterAll")}</option>
                   <option value="circuits">{t("feedFilterCircuits")}</option>
@@ -833,7 +833,7 @@ export default function RuntimePageClient() {
                 <button
                   type="button"
                   onClick={() => setFeed([])}
-                  className="text-[10px] px-1.5 py-1 rounded border border-border text-text-muted hover:text-text-main hover:bg-black/[0.04] dark:hover:bg-white/[0.04] cursor-pointer"
+                  className="text-[10px] px-1.5 py-1 rounded-md border border-border-strong text-text-muted transition-colors hover:text-text-main hover:bg-bg-subtle cursor-pointer"
                   title={t("feedClear")}
                 >
                   {t("feedClear")}
@@ -858,7 +858,7 @@ export default function RuntimePageClient() {
                 return (
                   <div
                     key={ev.id}
-                    className="flex items-start gap-2 px-2 py-1.5 rounded hover:bg-black/[0.03] dark:hover:bg-white/[0.03]"
+                    className="flex items-start gap-2 px-2 py-1.5 rounded-md transition-colors hover:bg-bg-subtle"
                   >
                     <span
                       className="material-symbols-outlined text-[14px] mt-0.5"
@@ -909,29 +909,32 @@ export default function RuntimePageClient() {
             </div>
           ) : (
             <div className="overflow-x-auto mt-2">
-              <table className="w-full text-sm">
+              <table className="w-full text-[13px]">
                 <thead>
-                  <tr className="border-b border-border/40">
-                    <th className="text-left py-2 px-2 text-[10px] font-semibold text-text-muted uppercase tracking-wider">
+                  <tr className="border-b border-border">
+                    <th className="text-left py-2 px-2 text-xs font-medium text-text-muted">
                       {t("tblSession")}
                     </th>
-                    <th className="text-right py-2 px-2 text-[10px] font-semibold text-text-muted uppercase tracking-wider">
+                    <th className="text-right py-2 px-2 text-xs font-medium text-text-muted">
                       {t("tblAge")}
                     </th>
-                    <th className="text-right py-2 px-2 text-[10px] font-semibold text-text-muted uppercase tracking-wider">
+                    <th className="text-right py-2 px-2 text-xs font-medium text-text-muted">
                       {t("tblIdle")}
                     </th>
-                    <th className="text-right py-2 px-2 text-[10px] font-semibold text-text-muted uppercase tracking-wider">
+                    <th className="text-right py-2 px-2 text-xs font-medium text-text-muted">
                       {t("tblReqs")}
                     </th>
-                    <th className="text-left py-2 px-2 text-[10px] font-semibold text-text-muted uppercase tracking-wider">
+                    <th className="text-left py-2 px-2 text-xs font-medium text-text-muted">
                       {t("tblBoundTo")}
                     </th>
                   </tr>
                 </thead>
                 <tbody>
                   {(health?.sessions?.top ?? []).map((s) => (
-                    <tr key={s.sessionId} className="border-b border-border/10 hover:bg-surface/20">
+                    <tr
+                      key={s.sessionId}
+                      className="border-b border-border last:border-b-0 transition-colors hover:bg-bg-subtle"
+                    >
                       <td className="py-2 px-2">
                         <span className="font-mono text-[11px] text-text-muted">
                           {shortId(s.sessionId, 14)}
@@ -950,7 +953,7 @@ export default function RuntimePageClient() {
                       </td>
                       <td className="py-2 px-2">
                         {s.connectionId ? (
-                          <span className="font-mono text-[10px] text-cyan-400">
+                          <span className="font-mono text-[11px] text-text-main">
                             {shortId(s.connectionId, 12)}
                           </span>
                         ) : (
@@ -962,7 +965,7 @@ export default function RuntimePageClient() {
                 </tbody>
               </table>
               {Object.keys(health?.sessions?.byApiKey ?? {}).length > 0 && (
-                <div className="mt-2 pt-2 border-t border-border/40 text-[10px] text-text-muted">
+                <div className="mt-2 pt-2 border-t border-border text-[10px] text-text-muted">
                   {t("topApiKeys")}:{" "}
                   {Object.entries(health?.sessions?.byApiKey ?? {})
                     .sort((a, b) => b[1] - a[1])
@@ -1063,24 +1066,25 @@ function KpiCard({
     <button
       type="button"
       onClick={onClick}
-      className="text-left rounded-xl border px-4 py-3 transition-colors cursor-pointer bg-surface"
+      className="text-left rounded-card border p-4 transition-colors cursor-pointer bg-surface hover:bg-bg-subtle"
       style={{
         borderColor: active ? tone : "var(--color-border)",
         boxShadow: active ? `0 0 0 2px ${tone}22` : undefined,
       }}
     >
       <div className="flex items-center justify-between">
-        <span className="text-[11px] uppercase tracking-wider font-semibold text-text-muted">
-          {label}
-        </span>
+        <span className="text-[13px] font-medium text-text-muted">{label}</span>
         <span className="material-symbols-outlined text-[16px]" style={{ color: tone }}>
           {icon}
         </span>
       </div>
-      <div className="mt-1 text-2xl font-bold tabular-nums" style={{ color: tone }}>
+      <div
+        className="mt-1 text-2xl font-semibold tracking-tight tabular-nums"
+        style={{ color: tone }}
+      >
         {value}
       </div>
-      <div className="text-[10px] text-text-muted truncate">{hint}</div>
+      <div className="text-[11px] text-text-subtle truncate">{hint}</div>
     </button>
   );
 }
@@ -1099,9 +1103,11 @@ function SectionHeader({
   return (
     <div className="flex items-start justify-between gap-3">
       <div className="flex items-start gap-2">
-        <span className="material-symbols-outlined text-[20px] text-primary mt-0.5">{icon}</span>
+        <span className="material-symbols-outlined text-[18px] text-text-muted mt-0.5">{icon}</span>
         <div>
-          <h2 className="text-base font-semibold text-text-main leading-tight">{title}</h2>
+          <h2 className="text-sm font-semibold tracking-tight text-text-main leading-tight">
+            {title}
+          </h2>
           {subtitle && <p className="text-[11px] text-text-muted mt-0.5">{subtitle}</p>}
         </div>
       </div>
@@ -1134,16 +1140,16 @@ function LayerSection({
   } as const;
   const tone = toneMap[badgeTone];
   return (
-    <div className="mt-4 border-t border-border/40 pt-3 first-of-type:border-t-0 first-of-type:pt-0">
+    <div className="mt-4 border-t border-border pt-3 first-of-type:border-t-0 first-of-type:pt-0">
       <div className="flex items-center justify-between gap-2 mb-2">
         <div className="flex items-center gap-2">
-          <span className="text-[10px] uppercase tracking-wider font-bold text-text-muted">
+          <span className="text-[10px] uppercase tracking-wider font-medium text-text-subtle">
             Layer {id}
           </span>
           <h3 className="text-[13px] font-semibold text-text-main">{title}</h3>
         </div>
         <span
-          className="text-[10px] font-semibold px-2 py-0.5 rounded-full tabular-nums"
+          className="text-[10px] font-medium px-2 py-0.5 rounded-full tabular-nums"
           style={{ background: tone.bg, color: tone.text }}
         >
           {badge}
@@ -1157,7 +1163,7 @@ function LayerSection({
 
 function EmptyHint({ text }: { text: string }) {
   return (
-    <div className="text-[11px] text-text-muted italic py-3 text-center bg-bg-subtle/40 rounded-md">
+    <div className="text-[11px] text-text-muted italic py-3 text-center bg-bg-subtle rounded-md">
       {text}
     </div>
   );
@@ -1184,7 +1190,7 @@ function QuotaGroup({
   return (
     <div>
       <div
-        className="text-[10px] font-bold uppercase tracking-wider mb-1.5"
+        className="text-[10px] font-semibold uppercase tracking-wider mb-1.5"
         style={{ color: tc.text }}
       >
         {label}
@@ -1204,7 +1210,7 @@ function QuotaGroup({
               <div className="text-[10px] text-text-muted">{m.window ?? ""}</div>
             </div>
             {typeof m.remainingPercent === "number" && (
-              <span className="text-[11px] font-bold tabular-nums" style={{ color: tc.text }}>
+              <span className="text-[11px] font-semibold tabular-nums" style={{ color: tc.text }}>
                 {Math.round(m.remainingPercent)}%
               </span>
             )}

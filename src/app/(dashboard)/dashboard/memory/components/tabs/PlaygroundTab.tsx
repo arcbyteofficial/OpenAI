@@ -49,8 +49,8 @@ export default function PlaygroundTab() {
   return (
     <div className="space-y-6">
       {/* Info */}
-      <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-primary/5 border border-primary/10 text-sm text-text-muted">
-        <span className="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0">
+      <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-surface-2 border border-border text-sm text-text-muted">
+        <span className="material-symbols-outlined text-text-muted text-[18px] mt-0.5 shrink-0">
           science
         </span>
         <div>
@@ -63,7 +63,7 @@ export default function PlaygroundTab() {
       <Card>
         <div className="p-4 space-y-4">
           <div>
-            <label className="block text-sm font-medium mb-1.5">
+            <label className="block text-[13px] font-medium text-text-main mb-1.5">
               {t("playground.queryLabel")}
             </label>
             <Input
@@ -82,15 +82,13 @@ export default function PlaygroundTab() {
 
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
             <div>
-              <label className="block text-sm font-medium mb-1.5">
+              <label className="block text-[13px] font-medium text-text-main mb-1.5">
                 {t("playground.strategyLabel")}
               </label>
               <Select
                 data-testid="playground-strategy-select"
                 value={strategy}
-                onChange={(e) =>
-                  setStrategy(e.target.value as "exact" | "semantic" | "hybrid")
-                }
+                onChange={(e) => setStrategy(e.target.value as "exact" | "semantic" | "hybrid")}
                 className="w-full"
               >
                 <option value="exact">{t("playground.strategyExact")}</option>
@@ -100,7 +98,7 @@ export default function PlaygroundTab() {
             </div>
 
             <div>
-              <label className="block text-sm font-medium mb-1.5">
+              <label className="block text-[13px] font-medium text-text-main mb-1.5">
                 {t("playground.budgetLabel")}
               </label>
               <Input
@@ -132,7 +130,7 @@ export default function PlaygroundTab() {
 
       {/* Error */}
       {error && (
-        <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20 text-xs text-red-400">
+        <div className="p-3 rounded-lg bg-error/10 border border-error/20 text-xs text-error">
           {error}
         </div>
       )}

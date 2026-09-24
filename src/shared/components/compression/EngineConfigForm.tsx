@@ -15,7 +15,7 @@ export function EngineConfigForm({ schema, value, onChange }: EngineConfigFormPr
         const v = value[f.key] ?? f.defaultValue;
         return (
           <label key={f.key} className="flex flex-col gap-1 text-sm">
-            <span className="font-medium">{f.label}</span>
+            <span className="font-medium text-text-main">{f.label}</span>
             {f.description && <span className="text-xs text-text-muted">{f.description}</span>}
             {f.type === "boolean" && (
               <input type="checkbox" checked={!!v} onChange={(e) => set(f.key, e.target.checked)} />
@@ -24,8 +24,7 @@ export function EngineConfigForm({ schema, value, onChange }: EngineConfigFormPr
               <input
                 type="number"
                 value={
-                  f.key === "maxToolLength" &&
-                  !(typeof v === "number" && Number.isFinite(v))
+                  f.key === "maxToolLength" && !(typeof v === "number" && Number.isFinite(v))
                     ? ""
                     : (v as number)
                 }
@@ -39,7 +38,7 @@ export function EngineConfigForm({ schema, value, onChange }: EngineConfigFormPr
                       : Number(e.target.value)
                   )
                 }
-                className="border border-border rounded px-2 py-1"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main focus:border-primary focus:outline-none transition-colors"
               />
             )}
             {f.type === "string" && (
@@ -47,14 +46,14 @@ export function EngineConfigForm({ schema, value, onChange }: EngineConfigFormPr
                 type="text"
                 value={(v as string) ?? ""}
                 onChange={(e) => set(f.key, e.target.value)}
-                className="border border-border rounded px-2 py-1"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main focus:border-primary focus:outline-none transition-colors"
               />
             )}
             {f.type === "select" && (
               <select
                 value={v as string}
                 onChange={(e) => set(f.key, e.target.value)}
-                className="border border-border rounded px-2 py-1"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main focus:border-primary focus:outline-none transition-colors"
               >
                 {(f.options ?? []).map((o) => (
                   <option key={o.value} value={o.value}>
@@ -65,7 +64,7 @@ export function EngineConfigForm({ schema, value, onChange }: EngineConfigFormPr
             )}
             {f.type === "multiselect" &&
               (f.options ?? []).map((o) => (
-                <label key={o.value} className="flex items-center gap-2 text-xs">
+                <label key={o.value} className="flex items-center gap-2 text-xs text-text-main">
                   <input
                     type="checkbox"
                     checked={Array.isArray(v) && (v as string[]).includes(o.value)}

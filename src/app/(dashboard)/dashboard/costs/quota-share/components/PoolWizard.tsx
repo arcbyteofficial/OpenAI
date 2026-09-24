@@ -128,7 +128,7 @@ function Stepper({ currentStep }: { currentStep: 1 | 2 | 3 }) {
   ];
 
   return (
-    <div className="flex items-center gap-0 px-4 py-3 border-b border-border bg-bg-alt shrink-0">
+    <div className="flex items-center gap-0 px-4 py-3 border-b border-border bg-surface-2 shrink-0">
       {steps.map((step, idx) => (
         <div key={step.num} className="flex items-center">
           {idx > 0 && (
@@ -142,10 +142,10 @@ function Stepper({ currentStep }: { currentStep: 1 | 2 | 3 }) {
             <span
               className={`flex items-center justify-center w-5 h-5 rounded-full text-[11px] font-semibold transition-colors ${
                 currentStep === step.num
-                  ? "bg-primary text-white"
+                  ? "bg-contrast text-contrast-fg"
                   : currentStep > step.num
-                    ? "bg-primary/20 text-primary"
-                    : "bg-border text-text-muted"
+                    ? "bg-primary/10 text-primary"
+                    : "bg-bg-subtle border border-border text-text-muted"
               }`}
             >
               {currentStep > step.num ? (
@@ -641,15 +641,15 @@ export default function PoolWizard({
 
             {/* Connection multi-select (checkboxes) */}
             <div>
-              <label className="text-[11px] uppercase tracking-wide text-text-muted font-semibold block mb-1">
+              <label className="text-xs font-medium text-text-muted block mb-1">
                 {t("wizardConnectionsLabel")}
               </label>
               {lockedProvider && (
-                <p className="text-[10px] text-amber-400 mb-1.5">
+                <p className="text-[11px] text-warning mb-1.5">
                   {t("wizardSingleProviderNote")} ({lockedProvider})
                 </p>
               )}
-              <div className="space-y-1.5 rounded border border-border bg-bg-base px-3 py-2 max-h-48 overflow-y-auto">
+              <div className="space-y-1.5 rounded-lg border border-border bg-surface-2 px-3 py-2 max-h-48 overflow-y-auto">
                 {availableConnections.map((c) => {
                   const checked = connectionIds.includes(c.id);
                   const isPrimary = connectionIds[0] === c.id;
@@ -674,9 +674,9 @@ export default function PoolWizard({
                         }}
                         className="accent-primary w-3.5 h-3.5 shrink-0"
                       />
-                      <span className="text-sm truncate">{connLabel(c)}</span>
+                      <span className="text-sm text-text-main truncate">{connLabel(c)}</span>
                       {isPrimary && (
-                        <span className="text-[10px] font-semibold text-primary bg-primary/10 px-1.5 py-0.5 rounded shrink-0">
+                        <span className="text-[10px] font-medium text-primary bg-primary/10 px-1.5 py-0.5 rounded shrink-0">
                           {t("wizardPrimaryBadge")}
                         </span>
                       )}
@@ -705,14 +705,14 @@ export default function PoolWizard({
                   ))}
               </div>
               {connections.length === 0 && (
-                <p className="text-[10px] text-amber-400 mt-1">{t("noEligibleConnections")}</p>
+                <p className="text-[11px] text-warning mt-1">{t("noEligibleConnections")}</p>
               )}
             </div>
 
             {/* Pool name */}
             {connectionIds.length > 0 && (
               <div>
-                <label className="text-[11px] uppercase tracking-wide text-text-muted font-semibold block mb-1">
+                <label className="text-xs font-medium text-text-muted block mb-1">
                   {t("wizardPoolNameLabel")}
                 </label>
                 <input
@@ -722,7 +722,7 @@ export default function PoolWizard({
                   placeholder={
                     selectedConn ? selectedConn.provider : t("wizardPoolNamePlaceholder")
                   }
-                  className="w-full px-3 py-2 rounded border border-border bg-bg-base text-sm"
+                  className="w-full px-3 py-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-sm"
                 />
               </div>
             )}
@@ -730,13 +730,13 @@ export default function PoolWizard({
             {/* Group picker */}
             {connectionIds.length > 0 && groups.length > 0 && (
               <div>
-                <label className="text-[11px] uppercase tracking-wide text-text-muted font-semibold block mb-1">
+                <label className="text-xs font-medium text-text-muted block mb-1">
                   {t("wizardGroupLabel")}
                 </label>
                 <select
                   value={groupId}
                   onChange={(e) => setGroupId(e.target.value)}
-                  className="w-full px-3 py-2 rounded border border-border bg-bg-base text-sm"
+                  className="w-full px-3 py-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-sm"
                 >
                   {groups.map((g) => (
                     <option key={g.id} value={g.id}>
@@ -750,7 +750,7 @@ export default function PoolWizard({
             {/* Default policy */}
             {connectionIds.length > 0 && (
               <div>
-                <label className="text-[11px] uppercase tracking-wide text-text-muted font-semibold block mb-1">
+                <label className="text-xs font-medium text-text-muted block mb-1">
                   {t("policyLabel")}
                 </label>
                 <div className="flex gap-1">
@@ -759,10 +759,10 @@ export default function PoolWizard({
                       key={p}
                       type="button"
                       onClick={() => setDefaultPolicy(p)}
-                      className={`px-3 py-1.5 rounded-md border text-xs cursor-pointer transition-colors ${
+                      className={`px-3 py-1.5 rounded-control border text-xs font-medium cursor-pointer transition-colors ${
                         defaultPolicy === p
-                          ? "bg-primary/15 border-primary/40 text-primary font-semibold"
-                          : "border-border text-text-muted hover:text-text-main"
+                          ? "bg-primary/10 border-primary/30 text-primary"
+                          : "border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
                       }`}
                     >
                       {p === "hard"
@@ -780,7 +780,7 @@ export default function PoolWizard({
               <button
                 onClick={() => setStep(2)}
                 disabled={connectionIds.length === 0}
-                className="flex items-center gap-1.5 text-sm px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+                className="flex items-center gap-1.5 text-[13px] font-medium px-3 py-1.5 rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
               >
                 {t("wizardNext")}
                 <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
@@ -800,9 +800,9 @@ export default function PoolWizard({
             </div>
 
             {/* Dimensions editor (ported from ProviderPlanConfigClient) */}
-            <div className="rounded-lg border border-border/40 bg-bg-subtle/10 p-3">
+            <div className="rounded-lg border border-border bg-surface-2 p-3">
               <div className="flex items-center justify-between mb-2">
-                <span className="text-[11px] uppercase tracking-wide font-bold text-text-muted">
+                <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {tPlans("dimensionLabel")}
                 </span>
                 <button
@@ -831,7 +831,7 @@ export default function PoolWizard({
                     <select
                       value={dim.unit}
                       onChange={(e) => updateDimension(i, { unit: e.target.value as QuotaUnit })}
-                      className="px-2 py-1.5 rounded border border-border bg-bg-base text-xs"
+                      className="px-2 py-1.5 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-xs"
                     >
                       {UNIT_OPTIONS.map((u) => (
                         <option key={u} value={u}>
@@ -844,7 +844,7 @@ export default function PoolWizard({
                       onChange={(e) =>
                         updateDimension(i, { window: e.target.value as QuotaWindow })
                       }
-                      className="px-2 py-1.5 rounded border border-border bg-bg-base text-xs"
+                      className="px-2 py-1.5 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-xs"
                     >
                       {WINDOW_OPTIONS.map((w) => (
                         <option key={w} value={w}>
@@ -858,12 +858,12 @@ export default function PoolWizard({
                       value={dim.limit}
                       onChange={(e) => updateDimension(i, { limit: Number(e.target.value) })}
                       placeholder={tPlans("limitLabel")}
-                      className="px-2 py-1.5 rounded border border-border bg-bg-base text-xs tabular-nums text-right"
+                      className="px-2 py-1.5 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-xs tabular-nums text-right"
                     />
                     <button
                       type="button"
                       onClick={() => removeDimension(i)}
-                      className="p-0.5 rounded hover:bg-red-500/10 text-text-muted hover:text-red-400 cursor-pointer"
+                      className="p-0.5 rounded-md hover:bg-error/10 text-text-muted hover:text-error transition-colors cursor-pointer"
                     >
                       <span className="material-symbols-outlined text-[16px]">close</span>
                     </button>
@@ -873,12 +873,12 @@ export default function PoolWizard({
             </div>
 
             {dimensionsEdited && (
-              <p className="text-[10px] text-amber-400">{t("wizardDimensionsEditedNotice")}</p>
+              <p className="text-[11px] text-warning">{t("wizardDimensionsEditedNotice")}</p>
             )}
 
             {/* Helper note when pool has multiple connections */}
             {connectionIds.length > 1 && (
-              <p className="text-[10px] text-text-muted bg-bg-subtle/40 px-3 py-2 rounded border border-border/40">
+              <p className="text-[11px] text-text-muted bg-bg-subtle px-3 py-2 rounded-md border border-border">
                 {t("wizardAdditionalConnectionsNote")}
               </p>
             )}
@@ -886,14 +886,14 @@ export default function PoolWizard({
             <div className="flex items-center justify-between pt-2">
               <button
                 onClick={() => setStep(1)}
-                className="flex items-center gap-1.5 text-sm px-4 py-2 rounded-lg border border-border text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+                className="flex items-center gap-1.5 text-[13px] font-medium px-3 py-1.5 rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors"
               >
                 <span className="material-symbols-outlined text-[16px]">arrow_back</span>
                 {t("wizardBack")}
               </button>
               <button
                 onClick={() => setStep(3)}
-                className="flex items-center gap-1.5 text-sm px-4 py-2 rounded-lg bg-primary text-white hover:bg-primary/90 transition-colors"
+                className="flex items-center gap-1.5 text-[13px] font-medium px-3 py-1.5 rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors"
               >
                 {t("wizardNext")}
                 <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
@@ -914,7 +914,7 @@ export default function PoolWizard({
 
             {/* Allocation rows (ported from EditAllocationsModal) */}
             {allocations.length === 0 ? (
-              <div className="text-[12px] text-text-muted italic py-4 text-center bg-bg-subtle/40 rounded-md">
+              <div className="text-[12px] text-text-muted italic py-4 text-center bg-bg-subtle rounded-md">
                 {t("noKeysAdded")}
               </div>
             ) : (
@@ -931,14 +931,16 @@ export default function PoolWizard({
                         className="inline-block w-3 h-3 rounded-sm"
                         style={{ background: color }}
                       />
-                      <span className="text-[12px] font-mono truncate">{keyLabel(a.apiKeyId)}</span>
+                      <span className="text-[12px] font-mono text-text-main truncate">
+                        {keyLabel(a.apiKeyId)}
+                      </span>
                       <input
                         type="number"
                         min={0}
                         max={100}
                         value={a.weight}
                         onChange={(e) => updateWeight(a.apiKeyId, Number(e.target.value))}
-                        className="px-2 py-1 rounded border border-border bg-bg-base text-sm text-right tabular-nums"
+                        className="px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-sm text-right tabular-nums"
                         title={t("weightPercent")}
                       />
                       <input
@@ -952,7 +954,7 @@ export default function PoolWizard({
                           )
                         }
                         placeholder={t("policyCapAbsolutePlaceholder")}
-                        className="px-2 py-1 rounded border border-border bg-bg-base text-xs tabular-nums"
+                        className="px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-xs tabular-nums"
                         title={t("policyCapAbsoluteLabel")}
                       />
                       <select
@@ -960,7 +962,7 @@ export default function PoolWizard({
                         onChange={(e) =>
                           updateAllocationPolicy(a.apiKeyId, e.target.value as Policy)
                         }
-                        className="px-1 py-1 rounded border border-border bg-bg-base text-xs"
+                        className="px-1 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-xs"
                       >
                         <option value="hard">{t("policyHard")}</option>
                         <option value="soft">{t("policySoft")}</option>
@@ -969,7 +971,7 @@ export default function PoolWizard({
                       <button
                         type="button"
                         onClick={() => removeAllocation(a.apiKeyId)}
-                        className="p-0.5 rounded hover:bg-red-500/10 text-text-muted hover:text-red-400 cursor-pointer"
+                        className="p-0.5 rounded-md hover:bg-error/10 text-text-muted hover:text-error transition-colors cursor-pointer"
                       >
                         <span className="material-symbols-outlined text-[16px]">close</span>
                       </button>
@@ -980,14 +982,14 @@ export default function PoolWizard({
             )}
 
             {/* Add key + equal split controls */}
-            <div className="flex items-center justify-between text-[11px] pt-1 border-t border-border/40">
+            <div className="flex items-center justify-between text-[11px] pt-1 border-t border-border">
               <span
-                className={`font-bold tabular-nums ${
+                className={`font-semibold tabular-nums ${
                   totalWeight === 100
-                    ? "text-emerald-400"
+                    ? "text-success"
                     : totalWeight > 100
-                      ? "text-red-400"
-                      : "text-amber-400"
+                      ? "text-error"
+                      : "text-warning"
                 }`}
               >
                 {t("totalLabel", { percent: totalWeight })}{" "}
@@ -998,7 +1000,7 @@ export default function PoolWizard({
                   <select
                     value=""
                     onChange={(e) => e.target.value && addKey(e.target.value)}
-                    className="px-2 py-1 rounded border border-border bg-bg-base text-xs"
+                    className="px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-xs"
                   >
                     <option value="">{t("addKey")}</option>
                     {availableKeys.map((k) => (
@@ -1020,7 +1022,7 @@ export default function PoolWizard({
             </div>
 
             {/* Exclusive checkbox */}
-            <label className="flex items-start gap-2 cursor-pointer select-none pt-1 border-t border-border/40">
+            <label className="flex items-start gap-2 cursor-pointer select-none pt-1 border-t border-border">
               <input
                 type="checkbox"
                 checked={exclusive}
@@ -1028,7 +1030,7 @@ export default function PoolWizard({
                 className="mt-0.5 accent-primary w-4 h-4"
               />
               <div>
-                <span className="text-sm font-semibold text-text-main">
+                <span className="text-sm font-medium text-text-main">
                   {t("wizardExclusiveLabel")}
                 </span>
                 <p className="text-[11px] text-text-muted mt-0.5">{t("wizardExclusiveHint")}</p>
@@ -1037,8 +1039,8 @@ export default function PoolWizard({
 
             {/* quotaModelName preview — grouped by provider */}
             {previewByProvider.length > 0 && (
-              <div className="rounded-md border border-border/40 bg-bg-subtle/30 p-3 text-[11px]">
-                <div className="font-semibold text-text-muted uppercase tracking-wide mb-1.5 text-[10px]">
+              <div className="rounded-lg border border-border bg-surface-2 p-3 text-[11px]">
+                <div className="font-medium text-text-subtle uppercase tracking-wider mb-1.5 text-[11px]">
                   {t("wizardPreviewLabel")}
                 </div>
                 <div className="space-y-2">
@@ -1047,7 +1049,7 @@ export default function PoolWizard({
                     return (
                       <div key={provider}>
                         {previewByProvider.length > 1 && (
-                          <div className="text-[10px] uppercase tracking-wide text-text-muted font-semibold mb-0.5">
+                          <div className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-0.5">
                             {provider}
                           </div>
                         )}
@@ -1071,14 +1073,16 @@ export default function PoolWizard({
             )}
 
             {error && (
-              <p className="text-[11px] text-red-400 bg-red-500/10 px-3 py-2 rounded">{error}</p>
+              <p className="text-[11px] text-error bg-error/10 border border-error/20 px-3 py-2 rounded-md">
+                {error}
+              </p>
             )}
 
-            <div className="flex items-center justify-between pt-2 border-t border-border/40">
+            <div className="flex items-center justify-between pt-2 border-t border-border">
               <button
                 onClick={() => setStep(2)}
                 disabled={saving}
-                className="flex items-center gap-1.5 text-sm px-4 py-2 rounded-lg border border-border text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5 transition-colors disabled:opacity-40"
+                className="flex items-center gap-1.5 text-[13px] font-medium px-3 py-1.5 rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-40"
               >
                 <span className="material-symbols-outlined text-[16px]">arrow_back</span>
                 {t("wizardBack")}

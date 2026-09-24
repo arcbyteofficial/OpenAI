@@ -14,17 +14,13 @@ export function ConversationTab({ request }: ConversationTabProps) {
   const conversation = normalizeConversation(request);
 
   if (!conversation) {
-    return (
-      <div className="p-4 text-sm text-text-muted">{t("conversationNotAvailable")}</div>
-    );
+    return <div className="p-4 text-sm text-text-muted">{t("conversationNotAvailable")}</div>;
   }
 
   const allTurns = [...conversation.request, ...conversation.response];
 
   if (allTurns.length === 0) {
-    return (
-      <div className="p-4 text-sm text-text-muted">{t("conversationNoMessages")}</div>
-    );
+    return <div className="p-4 text-sm text-text-muted">{t("conversationNoMessages")}</div>;
   }
 
   return (
@@ -32,12 +28,12 @@ export function ConversationTab({ request }: ConversationTabProps) {
       {conversation.contextKey && (
         <div className="text-xs text-text-muted mb-2">
           {t("contextFingerprint")}{" "}
-          <span className="font-mono text-blue-400">#{conversation.contextKey.slice(0, 12)}</span>
+          <span className="font-mono text-primary">#{conversation.contextKey.slice(0, 12)}</span>
         </div>
       )}
       {conversation.request.length > 0 && (
         <>
-          <div className="flex items-center gap-2 mt-2 mb-1 text-[11px] uppercase tracking-wider text-text-muted font-semibold">
+          <div className="flex items-center gap-2 mt-2 mb-1 text-[11px] uppercase tracking-wider text-text-subtle font-medium">
             <span className="h-px flex-1 bg-border" aria-hidden="true" />
             <span>{t("contextHistory")}</span>
             <span className="h-px flex-1 bg-border" aria-hidden="true" />
@@ -49,7 +45,7 @@ export function ConversationTab({ request }: ConversationTabProps) {
       )}
       {conversation.response.length > 0 && (
         <>
-          <div className="flex items-center gap-2 mt-3 mb-1 text-[11px] uppercase tracking-wider text-text-muted font-semibold">
+          <div className="flex items-center gap-2 mt-3 mb-1 text-[11px] uppercase tracking-wider text-text-subtle font-medium">
             <span className="h-px flex-1 bg-border" aria-hidden="true" />
             <span>{t("modelResponse")}</span>
             <span className="h-px flex-1 bg-border" aria-hidden="true" />

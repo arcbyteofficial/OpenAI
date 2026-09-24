@@ -40,7 +40,7 @@ export function NumberField({
               onChange(clamped);
             }
           }}
-          className="w-full rounded-lg border border-border bg-bg-subtle px-3 py-2 text-sm"
+          className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main tabular-nums focus:border-primary focus:outline-none"
         />
         {suffix ? <span className="text-xs text-text-muted">{suffix}</span> : null}
       </div>
@@ -60,7 +60,7 @@ export function BooleanField({
   onChange: (value: boolean) => void;
 }) {
   return (
-    <label className="flex items-start justify-between gap-3 rounded-lg border border-border bg-bg-subtle px-3 py-3">
+    <label className="flex items-start justify-between gap-3 rounded-lg border border-border bg-surface-2 px-3 py-3">
       <div>
         <div className="text-sm font-medium text-text-main">{label}</div>
         <div className="text-xs text-text-muted">{description}</div>
@@ -69,7 +69,7 @@ export function BooleanField({
         type="checkbox"
         checked={checked}
         onChange={(event) => onChange(event.target.checked)}
-        className="mt-1 size-4 rounded border-border"
+        className="mt-1 size-4 rounded border-border accent-primary"
       />
     </label>
   );

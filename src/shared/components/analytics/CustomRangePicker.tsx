@@ -117,12 +117,12 @@ export default function CustomRangePicker({
   return (
     <div
       ref={ref}
-      className="absolute right-0 top-full z-50 mt-2 w-[340px] rounded-xl border border-border/50 bg-surface p-4 shadow-xl"
-      style={{ backdropFilter: "blur(16px)" }}
+      className="absolute right-0 top-full z-50 mt-2 w-[340px] rounded-card border border-border bg-surface p-4 shadow-[var(--shadow-elevated)]"
+      style={{ backdropFilter: "none" }}
     >
       {/* Quick presets */}
       <div className="mb-3">
-        <p className="text-[10px] font-semibold uppercase tracking-wider text-text-muted mb-1.5">
+        <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-1.5">
           {t("rangeQuickSelect")}
         </p>
         <div className="flex flex-wrap gap-1">
@@ -131,7 +131,7 @@ export default function CustomRangePicker({
               key={p.key}
               type="button"
               onClick={() => handlePreset(p.key)}
-              className="rounded-md border border-border/30 bg-black/[0.03] px-2.5 py-1 text-[11px] font-medium text-text-muted transition-colors hover:bg-primary/10 hover:text-primary hover:border-primary/30 dark:bg-white/[0.03]"
+              className="rounded-md border border-border bg-surface px-2.5 py-1 text-[11px] font-medium text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main hover:border-border-strong"
             >
               {p.label}
             </button>
@@ -139,30 +139,30 @@ export default function CustomRangePicker({
         </div>
       </div>
 
-      <div className="h-px bg-border/30 mb-3" />
+      <div className="h-px bg-border mb-3" />
 
       {/* Date inputs */}
       <div className="flex flex-col gap-2.5">
         <div>
-          <label className="text-[10px] font-semibold uppercase tracking-wider text-text-muted mb-1 block">
+          <label className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-1 block">
             {t("rangeStart")}
           </label>
           <input
             type="datetime-local"
             value={localStart}
             onChange={(e) => setLocalStart(e.target.value)}
-            className="w-full rounded-lg border border-border/50 bg-black/[0.04] px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary dark:bg-white/[0.04]"
+            className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary"
           />
         </div>
         <div>
-          <label className="text-[10px] font-semibold uppercase tracking-wider text-text-muted mb-1 block">
+          <label className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-1 block">
             {t("rangeEnd")}
           </label>
           <input
             type="datetime-local"
             value={localEnd}
             onChange={(e) => setLocalEnd(e.target.value)}
-            className="w-full rounded-lg border border-border/50 bg-black/[0.04] px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary dark:bg-white/[0.04]"
+            className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary"
           />
         </div>
       </div>
@@ -177,7 +177,7 @@ export default function CustomRangePicker({
         <button
           type="button"
           onClick={onClose}
-          className="rounded-lg px-3 py-1.5 text-xs font-medium text-text-muted hover:text-text-main transition-colors"
+          className="rounded-control px-3 py-1.5 text-xs font-medium text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
         >
           {t("rangeCancel")}
         </button>
@@ -185,7 +185,7 @@ export default function CustomRangePicker({
           type="button"
           disabled={!isValid}
           onClick={handleApply}
-          className="rounded-lg bg-primary px-4 py-1.5 text-xs font-semibold text-white shadow-sm transition-colors hover:bg-primary-hover disabled:opacity-40 disabled:cursor-not-allowed"
+          className="rounded-control bg-contrast px-3 py-1.5 text-xs font-medium text-contrast-fg transition-colors hover:bg-contrast-hover disabled:opacity-40 disabled:cursor-not-allowed"
         >
           {t("rangeApply")}
         </button>

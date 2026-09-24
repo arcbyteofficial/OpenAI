@@ -123,7 +123,7 @@ function AccountRoundRobinSection({ t, busy, settings, setSettings, run }: Secti
       </div>
 
       {accountRoundRobin && (
-        <div className="flex items-start sm:items-center justify-between gap-4 pt-2 border-t border-border/50">
+        <div className="flex items-start sm:items-center justify-between gap-4 pt-2 border-t border-border">
           <div className="flex-1 min-w-0">
             <p className="font-medium text-sm sm:text-base">{t("stickyLimit")}</p>
             <p className="text-xs sm:text-sm text-text-muted">{t("stickyLimitDesc")}</p>
@@ -162,7 +162,7 @@ function ComboRoundRobinSection({ t, busy, settings, setSettings, run }: Section
   const comboRoundRobin = settings.comboStrategy === "round-robin";
   return (
     <>
-      <div className="flex items-start sm:items-center justify-between gap-4 pt-4 border-t border-border/50">
+      <div className="flex items-start sm:items-center justify-between gap-4 pt-4 border-t border-border">
         <div className="flex-1 min-w-0">
           <p className="font-medium text-sm sm:text-base">{t("comboRoundRobin")}</p>
           <p className="text-xs sm:text-sm text-text-muted">{t("comboRoundRobinDesc")}</p>
@@ -183,7 +183,7 @@ function ComboRoundRobinSection({ t, busy, settings, setSettings, run }: Section
       </div>
 
       {comboRoundRobin && (
-        <div className="flex items-center justify-between pt-2 border-t border-border/50">
+        <div className="flex items-center justify-between pt-2 border-t border-border">
           <div>
             <p className="font-medium">{t("comboStickyLimit")}</p>
             <p className="text-sm text-text-muted">{t("comboStickyLimitDesc")}</p>
@@ -232,7 +232,7 @@ function RoutingSummaryFooter({
   comboStickyDisplay: number;
 }) {
   return (
-    <p className="text-xs text-text-muted italic pt-2 border-t border-border/50">
+    <p className="text-xs text-text-muted italic pt-2 border-t border-border">
       {accountRoundRobin
         ? t("routingStrategyAccountSummary", { limit: accountStickyDisplay })
         : t("routingStrategyFillFirstSummary")}
@@ -260,13 +260,15 @@ export default function RoutingStrategyCard() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-4">
-        <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500 shrink-0">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted shrink-0">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             route
           </span>
         </div>
         <div>
-          <h3 className="text-base sm:text-lg font-semibold">{t("routingStrategyTitle")}</h3>
+          <h3 className="text-base font-semibold tracking-tight text-text-main">
+            {t("routingStrategyTitle")}
+          </h3>
           <p className="text-xs text-text-muted">{t("routingStrategySubtitle")}</p>
         </div>
       </div>

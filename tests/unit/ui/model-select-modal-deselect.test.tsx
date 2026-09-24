@@ -93,7 +93,7 @@ describe("ModelSelectModal — deselect / toggle behavior (upstream PR #889)", (
 
     // Find the first OpenAI model rendered (it must exist — openai is an active provider).
     const firstModelButton = container.querySelector(
-      "button[class*='hover:border-primary']"
+      "button[class*='hover:border-border-strong']"
     ) as HTMLButtonElement | null;
     expect(firstModelButton, "expected at least one openai model button to render").not.toBeNull();
 
@@ -119,14 +119,14 @@ describe("ModelSelectModal — deselect / toggle behavior (upstream PR #889)", (
     // Render once to discover the model value
     const probe = await renderModal({ onSelect: vi.fn(), onDeselect: vi.fn() });
     const probeButton = probe.container.querySelector(
-      "button[class*='hover:border-primary']"
+      "button[class*='hover:border-border-strong']"
     ) as HTMLButtonElement | null;
     expect(probeButton).not.toBeNull();
     // The on-click handler embeds the model value; trigger once to capture it.
     const tempSelect = vi.fn();
     const probe2 = await renderModal({ onSelect: tempSelect, addedModelValues: [] });
     const probeButton2 = probe2.container.querySelector(
-      "button[class*='hover:border-primary']"
+      "button[class*='hover:border-border-strong']"
     ) as HTMLButtonElement | null;
     await act(async () => {
       probeButton2!.click();
@@ -143,7 +143,7 @@ describe("ModelSelectModal — deselect / toggle behavior (upstream PR #889)", (
       keepOpenOnSelect: true,
     });
 
-    // The already-added model now renders with the emerald/added class — look for ✓.
+    // The already-added model now renders with the success/added class — look for ✓.
     const addedButton = Array.from(container.querySelectorAll("button")).find((b) =>
       (b.textContent || "").includes("✓")
     ) as HTMLButtonElement | undefined;
@@ -168,10 +168,10 @@ describe("ModelSelectModal — deselect / toggle behavior (upstream PR #889)", (
       keepOpenOnSelect: true,
     });
 
-    // Model chips use rounded-xl; toolbar controls (Select all / Test Selected)
-    // also include hover:border-primary so class-only matching is too broad.
+    // Model chips use rounded-md; toolbar controls (Select all / Test Selected)
+    // also include hover:border-border-strong so class-only matching is too broad.
     const firstModelButton = Array.from(container.querySelectorAll("button")).find((b) =>
-      (b.className || "").includes("rounded-xl")
+      (b.className || "").includes("rounded-md")
     ) as HTMLButtonElement | undefined;
     expect(firstModelButton, "expected a model chip button").toBeDefined();
 
@@ -190,7 +190,7 @@ describe("ModelSelectModal — deselect / toggle behavior (upstream PR #889)", (
     const { container } = await renderModal({ onSelect, onClose });
 
     const firstModelButton = container.querySelector(
-      "button[class*='hover:border-primary']"
+      "button[class*='hover:border-border-strong']"
     ) as HTMLButtonElement | null;
     expect(firstModelButton).not.toBeNull();
 

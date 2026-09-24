@@ -107,27 +107,27 @@ export default function UploadFileModal({ onClose, onUploaded }: Props) {
 
       {/* Panel */}
       <div
-        className="relative w-full sm:max-w-md bg-[var(--color-surface)] border border-[var(--color-border)] rounded-xl shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-200 flex flex-col"
+        className="relative w-full sm:max-w-md bg-surface border border-border rounded-card shadow-[var(--shadow-elevated)] animate-in fade-in slide-in-from-bottom-4 duration-200 flex flex-col"
         role="dialog"
         aria-modal="true"
         aria-label={t("uploadModalTitle")}
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--color-border)]">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-border">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-[20px] text-[var(--color-accent)]">
+            <span className="material-symbols-outlined text-[18px] text-text-muted">
               upload_file
             </span>
-            <h2 className="text-base font-semibold text-[var(--color-text-main)]">
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
               {t("uploadModalTitle")}
             </h2>
           </div>
           <button
             onClick={onClose}
             aria-label={t("close")}
-            className="p-1.5 rounded-lg text-[var(--color-text-muted)] hover:bg-[var(--color-bg-alt)] transition-colors"
+            className="p-1.5 rounded-md text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
           >
-            <span className="material-symbols-outlined text-[20px]">close</span>
+            <span className="material-symbols-outlined text-[18px]">close</span>
           </button>
         </div>
 
@@ -137,7 +137,7 @@ export default function UploadFileModal({ onClose, onUploaded }: Props) {
           {error && (
             <div
               role="alert"
-              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/25 text-red-400 text-sm"
+              className="flex items-center gap-2 px-3 py-2 rounded-lg bg-error/10 border border-error/20 text-error text-[13px]"
             >
               <span className="material-symbols-outlined text-[16px]">error</span>
               {error}
@@ -151,10 +151,10 @@ export default function UploadFileModal({ onClose, onUploaded }: Props) {
               onDragLeave={handleDragLeave}
               onDrop={handleDrop}
               onClick={() => inputRef.current?.click()}
-              className={`flex flex-col items-center justify-center gap-3 rounded-xl border-2 border-dashed px-6 py-10 cursor-pointer transition-colors select-none ${
+              className={`flex flex-col items-center justify-center gap-3 rounded-card border-2 border-dashed px-6 py-10 cursor-pointer transition-colors select-none ${
                 dragging
-                  ? "border-[var(--color-accent)] bg-[var(--color-accent)]/5"
-                  : "border-[var(--color-border)] hover:border-[var(--color-accent)]/60 hover:bg-[var(--color-bg-alt)]"
+                  ? "border-primary bg-primary/5"
+                  : "border-border-strong hover:border-text-subtle hover:bg-bg-subtle"
               }`}
               role="button"
               tabIndex={0}
@@ -164,14 +164,14 @@ export default function UploadFileModal({ onClose, onUploaded }: Props) {
               }}
             >
               <span
-                className={`material-symbols-outlined text-[40px] ${dragging ? "text-[var(--color-accent)]" : "text-[var(--color-text-muted)]"}`}
+                className={`material-symbols-outlined text-[32px] ${dragging ? "text-primary" : "text-text-subtle"}`}
               >
                 upload_file
               </span>
-              <span className="text-sm text-[var(--color-text-main)] text-center">
+              <span className="text-sm text-text-main text-center">
                 {t("uploadModalDropOrPick")}
               </span>
-              <span className="text-xs text-[var(--color-text-muted)] text-center">
+              <span className="text-xs text-text-muted text-center">
                 {t("uploadModalSizeLimit")}
               </span>
               <input
@@ -185,27 +185,22 @@ export default function UploadFileModal({ onClose, onUploaded }: Props) {
               />
             </div>
           ) : (
-            <div className="flex items-center gap-3 px-4 py-3 rounded-xl bg-[var(--color-bg-alt)] border border-[var(--color-border)]">
-              <span className="material-symbols-outlined text-[24px] text-[var(--color-accent)] shrink-0">
+            <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-bg-subtle border border-border">
+              <span className="material-symbols-outlined text-[20px] text-text-muted shrink-0">
                 description
               </span>
               <div className="flex flex-col gap-0.5 flex-1 min-w-0">
-                <span
-                  className="text-sm font-medium text-[var(--color-text-main)] truncate"
-                  title={file.name}
-                >
+                <span className="text-sm font-medium text-text-main truncate" title={file.name}>
                   {file.name}
                 </span>
-                <span className="text-xs text-[var(--color-text-muted)]">
-                  {formatBytes(file.size)}
-                </span>
+                <span className="text-xs text-text-muted">{formatBytes(file.size)}</span>
               </div>
               <button
                 onClick={() => {
                   setFile(null);
                   setError(null);
                 }}
-                className="shrink-0 text-xs text-[var(--color-text-muted)] hover:text-red-400 transition-colors px-2 py-1 rounded border border-[var(--color-border)] hover:border-red-400/40"
+                className="shrink-0 text-xs text-text-muted hover:text-error transition-colors px-2 py-1 rounded-md border border-border-strong hover:border-error/40"
               >
                 {t("uploadFileModalRemove")}
               </button>
@@ -214,21 +209,21 @@ export default function UploadFileModal({ onClose, onUploaded }: Props) {
         </div>
 
         {/* Footer */}
-        <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-[var(--color-border)]">
+        <div className="flex items-center justify-end gap-3 px-6 py-4 border-t border-border">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium rounded-lg text-[var(--color-text-muted)] hover:bg-[var(--color-bg-alt)] transition-colors border border-[var(--color-border)]"
+            className="px-4 py-2 text-sm font-medium rounded-control bg-surface text-text-main hover:bg-bg-subtle transition-colors border border-border-strong"
           >
             {t("uploadModalCancel")}
           </button>
           <button
             onClick={() => void handleUpload()}
             disabled={!file || uploading}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-[var(--color-accent)] text-white hover:opacity-90 transition-opacity disabled:opacity-40 disabled:cursor-not-allowed"
+            className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
           >
             {uploading ? (
               <>
-                <span className="animate-spin inline-block rounded-full h-4 w-4 border-b-2 border-white" />
+                <span className="animate-spin inline-block rounded-full h-4 w-4 border-b-2 border-contrast-fg" />
                 {t("uploadFileModalUploading")}
               </>
             ) : (

@@ -305,16 +305,14 @@ export default function ChatTab({ configState, onMetricsUpdate }: ChatTabProps) 
   return (
     <div className="flex flex-col h-full">
       {/* Status bar */}
-      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-bg-alt text-xs text-text-muted">
+      <div className="flex items-center justify-between px-4 py-2 border-b border-border bg-surface-2 text-xs text-text-muted">
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-[16px]">chat</span>
           <span className="font-medium">{t("tabChat")}</span>
           {responseStatus !== null && (
             <span
-              className={`px-1.5 py-0.5 rounded text-[10px] font-medium ${
-                responseStatus < 400
-                  ? "bg-green-100 text-green-700 dark:bg-green-900/30 dark:text-green-400"
-                  : "bg-red-100 text-red-700 dark:bg-red-900/30 dark:text-red-400"
+              className={`px-1.5 py-0.5 rounded font-mono text-[10px] font-medium ${
+                responseStatus < 400 ? "bg-success/10 text-success" : "bg-error/10 text-error"
               }`}
             >
               {responseStatus}
@@ -335,7 +333,7 @@ export default function ChatTab({ configState, onMetricsUpdate }: ChatTabProps) 
           )}
           <button
             onClick={handleClear}
-            className="p-1 rounded hover:bg-red-500/10 text-text-muted hover:text-red-500 transition-colors"
+            className="p-1 rounded-control hover:bg-error/10 text-text-muted hover:text-error transition-colors"
             title={t("clearChat")}
           >
             <span className="material-symbols-outlined text-[16px]">delete</span>
@@ -348,10 +346,12 @@ export default function ChatTab({ configState, onMetricsUpdate }: ChatTabProps) 
         {messages.length === 0 && !loading && (
           <div className="flex items-center justify-center h-full text-text-muted text-sm">
             <div className="text-center space-y-2">
-              <span className="material-symbols-outlined text-[48px] text-text-muted/30">chat</span>
+              <span className="material-symbols-outlined text-[40px] text-text-subtle/50">
+                chat
+              </span>
               <p>{t("startConversation")}</p>
               {!configState.model && (
-                <p className="text-amber-500 text-xs">{t("setModelInConfigFirst")}</p>
+                <p className="text-warning text-xs">{t("setModelInConfigFirst")}</p>
               )}
             </div>
           </div>
@@ -366,14 +366,14 @@ export default function ChatTab({ configState, onMetricsUpdate }: ChatTabProps) 
                 msg.role === "user" ? "ml-auto items-end" : "mr-auto items-start"
               }`}
             >
-              <span className="text-[10px] text-text-muted uppercase mb-1 px-1">
+              <span className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1 px-1">
                 {t(`role.${msg.role}`)}
               </span>
               <div
-                className={`px-4 py-2.5 rounded-2xl text-sm ${
+                className={`px-4 py-2.5 rounded-card text-sm ${
                   msg.role === "user"
-                    ? "bg-primary text-primary-foreground rounded-tr-sm"
-                    : "bg-bg-alt border border-border text-text-main rounded-tl-sm"
+                    ? "bg-contrast text-contrast-fg rounded-tr-sm"
+                    : "bg-surface border border-border text-text-main rounded-tl-sm"
                 }`}
               >
                 {msg.role === "assistant" ? (
@@ -399,10 +399,10 @@ export default function ChatTab({ configState, onMetricsUpdate }: ChatTabProps) 
         {/* Loading indicator */}
         {loading && messages[messages.length - 1]?.role === "user" && (
           <div className="flex flex-col max-w-[85%] mr-auto items-start">
-            <span className="text-[10px] text-text-muted uppercase mb-1 px-1">
+            <span className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1 px-1">
               {t("role.assistant")}
             </span>
-            <div className="px-4 py-2 rounded-2xl text-sm bg-bg-alt border border-border rounded-tl-sm text-text-muted flex items-center gap-2">
+            <div className="px-4 py-2 rounded-card text-sm bg-surface border border-border rounded-tl-sm text-text-muted flex items-center gap-2">
               <span className="material-symbols-outlined text-[16px] animate-spin">
                 progress_activity
               </span>
@@ -412,7 +412,7 @@ export default function ChatTab({ configState, onMetricsUpdate }: ChatTabProps) 
         )}
 
         {error && (
-          <div className="text-center p-2 text-sm text-red-500 bg-red-500/10 rounded border border-red-500/20">
+          <div className="text-center p-2 text-sm text-error bg-error/10 rounded-lg border border-error/20">
             {error}
           </div>
         )}
@@ -421,20 +421,20 @@ export default function ChatTab({ configState, onMetricsUpdate }: ChatTabProps) 
       </div>
 
       {/* Input area */}
-      <div className="p-3 border-t border-border bg-bg-alt flex gap-2 shrink-0">
+      <div className="p-3 border-t border-border bg-surface flex gap-2 shrink-0">
         <textarea
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={t("typeMessageWithShortcut")}
-          className="flex-1 min-h-[44px] max-h-[120px] bg-surface border border-border rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-1 focus:ring-primary resize-y"
+          className="flex-1 min-h-[44px] max-h-[120px] bg-surface border border-border-strong rounded-control px-3 py-2 text-sm placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary resize-y"
           rows={1}
           disabled={loading}
         />
         {loading ? (
           <button
             onClick={handleCancel}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg border border-border text-sm text-text-muted hover:text-text-main hover:bg-black/5 transition-colors shrink-0"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-control border border-border-strong text-[13px] font-medium text-text-main hover:bg-bg-subtle transition-colors shrink-0"
           >
             <span className="material-symbols-outlined text-[16px]">stop</span>
             {t("stop")}
@@ -443,7 +443,7 @@ export default function ChatTab({ configState, onMetricsUpdate }: ChatTabProps) 
           <button
             onClick={() => void handleSend()}
             disabled={!input.trim()}
-            className="flex items-center gap-1.5 px-3 py-2 rounded-lg bg-primary text-primary-foreground text-sm font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-primary/90 transition-colors shrink-0"
+            className="flex items-center gap-1.5 px-3 py-2 rounded-control bg-contrast text-contrast-fg text-[13px] font-medium disabled:opacity-50 disabled:cursor-not-allowed hover:bg-contrast-hover transition-colors shrink-0"
           >
             <span className="material-symbols-outlined text-[16px]">send</span>
             {t("send")}

@@ -81,14 +81,14 @@ export default function IPFilterSection() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-5">
-        <div className="p-2 rounded-lg bg-red-500/10 text-red-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-2 rounded-lg bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             security
           </span>
         </div>
         <div className="flex-1">
-          <h3 className="text-lg font-semibold">{t("ipAccessControl")}</h3>
-          <p className="text-sm text-text-muted">{t("ipAccessControlDesc")}</p>
+          <h3 className="text-sm font-semibold text-text-main">{t("ipAccessControl")}</h3>
+          <p className="text-[13px] text-text-muted">{t("ipAccessControlDesc")}</p>
         </div>
       </div>
 
@@ -99,21 +99,21 @@ export default function IPFilterSection() {
             key={m.value}
             onClick={() => setMode(m.value)}
             disabled={loading}
-            className={`flex flex-col items-center gap-1.5 p-3 rounded-lg border text-center transition-all ${
+            className={`flex flex-col items-center gap-1.5 p-3 rounded-lg border text-center transition-colors ${
               activeMode === m.value
-                ? "border-red-500/50 bg-red-500/5 ring-1 ring-red-500/20"
-                : "border-border/50 hover:border-border hover:bg-surface/30"
+                ? "border-primary/50 bg-primary/5 ring-1 ring-primary/20"
+                : "border-border hover:border-border-strong hover:bg-bg-subtle"
             }`}
           >
             <span
-              className={`material-symbols-outlined text-[20px] ${
-                activeMode === m.value ? "text-red-400" : "text-text-muted"
+              className={`material-symbols-outlined text-[18px] ${
+                activeMode === m.value ? "text-primary" : "text-text-muted"
               }`}
             >
               {m.icon}
             </span>
             <span
-              className={`text-xs font-medium ${activeMode === m.value ? "text-red-400" : "text-text-muted"}`}
+              className={`text-xs font-medium ${activeMode === m.value ? "text-primary" : "text-text-muted"}`}
             >
               {t(m.labelKey)}
             </span>
@@ -161,7 +161,7 @@ export default function IPFilterSection() {
           {/* Blacklist */}
           {config.blacklist.length > 0 && (
             <div>
-              <p className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-2">
+              <p className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-2">
                 {t("blocked", { count: config.blacklist.length })}
               </p>
               <div className="flex flex-wrap gap-1.5">
@@ -169,13 +169,10 @@ export default function IPFilterSection() {
                   <span
                     key={ip}
                     className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono
-                               bg-red-500/10 text-red-400 border border-red-500/20"
+                               bg-error/10 text-error border border-error/20"
                   >
                     {ip}
-                    <button
-                      onClick={() => removeIP(ip, "blacklist")}
-                      className="hover:text-red-300"
-                    >
+                    <button onClick={() => removeIP(ip, "blacklist")} className="hover:opacity-70">
                       <span className="material-symbols-outlined text-[14px]">close</span>
                     </button>
                   </span>
@@ -187,7 +184,7 @@ export default function IPFilterSection() {
           {/* Whitelist */}
           {config.whitelist.length > 0 && (
             <div>
-              <p className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-2">
+              <p className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-2">
                 {t("allowed", { count: config.whitelist.length })}
               </p>
               <div className="flex flex-wrap gap-1.5">
@@ -195,13 +192,10 @@ export default function IPFilterSection() {
                   <span
                     key={ip}
                     className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-mono
-                               bg-emerald-500/10 text-emerald-400 border border-emerald-500/20"
+                               bg-success/10 text-success border border-success/20"
                   >
                     {ip}
-                    <button
-                      onClick={() => removeIP(ip, "whitelist")}
-                      className="hover:text-emerald-300"
-                    >
+                    <button onClick={() => removeIP(ip, "whitelist")} className="hover:opacity-70">
                       <span className="material-symbols-outlined text-[14px]">close</span>
                     </button>
                   </span>
@@ -213,7 +207,7 @@ export default function IPFilterSection() {
           {/* Temp Bans */}
           {config.tempBans.length > 0 && (
             <div>
-              <p className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-2">
+              <p className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-2">
                 {t("temporaryBans", { count: config.tempBans.length })}
               </p>
               <div className="flex flex-col gap-1.5">
@@ -221,10 +215,10 @@ export default function IPFilterSection() {
                   <div
                     key={ban.ip}
                     className="flex items-center justify-between gap-2 px-3 py-2 rounded-lg
-                               bg-orange-500/5 border border-orange-500/20 text-sm"
+                               bg-warning/5 border border-warning/20 text-sm"
                   >
                     <div className="flex min-w-0 items-center gap-2">
-                      <span className="font-mono text-xs text-orange-400 shrink-0">{ban.ip}</span>
+                      <span className="font-mono text-xs text-warning shrink-0">{ban.ip}</span>
                       <span className="text-xs text-text-muted truncate">— {ban.reason}</span>
                     </div>
                     <div className="flex items-center gap-2">
@@ -233,7 +227,7 @@ export default function IPFilterSection() {
                       </span>
                       <button
                         onClick={() => removeBan(ban.ip)}
-                        className="text-text-muted hover:text-orange-400"
+                        className="text-text-muted hover:text-warning"
                       >
                         <span className="material-symbols-outlined text-[16px]">delete</span>
                       </button>

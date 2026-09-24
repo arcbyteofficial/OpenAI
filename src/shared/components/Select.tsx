@@ -47,10 +47,10 @@ export default function Select({
   return (
     <div className={cn("flex flex-col gap-1.5", className)}>
       {label && (
-        <label htmlFor={selectId} className="text-sm font-medium text-text-main">
+        <label htmlFor={selectId} className="text-[13px] font-medium text-text-main">
           {label}
           {required && (
-            <span className="text-red-500 ml-1" aria-hidden="true">
+            <span className="text-error ml-0.5" aria-hidden="true">
               *
             </span>
           )}
@@ -67,12 +67,12 @@ export default function Select({
           aria-invalid={error ? true : undefined}
           aria-describedby={describedBy}
           className={cn(
-            "w-full py-2 px-3 pe-10 text-sm text-text-main",
-            "bg-surface border border-black/10 dark:border-white/10 rounded-control appearance-none",
-            "focus:ring-1 focus:ring-accent/30 focus:border-accent/50 focus:outline-none",
-            "transition-all disabled:opacity-50 disabled:cursor-not-allowed",
-            "text-[16px] sm:text-sm",
-            error ? "border-red-500 focus:border-red-500 focus:ring-red-500/20" : "",
+            "w-full h-8 px-3 pe-10 text-text-main",
+            "bg-surface border border-border-strong rounded-control appearance-none cursor-pointer hover:border-text-subtle/50",
+            "focus:border-primary focus:ring-[3px] focus:ring-primary/15 focus:outline-none",
+            "transition-[border-color,box-shadow] duration-150 disabled:opacity-50 disabled:cursor-not-allowed",
+            "text-[16px] sm:text-[13px]",
+            error ? "border-error hover:border-error focus:border-error focus:ring-error/15" : "",
             selectClassName
           )}
           {...props}
@@ -91,14 +91,14 @@ export default function Select({
           {children}
         </select>
         <div
-          className="absolute inset-y-0 end-0 flex items-center pe-3 pointer-events-none text-text-muted"
+          className="absolute inset-y-0 end-0 flex items-center pe-3 pointer-events-none text-text-subtle"
           aria-hidden="true"
         >
-          <span className="material-symbols-outlined text-[20px]">expand_more</span>
+          <span className="material-symbols-outlined text-[16px]">expand_more</span>
         </div>
       </div>
       {error && (
-        <p id={errorId} className="text-xs text-red-500 flex items-center gap-1" role="alert">
+        <p id={errorId} className="text-xs text-error flex items-center gap-1" role="alert">
           <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
             error
           </span>

@@ -58,13 +58,13 @@ interface PricingCatalogProvider {
 function getSourceTone(source: PricingSource): string {
   switch (source) {
     case "user":
-      return "bg-amber-500/15 text-amber-400 border border-amber-500/25";
+      return "bg-primary/10 text-primary border border-primary/20";
     case "modelsDev":
-      return "bg-sky-500/15 text-sky-400 border border-sky-500/25";
+      return "bg-bg-subtle text-text-main border border-border-strong";
     case "litellm":
-      return "bg-emerald-500/15 text-emerald-400 border border-emerald-500/25";
+      return "bg-bg-subtle text-text-main border border-border-strong";
     default:
-      return "bg-bg-subtle text-text-muted border border-border/40";
+      return "bg-bg-subtle text-text-muted border border-border";
   }
 }
 
@@ -501,8 +501,10 @@ export default function PricingTab() {
       <Card className="p-5">
         <div className="flex items-start justify-between gap-3 mb-4">
           <div className="flex items-center gap-2">
-            <h2 className="text-xl font-bold flex items-center gap-2">
-              <span className="material-symbols-outlined text-[22px] text-primary">payments</span>
+            <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2">
+              <span className="material-symbols-outlined text-[18px] text-text-muted">
+                payments
+              </span>
               {t("modelPricing")}
             </h2>
             <InfoTooltip
@@ -516,32 +518,28 @@ export default function PricingTab() {
 
         <div className="grid grid-cols-1 lg:grid-cols-[1.2fr_1fr] gap-4">
           {/* Stats panel with coverage bar */}
-          <div className="rounded-lg border border-border/40 bg-bg-subtle/30 p-4">
+          <div className="rounded-lg border border-border bg-surface-2 p-4">
             <div className="grid grid-cols-4 gap-3 mb-3">
               <HeroStat label={t("providers")} value={stats.providers} />
               <HeroStat label={t("registry")} value={stats.totalModels} />
-              <HeroStat label={t("priced")} value={stats.pricedCount} accent="text-emerald-400" />
+              <HeroStat label={t("priced")} value={stats.pricedCount} accent="text-success" />
               <HeroStat
                 label={t("pricingSourceUser")}
                 value={stats.overriddenCount}
-                accent="text-amber-400"
+                accent="text-text-main"
               />
             </div>
             <div>
               <div className="flex items-center justify-between text-[11px] text-text-muted mb-1">
-                <span className="uppercase tracking-wide font-semibold">
+                <span className="uppercase tracking-wider font-medium">
                   {t("priced")} / {t("registry")}
                 </span>
                 <span className="tabular-nums font-semibold">{coveragePct}%</span>
               </div>
-              <div className="h-2 rounded-sm bg-black/[0.08] dark:bg-white/[0.06] overflow-hidden">
+              <div className="h-2 rounded-sm bg-border overflow-hidden">
                 <div
                   className={`h-full transition-[width] duration-300 ${
-                    coveragePct >= 90
-                      ? "bg-emerald-500"
-                      : coveragePct >= 60
-                        ? "bg-amber-500"
-                        : "bg-red-500"
+                    coveragePct >= 90 ? "bg-success" : coveragePct >= 60 ? "bg-warning" : "bg-error"
                   }`}
                   style={{ width: `${Math.min(coveragePct, 100)}%` }}
                 />
@@ -550,16 +548,16 @@ export default function PricingTab() {
           </div>
 
           {/* Sync panel */}
-          <div className="rounded-lg border border-border/40 bg-bg-subtle/30 p-4 flex flex-col gap-3">
+          <div className="rounded-lg border border-border bg-surface-2 p-4 flex flex-col gap-3">
             <div className="flex items-start justify-between gap-2">
               <div>
-                <h3 className="text-xs font-bold uppercase tracking-wide text-text-muted">
+                <h3 className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {t("pricingSyncTitle")}
                 </h3>
                 <div className="flex items-center gap-1.5 mt-1">
                   <span
                     className={`w-1.5 h-1.5 rounded-full ${
-                      syncStatus?.enabled ? "bg-emerald-500 animate-pulse" : "bg-text-muted"
+                      syncStatus?.enabled ? "bg-success" : "bg-text-subtle"
                     }`}
                   />
                   <span className="text-xs text-text-main font-medium">
@@ -610,10 +608,10 @@ export default function PricingTab() {
         <div
           className={`px-3 py-2 rounded-lg border text-sm ${
             statusMessage.tone === "success"
-              ? "bg-emerald-500/10 border-emerald-500/20 text-emerald-400"
+              ? "bg-success/10 border-success/20 text-success"
               : statusMessage.tone === "error"
-                ? "bg-red-500/10 border-red-500/20 text-red-400"
-                : "bg-sky-500/10 border-sky-500/20 text-sky-400"
+                ? "bg-error/10 border-error/20 text-error"
+                : "bg-bg-subtle border-border text-text-muted"
           }`}
         >
           {statusMessage.message}
@@ -624,7 +622,7 @@ export default function PricingTab() {
       <div className="flex flex-col gap-2">
         <div className="flex gap-2 items-center flex-wrap">
           <div className="relative flex-1 min-w-[260px]">
-            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-muted text-lg">
+            <span className="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-text-subtle text-[18px]">
               search
             </span>
             <input
@@ -632,7 +630,7 @@ export default function PricingTab() {
               placeholder={t("searchProvidersModels")}
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-              className="w-full pl-10 pr-3 py-2 bg-bg-base border border-border rounded-lg focus:outline-none focus:border-primary text-sm"
+              className="w-full pl-10 pr-3 py-2 bg-surface border border-border-strong rounded-control text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary text-sm"
             />
           </div>
 
@@ -683,8 +681,8 @@ export default function PricingTab() {
             onClick={() => setCoverageFilter(coverageFilter === "lt50" ? "all" : "lt50")}
             className={`inline-flex items-center gap-1 px-2 py-1 rounded-md border text-xs transition-colors cursor-pointer ${
               coverageFilter === "lt50"
-                ? "bg-amber-500/15 border-amber-500/30 text-amber-400"
-                : "bg-bg-subtle border-border text-text-muted hover:text-text-main"
+                ? "bg-warning/10 border-warning/30 text-warning"
+                : "bg-surface border-border text-text-muted hover:bg-bg-subtle hover:text-text-main"
             }`}
           >
             <span className="material-symbols-outlined text-[14px]">warning</span>
@@ -704,7 +702,7 @@ export default function PricingTab() {
                 setSortKey("modelsDesc");
                 setSelectedProvider(null);
               }}
-              className="inline-flex items-center gap-1 px-2 py-1 rounded-md border border-border bg-bg-subtle text-xs text-text-muted hover:text-text-main cursor-pointer"
+              className="inline-flex items-center gap-1 px-2 py-1 rounded-md border border-border bg-surface text-xs text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors cursor-pointer"
             >
               <span className="material-symbols-outlined text-[14px]">close</span>
               {t("pricingClearFilters")}
@@ -750,7 +748,7 @@ export default function PricingTab() {
           <button
             type="button"
             onClick={() => setVisibleCount((c) => c + VISIBLE_INCREMENT)}
-            className="mt-2 mx-auto px-4 py-2 rounded-md border border-border bg-bg-subtle hover:bg-black/[0.04] dark:hover:bg-white/[0.04] text-sm text-text-main cursor-pointer flex items-center gap-1.5"
+            className="mt-2 mx-auto px-4 py-2 rounded-control border border-border-strong bg-surface hover:bg-bg-subtle transition-colors text-sm font-medium text-text-main cursor-pointer flex items-center gap-1.5"
           >
             <span className="material-symbols-outlined text-[16px]">expand_more</span>
             {t("pricingShowMoreProviders", {
@@ -808,17 +806,17 @@ function ProviderSection({
 
   return (
     <div
-      className={`border rounded-lg overflow-hidden transition-colors ${
-        isEdited ? "border-yellow-500/40 bg-yellow-500/5" : "border-border"
+      className={`border rounded-card overflow-hidden transition-colors ${
+        isEdited ? "border-warning/40 bg-warning/5" : "border-border bg-surface"
       }`}
     >
       <button
         onClick={onToggle}
-        className="w-full flex items-center justify-between gap-3 px-4 py-3 hover:bg-bg-hover/50 transition-colors text-left"
+        className="w-full flex items-center justify-between gap-3 px-4 py-3 hover:bg-bg-subtle transition-colors text-left"
       >
         <div className="flex items-center gap-3 min-w-0 flex-1">
           <span
-            className={`material-symbols-outlined text-lg text-text-muted transition-transform shrink-0 ${
+            className={`material-symbols-outlined text-[18px] text-text-muted transition-transform shrink-0 ${
               isExpanded ? "rotate-90" : ""
             }`}
           >
@@ -828,7 +826,7 @@ function ProviderSection({
             <ProviderIcon providerId={provider.id} size={28} type="color" />
           </div>
           <div className="min-w-0 flex items-center gap-2">
-            <span className="font-semibold text-sm truncate">
+            <span className="font-semibold text-sm text-text-main truncate">
               {provider.id.charAt(0).toUpperCase() + provider.id.slice(1)}
             </span>
             <span className="text-text-muted text-[11px] truncate">
@@ -838,10 +836,10 @@ function ProviderSection({
           <span
             className={`px-1.5 py-0.5 text-[9px] rounded uppercase font-semibold shrink-0 ${
               provider.authType === "oauth"
-                ? "bg-sky-500/15 text-sky-400 border border-sky-500/25"
+                ? "bg-bg-subtle text-text-main border border-border-strong"
                 : provider.authType === "apikey"
-                  ? "bg-violet-500/15 text-violet-400 border border-violet-500/25"
-                  : "bg-bg-subtle text-text-muted border border-border/40"
+                  ? "bg-bg-subtle text-text-main border border-border-strong"
+                  : "bg-bg-subtle text-text-muted border border-border"
             }`}
           >
             {authBadge}
@@ -853,14 +851,14 @@ function ProviderSection({
         <div className="flex items-center gap-3 shrink-0">
           {sourceCounts.user > 0 && (
             <span
-              className="inline-flex items-center gap-1 text-[10px] font-semibold text-amber-400"
+              className="inline-flex items-center gap-1 text-[10px] font-semibold text-text-muted"
               title={`${sourceCounts.user} ${getSourceLabel("user")}`}
             >
               💎 {sourceCounts.user}
             </span>
           )}
           {isEdited && (
-            <span className="text-yellow-500 text-[11px] font-semibold">{t("unsaved")}</span>
+            <span className="text-warning text-[11px] font-semibold">{t("unsaved")}</span>
           )}
           <span className="text-text-muted text-[11px] tabular-nums hidden sm:inline">
             {pricedCount}/{provider.modelCount}
@@ -868,21 +866,20 @@ function ProviderSection({
           {(() => {
             const pct =
               provider.modelCount > 0 ? Math.round((pricedCount / provider.modelCount) * 100) : 0;
-            const barColor =
-              pct >= 100 ? "bg-emerald-500" : pct >= 50 ? "bg-amber-500" : "bg-red-500";
+            const barColor = pct >= 100 ? "bg-success" : pct >= 50 ? "bg-warning" : "bg-error";
             const textColor =
-              pct >= 100 ? "text-emerald-400" : pct >= 50 ? "text-amber-400" : "text-red-400";
+              pct >= 100 ? "text-success" : pct >= 50 ? "text-warning" : "text-error";
             const icon = pct >= 100 ? "✓" : pct >= 50 ? "◐" : "⚠";
             return (
               <>
                 <div className="w-20 h-1.5 bg-bg-subtle rounded-full overflow-hidden">
                   <div
-                    className={`h-full ${barColor} rounded-full transition-all`}
+                    className={`h-full ${barColor} rounded-full transition-[width]`}
                     style={{ width: `${pct}%` }}
                   />
                 </div>
                 <span
-                  className={`text-[11px] font-bold tabular-nums w-10 text-right ${textColor}`}
+                  className={`text-[11px] font-semibold tabular-nums w-10 text-right ${textColor}`}
                   title={`${pricedCount}/${provider.modelCount} ${t("withPricing")}`}
                 >
                   {pct}% {icon}
@@ -895,7 +892,7 @@ function ProviderSection({
 
       {isExpanded && (
         <div className="border-t border-border">
-          <div className="flex items-center justify-between px-4 py-2 bg-bg-subtle/50">
+          <div className="flex items-center justify-between px-4 py-2 bg-surface-2">
             <span className="text-xs text-text-muted">
               {provider.modelCount} {t("models")} • {pricedCount} {t("withPricing")}
             </span>
@@ -905,7 +902,7 @@ function ProviderSection({
                   event.stopPropagation();
                   onReset();
                 }}
-                className="px-2.5 py-1 text-[11px] text-red-400 hover:bg-red-500/10 rounded border border-red-500/20 transition-colors"
+                className="px-2.5 py-1 text-[11px] font-medium text-error hover:bg-error/10 rounded-md border border-error/20 transition-colors"
               >
                 {t("resetDefaults")}
               </button>
@@ -915,7 +912,7 @@ function ProviderSection({
                   onSave();
                 }}
                 disabled={saving || !isEdited}
-                className="px-2.5 py-1 text-[11px] bg-primary text-white rounded hover:bg-primary/90 transition-colors disabled:opacity-40"
+                className="px-2.5 py-1 text-[11px] font-medium bg-contrast text-contrast-fg rounded-md hover:bg-contrast-hover transition-colors disabled:opacity-40"
               >
                 {saving ? t("saving") : t("saveProvider")}
               </button>
@@ -923,18 +920,18 @@ function ProviderSection({
           </div>
 
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
-              <thead className="text-[11px] text-text-muted uppercase bg-bg-subtle/30">
+            <table className="w-full text-[13px]">
+              <thead className="text-xs text-text-muted bg-surface-2 border-b border-border">
                 <tr>
-                  <th className="px-4 py-2 text-left font-semibold">{t("model")}</th>
+                  <th className="px-4 py-2 text-left font-medium">{t("model")}</th>
                   {PRICING_FIELDS.map((field) => (
-                    <th key={field} className="px-2 py-2 text-right font-semibold w-24">
+                    <th key={field} className="px-2 py-2 text-right font-medium w-24">
                       {t(FIELD_LABEL_KEYS[field])}
                     </th>
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border/50">
+              <tbody className="divide-y divide-border">
                 {provider.models.map((model) => (
                   <ModelRow
                     key={model.id}
@@ -971,22 +968,22 @@ function ModelRow({
   const hasPricing = Boolean(pricing && Object.values(pricing).some((value) => Number(value) > 0));
 
   return (
-    <tr className="hover:bg-bg-hover/30 group">
+    <tr className="hover:bg-bg-subtle transition-colors group">
       <td className="px-4 py-1.5">
         <div className="flex items-center gap-2">
           <span
             className={`w-1.5 h-1.5 rounded-full ${hasPricing ? "bg-success" : "bg-text-muted/30"}`}
           />
-          <span className="font-medium text-xs">{model.name}</span>
+          <span className="font-medium text-xs text-text-main">{model.name}</span>
           {model.custom && (
-            <span className="px-1 py-0.5 text-[8px] font-bold bg-blue-500/15 text-blue-400 border border-blue-500/20 rounded uppercase">
+            <span className="px-1 py-0.5 text-[8px] font-semibold bg-bg-subtle text-text-main border border-border-strong rounded uppercase">
               {t("custom")}
             </span>
           )}
           <span className={`px-1.5 py-0.5 rounded text-[9px] ${getSourceTone(source)}`}>
             {getSourceLabel(source)}
           </span>
-          <span className="text-text-muted text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">
+          <span className="font-mono text-text-subtle text-[10px] opacity-0 group-hover:opacity-100 transition-opacity">
             {model.id}
           </span>
         </div>
@@ -999,7 +996,7 @@ function ModelRow({
             min="0"
             value={pricing?.[field] || 0}
             onChange={(event) => onPricingChange(field, event.target.value)}
-            className="w-full px-2 py-1 text-right text-xs bg-transparent border border-transparent hover:border-border focus:border-primary focus:bg-bg-base rounded transition-colors outline-none tabular-nums"
+            className="w-full px-2 py-1 text-right text-xs bg-transparent border border-transparent hover:border-border-strong focus:border-primary focus:bg-surface rounded-md transition-colors outline-none tabular-nums text-text-main"
           />
         </td>
       ))}

@@ -52,7 +52,7 @@ export default function BatchFilesPage() {
       <div className="flex justify-end">
         <button
           onClick={() => setShowUpload(true)}
-          className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-[var(--color-accent)] text-white hover:opacity-90 transition-opacity"
+          className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors"
         >
           <span className="material-symbols-outlined text-[16px]">upload</span>
           {t("filesListUploadButton")}

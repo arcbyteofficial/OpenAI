@@ -48,7 +48,7 @@ export function UpstreamCaField({ value, onChange, onSave }: UpstreamCaFieldProp
       <div className="flex gap-2">
         <input
           type="text"
-          className="flex-1 rounded-lg border border-border/50 bg-card px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+          className="flex-1 rounded-control border border-border-strong bg-surface px-3 py-2 text-sm font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
           placeholder={t("upstreamCaPlaceholder") || "/etc/ssl/certs/corp-ca.pem"}
           value={value}
           onChange={(e) => onChange(e.target.value)}
@@ -57,7 +57,7 @@ export function UpstreamCaField({ value, onChange, onSave }: UpstreamCaFieldProp
           type="button"
           onClick={handleTest}
           disabled={testing || !value.trim()}
-          className="shrink-0 rounded-lg border border-border/50 bg-card px-3 py-2 text-xs font-medium hover:bg-surface transition-colors disabled:opacity-50"
+          className="shrink-0 rounded-control border border-border-strong bg-surface px-3 py-2 text-xs font-medium text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
         >
           {testing ? "Testing…" : t("upstreamCaTest") || "Test TLS"}
         </button>
@@ -65,19 +65,19 @@ export function UpstreamCaField({ value, onChange, onSave }: UpstreamCaFieldProp
           type="button"
           onClick={handleSave}
           disabled={!value.trim()}
-          className="shrink-0 rounded-lg bg-primary/10 text-primary px-3 py-2 text-xs font-medium hover:bg-primary/20 transition-colors disabled:opacity-50"
+          className="shrink-0 rounded-control border border-transparent bg-contrast text-contrast-fg px-3 py-2 text-xs font-medium hover:bg-contrast-hover transition-colors disabled:opacity-50"
         >
           {t("save") || "Save"}
         </button>
       </div>
       {testResult === "ok" && (
-        <p className="text-xs text-emerald-500">
+        <p className="text-xs text-success">
           <span className="material-symbols-outlined text-[12px] mr-1">check_circle</span>
           {t("upstreamCaTestOk") || "TLS test passed"}
         </p>
       )}
       {testResult === "error" && (
-        <p className="text-xs text-red-500">
+        <p className="text-xs text-error">
           <span className="material-symbols-outlined text-[12px] mr-1">error</span>
           {t("upstreamCaTestError") || "TLS test failed — check the path and CA file"}
         </p>

@@ -132,10 +132,10 @@ function ProfileColumn({
   children: ReactNode;
 }) {
   return (
-    <div className="rounded-xl border border-border bg-bg-subtle p-4">
+    <div className="rounded-lg border border-border bg-surface-2 p-4">
       <div className="mb-4 flex items-center gap-2">
-        <span className="material-symbols-outlined text-base text-primary">{icon}</span>
-        <h3 className="text-sm font-semibold uppercase tracking-wide text-text-main">{title}</h3>
+        <span className="material-symbols-outlined text-base text-text-muted">{icon}</span>
+        <h3 className="text-sm font-semibold text-text-main">{title}</h3>
       </div>
       <div className="space-y-3">{children}</div>
     </div>
@@ -200,8 +200,10 @@ function RequestQueueCard({
       <div className="mb-4 flex items-start justify-between gap-4">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-xl text-primary">speed</span>
-            <h2 className="text-lg font-bold">{t("resilienceRequestQueueTitle")}</h2>
+            <span className="material-symbols-outlined text-[18px] text-text-muted">speed</span>
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
+              {t("resilienceRequestQueueTitle")}
+            </h2>
           </div>
           <SectionDescription
             scope={t("resilienceRequestQueueScope")}
@@ -286,51 +288,51 @@ function RequestQueueCard({
           </>
         ) : (
           <>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">
                 {t("resilienceAutoEnableApiKeyProviders")}
               </div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {value.autoEnableApiKeyProviders ? t("statusEnabled") : t("statusDisabled")}
               </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">{t("resilienceRequestsPerMinute")}</div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {value.requestsPerMinute}
               </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">{t("resilienceMinTimeBetweenRequests")}</div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {formatMs(value.minTimeBetweenRequestsMs)}
               </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">
                 {t("resilienceConnectionScopeConcurrentRequests")}
               </div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {value.concurrentRequests}
               </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">
                 {t("resilienceGlobalConcurrentRequests")}
               </div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {value.globalConcurrentRequests || t("statusDisabled")}
               </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">{t("resilienceMaxQueueWait")}</div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {formatMs(value.maxWaitMs)}
               </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">{t("resilienceMaxExecutionWait")}</div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {formatMs(value.executionMaxWaitMs)}
               </div>
             </div>
@@ -390,7 +392,7 @@ function ConnectionCooldownCard({
               <label className="flex items-center justify-between gap-2 text-sm">
                 <span className="text-text-muted">{t("resilienceUseUpstream429BreakerHints")}</span>
                 <select
-                  className="rounded border border-border-default bg-surface-1 px-2 py-1 text-sm font-mono"
+                  className="rounded-control border border-border-strong bg-surface px-2 py-1 text-[13px] font-mono text-text-main"
                   value={
                     current.useUpstream429BreakerHints === true
                       ? "on"
@@ -473,8 +475,10 @@ function ConnectionCooldownCard({
       <div className="mb-4 flex items-start justify-between gap-4">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-xl text-primary">timer_off</span>
-            <h2 className="text-lg font-bold">{t("resilienceConnectionCooldownTitle")}</h2>
+            <span className="material-symbols-outlined text-[18px] text-text-muted">timer_off</span>
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
+              {t("resilienceConnectionCooldownTitle")}
+            </h2>
           </div>
           <SectionDescription
             scope={t("resilienceConnectionCooldownScope")}
@@ -602,10 +606,12 @@ function ProviderBreakerCard({
       <div className="mb-4 flex items-start justify-between gap-4">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-xl text-primary">
+            <span className="material-symbols-outlined text-[18px] text-text-muted">
               electrical_services
             </span>
-            <h2 className="text-lg font-bold">{t("resilienceProviderBreakerTitle")}</h2>
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
+              {t("resilienceProviderBreakerTitle")}
+            </h2>
           </div>
           <SectionDescription
             scope={t("resilienceProviderBreakerScope")}
@@ -662,8 +668,12 @@ function WaitForCooldownCard({
       <div className="mb-4 flex items-start justify-between gap-4">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-xl text-primary">hourglass_top</span>
-            <h2 className="text-lg font-bold">{t("resilienceWaitForCooldownTitle")}</h2>
+            <span className="material-symbols-outlined text-[18px] text-text-muted">
+              hourglass_top
+            </span>
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
+              {t("resilienceWaitForCooldownTitle")}
+            </h2>
           </div>
           <SectionDescription
             scope={t("resilienceWaitForCooldownScope")}
@@ -713,19 +723,21 @@ function WaitForCooldownCard({
           </>
         ) : (
           <>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">{t("resilienceEnableServerWait")}</div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {value.enabled ? t("statusEnabled") : t("statusDisabled")}
               </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">{t("resilienceMaxAttempts")}</div>
-              <div className="mt-1 text-sm font-semibold text-text-main">{value.maxRetries}</div>
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
+                {value.maxRetries}
+              </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">{t("resilienceMaxWaitPerAttempt")}</div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {value.maxRetryWaitSec}s
               </div>
             </div>
@@ -764,8 +776,8 @@ function ComboCooldownWaitCard({
     <Card className="p-6">
       <div className="mb-4 flex items-start justify-between gap-4">
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-xl text-primary">timer</span>
-          <h2 className="text-lg font-bold">{title}</h2>
+          <span className="material-symbols-outlined text-[18px] text-text-muted">timer</span>
+          <h2 className="text-base font-semibold tracking-tight text-text-main">{title}</h2>
         </div>
         <ActionRow
           editing={editing}
@@ -819,25 +831,27 @@ function ComboCooldownWaitCard({
           </>
         ) : (
           <>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">{t("resilienceEnableServerWait")}</div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {value.enabled ? t("statusEnabled") : t("statusDisabled")}
               </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">{t("resilienceComboCooldownMaxWaitMs")}</div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {formatMs(value.maxWaitMs)}
               </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">{t("resilienceMaxAttempts")}</div>
-              <div className="mt-1 text-sm font-semibold text-text-main">{value.maxAttempts}</div>
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
+                {value.maxAttempts}
+              </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">{t("resilienceComboCooldownBudgetMs")}</div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {formatMs(value.budgetMs)}
               </div>
             </div>
@@ -876,8 +890,8 @@ function QuotaShareConcurrencyLimitCard({
     <Card className="p-6">
       <div className="mb-4 flex items-start justify-between gap-4">
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-xl text-primary">filter_list</span>
-          <h2 className="text-lg font-bold">{title}</h2>
+          <span className="material-symbols-outlined text-[18px] text-text-muted">filter_list</span>
+          <h2 className="text-base font-semibold tracking-tight text-text-main">{title}</h2>
         </div>
         <ActionRow
           editing={editing}
@@ -908,9 +922,9 @@ function QuotaShareConcurrencyLimitCard({
             onChange={(enabled) => setDraft((prev) => ({ ...prev, enabled }))}
           />
         ) : (
-          <div className="rounded-xl border border-border bg-bg-subtle p-4">
+          <div className="rounded-lg border border-border bg-surface-2 p-4">
             <div className="text-xs text-text-muted">{t("resilienceEnableServerWait")}</div>
-            <div className="mt-1 text-sm font-semibold text-text-main">
+            <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
               {value.enabled ? t("statusEnabled") : t("statusDisabled")}
             </div>
           </div>
@@ -944,8 +958,10 @@ export function ProviderCooldownCard({
       <div className="mb-4 flex items-start justify-between gap-4">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-xl text-primary">timer</span>
-            <h2 className="text-lg font-bold">{t("resilienceProviderCooldownTitle")}</h2>
+            <span className="material-symbols-outlined text-[18px] text-text-muted">timer</span>
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
+              {t("resilienceProviderCooldownTitle")}
+            </h2>
           </div>
           <SectionDescription
             scope={t("resilienceProviderCooldownScope")}
@@ -1002,23 +1018,23 @@ export function ProviderCooldownCard({
           </>
         ) : (
           <>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">
                 {t("resilienceProviderCooldownEnabled")}
               </div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {value.enabled ? t("statusEnabled") : t("statusDisabled")}
               </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">{t("resilienceProviderCooldownMin")}</div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {formatMs(value.minRetryCooldownMs)}
               </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">{t("resilienceProviderCooldownMax")}</div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {formatMs(value.maxRetryCooldownMs)}
               </div>
             </div>
@@ -1055,10 +1071,12 @@ function CredentialHealthCheckCard({
       <div className="mb-4 flex items-start justify-between gap-4">
         <div className="space-y-2">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-xl text-primary">
+            <span className="material-symbols-outlined text-[18px] text-text-muted">
               health_and_safety
             </span>
-            <h2 className="text-lg font-bold">{t("resilienceCredentialHealthTitle")}</h2>
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
+              {t("resilienceCredentialHealthTitle")}
+            </h2>
           </div>
           <SectionDescription
             scope={t("resilienceCredentialHealthScope")}
@@ -1094,17 +1112,17 @@ function CredentialHealthCheckCard({
               suffix="min"
               onChange={(intervalMinutes) => setEditing((prev) => ({ ...prev, intervalMinutes }))}
             />
-            <div className="rounded-xl border border-border bg-bg-subtle p-4 text-xs text-text-muted">
+            <div className="rounded-lg border border-border bg-surface-2 p-4 text-xs text-text-muted">
               {t("resilienceCredentialHealthHint")}
             </div>
           </>
         ) : (
           <>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="text-xs text-text-muted">
                 {t("resilienceCredentialHealthInterval")}
               </div>
-              <div className="mt-1 text-sm font-semibold text-text-main">
+              <div className="mt-1 text-sm font-semibold tabular-nums text-text-main">
                 {disabled
                   ? t("statusDisabled")
                   : t("resilienceCredentialHealthEveryMinutes", {
@@ -1112,7 +1130,7 @@ function CredentialHealthCheckCard({
                     })}
               </div>
             </div>
-            <div className="rounded-xl border border-border bg-bg-subtle p-4 text-xs text-text-muted">
+            <div className="rounded-lg border border-border bg-surface-2 p-4 text-xs text-text-muted">
               {t("resilienceCredentialHealthHint")}
             </div>
           </>

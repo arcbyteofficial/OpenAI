@@ -40,8 +40,8 @@ const CLOUD_AGENTS = [
     provider: "Google",
     descriptionKey: "agentDescriptions.jules",
     icon: "smart_toy",
-    iconBg: "bg-yellow-500/10",
-    iconColor: "text-yellow-600",
+    iconBg: "bg-bg-subtle",
+    iconColor: "text-text-muted",
   },
   {
     id: "devin",
@@ -49,8 +49,8 @@ const CLOUD_AGENTS = [
     provider: "Cognition",
     descriptionKey: "agentDescriptions.devin",
     icon: "psychology",
-    iconBg: "bg-blue-500/10",
-    iconColor: "text-blue-600",
+    iconBg: "bg-bg-subtle",
+    iconColor: "text-text-muted",
   },
   {
     id: "codex-cloud",
@@ -58,8 +58,8 @@ const CLOUD_AGENTS = [
     provider: "OpenAI",
     descriptionKey: "agentDescriptions.codexCloud",
     icon: "cloud",
-    iconBg: "bg-emerald-500/10",
-    iconColor: "text-emerald-600",
+    iconBg: "bg-bg-subtle",
+    iconColor: "text-text-muted",
   },
   {
     id: "cursor-cloud",
@@ -67,8 +67,8 @@ const CLOUD_AGENTS = [
     provider: "Cursor",
     descriptionKey: "agentDescriptions.cursorCloud",
     icon: "cloud",
-    iconBg: "bg-slate-500/10",
-    iconColor: "text-slate-600",
+    iconBg: "bg-bg-subtle",
+    iconColor: "text-text-muted",
   },
 ];
 
@@ -391,7 +391,7 @@ export default function CloudAgentsPage() {
   return (
     <div className="flex flex-col gap-6">
       {/* Header */}
-      <Card className="border-purple-500/20 bg-purple-500/5">
+      <Card className="bg-surface-2">
         <div className="flex items-start justify-between gap-4 flex-wrap">
           <div>
             <h2 className="text-sm font-semibold text-text-main">{t("aboutTitle")}</h2>
@@ -399,7 +399,7 @@ export default function CloudAgentsPage() {
           </div>
           <div className="flex items-center gap-2">
             <span
-              className={`inline-block h-2 w-2 rounded-full ${settings.enabled ? "bg-emerald-500" : "bg-zinc-400"}`}
+              className={`inline-block h-2 w-2 rounded-full ${settings.enabled ? "bg-success" : "bg-text-subtle"}`}
             />
             <span className="text-xs text-text-muted">
               {settings.enabled
@@ -418,7 +418,7 @@ export default function CloudAgentsPage() {
             onClick={() => setActiveTab(tab.id)}
             className={`px-4 py-2 text-sm font-medium border-b-2 transition-colors flex items-center gap-1.5 ${
               activeTab === tab.id
-                ? "border-purple-500 text-purple-500"
+                ? "border-text-main text-text-main"
                 : "border-transparent text-text-muted hover:text-text-main"
             }`}
           >
@@ -434,11 +434,13 @@ export default function CloudAgentsPage() {
           {/* Create task form */}
           <Card>
             <div className="flex items-center gap-3 mb-4">
-              <div className="p-2 rounded-lg bg-purple-500/10 text-purple-500">
-                <span className="material-symbols-outlined text-[20px]">add_task</span>
+              <div className="p-2 rounded-lg border border-border bg-bg-subtle text-text-muted">
+                <span className="material-symbols-outlined text-[18px]">add_task</span>
               </div>
               <div>
-                <h3 className="text-lg font-semibold">{t("newTaskTitle")}</h3>
+                <h3 className="text-base font-semibold tracking-tight text-text-main">
+                  {t("newTaskTitle")}
+                </h3>
                 <p className="text-sm text-text-muted">{t("newTaskDescription")}</p>
               </div>
             </div>
@@ -451,7 +453,7 @@ export default function CloudAgentsPage() {
                   <select
                     value={newTask.providerId}
                     onChange={(e) => setNewTask({ ...newTask, providerId: e.target.value })}
-                    className="w-full rounded-lg border border-border/50 bg-card px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                    className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                   >
                     {CLOUD_AGENTS.map((agent) => (
                       <option key={agent.id} value={agent.id}>
@@ -469,7 +471,7 @@ export default function CloudAgentsPage() {
                   placeholder={t("taskDescriptionPlaceholder")}
                   value={newTask.prompt}
                   onChange={(e) => setNewTask({ ...newTask, prompt: e.target.value })}
-                  className="min-h-24 w-full rounded-lg border border-border/50 bg-card px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+                  className="min-h-24 w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                   required
                 />
               </div>
@@ -501,7 +503,7 @@ export default function CloudAgentsPage() {
                     type="checkbox"
                     checked={newTask.autoCreatePr}
                     onChange={(e) => setNewTask({ ...newTask, autoCreatePr: e.target.checked })}
-                    className="h-4 w-4 rounded border-border/60"
+                    className="h-4 w-4 rounded border-border-strong accent-primary"
                   />
                   {t("settingAutoPR")}
                 </label>
@@ -520,7 +522,7 @@ export default function CloudAgentsPage() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as TaskStatus | "all")}
-              className="rounded-lg border border-border/50 bg-card px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
             >
               {STATUS_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -531,7 +533,7 @@ export default function CloudAgentsPage() {
             <select
               value={providerFilter}
               onChange={(e) => setProviderFilter(e.target.value)}
-              className="rounded-lg border border-border/50 bg-card px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-primary/50"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
             >
               <option value="all">{t("filterAllProviders") || "All Providers"}</option>
               {CLOUD_AGENTS.map((agent) => (
@@ -541,7 +543,7 @@ export default function CloudAgentsPage() {
               ))}
             </select>
             {hasActiveTasks && (
-              <span className="flex items-center gap-1.5 text-xs text-blue-500">
+              <span className="flex items-center gap-1.5 text-xs text-primary">
                 <span className="animate-pulse">●</span>
                 {t("autoRefreshing") || "Auto-refreshing"}
               </span>
@@ -552,8 +554,8 @@ export default function CloudAgentsPage() {
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
             <div className="flex flex-col gap-3">
               {filteredTasks.length === 0 ? (
-                <div className="text-center py-12 text-text-muted border border-dashed border-border/50 rounded-lg">
-                  <span className="material-symbols-outlined text-[48px] mb-2 block text-text-muted/50">
+                <div className="text-center py-12 text-text-muted border border-dashed border-border-strong rounded-card">
+                  <span className="material-symbols-outlined text-[32px] mb-2 block text-text-subtle">
                     assignment
                   </span>
                   <p className="text-sm font-medium">{t("noTasksTitle") || "No tasks yet"}</p>
@@ -569,10 +571,8 @@ export default function CloudAgentsPage() {
                       key={task.id}
                       padding="sm"
                       hover
-                      className={`transition-all ${
-                        selectedTask?.id === task.id
-                          ? "!border-purple-500 ring-1 ring-purple-500/20"
-                          : ""
+                      className={`transition-colors ${
+                        selectedTask?.id === task.id ? "!border-primary ring-1 ring-primary/20" : ""
                       }`}
                       onClick={() => setSelectedTask(task)}
                     >
@@ -614,7 +614,9 @@ export default function CloudAgentsPage() {
                         </span>
                       </div>
                       <div>
-                        <p className="font-medium">{getAgentInfo(selectedTask.providerId).name}</p>
+                        <p className="text-sm font-medium text-text-main">
+                          {getAgentInfo(selectedTask.providerId).name}
+                        </p>
                         <p className="text-xs text-text-muted">
                           {t("created")}: {new Date(selectedTask.createdAt).toLocaleString(locale)}
                         </p>
@@ -633,16 +635,14 @@ export default function CloudAgentsPage() {
 
                   {/* Awaiting approval: show plan */}
                   {selectedTask.status === "awaiting_approval" && getPlanText(selectedTask) && (
-                    <div className="rounded-lg border border-amber-500/20 bg-amber-500/5 p-3">
+                    <div className="rounded-lg border border-warning/20 bg-warning/5 p-3">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="material-symbols-outlined text-[16px] text-amber-600">
+                        <span className="material-symbols-outlined text-[16px] text-warning">
                           description
                         </span>
-                        <span className="text-sm font-medium text-amber-700 dark:text-amber-400">
-                          {t("planReady")}
-                        </span>
+                        <span className="text-sm font-medium text-warning">{t("planReady")}</span>
                       </div>
-                      <pre className="text-xs text-text-muted whitespace-pre-wrap bg-black/5 dark:bg-white/5 rounded p-2 max-h-32 overflow-auto">
+                      <pre className="text-xs text-text-muted whitespace-pre-wrap bg-bg-subtle rounded-md p-2 max-h-32 overflow-auto">
                         {getPlanText(selectedTask)}
                       </pre>
                       <div className="flex gap-2 mt-2">
@@ -664,15 +664,15 @@ export default function CloudAgentsPage() {
                   {/* Activities */}
                   {selectedTask.activities.length > 0 && (
                     <div className="flex flex-col gap-2">
-                      <p className="text-sm font-medium">{t("conversation")}</p>
+                      <p className="text-sm font-medium text-text-main">{t("conversation")}</p>
                       <div className="flex flex-col gap-2 max-h-64 overflow-auto">
                         {selectedTask.activities.map((activity) => (
                           <div
                             key={activity.id}
                             className={`p-2 rounded-lg text-xs ${
                               activity.type === "message" || activity.type === "completion"
-                                ? "bg-purple-500/10 text-text-main"
-                                : "bg-surface/40 text-text-main"
+                                ? "bg-primary/10 text-text-main"
+                                : "bg-bg-subtle text-text-main"
                             }`}
                           >
                             <span className="font-medium">
@@ -687,14 +687,12 @@ export default function CloudAgentsPage() {
 
                   {/* Result with PR link */}
                   {selectedTask.result && (
-                    <div className="rounded-lg border border-emerald-500/20 bg-emerald-500/5 p-3">
+                    <div className="rounded-lg border border-success/20 bg-success/5 p-3">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="material-symbols-outlined text-[16px] text-emerald-600">
+                        <span className="material-symbols-outlined text-[16px] text-success">
                           check_circle
                         </span>
-                        <span className="text-sm font-medium text-emerald-700 dark:text-emerald-400">
-                          {t("result")}
-                        </span>
+                        <span className="text-sm font-medium text-success">{t("result")}</span>
                       </div>
                       <pre className="text-xs text-text-muted whitespace-pre-wrap">
                         {formatResult(selectedTask.result)}
@@ -704,7 +702,7 @@ export default function CloudAgentsPage() {
                           href={(selectedTask.result as Record<string, unknown>).prUrl as string}
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 text-xs font-medium rounded-lg bg-purple-500/10 text-purple-600 hover:bg-purple-500/20 transition-colors"
+                          className="inline-flex items-center gap-1.5 mt-2 px-3 py-1.5 text-xs font-medium rounded-control bg-primary/10 text-primary hover:bg-primary/15 transition-colors"
                         >
                           <span className="material-symbols-outlined text-[14px]">open_in_new</span>
                           {t("viewPR") || "View Pull Request"}
@@ -715,12 +713,12 @@ export default function CloudAgentsPage() {
 
                   {/* Error */}
                   {selectedTask.error && (
-                    <div className="rounded-lg border border-red-500/20 bg-red-500/5 p-3">
+                    <div className="rounded-lg border border-error/20 bg-error/5 p-3">
                       <div className="flex items-center gap-2 mb-2">
-                        <span className="material-symbols-outlined text-[16px] text-red-500">
+                        <span className="material-symbols-outlined text-[16px] text-error">
                           error
                         </span>
-                        <span className="text-sm font-medium text-red-600">{t("error")}</span>
+                        <span className="text-sm font-medium text-error">{t("error")}</span>
                       </div>
                       <p className="text-xs text-text-muted">{selectedTask.error}</p>
                     </div>
@@ -743,7 +741,7 @@ export default function CloudAgentsPage() {
                   )}
 
                   {/* Action buttons */}
-                  <div className="flex justify-between pt-3 border-t border-border/30">
+                  <div className="flex justify-between pt-3 border-t border-border">
                     <Button
                       variant="ghost"
                       size="sm"
@@ -757,7 +755,7 @@ export default function CloudAgentsPage() {
                       variant="ghost"
                       size="sm"
                       onClick={() => handleDeleteTask(selectedTask.id)}
-                      className="text-red-500 hover:text-red-400"
+                      className="text-error hover:bg-error/10 hover:text-error"
                     >
                       <span className="material-symbols-outlined text-[14px] mr-1">delete</span>
                       {t("delete")}
@@ -765,8 +763,8 @@ export default function CloudAgentsPage() {
                   </div>
                 </Card>
               ) : (
-                <div className="text-center py-12 text-text-muted border border-dashed border-border/50 rounded-lg">
-                  <span className="material-symbols-outlined text-[48px] mb-2 block text-text-muted/50">
+                <div className="text-center py-12 text-text-muted border border-dashed border-border-strong rounded-card">
+                  <span className="material-symbols-outlined text-[32px] mb-2 block text-text-subtle">
                     touch_app
                   </span>
                   <p className="text-sm">{t("selectTaskPrompt")}</p>
@@ -786,8 +784,10 @@ export default function CloudAgentsPage() {
               <Card key={agent.id} padding="md" className="relative">
                 <div className="flex flex-col items-center text-center gap-3">
                   {/* Icon */}
-                  <div className={`p-3 rounded-xl ${agent.iconBg} ${agent.iconColor}`}>
-                    <span className="material-symbols-outlined text-[32px]">{agent.icon}</span>
+                  <div
+                    className={`p-3 rounded-lg border border-border ${agent.iconBg} ${agent.iconColor}`}
+                  >
+                    <span className="material-symbols-outlined text-[24px]">{agent.icon}</span>
                   </div>
 
                   {/* Name + provider */}
@@ -802,7 +802,7 @@ export default function CloudAgentsPage() {
                   {/* Connection status */}
                   <div className="flex items-center gap-2">
                     <span
-                      className={`h-2.5 w-2.5 rounded-full ${connected ? "bg-emerald-500" : "bg-red-500"}`}
+                      className={`h-2.5 w-2.5 rounded-full ${connected ? "bg-success" : "bg-error"}`}
                     />
                     <span className="text-xs text-text-muted">
                       {connected
@@ -843,7 +843,7 @@ export default function CloudAgentsPage() {
             </div>
 
             {/* Toggle: Enable cloud agents */}
-            <div className="flex items-center justify-between py-3 border-b border-border/30">
+            <div className="flex items-center justify-between py-3 border-b border-border">
               <div>
                 <p className="text-sm font-medium text-text-main">
                   {t("settingEnableAgents") || "Enable cloud agents"}
@@ -858,7 +858,7 @@ export default function CloudAgentsPage() {
                 aria-checked={settings.enabled}
                 onClick={() => updateSetting("enabled", !settings.enabled)}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                  settings.enabled ? "bg-purple-500" : "bg-zinc-300 dark:bg-zinc-600"
+                  settings.enabled ? "bg-primary" : "bg-border-strong"
                 }`}
               >
                 <span
@@ -870,7 +870,7 @@ export default function CloudAgentsPage() {
             </div>
 
             {/* Toggle: Auto-create PR */}
-            <div className="flex items-center justify-between py-3 border-b border-border/30">
+            <div className="flex items-center justify-between py-3 border-b border-border">
               <div>
                 <p className="text-sm font-medium text-text-main">
                   {t("settingAutoPR") || "Auto-create PR"}
@@ -885,7 +885,7 @@ export default function CloudAgentsPage() {
                 aria-checked={settings.autoCreatePr}
                 onClick={() => updateSetting("autoCreatePr", !settings.autoCreatePr)}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                  settings.autoCreatePr ? "bg-purple-500" : "bg-zinc-300 dark:bg-zinc-600"
+                  settings.autoCreatePr ? "bg-primary" : "bg-border-strong"
                 }`}
               >
                 <span
@@ -912,7 +912,7 @@ export default function CloudAgentsPage() {
                 aria-checked={settings.requireApproval}
                 onClick={() => updateSetting("requireApproval", !settings.requireApproval)}
                 className={`relative inline-flex h-6 w-11 items-center rounded-full transition-colors ${
-                  settings.requireApproval ? "bg-purple-500" : "bg-zinc-300 dark:bg-zinc-600"
+                  settings.requireApproval ? "bg-primary" : "bg-border-strong"
                 }`}
               >
                 <span

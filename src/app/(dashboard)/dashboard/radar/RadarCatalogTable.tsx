@@ -107,12 +107,12 @@ function capabilityBadge(
     value === true
       ? trueClass
       : value === false
-        ? "bg-red-500/10 text-red-400"
-        : "bg-gray-500/10 text-gray-400";
+        ? "bg-error/10 text-error"
+        : "bg-bg-subtle text-text-subtle";
   const unknown = value !== true && value !== false;
   return (
     <span
-      className={`text-[10px] px-1.5 py-0.5 rounded ${stateClass}`}
+      className={`text-[10px] font-medium px-1.5 py-0.5 rounded ${stateClass}`}
       {...(unknown ? { title: unknownHelp } : {})}
     >
       {label} {state}
@@ -223,9 +223,9 @@ export function RadarCatalogTable({ entries, refreshCatalog, onError }: RadarCat
     <>
       <Card>
         <div className="overflow-x-auto">
-          <table className="w-full">
+          <table className="w-full text-[13px]">
             <thead>
-              <tr className="text-left text-sm text-text-muted border-b border-border">
+              <tr className="text-left text-xs font-medium text-text-muted border-b border-border">
                 <th className="pb-3 font-medium">{t("colProvider")}</th>
                 <th className="pb-3 font-medium">{t("colModel")}</th>
                 <th className="pb-3 font-medium">{t("colQuota")}</th>
@@ -245,27 +245,27 @@ export function RadarCatalogTable({ entries, refreshCatalog, onError }: RadarCat
                 return (
                   <tr
                     key={key}
-                    className={`border-b border-border/50 last:border-b-0 ${
+                    className={`border-b border-border last:border-b-0 transition-colors hover:bg-bg-subtle/60 ${
                       entry.enabled === false ? "opacity-50" : ""
                     }`}
                   >
                     <td className="py-3">
                       <div className="flex items-center gap-2">
-                        <span className="font-medium">{entry.provider}</span>
+                        <span className="font-medium text-text-main">{entry.provider}</span>
                         {entry.origin === "radar" && (
-                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-violet-500/10 text-violet-400 font-medium">
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-primary/10 text-primary font-medium">
                             {t("newBadge")}
                           </span>
                         )}
                         {entry.origin === "local" && (
-                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-blue-500/10 text-blue-400 font-medium">
+                          <span className="text-[10px] px-1.5 py-0.5 rounded bg-bg-subtle text-text-muted font-medium">
                             {t("localBadge")}
                           </span>
                         )}
                         {entry.setup?.keyUrl && (
                           <Link
                             href={`/dashboard/radar/setup?provider=${encodeURIComponent(entry.provider)}`}
-                            className="text-xs text-violet-400 hover:underline"
+                            className="text-xs text-primary hover:underline"
                             title={t("setupGuide")}
                           >
                             ⚙
@@ -273,10 +273,10 @@ export function RadarCatalogTable({ entries, refreshCatalog, onError }: RadarCat
                         )}
                       </div>
                       {entry.enabled === false && entry.disabledBy === "radar" && (
-                        <p className="text-xs text-red-400 mt-0.5">{t("disabledByFeed")}</p>
+                        <p className="text-xs text-error mt-0.5">{t("disabledByFeed")}</p>
                       )}
                     </td>
-                    <td className="py-3 text-text-muted text-sm font-mono max-w-[240px]">
+                    <td className="py-3 text-text-muted text-[12px] font-mono max-w-[240px]">
                       {editingKey === key ? (
                         <input
                           type="text"
@@ -284,14 +284,16 @@ export function RadarCatalogTable({ entries, refreshCatalog, onError }: RadarCat
                           onChange={(event) => setDisplayName(event.target.value)}
                           aria-label={t("modelDisplayName")}
                           maxLength={160}
-                          className="w-full min-w-[180px] px-2 py-1 rounded border border-border bg-transparent text-text-main focus:outline-none focus:ring-2 focus:ring-violet-500"
+                          className="w-full min-w-[180px] px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
                         />
                       ) : (
                         <span className="block truncate">{entry.displayName}</span>
                       )}
                     </td>
-                    <td className="py-3 text-sm">{budgetLabel(entry)}</td>
-                    <td className="py-3 text-sm text-text-muted">
+                    <td className="py-3 text-[13px] text-text-main tabular-nums">
+                      {budgetLabel(entry)}
+                    </td>
+                    <td className="py-3 text-[13px] text-text-muted tabular-nums">
                       {(() => {
                         const limits = formatLimits(entry);
                         return limits === "—" ? (
@@ -301,7 +303,7 @@ export function RadarCatalogTable({ entries, refreshCatalog, onError }: RadarCat
                         );
                       })()}
                     </td>
-                    <td className="py-3 text-sm text-text-muted">
+                    <td className="py-3 text-[13px] text-text-muted tabular-nums">
                       {entry.contextWindow != null ? (
                         `${(entry.contextWindow / 1000).toFixed(0)}K`
                       ) : (
@@ -313,40 +315,40 @@ export function RadarCatalogTable({ entries, refreshCatalog, onError }: RadarCat
                         {capabilityBadge(
                           t("capTools"),
                           entry.capabilities?.tools,
-                          "bg-blue-500/10 text-blue-400",
+                          "bg-primary/10 text-primary",
                           t("capabilityUnknownHelp")
                         )}
                         {capabilityBadge(
                           t("capVision"),
                           entry.capabilities?.vision,
-                          "bg-purple-500/10 text-purple-400",
+                          "bg-primary/10 text-primary",
                           t("capabilityUnknownHelp")
                         )}
                         {capabilityBadge(
                           t("capThinking"),
                           entry.capabilities?.thinking,
-                          "bg-amber-500/10 text-amber-400",
+                          "bg-primary/10 text-primary",
                           t("capabilityUnknownHelp")
                         )}
                       </div>
                     </td>
                     <td className="py-3">
                       <span
-                        className={`text-xs px-2 py-1 rounded ${
+                        className={`text-xs font-medium px-2 py-1 rounded-md ${
                           entry.tos === "ok"
-                            ? "bg-green-500/10 text-green-400"
+                            ? "bg-success/10 text-success"
                             : entry.tos === "caution"
-                              ? "bg-yellow-500/10 text-yellow-400"
+                              ? "bg-warning/10 text-warning"
                               : entry.tos === "avoid"
-                                ? "bg-red-500/10 text-red-400"
-                                : "bg-gray-500/10 text-gray-400"
+                                ? "bg-error/10 text-error"
+                                : "bg-bg-subtle text-text-subtle"
                         }`}
                       >
                         {entry.tos}
                       </span>
                       {entry.trainsOnPrompts === true && (
                         <span
-                          className="ml-1 text-xs px-2 py-1 rounded bg-orange-500/10 text-orange-400"
+                          className="ml-1 text-xs font-medium px-2 py-1 rounded-md bg-warning/10 text-warning"
                           title={t("trainsOnPromptsHelp")}
                         >
                           {t("trainsOnPrompts")}
@@ -369,7 +371,7 @@ export function RadarCatalogTable({ entries, refreshCatalog, onError }: RadarCat
                             type="button"
                             disabled={saving || displayName.trim().length === 0}
                             onClick={() => void saveOverride(entry)}
-                            className="text-xs text-violet-400 hover:underline disabled:opacity-50"
+                            className="text-xs text-primary hover:underline disabled:opacity-50"
                           >
                             {t("saveModel")}
                           </button>
@@ -388,7 +390,7 @@ export function RadarCatalogTable({ entries, refreshCatalog, onError }: RadarCat
                             type="button"
                             disabled={saving}
                             onClick={() => beginEdit(entry)}
-                            className="text-xs text-violet-400 hover:underline disabled:opacity-50"
+                            className="text-xs text-primary hover:underline disabled:opacity-50"
                           >
                             {t("editModel")}
                           </button>
@@ -406,7 +408,7 @@ export function RadarCatalogTable({ entries, refreshCatalog, onError }: RadarCat
                             type="button"
                             disabled={saving}
                             onClick={() => void setTombstone(entry.provider, entry.modelId, true)}
-                            className="text-xs text-red-400 hover:underline disabled:opacity-50"
+                            className="text-xs text-error hover:underline disabled:opacity-50"
                           >
                             {t("hideModel")}
                           </button>
@@ -424,15 +426,17 @@ export function RadarCatalogTable({ entries, refreshCatalog, onError }: RadarCat
       {hiddenModels.length > 0 && (
         <Card>
           <div className="flex flex-col gap-3">
-            <h3 className="text-sm font-semibold">{t("hiddenModelsTitle")}</h3>
+            <h3 className="text-sm font-semibold tracking-tight text-text-main">
+              {t("hiddenModelsTitle")}
+            </h3>
             {hiddenModels.map((state) => (
               <div
                 key={`${state.provider}:${state.modelId}:hidden`}
-                className="flex flex-wrap items-center justify-between gap-3 border-b border-border/50 pb-3 last:border-b-0 last:pb-0"
+                className="flex flex-wrap items-center justify-between gap-3 border-b border-border pb-3 last:border-b-0 last:pb-0"
               >
                 <div>
-                  <span className="font-medium">{state.provider}</span>
-                  <span className="ml-2 text-sm font-mono text-text-muted">
+                  <span className="text-sm font-medium text-text-main">{state.provider}</span>
+                  <span className="ml-2 text-[12px] font-mono text-text-muted">
                     {state.displayName ?? state.modelId}
                   </span>
                 </div>
@@ -440,7 +444,7 @@ export function RadarCatalogTable({ entries, refreshCatalog, onError }: RadarCat
                   type="button"
                   disabled={saving}
                   onClick={() => void setTombstone(state.provider, state.modelId, false)}
-                  className="text-sm text-violet-400 hover:underline disabled:opacity-50"
+                  className="text-sm text-primary hover:underline disabled:opacity-50"
                 >
                   {t("restoreModel")}
                 </button>

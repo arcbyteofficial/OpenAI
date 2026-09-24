@@ -270,10 +270,12 @@ export default function TokensPage() {
       <Card>
         <div className="flex items-center justify-between">
           <div>
-            <p className="text-sm text-text-muted">{t("tokensTokenBalance")}</p>
-            <p className="text-4xl font-bold mt-1">{balance.toLocaleString(locale)}</p>
+            <p className="text-[13px] text-text-muted">{t("tokensTokenBalance")}</p>
+            <p className="text-3xl font-semibold tracking-tight tabular-nums mt-1">
+              {balance.toLocaleString(locale)}
+            </p>
           </div>
-          <div className="text-6xl opacity-20">🪙</div>
+          <div className="text-4xl opacity-20 grayscale">🪙</div>
         </div>
       </Card>
 
@@ -290,7 +292,7 @@ export default function TokensPage() {
               onChange={(e) => setToApiKeyId(e.target.value)}
               placeholder={t("tokensRecipientApiKeyIdPlaceholder")}
               required
-              className="w-full px-3 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring-1 focus:ring-violet-500"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
             />
           </div>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -303,7 +305,7 @@ export default function TokensPage() {
                 placeholder="0"
                 min="1"
                 required
-                className="w-full px-3 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring-1 focus:ring-violet-500"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <div>
@@ -315,7 +317,7 @@ export default function TokensPage() {
                 value={reason}
                 onChange={(e) => setReason(e.target.value)}
                 placeholder={t("tokensReasonPlaceholder")}
-                className="w-full px-3 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring-1 focus:ring-violet-500"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
           </div>
@@ -323,8 +325,8 @@ export default function TokensPage() {
             <div
               className={`p-3 rounded-lg text-sm ${
                 transferMsg.type === "success"
-                  ? "bg-emerald-500/10 text-emerald-400"
-                  : "bg-red-500/10 text-red-400"
+                  ? "bg-success/10 text-success"
+                  : "bg-error/10 text-error"
               }`}
             >
               {transferMsg.text}
@@ -333,7 +335,7 @@ export default function TokensPage() {
           <button
             type="submit"
             disabled={transferLoading || !toApiKeyId || !amount}
-            className="px-4 py-2 text-sm font-medium rounded-lg bg-violet-500 text-white hover:bg-violet-600 disabled:opacity-50 transition-colors justify-self-start"
+            className="px-4 py-2 text-sm font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover disabled:opacity-50 transition-colors justify-self-start"
           >
             {transferLoading ? t("tokensSending") : t("tokensSendTokens")}
           </button>
@@ -348,9 +350,9 @@ export default function TokensPage() {
           <div className="text-center py-8 text-text-muted">{t("tokensNoTransactionsYet")}</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full">
+            <table className="w-full text-[13px]">
               <thead>
-                <tr className="text-left text-sm text-text-muted border-b border-border">
+                <tr className="text-left text-xs text-text-muted border-b border-border">
                   <th className="pb-3 font-medium">{t("type")}</th>
                   <th className="pb-3 font-medium">{t("tokensFrom")}</th>
                   <th className="pb-3 font-medium">{t("tokensTo")}</th>
@@ -363,30 +365,30 @@ export default function TokensPage() {
                 {history.map((entry) => {
                   const isSent = entry.fromApiKeyId !== "current";
                   return (
-                    <tr key={entry.id} className="border-b border-border/50 last:border-b-0">
-                      <td className="py-3">
+                    <tr key={entry.id} className="border-b border-border last:border-b-0">
+                      <td className="py-2.5">
                         <span
-                          className={`text-xs px-2 py-1 rounded ${
-                            isSent
-                              ? "bg-red-500/10 text-red-400"
-                              : "bg-emerald-500/10 text-emerald-400"
+                          className={`text-[11px] font-medium px-1.5 py-0.5 rounded-md ${
+                            isSent ? "bg-error/10 text-error" : "bg-success/10 text-success"
                           }`}
                         >
                           {isSent ? t("tokensSent") : t("tokensReceived")}
                         </span>
                       </td>
-                      <td className="py-3 text-sm font-mono">
+                      <td className="py-2.5 font-mono text-[12px] text-text-muted">
                         {entry.fromApiKeyId.slice(0, 8)}...
                       </td>
-                      <td className="py-3 text-sm font-mono">{entry.toApiKeyId.slice(0, 8)}...</td>
+                      <td className="py-2.5 font-mono text-[12px] text-text-muted">
+                        {entry.toApiKeyId.slice(0, 8)}...
+                      </td>
                       <td
-                        className={`py-3 text-right font-mono ${isSent ? "text-red-400" : "text-emerald-400"}`}
+                        className={`py-2.5 text-right font-mono tabular-nums ${isSent ? "text-error" : "text-success"}`}
                       >
                         {isSent ? "-" : "+"}
                         {entry.amount.toLocaleString(locale)}
                       </td>
-                      <td className="py-3 text-sm text-text-muted">{entry.reason || "-"}</td>
-                      <td className="py-3 text-right text-sm text-text-muted">
+                      <td className="py-2.5 text-text-muted">{entry.reason || "-"}</td>
+                      <td className="py-2.5 text-right text-text-muted tabular-nums">
                         {new Date(entry.createdAt).toLocaleDateString(locale)}
                       </td>
                     </tr>
@@ -409,27 +411,27 @@ export default function TokensPage() {
                 value={inviteMaxUses}
                 onChange={(e) => setInviteMaxUses(e.target.value)}
                 min="1"
-                className="w-full px-3 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring-1 focus:ring-violet-500"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <button
               onClick={handleCreateInvite}
               disabled={inviteLoading}
-              className="px-4 py-2 text-sm font-medium rounded-lg bg-violet-500 text-white hover:bg-violet-600 disabled:opacity-50 transition-colors"
+              className="px-4 py-2 text-sm font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover disabled:opacity-50 transition-colors"
             >
               {inviteLoading ? t("tokensCreatingInvite") : t("tokensCreateInvite")}
             </button>
           </div>
 
           {newInviteCode && (
-            <div className="p-3 rounded-lg bg-emerald-500/10 text-emerald-400 text-sm">
+            <div className="p-3 rounded-lg bg-success/10 text-success text-sm">
               {t("tokensInviteCreated")}:{" "}
-              <span className="font-mono font-bold">{newInviteCode}</span>
+              <span className="font-mono font-semibold">{newInviteCode}</span>
             </div>
           )}
 
           {inviteError && (
-            <div className="p-3 rounded-lg bg-red-500/10 text-red-400 text-sm">{inviteError}</div>
+            <div className="p-3 rounded-lg bg-error/10 text-error text-sm">{inviteError}</div>
           )}
 
           {/* Redeem */}
@@ -445,13 +447,13 @@ export default function TokensPage() {
                 onChange={(e) => setRedeemCode(e.target.value)}
                 placeholder={t("tokensRedeemCodePlaceholder")}
                 required
-                className="w-full px-3 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring-1 focus:ring-violet-500"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <button
               type="submit"
               disabled={redeemLoading || !redeemCode}
-              className="px-4 py-2 text-sm font-medium rounded-lg bg-emerald-500 text-white hover:bg-emerald-600 disabled:opacity-50 transition-colors"
+              className="px-4 py-2 text-sm font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover disabled:opacity-50 transition-colors"
             >
               {redeemLoading ? t("tokensRedeeming") : t("tokensRedeem")}
             </button>
@@ -461,8 +463,8 @@ export default function TokensPage() {
             <div
               className={`p-3 rounded-lg text-sm ${
                 redeemMsg.type === "success"
-                  ? "bg-emerald-500/10 text-emerald-400"
-                  : "bg-red-500/10 text-red-400"
+                  ? "bg-success/10 text-success"
+                  : "bg-error/10 text-error"
               }`}
             >
               {redeemMsg.text}
@@ -477,21 +479,21 @@ export default function TokensPage() {
                 {invites.map((inv) => (
                   <div
                     key={inv.id}
-                    className="flex items-center justify-between p-3 rounded-lg bg-surface/50 border border-border/50"
+                    className="flex items-center justify-between p-3 rounded-lg bg-surface-2 border border-border"
                   >
                     <div>
-                      <span className="font-mono font-bold">{inv.code}</span>
+                      <span className="font-mono text-[13px] font-semibold">{inv.code}</span>
                       <span className="text-xs text-text-muted ml-3">
                         {t("tokensInviteUses", { used: inv.useCount, max: inv.maxUses })}
                       </span>
                       {inv.revokedAt && (
-                        <span className="text-xs text-red-400 ml-2">{t("tokensRevoked")}</span>
+                        <span className="text-xs text-error ml-2">{t("tokensRevoked")}</span>
                       )}
                     </div>
                     {!inv.revokedAt && (
                       <button
                         onClick={() => handleRevokeInvite(inv.id)}
-                        className="text-xs px-2 py-1 rounded text-red-400 hover:bg-red-500/10 transition-colors"
+                        className="text-xs px-2 py-1 rounded-md text-error hover:bg-error/10 transition-colors"
                       >
                         {t("tokensRevoke")}
                       </button>
@@ -515,7 +517,7 @@ export default function TokensPage() {
                 onChange={(e) => setServerName(e.target.value)}
                 placeholder={t("tokensServerNamePlaceholder")}
                 required
-                className="px-3 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring-1 focus:ring-violet-500"
+                className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
               />
               <input
                 type="url"
@@ -523,7 +525,7 @@ export default function TokensPage() {
                 onChange={(e) => setServerUrl(e.target.value)}
                 placeholder="https://server.example.com"
                 required
-                className="px-3 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring-1 focus:ring-violet-500"
+                className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
               />
               <input
                 type="password"
@@ -531,20 +533,20 @@ export default function TokensPage() {
                 onChange={(e) => setServerApiKey(e.target.value)}
                 placeholder={t("tokensApiKeyPlaceholder")}
                 required
-                className="px-3 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring-1 focus:ring-violet-500"
+                className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
               />
             </div>
             <button
               type="submit"
               disabled={serverLoading || !serverName || !serverUrl || !serverApiKey}
-              className="px-4 py-2 text-sm font-medium rounded-lg bg-violet-500 text-white hover:bg-violet-600 disabled:opacity-50 transition-colors justify-self-start"
+              className="px-4 py-2 text-sm font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover disabled:opacity-50 transition-colors justify-self-start"
             >
               {serverLoading ? t("tokensConnecting") : t("tokensConnectServer")}
             </button>
           </form>
 
           {serverError && (
-            <div className="p-3 rounded-lg bg-red-500/10 text-red-400 text-sm">{serverError}</div>
+            <div className="p-3 rounded-lg bg-error/10 text-error text-sm">{serverError}</div>
           )}
 
           {servers.length === 0 ? (
@@ -556,18 +558,18 @@ export default function TokensPage() {
               {servers.map((server) => (
                 <div
                   key={server.id}
-                  className="flex items-center justify-between p-3 rounded-lg bg-surface/50 border border-border/50"
+                  className="flex items-center justify-between p-3 rounded-lg bg-surface-2 border border-border"
                 >
                   <div className="flex-1 min-w-0">
                     <div className="flex items-center gap-2">
-                      <p className="font-semibold truncate">{server.name}</p>
+                      <p className="text-sm font-semibold truncate">{server.name}</p>
                       <span
-                        className={`text-xs px-2 py-0.5 rounded ${
+                        className={`text-[11px] font-medium px-1.5 py-0.5 rounded-md ${
                           server.status === "connected"
-                            ? "bg-emerald-500/10 text-emerald-400"
+                            ? "bg-success/10 text-success"
                             : server.status === "error"
-                              ? "bg-red-500/10 text-red-400"
-                              : "bg-gray-500/10 text-gray-400"
+                              ? "bg-error/10 text-error"
+                              : "bg-bg-subtle text-text-muted"
                         }`}
                       >
                         {t.has(`tokensServerStatus.${server.status}`)
@@ -575,9 +577,11 @@ export default function TokensPage() {
                           : server.status}
                       </span>
                     </div>
-                    <p className="text-xs text-text-muted mt-1 truncate">{server.url}</p>
+                    <p className="font-mono text-[12px] text-text-muted mt-1 truncate">
+                      {server.url}
+                    </p>
                     {server.errorMessage && (
-                      <p className="text-xs text-red-400 mt-1">{server.errorMessage}</p>
+                      <p className="text-xs text-error mt-1">{server.errorMessage}</p>
                     )}
                     {server.lastSyncAt && (
                       <p className="text-xs text-text-muted mt-1">
@@ -589,7 +593,7 @@ export default function TokensPage() {
                   </div>
                   <button
                     onClick={() => handleDisconnectServer(server.id)}
-                    className="text-xs px-3 py-1.5 rounded text-red-400 hover:bg-red-500/10 transition-colors ml-4"
+                    className="text-xs px-3 py-1.5 rounded-md text-error hover:bg-error/10 transition-colors ml-4"
                   >
                     {t("tokensDisconnect")}
                   </button>

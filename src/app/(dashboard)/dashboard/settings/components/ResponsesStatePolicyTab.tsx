@@ -74,24 +74,26 @@ export default function ResponsesStatePolicyTab() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-3">
-        <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             account_tree
           </span>
         </div>
         <div className="flex-1">
-          <h3 className="text-lg font-semibold">{t("responsesStateTitle")}</h3>
+          <h3 className="text-base font-semibold tracking-tight text-text-main">
+            {t("responsesStateTitle")}
+          </h3>
           <p className="text-sm text-text-muted">{t("responsesStateDesc")}</p>
         </div>
         <div className="min-w-[7rem] flex justify-end">
           {status === "saved" && (
-            <span className="text-xs font-medium text-emerald-500 flex items-center gap-1">
+            <span className="text-xs font-medium text-success flex items-center gap-1">
               <span className="material-symbols-outlined text-[14px]">check_circle</span>{" "}
               {t("saved")}
             </span>
           )}
           {status === "error" && (
-            <span className="text-xs font-medium text-rose-500 flex items-center gap-1">
+            <span className="text-xs font-medium text-error flex items-center gap-1">
               <span className="material-symbols-outlined text-[14px]">error</span>{" "}
               {t("responsesStateSaveError")}
             </span>
@@ -111,7 +113,7 @@ export default function ResponsesStatePolicyTab() {
         ]}
       />
 
-      <p className="mt-4 text-xs text-text-muted/80 flex items-start gap-1.5 leading-relaxed">
+      <p className="mt-4 text-xs text-text-subtle flex items-start gap-1.5 leading-relaxed">
         <span className="material-symbols-outlined text-[14px] mt-0.5">info</span>
         <span>{t("responsesStateHint")}</span>
       </p>

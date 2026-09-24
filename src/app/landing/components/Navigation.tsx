@@ -11,7 +11,7 @@ export default function Navigation() {
   const router = useRouter();
 
   return (
-    <nav className="fixed top-0 z-50 w-full bg-[#0B0E14]/80 backdrop-blur-md border-b border-[#2D333B]">
+    <nav className="fixed top-0 z-50 w-full bg-bg/80 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-3">
         {/* Logo */}
         <button
@@ -20,10 +20,10 @@ export default function Navigation() {
           onClick={() => router.push("/")}
           aria-label={t("navigateHome")}
         >
-          <div className="size-8 rounded bg-linear-to-br from-[#E54D5E] to-[#C93D4E] flex items-center justify-center text-white">
-            <OmniRouteLogo size={20} className="text-white" />
+          <div className="size-8 rounded-lg bg-contrast flex items-center justify-center text-contrast-fg">
+            <OmniRouteLogo size={20} className="text-contrast-fg" />
           </div>
-          <h2 className="text-white text-lg sm:text-xl font-bold tracking-tight truncate sm:max-w-none max-w-[160px]">
+          <h2 className="text-text-main text-lg sm:text-xl font-semibold tracking-tight truncate sm:max-w-none max-w-[160px]">
             {t("brandName")}
           </h2>
         </button>
@@ -31,25 +31,25 @@ export default function Navigation() {
         {/* Desktop menu */}
         <div className="hidden md:flex items-center gap-8">
           <a
-            className="text-gray-300 hover:text-white text-sm font-medium transition-colors"
+            className="text-text-muted hover:text-text-main text-sm transition-colors"
             href="#features"
           >
             {t("featuresLink")}
           </a>
           <a
-            className="text-gray-300 hover:text-white text-sm font-medium transition-colors"
+            className="text-text-muted hover:text-text-main text-sm transition-colors"
             href="#how-it-works"
           >
             {t("howItWorks")}
           </a>
           <Link
-            className="text-gray-300 hover:text-white text-sm font-medium transition-colors"
+            className="text-text-muted hover:text-text-main text-sm transition-colors"
             href="/docs"
           >
             {t("docsLink")}
           </Link>
           <a
-            className="text-gray-300 hover:text-white text-sm font-medium transition-colors flex items-center gap-1"
+            className="text-text-muted hover:text-text-main text-sm transition-colors flex items-center gap-1"
             href="https://github.com/diegosouzapw/OmniRoute"
             target="_blank"
             rel="noopener noreferrer"
@@ -65,12 +65,12 @@ export default function Navigation() {
         <div className="flex items-center gap-2 sm:gap-4 shrink-0">
           <button
             onClick={() => router.push("/dashboard")}
-            className="hidden sm:flex h-9 items-center justify-center rounded-lg px-4 bg-[#E54D5E] hover:bg-[#C93D4E] transition-all text-white text-sm font-bold shadow-[0_0_15px_rgba(229,77,94,0.4)] hover:shadow-[0_0_20px_rgba(229,77,94,0.6)]"
+            className="hidden sm:flex h-9 items-center justify-center rounded-control px-4 bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors text-sm font-medium"
           >
             {t("getStarted")}
           </button>
           <button
-            className="md:hidden text-white"
+            className="md:hidden text-text-main"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label={t("toggleMenu")}
           >
@@ -83,31 +83,31 @@ export default function Navigation() {
 
       {/* Mobile menu dropdown */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-[#2D333B] bg-[#0B0E14]/95 backdrop-blur-md">
+        <div className="md:hidden border-t border-border bg-bg/95 backdrop-blur-md">
           <div className="flex flex-col gap-4 p-6">
             <a
-              className="text-gray-300 hover:text-white text-sm font-medium transition-colors"
+              className="text-text-muted hover:text-text-main text-sm transition-colors"
               href="#features"
               onClick={() => setMobileMenuOpen(false)}
             >
               {t("featuresLink")}
             </a>
             <a
-              className="text-gray-300 hover:text-white text-sm font-medium transition-colors"
+              className="text-text-muted hover:text-text-main text-sm transition-colors"
               href="#how-it-works"
               onClick={() => setMobileMenuOpen(false)}
             >
               {t("howItWorks")}
             </a>
             <Link
-              className="text-gray-300 hover:text-white text-sm font-medium transition-colors"
+              className="text-text-muted hover:text-text-main text-sm transition-colors"
               href="/docs"
               onClick={() => setMobileMenuOpen(false)}
             >
               {t("docsLink")}
             </Link>
             <a
-              className="text-gray-300 hover:text-white text-sm font-medium transition-colors"
+              className="text-text-muted hover:text-text-main text-sm transition-colors"
               href="https://github.com/diegosouzapw/OmniRoute"
               target="_blank"
               rel="noopener noreferrer"
@@ -116,7 +116,7 @@ export default function Navigation() {
             </a>
             <button
               onClick={() => router.push("/dashboard")}
-              className="h-9 rounded-lg bg-[#E54D5E] hover:bg-[#C93D4E] text-white text-sm font-bold"
+              className="h-9 rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover text-sm font-medium transition-colors"
             >
               {t("getStarted")}
             </button>

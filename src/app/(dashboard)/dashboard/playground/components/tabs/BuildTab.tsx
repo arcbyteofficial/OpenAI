@@ -143,10 +143,7 @@ export default function BuildTab({ configState }: BuildTabProps) {
       const assistantMsg = choice?.message;
 
       if (assistantMsg == null) {
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content: "(empty response)" },
-        ]);
+        setMessages((prev) => [...prev, { role: "assistant", content: "(empty response)" }]);
         return;
       }
 
@@ -166,14 +163,11 @@ export default function BuildTab({ configState }: BuildTabProps) {
             toolCallId: tc.id,
             functionName: tc.function.name,
             draft: "",
-          })),
+          }))
         );
       } else {
         const content = assistantMsg.content ?? "";
-        setMessages((prev) => [
-          ...prev,
-          { role: "assistant", content },
-        ]);
+        setMessages((prev) => [...prev, { role: "assistant", content }]);
 
         // Validate structured output response if enabled
         if (structuredOutput.enabled && structuredOutput.schema != null) {
@@ -230,12 +224,12 @@ export default function BuildTab({ configState }: BuildTabProps) {
       {messages.map((msg, idx) => (
         <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
           <div
-            className={`max-w-[80%] rounded-xl px-3 py-2 text-sm ${
+            className={`max-w-[80%] rounded-card px-3 py-2 text-sm ${
               msg.role === "user"
-                ? "bg-primary text-white"
+                ? "bg-contrast text-contrast-fg"
                 : msg.role === "tool"
-                  ? "bg-yellow-500/10 border border-yellow-500/30 text-text-main"
-                  : "bg-bg-alt border border-border text-text-main"
+                  ? "bg-warning/10 border border-warning/30 text-text-main"
+                  : "bg-surface border border-border text-text-main"
             }`}
           >
             {msg.role === "user" ? (
@@ -253,23 +247,18 @@ export default function BuildTab({ configState }: BuildTabProps) {
           {toolCalls.map((tc) => {
             const draft = toolResultDrafts.find((d) => d.toolCallId === tc.id);
             return (
-              <div
-                key={tc.id}
-                className="border border-amber-500/40 rounded-lg p-3 bg-amber-500/5"
-              >
+              <div key={tc.id} className="border border-warning/30 rounded-lg p-3 bg-warning/5">
                 <div className="flex items-center gap-2 mb-2">
-                  <span className="material-symbols-outlined text-[14px] text-amber-500">
+                  <span className="material-symbols-outlined text-[14px] text-warning">
                     function
                   </span>
-                  <code className="text-xs font-mono text-text-main">
-                    {tc.function.name}
-                  </code>
+                  <code className="text-xs font-mono text-text-main">{tc.function.name}</code>
                 </div>
-                <pre className="text-[11px] font-mono text-text-muted bg-bg-alt rounded p-2 overflow-x-auto mb-2 whitespace-pre-wrap break-all">
+                <pre className="text-[11px] font-mono text-text-muted bg-bg-subtle rounded-md p-2 overflow-x-auto mb-2 whitespace-pre-wrap break-all">
                   {tc.function.arguments}
                 </pre>
                 <div className="flex flex-col gap-2">
-                  <label className="text-[10px] text-text-muted uppercase tracking-wider">
+                  <label className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
                     Tool result
                   </label>
                   <textarea
@@ -277,17 +266,17 @@ export default function BuildTab({ configState }: BuildTabProps) {
                     onChange={(e) =>
                       setToolResultDrafts((prev) =>
                         prev.map((d) =>
-                          d.toolCallId === tc.id ? { ...d, draft: e.target.value } : d,
-                        ),
+                          d.toolCallId === tc.id ? { ...d, draft: e.target.value } : d
+                        )
                       )
                     }
                     rows={3}
                     placeholder={t("enterToolResult")}
-                    className="text-xs font-mono bg-bg-alt border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main resize-y"
+                    className="text-xs font-mono bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main resize-y"
                   />
                   <button
                     onClick={() => void sendToolResult(tc.id)}
-                    className="text-xs px-2.5 py-1 rounded bg-primary text-white hover:bg-primary/90 transition-colors self-start"
+                    className="text-xs font-medium px-2.5 py-1 rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors self-start"
                   >
                     Send tool result
                   </button>
@@ -303,11 +292,13 @@ export default function BuildTab({ configState }: BuildTabProps) {
         <div
           className={`text-xs rounded-lg px-3 py-2 border ${
             validationResult.valid
-              ? "border-green-500/40 bg-green-500/5 text-green-600 dark:text-green-400"
-              : "border-destructive/40 bg-destructive/5 text-destructive"
+              ? "border-success/30 bg-success/10 text-success"
+              : "border-error/30 bg-error/10 text-error"
           }`}
         >
-          {validationResult.valid ? "✅ Valid JSON schema response" : `❌ ${validationResult.error}`}
+          {validationResult.valid
+            ? "✅ Valid JSON schema response"
+            : `❌ ${validationResult.error}`}
         </div>
       )}
     </div>

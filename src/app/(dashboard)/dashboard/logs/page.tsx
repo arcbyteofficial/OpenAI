@@ -124,16 +124,16 @@ function LogsPageContent() {
   return (
     <div className="flex flex-col gap-6">
       <div className="flex-shrink-0 flex items-center justify-between gap-4 flex-wrap">
-        <h2 className="text-lg font-semibold text-text-main">{t("requestLogs")}</h2>
+        <h2 className="text-lg font-semibold tracking-tight text-text-main">{t("requestLogs")}</h2>
 
         <div className="flex items-center gap-2">
           <button
             id="clean-log-history-btn"
             onClick={() => setShowCleanHistory(true)}
             disabled={cleaningHistory}
-            className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg
-              border border-red-500/30 bg-red-500/10 text-red-700 hover:bg-red-500/15
-              hover:border-red-500/50 dark:text-red-300 dark:hover:bg-red-500/20 transition-all duration-200
+            className="flex items-center gap-2 px-3 py-1.5 text-[13px] font-medium rounded-control
+              border border-error/30 bg-error/10 text-error hover:bg-error/15
+              hover:border-error/50 transition-colors duration-150
               disabled:opacity-50 disabled:cursor-not-allowed"
           >
             <svg
@@ -158,10 +158,9 @@ function LogsPageContent() {
               id="export-logs-btn"
               onClick={() => setShowExport(!showExport)}
               disabled={exporting}
-              className="flex items-center gap-2 px-4 py-2 text-sm font-medium rounded-lg
-                bg-[var(--card-bg,#1e1e2e)] border border-[var(--border,#333)]
-                text-[var(--text-secondary,#aaa)] hover:text-[var(--text-primary,#fff)]
-                hover:border-[var(--accent,#7c3aed)] transition-all duration-200
+              className="flex items-center gap-2 px-3 py-1.5 text-[13px] font-medium rounded-control
+                bg-surface border border-border-strong
+                text-text-main hover:bg-bg-subtle transition-colors duration-150
                 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg
@@ -184,10 +183,10 @@ function LogsPageContent() {
             {showExport && (
               <div
                 className="absolute right-0 top-full mt-1 z-50 min-w-[140px] rounded-lg
-                  bg-[var(--card-bg,#1e1e2e)] border border-[var(--border,#333)]
-                  shadow-xl overflow-hidden animate-in fade-in"
+                  bg-surface border border-border
+                  shadow-[var(--shadow-elevated)] overflow-hidden animate-in fade-in"
               >
-                <div className="px-3 py-2 text-xs text-[var(--text-muted,#666)] border-b border-[var(--border,#333)] font-medium">
+                <div className="px-3 py-2 text-xs text-text-muted border-b border-border font-medium">
                   {t("timeRange")}
                 </div>
                 {TIME_RANGES.map((range) => (
@@ -195,12 +194,12 @@ function LogsPageContent() {
                     key={range.hours}
                     id={`export-${range.hours}h-btn`}
                     onClick={() => handleExport(range.hours)}
-                    className="w-full px-3 py-2 text-sm text-left hover:bg-[var(--hover-bg,#2a2a3e)]
-                      text-[var(--text-secondary,#aaa)] hover:text-[var(--text-primary,#fff)]
+                    className="w-full px-3 py-2 text-[13px] text-left hover:bg-bg-subtle
+                      text-text-muted hover:text-text-main
                       transition-colors flex items-center justify-between"
                   >
                     <span>{t("lastNHours", { hours: range.label })}</span>
-                    <span className="text-xs text-[var(--text-muted,#666)]">
+                    <span className="text-xs text-text-subtle">
                       {range.hours === 24 ? t("defaultRange") : ""}
                     </span>
                   </button>
@@ -212,7 +211,7 @@ function LogsPageContent() {
       </div>
 
       {cleanHistoryStatus && (
-        <div className="flex-shrink-0 rounded-lg border border-[var(--border,#333)] bg-[var(--card-bg,#1e1e2e)] px-4 py-3 text-sm text-[var(--text-secondary,#aaa)]">
+        <div className="flex-shrink-0 rounded-lg border border-border bg-surface px-4 py-3 text-sm text-text-muted">
           {cleanHistoryStatus}
         </div>
       )}

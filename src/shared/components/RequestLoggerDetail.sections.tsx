@@ -107,13 +107,13 @@ export function PayloadSection({
     <div>
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-3">
-          <h3 className="text-[11px] text-text-muted uppercase tracking-wider font-bold">
+          <h3 className="text-[11px] text-text-muted uppercase tracking-wider font-medium">
             {title}
           </h3>
           {collapsible && (
             <button
               onClick={() => setOpen((v) => !v)}
-              className="p-1 rounded hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors"
+              className="p-1 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
               aria-label={open ? t("collapse", { title }) : t("expand", { title })}
             >
               <span className="material-symbols-outlined text-[16px]">
@@ -126,7 +126,7 @@ export function PayloadSection({
           {!notice && (
             <button
               onClick={handleCopy}
-              className="flex items-center gap-1 px-2 py-1 text-xs text-text-muted hover:text-text-primary transition-colors"
+              className="flex items-center gap-1 px-2 py-1 text-xs text-text-muted hover:text-text-main transition-colors"
               aria-label={t("copyTitle", { title })}
             >
               <span className="material-symbols-outlined text-[14px]">
@@ -139,15 +139,17 @@ export function PayloadSection({
         </div>
       </div>
       {open && notice && (
-        <div className="p-4 rounded-xl border border-amber-500/40 bg-amber-500/10 text-xs text-amber-700 dark:text-amber-300 flex items-start gap-2">
-          <span className="material-symbols-outlined text-[16px] shrink-0">warning</span>
+        <div className="p-4 rounded-lg border border-warning/25 bg-warning/5 text-xs text-text-main flex items-start gap-2">
+          <span className="material-symbols-outlined text-[16px] shrink-0 text-warning">
+            warning
+          </span>
           <span>{t("payloadSizeLimitOmitted")}</span>
         </div>
       )}
       {open && !notice && parsedJson !== null && (
         <div
           ref={treeContainerRef}
-          className="rounded-xl bg-black/5 dark:bg-black/30 border border-border max-h-150 overflow-auto p-4 text-xs font-mono"
+          className="rounded-lg bg-bg-subtle border border-border max-h-150 overflow-auto p-4 text-xs font-mono"
         >
           <JsonView
             src={parsedJson}
@@ -159,7 +161,7 @@ export function PayloadSection({
         </div>
       )}
       {open && !notice && parsedJson === null && (
-        <pre className="p-4 rounded-xl bg-black/5 dark:bg-black/30 border border-border overflow-x-auto text-xs font-mono text-text-main max-h-150 overflow-y-auto leading-relaxed whitespace-pre-wrap break-words">
+        <pre className="p-4 rounded-lg bg-bg-subtle border border-border overflow-x-auto text-xs font-mono text-text-main max-h-150 overflow-y-auto leading-relaxed whitespace-pre-wrap break-words">
           {json}
         </pre>
       )}
@@ -300,12 +302,12 @@ export function ConversationContextSection({ log, detail }) {
     <div>
       <div className="flex items-center justify-between gap-3 mb-2">
         <div className="flex items-center gap-3">
-          <h3 className="text-[11px] text-text-muted uppercase tracking-wider font-bold">
+          <h3 className="text-[11px] text-text-muted uppercase tracking-wider font-medium">
             Conversation Context
           </h3>
           <button
             onClick={() => setOpen((v) => !v)}
-            className="p-1 rounded hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors"
+            className="p-1 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
             aria-label={open ? "Collapse Conversation Context" : "Expand Conversation Context"}
           >
             <span className="material-symbols-outlined text-[16px]">
@@ -348,7 +350,7 @@ export function ConversationContextSection({ log, detail }) {
               <button
                 onClick={toggleLiveRefresh}
                 title={liveRefresh ? "Live refresh: on" : "Live refresh: off"}
-                className={`p-1 rounded hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors ${liveRefresh ? "text-primary" : ""}`}
+                className={`p-1 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors ${liveRefresh ? "text-primary" : ""}`}
                 aria-pressed={liveRefresh}
               >
                 <span className="material-symbols-outlined text-[18px]">
@@ -359,7 +361,7 @@ export function ConversationContextSection({ log, detail }) {
             <button
               onClick={scrollToBottom}
               title="Go to bottom"
-              className="p-1 rounded hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors"
+              className="p-1 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
               aria-label="Go to bottom"
             >
               <span className="material-symbols-outlined text-[18px]">vertical_align_bottom</span>
@@ -370,7 +372,7 @@ export function ConversationContextSection({ log, detail }) {
       {open && (
         <div
           ref={turnsBoxRef}
-          className="rounded-xl bg-black/5 dark:bg-black/30 border border-border max-h-150 overflow-y-auto p-3 space-y-2"
+          className="rounded-lg bg-bg-subtle border border-border max-h-150 overflow-y-auto p-3 space-y-2"
         >
           {allTurns.map((turn, i) => (
             <ChatBubble key={i} turn={turn} />

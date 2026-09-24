@@ -148,24 +148,24 @@ export default function KiroSocialOAuthModal({
       <div className="flex flex-col gap-4">
         {step === "loading" && (
           <div className="text-center py-6">
-            <div className="size-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-              <span className="material-symbols-outlined text-3xl text-primary animate-spin">
+            <div className="size-16 mx-auto mb-4 rounded-full bg-bg-subtle border border-border flex items-center justify-center">
+              <span className="material-symbols-outlined text-3xl text-text-muted animate-spin">
                 progress_activity
               </span>
             </div>
-            <h3 className="text-lg font-semibold mb-2">{t("initializing")}</h3>
+            <h3 className="text-base font-semibold tracking-tight mb-2">{t("initializing")}</h3>
             <p className="text-sm text-text-muted">{t("settingUp", { providerName })}</p>
           </div>
         )}
 
         {step === "polling" && (
           <div className="text-center py-6">
-            <div className="size-16 mx-auto mb-4 rounded-full bg-primary/10 flex items-center justify-center">
-              <span className="material-symbols-outlined text-3xl text-primary animate-pulse">
+            <div className="size-16 mx-auto mb-4 rounded-full bg-bg-subtle border border-border flex items-center justify-center">
+              <span className="material-symbols-outlined text-3xl text-text-muted">
                 open_in_browser
               </span>
             </div>
-            <h3 className="text-lg font-semibold mb-2">{t("openIncognito")}</h3>
+            <h3 className="text-base font-semibold tracking-tight mb-2">{t("openIncognito")}</h3>
             <p className="text-sm text-text-muted mb-3">{t("incognitoDescription")}</p>
             {authUrl && (
               <div className="mb-4">
@@ -180,7 +180,7 @@ export default function KiroSocialOAuthModal({
                   </a>
                   <button
                     onClick={() => copyToClipboard(authUrl)}
-                    className="shrink-0 p-1 rounded hover:bg-sidebar"
+                    className="shrink-0 p-1 rounded-md text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
                     title={t("copyLink")}
                   >
                     <span className="material-symbols-outlined text-base">content_copy</span>
@@ -191,7 +191,7 @@ export default function KiroSocialOAuthModal({
             {userCode && (
               <div className="mb-4">
                 <p className="text-xs text-text-muted mb-1">{t("verificationCode")}</p>
-                <p className="font-mono text-2xl font-bold tracking-widest">{userCode}</p>
+                <p className="font-mono text-2xl font-semibold tracking-widest">{userCode}</p>
               </div>
             )}
             <div className="flex items-center justify-center gap-2 text-sm text-text-muted">
@@ -210,12 +210,10 @@ export default function KiroSocialOAuthModal({
 
         {step === "success" && (
           <div className="text-center py-6">
-            <div className="size-16 mx-auto mb-4 rounded-full bg-green-100 dark:bg-green-900/30 flex items-center justify-center">
-              <span className="material-symbols-outlined text-3xl text-green-600">
-                check_circle
-              </span>
+            <div className="size-16 mx-auto mb-4 rounded-full bg-success/10 flex items-center justify-center">
+              <span className="material-symbols-outlined text-3xl text-success">check_circle</span>
             </div>
-            <h3 className="text-lg font-semibold mb-2">{t("successTitle")}</h3>
+            <h3 className="text-base font-semibold tracking-tight mb-2">{t("successTitle")}</h3>
             <p className="text-sm text-text-muted mb-4">
               {t("successMessage", { providerLabel, providerName })}
             </p>
@@ -227,11 +225,11 @@ export default function KiroSocialOAuthModal({
 
         {step === "error" && (
           <div className="text-center py-6">
-            <div className="size-16 mx-auto mb-4 rounded-full bg-red-100 dark:bg-red-900/30 flex items-center justify-center">
-              <span className="material-symbols-outlined text-3xl text-red-600">error</span>
+            <div className="size-16 mx-auto mb-4 rounded-full bg-error/10 flex items-center justify-center">
+              <span className="material-symbols-outlined text-3xl text-error">error</span>
             </div>
-            <h3 className="text-lg font-semibold mb-2">{t("errorTitle")}</h3>
-            <p className="text-sm text-red-600 mb-4">{error}</p>
+            <h3 className="text-base font-semibold tracking-tight mb-2">{t("errorTitle")}</h3>
+            <p className="text-sm text-error mb-4">{error}</p>
             <div className="flex gap-2">
               <Button onClick={handleClose} variant="ghost" fullWidth>
                 {t("close")}

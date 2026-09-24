@@ -17,9 +17,8 @@ interface CachePerformanceProps {
 }
 
 function HitRateBar({ hitRate, label }: { hitRate: number; label: string }) {
-  const colorClass = hitRate >= 70 ? "bg-green-500" : hitRate >= 40 ? "bg-amber-400" : "bg-red-500";
-  const textClass =
-    hitRate >= 70 ? "text-green-500" : hitRate >= 40 ? "text-amber-400" : "text-red-500";
+  const colorClass = hitRate >= 70 ? "bg-success" : hitRate >= 40 ? "bg-warning" : "bg-error";
+  const textClass = hitRate >= 70 ? "text-success" : hitRate >= 40 ? "text-warning" : "text-error";
 
   return (
     <div
@@ -34,9 +33,9 @@ function HitRateBar({ hitRate, label }: { hitRate: number; label: string }) {
         <span className="text-text-muted">{label}</span>
         <span className={`font-semibold tabular-nums ${textClass}`}>{hitRate.toFixed(1)}%</span>
       </div>
-      <div className="w-full h-2 rounded-full bg-surface/50 overflow-hidden">
+      <div className="w-full h-2 rounded-full bg-bg-subtle overflow-hidden">
         <div
-          className={`h-full rounded-full transition-all duration-500 ${colorClass}`}
+          className={`h-full rounded-full transition-[width] duration-500 ${colorClass}`}
           style={{ width: `${Math.min(hitRate, 100)}%` }}
         />
       </div>
@@ -50,7 +49,7 @@ function Skeleton({ className }: { className?: string }) {
   return (
     <div
       data-testid="skeleton"
-      className={`animate-pulse rounded bg-surface/50 ${className ?? ""}`}
+      className={`animate-pulse rounded bg-bg-subtle ${className ?? ""}`}
     />
   );
 }
@@ -75,20 +74,20 @@ export default function CachePerformance({
 
   return (
     <Card>
-      <div data-testid="cache-performance" className="p-5 flex flex-col gap-4">
+      <div data-testid="cache-performance" className="flex flex-col gap-4">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <h2 className="font-medium text-sm">{t("performanceTitle")}</h2>
+          <h2 className="text-sm font-semibold text-text-main">{t("performanceTitle")}</h2>
         </div>
 
         {/* Error state */}
         {error && (
           <div className="flex flex-col gap-2">
-            <p className="text-sm text-red-400">{error}</p>
+            <p className="text-sm text-error">{error}</p>
             {onRetry && (
               <button
                 onClick={onRetry}
-                className="self-start text-xs px-3 py-1.5 rounded bg-surface border border-border/50 hover:bg-surface/80 transition-colors"
+                className="self-start text-xs px-3 py-1.5 rounded-control bg-surface border border-border-strong hover:bg-bg-subtle transition-colors"
                 aria-label={t("cachePerformanceRetry")}
               >
                 {t("retry")}
@@ -101,7 +100,7 @@ export default function CachePerformance({
         {loading && !error && (
           <div className="flex flex-col gap-4">
             <Skeleton className="h-8 w-full" />
-            <div className="grid grid-cols-3 gap-4 pt-3 border-t border-border/30">
+            <div className="grid grid-cols-3 gap-4 pt-3 border-t border-border">
               <Skeleton className="h-10" />
               <Skeleton className="h-10" />
               <Skeleton className="h-10" />
@@ -124,13 +123,13 @@ export default function CachePerformance({
             )}
 
             {/* Hit / Miss / Total breakdown */}
-            <div className="grid grid-cols-3 gap-4 pt-3 border-t border-border/30 text-center">
+            <div className="grid grid-cols-3 gap-4 pt-3 border-t border-border text-center">
               <div>
-                <div className="text-lg font-semibold tabular-nums text-green-500">{hits}</div>
+                <div className="text-lg font-semibold tabular-nums text-success">{hits}</div>
                 <div className="text-xs text-text-muted mt-0.5">{t("hits")}</div>
               </div>
               <div>
-                <div className="text-lg font-semibold tabular-nums text-red-400">{misses}</div>
+                <div className="text-lg font-semibold tabular-nums text-error">{misses}</div>
                 <div className="text-xs text-text-muted mt-0.5">{t("misses")}</div>
               </div>
               <div>
@@ -141,7 +140,7 @@ export default function CachePerformance({
 
             {/* Latency metrics */}
             {(avgLatencyMs !== undefined || p95LatencyMs !== undefined) && (
-              <div className="grid grid-cols-2 gap-4 pt-3 border-t border-border/30 text-center">
+              <div className="grid grid-cols-2 gap-4 pt-3 border-t border-border text-center">
                 {avgLatencyMs !== undefined && (
                   <div>
                     <div className="text-lg font-semibold tabular-nums">{avgLatencyMs}</div>

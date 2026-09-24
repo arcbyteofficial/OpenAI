@@ -17,7 +17,7 @@ export default function LinkifiedText({ text }: { text: string | null | undefine
             href={seg.href}
             target="_blank"
             rel="noopener noreferrer"
-            className="underline break-all"
+            className="underline underline-offset-2 hover:opacity-80 transition-opacity break-all"
           >
             {seg.text}
           </a>

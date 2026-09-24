@@ -168,7 +168,7 @@ function ImageResultsInline({ data }: { data: unknown }) {
               <a
                 href={src}
                 download={`image-${i + 1}.png`}
-                className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1"
+                className="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded-md opacity-0 group-hover:opacity-100 transition-opacity flex items-center gap-1"
               >
                 <span className="material-symbols-outlined text-[13px]">download</span>
                 {t("save")}
@@ -511,8 +511,8 @@ export default function ApiTab(_props: ApiTabProps) {
   return (
     <div className="space-y-5 p-4 overflow-y-auto">
       {/* Info Banner */}
-      <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-primary/5 border border-primary/10 text-sm text-text-muted">
-        <span className="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0">
+      <div className="flex items-start gap-3 px-4 py-3 rounded-lg bg-bg-subtle border border-border text-sm text-text-muted">
+        <span className="material-symbols-outlined text-text-muted text-[18px] mt-0.5 shrink-0">
           science
         </span>
         <div>
@@ -649,18 +649,18 @@ export default function ApiTab(_props: ApiTabProps) {
                   type="file"
                   accept="audio/*,video/*"
                   onChange={handleAudioFileChange}
-                  className="w-full px-3 py-2 rounded-lg bg-surface border border-border text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:bg-primary/10 file:text-primary file:text-sm"
+                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-[13px] file:font-medium"
                 />
                 {uploadedFile && (
                   <p className="text-xs text-text-muted mt-1 flex items-center gap-1">
-                    <span className="material-symbols-outlined text-[12px] text-green-500">
+                    <span className="material-symbols-outlined text-[12px] text-success">
                       check_circle
                     </span>
                     {uploadedFile.name} ({(uploadedFile.size / 1024).toFixed(0)} KB)
                   </p>
                 )}
                 {!uploadedFile && (
-                  <p className="text-xs text-amber-500 mt-1 flex items-center gap-1">
+                  <p className="text-xs text-warning mt-1 flex items-center gap-1">
                     <span className="material-symbols-outlined text-[12px]">info</span>
                     {t("selectAudioFile")}
                   </p>
@@ -674,14 +674,14 @@ export default function ApiTab(_props: ApiTabProps) {
                   accept="image/*"
                   multiple
                   onChange={(e) => void handleImageFileChange(e)}
-                  className="w-full px-3 py-2 rounded-lg bg-surface border border-border text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:bg-primary/10 file:text-primary file:text-sm"
+                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-[13px] file:font-medium"
                 />
                 {uploadedImages.length > 0 && (
                   <div className="flex gap-2 mt-2 flex-wrap">
                     {uploadedImages.map((src, i) => (
                       <div
                         key={i}
-                        className="relative group size-16 rounded overflow-hidden border border-border"
+                        className="relative group size-16 rounded-md overflow-hidden border border-border"
                       >
                         {/* eslint-disable-next-line @next/next/no-img-element */}
                         <img
@@ -701,7 +701,7 @@ export default function ApiTab(_props: ApiTabProps) {
                     ))}
                     <button
                       onClick={() => setUploadedImages([])}
-                      className="text-xs text-text-muted hover:text-red-500 self-center ml-1"
+                      className="text-xs text-text-muted hover:text-error transition-colors self-center ml-1"
                     >
                       {t("clearAll")}
                     </button>
@@ -730,7 +730,7 @@ export default function ApiTab(_props: ApiTabProps) {
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => void handleCopy(requestBody)}
-                  className="p-1.5 rounded hover:bg-black/5 dark:hover:bg-white/5 text-text-muted hover:text-text-main transition-colors"
+                  className="p-1.5 rounded-control hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
                   title={t("copy")}
                 >
                   <span className="material-symbols-outlined text-[16px]">content_copy</span>
@@ -742,7 +742,7 @@ export default function ApiTab(_props: ApiTabProps) {
                       (template as Record<string, unknown>).model = selectedModel;
                     setRequestBody(JSON.stringify(template, null, 2));
                   }}
-                  className="p-1.5 rounded hover:bg-black/5 dark:hover:bg-white/5 text-text-muted hover:text-text-main transition-colors"
+                  className="p-1.5 rounded-control hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
                   title={t("resetToDefault")}
                 >
                   <span className="material-symbols-outlined text-[16px]">restart_alt</span>
@@ -750,8 +750,8 @@ export default function ApiTab(_props: ApiTabProps) {
               </div>
             </div>
             {isTranscriptionEndpoint && (
-              <p className="text-xs text-text-muted bg-amber-500/10 border border-amber-500/20 rounded px-2 py-1.5 flex items-start gap-1">
-                <span className="material-symbols-outlined text-[12px] text-amber-500 mt-0.5">
+              <p className="text-xs text-text-muted bg-warning/10 border border-warning/20 rounded-md px-2 py-1.5 flex items-start gap-1">
+                <span className="material-symbols-outlined text-[12px] text-warning mt-0.5">
                   info
                 </span>
                 {t("transcriptionHint")}
@@ -795,7 +795,9 @@ export default function ApiTab(_props: ApiTabProps) {
                   </Badge>
                 )}
                 {responseDuration !== null && (
-                  <span className="text-xs text-text-muted">{responseDuration}ms</span>
+                  <span className="text-xs font-mono tabular-nums text-text-muted">
+                    {responseDuration}ms
+                  </span>
                 )}
                 {loading && (
                   <span className="material-symbols-outlined text-[14px] text-primary animate-spin">
@@ -806,7 +808,7 @@ export default function ApiTab(_props: ApiTabProps) {
               <div className="flex items-center gap-1">
                 <button
                   onClick={() => void handleCopy(responseBody)}
-                  className="p-1.5 rounded hover:bg-black/5 dark:hover:bg-white/5 text-text-muted hover:text-text-main transition-colors"
+                  className="p-1.5 rounded-control hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
                   title={t("copy")}
                 >
                   <span className="material-symbols-outlined text-[16px]">content_copy</span>
@@ -833,7 +835,7 @@ export default function ApiTab(_props: ApiTabProps) {
                   <p className="text-xs text-text-muted font-medium uppercase tracking-wider">
                     {t("transcription")}
                   </p>
-                  <div className="bg-surface/50 rounded p-3 text-sm text-text-main leading-relaxed whitespace-pre-wrap">
+                  <div className="bg-bg-subtle rounded-md p-3 text-sm text-text-main leading-relaxed whitespace-pre-wrap">
                     {transcriptionText}
                   </div>
                   <button

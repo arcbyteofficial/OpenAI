@@ -26,10 +26,10 @@ export default function ProviderQuotaVisibilityToggle({
         onClick={() => onToggle(!visible)}
         aria-pressed={visible}
         aria-label={actionLabel}
-        className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-medium transition-all cursor-pointer ${
+        className={`inline-flex items-center gap-1 px-1.5 py-0.5 rounded text-xs font-medium transition-colors cursor-pointer ${
           visible
-            ? "bg-sky-500/15 text-sky-500 hover:bg-sky-500/25"
-            : "bg-black/[0.03] dark:bg-white/[0.03] text-text-muted/50 hover:text-text-muted hover:bg-black/[0.06] dark:hover:bg-white/[0.06]"
+            ? "bg-primary/10 text-primary hover:bg-primary/15"
+            : "bg-bg-subtle text-text-subtle hover:text-text-main"
         }`}
         title={actionLabel}
       >

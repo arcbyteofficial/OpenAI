@@ -65,7 +65,10 @@ function QuotaRow({ quota }: { quota: any }) {
     return (
       <div className="flex min-w-0 items-center justify-between gap-3 py-1.5">
         <span className="min-w-0 truncate text-xs font-medium text-text-main">{label}</span>
-        <span className="shrink-0 text-xs font-bold tabular-nums" style={{ color: colors.text }}>
+        <span
+          className="shrink-0 text-xs font-semibold tabular-nums"
+          style={{ color: colors.text }}
+        >
           {amount}
         </span>
       </div>
@@ -76,7 +79,10 @@ function QuotaRow({ quota }: { quota: any }) {
     <div className="flex min-w-0 flex-col gap-1 py-1.5" title={quota.modelKey || quota.name}>
       <div className="flex items-center justify-between gap-3">
         <span className="min-w-0 truncate text-xs font-medium text-text-main">{label}</span>
-        <span className="shrink-0 text-xs font-bold tabular-nums" style={{ color: colors.text }}>
+        <span
+          className="shrink-0 text-xs font-semibold tabular-nums"
+          style={{ color: colors.text }}
+        >
           {quota.unlimited
             ? "∞"
             : translateUsageOrFallback(t, "percentLeft", `${percentage}% left`, {
@@ -113,7 +119,7 @@ function ConnectionQuotas({ connection, cache }: { connection: Connection; cache
           {primaryQuotas.map((quota, index) => (
             <div
               key={`${quota.name}-${quota.modelKey || ""}-${index}`}
-              className="border-b border-border/40"
+              className="border-b border-border"
             >
               <QuotaRow quota={quota} />
             </div>
@@ -122,7 +128,7 @@ function ConnectionQuotas({ connection, cache }: { connection: Connection; cache
             optionalQuotas.map((quota, index) => (
               <div
                 key={`${quota.name}-${quota.modelKey || ""}-${index}`}
-                className="border-b border-border/40"
+                className="border-b border-border"
               >
                 <QuotaRow quota={quota} />
               </div>
@@ -133,7 +139,7 @@ function ConnectionQuotas({ connection, cache }: { connection: Connection; cache
         <button
           type="button"
           onClick={() => setShowOptional((current) => !current)}
-          className="mt-2 inline-flex items-center gap-1 rounded-md border border-border bg-bg-subtle px-2 py-1 text-[11px] font-medium text-text-main hover:bg-surface transition-colors"
+          className="mt-2 inline-flex items-center gap-1 rounded-control border border-border-strong bg-surface px-2 py-1 text-[11px] font-medium text-text-main hover:bg-bg-subtle transition-colors"
         >
           <span className="material-symbols-outlined text-[12px]" aria-hidden="true">
             {showOptional ? "expand_less" : "expand_more"}
@@ -261,13 +267,16 @@ export default function ProviderQuotaWidget({
 
   return (
     <Card className="w-full overflow-hidden">
-      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border bg-surface/60 px-4 py-3">
+      <div className="flex flex-wrap items-center justify-between gap-3 border-b border-border px-4 py-3">
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-[20px] text-primary" aria-hidden="true">
+          <span
+            className="material-symbols-outlined text-[18px] text-text-muted"
+            aria-hidden="true"
+          >
             account_balance
           </span>
           <div>
-            <h2 className="text-base font-semibold text-text-main">
+            <h2 className="text-sm font-semibold text-text-main">
               {tr("providerQuota", "Provider Quota")}
             </h2>
             {updatedLabel && (
@@ -281,7 +290,7 @@ export default function ProviderQuotaWidget({
           type="button"
           onClick={refreshAll}
           disabled={loading || refreshingAll}
-          className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-bg-subtle px-3 py-1.5 text-xs font-medium text-text-main transition-colors hover:bg-surface disabled:cursor-not-allowed disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-xs font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:cursor-not-allowed disabled:opacity-50"
         >
           <span
             className={`material-symbols-outlined text-[16px] ${refreshingAll ? "animate-spin" : ""}`}
@@ -314,7 +323,7 @@ export default function ProviderQuotaWidget({
         /* Compact mode: 3-column card grid, flat across all connections */
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-3 p-4">
           {connections.map((connection) => (
-            <div key={connection.id} className="border border-border rounded-lg p-3 bg-bg-subtle">
+            <div key={connection.id} className="border border-border rounded-lg p-3 bg-surface-2">
               <div className="flex items-center gap-2 mb-2">
                 <ProviderIcon providerId={connection.provider} size={16} />
                 <span className="text-xs font-semibold text-text-main truncate">

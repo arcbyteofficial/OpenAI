@@ -119,7 +119,7 @@ export default function ConductorPageClient() {
   return (
     <div className="space-y-6">
       <div>
-        <h1 className="text-xl font-semibold">{t("title")}</h1>
+        <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
         <p className="text-sm text-text-muted">{t("subtitle")}</p>
       </div>
 
@@ -185,7 +185,8 @@ export default function ConductorPageClient() {
                       {task.status}
                     </Badge>
                   );
-                if (column.key === "id") return <code className="text-xs">{task.id}</code>;
+                if (column.key === "id")
+                  return <code className="font-mono text-[12px]">{task.id}</code>;
                 if (column.key === "summary") return task.summary ?? task.error ?? "—";
                 return (task as unknown as Record<string, unknown>)[column.key]?.toString() ?? "—";
               }}
@@ -205,7 +206,7 @@ export default function ConductorPageClient() {
         {detail && (
           <div className="space-y-4 text-sm">
             <div className="flex items-center gap-2">
-              <code className="text-xs">{detail.id}</code>
+              <code className="font-mono text-[12px]">{detail.id}</code>
               <Badge variant={statusVariant(detail.status)} dot>
                 {detail.status}
               </Badge>
@@ -215,7 +216,7 @@ export default function ConductorPageClient() {
             {detail.prompt && (
               <div>
                 <div className="font-medium">{t("prompt")}</div>
-                <pre className="whitespace-pre-wrap text-xs bg-black/5 dark:bg-white/5 rounded p-2">
+                <pre className="whitespace-pre-wrap font-mono text-[12px] bg-bg-subtle border border-border rounded-md p-2">
                   {detail.prompt}
                 </pre>
               </div>
@@ -225,7 +226,7 @@ export default function ConductorPageClient() {
             {detail.branch && (
               <div>
                 <div className="font-medium">{t("branch")}</div>
-                <code className="text-xs">{detail.branch}</code>
+                <code className="font-mono text-[12px]">{detail.branch}</code>
                 <p className="text-xs text-text-muted">
                   {t("fetchHint", { branch: detail.branch })}
                 </p>
@@ -242,7 +243,7 @@ export default function ConductorPageClient() {
             {!TERMINAL.has(detail.status) && (
               <button
                 type="button"
-                className="text-sm text-red-600 dark:text-red-400 underline"
+                className="text-sm text-error underline"
                 onClick={() => setCancelTarget(detail.id)}
               >
                 {t("cancel")}

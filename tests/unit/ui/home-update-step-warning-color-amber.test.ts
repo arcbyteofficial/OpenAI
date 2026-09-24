@@ -30,8 +30,10 @@ test("update-step warning icon renders with an amber color, not bare yellow", ()
     "expected to find the update-step `warning` material-symbols icon span in HomePageClient.tsx"
   );
   const className = warningIconMatch![1];
+  // The minimal redesign moved status colors to the semantic `text-warning` token
+  // (amber in both themes); the legacy raw `text-amber-500` is still accepted.
   assert.ok(
-    className.includes("text-amber-500"),
+    className.includes("text-warning") || className.includes("text-amber-500"),
     `warning icon should use the project's amber warning convention; got: "${className}"`
   );
   assert.ok(

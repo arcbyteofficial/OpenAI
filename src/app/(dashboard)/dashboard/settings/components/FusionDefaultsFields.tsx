@@ -37,7 +37,7 @@ export default function FusionDefaultsFields({
   const num = (value: string) => (value ? Number(value) : undefined);
 
   return (
-    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-3 border-t border-border/50">
+    <div className="grid grid-cols-1 md:grid-cols-2 gap-3 pt-3 border-t border-border">
       <Input
         label={translateOrFallback(t, "fusionJudgeModel", "Judge Model")}
         type="text"
@@ -78,8 +78,8 @@ export default function FusionDefaultsFields({
         onChange={(e) => setTuning({ panelHardTimeoutMs: num(e.target.value) })}
         className="text-sm md:col-span-2"
       />
-      <div className="md:col-span-2 rounded-lg border border-blue-500/20 bg-blue-500/5 p-3">
-        <p className="text-xs text-blue-700 dark:text-blue-300">
+      <div className="md:col-span-2 rounded-lg border border-border bg-bg-subtle p-3">
+        <p className="text-xs text-text-muted">
           {translateOrFallback(
             t,
             "fusionDefaultsNote",

@@ -137,9 +137,9 @@ export default function CliproxyapiSettingsTab() {
 
   const statusColor =
     toolState?.status === "running"
-      ? "text-green-600 dark:text-green-400"
+      ? "text-success"
       : toolState?.status === "error"
-        ? "text-red-600 dark:text-red-400"
+        ? "text-error"
         : "text-text-muted";
 
   const statusIcon =
@@ -152,13 +152,13 @@ export default function CliproxyapiSettingsTab() {
   return (
     <div className="space-y-4">
       {/* Migration banner — new lifecycle management lives in the Services page */}
-      <div className="flex items-start gap-2 px-3 py-2.5 rounded-lg bg-blue-500/10 text-blue-700 dark:text-blue-300 text-xs">
+      <div className="flex items-start gap-2 px-3 py-2.5 rounded-lg border border-border bg-bg-subtle text-text-muted text-xs">
         <span className="material-symbols-outlined text-[14px] mt-0.5 shrink-0">info</span>
         <span>
           {t("cliproxyapiLifecycleNoticeBefore")}{" "}
           <Link
             href="/dashboard/providers/services"
-            className="underline underline-offset-2 hover:opacity-80"
+            className="text-text-main underline underline-offset-2 hover:opacity-80"
           >
             {t("cliproxyapiLifecycleNoticeLink")}
           </Link>
@@ -169,9 +169,7 @@ export default function CliproxyapiSettingsTab() {
       {message && (
         <div
           className={`flex items-center gap-2 px-3 py-2 rounded-lg text-xs ${
-            message.type === "success"
-              ? "bg-green-500/10 text-green-600 dark:text-green-400"
-              : "bg-red-500/10 text-red-600 dark:text-red-400"
+            message.type === "success" ? "bg-success/10 text-success" : "bg-error/10 text-error"
           }`}
         >
           <span className="material-symbols-outlined text-[14px]">
@@ -183,11 +181,13 @@ export default function CliproxyapiSettingsTab() {
 
       <Card padding="md">
         <div className="flex items-center gap-3 mb-4">
-          <div className="size-8 rounded-lg flex items-center justify-center bg-indigo-500/10">
-            <span className="material-symbols-outlined text-indigo-500 text-xl">swap_horiz</span>
+          <div className="size-8 rounded-lg flex items-center justify-center bg-bg-subtle border border-border">
+            <span className="material-symbols-outlined text-text-muted text-[18px]">
+              swap_horiz
+            </span>
           </div>
           <div>
-            <h3 className="font-medium text-sm">{t("cliproxyapiFallback")}</h3>
+            <h3 className="font-semibold text-sm text-text-main">{t("cliproxyapiFallback")}</h3>
             <p className="text-xs text-text-muted">{t("cliproxyapiFallbackDescription")}</p>
           </div>
         </div>
@@ -232,7 +232,7 @@ export default function CliproxyapiSettingsTab() {
       </Card>
 
       <Card padding="md">
-        <h3 className="font-medium text-sm mb-4">{t("cliproxyapiStatus")}</h3>
+        <h3 className="font-semibold text-sm text-text-main mb-4">{t("cliproxyapiStatus")}</h3>
         {loading ? (
           <div className="flex items-center gap-2 text-text-muted text-sm">
             <span className="material-symbols-outlined animate-spin text-base">
@@ -244,7 +244,7 @@ export default function CliproxyapiSettingsTab() {
           <p className="text-sm text-text-muted">{toolStateError}</p>
         ) : toolState ? (
           <div className="grid grid-cols-2 gap-3">
-            <div className="p-3 rounded-lg bg-bg-secondary">
+            <div className="p-3 rounded-lg border border-border bg-surface-2">
               <p className="text-xs text-text-muted mb-1">{t("cliproxyapiStatusLabel")}</p>
               <div className="flex items-center gap-1.5">
                 <span className={`material-symbols-outlined text-sm ${statusColor}`}>
@@ -255,20 +255,20 @@ export default function CliproxyapiSettingsTab() {
                 </p>
               </div>
             </div>
-            <div className="p-3 rounded-lg bg-bg-secondary">
+            <div className="p-3 rounded-lg border border-border bg-surface-2">
               <p className="text-xs text-text-muted mb-1">{t("cliproxyapiVersion")}</p>
               <p className="text-sm font-medium">
                 {toolState.installedVersion ? `v${toolState.installedVersion}` : t("notInstalled")}
               </p>
             </div>
-            <div className="p-3 rounded-lg bg-bg-secondary">
+            <div className="p-3 rounded-lg border border-border bg-surface-2">
               <p className="text-xs text-text-muted mb-1">{t("cliproxyapiHealth")}</p>
               <p
                 className={`text-sm font-medium ${
                   toolState.healthStatus === "healthy"
-                    ? "text-green-600 dark:text-green-400"
+                    ? "text-success"
                     : toolState.healthStatus === "unhealthy"
-                      ? "text-red-600 dark:text-red-400"
+                      ? "text-error"
                       : "text-text-muted"
                 }`}
               >
@@ -279,9 +279,9 @@ export default function CliproxyapiSettingsTab() {
                     : t("unknown")}
               </p>
             </div>
-            <div className="p-3 rounded-lg bg-bg-secondary">
+            <div className="p-3 rounded-lg border border-border bg-surface-2">
               <p className="text-xs text-text-muted mb-1">{t("cliproxyapiPort")}</p>
-              <p className="text-sm font-mono">{toolState.port || 8317}</p>
+              <p className="text-sm font-mono tabular-nums">{toolState.port || 8317}</p>
             </div>
           </div>
         ) : (
@@ -290,7 +290,9 @@ export default function CliproxyapiSettingsTab() {
       </Card>
 
       <Card padding="md">
-        <h3 className="text-lg font-semibold mb-1">{t("cliproxyapiImportAuthTitle")}</h3>
+        <h3 className="text-base font-semibold tracking-tight text-text-main mb-1">
+          {t("cliproxyapiImportAuthTitle")}
+        </h3>
         <p className="text-sm text-text-muted mb-3">{t("cliproxyapiImportAuthDesc")}</p>
         <Button onClick={handleImportAuth} loading={importing} disabled={importing}>
           {t("cliproxyapiImportAuthButton")}

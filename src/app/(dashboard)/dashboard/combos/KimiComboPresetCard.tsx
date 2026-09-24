@@ -29,16 +29,11 @@ export default function KimiComboPresetCard({
   if (alreadyCreated) return null;
 
   return (
-    <Card
-      padding="sm"
-      className="border-2 border-[#1783FF]/70 bg-[#1783FF]/[0.04] shadow-[0_2px_10px_-4px_rgba(23,131,255,0.45)]"
-    >
+    <Card padding="sm" className="border-border">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex min-w-0 items-start gap-3">
-          <div className="flex size-9 shrink-0 items-center justify-center rounded-lg bg-[#1783FF]/10">
-            <span className="material-symbols-outlined text-[20px] text-[#1067CC] dark:text-[#7CB8FF]">
-              bolt
-            </span>
+          <div className="flex size-9 shrink-0 items-center justify-center rounded-lg border border-border bg-bg-subtle">
+            <span className="material-symbols-outlined text-[18px] text-[#1783FF]">bolt</span>
           </div>
           <div className="min-w-0">
             <p className="text-sm font-semibold text-text-main">{t("kimiPresetTitle")}</p>

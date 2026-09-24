@@ -461,7 +461,9 @@ export default function ReasoningRoutingRules({
       <Card>
         <div className="flex flex-wrap items-start justify-between gap-5">
           <div className="min-w-0 flex-1 space-y-2">
-            <h2 className="text-lg font-semibold text-text-main">{e("workspace")}</h2>
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
+              {e("workspace")}
+            </h2>
             <p className="text-sm text-text-muted">{e("scopeHint")}</p>
           </div>
           <Button
@@ -492,7 +494,7 @@ export default function ReasoningRoutingRules({
           </p>
         )}
         {(loadFailed || keyMissing) && (
-          <p className="mt-4 text-sm text-red-500" role="alert">
+          <p className="mt-4 text-sm text-error" role="alert">
             {keyMissing ? e("missingKey") : t("loadError")}
           </p>
         )}
@@ -537,12 +539,15 @@ export default function ReasoningRoutingRules({
         </div>
         <div className="mt-5 space-y-3">
           {!loading && !loadFailed && visibleRules.length === 0 && (
-            <div className="rounded-xl border border-dashed border-border p-8 text-center text-sm text-text-muted">
+            <div className="rounded-lg border border-dashed border-border p-6 text-center text-sm text-text-muted">
               {t("empty")}
             </div>
           )}
           {visibleRules.map((rule) => (
-            <article key={rule.id} className="rounded-xl border border-border p-4">
+            <article
+              key={rule.id}
+              className="rounded-lg border border-border p-4 transition-colors hover:border-border-strong"
+            >
               <div className="flex flex-wrap items-center justify-between gap-3">
                 <div className="flex min-w-0 items-center gap-3">
                   <Toggle
@@ -552,8 +557,8 @@ export default function ReasoningRoutingRules({
                     size="sm"
                     ariaLabel={t("toggleAria", { name: rule.name })}
                   />
-                  <h3 className="break-words font-semibold text-text-main">{rule.name}</h3>
-                  <span className="rounded-full bg-surface px-2 py-1 text-xs text-text-muted">
+                  <h3 className="break-words text-sm font-semibold text-text-main">{rule.name}</h3>
+                  <span className="rounded-full bg-bg-subtle px-2 py-0.5 text-xs text-text-muted">
                     {t(rule.enabled ? "enabled" : "disabled")}
                   </span>
                 </div>
@@ -651,7 +656,7 @@ export default function ReasoningRoutingRules({
                   />
                 </div>
                 <section className="space-y-4 border-t border-border pt-6">
-                  <h3 className="font-semibold text-text-main">1 · {e("when")}</h3>
+                  <h3 className="text-sm font-semibold text-text-main">1 · {e("when")}</h3>
                   {!apiKeyId && (
                     <div className={grid}>
                       <Select
@@ -753,9 +758,9 @@ export default function ReasoningRoutingRules({
                         />
                       )}
                       {catalogError && sourceKind === "model" && (
-                        <p className="text-sm text-amber-600">{e("catalogError")}</p>
+                        <p className="text-sm text-warning">{e("catalogError")}</p>
                       )}
-                      <p className="rounded-lg bg-primary/5 p-3 text-sm leading-relaxed text-text-muted">
+                      <p className="rounded-lg bg-bg-subtle p-3 text-sm leading-relaxed text-text-muted">
                         {e("matchStageHint")}
                       </p>
                     </>
@@ -777,7 +782,7 @@ export default function ReasoningRoutingRules({
                   </div>
                 </section>
                 <section className="space-y-4 border-t border-border pt-6">
-                  <h3 className="font-semibold text-text-main">2 · {e("then")}</h3>
+                  <h3 className="text-sm font-semibold text-text-main">2 · {e("then")}</h3>
                   <div className={grid}>
                     <Select
                       label={t("routingTarget")}
@@ -843,12 +848,12 @@ export default function ReasoningRoutingRules({
                   )}
                   <p className="text-sm text-text-muted">{e("effortHint." + form.effortMode)}</p>
                   {capabilityWarning && (
-                    <p role="status" className="text-sm text-amber-600 dark:text-amber-400">
+                    <p role="status" className="text-sm text-warning">
                       {capabilityWarning}
                     </p>
                   )}
                 </section>
-                <details className="rounded-xl border border-border p-4" open={undefined}>
+                <details className="rounded-lg border border-border p-4" open={undefined}>
                   <summary className="cursor-pointer font-medium text-text-main">
                     {e("advanced")}
                   </summary>
@@ -904,7 +909,7 @@ export default function ReasoningRoutingRules({
                     )}
                   </div>
                 </details>
-                <div className="rounded-xl bg-primary/5 p-4 text-sm">
+                <div className="rounded-lg border border-border bg-bg-subtle p-4 text-sm">
                   <p className="font-medium text-text-main">{e("draftSummary")}</p>
                   <p className="mt-2 break-all text-text-muted">
                     {form.scope === "combo"
@@ -931,7 +936,7 @@ export default function ReasoningRoutingRules({
                     {t("cancel")}
                   </Button>
                   {dirty && (
-                    <span className="text-xs text-amber-600 dark:text-amber-400">
+                    <span className="rounded-md bg-warning/10 px-1.5 py-0.5 text-xs font-medium text-warning">
                       {e("unsaved")}
                     </span>
                   )}
@@ -991,7 +996,9 @@ export default function ReasoningRoutingRules({
           />
         </div>
         {dirty && (
-          <p className="mt-4 text-sm text-amber-600 dark:text-amber-400">{e("saveBeforeCheck")}</p>
+          <p className="mt-4 rounded-lg border border-warning/20 bg-warning/10 px-3 py-2 text-sm text-warning">
+            {e("saveBeforeCheck")}
+          </p>
         )}
         <Button
           className="mt-4"
@@ -1005,7 +1012,10 @@ export default function ReasoningRoutingRules({
           {t("simulate")}
         </Button>
         {simulation && (
-          <div className="mt-4 space-y-3 rounded-xl border border-border p-4" role="status">
+          <div
+            className="mt-4 space-y-3 rounded-lg border border-border bg-bg-subtle p-4"
+            role="status"
+          >
             <p className="font-medium text-text-main">
               {simulation.matched
                 ? e("matched", { name: decision?.rule?.name || "—" })
@@ -1022,7 +1032,7 @@ export default function ReasoningRoutingRules({
               <p className="text-sm text-text-muted">{e("notMatchedHint")}</p>
             )}
             {[...simulationErrors, ...(decision?.warnings || [])].map((warning, index) => (
-              <p key={index} className="text-sm text-amber-600">
+              <p key={index} className="text-sm text-warning">
                 {String(warning)}
               </p>
             ))}
@@ -1030,7 +1040,7 @@ export default function ReasoningRoutingRules({
               <summary className="cursor-pointer text-sm text-text-muted">
                 {e("technicalDetails")}
               </summary>
-              <pre className="mt-3 max-h-64 overflow-auto whitespace-pre-wrap break-all text-xs text-text-muted">
+              <pre className="mt-3 max-h-64 overflow-auto whitespace-pre-wrap break-all font-mono text-[12px] text-text-muted">
                 {JSON.stringify(simulation, null, 2)}
               </pre>
             </details>

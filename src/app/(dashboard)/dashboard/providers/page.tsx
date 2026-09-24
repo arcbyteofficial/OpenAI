@@ -876,7 +876,7 @@ function ProvidersPageContent() {
   };
   if (loading) {
     return (
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         <CardSkeleton />
         <CardSkeleton />
       </div>
@@ -889,16 +889,15 @@ function ProvidersPageContent() {
   return (
     <OpenRouterProviderStatsProvider entries={openRouterProviderStats}>
       <div className="flex flex-col gap-6">
-          <DeprecatedProviderBanner />
-
+        <DeprecatedProviderBanner />
 
         {showFirstProviderHint && (
           <Card padding="lg">
             <div className="flex flex-col items-center justify-center text-center">
-              <div className="flex items-center justify-center size-16 rounded-full bg-primary/10 mb-4">
-                <span className="material-symbols-outlined text-[32px] text-primary">dns</span>
+              <div className="flex items-center justify-center size-16 rounded-full bg-bg-subtle border border-border mb-4">
+                <span className="material-symbols-outlined text-[28px] text-text-muted">dns</span>
               </div>
-              <h2 className="text-xl font-semibold text-text-main">
+              <h2 className="text-xl font-semibold tracking-tight text-text-main">
                 {t("addFirstProvider") || "Add your first provider"}
               </h2>
               <p className="text-sm text-text-muted mt-2 max-w-md">
@@ -913,7 +912,7 @@ function ProvidersPageContent() {
                   href="https://github.com/diegosouzapw/OmniRoute#-documentation"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 px-4 py-2 text-sm font-medium rounded-lg border border-border text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
+                  className="inline-flex items-center gap-1.5 px-3 py-1.5 text-[13px] font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors"
                 >
                   <span className="material-symbols-outlined text-[16px]">help</span>
                   {t("learnMore") || "Learn more"}
@@ -952,22 +951,22 @@ function ProvidersPageContent() {
         {expirations?.summary &&
           (expirations.summary.expired > 0 || expirations.summary.expiringSoon > 0) && (
             <div
-              className={`p-4 rounded-xl flex items-start gap-3 border ${
+              className={`p-4 rounded-card flex items-start gap-3 border ${
                 expirations.summary.expired > 0
-                  ? "bg-red-500/10 border-red-500/20"
-                  : "bg-amber-500/10 border-amber-500/20"
+                  ? "bg-error/10 border-error/20"
+                  : "bg-warning/10 border-warning/20"
               }`}
             >
               <span
-                className={`material-symbols-outlined text-[24px] ${
-                  expirations.summary.expired > 0 ? "text-red-500" : "text-amber-500"
+                className={`material-symbols-outlined text-[20px] ${
+                  expirations.summary.expired > 0 ? "text-error" : "text-warning"
                 }`}
               >
                 {expirations.summary.expired > 0 ? "error" : "warning"}
               </span>
               <div className="flex-1">
                 <h3
-                  className={`font-semibold ${expirations.summary.expired > 0 ? "text-red-500" : "text-amber-500"}`}
+                  className={`text-sm font-semibold ${expirations.summary.expired > 0 ? "text-error" : "text-warning"}`}
                 >
                   {expirations.summary.expired > 0
                     ? t("expirationBannerExpired", { count: expirations.summary.expired })
@@ -1005,7 +1004,7 @@ function ProvidersPageContent() {
             </div>
           ) : (
             <div
-              className="flex items-center justify-center gap-2 py-8 border border-dashed border-border rounded-xl text-text-muted text-sm"
+              className="flex items-center justify-center gap-2 py-8 border border-dashed border-border-strong rounded-card text-text-muted text-sm"
               data-testid="provider-compact-empty"
             >
               <span className="material-symbols-outlined text-[18px]">search_off</span>
@@ -1018,7 +1017,7 @@ function ProvidersPageContent() {
             {showSection("compatible") && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("compatibleProviders")}{" "}
                     <span
                       className="size-2.5 rounded-full bg-orange-500"
@@ -1033,10 +1032,10 @@ function ProvidersPageContent() {
                       <button
                         onClick={() => handleBatchTest("compatible")}
                         disabled={!!testingMode}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                           testingMode === "compatible"
-                            ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                            : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                            ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                            : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
                         }`}
                         title={t("testAllCompatible")}
                       >
@@ -1073,7 +1072,7 @@ function ProvidersPageContent() {
                 {compatibleProviders.length === 0 &&
                 anthropicCompatibleProviders.length === 0 &&
                 ccCompatibleProviders.length === 0 ? (
-                  <div className="flex items-center justify-center gap-2 py-2 border border-dashed border-border rounded-xl text-text-muted text-sm">
+                  <div className="flex items-center justify-center gap-2 py-2 border border-dashed border-border-strong rounded-card text-text-muted text-sm">
                     <span className="material-symbols-outlined text-[18px]">extension</span>
                     <span>{t("noCompatibleYet")}</span>
                   </div>
@@ -1102,7 +1101,7 @@ function ProvidersPageContent() {
             {showSection("oauth") && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("oauthProviders")}{" "}
                     <span className="size-2.5 rounded-full bg-blue-500" title={t("oauthLabel")} />
                     <ProviderCountBadge
@@ -1116,10 +1115,10 @@ function ProvidersPageContent() {
                       <button
                         onClick={handleRepairEnv}
                         disabled={repairingEnv}
-                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                        className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                           repairingEnv
-                            ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                            : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                            ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                            : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
                         }`}
                         title={t("repairEnvHint")}
                         aria-label={t("repairEnv")}
@@ -1133,10 +1132,10 @@ function ProvidersPageContent() {
                     <button
                       onClick={() => handleBatchTest("oauth")}
                       disabled={!!testingMode}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                         testingMode === "oauth"
-                          ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                          : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                          ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                          : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
                       }`}
                       title={t("testAllOAuth")}
                       aria-label={t("testAllOAuth")}
@@ -1174,7 +1173,7 @@ function ProvidersPageContent() {
             {showSection("ide") && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("ideProviders") || "IDE Providers"}{" "}
                     <span
                       className="size-2.5 rounded-full bg-cyan-500"
@@ -1185,10 +1184,10 @@ function ProvidersPageContent() {
                   <button
                     onClick={() => handleBatchTest("ide")}
                     disabled={!!testingMode}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                       testingMode === "ide"
-                        ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                        : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                        ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                        : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
                     }`}
                     title={t("testAll")}
                     aria-label={t("testAll")}
@@ -1206,7 +1205,7 @@ function ProvidersPageContent() {
                     "Editors with built-in AI subscription. Use the provider page to import credentials directly from the IDE's keychain."}
                 </p>
                 {ideProviderEntries.length === 0 ? (
-                  <div className="rounded-lg border border-dashed border-border bg-bg-subtle p-6 text-center text-sm text-text-muted">
+                  <div className="rounded-card border border-dashed border-border-strong bg-bg-subtle p-6 text-center text-sm text-text-muted">
                     {t("noIdeProviders") || "No IDE providers match the current filters."}
                   </div>
                 ) : (
@@ -1234,7 +1233,7 @@ function ProvidersPageContent() {
             {showSection("web") && webCookieProviderEntries.length > 0 && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("webCookieProviders")}{" "}
                     <span
                       className="size-2.5 rounded-full bg-purple-500"
@@ -1245,10 +1244,10 @@ function ProvidersPageContent() {
                   <button
                     onClick={() => handleBatchTest("web-cookie")}
                     disabled={!!testingMode}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                       testingMode === "web-cookie"
-                        ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                        : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                        ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                        : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
                     }`}
                     title={t("testAll")}
                   >
@@ -1285,7 +1284,7 @@ function ProvidersPageContent() {
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-start gap-2">
                   <div className="flex-1 min-w-0">
-                    <h2 className="text-xl font-semibold flex items-center gap-2">
+                    <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2">
                       {t("freeTierProviders")}
                       <CategoryDot color="bg-green-500" label={t("freeTierLabel")} />
                       <ProviderCountBadge {...countConfigured(freeSectionEntriesAll)} />
@@ -1295,10 +1294,10 @@ function ProvidersPageContent() {
                   <button
                     onClick={() => handleBatchTest("free")}
                     disabled={!!testingMode}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                       testingMode === "free"
-                        ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                        : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                        ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                        : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
                     }`}
                     title={t("testAll")}
                   >
@@ -1333,7 +1332,7 @@ function ProvidersPageContent() {
             {showSection("apikey") && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("apiKeyProviders")}{" "}
                     <span className="size-2.5 rounded-full bg-amber-500" title={t("apiKeyLabel")} />
                     <ProviderCountBadge {...countConfigured(apiKeyProviderEntriesAll)} />
@@ -1341,10 +1340,10 @@ function ProvidersPageContent() {
                   <button
                     onClick={() => handleBatchTest("apikey")}
                     disabled={!!testingMode}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                       testingMode === "apikey"
-                        ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                        : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                        ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                        : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
                     }`}
                     title={t("testAllApiKey")}
                     aria-label={t("testAllApiKey")}
@@ -1360,7 +1359,7 @@ function ProvidersPageContent() {
                 <p className="text-sm text-text-muted -mt-2">{t("apiKeyProvidersDesc")}</p>
                 {llmProviderEntries.length > 0 && (
                   <div className="flex flex-col gap-3">
-                    <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+                    <h3 className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                       {t("llmProviders")}
                     </h3>
                     <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-4 gap-3">
@@ -1405,7 +1404,7 @@ function ProvidersPageContent() {
             {showSection("proxy") && upstreamProxyEntries.length > 0 && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("upstreamProxyProviders")}{" "}
                     <span
                       className="size-2.5 rounded-full bg-indigo-500"
@@ -1416,10 +1415,10 @@ function ProvidersPageContent() {
                   <button
                     onClick={() => handleBatchTest("upstream-proxy")}
                     disabled={!!testingMode}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                       testingMode === "upstream-proxy"
-                        ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                        : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                        ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                        : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
                     }`}
                     title={t("testAll")}
                   >
@@ -1453,7 +1452,7 @@ function ProvidersPageContent() {
             {showSection("webfetch") && webFetchEntries.length > 0 && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("webFetchProvidersHeading")}{" "}
                     <span
                       className="size-2.5 rounded-full bg-orange-500"
@@ -1486,7 +1485,7 @@ function ProvidersPageContent() {
             {showSection("apikey") && aggregatorProviderEntries.length > 0 && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("aggregatorsGateways")}{" "}
                     <span
                       className="size-2.5 rounded-full bg-amber-500"
@@ -1519,7 +1518,7 @@ function ProvidersPageContent() {
             {showSection("apikey") && enterpriseProviderEntries.length > 0 && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("enterpriseCloud")}{" "}
                     <span
                       className="size-2.5 rounded-full bg-amber-500"
@@ -1552,7 +1551,7 @@ function ProvidersPageContent() {
             {showSection("cloud") && cloudAgentProviderEntries.length > 0 && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("cloudAgentProviders")}{" "}
                     <span
                       className="size-2.5 rounded-full bg-violet-500"
@@ -1563,10 +1562,10 @@ function ProvidersPageContent() {
                   <button
                     onClick={() => handleBatchTest("cloud-agent")}
                     disabled={!!testingMode}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                       testingMode === "cloud-agent"
-                        ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                        : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                        ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                        : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
                     }`}
                     title={t("testAll")}
                   >
@@ -1602,7 +1601,7 @@ function ProvidersPageContent() {
             {showSection("local") && localProviderEntries.length > 0 && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("localProviders")}{" "}
                     <span
                       className="size-2.5 rounded-full bg-emerald-500"
@@ -1613,10 +1612,10 @@ function ProvidersPageContent() {
                   <button
                     onClick={() => handleBatchTest("local")}
                     disabled={!!testingMode}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                       testingMode === "local"
-                        ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                        : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                        ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                        : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
                     }`}
                     title={t("testAll")}
                   >
@@ -1650,7 +1649,7 @@ function ProvidersPageContent() {
             {showSection("search") && searchProviderEntries.length > 0 && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("searchProvidersHeading")}{" "}
                     <span
                       className="size-2.5 rounded-full bg-teal-500"
@@ -1661,10 +1660,10 @@ function ProvidersPageContent() {
                   <button
                     onClick={() => handleBatchTest("search")}
                     disabled={!!testingMode}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                       testingMode === "search"
-                        ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                        : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                        ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                        : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
                     }`}
                     title={t("testAll")}
                   >
@@ -1698,7 +1697,7 @@ function ProvidersPageContent() {
             {showSection("apikey") && embeddingRerankProviderEntries.length > 0 && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("embeddingRerankProviders")}{" "}
                     <span
                       className="size-2.5 rounded-full bg-amber-500"
@@ -1731,7 +1730,7 @@ function ProvidersPageContent() {
             {showSection("apikey") && imageProviderEntries.length > 0 && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("imageProviders")}{" "}
                     <span
                       className="size-2.5 rounded-full bg-amber-500"
@@ -1764,7 +1763,7 @@ function ProvidersPageContent() {
             {showSection("audio") && audioProviderEntries.length > 0 && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("audioProvidersHeading")}{" "}
                     <span
                       className="size-2.5 rounded-full bg-rose-500"
@@ -1775,10 +1774,10 @@ function ProvidersPageContent() {
                   <button
                     onClick={() => handleBatchTest("audio")}
                     disabled={!!testingMode}
-                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
                       testingMode === "audio"
-                        ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                        : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                        ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                        : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
                     }`}
                     title={t("testAll")}
                   >
@@ -1812,7 +1811,7 @@ function ProvidersPageContent() {
             {showSection("apikey") && videoProviderEntries.length > 0 && (
               <div className="flex flex-col gap-4">
                 <div className="flex flex-wrap items-center gap-2">
-                  <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+                  <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
                     {t("videoProviders")}{" "}
                     <span
                       className="size-2.5 rounded-full bg-amber-500"
@@ -1887,19 +1886,19 @@ function ProvidersPageContent() {
             className="fixed inset-0 z-50 flex items-start justify-center pt-[10vh]"
             onClick={() => setTestResults(null)}
           >
-            <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+            <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
             <div
-              className="relative bg-bg-primary border border-border rounded-xl w-full max-w-[600px] max-h-[80vh] overflow-y-auto shadow-2xl"
+              className="relative bg-surface border border-border rounded-card w-full max-w-[600px] max-h-[80vh] overflow-y-auto shadow-[var(--shadow-elevated)]"
               onClick={(e) => e.stopPropagation()}
             >
-              <div className="sticky top-0 z-10 flex items-center justify-between px-5 py-3 border-b border-border bg-bg-primary/95 backdrop-blur-sm rounded-t-xl">
-                <h3 className="font-semibold">{t("testResults")}</h3>
+              <div className="sticky top-0 z-10 flex items-center justify-between px-5 py-3 border-b border-border bg-surface/95 backdrop-blur-sm rounded-t-card">
+                <h3 className="text-sm font-semibold text-text-main">{t("testResults")}</h3>
                 <button
                   onClick={() => setTestResults(null)}
-                  className="p-1 rounded-lg hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors"
+                  className="p-1.5 rounded-control hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
                   aria-label={tc("close")}
                 >
-                  <span className="material-symbols-outlined text-lg">close</span>
+                  <span className="material-symbols-outlined text-[16px]">close</span>
                 </button>
               </div>
               <div className="p-5">
@@ -1936,8 +1935,8 @@ function ProviderTestResultsView({ results }: { results: ProviderBatchTestResult
   if (results.error && (!results.results || results.results.length === 0)) {
     return (
       <div className="text-center py-6">
-        <span className="material-symbols-outlined text-red-500 text-[32px] mb-2 block">error</span>
-        <p className="text-sm text-red-400">
+        <span className="material-symbols-outlined text-error text-[28px] mb-2 block">error</span>
+        <p className="text-sm text-error">
           {typeof results.error === "object"
             ? results.error?.message || JSON.stringify(results.error)
             : String(results.error)}
@@ -1966,11 +1965,11 @@ function ProviderTestResultsView({ results }: { results: ProviderBatchTestResult
       {summary && (
         <div className="flex items-center gap-3 text-xs mb-1">
           <span className="text-text-muted">{t("modeTest", { mode: modeLabel })}</span>
-          <span className="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-400 font-medium">
+          <span className="px-2 py-0.5 rounded-md bg-success/10 text-success font-medium tabular-nums">
             {t("passedCount", { count: summary.passed })}
           </span>
           {summary.failed > 0 && (
-            <span className="px-2 py-0.5 rounded bg-red-500/15 text-red-400 font-medium">
+            <span className="px-2 py-0.5 rounded-md bg-error/10 text-error font-medium tabular-nums">
               {t("failedCount", { count: summary.failed })}
             </span>
           )}
@@ -1984,11 +1983,11 @@ function ProviderTestResultsView({ results }: { results: ProviderBatchTestResult
       {items.map((r, i) => (
         <div
           key={r.connectionId || i}
-          className="flex items-center gap-2 text-xs px-3 py-2 rounded-lg bg-black/[0.03] dark:bg-white/[0.03]"
+          className="flex items-center gap-2 text-xs px-3 py-2 rounded-lg bg-bg-subtle"
         >
           <span
             className={`material-symbols-outlined text-[16px] ${
-              r.valid ? "text-emerald-500" : "text-red-500"
+              r.valid ? "text-success" : "text-error"
             }`}
           >
             {r.valid ? "check_circle" : "error"}
@@ -2005,8 +2004,8 @@ function ProviderTestResultsView({ results }: { results: ProviderBatchTestResult
             </span>
           )}
           <span
-            className={`text-[10px] uppercase font-bold px-1.5 py-0.5 rounded ${
-              r.valid ? "bg-emerald-500/15 text-emerald-400" : "bg-red-500/15 text-red-400"
+            className={`text-[10px] uppercase font-semibold px-1.5 py-0.5 rounded ${
+              r.valid ? "bg-success/10 text-success" : "bg-error/10 text-error"
             }`}
           >
             {r.valid ? t("okShort") : r.diagnosis?.type || t("errorShort")}

@@ -59,7 +59,7 @@ export function AgentCard({
   const getStatusBadge = () => {
     if (isInvestigating) {
       return (
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-zinc-500/10 text-zinc-500 dark:text-zinc-400 text-xs font-medium">
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-bg-subtle text-text-muted text-xs font-medium">
           <span className="material-symbols-outlined text-[12px]">search</span>
           {t("statusInvestigating") || "Investigating"}
         </span>
@@ -67,22 +67,22 @@ export function AgentCard({
     }
     if (setupCompleted && dnsEnabled) {
       return (
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 text-xs font-medium">
-          <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-success/10 text-success text-xs font-medium">
+          <span className="h-1.5 w-1.5 rounded-full bg-success" />
           {t("statusActive") || "Active"}
         </span>
       );
     }
     if (!setupCompleted) {
       return (
-        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-zinc-500/10 text-zinc-500 text-xs font-medium">
+        <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-bg-subtle text-text-muted text-xs font-medium">
           <span className="material-symbols-outlined text-[12px]">settings</span>
           {t("statusSetupRequired") || "Setup required"}
         </span>
       );
     }
     return (
-      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 text-xs font-medium">
+      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded-full bg-warning/10 text-warning text-xs font-medium">
         <span className="material-symbols-outlined text-[12px]">warning</span>
         {t("statusDnsOff") || "DNS off"}
       </span>
@@ -115,13 +115,13 @@ export function AgentCard({
   return (
     <>
       <div
-        className="rounded-xl border border-border/50 bg-card overflow-hidden transition-all hover:border-border/80"
+        className="rounded-card border border-border bg-surface overflow-hidden transition-colors hover:border-border-strong"
         style={{ borderLeftWidth: 3, borderLeftColor: target.color }}
       >
         {/* Card header */}
         <button
           type="button"
-          className="w-full flex items-center justify-between gap-3 px-4 py-3 text-left hover:bg-surface/30 transition-colors"
+          className="w-full flex items-center justify-between gap-3 px-4 py-3 text-left hover:bg-bg-subtle transition-colors"
           onClick={() => setExpanded((v) => !v)}
           aria-expanded={expanded}
         >
@@ -147,7 +147,7 @@ export function AgentCard({
 
         {/* Expanded content */}
         {expanded && (
-          <div className="px-4 pb-4 border-t border-border/20 pt-4 flex flex-col gap-4">
+          <div className="px-4 pb-4 border-t border-border pt-4 flex flex-col gap-4">
             {/* Hosts */}
             <div>
               <p className="text-xs font-medium text-text-muted mb-1.5">
@@ -157,7 +157,7 @@ export function AgentCard({
                 {target.hosts.map((h) => (
                   <span
                     key={h}
-                    className="inline-flex items-center px-2 py-0.5 rounded-full bg-surface text-xs font-mono text-text-muted border border-border/40"
+                    className="inline-flex items-center px-2 py-0.5 rounded-md bg-bg-subtle text-xs font-mono text-text-muted border border-border"
                   >
                     {h}
                   </span>
@@ -168,7 +168,7 @@ export function AgentCard({
             {/* Cert status */}
             <div className="flex items-center gap-2 text-xs text-text-muted">
               <span
-                className={`material-symbols-outlined text-[14px] ${certTrusted ? "text-emerald-500" : "text-zinc-400"}`}
+                className={`material-symbols-outlined text-[14px] ${certTrusted ? "text-success" : "text-text-subtle"}`}
               >
                 {certTrusted ? "verified_user" : "lock_open"}
               </span>
@@ -179,7 +179,7 @@ export function AgentCard({
 
             {/* Investigating notice */}
             {isInvestigating && (
-              <div className="rounded-lg border border-zinc-500/20 bg-zinc-500/5 p-3">
+              <div className="rounded-lg border border-border bg-surface-2 p-3">
                 <p className="text-xs text-text-muted">
                   {t("investigatingNotice") ||
                     "This agent is under investigation. Hosts and API surface are still being confirmed. Setup will be available once the upstream API is documented."}
@@ -207,7 +207,7 @@ export function AgentCard({
                 <button
                   type="button"
                   onClick={() => setWizardOpen(true)}
-                  className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 text-primary px-3 py-1.5 text-xs font-medium hover:bg-primary/20 transition-colors"
+                  className="inline-flex items-center gap-1.5 rounded-control border border-transparent bg-contrast text-contrast-fg px-3 py-1.5 text-xs font-medium hover:bg-contrast-hover transition-colors"
                 >
                   <span className="material-symbols-outlined text-[14px]">play_arrow</span>
                   {t("setupWizard") || "Setup wizard"}
@@ -219,10 +219,10 @@ export function AgentCard({
                   type="button"
                   onClick={handleDnsToggle}
                   disabled={dnsLoading}
-                  className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-50 ${
+                  className={`inline-flex items-center gap-1.5 rounded-control border px-3 py-1.5 text-xs font-medium transition-colors disabled:opacity-50 ${
                     dnsEnabled
-                      ? "bg-red-500/10 text-red-600 hover:bg-red-500/20"
-                      : "bg-emerald-500/10 text-emerald-600 hover:bg-emerald-500/20"
+                      ? "border-error/30 bg-error/5 text-error hover:bg-error/10"
+                      : "border-border-strong bg-surface text-text-main hover:bg-bg-subtle"
                   }`}
                 >
                   <span className="material-symbols-outlined text-[14px]">
@@ -238,7 +238,7 @@ export function AgentCard({
 
               <a
                 href={`/dashboard/tools/traffic-inspector?agent=${target.id}`}
-                className="inline-flex items-center gap-1.5 rounded-lg bg-zinc-500/10 text-text-muted px-3 py-1.5 text-xs font-medium hover:bg-zinc-500/20 transition-colors"
+                className="inline-flex items-center gap-1.5 rounded-control border border-border-strong bg-surface text-text-main px-3 py-1.5 text-xs font-medium hover:bg-bg-subtle transition-colors"
               >
                 <span className="material-symbols-outlined text-[14px]">network_check</span>
                 {t("viewTraffic") || "View traffic"}

@@ -84,7 +84,7 @@ function Sparkline({
     .filter((value) => Number.isFinite(value));
 
   if (values.length < 2) {
-    return <div className="h-10 rounded-lg bg-sidebar/50" />;
+    return <div className="h-10 rounded-lg bg-bg-subtle" />;
   }
 
   const min = Math.min(...values);
@@ -115,9 +115,9 @@ function Sparkline({
 function getIndicatorTone(value: number, warning: number, critical: number, inverse = false) {
   const healthy = inverse ? value >= warning : value <= warning;
   const criticalHit = inverse ? value < critical : value >= critical;
-  if (criticalHit) return "bg-red-500/10 text-red-500";
-  if (!healthy) return "bg-amber-500/10 text-amber-500";
-  return "bg-emerald-500/10 text-emerald-500";
+  if (criticalHit) return "text-error";
+  if (!healthy) return "text-warning";
+  return "text-success";
 }
 
 export default function TelemetryCard() {
@@ -215,13 +215,13 @@ export default function TelemetryCard() {
       label: t("uptime"),
       value: formatDuration(values.uptime),
       icon: "timer",
-      tone: "bg-blue-500/10 text-blue-500",
+      tone: "text-text-subtle",
     },
     {
       label: t("totalRequests"),
       value: values.totalRequests.toLocaleString(),
       icon: "receipt_long",
-      tone: "bg-primary/10 text-primary",
+      tone: "text-text-subtle",
     },
     {
       label: t("avgLatency"),
@@ -239,13 +239,13 @@ export default function TelemetryCard() {
       label: t("activeConnections"),
       value: values.activeConnections.toLocaleString(),
       icon: "hub",
-      tone: "bg-cyan-500/10 text-cyan-500",
+      tone: "text-text-subtle",
     },
     {
       label: t("memoryUsage"),
       value: formatBytes(values.memoryUsage.rss ?? values.memoryUsage.heapUsed ?? 0),
       icon: "memory",
-      tone: "bg-violet-500/10 text-violet-500",
+      tone: "text-text-subtle",
     },
   ];
 
@@ -253,8 +253,10 @@ export default function TelemetryCard() {
     <Card className="p-5">
       <div className="mb-5 flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
         <div>
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-text-main">
-            <span className="material-symbols-outlined text-[20px] text-primary">monitoring</span>
+          <h2 className="flex items-center gap-2 text-base font-semibold tracking-tight text-text-main">
+            <span className="material-symbols-outlined text-[18px] text-text-muted">
+              monitoring
+            </span>
             {t("title")}
           </h2>
           <p className="mt-1 text-sm text-text-muted">{t("description")}</p>
@@ -268,7 +270,7 @@ export default function TelemetryCard() {
           onClick={() => void loadTelemetry()}
           disabled={loading}
           title={t("refresh")}
-          className="inline-flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar disabled:opacity-40"
+          className="inline-flex items-center gap-1.5 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-50"
         >
           <span
             className={`material-symbols-outlined text-[16px] ${loading ? "animate-spin" : ""}`}
@@ -280,24 +282,22 @@ export default function TelemetryCard() {
       </div>
 
       {error && (
-        <div className="mb-4 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-sm text-amber-600">
+        <div className="mb-4 rounded-lg border border-warning/20 bg-warning/10 px-3 py-2 text-sm text-warning">
           {t("partialData", { error })}
         </div>
       )}
 
       <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
         {metricCards.map((metric) => (
-          <div key={metric.label} className="rounded-xl border border-border bg-surface/50 p-3">
+          <div key={metric.label} className="rounded-lg border border-border bg-surface-2 p-3">
             <div className="flex items-center justify-between gap-3">
               <div>
-                <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
-                  {metric.label}
+                <p className="text-[13px] text-text-muted">{metric.label}</p>
+                <p className="mt-1 text-xl font-semibold tracking-tight tabular-nums text-text-main">
+                  {metric.value}
                 </p>
-                <p className="mt-1 text-xl font-semibold text-text-main">{metric.value}</p>
               </div>
-              <span
-                className={`material-symbols-outlined rounded-lg p-2 text-[20px] ${metric.tone}`}
-              >
+              <span className={`material-symbols-outlined text-[18px] ${metric.tone}`}>
                 {metric.icon}
               </span>
             </div>
@@ -306,21 +306,21 @@ export default function TelemetryCard() {
       </div>
 
       <div className="mt-5 grid gap-4 lg:grid-cols-3">
-        <div className="rounded-xl border border-border bg-surface/40 p-3">
+        <div className="rounded-lg border border-border bg-surface-2 p-3">
           <div className="mb-2 flex items-center justify-between text-xs text-text-muted">
             <span>{t("latencyTrend")}</span>
             <span>{formatMs(values.p95Latency)} p95</span>
           </div>
           <Sparkline samples={samples} field="latencyMs" />
         </div>
-        <div className="rounded-xl border border-border bg-surface/40 p-3">
+        <div className="rounded-lg border border-border bg-surface-2 p-3">
           <div className="mb-2 flex items-center justify-between text-xs text-text-muted">
             <span>{t("throughputTrend")}</span>
             <span>{values.totalRequests.toLocaleString()}</span>
           </div>
           <Sparkline samples={samples} field="throughput" />
         </div>
-        <div className="rounded-xl border border-border bg-surface/40 p-3">
+        <div className="rounded-lg border border-border bg-surface-2 p-3">
           <div className="mb-2 flex items-center justify-between text-xs text-text-muted">
             <span>{t("memoryTrend")}</span>
             <span>{formatBytes(values.memoryUsage.heapUsed ?? 0)}</span>

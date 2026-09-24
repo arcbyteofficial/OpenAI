@@ -205,8 +205,8 @@ export default function QuotaCutoffModal({
                   placeholder={placeholder}
                   disabled={saving}
                   onChange={(e) => setDrafts((prev) => ({ ...prev, [w.key]: e.target.value }))}
-                  className={`w-20 px-2 py-1 text-sm text-center rounded-md border bg-transparent text-text-main focus:outline-none focus:border-primary/60 disabled:opacity-50 ${
-                    isOverride ? "border-primary/40" : "border-border"
+                  className={`w-20 px-2 py-1 text-sm text-center tabular-nums rounded-control border bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 disabled:opacity-50 ${
+                    isOverride ? "border-primary/40" : "border-border-strong"
                   }`}
                 />
                 <span className="text-xs text-text-muted">%</span>
@@ -216,7 +216,7 @@ export default function QuotaCutoffModal({
         })}
       </div>
       {error && (
-        <div className="mt-3 text-sm text-red-500 flex items-center gap-1.5">
+        <div className="mt-3 text-sm text-error flex items-center gap-1.5">
           <span className="material-symbols-outlined text-[16px]">error</span>
           {error}
         </div>

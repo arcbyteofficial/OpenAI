@@ -39,21 +39,19 @@ export default function BatchConceptCard({ className = "" }: Props) {
 
   return (
     <div
-      className={`rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] p-4 flex flex-col gap-3 ${className}`}
+      className={`rounded-card bg-surface border border-border p-4 flex flex-col gap-3 ${className}`}
     >
       {/* Header */}
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-[20px] text-[var(--color-accent)]">
-            info
-          </span>
-          <span className="font-semibold text-sm text-[var(--color-text-main)]">
+          <span className="material-symbols-outlined text-[18px] text-text-muted">info</span>
+          <span className="font-semibold tracking-tight text-sm text-text-main">
             {t("batchConceptTitle")}
           </span>
         </div>
         <button
           onClick={toggle}
-          className="flex items-center gap-1 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors"
+          className="flex items-center gap-1 text-xs text-text-muted hover:text-text-main transition-colors"
           aria-expanded={!collapsed}
         >
           {t("batchConceptHowItWorks")}
@@ -64,31 +62,31 @@ export default function BatchConceptCard({ className = "" }: Props) {
       </div>
 
       {/* Subtitle — always visible */}
-      <p className="text-sm text-[var(--color-text-muted)]">{t("batchConceptSubtitle")}</p>
+      <p className="text-sm text-text-muted">{t("batchConceptSubtitle")}</p>
 
       {/* Expandable bullets — keys from §3.5 */}
       {!collapsed && (
         <ul className="flex flex-col gap-2 pl-1">
-          <li className="flex items-start gap-2 text-sm text-[var(--color-text-muted)]">
-            <span className="material-symbols-outlined text-[16px] text-emerald-400 mt-0.5 shrink-0">
+          <li className="flex items-start gap-2 text-sm text-text-muted">
+            <span className="material-symbols-outlined text-[16px] text-text-subtle mt-0.5 shrink-0">
               savings
             </span>
             <span>{t("batchConceptBenefit50pct")}</span>
           </li>
-          <li className="flex items-start gap-2 text-sm text-[var(--color-text-muted)]">
-            <span className="material-symbols-outlined text-[16px] text-blue-400 mt-0.5 shrink-0">
+          <li className="flex items-start gap-2 text-sm text-text-muted">
+            <span className="material-symbols-outlined text-[16px] text-text-subtle mt-0.5 shrink-0">
               schedule
             </span>
             <span>{t("batchConceptAsync24h")}</span>
           </li>
-          <li className="flex items-start gap-2 text-sm text-[var(--color-text-muted)]">
-            <span className="material-symbols-outlined text-[16px] text-violet-400 mt-0.5 shrink-0">
+          <li className="flex items-start gap-2 text-sm text-text-muted">
+            <span className="material-symbols-outlined text-[16px] text-text-subtle mt-0.5 shrink-0">
               task_alt
             </span>
             <span>{t("batchConceptUseCases")}</span>
           </li>
-          <li className="flex items-start gap-2 text-sm text-[var(--color-text-muted)]">
-            <span className="material-symbols-outlined text-[16px] text-yellow-400 mt-0.5 shrink-0">
+          <li className="flex items-start gap-2 text-sm text-text-muted">
+            <span className="material-symbols-outlined text-[16px] text-text-subtle mt-0.5 shrink-0">
               timer
             </span>
             <span>{t("batchConceptRetentionNote")}</span>

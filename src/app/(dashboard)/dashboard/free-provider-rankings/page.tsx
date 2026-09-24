@@ -32,10 +32,10 @@ function scoreLabel(score: number): string {
 }
 
 function scoreColor(score: number): string {
-  if (score >= 0.85) return "text-green-400";
-  if (score >= 0.7) return "text-emerald-400";
-  if (score >= 0.55) return "text-yellow-400";
-  return "text-orange-400";
+  if (score >= 0.85) return "text-success";
+  if (score >= 0.7) return "text-success/80";
+  if (score >= 0.55) return "text-warning";
+  return "text-text-muted";
 }
 
 const CATEGORY_OPTIONS = [
@@ -113,7 +113,7 @@ export default function FreeProviderRankingsPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl font-bold">{t("title")}</h1>
+          <h1 className="text-2xl font-semibold tracking-tight">{t("title")}</h1>
           <p className="text-sm text-text-muted mt-1">{t("subtitle")}</p>
         </div>
       </div>
@@ -124,10 +124,10 @@ export default function FreeProviderRankingsPage() {
           <button
             key={opt.value}
             onClick={() => setFilter(opt.value)}
-            className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
+            className={`px-3 py-1.5 text-[13px] font-medium rounded-control border transition-colors ${
               filter === opt.value
-                ? "bg-violet-500 border-violet-500 text-white"
-                : "border-border text-text-muted hover:text-text-main hover:border-violet-500/50"
+                ? "bg-bg-subtle border-border-strong text-text-main"
+                : "border-border text-text-muted hover:text-text-main hover:border-border-strong"
             }`}
           >
             {t(opt.labelKey)}
@@ -140,10 +140,10 @@ export default function FreeProviderRankingsPage() {
         <button
           onClick={() => setConfiguredOnly((v) => !v)}
           aria-pressed={configuredOnly}
-          className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
+          className={`px-3 py-1.5 text-[13px] font-medium rounded-control border transition-colors ${
             configuredOnly
-              ? "bg-emerald-500 border-emerald-500 text-white"
-              : "border-border text-text-muted hover:text-text-main hover:border-emerald-500/50"
+              ? "bg-primary/10 border-primary/30 text-primary"
+              : "border-border text-text-muted hover:text-text-main hover:border-border-strong"
           }`}
         >
           {t("filterConfiguredOnly")}
@@ -152,10 +152,10 @@ export default function FreeProviderRankingsPage() {
           onClick={() => setAvailableOnly((v) => !v)}
           aria-pressed={availableOnly}
           title={t("filterAvailableOnlyHelp")}
-          className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
+          className={`px-3 py-1.5 text-[13px] font-medium rounded-control border transition-colors ${
             availableOnly
-              ? "bg-emerald-500 border-emerald-500 text-white"
-              : "border-border text-text-muted hover:text-text-main hover:border-emerald-500/50"
+              ? "bg-primary/10 border-primary/30 text-primary"
+              : "border-border text-text-muted hover:text-text-main hover:border-border-strong"
           }`}
         >
           {t("filterAvailableOnly")}
@@ -169,10 +169,10 @@ export default function FreeProviderRankingsPage() {
             key={opt.value || "all"}
             onClick={() => setTypeFilter(opt.value)}
             aria-pressed={typeFilter === opt.value}
-            className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
+            className={`px-3 py-1.5 text-[13px] font-medium rounded-control border transition-colors ${
               typeFilter === opt.value
-                ? "bg-violet-500 border-violet-500 text-white"
-                : "border-border text-text-muted hover:text-text-main hover:border-violet-500/50"
+                ? "bg-bg-subtle border-border-strong text-text-main"
+                : "border-border text-text-muted hover:text-text-main hover:border-border-strong"
             }`}
           >
             {t(opt.labelKey)}
@@ -182,10 +182,10 @@ export default function FreeProviderRankingsPage() {
           onClick={() => setGroupByType((v) => !v)}
           aria-pressed={groupByType}
           title={t("sortTypeFirstHelp")}
-          className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
+          className={`px-3 py-1.5 text-[13px] font-medium rounded-control border transition-colors ${
             groupByType
-              ? "bg-emerald-500 border-emerald-500 text-white"
-              : "border-border text-text-muted hover:text-text-main hover:border-emerald-500/50"
+              ? "bg-primary/10 border-primary/30 text-primary"
+              : "border-border text-text-muted hover:text-text-main hover:border-border-strong"
           }`}
         >
           {t("sortTypeFirst")}
@@ -194,10 +194,10 @@ export default function FreeProviderRankingsPage() {
           onClick={() => setSortByReliability((v) => !v)}
           aria-pressed={sortByReliability}
           title={t("sortByReliabilityHelp")}
-          className={`px-4 py-2 text-sm font-medium rounded-lg border transition-colors ${
+          className={`px-3 py-1.5 text-[13px] font-medium rounded-control border transition-colors ${
             sortByReliability
-              ? "bg-emerald-500 border-emerald-500 text-white"
-              : "border-border text-text-muted hover:text-text-main hover:border-emerald-500/50"
+              ? "bg-primary/10 border-primary/30 text-primary"
+              : "border-border text-text-muted hover:text-text-main hover:border-border-strong"
           }`}
         >
           {t("sortByReliability")}
@@ -205,7 +205,7 @@ export default function FreeProviderRankingsPage() {
       </div>
       <p className="text-xs text-text-muted">{t("typeLegend")}</p>
 
-      {error && <div className="p-3 rounded-lg bg-red-500/10 text-red-400 text-sm">{error}</div>}
+      {error && <div className="p-3 rounded-lg bg-error/10 text-error text-sm">{error}</div>}
 
       {loading ? (
         <div className="flex items-center justify-center min-h-[200px]">
@@ -220,11 +220,7 @@ export default function FreeProviderRankingsPage() {
                 <Card key={provider.id} className="relative overflow-hidden">
                   <div
                     className={`absolute top-0 left-0 right-0 h-1 ${
-                      idx === 0
-                        ? "bg-gradient-to-r from-amber-400 to-yellow-600"
-                        : idx === 1
-                          ? "bg-gradient-to-r from-gray-300 to-gray-500"
-                          : "bg-gradient-to-r from-amber-600 to-orange-800"
+                      idx === 0 ? "bg-text-main" : idx === 1 ? "bg-text-subtle" : "bg-border-strong"
                     }`}
                   />
                   <div className="flex items-center gap-4">
@@ -232,7 +228,7 @@ export default function FreeProviderRankingsPage() {
                     <div className="flex-1 min-w-0">
                       <div className="flex items-center gap-2">
                         <div
-                          className="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold text-white"
+                          className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-semibold text-white"
                           style={{ backgroundColor: provider.color }}
                         >
                           {provider.textIcon || provider.name.charAt(0)}
@@ -246,13 +242,15 @@ export default function FreeProviderRankingsPage() {
                       )}
                       {provider.topModel && (
                         <p
-                          className={`text-lg font-bold mt-1 ${scoreColor(provider.topModel.score)}`}
+                          className={`text-base font-semibold mt-1 ${scoreColor(provider.topModel.score)}`}
                         >
                           {scoreLabel(provider.topModel.score)}
                         </p>
                       )}
                     </div>
-                    <div className="text-5xl font-black text-text-muted/20">{idx + 1}</div>
+                    <div className="text-4xl font-semibold tracking-tight tabular-nums text-text-muted/20">
+                      {idx + 1}
+                    </div>
                   </div>
                 </Card>
               ))}
@@ -263,9 +261,9 @@ export default function FreeProviderRankingsPage() {
           {displayedRankings.length > 0 && (
             <Card>
               <div className="overflow-x-auto">
-                <table className="w-full">
+                <table className="w-full text-[13px]">
                   <thead>
-                    <tr className="text-left text-sm text-text-muted border-b border-border">
+                    <tr className="text-left text-xs text-text-muted border-b border-border">
                       <th className="pb-3 font-medium w-16">{t("colRank")}</th>
                       <th className="pb-3 font-medium">{t("colProvider")}</th>
                       <th className="pb-3 font-medium">{t("colTopModel")}</th>
@@ -282,12 +280,12 @@ export default function FreeProviderRankingsPage() {
                   </thead>
                   <tbody>
                     {displayedRankings.map((provider, idx) => (
-                      <tr key={provider.id} className="border-b border-border/50 last:border-b-0">
-                        <td className="py-3 text-text-muted font-mono">{idx + 1}</td>
-                        <td className="py-3">
+                      <tr key={provider.id} className="border-b border-border last:border-b-0">
+                        <td className="py-2.5 text-text-muted font-mono tabular-nums">{idx + 1}</td>
+                        <td className="py-2.5">
                           <div className="flex items-center gap-2">
                             <div
-                              className="w-6 h-6 rounded flex items-center justify-center text-[10px] font-bold text-white"
+                              className="w-6 h-6 rounded-md flex items-center justify-center text-[10px] font-semibold text-white"
                               style={{ backgroundColor: provider.color }}
                             >
                               {provider.textIcon || provider.name.charAt(0)}
@@ -295,10 +293,10 @@ export default function FreeProviderRankingsPage() {
                             <span className="font-medium">{provider.name}</span>
                           </div>
                         </td>
-                        <td className="py-3 text-text-muted truncate max-w-[200px]">
+                        <td className="py-2.5 text-text-muted truncate max-w-[200px]">
                           {provider.topModel?.modelName || "—"}
                         </td>
-                        <td className="py-3 text-right">
+                        <td className="py-2.5 text-right">
                           {provider.topModel ? (
                             <span
                               className={`font-mono font-medium ${scoreColor(provider.topModel.score)}`}
@@ -309,10 +307,10 @@ export default function FreeProviderRankingsPage() {
                             "—"
                           )}
                         </td>
-                        <td className="py-3 text-right font-mono text-text-muted">
+                        <td className="py-2.5 text-right font-mono text-text-muted">
                           {scoreLabel(provider.averageScore)}
                         </td>
-                        <td className="py-3 text-right">
+                        <td className="py-2.5 text-right">
                           {(() => {
                             const u = formatUsageReliability(provider.reliability?.usage);
                             const title =
@@ -335,15 +333,15 @@ export default function FreeProviderRankingsPage() {
                             );
                           })()}
                         </td>
-                        <td className="py-3 text-right text-text-muted">{provider.modelCount}</td>
-                        <td className="py-3 text-right">
+                        <td className="py-2.5 text-right text-text-muted">{provider.modelCount}</td>
+                        <td className="py-2.5 text-right">
                           <span
-                            className={`text-xs px-2 py-1 rounded ${
+                            className={`text-[11px] font-medium font-mono px-1.5 py-0.5 rounded-md ${
                               provider.category === "noauth"
-                                ? "bg-green-500/10 text-green-500"
+                                ? "bg-success/10 text-success"
                                 : provider.category === "oauth"
-                                  ? "bg-blue-500/10 text-blue-500"
-                                  : "bg-purple-500/10 text-purple-500"
+                                  ? "bg-primary/10 text-primary"
+                                  : "bg-bg-subtle text-text-muted"
                             }`}
                           >
                             {provider.category.toUpperCase()}

@@ -340,10 +340,10 @@ export default function DroidToolCard({
           )}
 
           {!checkingDroid && droidStatus && !cliReady && (
-            <div className="flex items-center gap-3 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
-              <span className="material-symbols-outlined text-yellow-500">warning</span>
+            <div className="flex items-center gap-3 p-4 bg-warning/10 border border-warning/30 rounded-lg">
+              <span className="material-symbols-outlined text-warning">warning</span>
               <div className="flex-1">
-                <p className="font-medium text-yellow-600 dark:text-yellow-400">
+                <p className="font-medium text-warning">
                   {droidStatus.installed
                     ? t("cliNotRunnable", { tool: "Factory Droid" })
                     : t("cliNotInstalled", { tool: "Factory Droid" })}
@@ -391,12 +391,12 @@ export default function DroidToolCard({
                     value={getDisplayUrl()}
                     onChange={(e) => setCustomBaseUrl(e.target.value)}
                     placeholder={t("baseUrlPlaceholder")}
-                    className="flex-1 px-2 py-1.5 bg-surface rounded border border-border text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
                   />
                   {customBaseUrl && customBaseUrl !== baseUrl && (
                     <button
                       onClick={() => setCustomBaseUrl("")}
-                      className="p-1 text-text-muted hover:text-primary rounded transition-colors"
+                      className="p-1 text-text-muted hover:text-text-main rounded-md transition-colors"
                       title={t("resetToDefault")}
                     >
                       <span className="material-symbols-outlined text-[14px]">restart_alt</span>
@@ -416,7 +416,7 @@ export default function DroidToolCard({
                     <select
                       value={effectiveApiKeyId}
                       onChange={(e) => setSelectedApiKeyId(e.target.value)}
-                      className="flex-1 px-2 py-1.5 bg-surface rounded text-xs border border-border focus:outline-none focus:ring-1 focus:ring-primary/50"
+                      className="flex-1 px-2 py-1.5 bg-surface rounded-control text-xs border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
                     >
                       {apiKeys.map((key) => (
                         <option key={key.id} value={key.id}>
@@ -436,7 +436,7 @@ export default function DroidToolCard({
                   <span className="w-32 shrink-0 text-sm font-semibold text-text-main text-right pt-1.5">
                     {t("model")}
                     {modelList.length > 0 && (
-                      <span className="text-primary"> ({modelList.length})</span>
+                      <span className="text-text-muted"> ({modelList.length})</span>
                     )}
                   </span>
                   <span className="material-symbols-outlined text-text-muted text-[14px] pt-2">
@@ -448,12 +448,12 @@ export default function DroidToolCard({
                         {modelList.map((id) => (
                           <div
                             key={id}
-                            className="flex items-center gap-1.5 px-2 py-1 bg-bg-secondary rounded border border-border"
+                            className="flex items-center gap-1.5 px-2 py-1 bg-bg-subtle rounded-md border border-border"
                           >
                             <span className="flex-1 text-xs font-mono truncate">{id}</span>
                             <button
                               onClick={() => removeModel(id)}
-                              className="text-text-muted hover:text-red-500 transition-colors shrink-0"
+                              className="text-text-muted hover:text-error transition-colors shrink-0"
                               title={t("clear")}
                             >
                               <span className="material-symbols-outlined text-[12px]">close</span>
@@ -474,19 +474,19 @@ export default function DroidToolCard({
                           }
                         }}
                         placeholder={t("providerModelPlaceholder")}
-                        className="flex-1 px-2 py-1.5 bg-surface rounded border border-border text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
+                        className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
                       />
                       <button
                         onClick={() => setModalOpen(true)}
                         disabled={!hasActiveProviders}
-                        className={`px-2 py-1.5 rounded border text-xs transition-colors shrink-0 whitespace-nowrap ${hasActiveProviders ? "bg-surface border-border text-text-main hover:border-primary cursor-pointer" : "opacity-50 cursor-not-allowed border-border"}`}
+                        className={`px-2 py-1.5 rounded-control border text-xs transition-colors shrink-0 whitespace-nowrap ${hasActiveProviders ? "bg-surface border-border-strong text-text-main hover:bg-bg-subtle cursor-pointer" : "opacity-50 cursor-not-allowed border-border"}`}
                       >
                         {t("selectModel")}
                       </button>
                       <button
                         onClick={() => addModel()}
                         disabled={!modelInput.trim() || modelList.includes(modelInput.trim())}
-                        className="px-2 py-1.5 rounded border bg-surface border-border hover:border-primary text-xs shrink-0 disabled:opacity-50"
+                        className="px-2 py-1.5 rounded-control border bg-surface border-border-strong hover:bg-bg-subtle text-xs shrink-0 disabled:opacity-50"
                         title={t("addModel")}
                       >
                         <span className="material-symbols-outlined text-[14px]">add</span>
@@ -498,7 +498,7 @@ export default function DroidToolCard({
 
               {message && (
                 <div
-                  className={`flex items-center gap-2 px-2 py-1.5 rounded text-xs ${message.type === "success" ? "bg-green-500/10 text-green-600" : "bg-red-500/10 text-red-600"}`}
+                  className={`flex items-center gap-2 px-2 py-1.5 rounded-md text-xs ${message.type === "success" ? "bg-success/10 text-success" : "bg-error/10 text-error"}`}
                 >
                   <span className="material-symbols-outlined text-[14px]">
                     {message.type === "success" ? "check_circle" : "error"}
@@ -560,7 +560,7 @@ export default function DroidToolCard({
                       {backups.map((b) => (
                         <div
                           key={b.id}
-                          className="flex items-center gap-2 px-2 py-1.5 bg-black/5 dark:bg-white/5 rounded text-xs"
+                          className="flex items-center gap-2 px-2 py-1.5 bg-bg-subtle rounded-md text-xs"
                         >
                           <span className="material-symbols-outlined text-[14px] text-text-muted">
                             description
@@ -574,7 +574,7 @@ export default function DroidToolCard({
                           <button
                             onClick={() => handleRestoreBackup(b.id)}
                             disabled={restoringBackup === b.id}
-                            className="px-2 py-0.5 bg-primary/10 text-primary rounded text-[10px] font-medium hover:bg-primary/20 transition-colors disabled:opacity-50"
+                            className="px-2 py-0.5 bg-surface border border-border-strong text-text-main rounded-md text-[10px] font-medium hover:bg-bg-subtle transition-colors disabled:opacity-50"
                           >
                             {restoringBackup === b.id ? "..." : t("restore")}
                           </button>

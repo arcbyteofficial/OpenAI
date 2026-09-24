@@ -95,7 +95,9 @@ export default function ProviderPlaygroundPanel({ providerId }: { providerId: st
 
   return (
     <div className="flex flex-col gap-3">
-      <h2 className="text-lg font-semibold">{providerText(t, "playgroundTitle", "Playground")}</h2>
+      <h2 className="text-base font-semibold tracking-tight">
+        {providerText(t, "playgroundTitle", "Playground")}
+      </h2>
       <ServiceKindTabs
         kinds={playgroundableKinds}
         activeKind={activeKind}

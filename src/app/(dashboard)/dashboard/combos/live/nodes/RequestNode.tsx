@@ -22,10 +22,10 @@ export function RequestNode({ data }: NodeProps) {
 
   return (
     <div
-      className="rounded-xl border-2 bg-bg px-4 py-3 min-w-[110px] text-center transition-all duration-200"
+      className="rounded-card border-2 bg-surface px-4 py-3 min-w-[110px] text-center transition-[border-color,box-shadow] duration-200"
       style={{
         borderColor: color,
-        boxShadow: `0 0 12px ${color}25`,
+        boxShadow: `0 0 0 3px ${color}1f`,
       }}
       data-testid="request-node"
     >
@@ -39,7 +39,7 @@ export function RequestNode({ data }: NodeProps) {
         Request
       </div>
       <div
-        className="text-[11px] font-mono text-muted truncate max-w-[130px]"
+        className="text-[11px] font-mono text-text-muted truncate max-w-[130px]"
         title={comboName as string}
       >
         {comboName as string}

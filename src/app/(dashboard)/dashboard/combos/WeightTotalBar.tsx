@@ -44,13 +44,13 @@ export default function WeightTotalBar({ models }: WeightTotalBarProps) {
   return (
     <div className="mt-1.5">
       {/* Visual bar */}
-      <div className="h-1.5 rounded-full bg-black/5 dark:bg-white/5 overflow-hidden flex">
+      <div className="h-1.5 rounded-full bg-bg-subtle overflow-hidden flex">
         {models.map((m, i) => {
           if (!m.weight) return null;
           return (
             <div
               key={i}
-              className={`${WEIGHT_COLORS[i % WEIGHT_COLORS.length]} transition-all duration-300`}
+              className={`${WEIGHT_COLORS[i % WEIGHT_COLORS.length]} transition-[width] duration-300`}
               style={{ width: `${Math.min(m.weight, 100)}%` }}
             />
           );
@@ -79,7 +79,7 @@ export default function WeightTotalBar({ models }: WeightTotalBarProps) {
         </div>
         <span
           className={`text-[10px] font-medium ${
-            isValid ? "text-emerald-500" : total > 100 ? "text-red-500" : "text-amber-500"
+            isValid ? "text-success" : total > 100 ? "text-error" : "text-warning"
           }`}
         >
           {total}%{!isValid && total > 0 && " ≠ 100%"}

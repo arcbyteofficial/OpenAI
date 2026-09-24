@@ -62,11 +62,11 @@ export default function FilterBar({
           placeholder={placeholder || t("search")}
           style={{
             width: "100%",
-            padding: "8px 12px 8px 32px",
-            borderRadius: "6px",
-            border: "1px solid rgba(255,255,255,0.1)",
-            background: "rgba(255,255,255,0.05)",
-            color: "var(--text-primary, #e0e0e0)",
+            padding: "6px 12px 6px 32px",
+            borderRadius: "var(--radius-control)",
+            border: "1px solid var(--color-border-strong)",
+            background: "var(--color-surface)",
+            color: "var(--color-text-main)",
             fontSize: "13px",
             outline: "none",
           }}
@@ -92,13 +92,13 @@ export default function FilterBar({
           <button
             onClick={() => setExpandedFilter(expandedFilter === filter.key ? null : filter.key)}
             style={{
-              padding: "6px 12px",
-              borderRadius: "6px",
-              border: `1px solid ${activeFilters[filter.key] ? "rgba(99,102,241,0.5)" : "rgba(255,255,255,0.1)"}`,
+              padding: "6px 10px",
+              borderRadius: "var(--radius-control)",
+              border: `1px solid ${activeFilters[filter.key] ? "color-mix(in srgb, var(--color-primary) 35%, transparent)" : "var(--color-border-strong)"}`,
               background: activeFilters[filter.key]
-                ? "rgba(99,102,241,0.15)"
-                : "rgba(255,255,255,0.05)",
-              color: activeFilters[filter.key] ? "#818cf8" : "var(--text-secondary, #888)",
+                ? "color-mix(in srgb, var(--color-primary) 10%, transparent)"
+                : "var(--color-surface)",
+              color: activeFilters[filter.key] ? "var(--color-primary)" : "var(--color-text-muted)",
               fontSize: "12px",
               cursor: "pointer",
               whiteSpace: "nowrap",
@@ -114,13 +114,14 @@ export default function FilterBar({
                 top: "100%",
                 left: 0,
                 marginTop: "4px",
-                background: "rgba(20,20,30,0.95)",
-                border: "1px solid rgba(255,255,255,0.1)",
+                background: "var(--color-surface)",
+                border: "1px solid var(--color-border)",
                 borderRadius: "8px",
                 padding: "4px",
                 zIndex: 50,
                 minWidth: "120px",
-                backdropFilter: "blur(12px)",
+                backdropFilter: "none",
+                boxShadow: "var(--shadow-elevated)",
               }}
             >
               <button
@@ -135,7 +136,7 @@ export default function FilterBar({
                   textAlign: "left",
                   background: "none",
                   border: "none",
-                  color: "#888",
+                  color: "var(--color-text-muted)",
                   fontSize: "12px",
                   cursor: "pointer",
                   borderRadius: "4px",
@@ -155,12 +156,13 @@ export default function FilterBar({
                     width: "100%",
                     padding: "6px 12px",
                     textAlign: "left",
-                    background: activeFilters[filter.key] === opt ? "rgba(99,102,241,0.2)" : "none",
+                    background:
+                      activeFilters[filter.key] === opt ? "var(--color-bg-subtle)" : "none",
                     border: "none",
                     color:
                       activeFilters[filter.key] === opt
-                        ? "#818cf8"
-                        : "var(--text-primary, #e0e0e0)",
+                        ? "var(--color-text-main)"
+                        : "var(--color-text-muted)",
                     fontSize: "12px",
                     cursor: "pointer",
                     borderRadius: "4px",
@@ -179,11 +181,11 @@ export default function FilterBar({
         <button
           onClick={handleClear}
           style={{
-            padding: "6px 12px",
-            borderRadius: "6px",
-            border: "1px solid rgba(239,68,68,0.3)",
-            background: "rgba(239,68,68,0.1)",
-            color: "#ef4444",
+            padding: "6px 10px",
+            borderRadius: "var(--radius-control)",
+            border: "1px solid transparent",
+            background: "transparent",
+            color: "var(--color-text-muted)",
             fontSize: "12px",
             cursor: "pointer",
           }}

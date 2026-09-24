@@ -117,24 +117,26 @@ export default function CodexFastTierTab() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-3">
-        <div className="p-2 rounded-lg bg-sky-500/10 text-sky-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="p-2 rounded-lg border border-border bg-bg-subtle text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             bolt
           </span>
         </div>
         <div className="flex-1">
-          <h3 className="text-lg font-semibold">{t("codexFastTierTitle")}</h3>
+          <h3 className="text-base font-semibold tracking-tight text-text-main">
+            {t("codexFastTierTitle")}
+          </h3>
           <p className="text-sm text-text-muted">{t("codexFastTierDesc")}</p>
         </div>
         <div className="flex items-center gap-3">
           {status === "saved" && (
-            <span className="text-xs font-medium text-emerald-500 flex items-center gap-1">
+            <span className="text-xs font-medium text-success flex items-center gap-1">
               <span className="material-symbols-outlined text-[14px]">check_circle</span>{" "}
               {t("saved")}
             </span>
           )}
           {status === "error" && (
-            <span className="text-xs font-medium text-rose-500 flex items-center gap-1">
+            <span className="text-xs font-medium text-error flex items-center gap-1">
               <span className="material-symbols-outlined text-[14px]">error</span>{" "}
               {t("codexFastTierSaveError")}
             </span>
@@ -184,13 +186,13 @@ export default function CodexFastTierTab() {
                     <label key={slug} className="flex items-center gap-2 text-sm cursor-pointer">
                       <input
                         type="checkbox"
-                        className="h-4 w-4"
+                        className="h-4 w-4 accent-primary"
                         checked={checked}
                         disabled={loading || saving}
                         onChange={(e) => toggleModel(slug, e.target.checked)}
                         aria-label={t("codexFastTierModelCheckbox", { model: slug })}
                       />
-                      <span className="font-mono text-xs">{slug}</span>
+                      <span className="font-mono text-xs text-text-main">{slug}</span>
                     </label>
                   );
                 })}

@@ -11,7 +11,10 @@ import { LocaleAutoDetect } from "@/shared/components/LocaleAutoDetect";
 import { BasePathNetworkProvider } from "@/shared/components/BasePathNetworkProvider";
 
 export const viewport: Viewport = {
-  themeColor: "#0b0f1a",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafafa" },
+    { media: "(prefers-color-scheme: dark)", color: "#0a0a0a" },
+  ],
   viewportFit: "cover",
 };
 
@@ -132,7 +135,7 @@ export default async function RootLayout({ children }) {
       <body className="font-sans antialiased" suppressHydrationWarning>
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-[#6366f1] focus:text-white focus:rounded-lg focus:text-sm focus:font-semibold focus:shadow-lg"
+          className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:px-4 focus:py-2 focus:bg-contrast focus:text-contrast-fg focus:rounded-control focus:text-sm focus:font-medium focus:shadow-[var(--shadow-elevated)]"
         >
           {t("skipToContent")}
         </a>

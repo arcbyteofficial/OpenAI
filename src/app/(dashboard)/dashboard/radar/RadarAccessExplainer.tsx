@@ -6,7 +6,7 @@ import { useTranslations } from "next-intl";
 function RuleItem({ children }: { children: ReactNode }) {
   return (
     <li className="flex items-start gap-2">
-      <span aria-hidden="true" className="mt-0.5 shrink-0 text-green-400">
+      <span aria-hidden="true" className="mt-0.5 shrink-0 text-success">
         ✓
       </span>
       <span>{children}</span>
@@ -21,9 +21,12 @@ export function RadarAccessExplainer() {
   return (
     <section
       aria-labelledby="radar-access-scale-title"
-      className="w-full rounded-xl border border-border bg-violet-500/5 p-4 text-left sm:p-5"
+      className="w-full rounded-card border border-border bg-surface p-4 text-left sm:p-5"
     >
-      <h3 id="radar-access-scale-title" className="text-base font-semibold text-text-main">
+      <h3
+        id="radar-access-scale-title"
+        className="text-base font-semibold tracking-tight text-text-main"
+      >
         {t("accessScaleTitle")}
       </h3>
       <p className="mt-1 text-sm text-text-muted">{t("accessScaleIntro")}</p>

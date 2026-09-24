@@ -14,13 +14,13 @@ export default function Textarea({ className, error = false, ...props }: Textare
   return (
     <textarea
       className={cn(
-        "w-full py-2 px-3 text-sm text-text-main",
-        "bg-white dark:bg-white/5 border border-black/10 dark:border-white/10 rounded-control",
-        "placeholder-text-muted/60",
-        "focus:ring-1 focus:ring-accent/30 focus:border-accent/50 focus:outline-none",
-        "transition-all disabled:opacity-50 disabled:cursor-not-allowed",
-        "text-[16px] sm:text-sm",
-        error ? "border-red-500 focus:border-red-500 focus:ring-red-500/20" : "",
+        "w-full py-1.5 px-3 text-text-main",
+        "bg-surface border border-border-strong rounded-control",
+        "placeholder:text-text-subtle hover:border-text-subtle/50",
+        "focus:border-primary focus:ring-[3px] focus:ring-primary/15 focus:outline-none",
+        "transition-[border-color,box-shadow] duration-150 disabled:opacity-50 disabled:cursor-not-allowed",
+        "text-[16px] sm:text-[13px]",
+        error ? "border-error hover:border-error focus:border-error focus:ring-error/15" : "",
         className
       )}
       {...props}

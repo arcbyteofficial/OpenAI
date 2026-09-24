@@ -141,9 +141,9 @@ function modelVariant(status: ModelStatus) {
 
 function Metric({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="rounded-xl border border-border bg-surface/50 p-3">
-      <p className="text-xs uppercase tracking-wide text-text-muted">{label}</p>
-      <p className="mt-1 text-sm font-semibold text-text-main">{value}</p>
+    <div className="rounded-lg border border-border bg-surface-2 p-3">
+      <p className="text-xs text-text-muted">{label}</p>
+      <p className="mt-1 text-sm font-semibold tabular-nums text-text-main">{value}</p>
     </div>
   );
 }
@@ -156,10 +156,10 @@ function ModelPill({ model }: { model: HealthMatrixModel }) {
     <div
       className={cn(
         "rounded-lg border px-3 py-2 text-xs",
-        model.status === "healthy" && "border-green-500/20 bg-green-500/5",
-        model.status === "degraded" && "border-yellow-500/20 bg-yellow-500/5",
-        model.status === "locked" && "border-amber-500/20 bg-amber-500/5",
-        model.status === "error" && "border-red-500/20 bg-red-500/5",
+        model.status === "healthy" && "border-success/20 bg-success/5",
+        model.status === "degraded" && "border-warning/20 bg-warning/5",
+        model.status === "locked" && "border-warning/30 bg-warning/5",
+        model.status === "error" && "border-error/20 bg-error/5",
         model.status === "idle" && "border-border bg-bg-subtle/60"
       )}
     >
@@ -181,7 +181,7 @@ function ModelPill({ model }: { model: HealthMatrixModel }) {
             )}
           </p>
           {model.isLockedOut ? (
-            <p className="mt-1 text-amber-500">
+            <p className="mt-1 text-warning">
               {healthText(t, "modelLockoutSummary", "{reason} · {duration} left", {
                 reason: model.lockoutReason || healthText(t, "locked", "locked"),
                 duration: formatDuration(model.lockoutRemainingMs, t),
@@ -206,7 +206,7 @@ function AccountRow({ account }: { account: HealthMatrixAccount }) {
     : `+${hiddenCount} more models`;
 
   return (
-    <div className="rounded-xl border border-border bg-bg p-4">
+    <div className="rounded-lg border border-border bg-bg p-4">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
@@ -232,7 +232,7 @@ function AccountRow({ account }: { account: HealthMatrixAccount }) {
             })}
           </p>
           {account.lastErrorType || account.errorCode || account.cooldownRemainingMs > 0 ? (
-            <p className="mt-1 text-xs text-amber-500">
+            <p className="mt-1 text-xs text-warning">
               {account.lastErrorType || account.errorCode || healthText(t, "cooldown", "cooldown")}
               {account.cooldownRemainingMs > 0
                 ? ` · ${healthText(t, "durationRemaining", "{duration} remaining", {
@@ -315,11 +315,11 @@ export default function ProviderHealthMatrixCard() {
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <div className="flex items-center gap-3">
-            <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-bg-subtle text-text-muted">
               <span className="material-symbols-outlined text-[18px]">grid_view</span>
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-text-main">
+              <h2 className="text-base font-semibold tracking-tight text-text-main">
                 {healthText(t, "providerHealthMatrixTitle", "Provider Health Matrix")}
               </h2>
               <p className="text-sm text-text-muted">
@@ -343,7 +343,7 @@ export default function ProviderHealthMatrixCard() {
           <select
             value={range}
             onChange={(event) => setRange(event.target.value as RangeValue)}
-            className="rounded-lg border border-border bg-bg px-3 py-2 text-sm text-text-main"
+            className="rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] text-text-main"
             aria-label={healthText(t, "healthMatrixRange", "Health matrix range")}
           >
             <option value="1h">1h</option>
@@ -356,7 +356,7 @@ export default function ProviderHealthMatrixCard() {
             onChange={(event) => setProviderFilter(event.target.value)}
             list="provider-health-matrix-providers"
             placeholder={healthText(t, "providerFilter", "Provider filter")}
-            className="w-44 rounded-lg border border-border bg-bg px-3 py-2 text-sm text-text-main"
+            className="w-44 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] text-text-main placeholder:text-text-subtle"
           />
           <datalist id="provider-health-matrix-providers">
             {providerOptions.map((provider) => (
@@ -367,10 +367,10 @@ export default function ProviderHealthMatrixCard() {
             type="button"
             onClick={() => setOnlyIssues((value) => !value)}
             className={cn(
-              "rounded-lg border px-3 py-2 text-sm transition-colors",
+              "rounded-control border px-3 py-1.5 text-[13px] font-medium transition-colors",
               onlyIssues
                 ? "border-warning/40 bg-warning/10 text-warning"
-                : "border-border bg-bg text-text-muted hover:text-text-main"
+                : "border-border-strong bg-surface text-text-muted hover:bg-bg-subtle hover:text-text-main"
             )}
           >
             {healthText(t, "onlyIssues", "Only issues")}
@@ -379,7 +379,7 @@ export default function ProviderHealthMatrixCard() {
             type="button"
             onClick={fetchMatrix}
             disabled={loading}
-            className="rounded-lg bg-primary/10 px-3 py-2 text-sm text-primary transition-colors hover:bg-primary/20 disabled:opacity-60"
+            className="rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-60"
           >
             {healthText(t, "refresh", "Refresh")}
           </button>
@@ -407,13 +407,13 @@ export default function ProviderHealthMatrixCard() {
       ) : null}
 
       {loading && !data ? (
-        <div className="mt-6 rounded-xl border border-border bg-bg-subtle p-8 text-center text-text-muted">
+        <div className="mt-6 rounded-lg border border-border bg-bg-subtle p-6 text-center text-sm text-text-muted">
           {healthText(t, "loadingProviderHealthMatrix", "Loading provider health matrix...")}
         </div>
       ) : null}
 
       {error ? (
-        <div className="mt-4 rounded-xl border border-red-500/30 bg-red-500/10 p-4 text-sm text-red-400">
+        <div className="mt-4 rounded-lg border border-error/20 bg-error/10 p-4 text-sm text-error">
           {healthText(
             t,
             "failedProviderHealthMatrix",
@@ -426,7 +426,7 @@ export default function ProviderHealthMatrixCard() {
       ) : null}
 
       {!loading && !error && providers.length === 0 ? (
-        <div className="mt-6 rounded-xl border border-border bg-bg-subtle p-8 text-center text-text-muted">
+        <div className="mt-6 rounded-lg border border-border bg-bg-subtle p-6 text-center text-sm text-text-muted">
           {healthText(t, "noProvidersMatchedFilters", "No providers matched the current filters.")}
         </div>
       ) : null}
@@ -435,7 +435,7 @@ export default function ProviderHealthMatrixCard() {
         {providers.map((provider) => {
           const isExpanded = expanded === provider.provider;
           return (
-            <div key={provider.provider} className="rounded-xl border border-border bg-surface/50">
+            <div key={provider.provider} className="rounded-lg border border-border bg-surface">
               <button
                 type="button"
                 onClick={() => setExpanded(isExpanded ? null : provider.provider)}

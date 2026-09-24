@@ -13,9 +13,9 @@ const TYPE_PILLS: Array<{
   key: "filesConceptInput" | "filesConceptOutput" | "filesConceptError";
   color: string;
 }> = [
-  { key: "filesConceptInput", color: "bg-blue-500/15 text-blue-400 border-blue-500/25" },
-  { key: "filesConceptOutput", color: "bg-emerald-500/15 text-emerald-400 border-emerald-500/25" },
-  { key: "filesConceptError", color: "bg-red-500/15 text-red-400 border-red-500/25" },
+  { key: "filesConceptInput", color: "bg-primary/10 text-primary border-primary/20" },
+  { key: "filesConceptOutput", color: "bg-success/10 text-success border-success/20" },
+  { key: "filesConceptError", color: "bg-error/10 text-error border-error/20" },
 ];
 
 export default function FilesConceptCard({ className = "" }: Props) {
@@ -48,21 +48,19 @@ export default function FilesConceptCard({ className = "" }: Props) {
 
   return (
     <div
-      className={`rounded-xl bg-[var(--color-surface)] border border-[var(--color-border)] p-4 flex flex-col gap-3 ${className}`}
+      className={`rounded-card bg-surface border border-border p-4 flex flex-col gap-3 ${className}`}
     >
       {/* Header */}
       <div className="flex items-center justify-between gap-2">
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-[20px] text-[var(--color-accent)]">
-            info
-          </span>
-          <span className="font-semibold text-sm text-[var(--color-text-main)]">
+          <span className="material-symbols-outlined text-[18px] text-text-muted">info</span>
+          <span className="font-semibold tracking-tight text-sm text-text-main">
             {t("filesConceptTitle")}
           </span>
         </div>
         <button
           onClick={toggle}
-          className="flex items-center gap-1 text-xs text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors"
+          className="flex items-center gap-1 text-xs text-text-muted hover:text-text-main transition-colors"
           aria-expanded={!collapsed}
         >
           {t("batchConceptHowItWorks")}
@@ -73,7 +71,7 @@ export default function FilesConceptCard({ className = "" }: Props) {
       </div>
 
       {/* Subtitle — always visible */}
-      <p className="text-sm text-[var(--color-text-muted)]">{t("filesConceptSubtitle")}</p>
+      <p className="text-sm text-text-muted">{t("filesConceptSubtitle")}</p>
 
       {/* 3 type pills — always visible */}
       <div className="flex flex-wrap gap-2">
@@ -90,36 +88,36 @@ export default function FilesConceptCard({ className = "" }: Props) {
       {/* Expandable bullets */}
       {!collapsed && (
         <ul className="flex flex-col gap-2 pl-1">
-          <li className="flex items-start gap-2 text-sm text-[var(--color-text-muted)]">
+          <li className="flex items-start gap-2 text-sm text-text-muted">
             <span
-              className="material-symbols-outlined text-[16px] text-blue-400 mt-0.5 shrink-0"
+              className="material-symbols-outlined text-[16px] text-text-subtle mt-0.5 shrink-0"
               aria-hidden="true"
             >
               upload_file
             </span>
             <span>{t("filesConceptInput")}</span>
           </li>
-          <li className="flex items-start gap-2 text-sm text-[var(--color-text-muted)]">
+          <li className="flex items-start gap-2 text-sm text-text-muted">
             <span
-              className="material-symbols-outlined text-[16px] text-emerald-400 mt-0.5 shrink-0"
+              className="material-symbols-outlined text-[16px] text-text-subtle mt-0.5 shrink-0"
               aria-hidden="true"
             >
               download
             </span>
             <span>{t("filesConceptOutput")}</span>
           </li>
-          <li className="flex items-start gap-2 text-sm text-[var(--color-text-muted)]">
+          <li className="flex items-start gap-2 text-sm text-text-muted">
             <span
-              className="material-symbols-outlined text-[16px] text-red-400 mt-0.5 shrink-0"
+              className="material-symbols-outlined text-[16px] text-text-subtle mt-0.5 shrink-0"
               aria-hidden="true"
             >
               error_outline
             </span>
             <span>{t("filesConceptError")}</span>
           </li>
-          <li className="flex items-start gap-2 text-sm text-[var(--color-text-muted)]">
+          <li className="flex items-start gap-2 text-sm text-text-muted">
             <span
-              className="material-symbols-outlined text-[16px] text-yellow-400 mt-0.5 shrink-0"
+              className="material-symbols-outlined text-[16px] text-text-subtle mt-0.5 shrink-0"
               aria-hidden="true"
             >
               event_available

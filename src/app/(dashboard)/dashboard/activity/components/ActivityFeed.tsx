@@ -21,13 +21,14 @@ export default function ActivityFeed({ entries, referenceNowMs }: ActivityFeedPr
         role="status"
         aria-live="polite"
       >
-        <span className="material-symbols-outlined text-[48px] text-[var(--color-text-muted)] mb-4" aria-hidden="true">
+        <span
+          className="material-symbols-outlined text-[32px] text-text-subtle mb-3"
+          aria-hidden="true"
+        >
           timeline
         </span>
-        <h3 className="text-base font-semibold text-[var(--color-text-main)] mb-1">
-          {t("emptyTitle")}
-        </h3>
-        <p className="text-sm text-[var(--color-text-muted)] max-w-sm">{t("emptyDescription")}</p>
+        <h3 className="text-sm font-semibold text-text-main mb-1">{t("emptyTitle")}</h3>
+        <p className="text-[13px] text-text-muted max-w-sm">{t("emptyDescription")}</p>
       </div>
     );
   }
@@ -35,11 +36,11 @@ export default function ActivityFeed({ entries, referenceNowMs }: ActivityFeedPr
   const groups = groupByDay(entries, referenceNowMs);
 
   return (
-    <div className="divide-y divide-[var(--color-border)]">
+    <div className="divide-y divide-border">
       {groups.map((group) => (
         <section key={group.dayKey} aria-label={group.label}>
           <DayHeader label={group.label} dayKey={group.dayKey} />
-          <ul className="divide-y divide-[var(--color-border)]">
+          <ul className="divide-y divide-border">
             {group.entries.map((entry, idx) => (
               <ActivityItem
                 key={typeof entry.id === "number" ? entry.id : `${group.dayKey}-${idx}`}

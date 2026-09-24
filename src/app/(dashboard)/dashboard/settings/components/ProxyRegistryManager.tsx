@@ -628,8 +628,8 @@ export default function ProxyRegistryManager({
       <Card className="p-6">
         <div className="mb-4 flex flex-col gap-3">
           <div className="w-full min-w-0">
-            <h3 className="text-lg font-semibold">{t("title")}</h3>
-            <p className="text-sm text-text-muted">{t("description")}</p>
+            <h3 className="text-base font-semibold tracking-tight text-text-main">{t("title")}</h3>
+            <p className="text-[13px] text-text-muted">{t("description")}</p>
           </div>
           <div className="w-full border-t border-border" aria-hidden="true" />
           <div className="flex w-full flex-wrap items-center justify-end gap-2">
@@ -670,7 +670,7 @@ export default function ProxyRegistryManager({
                 </Button>
                 {relayMenuOpen && (
                   <div
-                    className="absolute right-0 top-full z-50 mt-1 w-56 rounded-md border border-border bg-surface p-1 shadow-xl"
+                    className="absolute right-0 top-full z-50 mt-1 w-56 rounded-lg border border-border bg-surface p-1 shadow-[var(--shadow-elevated)]"
                     role="menu"
                   >
                     {showVercelRelay && (
@@ -739,7 +739,7 @@ export default function ProxyRegistryManager({
               </Button>
               {actionsOpen && (
                 <div
-                  className="absolute right-0 top-full z-50 mt-1 w-56 rounded-md border border-border bg-surface p-1 shadow-xl"
+                  className="absolute right-0 top-full z-50 mt-1 w-56 rounded-lg border border-border bg-surface p-1 shadow-[var(--shadow-elevated)]"
                   role="menu"
                 >
                   <Button
@@ -800,12 +800,12 @@ export default function ProxyRegistryManager({
         </div>
 
         {error && (
-          <div className="mb-3 px-3 py-2 rounded border border-red-500/30 bg-red-500/10 text-sm text-red-400">
+          <div className="mb-3 px-3 py-2 rounded-md border border-error/20 bg-error/10 text-sm text-error">
             {error}
           </div>
         )}
         {relayTested !== null && relayAlive !== null && (
-          <div className="mb-3 px-3 py-2 rounded border border-border/60 bg-surface-alt text-xs text-text-muted">
+          <div className="mb-3 px-3 py-2 rounded-md border border-border bg-bg-subtle text-xs text-text-muted">
             {t("relayProbeSummary", { tested: relayTested, alive: relayAlive })}
           </div>
         )}
@@ -816,13 +816,13 @@ export default function ProxyRegistryManager({
           <div className="text-sm text-text-muted">{t("noProxies")}</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full text-[13px]">
               <thead>
-                <tr className="text-left text-text-muted border-b border-border">
+                <tr className="text-left text-xs text-text-muted border-b border-border">
                   <th className="py-2 pr-2 w-8">
                     <input
                       type="checkbox"
-                      className="accent-blue-500 w-4 h-4 cursor-pointer"
+                      className="accent-primary w-4 h-4 cursor-pointer"
                       checked={allSelected}
                       ref={(el) => {
                         if (el)
@@ -833,11 +833,11 @@ export default function ProxyRegistryManager({
                       aria-label={t("selectAllProxies")}
                     />
                   </th>
-                  <th className="py-2 pr-3">{t("tableName")}</th>
-                  <th className="py-2 pr-3">{t("tableStatus")}</th>
-                  <th className="py-2 pr-3">{t("tableHealth")}</th>
-                  <th className="py-2 pr-3">{t("tableUsage")}</th>
-                  <th className="py-2">{t("tableActions")}</th>
+                  <th className="py-2 pr-3 font-medium">{t("tableName")}</th>
+                  <th className="py-2 pr-3 font-medium">{t("tableStatus")}</th>
+                  <th className="py-2 pr-3 font-medium">{t("tableHealth")}</th>
+                  <th className="py-2 pr-3 font-medium">{t("tableUsage")}</th>
+                  <th className="py-2 font-medium">{t("tableActions")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -845,7 +845,7 @@ export default function ProxyRegistryManager({
                   const usage = usageById[item.id];
                   const health = healthById[item.id];
                   return (
-                    <tr key={item.id} className="border-b border-border/60">
+                    <tr key={item.id} className="border-b border-border">
                       <ProxyCheckboxCell
                         checked={selectedIds.has(item.id)}
                         onChange={() => toggleSelect(item.id)}
@@ -900,13 +900,13 @@ export default function ProxyRegistryManager({
                               </Button>
                             )}
                           {item.relayInfo?.isRelay && item.relayInfo.authMissing && (
-                            <span className="ml-1 rounded bg-amber-500/15 px-1.5 py-0.5 text-[10px] font-medium text-amber-400">
+                            <span className="ml-1 rounded-md bg-warning/10 px-1.5 py-0.5 text-[10px] font-medium text-warning">
                               {t("relayAuthMissing")}
                             </span>
                           )}
                           {repairErrorById[item.id] && (
                             <span
-                              className="ml-1 text-[10px] text-red-400"
+                              className="ml-1 text-[10px] text-error"
                               title={repairErrorById[item.id]}
                             >
                               {t("relayRepairError")}
@@ -925,7 +925,7 @@ export default function ProxyRegistryManager({
                             variant="ghost"
                             icon="delete"
                             onClick={() => void handleDelete(item.id)}
-                            className="!text-red-400"
+                            className="!text-error hover:!bg-error/10"
                           >
                             {t("delete")}
                           </Button>
@@ -962,7 +962,7 @@ export default function ProxyRegistryManager({
               <label className="text-xs text-text-muted mb-1 block">{t("labelName")}</label>
               <input
                 data-testid="proxy-registry-name-input"
-                className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                 value={form.name}
                 onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
               />
@@ -970,7 +970,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelType")}</label>
               <select
-                className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                 value={form.type}
                 onChange={(e) => setForm((prev) => ({ ...prev, type: e.target.value }))}
               >
@@ -982,7 +982,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelFamily")}</label>
               <select
-                className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                 value={form.family}
                 onChange={(e) => setForm((prev) => ({ ...prev, family: e.target.value }))}
               >
@@ -996,7 +996,7 @@ export default function ProxyRegistryManager({
               <label className="text-xs text-text-muted mb-1 block">{t("labelHost")}</label>
               <input
                 data-testid="proxy-registry-host-input"
-                className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                 value={form.host}
                 onChange={(e) => setForm((prev) => ({ ...prev, host: e.target.value }))}
               />
@@ -1004,7 +1004,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelPort")}</label>
               <input
-                className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                 value={form.port}
                 onChange={(e) => setForm((prev) => ({ ...prev, port: e.target.value }))}
               />
@@ -1012,7 +1012,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelUsername")}</label>
               <input
-                className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                 value={form.username}
                 autoComplete="off"
                 data-1p-ignore="true"
@@ -1025,7 +1025,7 @@ export default function ProxyRegistryManager({
               <label className="text-xs text-text-muted mb-1 block">{t("labelPassword")}</label>
               <input
                 type="password"
-                className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                 value={form.password}
                 autoComplete="new-password"
                 data-1p-ignore="true"
@@ -1037,7 +1037,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelRegion")}</label>
               <input
-                className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                 value={form.region}
                 onChange={(e) => setForm((prev) => ({ ...prev, region: e.target.value }))}
               />
@@ -1045,7 +1045,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelStatus")}</label>
               <select
-                className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                 value={form.status}
                 onChange={(e) => setForm((prev) => ({ ...prev, status: e.target.value }))}
                 data-testid="proxy-registry-status-select"
@@ -1060,7 +1060,7 @@ export default function ProxyRegistryManager({
           <div>
             <label className="text-xs text-text-muted mb-1 block">{t("labelNotes")}</label>
             <textarea
-              className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
               value={form.notes}
               onChange={(e) => setForm((prev) => ({ ...prev, notes: e.target.value }))}
               rows={3}
@@ -1091,7 +1091,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelScope")}</label>
               <select
-                className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                 value={bulkScope}
                 onChange={(e) => setBulkScope(e.target.value)}
               >
@@ -1104,7 +1104,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelProxy")}</label>
               <select
-                className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                 value={bulkProxyId}
                 onChange={(e) => setBulkProxyId(e.target.value)}
               >
@@ -1123,7 +1123,7 @@ export default function ProxyRegistryManager({
               <label className="text-xs text-text-muted mb-1 block">{t("bulkLabelScopeIds")}</label>
               <textarea
                 data-testid="proxy-registry-bulk-scopeids-input"
-                className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                 rows={5}
                 value={bulkScopeIds}
                 onChange={(e) => setBulkScopeIds(e.target.value)}
@@ -1165,7 +1165,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelScope")}</label>
               <select
-                className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                 value={poolScope}
                 onChange={(e) => {
                   setPoolScope(e.target.value);
@@ -1186,7 +1186,7 @@ export default function ProxyRegistryManager({
                   {t("poolScopeIdLabel")}
                 </label>
                 <input
-                  className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                   value={poolScopeId}
                   onChange={(e) => {
                     setPoolScopeId(e.target.value);
@@ -1220,7 +1220,7 @@ export default function ProxyRegistryManager({
                   {t("poolStrategyLabel")}
                 </label>
                 <select
-                  className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                   value={poolStrategy}
                   onChange={(e) =>
                     handlePoolStrategyChange(e.target.value as "round-robin" | "random" | "sticky")
@@ -1243,7 +1243,7 @@ export default function ProxyRegistryManager({
                 <PoolEgressObservation query={poolQuery()} />
                 <PoolMemberEgressLines query={poolQuery()} />
                 {poolMembers.length === 0 ? (
-                  <div className="text-sm text-text-muted px-3 py-2 rounded border border-border bg-bg-subtle">
+                  <div className="text-sm text-text-muted px-3 py-2 rounded-md border border-border bg-bg-subtle">
                     {t("poolNoMembers")}
                   </div>
                 ) : (
@@ -1253,9 +1253,9 @@ export default function ProxyRegistryManager({
                       return (
                         <div
                           key={proxyId}
-                          className="flex items-center justify-between px-3 py-2 rounded border border-border bg-bg-subtle"
+                          className="flex items-center justify-between px-3 py-2 rounded-md border border-border bg-surface-2"
                         >
-                          <span className="text-sm">
+                          <span className="text-sm text-text-main">
                             {proxy
                               ? `${proxy.name} (${proxy.type}://${proxy.host}:${proxy.port})`
                               : proxyId}
@@ -1280,7 +1280,7 @@ export default function ProxyRegistryManager({
                 <div className="flex-1">
                   <label className="text-xs text-text-muted mb-1 block">{t("poolAddLabel")}</label>
                   <select
-                    className="w-full px-3 py-2 rounded bg-bg-subtle border border-border"
+                    className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
                     value={poolAddProxyId}
                     onChange={(e) => setPoolAddProxyId(e.target.value)}
                     data-testid="proxy-registry-pool-add-select"
@@ -1336,7 +1336,7 @@ export default function ProxyRegistryManager({
           <div>
             <textarea
               data-testid="proxy-registry-bulk-import-textarea"
-              className="w-full px-3 py-2 rounded bg-bg-subtle border border-border font-mono text-xs leading-relaxed placeholder:whitespace-pre-wrap placeholder:text-text-muted/70"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong font-mono text-xs leading-relaxed text-text-main focus:outline-none focus:border-primary placeholder:whitespace-pre-wrap placeholder:text-text-subtle"
               rows={14}
               value={bulkImportText}
               placeholder={BULK_IMPORT_PLACEHOLDER}
@@ -1363,14 +1363,14 @@ export default function ProxyRegistryManager({
 
             {bulkImportParsedOnce && (
               <div className="flex items-center gap-3 text-xs">
-                <span className="text-emerald-400">
+                <span className="text-success">
                   {t("bulkImportParsed", { count: bulkImportParsed.length })}
                 </span>
                 <span className="text-text-muted">
                   {t("bulkImportSkipped", { count: bulkImportSkipped })}
                 </span>
                 {bulkImportErrors.length > 0 && (
-                  <span className="text-red-400">
+                  <span className="text-error">
                     {t("bulkImportParseErrors", { count: bulkImportErrors.length })}
                   </span>
                 )}
@@ -1380,9 +1380,9 @@ export default function ProxyRegistryManager({
 
           {/* Parse errors */}
           {bulkImportErrors.length > 0 && (
-            <div className="max-h-28 overflow-y-auto rounded border border-red-500/30 bg-red-500/10 p-2">
+            <div className="max-h-28 overflow-y-auto rounded-md border border-error/20 bg-error/10 p-2">
               {bulkImportErrors.map((err, idx) => (
-                <div key={idx} className="text-xs text-red-400">
+                <div key={idx} className="text-xs text-error">
                   {t("bulkImportErrorLine", { line: err.line, reason: t(err.reason as any) })}
                 </div>
               ))}
@@ -1391,22 +1391,22 @@ export default function ProxyRegistryManager({
 
           {/* Preview table */}
           {bulkImportParsedOnce && bulkImportParsed.length > 0 && (
-            <div className="overflow-x-auto max-h-48 overflow-y-auto rounded border border-border">
+            <div className="overflow-x-auto max-h-48 overflow-y-auto rounded-md border border-border">
               <table className="w-full text-xs">
                 <thead>
                   <tr className="text-left text-text-muted border-b border-border bg-bg-subtle sticky top-0">
-                    <th className="py-1.5 px-2">{t("tableName")}</th>
-                    <th className="py-1.5 px-2">{t("labelType")}</th>
-                    <th className="py-1.5 px-2">{t("labelHost")}</th>
-                    <th className="py-1.5 px-2">{t("labelPort")}</th>
-                    <th className="py-1.5 px-2">{t("labelUsername")}</th>
-                    <th className="py-1.5 px-2">{t("labelRegion")}</th>
-                    <th className="py-1.5 px-2">{t("labelStatus")}</th>
+                    <th className="py-1.5 px-2 font-medium">{t("tableName")}</th>
+                    <th className="py-1.5 px-2 font-medium">{t("labelType")}</th>
+                    <th className="py-1.5 px-2 font-medium">{t("labelHost")}</th>
+                    <th className="py-1.5 px-2 font-medium">{t("labelPort")}</th>
+                    <th className="py-1.5 px-2 font-medium">{t("labelUsername")}</th>
+                    <th className="py-1.5 px-2 font-medium">{t("labelRegion")}</th>
+                    <th className="py-1.5 px-2 font-medium">{t("labelStatus")}</th>
                   </tr>
                 </thead>
                 <tbody>
                   {bulkImportParsed.map((entry, idx) => (
-                    <tr key={idx} className="border-b border-border/40">
+                    <tr key={idx} className="border-b border-border">
                       <td className="py-1 px-2 font-medium text-text-main">{entry.name}</td>
                       <td className="py-1 px-2">
                         <span className="px-1.5 py-0.5 rounded bg-bg-subtle border border-border text-[10px]">
@@ -1418,9 +1418,7 @@ export default function ProxyRegistryManager({
                       <td className="py-1 px-2 text-text-muted">{entry.username || "—"}</td>
                       <td className="py-1 px-2 text-text-muted">{entry.region || "—"}</td>
                       <td className="py-1 px-2 text-text-muted">
-                        <span
-                          className={entry.status === "active" ? "text-emerald-400" : undefined}
-                        >
+                        <span className={entry.status === "active" ? "text-success" : undefined}>
                           {entry.status === "active" && t("statusActive")}
                           {entry.status === "inactive" && t("statusInactive")}
                           {!entry.status && "—"}
@@ -1437,12 +1435,12 @@ export default function ProxyRegistryManager({
           {bulkImportParsedOnce &&
             bulkImportParsed.length === 0 &&
             bulkImportErrors.length === 0 && (
-              <div className="text-sm text-amber-400">{t("bulkImportNoValidEntries")}</div>
+              <div className="text-sm text-warning">{t("bulkImportNoValidEntries")}</div>
             )}
 
           {/* Import result */}
           {bulkImportResult && (
-            <div className="px-3 py-2 rounded border border-emerald-500/30 bg-emerald-500/10 text-sm text-emerald-400">
+            <div className="px-3 py-2 rounded-md border border-success/20 bg-success/10 text-sm text-success">
               {t("bulkImportSuccess", {
                 created: bulkImportResult.created,
                 updated: bulkImportResult.updated,

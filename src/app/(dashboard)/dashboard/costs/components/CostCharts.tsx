@@ -66,9 +66,7 @@ export function ProviderSpendCard({
 
   return (
     <Card className="p-5">
-      <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-4">
-        {title}
-      </h3>
+      <h3 className="text-sm font-semibold tracking-tight text-text-main mb-4">{title}</h3>
       <div className="flex flex-col gap-4 md:flex-row md:items-center">
         <div className="w-full md:w-45 h-45">
           <ResponsiveContainer width="100%" height="100%">
@@ -92,7 +90,7 @@ export function ProviderSpendCard({
                   borderColor: "var(--color-border)",
                   borderRadius: 12,
                   color: "var(--color-text-main)",
-                  boxShadow: "var(--shadow-soft)",
+                  boxShadow: "var(--shadow-elevated)",
                 }}
               />
             </PieChart>
@@ -108,7 +106,7 @@ export function ProviderSpendCard({
                 />
                 <span className="font-medium truncate max-w-[120px]">{row.name}</span>
               </div>
-              <span className="text-text-muted shrink-0">
+              <span className="font-mono tabular-nums text-[13px] text-text-muted shrink-0">
                 {currencyFormatter.format(row.value)}
               </span>
             </div>
@@ -136,22 +134,20 @@ export function CostTrendCard({
 
   return (
     <Card className="p-5">
-      <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-4">
-        {title}
-      </h3>
+      <h3 className="text-sm font-semibold tracking-tight text-text-main mb-4">{title}</h3>
       <div className="h-55">
         <ResponsiveContainer width="100%" height="100%">
           <LineChart data={chartRows} margin={{ top: 5, right: 12, left: 0, bottom: 0 }}>
-            <CartesianGrid stroke="rgba(255,255,255,0.06)" vertical={false} />
+            <CartesianGrid stroke="var(--color-border)" vertical={false} />
             <XAxis
               dataKey="date"
-              tick={{ fontSize: 10, fill: "var(--text-muted)" }}
+              tick={{ fontSize: 10, fill: "var(--color-text-muted)" }}
               axisLine={false}
               tickLine={false}
               interval={Math.max(Math.floor(chartRows.length / 8), 0)}
             />
             <YAxis
-              tick={{ fontSize: 10, fill: "var(--text-muted)" }}
+              tick={{ fontSize: 10, fill: "var(--color-text-muted)" }}
               axisLine={false}
               tickLine={false}
               tickFormatter={(value) => currencyFormatter.format(value).replace(".00", "")}
@@ -164,13 +160,13 @@ export function CostTrendCard({
                 borderColor: "var(--color-border)",
                 borderRadius: 12,
                 color: "var(--color-text-main)",
-                boxShadow: "var(--shadow-soft)",
+                boxShadow: "var(--shadow-elevated)",
               }}
             />
             <Line
               type="monotone"
               dataKey="cost"
-              stroke="#10b981"
+              stroke="var(--color-primary)"
               strokeWidth={2.5}
               dot={false}
               activeDot={{ r: 4 }}
@@ -200,20 +196,18 @@ export function WeeklyPatternCard({
 
   return (
     <Card className="p-5">
-      <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-4">
-        {title}
-      </h3>
+      <h3 className="text-sm font-semibold tracking-tight text-text-main mb-4">{title}</h3>
       <div className="h-40">
         <ResponsiveContainer width="100%" height="100%">
           <BarChart data={chartData} margin={{ top: 5, right: 5, left: 0, bottom: 0 }}>
             <XAxis
               dataKey="day"
-              tick={{ fontSize: 11, fill: "var(--text-muted)" }}
+              tick={{ fontSize: 11, fill: "var(--color-text-muted)" }}
               axisLine={false}
               tickLine={false}
             />
             <YAxis
-              tick={{ fontSize: 10, fill: "var(--text-muted)" }}
+              tick={{ fontSize: 10, fill: "var(--color-text-muted)" }}
               axisLine={false}
               tickLine={false}
               tickFormatter={(value) =>
@@ -232,10 +226,10 @@ export function WeeklyPatternCard({
                 borderColor: "var(--color-border)",
                 borderRadius: 12,
                 color: "var(--color-text-main)",
-                boxShadow: "var(--shadow-soft)",
+                boxShadow: "var(--shadow-elevated)",
               }}
             />
-            <Bar dataKey="tokens" fill="#8b5cf6" radius={[4, 4, 0, 0]} />
+            <Bar dataKey="tokens" fill="var(--color-primary)" radius={[4, 4, 0, 0]} />
           </BarChart>
         </ResponsiveContainer>
       </div>

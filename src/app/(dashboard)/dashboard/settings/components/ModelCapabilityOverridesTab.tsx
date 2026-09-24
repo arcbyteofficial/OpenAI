@@ -33,9 +33,9 @@ interface StatusMessage {
 }
 
 function statusClassName(tone: StatusTone) {
-  if (tone === "success") return "bg-emerald-500/10 border-emerald-500/20 text-emerald-400";
-  if (tone === "error") return "bg-red-500/10 border-red-500/20 text-red-400";
-  return "bg-sky-500/10 border-sky-500/20 text-sky-400";
+  if (tone === "success") return "bg-success/10 border-success/20 text-success";
+  if (tone === "error") return "bg-error/10 border-error/20 text-error";
+  return "bg-bg-subtle border-border text-text-muted";
 }
 
 function useModelCapabilityOverridesData() {
@@ -209,8 +209,8 @@ function ModelOverridesHeader({ count }: { count: number }) {
   return (
     <div className="flex items-start justify-between gap-3 mb-3">
       <div>
-        <h3 className="text-sm font-bold flex items-center gap-2">
-          <span className="material-symbols-outlined text-[18px] text-primary">tune</span>
+        <h3 className="text-sm font-semibold text-text-main flex items-center gap-2">
+          <span className="material-symbols-outlined text-[18px] text-text-muted">tune</span>
           {t("modelOverridesTitle")}
         </h3>
         <p className="text-xs text-text-muted mt-1">{t("modelOverridesDesc")}</p>
@@ -239,17 +239,17 @@ function ModelOverrideTargetList({
 }) {
   const t = useTranslations("settings");
   return (
-    <div className="rounded-lg border border-border/50 overflow-hidden">
-      <div className="p-2 border-b border-border/50 bg-bg-subtle/40">
+    <div className="rounded-lg border border-border overflow-hidden">
+      <div className="p-2 border-b border-border bg-surface-2">
         <input
           type="text"
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder={t("searchModelOverrideTargets")}
-          className="w-full px-3 py-2 text-xs bg-bg-base border border-border rounded-md focus:outline-none focus:border-primary"
+          className="w-full px-3 py-2 text-xs bg-surface border border-border-strong rounded-control focus:outline-none focus:border-primary"
         />
       </div>
-      <div className="max-h-56 overflow-y-auto divide-y divide-border/40">
+      <div className="max-h-56 overflow-y-auto divide-y divide-border">
         {filteredTargets.map((entry) => (
           <ModelOverrideTargetButton
             key={entry.target}
@@ -279,13 +279,13 @@ function ModelOverrideTargetButton({
     <button
       type="button"
       onClick={() => onSelect(entry.target)}
-      className={`w-full px-3 py-2 text-left text-xs flex items-center justify-between gap-2 hover:bg-bg-hover/50 ${
+      className={`w-full px-3 py-2 text-left text-xs flex items-center justify-between gap-2 transition-colors hover:bg-bg-subtle ${
         active ? "bg-primary/10 text-primary" : "text-text-main"
       }`}
     >
       <span className="truncate font-mono">{entry.label}</span>
       {count > 0 && (
-        <span className="shrink-0 text-[10px] px-1.5 py-0.5 rounded bg-amber-500/15 text-amber-400">
+        <span className="shrink-0 text-[10px] px-1.5 py-0.5 rounded bg-bg-subtle text-text-main tabular-nums">
           {count}
         </span>
       )}
@@ -306,9 +306,9 @@ function ModelOverrideEditor({
 }) {
   const t = useTranslations("settings");
   return (
-    <div className="rounded-lg border border-border/50 p-3 flex flex-col gap-3">
+    <div className="rounded-lg border border-border p-3 flex flex-col gap-3">
       <div>
-        <p className="text-[10px] uppercase tracking-wide text-text-muted font-semibold mb-1">
+        <p className="text-[11px] uppercase tracking-wider text-text-subtle font-medium mb-1">
           {t("selectedModel")}
         </p>
         <p className="text-xs font-mono break-all">{activeTarget || t("none")}</p>
@@ -342,7 +342,7 @@ function ModelOverrideForm({
       <select
         value={key}
         onChange={(event) => setKey(event.target.value as ModelOverrideKey)}
-        className="sm:w-40 px-2 py-2 text-xs bg-bg-base border border-border rounded-md focus:outline-none focus:border-primary"
+        className="sm:w-40 px-2 py-2 text-xs bg-surface border border-border-strong rounded-control focus:outline-none focus:border-primary"
       >
         <option value="context_length">context_length</option>
         <option value="max_input_tokens">max_input_tokens</option>
@@ -360,7 +360,7 @@ function ModelOverrideForm({
             ? "modelOverrideReasoningEffortsPlaceholder"
             : "modelOverrideValuePlaceholder"
         )}
-        className="flex-1 px-3 py-2 text-xs bg-bg-base border border-border rounded-md focus:outline-none focus:border-primary"
+        className="flex-1 px-3 py-2 text-xs bg-surface border border-border-strong rounded-control focus:outline-none focus:border-primary"
       />
       <Button
         variant="primary"
@@ -386,11 +386,11 @@ function ModelOverrideRows({
 }) {
   const t = useTranslations("settings");
   return (
-    <div className="rounded-md border border-border/40 overflow-hidden">
+    <div className="rounded-md border border-border overflow-hidden">
       {activeOverrides.length === 0 ? (
         <div className="px-3 py-4 text-xs text-text-muted text-center">{t("noModelOverrides")}</div>
       ) : (
-        <div className="divide-y divide-border/40">
+        <div className="divide-y divide-border">
           {activeOverrides.map((override) => (
             <ModelOverrideRow
               key={`${override.target}:${override.key}`}
@@ -423,7 +423,7 @@ function ModelOverrideRow({
       <button
         type="button"
         onClick={() => onRemove(override.target, override.key)}
-        className="text-red-400 hover:bg-red-500/10 rounded px-2 py-1"
+        className="text-error hover:bg-error/10 rounded-md px-2 py-1 transition-colors"
       >
         {t("remove")}
       </button>

@@ -41,7 +41,7 @@ export function EventChecklist({
         className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
           isAll
             ? "border-primary/30 bg-primary/10 text-primary"
-            : "border-border bg-surface text-text-muted hover:text-text-main"
+            : "border-border bg-surface text-text-muted hover:border-border-strong hover:text-text-main"
         }`}
       >
         {allEventsLabel}
@@ -51,10 +51,10 @@ export function EventChecklist({
           key={ev}
           type="button"
           onClick={() => toggle(ev)}
-          className={`rounded-full border px-3 py-1 text-xs font-medium transition-colors ${
+          className={`rounded-full border px-3 py-1 font-mono text-[11px] font-medium transition-colors ${
             isAll || selected.includes(ev)
               ? "border-primary/30 bg-primary/10 text-primary"
-              : "border-border bg-surface text-text-muted hover:text-text-main"
+              : "border-border bg-surface text-text-muted hover:border-border-strong hover:text-text-main"
           }`}
         >
           {ev}

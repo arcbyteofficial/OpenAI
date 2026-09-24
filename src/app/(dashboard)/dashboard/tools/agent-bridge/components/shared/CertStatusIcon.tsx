@@ -11,7 +11,7 @@ export function CertStatusIcon({ trusted, size = 16 }: CertStatusIconProps) {
   const t = useTranslations("agentBridge");
   return trusted ? (
     <span
-      className="material-symbols-outlined text-emerald-500"
+      className="material-symbols-outlined text-success"
       style={{ fontSize: size }}
       title={t("certTrusted")}
     >
@@ -19,7 +19,7 @@ export function CertStatusIcon({ trusted, size = 16 }: CertStatusIconProps) {
     </span>
   ) : (
     <span
-      className="material-symbols-outlined text-zinc-400"
+      className="material-symbols-outlined text-text-subtle"
       style={{ fontSize: size }}
       title={t("certNotTrusted")}
     >

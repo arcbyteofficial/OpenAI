@@ -65,8 +65,10 @@ function verdictVariant(v: CacheHealthVerdict) {
 function Metric({ label, value, hint }: { label: string; value: string; hint?: string }) {
   return (
     <div className="flex flex-col gap-1">
-      <span className="text-xs uppercase tracking-wide text-text-muted">{label}</span>
-      <span className="text-2xl font-semibold text-text-main">{value}</span>
+      <span className="text-[13px] text-text-muted">{label}</span>
+      <span className="text-2xl font-semibold tracking-tight tabular-nums text-text-main">
+        {value}
+      </span>
       {hint ? <span className="text-xs text-text-muted">{hint}</span> : null}
     </div>
   );
@@ -118,7 +120,7 @@ export default function CacheHealthTab() {
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex items-center gap-2">
-          <h2 className="text-lg font-semibold text-text-main">
+          <h2 className="text-lg font-semibold tracking-tight text-text-main">
             {text(t, "cacheHealthTitle", "Prompt cache health")}
           </h2>
           <Badge variant={verdictVariant(data.verdict)}>
@@ -196,7 +198,7 @@ export default function CacheHealthTab() {
                 <div
                   className={cn(
                     "h-full rounded-full",
-                    data.heavyWriteTokenShare > 0.75 ? "bg-red-500" : "bg-amber-500"
+                    data.heavyWriteTokenShare > 0.75 ? "bg-error" : "bg-warning"
                   )}
                   style={{ width: `${Math.min(100, data.heavyWriteTokenShare * 100)}%` }}
                 />
@@ -215,9 +217,9 @@ export default function CacheHealthTab() {
               {text(t, "cacheHealthByModel", "By model (worst ratio first)")}
             </h3>
             <div className="overflow-x-auto">
-              <table className="w-full min-w-[560px] text-sm">
+              <table className="w-full min-w-[560px] text-[13px]">
                 <thead>
-                  <tr className="border-b border-border text-left text-xs uppercase text-text-muted">
+                  <tr className="border-b border-border text-left text-xs text-text-muted">
                     <th className="pb-2 pr-4 font-medium">
                       {text(t, "cacheHealthModel", "Model")}
                     </th>
@@ -238,28 +240,30 @@ export default function CacheHealthTab() {
                 </thead>
                 <tbody>
                   {data.byModel.map((m) => (
-                    <tr key={m.model} className="border-b border-border/50 last:border-0">
-                      <td className="py-2 pr-4 font-mono text-xs text-text-main">{m.model}</td>
-                      <td className="py-2 pr-4 text-right text-text-muted">{compact(m.calls)}</td>
-                      <td className="py-2 pr-4 text-right text-text-muted">
+                    <tr key={m.model} className="border-b border-border last:border-0">
+                      <td className="py-2 pr-4 font-mono text-[12px] text-text-main">{m.model}</td>
+                      <td className="py-2 pr-4 text-right tabular-nums text-text-muted">
+                        {compact(m.calls)}
+                      </td>
+                      <td className="py-2 pr-4 text-right tabular-nums text-text-muted">
                         {compact(m.cacheReadTotal)}
                       </td>
-                      <td className="py-2 pr-4 text-right text-text-muted">
+                      <td className="py-2 pr-4 text-right tabular-nums text-text-muted">
                         {compact(m.cacheWriteTotal)}
                       </td>
                       <td
                         className={cn(
-                          "py-2 pr-4 text-right font-medium",
+                          "py-2 pr-4 text-right font-medium tabular-nums",
                           m.writeReadRatio > 1
-                            ? "text-red-500"
+                            ? "text-error"
                             : m.writeReadRatio > 0.2
-                              ? "text-amber-500"
+                              ? "text-warning"
                               : "text-text-main"
                         )}
                       >
                         {m.writeReadRatio.toFixed(2)}
                       </td>
-                      <td className="py-2 text-right text-text-muted">
+                      <td className="py-2 text-right tabular-nums text-text-muted">
                         {compact(m.heavyWriteCalls)}
                       </td>
                     </tr>

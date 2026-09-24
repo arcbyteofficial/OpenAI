@@ -27,7 +27,7 @@ export default function RerankConfigCard({ settings, providers, onSave, saving }
 
   return (
     <div className="space-y-3">
-      <div className="flex items-center justify-between p-3 rounded-lg bg-surface/30 border border-border/60">
+      <div className="flex items-center justify-between p-3 rounded-lg bg-surface-2 border border-border">
         <div>
           <p className="text-sm font-medium text-text-main">{t("rerank.enableLabel")}</p>
           <p className="text-xs text-text-muted mt-0.5">{t("rerank.enableDesc")}</p>
@@ -47,7 +47,7 @@ export default function RerankConfigCard({ settings, providers, onSave, saving }
           role="switch"
           aria-checked={rerankEnabled}
           className={`relative w-11 h-6 rounded-full transition-colors shrink-0 disabled:opacity-50 disabled:cursor-not-allowed ${
-            rerankEnabled ? "bg-violet-500" : "bg-border"
+            rerankEnabled ? "bg-primary" : "bg-border-strong"
           }`}
         >
           <span
@@ -61,19 +61,19 @@ export default function RerankConfigCard({ settings, providers, onSave, saving }
       {rerankEnabled && (
         <>
           {/* Latency / cost warning */}
-          <div className="p-3 rounded-lg bg-amber-500/10 border border-amber-500/20 text-xs text-amber-400 flex items-start gap-2">
+          <div className="p-3 rounded-lg bg-warning/10 border border-warning/20 text-xs text-warning flex items-start gap-2">
             <span className="material-symbols-outlined text-[14px] mt-0.5 shrink-0">warning</span>
             <span>{t("rerank.warning")}</span>
           </div>
 
-          <div className="p-3 rounded-lg bg-surface/30 border border-border/60">
+          <div className="p-3 rounded-lg bg-surface-2 border border-border">
             <label className="block text-sm font-medium text-text-main mb-2">
               {t("rerank.providerModelLabel")}
             </label>
             {!hasProvider ? (
               <p
                 data-testid="rerank-no-provider-warning"
-                className="text-xs text-amber-400 flex items-center gap-1"
+                className="text-xs text-warning flex items-center gap-1"
               >
                 <span className="material-symbols-outlined text-[12px]">warning</span>
                 {t("rerank.noProviderWithKey")}
@@ -89,7 +89,7 @@ export default function RerankConfigCard({ settings, providers, onSave, saving }
                   onChange={(e) => handleProviderModelChange(e.target.value)}
                   disabled={saving}
                   data-testid="rerank-provider-model-select"
-                  className="w-full px-3 py-2 rounded-lg bg-background border border-border text-sm focus:outline-none focus:ring-1 focus:ring-violet-500"
+                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                 >
                   <option value="">{t("rerank.selectProviderModel")}</option>
                   {rerankProviders.map((p) =>
@@ -115,7 +115,7 @@ export default function RerankConfigCard({ settings, providers, onSave, saving }
                   disabled={saving}
                   placeholder="provider/model — e.g. groq/my-reranker"
                   data-testid="rerank-provider-model-input"
-                  className="w-full mt-2 px-3 py-2 rounded-lg bg-background border border-border text-sm font-mono focus:outline-none focus:ring-1 focus:ring-violet-500"
+                  className="w-full mt-2 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                 />
               </>
             )}

@@ -58,10 +58,10 @@ export default function ScrapeTab({ configState, onMetrics }: ScrapeTabProps) {
   return (
     <div className="flex flex-col h-full p-4 space-y-4" data-testid="scrape-tab">
       {/* URL input */}
-      <div className="bg-surface border border-border rounded-lg p-4 space-y-3">
+      <div className="bg-surface border border-border rounded-card p-4 space-y-3">
         <label
           htmlFor="scrape-url"
-          className="block text-[10px] font-semibold text-text-muted uppercase tracking-wider"
+          className="block text-[11px] font-medium text-text-subtle uppercase tracking-wider"
         >
           {t("scrapeUrl")}
         </label>
@@ -75,14 +75,14 @@ export default function ScrapeTab({ configState, onMetrics }: ScrapeTabProps) {
               if (urlError) setUrlError(null);
             }}
             placeholder="https://example.com/article"
-            className="flex-1 bg-bg-alt border border-border rounded-lg px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/30"
+            className="flex-1 bg-surface border border-border-strong rounded-control px-3 py-1.5 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
             onKeyDown={(e) => {
               if (e.key === "Enter") void handleSubmit();
             }}
             data-testid="url-input"
           />
           <button
-            className="px-4 py-2 rounded-lg bg-primary text-white text-sm font-medium hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-3.5 py-1.5 rounded-control bg-contrast text-contrast-fg text-sm font-medium hover:bg-contrast-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() => void handleSubmit()}
             disabled={loading}
             data-testid="scrape-button"
@@ -133,7 +133,7 @@ export default function ScrapeTab({ configState, onMetrics }: ScrapeTabProps) {
       {loading && (
         <div className="flex items-center justify-center py-12" data-testid="scrape-loading">
           <span
-            className="material-symbols-outlined text-[32px] text-primary animate-spin"
+            className="material-symbols-outlined text-[32px] text-text-muted animate-spin"
             aria-hidden="true"
           >
             progress_activity

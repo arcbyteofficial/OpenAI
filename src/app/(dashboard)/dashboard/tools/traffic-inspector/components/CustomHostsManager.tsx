@@ -85,17 +85,17 @@ export function CustomHostsManager({ onClose }: CustomHostsManagerProps) {
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="w-full max-w-md rounded-xl border border-border bg-surface shadow-xl p-5">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40">
+      <div className="w-full max-w-md rounded-card border border-border bg-surface shadow-[var(--shadow-elevated)] p-5">
         <div className="flex items-center justify-between mb-4">
           <h2 className="text-base font-semibold text-text-main">{t("customHostsTitle")}</h2>
           <button
             type="button"
             onClick={onClose}
-            className="text-text-muted hover:text-text-main focus-ring rounded"
+            className="text-text-muted hover:text-text-main transition-colors focus-ring rounded-md"
             aria-label={t("close")}
           >
-            <span className="material-symbols-outlined" aria-hidden="true">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               close
             </span>
           </button>
@@ -108,17 +108,17 @@ export function CustomHostsManager({ onClose }: CustomHostsManagerProps) {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && addHost()}
             placeholder={t("hostPlaceholder")}
-            className="flex-1 rounded border border-border bg-bg-subtle px-3 py-1.5 text-sm text-text-main focus:outline-none focus:ring-1 focus:ring-blue-500"
+            className="flex-1 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-sm font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
           />
           <button
             type="button"
             onClick={addHost}
-            className="rounded border border-border bg-blue-600 px-3 py-1.5 text-sm text-white hover:bg-blue-700 focus-ring"
+            className="rounded-control border border-transparent bg-contrast px-3 py-1.5 text-sm font-medium text-contrast-fg hover:bg-contrast-hover transition-colors focus-ring"
           >
             {t("addHost")}
           </button>
         </div>
-        {error && <p className="text-xs text-red-400 mb-2">{error}</p>}
+        {error && <p className="text-xs text-error mb-2">{error}</p>}
 
         <div className="space-y-1 max-h-60 overflow-y-auto">
           {loading && <p className="text-sm text-text-muted">{t("loading")}</p>}
@@ -128,13 +128,13 @@ export function CustomHostsManager({ onClose }: CustomHostsManagerProps) {
           {hosts.map((h) => (
             <div
               key={h.host}
-              className="flex items-center justify-between rounded border border-border/50 bg-bg-subtle px-3 py-1.5"
+              className="flex items-center justify-between rounded-md border border-border bg-bg-subtle px-3 py-1.5"
             >
               <span className="text-sm font-mono text-text-main">{h.host}</span>
               <button
                 type="button"
                 onClick={() => deleteHost(h.host)}
-                className="text-text-muted hover:text-red-400 focus-ring rounded"
+                className="text-text-muted hover:text-error transition-colors focus-ring rounded-md"
                 aria-label={t("removeHost", { host: h.host })}
               >
                 <span className="material-symbols-outlined text-[16px]" aria-hidden="true">

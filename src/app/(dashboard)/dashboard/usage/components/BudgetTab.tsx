@@ -124,24 +124,24 @@ function projectEndOfMonth(monthlyCost: number, now = new Date()): number {
 const STATUS_META: Record<StatusKey, { tone: string; bg: string; dot: string }> = {
   all: { tone: "text-text-main", bg: "bg-bg-subtle", dot: "var(--color-text-muted)" },
   blocked: {
-    tone: "text-red-400",
-    bg: "bg-red-500/10 border-red-500/30",
-    dot: "#ef4444",
+    tone: "text-error",
+    bg: "bg-error/10 border-error/30",
+    dot: "var(--color-error)",
   },
   alerting: {
-    tone: "text-amber-400",
-    bg: "bg-amber-500/10 border-amber-500/30",
-    dot: "#f59e0b",
+    tone: "text-warning",
+    bg: "bg-warning/10 border-warning/30",
+    dot: "var(--color-warning)",
   },
   warning: {
-    tone: "text-yellow-400",
-    bg: "bg-yellow-500/10 border-yellow-500/30",
-    dot: "#eab308",
+    tone: "text-warning",
+    bg: "bg-warning/5 border-warning/20",
+    dot: "color-mix(in srgb, var(--color-warning) 55%, transparent)",
   },
   safe: {
-    tone: "text-emerald-400",
-    bg: "bg-emerald-500/10 border-emerald-500/30",
-    dot: "#22c55e",
+    tone: "text-success",
+    bg: "bg-success/10 border-success/30",
+    dot: "var(--color-success)",
   },
   "no-limit": {
     tone: "text-text-muted",
@@ -454,17 +454,17 @@ export default function BudgetTab() {
       <Card className="p-5">
         <div className="flex items-start justify-between gap-3 mb-4">
           <div>
-            <h2 className="text-xl font-bold flex items-center gap-2">
-              <span className="material-symbols-outlined text-[22px] text-primary">
+            <h2 className="text-xl font-semibold tracking-tight flex items-center gap-2">
+              <span className="material-symbols-outlined text-[18px] text-text-muted">
                 account_balance_wallet
               </span>
               {t("budgetPageTitle")}
             </h2>
-            <p className="text-text-muted text-xs mt-0.5">{t("budgetPageDescription")}</p>
+            <p className="text-text-muted text-sm mt-0.5">{t("budgetPageDescription")}</p>
           </div>
           <span className="text-[11px] text-text-muted">
             {t("budgetTemplateStorageHint", { count: templates.length })}{" "}
-            <code className="text-text-main">{LS_TEMPLATES}</code>
+            <code className="font-mono text-text-main">{LS_TEMPLATES}</code>
           </span>
         </div>
 
@@ -507,13 +507,13 @@ export default function BudgetTab() {
               placeholder={t("budgetSearchKeysPlaceholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-3 py-2 bg-bg-base border border-border rounded-lg focus:outline-none focus:border-primary text-sm"
+              className="w-full pl-10 pr-3 py-2 bg-surface border border-border-strong rounded-control placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm"
             />
           </div>
           <select
             value={sortKey}
             onChange={(e) => setSortKey(e.target.value as typeof sortKey)}
-            className="bg-bg-base border border-border rounded-md px-2 py-1.5 text-xs text-text-main cursor-pointer"
+            className="bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main cursor-pointer"
           >
             <option value="usedDesc">{t("budgetSortPctUsed")}</option>
             <option value="todayDesc">{t("budgetSortTodayDollar")}</option>
@@ -534,17 +534,17 @@ export default function BudgetTab() {
                   key={key}
                   type="button"
                   onClick={() => setStatusFilter(key)}
-                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold border transition-colors cursor-pointer ${
+                  className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium border transition-colors cursor-pointer ${
                     active
                       ? meta.bg + " " + meta.tone
-                      : "border-border text-text-muted bg-bg-subtle hover:text-text-main"
+                      : "border-border text-text-muted bg-surface hover:border-border-strong hover:text-text-main"
                   }`}
                 >
                   {key !== "all" && (
                     <span className="w-1.5 h-1.5 rounded-full" style={{ background: meta.dot }} />
                   )}
                   <span>{t(`budgetStatus.${key}`)}</span>
-                  <span className="opacity-70">{count}</span>
+                  <span className="tabular-nums opacity-70">{count}</span>
                 </button>
               );
             }
@@ -553,7 +553,7 @@ export default function BudgetTab() {
 
         {templates.length > 0 && (
           <div className="flex items-center gap-1.5 flex-wrap text-[11px]">
-            <span className="text-text-muted font-semibold uppercase tracking-wide mr-1">
+            <span className="text-text-subtle font-medium uppercase tracking-wider mr-1">
               {t("budgetTemplates")}:
             </span>
             {templates.map((tpl) => (
@@ -567,7 +567,7 @@ export default function BudgetTab() {
                     ? t("budgetSelectKeysFirst")
                     : t("budgetApplyToSelected", { count: selectedIds.size })
                 }
-                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md border border-border bg-bg-subtle text-text-main hover:bg-black/[0.04] dark:hover:bg-white/[0.04] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                className="inline-flex items-center gap-1 px-2.5 py-1 rounded-control border border-border-strong bg-surface text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
               >
                 <span>{tpl.emoji}</span>
                 <span>{templateName(tpl)}</span>
@@ -588,9 +588,9 @@ export default function BudgetTab() {
       </div>
 
       {/* Multi-key table */}
-      <div className="rounded-xl border border-border overflow-hidden bg-surface">
+      <div className="rounded-card border border-border overflow-hidden bg-surface">
         <div
-          className="items-center px-3 py-2 border-b border-border bg-bg-subtle/40 text-[10px] font-semibold uppercase tracking-wider text-text-muted"
+          className="items-center px-3 py-2 border-b border-border bg-bg-subtle/40 text-[11px] font-medium text-text-muted"
           style={{
             display: "grid",
             gridTemplateColumns: "24px 28px minmax(180px,1.6fr) 90px 100px 90px 100px 80px 100px",
@@ -667,13 +667,11 @@ function KpiBlock({
   tone?: "amber" | "red";
 }) {
   const color =
-    tone === "red" ? "text-red-400" : tone === "amber" ? "text-amber-400" : "text-text-main";
+    tone === "red" ? "text-error" : tone === "amber" ? "text-warning" : "text-text-main";
   return (
-    <div className="rounded-lg border border-border/40 bg-bg-subtle/30 px-3 py-2">
-      <div className="text-[10px] uppercase tracking-wide text-text-muted font-semibold truncate">
-        {label}
-      </div>
-      <div className={`text-xl font-bold tabular-nums leading-tight ${color}`}>{value}</div>
+    <div className="rounded-lg border border-border bg-surface px-3 py-2">
+      <div className="text-xs text-text-muted truncate">{label}</div>
+      <div className={`text-xl font-semibold tabular-nums leading-tight ${color}`}>{value}</div>
       {hint && <div className="text-[10px] text-text-muted truncate">{hint}</div>}
     </div>
   );
@@ -681,9 +679,16 @@ function KpiBlock({
 
 function ProgressBarTinyColored({ value, max }: { value: number; max: number }) {
   const pct = max > 0 ? Math.min((value / max) * 100, 100) : 0;
-  const color = pct >= 100 ? "#ef4444" : pct >= 80 ? "#f59e0b" : pct >= 50 ? "#eab308" : "#22c55e";
+  const color =
+    pct >= 100
+      ? "var(--color-error)"
+      : pct >= 80
+        ? "var(--color-warning)"
+        : pct >= 50
+          ? "color-mix(in srgb, var(--color-warning) 55%, transparent)"
+          : "var(--color-success)";
   return (
-    <div className="w-full h-1 rounded-sm bg-black/[0.06] dark:bg-white/[0.06] overflow-hidden">
+    <div className="w-full h-1 rounded-full bg-border overflow-hidden">
       <div className="h-full" style={{ width: `${pct}%`, background: color }} />
     </div>
   );
@@ -726,12 +731,12 @@ function BudgetRow({
   return (
     <div style={{ borderBottom: !isLast || isExpanded ? "1px solid var(--color-border)" : "none" }}>
       <div
-        className="items-center px-3 py-2.5 hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors"
+        className="items-center px-3 py-2.5 hover:bg-bg-subtle transition-colors"
         style={{
           display: "grid",
           gridTemplateColumns: "24px 28px minmax(180px,1.6fr) 90px 100px 90px 100px 80px 100px",
           gap: "8px",
-          borderLeft: `3px solid ${status === "all" ? "transparent" : meta.dot}`,
+          borderLeft: `2px solid ${status === "all" ? "transparent" : meta.dot}`,
         }}
       >
         {/* Checkbox — wrapper only stops the row-expand trigger from firing */}
@@ -761,7 +766,7 @@ function BudgetRow({
           onClick={onToggleExpand}
           className="text-left border-none bg-transparent p-0 cursor-pointer min-w-0"
         >
-          <div className="text-[13px] font-semibold text-text-main truncate">
+          <div className="text-[13px] font-medium text-text-main truncate">
             {row.name || row.id}
           </div>
           <div className="text-[10px] text-text-muted truncate">
@@ -790,7 +795,7 @@ function BudgetRow({
         </div>
         <div className="text-center">
           <span
-            className={`inline-block px-1.5 py-0.5 rounded text-[9px] font-bold border ${meta.bg} ${meta.tone}`}
+            className={`inline-block px-1.5 py-0.5 rounded-md text-[10px] font-medium border ${meta.bg} ${meta.tone}`}
           >
             {t(`budgetStatus.${status}`).toUpperCase()}
           </span>
@@ -866,9 +871,9 @@ function BudgetRowExpanded({
   return (
     <div className="px-12 py-4 bg-bg-subtle/30 border-t border-border space-y-4">
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
-        <div className="rounded-md border border-border/40 bg-bg-base/30 p-3">
+        <div className="rounded-lg border border-border bg-surface p-3">
           <div className="flex items-center justify-between mb-2">
-            <h4 className="text-[11px] uppercase tracking-wide font-bold text-text-muted">
+            <h4 className="text-[11px] uppercase tracking-wider font-medium text-text-subtle">
               {t("budgetProjection")}
             </h4>
             <span className="text-[10px] text-text-muted">{t("budgetLinearExtrapolation")}</span>
@@ -876,14 +881,16 @@ function BudgetRowExpanded({
           <div className="flex items-baseline gap-3">
             <div>
               <div className="text-[10px] text-text-muted">{t("budgetThisMonthSoFar")}</div>
-              <div className="text-lg font-bold tabular-nums">{formatCurrency(month)}</div>
+              <div className="text-lg font-semibold tabular-nums text-text-main">
+                {formatCurrency(month)}
+              </div>
             </div>
             <span className="text-text-muted">→</span>
             <div>
               <div className="text-[10px] text-text-muted">{t("budgetProjectedEndOfMonth")}</div>
               <div
-                className={`text-lg font-bold tabular-nums ${
-                  projectionOver ? "text-amber-400" : "text-emerald-400"
+                className={`text-lg font-semibold tabular-nums ${
+                  projectionOver ? "text-warning" : "text-success"
                 }`}
               >
                 {formatCurrency(projection)}
@@ -897,9 +904,9 @@ function BudgetRowExpanded({
           </div>
         </div>
 
-        <div className="rounded-md border border-border/40 bg-bg-base/30 p-3">
+        <div className="rounded-lg border border-border bg-surface p-3">
           <div className="flex items-center justify-between mb-2">
-            <h4 className="text-[11px] uppercase tracking-wide font-bold text-text-muted">
+            <h4 className="text-[11px] uppercase tracking-wider font-medium text-text-subtle">
               {t("budgetCostBreakdown30d")}
             </h4>
             <span className="text-[10px] text-text-muted">{t("budgetByProvider")}</span>
@@ -915,9 +922,9 @@ function BudgetRowExpanded({
               {breakdown.slice(0, 5).map((b) => (
                 <div key={b.provider} className="flex items-center gap-2 text-[11px]">
                   <span className="font-medium text-text-main w-24 truncate">{b.provider}</span>
-                  <div className="flex-1 h-1.5 rounded-sm bg-black/[0.08] dark:bg-white/[0.06] overflow-hidden">
+                  <div className="flex-1 h-1.5 rounded-full bg-border overflow-hidden">
                     <div
-                      className="h-full bg-primary rounded-sm"
+                      className="h-full bg-primary rounded-full"
                       style={{ width: `${Math.min(b.pct, 100)}%` }}
                     />
                   </div>
@@ -934,8 +941,8 @@ function BudgetRowExpanded({
         </div>
       </div>
 
-      <div className="rounded-md border border-border/40 bg-bg-base/30 p-3">
-        <h4 className="text-[11px] uppercase tracking-wide font-bold text-text-muted mb-3">
+      <div className="rounded-lg border border-border bg-surface p-3">
+        <h4 className="text-[11px] uppercase tracking-wider font-medium text-text-subtle mb-3">
           {t("budgetLimits")}
         </h4>
         <div className="grid grid-cols-1 md:grid-cols-4 gap-3 mb-3">
@@ -983,7 +990,7 @@ function BudgetRowExpanded({
               onChange={(e) =>
                 setForm({ ...form, resetInterval: e.target.value as typeof form.resetInterval })
               }
-              className="w-full px-2 py-1.5 rounded border border-border bg-bg-base text-sm"
+              className="w-full px-2 py-1.5 rounded-control border border-border-strong bg-surface text-sm text-text-main"
             >
               <option value="daily">{t("budgetResetDaily")}</option>
               <option value="weekly">{t("budgetResetWeekly")}</option>

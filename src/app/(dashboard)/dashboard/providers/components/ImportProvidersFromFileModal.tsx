@@ -2,7 +2,10 @@
 
 import { useTranslations } from "next-intl";
 import { Button, Modal } from "@/shared/components";
-import type { ParsedProviderImportEntry, ProviderImportParseError } from "./parseProviderImportFile";
+import type {
+  ParsedProviderImportEntry,
+  ProviderImportParseError,
+} from "./parseProviderImportFile";
 import { useImportProvidersFromFile } from "./useImportProvidersFromFile";
 import {
   downloadProviderImportCsvTemplate,
@@ -32,13 +35,15 @@ const PARSE_ERROR_REASON_KEYS = [
 function ParseErrorsList({ errors, t }: { errors: ProviderImportParseError[]; t: Translator }) {
   if (errors.length === 0) return null;
   return (
-    <div className="max-h-28 overflow-y-auto rounded border border-red-500/30 bg-red-500/10 p-2">
+    <div className="max-h-28 overflow-y-auto rounded-md border border-error/30 bg-error/10 p-2">
       {errors.map((err, idx) => (
-        <div key={idx} className="text-xs text-red-400">
+        <div key={idx} className="text-xs text-error">
           {t("importFromFileErrorLine", {
             line: err.line,
             reason: t(
-              PARSE_ERROR_REASON_KEYS.includes(err.reason as (typeof PARSE_ERROR_REASON_KEYS)[number])
+              PARSE_ERROR_REASON_KEYS.includes(
+                err.reason as (typeof PARSE_ERROR_REASON_KEYS)[number]
+              )
                 ? err.reason
                 : "importErrorMalformedRow"
             ),
@@ -65,10 +70,10 @@ function EntriesTable({ entries, selected, onToggleRow, onToggleAll, t }: Entrie
       <div className="text-xs text-text-muted">
         {t("importFromFileSelectHint", { count: selected.size, total: entries.length })}
       </div>
-      <div className="overflow-x-auto max-h-64 overflow-y-auto rounded border border-border">
-        <table className="w-full text-xs">
+      <div className="overflow-x-auto max-h-64 overflow-y-auto rounded-lg border border-border">
+        <table className="w-full text-[13px]">
           <thead>
-            <tr className="text-left text-text-muted border-b border-border bg-bg-subtle sticky top-0">
+            <tr className="text-left text-xs font-medium text-text-muted border-b border-border bg-bg-subtle sticky top-0">
               <th className="py-1.5 px-2">
                 <input
                   type="checkbox"
@@ -83,13 +88,21 @@ function EntriesTable({ entries, selected, onToggleRow, onToggleAll, t }: Entrie
           </thead>
           <tbody>
             {entries.map((entry, idx) => (
-              <tr key={idx} className="border-b border-border/40">
+              <tr key={idx} className="border-b border-border last:border-0">
                 <td className="py-1 px-2">
-                  <input type="checkbox" checked={selected.has(idx)} onChange={() => onToggleRow(idx)} />
+                  <input
+                    type="checkbox"
+                    checked={selected.has(idx)}
+                    onChange={() => onToggleRow(idx)}
+                  />
                 </td>
-                <td className="py-1 px-2 font-mono text-text-muted">{entry.provider}</td>
+                <td className="py-1 px-2 font-mono text-[12px] text-text-muted">
+                  {entry.provider}
+                </td>
                 <td className="py-1 px-2 font-medium text-text-main">{entry.name}</td>
-                <td className="py-1 px-2 text-text-muted">{entry.baseUrl || "—"}</td>
+                <td className="py-1 px-2 font-mono text-[12px] text-text-muted">
+                  {entry.baseUrl || "—"}
+                </td>
               </tr>
             ))}
           </tbody>
@@ -120,7 +133,12 @@ function FilePickerRow({ fileInputRef, fileName, onFile, t }: FilePickerRowProps
           if (file) onFile(file);
         }}
       />
-      <Button size="sm" variant="secondary" icon="upload_file" onClick={() => fileInputRef.current?.click()}>
+      <Button
+        size="sm"
+        variant="secondary"
+        icon="upload_file"
+        onClick={() => fileInputRef.current?.click()}
+      >
         {t("importFromFileChoose")}
       </Button>
       {fileName && <span className="text-xs text-text-muted font-mono">{fileName}</span>}
@@ -133,10 +151,10 @@ function ImportResultPanel({ result, t }: { result: ImportResult; t: Translator 
   const failed = result.failed > 0 || shown.length > 0;
   return (
     <div
-      className={`px-3 py-2 rounded border text-sm ${
+      className={`px-3 py-2 rounded-lg border text-sm ${
         failed
-          ? "border-amber-500/30 bg-amber-500/10 text-amber-300"
-          : "border-emerald-500/30 bg-emerald-500/10 text-emerald-400"
+          ? "border-warning/30 bg-warning/10 text-warning"
+          : "border-success/30 bg-success/10 text-success"
       }`}
     >
       {t("importFromFileResult", { success: result.success, failed: result.failed })}
@@ -168,14 +186,30 @@ export function ImportProvidersFromFileModal({
   const s = useImportProvidersFromFile(onImported);
 
   return (
-    <Modal isOpen={isOpen} onClose={() => s.handleClose(onClose)} title={t("importFromFileTitle")} maxWidth="xl">
+    <Modal
+      isOpen={isOpen}
+      onClose={() => s.handleClose(onClose)}
+      title={t("importFromFileTitle")}
+      maxWidth="xl"
+    >
       <div className="flex flex-col gap-4">
         <p className="text-sm text-text-muted">{t("importFromFileDescription")}</p>
         <p className="text-xs text-text-muted">{t("importFromFileSchemaHint")}</p>
 
-        <FilePickerRow fileInputRef={s.fileInputRef} fileName={s.fileName} onFile={s.handleFile} t={t} />
+        <FilePickerRow
+          fileInputRef={s.fileInputRef}
+          fileName={s.fileName}
+          onFile={s.handleFile}
+          t={t}
+        />
         <ParseErrorsList errors={s.errors} t={t} />
-        <EntriesTable entries={s.entries} selected={s.selected} onToggleRow={s.toggleRow} onToggleAll={s.toggleAll} t={t} />
+        <EntriesTable
+          entries={s.entries}
+          selected={s.selected}
+          onToggleRow={s.toggleRow}
+          onToggleAll={s.toggleAll}
+          t={t}
+        />
 
         {s.result && <ImportResultPanel result={s.result} t={t} />}
 
@@ -193,7 +227,9 @@ export function ImportProvidersFromFileModal({
             loading={s.importing}
             disabled={s.selected.size === 0 || s.importing}
           >
-            {s.importing ? t("importFromFileImporting") : t("importFromFileImport", { count: s.selected.size })}
+            {s.importing
+              ? t("importFromFileImporting")
+              : t("importFromFileImport", { count: s.selected.size })}
           </Button>
         </div>
       </div>

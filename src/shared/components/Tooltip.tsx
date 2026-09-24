@@ -153,7 +153,7 @@ export default function Tooltip({
   );
 
   const widthClass = multiline ? "max-w-xs whitespace-normal break-words" : "whitespace-nowrap";
-  const baseTooltipClass = `z-50 px-3 py-2 text-xs font-medium text-white bg-[#10141e]/95 rounded-lg shadow-xl pointer-events-none transition-opacity duration-150 motion-reduce:transition-none border border-white/10 backdrop-blur-sm ${tooltipClassName}`;
+  const baseTooltipClass = `z-50 px-2 py-1 text-xs font-medium text-contrast-fg bg-contrast dark:bg-surface-2 dark:text-text-main rounded-md shadow-[var(--shadow-elevated)] pointer-events-none transition-opacity duration-150 motion-reduce:transition-none ${tooltipClassName}`;
 
   const portalEnabled = usePortal && typeof window !== "undefined";
 

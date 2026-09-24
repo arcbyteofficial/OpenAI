@@ -36,9 +36,9 @@ export default function WebSessionCredentialGuide({
 
   if (requirement.kind === "none") {
     return (
-      <div className="rounded-lg border border-emerald-500/25 bg-emerald-500/10 px-3 py-3 text-sm text-text-muted">
+      <div className="rounded-lg border border-success/25 bg-success/10 px-3 py-3 text-sm text-text-muted">
         <div className="flex items-start gap-2">
-          <span className="material-symbols-outlined mt-0.5 text-[18px] text-emerald-500">
+          <span className="material-symbols-outlined mt-0.5 text-[18px] text-success">
             check_circle
           </span>
           <div>
@@ -66,9 +66,9 @@ export default function WebSessionCredentialGuide({
   const guideSteps = requirement.guideSteps;
 
   return (
-    <div className="rounded-lg border border-purple-500/25 bg-purple-500/10 px-3 py-3 text-sm text-text-muted">
+    <div className="rounded-lg border border-border bg-bg-subtle px-3 py-3 text-sm text-text-muted">
       <div className="flex items-start gap-2">
-        <span className="material-symbols-outlined mt-0.5 text-[18px] text-purple-500">cookie</span>
+        <span className="material-symbols-outlined mt-0.5 text-[18px] text-text-muted">cookie</span>
         <div className="space-y-2">
           <div>
             <p className="font-medium text-text-main">
@@ -157,7 +157,7 @@ export default function WebSessionCredentialGuide({
               </li>
             </ol>
           )}
-          <p className="text-xs text-amber-700 dark:text-amber-300">
+          <p className="text-xs text-warning">
             {requirement.guideNote ??
               providerText(
                 t,

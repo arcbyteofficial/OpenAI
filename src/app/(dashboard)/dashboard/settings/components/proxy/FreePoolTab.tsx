@@ -243,7 +243,7 @@ export default function FreePoolTab() {
           <select
             value={filterProtocol}
             onChange={(e) => setFilterProtocol(e.target.value)}
-            className="text-xs bg-surface-alt border border-border rounded px-2 py-1"
+            className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1 text-text-main placeholder:text-text-subtle"
             aria-label={translateOrFallback("proxyFreePoolFilterProtocol", "Filter by protocol")}
           >
             <option value="">{translateOrFallback("proxyFreePoolProtocol", "Protocol")}</option>
@@ -261,7 +261,7 @@ export default function FreePoolTab() {
             )}
             value={filterCountry}
             onChange={(e) => setFilterCountry(e.target.value.toUpperCase().slice(0, 2))}
-            className="text-xs bg-surface-alt border border-border rounded px-2 py-1 w-28"
+            className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1 text-text-main placeholder:text-text-subtle w-28"
             aria-label={translateOrFallback("proxyFreePoolFilterCountry", "Filter by country")}
           />
           <input
@@ -271,7 +271,7 @@ export default function FreePoolTab() {
             onChange={(e) => setMinQuality(e.target.value)}
             min={0}
             max={100}
-            className="text-xs bg-surface-alt border border-border rounded px-2 py-1 w-24"
+            className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1 text-text-main placeholder:text-text-subtle w-24"
             aria-label={translateOrFallback(
               "proxyFreePoolMinQualityLabel",
               "Minimum quality score"
@@ -310,7 +310,7 @@ export default function FreePoolTab() {
 
       {syncErrors && (
         <div
-          className="text-xs text-red-500 flex flex-col gap-1"
+          className="text-xs text-error flex flex-col gap-1"
           role="alert"
           data-testid="free-pool-sync-errors"
         >
@@ -323,7 +323,7 @@ export default function FreePoolTab() {
       )}
 
       {selected.size > 0 && (
-        <div className="flex items-center gap-2 p-2 bg-primary/10 rounded border border-primary/20">
+        <div className="flex items-center gap-2 p-2 bg-bg-subtle rounded-lg border border-border">
           <span className="text-xs">
             {translateOrFallback("proxyFreePoolSelected", `${selected.size} selected`, {
               count: selected.size,
@@ -348,30 +348,30 @@ export default function FreePoolTab() {
         </div>
       )}
 
-      <div className="overflow-x-auto rounded border border-border bg-surface">
-        <table className="w-full text-sm">
-          <thead className="bg-surface-alt text-text-muted text-xs">
+      <div className="overflow-x-auto rounded-lg border border-border bg-surface">
+        <table className="w-full text-[13px]">
+          <thead className="bg-bg-subtle text-text-muted text-xs border-b border-border">
             <tr>
-              <th className="px-3 py-2 text-left w-8" scope="col"></th>
-              <th className="px-3 py-2 text-left" scope="col">
+              <th className="px-3 py-2 text-left font-medium w-8" scope="col"></th>
+              <th className="px-3 py-2 text-left font-medium" scope="col">
                 {translateOrFallback("proxyFreePoolSource", "Source")}
               </th>
-              <th className="px-3 py-2 text-left" scope="col">
+              <th className="px-3 py-2 text-left font-medium" scope="col">
                 {translateOrFallback("proxyFreePoolHostPort", "Host:Port")}
               </th>
-              <th className="px-3 py-2 text-left" scope="col">
+              <th className="px-3 py-2 text-left font-medium" scope="col">
                 {translateOrFallback("proxyFreePoolType", "Type")}
               </th>
-              <th className="px-3 py-2 text-left" scope="col">
+              <th className="px-3 py-2 text-left font-medium" scope="col">
                 {translateOrFallback("proxyFreePoolCountry", "Country")}
               </th>
-              <th className="px-3 py-2 text-left" scope="col">
+              <th className="px-3 py-2 text-left font-medium" scope="col">
                 {translateOrFallback("proxyFreePoolQuality", "Quality")}
               </th>
-              <th className="px-3 py-2 text-left" scope="col">
+              <th className="px-3 py-2 text-left font-medium" scope="col">
                 {translateOrFallback("proxyFreePoolLatency", "Latency")}
               </th>
-              <th className="px-3 py-2 text-left" scope="col"></th>
+              <th className="px-3 py-2 text-left font-medium" scope="col"></th>
             </tr>
           </thead>
           <tbody>
@@ -427,10 +427,10 @@ export default function FreePoolTab() {
                 key={p}
                 type="button"
                 onClick={() => handlePageChange(p)}
-                className={`px-2.5 py-1 text-xs rounded ${
+                className={`px-2.5 py-1 text-xs tabular-nums rounded-md transition-colors ${
                   p === page
-                    ? "bg-primary text-white font-medium"
-                    : "hover:bg-black/5 dark:hover:bg-white/5"
+                    ? "border border-border-strong bg-surface text-text-main font-medium"
+                    : "border border-transparent text-text-muted hover:bg-bg-subtle hover:text-text-main"
                 }`}
               >
                 {p}

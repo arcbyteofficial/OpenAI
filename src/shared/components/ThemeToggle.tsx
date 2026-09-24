@@ -17,21 +17,21 @@ export default function ThemeToggle({
 
   const variants = {
     default: cn(
-      "flex items-center justify-center size-10 rounded-full",
+      "flex items-center justify-center size-8 rounded-control",
       "text-text-muted",
-      "hover:bg-black/5",
+      "hover:bg-bg-subtle",
       "hover:text-text-main",
       "transition-colors"
     ),
     card: cn(
-      "flex items-center justify-center size-11 rounded-full",
-      "bg-surface/60",
-      "hover:bg-surface",
+      "flex items-center justify-center size-9 rounded-control",
+      "bg-surface",
+      "hover:bg-bg-subtle",
       "border border-border",
-      "backdrop-blur-md shadow-sm hover:shadow-md",
-      "text-text-muted-light hover:text-primary",
-      "hover:text-primary",
-      "transition-all group"
+      "hover:border-border-strong",
+      "text-text-muted hover:text-text-main",
+      "cursor-pointer",
+      "transition-colors group"
     ),
   };
 
@@ -43,10 +43,7 @@ export default function ThemeToggle({
       title={toggleLabel}
     >
       <span
-        className={cn(
-          "material-symbols-outlined text-[22px]",
-          variant === "card" && "transition-transform duration-300 group-hover:rotate-12"
-        )}
+        className={cn("material-symbols-outlined text-[18px]", variant === "card" && "text-[20px]")}
       >
         {isDark ? "light_mode" : "dark_mode"}
       </span>

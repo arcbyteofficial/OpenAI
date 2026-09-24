@@ -357,7 +357,7 @@ function OpEditor({
   const wrap = (body: React.ReactNode) => (
     <div className="flex flex-col gap-3">
       {opDescription && (
-        <p className="text-[11px] leading-relaxed text-text-muted border-l-2 border-purple-500/30 pl-2 italic">
+        <p className="text-[11px] leading-relaxed text-text-muted border-l-2 border-border-strong pl-2 italic">
           {opDescription}
         </p>
       )}
@@ -480,7 +480,7 @@ function OpEditor({
               value={op.text || ""}
               disabled={disabled}
               onChange={(e) => updateField("text", e.target.value)}
-              className="w-full rounded-md border border-black/10 dark:border-white/10 bg-white dark:bg-white/5 px-3 py-2 text-sm text-text-main font-mono focus:ring-1 focus:ring-primary/30 focus:border-primary/50 focus:outline-none transition-all shadow-inner disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main font-mono focus:ring-1 focus:ring-primary/30 focus:border-primary/50 focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <p className="text-xs text-text-muted">{t(FIELD_HINTS.blockText)}</p>
           </div>
@@ -903,13 +903,15 @@ export default function RoutingTab() {
       <Card>
         <div className="flex items-start justify-between gap-4">
           <div className="flex gap-3">
-            <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-500 h-fit">
-              <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+            <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted h-fit">
+              <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                 auto_awesome
               </span>
             </div>
             <div>
-              <h3 className="text-lg font-semibold">{t("routingZeroConfigTitle")}</h3>
+              <h3 className="text-base font-semibold tracking-tight text-text-main">
+                {t("routingZeroConfigTitle")}
+              </h3>
               <p className="text-sm text-text-muted mt-1">{t("routingZeroConfigDesc")}</p>
             </div>
           </div>
@@ -922,7 +924,7 @@ export default function RoutingTab() {
             />
           </div>
         </div>
-        <div className="mt-4 pt-4 border-t border-border/30">
+        <div className="mt-4 pt-4 border-t border-border">
           <label className="block text-sm font-medium mb-2">{t("routingDefaultAutoVariant")}</label>
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
             {[
@@ -961,17 +963,17 @@ export default function RoutingTab() {
                 key={option.value}
                 onClick={() => updateSetting({ autoRoutingDefaultVariant: option.value })}
                 disabled={loading}
-                className={`p-2 rounded-lg border text-left transition-all ${
+                className={`p-2 rounded-lg border text-left transition-colors ${
                   settings.autoRoutingDefaultVariant === option.value
-                    ? "border-indigo-500/50 bg-indigo-500/5 ring-1 ring-indigo-500/20"
-                    : "border-border/50 hover:border-border hover:bg-surface/30"
+                    ? "border-primary/40 bg-primary/5"
+                    : "border-border hover:border-border-strong hover:bg-bg-subtle"
                 }`}
               >
                 <div className="flex items-center gap-1">
                   <span
                     className={`material-symbols-outlined text-[14px] ${
                       settings.autoRoutingDefaultVariant === option.value
-                        ? "text-indigo-400"
+                        ? "text-primary"
                         : "text-text-muted"
                     }`}
                   >
@@ -980,7 +982,7 @@ export default function RoutingTab() {
                       : "radio_button_unchecked"}
                   </span>
                   <span
-                    className={`text-xs font-medium ${settings.autoRoutingDefaultVariant === option.value ? "text-indigo-400" : ""}`}
+                    className={`text-xs font-medium ${settings.autoRoutingDefaultVariant === option.value ? "text-primary" : ""}`}
                   >
                     {option.label}
                   </span>
@@ -993,19 +995,21 @@ export default function RoutingTab() {
 
       <Card>
         <div className="flex items-start gap-3 mb-4">
-          <div className="p-2 rounded-lg bg-purple-500/10 text-purple-500 h-fit">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted h-fit">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               tune
             </span>
           </div>
           <div>
-            <h3 className="text-lg font-semibold">{t("systemTransforms")}</h3>
+            <h3 className="text-base font-semibold tracking-tight text-text-main">
+              {t("systemTransforms")}
+            </h3>
             <p className="text-sm text-text-muted mt-1">{t("systemTransformsDesc")}</p>
           </div>
         </div>
 
         {/* Add provider — moved to TOP per UX brief. */}
-        <div className="mb-4 flex items-end gap-2 rounded-lg border border-dashed border-border/40 bg-surface/30 p-3">
+        <div className="mb-4 flex items-end gap-2 rounded-lg border border-dashed border-border-strong bg-surface-2 p-3">
           <Select
             label={t("systemTransformsAddProvider")}
             value={newProviderId}
@@ -1065,7 +1069,7 @@ export default function RoutingTab() {
                 defaultOpen={false}
                 title={
                   <div className="flex items-center gap-2 flex-wrap">
-                    <code className="text-xs font-mono rounded bg-surface px-1.5 py-0.5">
+                    <code className="text-[12px] font-mono rounded-md bg-bg-subtle px-1.5 py-0.5">
                       {providerId}
                     </code>
                     <span className="text-sm font-medium">{displayName}</span>
@@ -1104,11 +1108,11 @@ export default function RoutingTab() {
                 {providerSaveErrors[providerId] && (
                   <div
                     role="alert"
-                    className="mb-3 rounded border border-red-500/40 bg-red-500/10 p-2 text-xs text-red-300"
+                    className="mb-3 rounded-md border border-error/20 bg-error/10 p-2 text-xs text-error"
                   >
                     <span className="font-medium">{t("routingServerRejectedSave")}</span>{" "}
                     <span className="break-words font-mono">{providerSaveErrors[providerId]}</span>
-                    <p className="mt-1 text-[11px] text-red-200/80">{tCommon("error")}</p>
+                    <p className="mt-1 text-[11px] text-error/80">{tCommon("error")}</p>
                   </div>
                 )}
 
@@ -1122,10 +1126,10 @@ export default function RoutingTab() {
                           defaultOpen={false}
                           title={
                             <div className="flex items-center gap-2">
-                              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-purple-500/10 text-[10px] font-semibold text-purple-400">
+                              <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-bg-subtle text-[10px] font-medium tabular-nums text-text-muted">
                                 {index + 1}
                               </span>
-                              <span className="font-mono text-purple-300 text-xs">
+                              <span className="font-mono text-text-main text-xs">
                                 {t(OP_KIND_LABELS[op?.kind as TransformOpKind] || op?.kind)}
                               </span>
                             </div>
@@ -1204,7 +1208,7 @@ export default function RoutingTab() {
                 </div>
 
                 {/* JSON import section (collapsible) */}
-                <div className="border-t border-border/20 pt-2 mt-2">
+                <div className="border-t border-border pt-2 mt-2">
                   <button
                     type="button"
                     onClick={() =>
@@ -1229,10 +1233,10 @@ export default function RoutingTab() {
                         rows={Math.min(40, Math.max(6, draft.split("\n").length))}
                         disabled={loading}
                         spellCheck={false}
-                        className="w-full rounded border border-border/50 bg-background/40 p-2 font-mono text-[11px] text-text resize-y"
+                        className="w-full rounded-control border border-border-strong bg-surface p-2 font-mono text-[12px] text-text-main resize-y"
                       />
                       {errorMsg && (
-                        <p className="mt-1 text-xs text-red-400 break-words">⚠ {errorMsg}</p>
+                        <p className="mt-1 text-xs text-error break-words">⚠ {errorMsg}</p>
                       )}
                       <div className="flex flex-wrap items-center gap-2 mt-2">
                         <Button
@@ -1269,13 +1273,15 @@ export default function RoutingTab() {
 
       <Card>
         <div className="flex items-start gap-3 mb-4">
-          <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-500 h-fit">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted h-fit">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               security
             </span>
           </div>
           <div>
-            <h3 className="text-lg font-semibold">{t("cliFingerprint")}</h3>
+            <h3 className="text-base font-semibold tracking-tight text-text-main">
+              {t("cliFingerprint")}
+            </h3>
             <p className="text-sm text-text-muted mt-1">{t("cliFingerprintDesc")}</p>
           </div>
         </div>
@@ -1304,22 +1310,20 @@ export default function RoutingTab() {
                   disabled={loading}
                   aria-pressed={checked}
                   title={titleText}
-                  className={`flex items-start gap-3 rounded-lg border p-3 text-left transition-all ${
+                  className={`flex items-start gap-3 rounded-lg border p-3 text-left transition-colors ${
                     checked
-                      ? "border-indigo-500/50 bg-indigo-500/5 ring-1 ring-indigo-500/20"
-                      : "border-border/50 hover:border-border hover:bg-surface/30"
+                      ? "border-primary/40 bg-primary/5"
+                      : "border-border hover:border-border-strong hover:bg-bg-subtle"
                   } ${loading ? "cursor-not-allowed opacity-60" : ""}`}
                 >
                   <span
-                    className={`material-symbols-outlined mt-0.5 text-[18px] ${checked ? "text-indigo-400" : "text-text-muted"}`}
+                    className={`material-symbols-outlined mt-0.5 text-[18px] ${checked ? "text-primary" : "text-text-muted"}`}
                     aria-hidden="true"
                   >
                     {checked ? "check_circle" : "radio_button_unchecked"}
                   </span>
                   <span className="min-w-0 flex-1">
-                    <span
-                      className={`block text-sm font-medium ${checked ? "text-indigo-400" : ""}`}
-                    >
+                    <span className={`block text-sm font-medium ${checked ? "text-primary" : ""}`}>
                       {label}
                     </span>
                     <span className="mt-1 block text-xs text-text-muted">{description}</span>
@@ -1333,13 +1337,15 @@ export default function RoutingTab() {
 
       <Card>
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 rounded-lg bg-green-500/10 text-green-500">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               cached
             </span>
           </div>
           <div>
-            <h3 className="text-lg font-semibold">{t("routingClientCacheControlTitle")}</h3>
+            <h3 className="text-base font-semibold tracking-tight text-text-main">
+              {t("routingClientCacheControlTitle")}
+            </h3>
             <p className="text-sm text-text-muted">{t("routingClientCacheControlDesc")}</p>
           </div>
         </div>
@@ -1366,17 +1372,17 @@ export default function RoutingTab() {
               key={option.value}
               onClick={() => updateSetting({ alwaysPreserveClientCache: option.value })}
               disabled={loading}
-              className={`w-full flex flex-col items-start gap-1 p-3 rounded-lg border text-left transition-all ${
+              className={`w-full flex flex-col items-start gap-1 p-3 rounded-lg border text-left transition-colors ${
                 settings.alwaysPreserveClientCache === option.value
-                  ? "border-green-500/50 bg-green-500/5 ring-1 ring-green-500/20"
-                  : "border-border/50 hover:border-border hover:bg-surface/30"
+                  ? "border-primary/40 bg-primary/5"
+                  : "border-border hover:border-border-strong hover:bg-bg-subtle"
               }`}
             >
               <div className="flex items-center gap-2">
                 <span
                   className={`material-symbols-outlined text-[16px] ${
                     settings.alwaysPreserveClientCache === option.value
-                      ? "text-green-400"
+                      ? "text-primary"
                       : "text-text-muted"
                   }`}
                 >
@@ -1385,7 +1391,7 @@ export default function RoutingTab() {
                     : "radio_button_unchecked"}
                 </span>
                 <span
-                  className={`text-sm font-medium ${settings.alwaysPreserveClientCache === option.value ? "text-green-400" : ""}`}
+                  className={`text-sm font-medium ${settings.alwaysPreserveClientCache === option.value ? "text-primary" : ""}`}
                 >
                   {option.label}
                 </span>
@@ -1398,13 +1404,15 @@ export default function RoutingTab() {
 
       <Card>
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 rounded-lg bg-sky-500/10 text-sky-500">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               fingerprint
             </span>
           </div>
           <div>
-            <h3 className="text-lg font-semibold">{t("routingAntigravitySignatureTitle")}</h3>
+            <h3 className="text-base font-semibold tracking-tight text-text-main">
+              {t("routingAntigravitySignatureTitle")}
+            </h3>
             <p className="text-sm text-text-muted">{t("routingAntigravitySignatureDesc")}</p>
           </div>
         </div>
@@ -1431,17 +1439,17 @@ export default function RoutingTab() {
               key={option.value}
               onClick={() => updateSetting({ antigravitySignatureCacheMode: option.value })}
               disabled={loading}
-              className={`w-full flex flex-col items-start gap-1 p-3 rounded-lg border text-left transition-all ${
+              className={`w-full flex flex-col items-start gap-1 p-3 rounded-lg border text-left transition-colors ${
                 settings.antigravitySignatureCacheMode === option.value
-                  ? "border-sky-500/50 bg-sky-500/5 ring-1 ring-sky-500/20"
-                  : "border-border/50 hover:border-border hover:bg-surface/30"
+                  ? "border-primary/40 bg-primary/5"
+                  : "border-border hover:border-border-strong hover:bg-bg-subtle"
               }`}
             >
               <div className="flex items-center gap-2">
                 <span
                   className={`material-symbols-outlined text-[16px] ${
                     settings.antigravitySignatureCacheMode === option.value
-                      ? "text-sky-400"
+                      ? "text-primary"
                       : "text-text-muted"
                   }`}
                 >
@@ -1450,7 +1458,7 @@ export default function RoutingTab() {
                     : "radio_button_unchecked"}
                 </span>
                 <span
-                  className={`text-sm font-medium ${settings.antigravitySignatureCacheMode === option.value ? "text-sky-400" : ""}`}
+                  className={`text-sm font-medium ${settings.antigravitySignatureCacheMode === option.value ? "text-primary" : ""}`}
                 >
                   {option.label}
                 </span>
@@ -1464,13 +1472,15 @@ export default function RoutingTab() {
       <Card>
         <div className="flex items-start justify-between gap-4">
           <div className="flex gap-3">
-            <div className="p-2 rounded-lg bg-sky-500/10 text-sky-500 h-fit">
-              <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+            <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted h-fit">
+              <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                 badge
               </span>
             </div>
             <div>
-              <h3 className="text-lg font-semibold">{t("echoRequestedModelTitle")}</h3>
+              <h3 className="text-base font-semibold tracking-tight text-text-main">
+                {t("echoRequestedModelTitle")}
+              </h3>
               <p className="text-sm text-text-muted mt-1">{t("echoRequestedModelDesc")}</p>
             </div>
           </div>
@@ -1488,13 +1498,15 @@ export default function RoutingTab() {
       {/* #4481 layer 2 — Web-Search Routing (CCR-style Router.webSearch) */}
       <Card>
         <div className="flex gap-3">
-          <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500 h-fit">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted h-fit">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               travel_explore
             </span>
           </div>
           <div className="flex-1">
-            <h3 className="text-lg font-semibold">{t("webSearchRouteTitle")}</h3>
+            <h3 className="text-base font-semibold tracking-tight text-text-main">
+              {t("webSearchRouteTitle")}
+            </h3>
             <p className="text-sm text-text-muted mt-1">{t("webSearchRouteDesc")}</p>
             <div className="mt-3">
               <ModelSelectField
@@ -1523,13 +1535,15 @@ export default function RoutingTab() {
       <Card>
         <div className="flex items-start justify-between gap-4">
           <div className="flex gap-3">
-            <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500 h-fit">
-              <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+            <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted h-fit">
+              <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                 verified
               </span>
             </div>
             <div>
-              <h3 className="text-lg font-semibold">{t("lkgpToggleTitle")}</h3>
+              <h3 className="text-base font-semibold tracking-tight text-text-main">
+                {t("lkgpToggleTitle")}
+              </h3>
               <p className="text-sm text-text-muted mt-1">{t("lkgpToggleDesc")}</p>
             </div>
           </div>
@@ -1542,7 +1556,7 @@ export default function RoutingTab() {
             />
           </div>
         </div>
-        <div className="mt-3 pt-3 border-t border-border/30 flex items-center gap-2">
+        <div className="mt-3 pt-3 border-t border-border flex items-center gap-2">
           <Button
             variant="outline"
             size="sm"
@@ -1581,7 +1595,7 @@ export default function RoutingTab() {
           </Button>
           {lkgpCacheStatus.message && (
             <span
-              className={`text-xs ${lkgpCacheStatus.type === "success" ? "text-green-500" : "text-red-500"}`}
+              className={`text-xs ${lkgpCacheStatus.type === "success" ? "text-success" : "text-error"}`}
             >
               {lkgpCacheStatus.message}
             </span>
@@ -1592,13 +1606,15 @@ export default function RoutingTab() {
       <Card>
         <div className="flex items-start justify-between gap-4">
           <div className="flex gap-3">
-            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500 h-fit">
-              <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+            <div className="p-1.5 rounded-lg border border-border bg-bg-subtle text-text-muted h-fit">
+              <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                 network_ping
               </span>
             </div>
             <div>
-              <h3 className="text-lg font-semibold">{t("adaptiveVolumeRouting")}</h3>
+              <h3 className="text-base font-semibold tracking-tight text-text-main">
+                {t("adaptiveVolumeRouting")}
+              </h3>
               <p className="text-sm text-text-muted mt-1">{t("adaptiveVolumeRoutingDesc")}</p>
             </div>
           </div>

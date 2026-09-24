@@ -18,14 +18,14 @@ function ChaosSystemPromptField({
 }) {
   const t = useTranslations("chaosConfig");
   return (
-    <div className="p-3 rounded-lg border border-border bg-surface/40">
+    <div className="p-4 rounded-card border border-border bg-surface">
       <p className="text-sm font-medium text-text-main">{t("systemPrompt")}</p>
       <p className="text-xs text-text-muted mb-2">{t("systemPromptDesc")}</p>
       <textarea
         value={value || ""}
         onChange={(e) => onChange(e.target.value)}
         rows={3}
-        className="w-full px-3 py-1.5 rounded-md border border-border bg-surface text-sm text-text-main resize-y"
+        className="w-full px-3 py-1.5 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] resize-y"
         placeholder={t("systemPromptPlaceholder")}
       />
     </div>
@@ -50,7 +50,7 @@ export function ChaosBasicSettingsFields({
   return (
     <>
       {/* Enable/Disable Toggle */}
-      <div className="flex items-start justify-between gap-3 p-3 rounded-lg border border-border bg-surface/40">
+      <div className="flex items-start justify-between gap-3 p-4 rounded-card border border-border bg-surface">
         <div className="flex flex-col gap-1">
           <p className="text-sm font-medium text-text-main">{t("enableChaos")}</p>
           <p className="text-xs text-text-muted">{t("enableChaosDesc")}</p>
@@ -60,10 +60,10 @@ export function ChaosBasicSettingsFields({
           role="switch"
           aria-checked={settings.enabled}
           onClick={() => onChange({ enabled: !settings.enabled })}
-          className={`inline-flex shrink-0 items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+          className={`inline-flex shrink-0 items-center gap-1.5 px-2.5 py-1.5 rounded-control text-xs font-medium transition-colors ${
             settings.enabled
-              ? "bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30"
-              : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+              ? "bg-warning/10 text-warning border border-warning/30"
+              : "bg-bg-subtle text-text-muted border border-border"
           }`}
         >
           <span className="material-symbols-outlined text-[14px]">
@@ -74,7 +74,7 @@ export function ChaosBasicSettingsFields({
       </div>
 
       {/* Timeout */}
-      <div className="p-3 rounded-lg border border-border bg-surface/40">
+      <div className="p-4 rounded-card border border-border bg-surface">
         <p className="text-sm font-medium text-text-main">{t("timeout")}</p>
         <p className="text-xs text-text-muted mb-2">{t("timeoutDesc")}</p>
         <input
@@ -88,12 +88,12 @@ export function ChaosBasicSettingsFields({
               timeoutMs: Math.max(5000, Math.min(600000, Number(e.target.value) || 120000)),
             })
           }
-          className="w-full px-3 py-1.5 rounded-md border border-border bg-surface text-sm text-text-main"
+          className="w-full px-3 py-1.5 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
         />
       </div>
 
       {/* Max Tokens */}
-      <div className="p-3 rounded-lg border border-border bg-surface/40">
+      <div className="p-4 rounded-card border border-border bg-surface">
         <p className="text-sm font-medium text-text-main">{t("maxTokens")}</p>
         <p className="text-xs text-text-muted mb-2">{t("maxTokensDesc")}</p>
         <input
@@ -107,7 +107,7 @@ export function ChaosBasicSettingsFields({
               maxTokens: Math.max(256, Math.min(128000, Number(e.target.value) || 4096)),
             })
           }
-          className="w-full px-3 py-1.5 rounded-md border border-border bg-surface text-sm text-text-main"
+          className="w-full px-3 py-1.5 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
         />
       </div>
 

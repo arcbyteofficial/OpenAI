@@ -47,11 +47,11 @@ function SpeedButton({
   return (
     <button
       onClick={onClick}
-      className="px-2 py-0.5 rounded text-[11px] border transition-colors"
+      className="px-2 py-0.5 rounded-md text-[11px] font-medium border transition-colors"
       style={{
-        borderColor: active ? "var(--color-primary)" : "var(--color-border)",
-        color: active ? "var(--color-primary)" : "var(--color-text-muted)",
-        background: active ? "var(--color-primary-subtle)" : "transparent",
+        borderColor: active ? "var(--color-border-strong)" : "transparent",
+        color: active ? "var(--color-text-main)" : "var(--color-text-muted)",
+        background: active ? "var(--color-surface)" : "transparent",
       }}
     >
       {s}×
@@ -77,11 +77,11 @@ function ViewButton({
       onClick={onClick}
       data-testid={testId}
       aria-pressed={active}
-      className="px-2 py-0.5 rounded text-[11px] border transition-colors"
+      className="px-2 py-0.5 rounded-md text-[11px] font-medium border transition-colors"
       style={{
-        borderColor: active ? "var(--color-primary)" : "var(--color-border)",
-        color: active ? "var(--color-primary)" : "var(--color-text-muted)",
-        background: active ? "var(--color-primary-subtle)" : "transparent",
+        borderColor: active ? "var(--color-border-strong)" : "transparent",
+        color: active ? "var(--color-text-main)" : "var(--color-text-muted)",
+        background: active ? "var(--color-surface)" : "transparent",
       }}
     >
       {label}
@@ -95,12 +95,12 @@ function EmptyState() {
   const t = useTranslations("compressionStudio");
   return (
     <div
-      className="flex flex-col items-center justify-center h-full gap-3 text-muted"
+      className="flex flex-col items-center justify-center h-full gap-3 text-text-muted"
       data-testid="compression-cockpit-empty"
     >
-      <span className="text-3xl opacity-40">⌁</span>
+      <span className="text-3xl text-text-subtle">⌁</span>
       <p className="text-sm">{t("noRun")}</p>
-      <p className="text-xs opacity-60">{t("liveDataHint")}</p>
+      <p className="text-xs text-text-subtle">{t("liveDataHint")}</p>
     </div>
   );
 }
@@ -175,14 +175,16 @@ export function CompressionCockpit({ run: runProp }: CompressionCockpitProps) {
   return (
     <div className="flex flex-col h-full gap-2" data-testid="compression-cockpit">
       {/* ── Header ─────────────────────────────────────────────────────── */}
-      <div className="flex items-center gap-3 px-3 py-2 rounded-lg border border-border bg-bg/60 shrink-0">
-        <span className="text-xs font-semibold text-muted uppercase tracking-wide">{run.mode}</span>
+      <div className="flex items-center gap-3 px-3 py-2 rounded-card border border-border bg-surface shrink-0">
+        <span className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
+          {run.mode}
+        </span>
         {run.comboId && (
-          <span className="text-xs text-muted px-1.5 py-0.5 rounded bg-border/40 font-mono">
+          <span className="text-xs text-text-muted px-1.5 py-0.5 rounded-md bg-bg-subtle border border-border font-mono">
             {run.comboId}
           </span>
         )}
-        <span className="text-xs text-muted font-mono opacity-70 truncate">{run.requestId}</span>
+        <span className="text-xs text-text-subtle font-mono truncate">{run.requestId}</span>
         <CompressionAnnotation
           stats={{
             originalTokens: run.originalTokens,
@@ -196,7 +198,11 @@ export function CompressionCockpit({ run: runProp }: CompressionCockpitProps) {
         />
         <div className="ml-auto flex items-center gap-2">
           {/* View toggle: ReactFlow canvas (A2) ↔ waterfall list (A1) */}
-          <div className="flex items-center gap-1" role="group" aria-label={t("cockpitView")}>
+          <div
+            className="flex items-center gap-0.5 rounded-lg bg-bg-subtle p-0.5"
+            role="group"
+            aria-label={t("cockpitView")}
+          >
             <ViewButton
               label={t("canvas")}
               testId="cockpit-view-canvas"
@@ -210,14 +216,17 @@ export function CompressionCockpit({ run: runProp }: CompressionCockpitProps) {
               onClick={() => setView("waterfall")}
             />
           </div>
-          <span className="text-[11px] text-muted">
+          <span className="text-[11px] text-text-muted tabular-nums">
             {fmt(run.originalTokens)} → {fmt(run.compressedTokens)} {t("tokenShort")}
           </span>
-          <span className="text-xs font-bold" style={{ color: "var(--orch-status-success)" }}>
+          <span
+            className="text-xs font-semibold tabular-nums"
+            style={{ color: "var(--orch-status-success)" }}
+          >
             −{run.savingsPercent.toFixed(1)}%
           </span>
           {isComplete && view === "canvas" && (
-            <span className="text-[10px] px-1.5 py-0.5 rounded border border-border text-muted">
+            <span className="text-[10px] px-1.5 py-0.5 rounded-md border border-border text-text-muted">
               {t("replayDone")}
             </span>
           )}
@@ -226,11 +235,11 @@ export function CompressionCockpit({ run: runProp }: CompressionCockpitProps) {
 
       {/* ── Body: Canvas (A2) or Waterfall (A1) ──────────────────────────── */}
       {view === "waterfall" ? (
-        <div className="flex-1 min-h-0 overflow-auto rounded-lg border border-border bg-bg/60 p-3">
+        <div className="flex-1 min-h-0 overflow-auto rounded-card border border-border bg-surface p-3">
           <WaterfallInspector run={run} />
         </div>
       ) : (
-        <div className="flex-1 min-h-0 rounded-lg overflow-hidden border border-border">
+        <div className="flex-1 min-h-0 rounded-card overflow-hidden border border-border">
           <FlowCanvas
             nodes={nodes}
             edges={edges}
@@ -243,28 +252,28 @@ export function CompressionCockpit({ run: runProp }: CompressionCockpitProps) {
 
       {/* ── Replay controls (canvas only — the waterfall is static) ──────── */}
       {view === "canvas" && (
-        <div className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border bg-bg/60 shrink-0">
+        <div className="flex items-center gap-2 px-3 py-1.5 rounded-card border border-border bg-surface shrink-0">
           <button
             onClick={isPlaying ? pause : play}
-            className="flex items-center gap-1.5 px-2.5 py-1 rounded border border-border text-xs hover:bg-border/30 transition-colors"
+            className="flex items-center gap-1.5 px-2.5 py-1 rounded-control border border-border-strong bg-surface text-xs font-medium text-text-main hover:bg-bg-subtle transition-colors"
             aria-label={isPlaying ? t("pauseReplay") : t("playReplay")}
           >
             {isPlaying ? `⏸ ${t("pause")}` : `▷ ${t("replay")}`}
           </button>
           <button
             onClick={reset}
-            className="px-2 py-1 rounded border border-border text-xs text-muted hover:bg-border/30 transition-colors"
+            className="px-2 py-1 rounded-control border border-border-strong bg-surface text-xs text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
             aria-label={t("resetReplay")}
           >
             ⟳
           </button>
-          <div className="flex items-center gap-1 ml-2">
+          <div className="flex items-center gap-0.5 ml-2 rounded-lg bg-bg-subtle p-0.5">
             {SPEEDS.map((s) => (
               <SpeedButton key={s} s={s} active={speed === s} onClick={() => setSpeed(s)} />
             ))}
           </div>
           {displayRun && currentFrame && (
-            <span className="ml-auto text-[11px] text-muted">
+            <span className="ml-auto text-[11px] text-text-muted tabular-nums">
               {t("stepProgress", {
                 current: displayRun?.steps.length ?? 0,
                 total: run.steps.length,

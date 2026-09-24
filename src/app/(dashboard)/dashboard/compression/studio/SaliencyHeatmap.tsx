@@ -27,7 +27,7 @@ export function SaliencyHeatmap({ heatmap }: SaliencyHeatmapProps): React.ReactE
   return (
     <div
       data-testid="saliency-heatmap"
-      className="rounded border p-2 font-mono text-xs leading-relaxed"
+      className="rounded-lg border border-border bg-surface p-3 font-mono text-xs leading-relaxed"
       aria-label={`Saliency heatmap — ${heatmap.mode} mode`}
     >
       {heatmap.tokens.map((token, idx) => (

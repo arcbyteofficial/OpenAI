@@ -144,7 +144,7 @@ export default function SearchTab({
   return (
     <div className="flex h-full" data-testid="search-tab">
       {/* Left: form + history */}
-      <div className="w-[300px] shrink-0 border-r border-border overflow-y-auto flex flex-col bg-bg-alt">
+      <div className="w-[300px] shrink-0 border-r border-border overflow-y-auto flex flex-col bg-surface">
         <SearchForm
           onSearch={handleSearch}
           loading={loading}
@@ -170,13 +170,13 @@ export default function SearchTab({
         {response && (
           <div className="px-4 py-2 flex gap-2">
             <button
-              className="flex-1 bg-surface border border-border rounded-lg p-2 text-center hover:border-primary/30 transition-colors flex items-center justify-center gap-2"
+              className="flex-1 bg-surface border border-border-strong rounded-control p-2 text-center hover:bg-bg-subtle transition-colors flex items-center justify-center gap-2"
               onClick={() => setShowRerank(!showRerank)}
             >
-              <span className="text-primary text-sm" aria-hidden="true">
+              <span className="text-text-muted text-sm" aria-hidden="true">
                 &#8645;
               </span>
-              <span className="text-xs text-text-muted">{t("rerank")}</span>
+              <span className="text-xs font-medium text-text-main">{t("rerank")}</span>
             </button>
           </div>
         )}

@@ -41,25 +41,25 @@ export default function ApiKeyFilterBar({
     {
       value: "active",
       label: t("filterStatusActive"),
-      dotColor: "bg-green-500",
+      dotColor: "bg-success",
       count: counts.active,
     },
     {
       value: "disabled",
       label: t("filterStatusDisabled"),
-      dotColor: "bg-gray-500",
+      dotColor: "bg-text-subtle",
       count: counts.disabled,
     },
     {
       value: "banned",
       label: t("filterStatusBanned"),
-      dotColor: "bg-red-500",
+      dotColor: "bg-error",
       count: counts.banned,
     },
     {
       value: "expired",
       label: t("filterStatusExpired"),
-      dotColor: "bg-amber-500",
+      dotColor: "bg-warning",
       count: counts.expired,
     },
   ];
@@ -74,19 +74,19 @@ export default function ApiKeyFilterBar({
     {
       value: "standard",
       label: t("filterTypeStandard"),
-      dotColor: "bg-slate-500",
+      dotColor: "bg-text-subtle",
       count: counts.standard,
     },
     {
       value: "manage",
       label: t("filterTypeManage"),
-      dotColor: "bg-rose-500",
+      dotColor: "bg-primary",
       count: counts.manage,
     },
     {
       value: "restricted",
       label: t("filterTypeRestricted"),
-      dotColor: "bg-amber-500",
+      dotColor: "bg-warning",
       count: counts.restricted,
     },
   ];
@@ -108,7 +108,7 @@ export default function ApiKeyFilterBar({
             {searchQuery && (
               <button
                 onClick={() => onSearchChange("")}
-                className="absolute inset-y-0 right-0 flex items-center pr-2.5 text-text-muted hover:text-text-primary transition-colors"
+                className="absolute inset-y-0 right-0 flex items-center pr-2.5 text-text-muted hover:text-text-main transition-colors"
                 aria-label={tc("clear")}
               >
                 <span className="material-symbols-outlined text-[18px]">close</span>
@@ -133,7 +133,7 @@ export default function ApiKeyFilterBar({
         {/* STATUS + TYPE chips — single row on >=1280px, wraps below on smaller */}
         <div className="border-t border-border pt-3 flex flex-wrap items-center gap-x-3 gap-y-2">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-text-muted mr-1">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mr-1">
               {t("filterStatus")}:
             </span>
             {statusChips.map((chip) => (
@@ -160,7 +160,7 @@ export default function ApiKeyFilterBar({
           <div aria-hidden="true" className="hidden xl:block h-6 w-px bg-border self-center" />
 
           <div className="flex flex-wrap items-center gap-2">
-            <span className="text-[10px] font-semibold uppercase tracking-wider text-text-muted mr-1">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mr-1">
               {t("filterType")}:
             </span>
             {typeChips.map((chip) => (

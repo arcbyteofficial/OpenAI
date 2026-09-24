@@ -31,9 +31,9 @@ export default function RiskNoticeModal({
   return (
     <Modal isOpen onClose={onCancel} title={t("title")} size="md">
       <div className="flex flex-col gap-5">
-        <div className="flex items-start gap-3 rounded-lg border border-amber-500/25 bg-amber-500/10 p-4">
+        <div className="flex items-start gap-3 rounded-lg border border-warning/25 bg-warning/10 p-4">
           <span
-            className="material-symbols-outlined mt-0.5 text-[28px] leading-none text-amber-500"
+            className="material-symbols-outlined mt-0.5 text-[20px] leading-none text-warning"
             aria-hidden="true"
           >
             info

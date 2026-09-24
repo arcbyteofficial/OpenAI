@@ -10,8 +10,8 @@ export interface AllowedComboOption {
   models?: unknown[];
 }
 
-const MODE_BUTTON_ACTIVE = "bg-primary text-white";
-const MODE_BUTTON_IDLE = "text-text-muted hover:bg-black/5 dark:hover:bg-white/5";
+const MODE_BUTTON_ACTIVE = "bg-surface text-text-main shadow-sm";
+const MODE_BUTTON_IDLE = "text-text-muted hover:text-text-main";
 
 function ComboAccessModeToggle({
   allowAllCombos,
@@ -25,10 +25,10 @@ function ComboAccessModeToggle({
   const t = useTranslations("apiManager");
   const tc = useTranslations("common");
   return (
-    <div className="flex gap-1 p-0.5 bg-surface rounded-md">
+    <div className="flex gap-1 p-0.5 bg-bg-subtle rounded-md">
       <button
         onClick={onAllowAll}
-        className={`px-2 py-1 rounded text-xs font-medium transition-all ${
+        className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
           allowAllCombos ? MODE_BUTTON_ACTIVE : MODE_BUTTON_IDLE
         }`}
       >
@@ -36,7 +36,7 @@ function ComboAccessModeToggle({
       </button>
       <button
         onClick={onRestrict}
-        className={`px-2 py-1 rounded text-xs font-medium transition-all ${
+        className={`px-2 py-1 rounded text-xs font-medium transition-colors ${
           allowAllCombos ? MODE_BUTTON_IDLE : MODE_BUTTON_ACTIVE
         }`}
       >
@@ -58,15 +58,15 @@ function ComboOptionRow({
   return (
     <button
       onClick={() => onToggle(combo.name)}
-      className={`w-full flex items-center gap-2 px-2 py-1.5 rounded text-left text-xs transition-all ${
+      className={`w-full flex items-center gap-2 px-2 py-1.5 rounded text-left text-xs transition-colors ${
         isSelected
           ? "bg-primary/10 text-primary"
-          : "text-text-muted hover:bg-surface/50 hover:text-text-main"
+          : "text-text-muted hover:bg-bg-subtle hover:text-text-main"
       }`}
     >
       <div
         className={`w-3.5 h-3.5 rounded border flex items-center justify-center shrink-0 ${
-          isSelected ? "bg-primary border-primary" : "border-border"
+          isSelected ? "bg-primary border-primary" : "border-border-strong"
         }`}
       >
         {isSelected && (
@@ -157,7 +157,7 @@ export function AllowedCombosSection({
   if (allCombos.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface/40">
+    <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface-2">
       <div className="flex items-center justify-between">
         <p className="text-sm font-medium text-text-main">{t("allowedCombos")}</p>
         <ComboAccessModeToggle

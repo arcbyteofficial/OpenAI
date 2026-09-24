@@ -33,7 +33,7 @@ export default function ConnectionDetail({
   const elapsedMs = tick * 1000;
   const adjustedCooldown = Math.max(0, connection.cooldownRemainingMs - elapsedMs);
   return (
-    <div style={{ padding: "16px", borderRadius: "8px", border: "1px solid var(--color-border)" }}>
+    <div style={{ padding: "16px", borderRadius: "10px", border: "1px solid var(--color-border)" }}>
       <h2>{t("detail.title")}</h2>
       <div>
         {t("detail.provider")}: {connection.provider}

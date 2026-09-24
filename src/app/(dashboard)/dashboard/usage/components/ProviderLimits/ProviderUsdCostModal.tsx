@@ -132,16 +132,18 @@ export default function ProviderUsdCostModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 px-4 py-6"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 px-4 py-6"
       onClick={onClose}
     >
       <div
-        className="w-full max-w-3xl max-h-[88vh] overflow-hidden rounded-lg border border-border bg-surface shadow-xl"
+        className="w-full max-w-3xl max-h-[88vh] overflow-hidden rounded-card border border-border bg-surface shadow-[var(--shadow-elevated)]"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4 border-b border-border px-5 py-4">
           <div>
-            <h2 className="m-0 text-lg font-semibold text-text-main">{t("usdCost")}</h2>
+            <h2 className="m-0 text-base font-semibold tracking-tight text-text-main">
+              {t("usdCost")}
+            </h2>
             <p className="mt-1 text-xs text-text-muted">
               {providerLabel} · {accountLabel || connection?.id}
             </p>
@@ -149,7 +151,7 @@ export default function ProviderUsdCostModal({
           <button
             type="button"
             onClick={onClose}
-            className="inline-flex h-8 w-8 items-center justify-center rounded-md border border-border bg-bg-subtle text-text-main hover:bg-black/[0.04] dark:hover:bg-white/[0.04]"
+            className="inline-flex h-8 w-8 items-center justify-center rounded-control text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
             aria-label={t("close")}
           >
             <span className="material-symbols-outlined text-[18px]">close</span>
@@ -165,50 +167,42 @@ export default function ProviderUsdCostModal({
               {t("loadingUsdCosts")}
             </div>
           ) : error ? (
-            <div className="flex items-start gap-2 rounded-md border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-500">
+            <div className="flex items-start gap-2 rounded-lg border border-error/30 bg-error/10 px-3 py-2 text-sm text-error">
               <span className="material-symbols-outlined text-[16px]">error</span>
               {error}
             </div>
           ) : payload ? (
             <div className="flex flex-col gap-4">
               <div className="grid grid-cols-2 gap-2 md:grid-cols-4">
-                <div className="rounded-md border border-border bg-bg-subtle px-3 py-2">
-                  <div className="text-[10px] uppercase tracking-wide text-text-muted">
-                    {t("used")}
-                  </div>
+                <div className="rounded-lg border border-border bg-surface px-3 py-2">
+                  <div className="text-xs text-text-muted">{t("used")}</div>
                   <div className="mt-1 text-lg font-semibold tabular-nums text-text-main">
                     {formatUsd(payload.totalCostUsd)}
                   </div>
                 </div>
-                <div className="rounded-md border border-border bg-bg-subtle px-3 py-2">
-                  <div className="text-[10px] uppercase tracking-wide text-text-muted">
-                    {t("quotaUsed")}
-                  </div>
+                <div className="rounded-lg border border-border bg-surface px-3 py-2">
+                  <div className="text-xs text-text-muted">{t("quotaUsed")}</div>
                   <div className="mt-1 text-lg font-semibold tabular-nums text-text-main">
                     {formatPercent(payload.quotaUsedPercent)}
                   </div>
                 </div>
-                <div className="rounded-md border border-border bg-bg-subtle px-3 py-2">
-                  <div className="text-[10px] uppercase tracking-wide text-text-muted">
-                    {t("estimatedFullQuota")}
-                  </div>
+                <div className="rounded-lg border border-border bg-surface px-3 py-2">
+                  <div className="text-xs text-text-muted">{t("estimatedFullQuota")}</div>
                   <div className="mt-1 text-lg font-semibold tabular-nums text-text-main">
                     {payload.estimatedFullQuotaUsd === null
                       ? "n/a"
                       : formatUsd(payload.estimatedFullQuotaUsd)}
                   </div>
                 </div>
-                <div className="rounded-md border border-border bg-bg-subtle px-3 py-2">
-                  <div className="text-[10px] uppercase tracking-wide text-text-muted">
-                    {t("rows")}
-                  </div>
+                <div className="rounded-lg border border-border bg-surface px-3 py-2">
+                  <div className="text-xs text-text-muted">{t("rows")}</div>
                   <div className="mt-1 text-lg font-semibold tabular-nums text-text-main">
                     {payload.rows.length}
                   </div>
                 </div>
               </div>
 
-              <div className="rounded-md border border-border bg-surface px-3 py-3">
+              <div className="rounded-lg border border-border bg-surface px-3 py-3">
                 <div className="flex flex-wrap items-center justify-between gap-2 text-xs text-text-muted">
                   <span>
                     {t("window")}: {formatDateTime(payload.windowStartAt, t("unknown"))} →{" "}
@@ -239,14 +233,14 @@ export default function ProviderUsdCostModal({
                     step="1"
                     value={simulatedPercent}
                     onChange={(event) => setSimulatedPercent(Number(event.target.value))}
-                    className="w-full accent-[var(--color-primary,#E54D5E)]"
+                    className="w-full accent-primary"
                     disabled={payload.estimatedFullQuotaUsd === null}
                   />
                 </div>
               </div>
 
               {payload.rows.length === 0 ? (
-                <div className="rounded-md border border-border px-3 py-8 text-center text-sm text-text-muted">
+                <div className="rounded-lg border border-dashed border-border px-3 py-8 text-center text-sm text-text-muted">
                   {t("noApiKeyUsage")}
                 </div>
               ) : (
@@ -256,11 +250,11 @@ export default function ProviderUsdCostModal({
                     return (
                       <div
                         key={row.apiKeyKey}
-                        className="rounded-md border border-border bg-surface px-3 py-2"
+                        className="rounded-lg border border-border bg-surface px-3 py-2"
                       >
                         <div className="flex items-start justify-between gap-3">
                           <div className="min-w-0">
-                            <div className="truncate text-sm font-semibold text-text-main">
+                            <div className="truncate text-[13px] font-medium text-text-main">
                               {row.apiKeyName}
                             </div>
                             <div className="mt-0.5 text-[11px] text-text-muted">
@@ -286,9 +280,9 @@ export default function ProviderUsdCostModal({
                             )}
                           </div>
                         </div>
-                        <div className="mt-2 h-2 overflow-hidden rounded-sm bg-border/60">
+                        <div className="mt-2 h-2 overflow-hidden rounded-full bg-border">
                           <div
-                            className="h-full rounded-sm bg-[var(--color-primary,#E54D5E)]"
+                            className="h-full rounded-full bg-primary"
                             style={{ width: `${barPercent}%` }}
                           />
                         </div>

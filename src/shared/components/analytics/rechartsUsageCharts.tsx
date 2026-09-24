@@ -25,7 +25,7 @@ export function DailyTrendChart({ dailyTrend }) {
   if (!chartData.length) {
     return (
       <Card className="p-4">
-        <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider mb-3">
+        <h3 className="text-sm font-semibold text-text-main mb-3">
           {t("chartModelUsageOverTime")}
         </h3>
         <div className="text-center text-text-muted text-sm py-8">{t("chartNoData")}</div>
@@ -48,9 +48,7 @@ function DailyTrendChartBody({ chartData, hasCost }) {
 
   return (
     <Card className="p-4 flex-1">
-      <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider mb-3">
-        {t("chartModelUsageOverTime")}
-      </h3>
+      <h3 className="text-sm font-semibold text-text-main mb-3">{t("chartModelUsageOverTime")}</h3>
       <ResponsiveContainer width="100%" height={140}>
         <ComposedChart
           data={chartData}
@@ -74,7 +72,7 @@ function DailyTrendChartBody({ chartData, hasCost }) {
               width={36}
             />
           )}
-          <Tooltip content={<CostTooltip />} cursor={{ fill: "rgba(255,255,255,0.04)" }} />
+          <Tooltip content={<CostTooltip />} cursor={{ fill: "rgba(127,127,127,0.08)" }} />
           <Bar
             dataKey={t("chartInput")}
             stackId="a"
@@ -135,7 +133,7 @@ function CostTooltip({
   const t = useTranslations("analytics");
   if (!active || !payload?.length) return null;
   return (
-    <div className="rounded-lg border border-white/10 bg-surface px-3 py-2 text-xs shadow-lg">
+    <div className="rounded-lg border border-border bg-surface px-3 py-2 text-xs shadow-[var(--shadow-elevated)]">
       {label && <div className="font-semibold text-text-main mb-1">{label}</div>}
       {payload.map((entry, i) => (
         <div key={i} className="flex items-center gap-1.5 text-text-muted">
@@ -173,9 +171,7 @@ function WeeklyPatternBody({ chartData, title }) {
   if (!recharts) {
     return (
       <Card className="px-4 py-3">
-        <h3 className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-2">
-          {title}
-        </h3>
+        <h3 className="text-[13px] font-medium text-text-muted mb-2">{title}</h3>
         <div className="h-12" />
       </Card>
     );
@@ -185,9 +181,7 @@ function WeeklyPatternBody({ chartData, title }) {
 
   return (
     <Card className="px-4 py-3">
-      <h3 className="text-xs font-semibold text-text-muted uppercase tracking-wider mb-2">
-        {title}
-      </h3>
+      <h3 className="text-[13px] font-medium text-text-muted mb-2">{title}</h3>
       <ResponsiveContainer width="100%" height={48}>
         <BarChart data={chartData} margin={{ top: 0, right: 0, left: 0, bottom: 0 }}>
           <XAxis
@@ -198,7 +192,7 @@ function WeeklyPatternBody({ chartData, title }) {
           />
           <Tooltip
             content={<DarkTooltip formatter={fmt} />}
-            cursor={{ fill: "rgba(255,255,255,0.04)" }}
+            cursor={{ fill: "rgba(127,127,127,0.08)" }}
           />
           <Bar
             dataKey="Tokens"
@@ -236,7 +230,7 @@ export function ModelOverTimeChart({ dailyByModel, modelNames }) {
   if (!data.length || !models.length) {
     return (
       <Card className="p-4">
-        <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider mb-3">
+        <h3 className="text-sm font-semibold text-text-main mb-3">
           {t("chartModelUsageOverTime")}
         </h3>
         <div className="text-center text-text-muted text-sm py-8">{t("chartNoData")}</div>
@@ -259,9 +253,7 @@ function ModelOverTimeChartBody({ chartData, models }) {
 
   return (
     <Card className="p-4">
-      <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider mb-3">
-        {t("chartModelUsageOverTime")}
-      </h3>
+      <h3 className="text-sm font-semibold text-text-main mb-3">{t("chartModelUsageOverTime")}</h3>
       <ResponsiveContainer width="100%" height={240}>
         <AreaChart data={chartData} margin={{ top: 4, right: 4, left: 0, bottom: 0 }}>
           <XAxis

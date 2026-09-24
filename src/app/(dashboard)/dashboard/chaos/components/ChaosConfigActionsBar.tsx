@@ -33,7 +33,7 @@ export function ChaosConfigActionsBar({
           type="button"
           onClick={onSave}
           disabled={saving}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-primary text-white text-sm font-semibold hover:opacity-90 disabled:opacity-50"
+          className="flex items-center gap-2 px-3.5 py-1.5 rounded-control bg-contrast text-contrast-fg text-sm font-medium hover:bg-contrast-hover transition-colors disabled:opacity-50"
         >
           {saving ? (
             <span className="material-symbols-outlined text-[16px] animate-spin">sync</span>
@@ -46,7 +46,7 @@ export function ChaosConfigActionsBar({
           type="button"
           onClick={onReset}
           disabled={saving}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg border border-border text-text-muted text-sm hover:bg-black/5 dark:hover:bg-white/5 disabled:opacity-50"
+          className="flex items-center gap-2 px-3.5 py-1.5 rounded-control border border-border-strong bg-surface text-text-main text-sm font-medium hover:bg-bg-subtle transition-colors disabled:opacity-50"
         >
           <span className="material-symbols-outlined text-[16px]">restart_alt</span>
           {t("configReset")}
@@ -54,13 +54,13 @@ export function ChaosConfigActionsBar({
       </div>
 
       {/* Test Button */}
-      <div className="p-3 rounded-lg border border-border bg-surface/40">
+      <div className="p-4 rounded-card border border-border bg-surface">
         <p className="text-sm font-medium text-text-main mb-2">{t("testButton")}</p>
         <button
           type="button"
           onClick={onTest}
           disabled={testing || testDisabled}
-          className="flex items-center gap-2 px-4 py-2 rounded-lg bg-amber-500/15 text-amber-700 dark:text-amber-300 border border-amber-500/30 text-sm font-semibold hover:bg-amber-500/25 disabled:opacity-50"
+          className="flex items-center gap-2 px-3.5 py-1.5 rounded-control border border-border-strong bg-surface text-text-main text-sm font-medium hover:bg-bg-subtle transition-colors disabled:opacity-50"
         >
           {testing ? (
             <span className="material-symbols-outlined text-[16px] animate-spin">sync</span>

@@ -392,7 +392,7 @@ export default function McpDashboardPage() {
       </div>
 
       <Card className="p-5">
-        <h2 className="text-lg font-semibold mb-4">{t("activity24h")}</h2>
+        <h2 className="text-base font-semibold tracking-tight mb-4">{t("activity24h")}</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-4">
           <StatCard label={t("totalCalls")} value={status?.activity?.totalCalls24h ?? 0} compact />
           <StatCard
@@ -415,7 +415,7 @@ export default function McpDashboardPage() {
               <ul className="space-y-1 text-sm">
                 {topTools.map((entry) => (
                   <li key={entry.tool} className="flex justify-between">
-                    <span className="font-mono text-xs">{entry.tool}</span>
+                    <span className="font-mono text-[12px]">{entry.tool}</span>
                     <span>{entry.count}</span>
                   </li>
                 ))}
@@ -455,12 +455,12 @@ export default function McpDashboardPage() {
       </Card>
 
       <Card className="p-5">
-        <h2 className="text-lg font-semibold mb-4">{t("operationalControls")}</h2>
+        <h2 className="text-base font-semibold tracking-tight mb-4">{t("operationalControls")}</h2>
         <div className="grid grid-cols-1 xl:grid-cols-3 gap-4">
           <div className="rounded-lg border border-border p-3 space-y-3">
             <p className="text-sm font-semibold">{t("switchCombo")}</p>
             <select
-              className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
               value={selectedComboId}
               onChange={(event) => setSelectedComboId(event.target.value)}
             >
@@ -483,7 +483,7 @@ export default function McpDashboardPage() {
           <div className="rounded-lg border border-border p-3 space-y-3">
             <p className="text-sm font-semibold">{t("applyResilienceProfile")}</p>
             <select
-              className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
               value={selectedProfile}
               onChange={(event) =>
                 setSelectedProfile(event.target.value as keyof typeof RESILIENCE_PRESETS)
@@ -509,7 +509,7 @@ export default function McpDashboardPage() {
             <Button
               size="sm"
               onClick={handleResetCircuitBreakers}
-              className="bg-red-500! hover:bg-red-600! text-white!"
+              className="bg-error! hover:bg-error/90! text-white!"
               disabled={actionBusy === "reset"}
             >
               {t("resetAllBreakers")}
@@ -520,22 +520,35 @@ export default function McpDashboardPage() {
       </Card>
 
       <Card className="p-5">
-        <h2 className="text-lg font-semibold mb-4">{t("toolsAndScopes")}</h2>
+        <h2 className="text-base font-semibold tracking-tight mb-4">{t("toolsAndScopes")}</h2>
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full text-[13px]">
             <thead>
               <tr className="border-b border-border">
-                <th className="text-left py-2 pr-2">{t("tableTool")}</th>
-                <th className="text-left py-2 pr-2">{t("tableScopes")}</th>
-                <th className="text-left py-2 pr-2">{t("tablePhase")}</th>
-                <th className="text-left py-2">{t("tableAudit")}</th>
+                <th className="text-left py-2 pr-2 text-xs font-medium text-text-muted">
+                  {t("tableTool")}
+                </th>
+                <th className="text-left py-2 pr-2 text-xs font-medium text-text-muted">
+                  {t("tableScopes")}
+                </th>
+                <th className="text-left py-2 pr-2 text-xs font-medium text-text-muted">
+                  {t("tablePhase")}
+                </th>
+                <th className="text-left py-2 text-xs font-medium text-text-muted">
+                  {t("tableAudit")}
+                </th>
               </tr>
             </thead>
             <tbody>
               {tools.map((tool) => (
-                <tr key={tool.name} className="border-b border-border/40">
-                  <td className="py-2 pr-2 font-mono text-xs">{tool.name}</td>
-                  <td className="py-2 pr-2 text-xs">{tool.scopes.join(", ") || "—"}</td>
+                <tr
+                  key={tool.name}
+                  className="border-b border-border last:border-b-0 transition-colors hover:bg-bg-subtle/60"
+                >
+                  <td className="py-2 pr-2 font-mono text-[12px]">{tool.name}</td>
+                  <td className="py-2 pr-2 text-xs text-text-muted">
+                    {tool.scopes.join(", ") || "—"}
+                  </td>
                   <td className="py-2 pr-2">{tool.phase}</td>
                   <td className="py-2">{tool.auditLevel}</td>
                 </tr>
@@ -548,14 +561,14 @@ export default function McpDashboardPage() {
       <Card className="p-5">
         <div className="flex flex-wrap gap-2 items-end justify-between mb-4">
           <div>
-            <h2 className="text-lg font-semibold">{t("auditLog")}</h2>
+            <h2 className="text-base font-semibold tracking-tight">{t("auditLog")}</h2>
             <p className="text-sm text-text-muted">
               {t("auditSummary", { total: auditData.total, page: currentPage, totalPages })}
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
             <select
-              className="rounded-lg border border-border bg-bg px-3 py-2 text-sm"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
               value={toolFilter}
               onChange={(event) => {
                 setAuditOffset(0);
@@ -570,7 +583,7 @@ export default function McpDashboardPage() {
               ))}
             </select>
             <select
-              className="rounded-lg border border-border bg-bg px-3 py-2 text-sm"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
               value={successFilter}
               onChange={(event) => {
                 setAuditOffset(0);
@@ -582,7 +595,7 @@ export default function McpDashboardPage() {
               <option value="false">{t("failure")}</option>
             </select>
             <input
-              className="rounded-lg border border-border bg-bg px-3 py-2 text-sm"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
               placeholder={t("apiKeyIdPlaceholder")}
               value={apiKeyFilter}
               onChange={(event) => {
@@ -599,30 +612,45 @@ export default function McpDashboardPage() {
           <p className="text-sm text-text-muted">{t("noAuditEntriesForFilters")}</p>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full text-[13px]">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="text-left py-2 pr-2">{t("tableTimestamp")}</th>
-                  <th className="text-left py-2 pr-2">{t("tableTool")}</th>
-                  <th className="text-left py-2 pr-2">{t("tableDuration")}</th>
-                  <th className="text-left py-2 pr-2">{t("tableResult")}</th>
-                  <th className="text-left py-2">{t("tableApiKey")}</th>
+                  <th className="text-left py-2 pr-2 text-xs font-medium text-text-muted">
+                    {t("tableTimestamp")}
+                  </th>
+                  <th className="text-left py-2 pr-2 text-xs font-medium text-text-muted">
+                    {t("tableTool")}
+                  </th>
+                  <th className="text-left py-2 pr-2 text-xs font-medium text-text-muted">
+                    {t("tableDuration")}
+                  </th>
+                  <th className="text-left py-2 pr-2 text-xs font-medium text-text-muted">
+                    {t("tableResult")}
+                  </th>
+                  <th className="text-left py-2 text-xs font-medium text-text-muted">
+                    {t("tableApiKey")}
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {auditData.entries.map((entry) => (
-                  <tr key={entry.id} className="border-b border-border/40">
-                    <td className="py-2 pr-2 text-xs">
+                  <tr
+                    key={entry.id}
+                    className="border-b border-border last:border-b-0 transition-colors hover:bg-bg-subtle/60"
+                  >
+                    <td className="py-2 pr-2 text-xs text-text-muted">
                       {new Date(entry.createdAt).toLocaleString()}
                     </td>
-                    <td className="py-2 pr-2 font-mono text-xs">{entry.toolName}</td>
+                    <td className="py-2 pr-2 font-mono text-[12px]">{entry.toolName}</td>
                     <td className="py-2 pr-2">{entry.durationMs}ms</td>
                     <td className="py-2 pr-2">
-                      <span className={entry.success ? "text-green-500" : "text-red-500"}>
+                      <span className={entry.success ? "text-success" : "text-error"}>
                         {entry.success ? t("success") : entry.errorCode || t("failed")}
                       </span>
                     </td>
-                    <td className="py-2">{entry.apiKeyId || "—"}</td>
+                    <td className="py-2 font-mono text-[12px] text-text-muted">
+                      {entry.apiKeyId || "—"}
+                    </td>
                   </tr>
                 ))}
               </tbody>
@@ -667,9 +695,11 @@ function StatCard({
   compact?: boolean;
 }) {
   return (
-    <div className={`rounded-lg border border-border bg-bg p-4 ${compact ? "" : "min-h-[84px]"}`}>
-      <p className="text-xs text-text-muted uppercase tracking-wide">{label}</p>
-      <p className="text-xl font-semibold mt-1">{value}</p>
+    <div
+      className={`rounded-card border border-border bg-surface p-4 ${compact ? "" : "min-h-[84px]"}`}
+    >
+      <p className="text-[13px] text-text-muted">{label}</p>
+      <p className="text-2xl font-semibold tracking-tight tabular-nums mt-1">{value}</p>
     </div>
   );
 }

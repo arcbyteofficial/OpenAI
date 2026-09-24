@@ -104,13 +104,15 @@ export default function CodexConnectClient({ token }: { token: string }) {
   }, [token, t]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-bg-base px-4 py-10">
-      <div className="w-full max-w-md rounded-2xl border border-border bg-bg-subtle p-8 shadow-sm">
+    <div className="min-h-screen flex items-center justify-center bg-bg px-4 py-10">
+      <div className="w-full max-w-md rounded-card border border-border bg-surface p-6">
         <div className="mb-6 text-center">
-          <div className="mb-3 inline-flex h-14 w-14 items-center justify-center rounded-full bg-primary/10 text-primary">
-            <span className="material-symbols-outlined text-[28px]">key</span>
+          <div className="mb-4 inline-flex h-14 w-14 items-center justify-center rounded-card border border-border bg-bg-subtle text-text-main">
+            <span className="material-symbols-outlined text-[24px]">key</span>
           </div>
-          <h1 className="text-lg font-semibold text-text-main">{t("connectOpenAiCodexTitle")}</h1>
+          <h1 className="text-xl font-semibold tracking-tight text-text-main">
+            {t("connectOpenAiCodexTitle")}
+          </h1>
           <p className="mt-1 text-sm text-text-muted">{t("codexConnectDescription")}</p>
         </div>
 
@@ -135,10 +137,10 @@ export default function CodexConnectClient({ token }: { token: string }) {
           <div className="space-y-4">
             <p className="text-sm text-text-muted">{t("codexVerificationInstructions")}</p>
 
-            <div className="rounded-lg border border-border bg-bg-base p-3">
+            <div className="rounded-lg border border-border bg-bg-subtle p-3">
               <p className="mb-1 text-xs text-text-muted">{t("yourCode")}</p>
               <div className="flex items-center justify-between gap-2">
-                <code className="text-lg font-semibold tracking-widest text-text-main">
+                <code className="font-mono text-lg font-semibold tracking-widest text-text-main">
                   {userCode.userCode}
                 </code>
                 <Button
@@ -179,7 +181,7 @@ export default function CodexConnectClient({ token }: { token: string }) {
 
         {status === "success" && (
           <div className="text-center">
-            <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-green-500/10 text-green-500">
+            <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-success/10 text-success">
               <span className="material-symbols-outlined text-[26px]">check_circle</span>
             </div>
             <p className="font-medium text-text-main">{t("codexConnected")}</p>
@@ -189,7 +191,7 @@ export default function CodexConnectClient({ token }: { token: string }) {
 
         {status === "error" && (
           <div className="text-center">
-            <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-red-500/10 text-red-500">
+            <div className="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-error/10 text-error">
               <span className="material-symbols-outlined text-[26px]">error</span>
             </div>
             <p className="mb-4 text-sm text-text-muted">{error}</p>

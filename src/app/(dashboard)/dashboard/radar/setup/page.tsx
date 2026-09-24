@@ -161,9 +161,9 @@ function RadarSetupPageContent() {
   if (!provider) {
     return (
       <div className="flex flex-col gap-6">
-        <h1 className="text-2xl font-bold">{t("title")}</h1>
+        <h1 className="text-xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
         <Card>
-          <div className="text-center py-12 text-text-muted">{t("noProvider")}</div>
+          <div className="text-center py-12 text-sm text-text-muted">{t("noProvider")}</div>
         </Card>
       </div>
     );
@@ -181,11 +181,13 @@ function RadarSetupPageContent() {
         </Link>
       </div>
       <div>
-        <h1 className="text-2xl font-bold">{t("setupTitle", { provider })}</h1>
+        <h1 className="text-xl font-semibold tracking-tight text-text-main">
+          {t("setupTitle", { provider })}
+        </h1>
         <p className="text-sm text-text-muted mt-1">{t("setupSubtitle")}</p>
       </div>
 
-      {error && <div className="p-3 rounded-lg bg-red-500/10 text-red-400 text-sm">{error}</div>}
+      {error && <div className="p-3 rounded-lg bg-error/10 text-error text-sm">{error}</div>}
 
       {loading ? (
         <div className="flex items-center justify-center min-h-[200px]">
@@ -197,8 +199,8 @@ function RadarSetupPageContent() {
           {setupData.configured && (
             <Card>
               <div className="flex items-center gap-3 py-2">
-                <span className="text-green-400 text-xl">✓</span>
-                <span className="text-green-400 font-medium">{t("providerConfigured")}</span>
+                <span className="text-success text-lg">✓</span>
+                <span className="text-success text-sm font-medium">{t("providerConfigured")}</span>
               </div>
             </Card>
           )}
@@ -207,12 +209,14 @@ function RadarSetupPageContent() {
           {setupData.setup?.keyUrl && (
             <Card>
               <div className="flex flex-col gap-2">
-                <h2 className="font-semibold">{t("getApiKey")}</h2>
+                <h2 className="text-sm font-semibold tracking-tight text-text-main">
+                  {t("getApiKey")}
+                </h2>
                 <a
                   href={setupData.setup.keyUrl}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-violet-400 hover:underline break-all"
+                  className="text-sm font-mono text-primary hover:underline break-all"
                 >
                   {setupData.setup.keyUrl}
                 </a>
@@ -224,11 +228,13 @@ function RadarSetupPageContent() {
           {setupData.setup && setupData.setup.steps.length > 0 && (
             <Card>
               <div className="flex flex-col gap-4">
-                <h2 className="font-semibold">{t("setupSteps")}</h2>
+                <h2 className="text-sm font-semibold tracking-tight text-text-main">
+                  {t("setupSteps")}
+                </h2>
                 <ol className="flex flex-col gap-3">
                   {setupData.setup.steps.map((step, idx) => (
                     <li key={idx} className="flex items-start gap-3">
-                      <span className="flex-shrink-0 w-7 h-7 rounded-full bg-violet-500/10 text-violet-400 flex items-center justify-center text-sm font-medium">
+                      <span className="flex-shrink-0 w-7 h-7 rounded-full bg-bg-subtle border border-border text-text-muted flex items-center justify-center text-[13px] font-medium tabular-nums">
                         {idx + 1}
                       </span>
                       <span className="text-sm text-text-muted pt-1">
@@ -253,18 +259,20 @@ function RadarSetupPageContent() {
           {/* Test connection */}
           <Card>
             <div className="flex flex-col gap-3">
-              <h2 className="font-semibold">{t("testConnection")}</h2>
+              <h2 className="text-sm font-semibold tracking-tight text-text-main">
+                {t("testConnection")}
+              </h2>
               <p className="text-sm text-text-muted">{t("testDescription")}</p>
               <div className="flex items-center gap-3">
                 <button
                   onClick={handleTestConnection}
                   disabled={testing || !setupData.connectionId}
-                  className="px-4 py-2 text-sm font-medium rounded-lg border border-violet-500 text-violet-400 hover:bg-violet-500/10 transition-colors disabled:opacity-50"
+                  className="px-3 py-1.5 text-[13px] font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
                 >
                   {testing ? t("testing") : t("testButton")}
                 </button>
                 {testResult && (
-                  <span className={`text-sm ${testResult.ok ? "text-green-400" : "text-red-400"}`}>
+                  <span className={`text-sm ${testResult.ok ? "text-success" : "text-error"}`}>
                     {testResult.message}
                   </span>
                 )}
@@ -275,11 +283,13 @@ function RadarSetupPageContent() {
           {/* Add connection link */}
           <Card>
             <div className="flex flex-col gap-2">
-              <h2 className="font-semibold">{t("addConnection")}</h2>
+              <h2 className="text-sm font-semibold tracking-tight text-text-main">
+                {t("addConnection")}
+              </h2>
               <p className="text-sm text-text-muted">{t("addConnectionDescription")}</p>
               <Link
                 href={providerSetupConnectionUrl(provider)}
-                className="text-violet-400 hover:underline text-sm"
+                className="text-primary hover:underline text-sm"
               >
                 {t("addConnectionLink")}
               </Link>

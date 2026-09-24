@@ -131,7 +131,7 @@ export default function ResilienceConnectionsClient() {
       style={{
         padding: "12px",
         borderRadius: "8px",
-        background: "rgba(239,68,68,0.1)",
+        background: "color-mix(in srgb, var(--color-error) 10%, transparent)",
         color: "var(--color-error)",
       }}
     >
@@ -181,7 +181,7 @@ export default function ResilienceConnectionsClient() {
           style={{
             padding: "12px",
             borderRadius: "8px",
-            background: "rgba(245,158,11,0.1)",
+            background: "color-mix(in srgb, var(--color-warning) 10%, transparent)",
             color: "var(--color-warning)",
           }}
         >

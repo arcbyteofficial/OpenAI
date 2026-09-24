@@ -86,9 +86,9 @@ export default function ProviderPageHeader({
     <div>
       <Link
         href="/dashboard/providers"
-        className="inline-flex items-center gap-1 text-sm text-text-muted hover:text-primary transition-colors mb-4"
+        className="inline-flex items-center gap-1 text-[13px] text-text-muted hover:text-text-main transition-colors mb-4"
       >
-        <span className="material-symbols-outlined text-lg">arrow_back</span>
+        <span className="material-symbols-outlined text-[16px]">arrow_back</span>
         {t("backToProviders")}
       </Link>
       <div className="flex items-center gap-4">
@@ -117,7 +117,7 @@ export default function ProviderPageHeader({
               href={providerInfo.website}
               target="_blank"
               rel="noopener noreferrer"
-              className="text-3xl font-semibold tracking-tight hover:underline inline-flex items-center gap-2"
+              className="text-2xl font-semibold tracking-tight hover:underline inline-flex items-center gap-2"
               style={{ color: providerInfo.color }}
               title={showPartnerNote ? kimiPartnerLinkNote : undefined}
               aria-label={
@@ -125,13 +125,13 @@ export default function ProviderPageHeader({
               }
             >
               {providerInfo.name}
-              <span className="material-symbols-outlined text-lg opacity-60">open_in_new</span>
+              <span className="material-symbols-outlined text-[16px] opacity-60">open_in_new</span>
             </a>
           ) : (
-            <h1 className="text-3xl font-semibold tracking-tight">{providerInfo.name}</h1>
+            <h1 className="text-2xl font-semibold tracking-tight">{providerInfo.name}</h1>
           )}
           <div className="flex items-center gap-2">
-            <p className="text-text-muted">
+            <p className="text-sm text-text-muted">
               {t("connectionCountLabel", { count: connectionsCount })}
             </p>
             {showPartnerNote && providerInfo.website && (

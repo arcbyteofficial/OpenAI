@@ -60,15 +60,15 @@ type AutopilotReport = {
 };
 
 const STATUS_STYLES: Record<AutopilotReport["status"], string> = {
-  healthy: "bg-green-500/10 text-green-400 border-green-500/20",
-  warning: "bg-amber-500/10 text-amber-400 border-amber-500/20",
-  critical: "bg-red-500/10 text-red-400 border-red-500/20",
+  healthy: "bg-success/10 text-success border-success/20",
+  warning: "bg-warning/10 text-warning border-warning/20",
+  critical: "bg-error/10 text-error border-error/20",
 };
 
 const SEVERITY_STYLES: Record<AutopilotIssue["severity"], string> = {
-  info: "bg-blue-500/10 text-blue-300 border-blue-500/20",
-  warning: "bg-amber-500/10 text-amber-300 border-amber-500/20",
-  critical: "bg-red-500/10 text-red-300 border-red-500/20",
+  info: "bg-primary/10 text-primary border-primary/20",
+  warning: "bg-warning/10 text-warning border-warning/20",
+  critical: "bg-error/10 text-error border-error/20",
 };
 
 const SEVERITY_RANK: Record<AutopilotIssue["severity"], number> = {
@@ -208,7 +208,7 @@ function ProviderIssues({
                         key={`${issue.id}:${action.type}`}
                         onClick={() => void onApply(issue, action)}
                         disabled={busy || Boolean(busyAction)}
-                        className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-1.5 text-xs font-medium text-primary transition-colors hover:bg-primary/20 disabled:opacity-50"
+                        className="rounded-control border border-border-strong bg-surface px-3 py-1.5 text-xs font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-50"
                       >
                         {busy ? t("applying") : actionLabel(action, t)}
                       </button>
@@ -305,11 +305,13 @@ export default function ProviderHealthAutopilotCard() {
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
           <div className="flex items-center gap-3">
-            <div className="flex size-9 items-center justify-center rounded-lg bg-primary/10 text-primary">
+            <div className="flex size-9 items-center justify-center rounded-lg border border-border bg-bg-subtle text-text-muted">
               <span className="material-symbols-outlined text-[18px]">health_and_safety</span>
             </div>
             <div>
-              <h2 className="text-lg font-semibold text-text-main">{t("title")}</h2>
+              <h2 className="text-base font-semibold tracking-tight text-text-main">
+                {t("title")}
+              </h2>
               <p className="text-sm text-text-muted">{t("description")}</p>
             </div>
           </div>
@@ -317,7 +319,7 @@ export default function ProviderHealthAutopilotCard() {
         <button
           onClick={() => void load()}
           disabled={loading}
-          className="rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main transition-colors hover:bg-surface/80 disabled:opacity-50"
+          className="rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-50"
         >
           {t("refresh")}
         </button>
@@ -325,26 +327,28 @@ export default function ProviderHealthAutopilotCard() {
 
       <div className="mt-4 grid gap-3 md:grid-cols-4">
         <div
-          className={`rounded-xl border px-3 py-2 ${STATUS_STYLES[report?.status || "healthy"]}`}
+          className={`rounded-lg border px-3 py-2 ${STATUS_STYLES[report?.status || "healthy"]}`}
         >
-          <p className="text-xs uppercase tracking-wide opacity-80">{t("status")}</p>
-          <p className="text-lg font-semibold capitalize">
+          <p className="text-[13px] opacity-80">{t("status")}</p>
+          <p className="text-lg font-semibold tracking-tight capitalize">
             {t(`state.${report?.status || "loading"}`)}
           </p>
         </div>
-        <div className="rounded-xl border border-border bg-bg-subtle px-3 py-2">
-          <p className="text-xs uppercase tracking-wide text-text-muted">{t("issues")}</p>
-          <p className="text-lg font-semibold text-text-main">{report?.summary.issueCount ?? 0}</p>
+        <div className="rounded-lg border border-border bg-bg-subtle px-3 py-2">
+          <p className="text-[13px] text-text-muted">{t("issues")}</p>
+          <p className="text-lg font-semibold tabular-nums text-text-main">
+            {report?.summary.issueCount ?? 0}
+          </p>
         </div>
-        <div className="rounded-xl border border-border bg-bg-subtle px-3 py-2">
-          <p className="text-xs uppercase tracking-wide text-text-muted">{t("actions")}</p>
-          <p className="text-lg font-semibold text-text-main">
+        <div className="rounded-lg border border-border bg-bg-subtle px-3 py-2">
+          <p className="text-[13px] text-text-muted">{t("actions")}</p>
+          <p className="text-lg font-semibold tabular-nums text-text-main">
             {report?.summary.actionableCount ?? 0}
           </p>
         </div>
-        <div className="rounded-xl border border-border bg-bg-subtle px-3 py-2">
-          <p className="text-xs uppercase tracking-wide text-text-muted">{t("connections")}</p>
-          <p className="text-lg font-semibold text-text-main">
+        <div className="rounded-lg border border-border bg-bg-subtle px-3 py-2">
+          <p className="text-[13px] text-text-muted">{t("connections")}</p>
+          <p className="text-lg font-semibold tabular-nums text-text-main">
             {report?.summary.connectionCount ?? 0}
           </p>
         </div>
@@ -357,7 +361,7 @@ export default function ProviderHealthAutopilotCard() {
       )}
 
       {error ? (
-        <div className="mt-4 rounded-lg border border-red-500/20 bg-red-500/10 px-3 py-2 text-sm text-red-300">
+        <div className="mt-4 rounded-lg border border-error/20 bg-error/10 px-3 py-2 text-sm text-error">
           {error}
         </div>
       ) : loading && !report ? (
@@ -369,11 +373,11 @@ export default function ProviderHealthAutopilotCard() {
           {topProviders.map((provider) => (
             <div
               key={provider.provider}
-              className="rounded-xl border border-border bg-bg-subtle p-4"
+              className="rounded-lg border border-border bg-bg-subtle p-4"
             >
               <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
                 <div>
-                  <h3 className="font-semibold text-text-main">
+                  <h3 className="text-sm font-semibold text-text-main">
                     {resolveProviderName(provider.provider, nodeMap)}
                   </h3>
                   <p className="text-xs text-text-muted">
@@ -389,10 +393,10 @@ export default function ProviderHealthAutopilotCard() {
                 <span
                   className={`w-fit rounded-full border px-2 py-1 text-xs font-medium ${
                     provider.state === "down"
-                      ? "border-red-500/20 bg-red-500/10 text-red-300"
+                      ? "border-error/20 bg-error/10 text-error"
                       : provider.state === "degraded"
-                        ? "border-amber-500/20 bg-amber-500/10 text-amber-300"
-                        : "border-green-500/20 bg-green-500/10 text-green-300"
+                        ? "border-warning/20 bg-warning/10 text-warning"
+                        : "border-success/20 bg-success/10 text-success"
                   }`}
                 >
                   {t(`providerState.${provider.state}`)}

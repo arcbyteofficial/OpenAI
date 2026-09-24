@@ -126,12 +126,14 @@ export default function NotionSourceCard() {
           onClick={() => setExpanded(!expanded)}
           className="w-full flex items-center gap-3 text-left"
         >
-          <div className="flex items-center justify-center size-10 rounded-lg bg-blue-500/10 shrink-0">
-            <span className="material-symbols-outlined text-xl text-blue-400">description</span>
+          <div className="flex items-center justify-center size-10 rounded-lg border border-border bg-bg-subtle shrink-0">
+            <span className="material-symbols-outlined text-[20px] text-text-muted">
+              description
+            </span>
           </div>
           <div className="flex-1 min-w-0">
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="font-semibold text-sm">Notion</span>
+              <span className="font-semibold text-sm text-text-main">Notion</span>
               <Badge variant={connected ? "success" : "default"}>
                 {connected
                   ? translateOrFallback("notionConnected", "Connected")
@@ -153,13 +155,13 @@ export default function NotionSourceCard() {
         </button>
 
         {expanded && (
-          <div className="mt-4 pt-4 border-t border-border/50 flex flex-col gap-3">
+          <div className="mt-4 pt-4 border-t border-border flex flex-col gap-3">
             {message && (
               <div
                 className={`flex items-center gap-2 rounded-lg border px-3 py-2 text-sm ${
                   message.type === "success"
-                    ? "border-green-500/30 bg-green-500/10 text-green-400"
-                    : "border-red-500/30 bg-red-500/10 text-red-400"
+                    ? "border-success/30 bg-success/10 text-success"
+                    : "border-error/30 bg-error/10 text-error"
                 }`}
               >
                 <span className="material-symbols-outlined text-[18px]">
@@ -195,7 +197,7 @@ export default function NotionSourceCard() {
                     "notionIntegrationHelp",
                     "Create an Internal Integration at"
                   )}{" "}
-                  <code className="text-primary font-mono bg-surface/80 px-1 rounded">
+                  <code className="text-text-main font-mono bg-bg-subtle px-1 rounded">
                     https://www.notion.so/profile/integrations
                   </code>
                 </p>
@@ -213,7 +215,7 @@ export default function NotionSourceCard() {
                   loading={busy}
                   variant="secondary"
                   size="sm"
-                  className="border-red-500/30! text-red-400! hover:bg-red-500/10!"
+                  className="border-error/30! text-error! hover:bg-error/10!"
                 >
                   {translateOrFallback("notionDisconnect", "Disconnect")}
                 </Button>

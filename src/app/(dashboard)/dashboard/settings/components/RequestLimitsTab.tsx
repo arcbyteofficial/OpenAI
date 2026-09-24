@@ -110,8 +110,8 @@ export default function RequestLimitsTab() {
     <Card className="p-6 mt-4">
       <div className="flex flex-col gap-3">
         <div>
-          <p className="font-medium">{t("requestBodyLimitTitle")}</p>
-          <p className="text-sm text-text-muted mt-1">{t("requestBodyLimitDescription")}</p>
+          <p className="text-sm font-semibold text-text-main">{t("requestBodyLimitTitle")}</p>
+          <p className="text-[13px] text-text-muted mt-1">{t("requestBodyLimitDescription")}</p>
         </div>
         <div className="flex items-center gap-3">
           <label htmlFor="request-body-limit-mb" className="sr-only">
@@ -131,7 +131,7 @@ export default function RequestLimitsTab() {
             onKeyDown={(event) => {
               if (event.key === "Enter" && dirty) void saveLimit();
             }}
-            className="w-32 px-3 py-1.5 rounded bg-surface-2 border border-border text-sm text-text-primary"
+            className="w-32 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main tabular-nums focus:outline-none focus:border-primary"
             disabled={loading || saving}
           />
           <span className="text-xs text-text-muted">MB</span>
@@ -149,15 +149,9 @@ export default function RequestLimitsTab() {
             </span>
           )}
         </div>
-        {validationError && <p className="text-xs text-red-500">{validationError}</p>}
+        {validationError && <p className="text-xs text-error">{validationError}</p>}
         {message && (
-          <p
-            className={`text-xs ${
-              message.type === "success"
-                ? "text-green-600 dark:text-green-400"
-                : "text-red-600 dark:text-red-400"
-            }`}
-          >
+          <p className={`text-xs ${message.type === "success" ? "text-success" : "text-error"}`}>
             {message.text}
           </p>
         )}

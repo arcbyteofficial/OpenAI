@@ -40,35 +40,35 @@ const MODALITY_CONFIG: Record<
     endpoint: "/api/v1/images/generations",
     labelKey: "imageGeneration",
     placeholderKey: "imagePromptPlaceholder",
-    color: "from-purple-500 to-pink-500",
+    color: "",
   },
   video: {
     icon: "videocam",
     endpoint: "/api/v1/videos/generations",
     labelKey: "videoGeneration",
     placeholderKey: "videoPromptPlaceholder",
-    color: "from-blue-500 to-cyan-500",
+    color: "",
   },
   music: {
     icon: "music_note",
     endpoint: "/api/v1/music/generations",
     labelKey: "musicGeneration",
     placeholderKey: "musicPromptPlaceholder",
-    color: "from-orange-500 to-yellow-500",
+    color: "",
   },
   speech: {
     icon: "record_voice_over",
     endpoint: "/api/v1/audio/speech",
     labelKey: "textToSpeech",
     placeholderKey: "speechTextPlaceholder",
-    color: "from-green-500 to-teal-500",
+    color: "",
   },
   transcription: {
     icon: "mic",
     endpoint: "/api/v1/audio/transcriptions",
     labelKey: "transcription",
     placeholderKey: "transcriptionPlaceholder",
-    color: "from-indigo-500 to-blue-500",
+    color: "",
   },
 };
 
@@ -384,10 +384,7 @@ function ImageResults({ data }: { data: any }) {
         const src = img.url || (img.b64_json ? `data:image/png;base64,${img.b64_json}` : null);
         if (!src) return null;
         return (
-          <div
-            key={i}
-            className="relative group rounded-lg overflow-hidden border border-black/10 dark:border-white/10"
-          >
+          <div key={i} className="relative group rounded-lg overflow-hidden border border-border">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={src}
@@ -692,7 +689,7 @@ export default function MediaPageClient() {
   return (
     <div className="space-y-6">
       {/* Modality Tabs */}
-      <div className="flex flex-wrap gap-2 p-1 bg-surface/50 rounded-xl border border-black/5 dark:border-white/5">
+      <div className="flex flex-wrap gap-2 p-1 bg-bg-subtle rounded-lg border border-border">
         {(Object.keys(MODALITY_CONFIG) as Modality[]).map((key) => {
           const cfg = MODALITY_CONFIG[key];
           const isActive = key === activeTab;
@@ -700,10 +697,10 @@ export default function MediaPageClient() {
             <button
               key={key}
               onClick={() => switchTab(key)}
-              className={`flex-1 min-w-[110px] flex items-center justify-center gap-2 px-4 py-2.5 rounded-lg text-sm font-medium transition-all ${
+              className={`flex-1 min-w-[110px] flex items-center justify-center gap-2 px-4 py-2.5 rounded-md text-sm font-medium transition-colors ${
                 isActive
-                  ? "bg-primary/10 text-primary shadow-sm border border-primary/20"
-                  : "text-text-muted hover:text-text-main hover:bg-surface/80"
+                  ? "bg-surface text-text-main border border-border"
+                  : "text-text-muted hover:text-text-main hover:bg-surface/70"
               }`}
             >
               <span className="material-symbols-outlined text-[18px]">{cfg.icon}</span>
@@ -714,7 +711,7 @@ export default function MediaPageClient() {
       </div>
 
       {/* Generation Form */}
-      <div className="bg-surface/30 rounded-xl border border-black/5 dark:border-white/5 p-6 space-y-4">
+      <div className="bg-surface rounded-card border border-border p-5 space-y-4">
         {/* Provider + Model row */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
           {/* Provider dropdown */}
@@ -723,7 +720,7 @@ export default function MediaPageClient() {
             <select
               value={selectedProvider}
               onChange={(e) => handleProviderChange(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-surface border border-black/10 dark:border-white/10 text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             >
               {currentProviders.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -739,7 +736,7 @@ export default function MediaPageClient() {
             <select
               value={selectedModel}
               onChange={(e) => setSelectedModel(e.target.value)}
-              className="w-full px-3 py-2 rounded-lg bg-surface border border-black/10 dark:border-white/10 text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
             >
               {currentModels.map((m) => (
                 <option key={m.id} value={m.id}>
@@ -753,7 +750,7 @@ export default function MediaPageClient() {
         {/* Credential hint */}
         {selectedProvider && !["sdwebui", "comfyui", "qwen"].includes(selectedProvider) && (
           <p className="text-xs text-text-muted flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-[14px] text-amber-500">info</span>
+            <span className="material-symbols-outlined text-[14px] text-warning">info</span>
             {t.rich("credentialsRequired", {
               provider: () => <strong className="capitalize">{selectedProvider}</strong>,
               providers: (chunks) => (
@@ -776,7 +773,7 @@ export default function MediaPageClient() {
               <select
                 value={speechVoice}
                 onChange={(e) => setSpeechVoice(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg bg-surface border border-black/10 dark:border-white/10 text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               >
                 {voiceList.map((v) => (
                   <option key={v.id} value={v.id}>
@@ -790,7 +787,7 @@ export default function MediaPageClient() {
               <select
                 value={speechFormat}
                 onChange={(e) => setSpeechFormat(e.target.value)}
-                className="w-full px-3 py-2 rounded-lg bg-surface border border-black/10 dark:border-white/10 text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
               >
                 {currentSpeechFormats.map((f) => (
                   <option key={f} value={f}>
@@ -824,10 +821,10 @@ export default function MediaPageClient() {
                 }
                 setAudioFile(file);
               }}
-              className="w-full px-3 py-2 rounded-lg bg-surface border border-black/10 dark:border-white/10 text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:bg-primary/10 file:text-primary file:text-sm"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-sm"
             />
             {fileSizeError && (
-              <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
+              <p className="text-xs text-error mt-1 flex items-center gap-1">
                 <span className="material-symbols-outlined text-[12px]">error</span>
                 {fileSizeError}
               </p>
@@ -837,7 +834,7 @@ export default function MediaPageClient() {
                 {audioFile.name} ({formatFileSize(audioFile.size)})
               </p>
             )}
-            <p className="text-[10px] text-text-muted/60 mt-1">{t("audioVideoFileHint")}</p>
+            <p className="text-[11px] text-text-subtle mt-1">{t("audioVideoFileHint")}</p>
           </div>
         ) : (
           <>
@@ -851,14 +848,14 @@ export default function MediaPageClient() {
                     type="file"
                     accept="image/*"
                     onChange={(e) => setImageInputFile(e.target.files?.[0] ?? null)}
-                    className="w-full px-3 py-2 rounded-lg bg-surface border border-black/10 dark:border-white/10 text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:bg-primary/10 file:text-primary file:text-sm"
+                    className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-sm"
                   />
                   {imageInputFile && (
                     <p className="text-xs text-text-muted mt-1">
                       {imageInputFile.name} ({formatFileSize(imageInputFile.size)})
                     </p>
                   )}
-                  <p className="text-[10px] text-text-muted/60 mt-1">{t("sourceImageHint")}</p>
+                  <p className="text-[11px] text-text-subtle mt-1">{t("sourceImageHint")}</p>
                 </div>
                 <div>
                   <label className="block text-sm font-medium text-text-main mb-2">
@@ -868,14 +865,14 @@ export default function MediaPageClient() {
                     type="file"
                     accept="image/*"
                     onChange={(e) => setImageMaskFile(e.target.files?.[0] ?? null)}
-                    className="w-full px-3 py-2 rounded-lg bg-surface border border-black/10 dark:border-white/10 text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded file:border-0 file:bg-primary/10 file:text-primary file:text-sm"
+                    className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-sm"
                   />
                   {imageMaskFile && (
                     <p className="text-xs text-text-muted mt-1">
                       {imageMaskFile.name} ({formatFileSize(imageMaskFile.size)})
                     </p>
                   )}
-                  <p className="text-[10px] text-text-muted/60 mt-1">{t("maskImageHint")}</p>
+                  <p className="text-[11px] text-text-subtle mt-1">{t("maskImageHint")}</p>
                 </div>
               </div>
             )}
@@ -900,7 +897,7 @@ export default function MediaPageClient() {
                       ? t(config.placeholderKey)
                       : undefined
                 }
-                className="w-full px-3 py-2 rounded-lg bg-surface border border-black/10 dark:border-white/10 text-text-main text-sm placeholder:text-text-muted/50 focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm placeholder:text-text-subtle focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
               />
             </div>
           </>
@@ -910,10 +907,8 @@ export default function MediaPageClient() {
         <button
           onClick={handleGenerate}
           disabled={isGenerateDisabled}
-          className={`w-full flex items-center justify-center gap-2 px-4 py-3 rounded-lg text-white font-medium transition-all bg-gradient-to-r ${config.color} ${
-            isGenerateDisabled
-              ? "opacity-50 cursor-not-allowed"
-              : "hover:opacity-90 hover:shadow-lg"
+          className={`w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-control bg-contrast text-contrast-fg text-sm font-medium transition-colors ${config.color} ${
+            isGenerateDisabled ? "opacity-50 cursor-not-allowed" : "hover:bg-contrast-hover"
           }`}
         >
           {loading ? (
@@ -949,16 +944,16 @@ export default function MediaPageClient() {
       {/* Error */}
       {error && (
         <div
-          className={`rounded-xl p-4 flex items-start gap-3 ${isCredentialsError ? "bg-amber-500/10 border border-amber-500/20" : "bg-red-500/10 border border-red-500/20"}`}
+          className={`rounded-lg p-4 flex items-start gap-3 ${isCredentialsError ? "bg-warning/10 border border-warning/20" : "bg-error/10 border border-error/20"}`}
         >
           <span
-            className={`material-symbols-outlined text-[20px] mt-0.5 ${isCredentialsError ? "text-amber-500" : "text-red-500"}`}
+            className={`material-symbols-outlined text-[18px] mt-0.5 ${isCredentialsError ? "text-warning" : "text-error"}`}
           >
             {isCredentialsError ? "key" : "error"}
           </span>
           <div className="flex-1 min-w-0">
             <p
-              className={`text-sm font-medium ${isCredentialsError ? "text-amber-500" : "text-red-500"}`}
+              className={`text-sm font-medium ${isCredentialsError ? "text-warning" : "text-error"}`}
             >
               {isCredentialsError ? t("apiKeyRequired") : t("error")}
             </p>
@@ -978,14 +973,14 @@ export default function MediaPageClient() {
 
       {/* Result */}
       {result && (
-        <div className="bg-surface/30 rounded-xl border border-black/5 dark:border-white/5 p-6">
+        <div className="bg-surface rounded-card border border-border p-5">
           <div className="flex items-center gap-2 mb-4">
             <span
-              className={`material-symbols-outlined text-[20px] bg-gradient-to-r ${config.color} bg-clip-text text-transparent`}
+              className={`material-symbols-outlined text-[18px] text-text-muted ${config.color}`}
             >
               {config.icon}
             </span>
-            <h3 className="text-sm font-medium text-text-main">{t("result")}</h3>
+            <h3 className="text-sm font-semibold text-text-main">{t("result")}</h3>
             <span className="text-xs text-text-muted ml-auto">
               {new Date(result.timestamp).toLocaleTimeString()}
             </span>
@@ -1007,7 +1002,7 @@ export default function MediaPageClient() {
             <ImageResults data={result.data} />
           ) : result.type === "transcription" ? (
             <div className="space-y-3">
-              <div className="bg-surface rounded-lg p-4 text-sm text-text-main leading-relaxed whitespace-pre-wrap">
+              <div className="bg-bg-subtle rounded-lg p-4 text-sm text-text-main leading-relaxed whitespace-pre-wrap">
                 {result.data?.text || (
                   <span className="text-text-muted italic">{t("noTextReturned")}</span>
                 )}
@@ -1017,14 +1012,14 @@ export default function MediaPageClient() {
                   <summary className="text-xs text-text-muted cursor-pointer hover:text-text-main">
                     {t("wordTimestamps", { count: result.data.words.length })}
                   </summary>
-                  <pre className="bg-surface rounded mt-2 p-3 text-xs text-text-muted overflow-auto max-h-48 custom-scrollbar">
+                  <pre className="bg-bg-subtle rounded-md mt-2 p-3 font-mono text-xs text-text-muted overflow-auto max-h-48 custom-scrollbar">
                     {JSON.stringify(result.data.words, null, 2)}
                   </pre>
                 </details>
               )}
             </div>
           ) : (
-            <pre className="bg-surface rounded-lg p-4 text-xs text-text-muted overflow-auto max-h-96 custom-scrollbar">
+            <pre className="bg-bg-subtle rounded-lg p-4 font-mono text-xs text-text-muted overflow-auto max-h-96 custom-scrollbar">
               {JSON.stringify(result.data, null, 2)}
             </pre>
           )}
@@ -1037,15 +1032,12 @@ export default function MediaPageClient() {
           const cfg = MODALITY_CONFIG[key];
           const providerCount = PROVIDER_MODELS[key]?.length ?? 0;
           return (
-            <div
-              key={key}
-              className="bg-surface/30 rounded-xl border border-black/5 dark:border-white/5 p-4"
-            >
+            <div key={key} className="bg-surface rounded-card border border-border p-4">
               <div className="flex items-center gap-2 mb-2">
                 <div
-                  className={`flex items-center justify-center size-8 rounded-lg bg-gradient-to-r ${cfg.color}`}
+                  className={`flex items-center justify-center size-8 rounded-lg border border-border bg-bg-subtle ${cfg.color}`}
                 >
-                  <span className="material-symbols-outlined text-white text-[16px]">
+                  <span className="material-symbols-outlined text-text-muted text-[16px]">
                     {cfg.icon}
                   </span>
                 </div>
@@ -1054,7 +1046,7 @@ export default function MediaPageClient() {
               <p className="text-xs text-text-muted">
                 {t("providerCount", { count: providerCount })}
               </p>
-              <code className="block mt-2 text-xs text-primary/70 bg-primary/5 rounded px-2 py-1">
+              <code className="block mt-2 font-mono text-[12px] text-text-muted bg-bg-subtle rounded-md px-2 py-1">
                 POST {cfg.endpoint}
               </code>
             </div>

@@ -57,7 +57,7 @@ export default function CustomEmbeddingEndpointFields({ settings, onSave, saving
   };
 
   return (
-    <div className="mt-4 pt-4 border-t border-border/60 space-y-3">
+    <div className="mt-4 pt-4 border-t border-border space-y-3">
       <div>
         <label className="block text-sm font-medium text-text-main mb-1">
           {t("embedding.customBaseUrlLabel")}
@@ -68,7 +68,7 @@ export default function CustomEmbeddingEndpointFields({ settings, onSave, saving
           placeholder="http://localhost:8000/v1"
           disabled={saving}
           data-testid="embedding-custom-base-url"
-          className="w-full px-3 py-2 rounded-lg bg-background border border-border text-sm"
+          className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
         />
       </div>
       <div>
@@ -81,12 +81,12 @@ export default function CustomEmbeddingEndpointFields({ settings, onSave, saving
           placeholder="my-embedding-model"
           disabled={saving}
           data-testid="embedding-custom-model-id"
-          className="w-full px-3 py-2 rounded-lg bg-background border border-border text-sm"
+          className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
         />
       </div>
       <p className="text-xs text-text-muted">{t("embedding.customEndpointHelp")}</p>
       {error && (
-        <p role="alert" className="text-xs text-red-400">
+        <p role="alert" className="text-xs text-error">
           {error}
         </p>
       )}
@@ -95,7 +95,7 @@ export default function CustomEmbeddingEndpointFields({ settings, onSave, saving
         onClick={() => void save()}
         disabled={saving}
         data-testid="embedding-custom-save"
-        className="px-3 py-2 rounded-lg bg-violet-500 text-white text-sm disabled:opacity-50"
+        className="px-3 py-2 rounded-control bg-contrast text-contrast-fg text-sm font-medium transition-colors hover:bg-contrast-hover disabled:opacity-50"
       >
         {t("embedding.customEndpointSave")}
       </button>

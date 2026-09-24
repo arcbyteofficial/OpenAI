@@ -8,10 +8,10 @@ export default function AnalyticsLoading() {
       <Skeleton className="h-8 w-40" />
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {[0, 1, 2, 3].map((index) => (
-          <Skeleton key={index} className="h-24 rounded-lg" />
+          <Skeleton key={index} className="h-24 rounded-card" />
         ))}
       </div>
-      <Skeleton className="h-64 rounded-lg" />
+      <Skeleton className="h-64 rounded-card" />
     </div>
   );
 }

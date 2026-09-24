@@ -142,7 +142,7 @@ export default function AccessTokensTab() {
     <div className="space-y-6">
       <Card>
         <div className="p-5">
-          <h2 className="text-lg font-semibold text-text">
+          <h2 className="text-base font-semibold tracking-tight text-text-main">
             {L("accessTokensTitle", "Access Tokens")}
           </h2>
           <p className="mt-1 text-sm text-text-muted">
@@ -157,7 +157,7 @@ export default function AccessTokensTab() {
       {/* Create */}
       <Card>
         <div className="p-5 space-y-4">
-          <h3 className="text-sm font-semibold text-text">
+          <h3 className="text-sm font-semibold text-text-main">
             {L("accessTokensCreateHeading", "Create a token")}
           </h3>
           <div className="grid gap-3 sm:grid-cols-4">
@@ -190,12 +190,12 @@ export default function AccessTokensTab() {
           </div>
 
           {newSecret && (
-            <div className="rounded-control border border-primary/40 bg-primary/5 p-4">
-              <p className="text-sm font-medium text-text">
+            <div className="rounded-lg border border-border bg-surface-2 p-4">
+              <p className="text-sm font-medium text-text-main">
                 {L("accessTokensCopyNow", "Copy this token now — it will not be shown again:")}
               </p>
               <div className="mt-2 flex items-center gap-2">
-                <code className="flex-1 break-all rounded bg-surface px-3 py-2 font-mono text-xs text-text">
+                <code className="flex-1 break-all rounded-md border border-border bg-surface px-3 py-2 font-mono text-xs text-text-main">
                   {newSecret}
                 </code>
                 <Button variant="secondary" onClick={copySecret}>
@@ -211,7 +211,7 @@ export default function AccessTokensTab() {
       </Card>
 
       {error && (
-        <div className="rounded-control border border-red-500/40 bg-red-500/5 px-4 py-3 text-sm text-red-400">
+        <div className="rounded-lg border border-error/30 bg-error/10 px-4 py-3 text-sm text-error">
           {error}
         </div>
       )}
@@ -219,7 +219,7 @@ export default function AccessTokensTab() {
       {/* List */}
       <Card>
         <div className="p-5">
-          <h3 className="mb-3 text-sm font-semibold text-text">
+          <h3 className="mb-3 text-sm font-semibold text-text-main">
             {L("accessTokensExisting", "Existing tokens")}
           </h3>
           {loading ? (
@@ -232,9 +232,9 @@ export default function AccessTokensTab() {
             </p>
           ) : (
             <div className="overflow-x-auto">
-              <table className="w-full text-sm">
+              <table className="w-full text-[13px]">
                 <thead>
-                  <tr className="border-b border-border text-left text-text-muted">
+                  <tr className="border-b border-border text-left text-xs text-text-muted">
                     <th className="py-2 pr-4 font-medium">{L("accessTokensColName", "Name")}</th>
                     <th className="py-2 pr-4 font-medium">{L("accessTokensColScope", "Scope")}</th>
                     <th className="py-2 pr-4 font-medium">
@@ -256,8 +256,11 @@ export default function AccessTokensTab() {
                   {tokens.map((tk) => {
                     const revoked = Boolean(tk.revokedAt);
                     return (
-                      <tr key={tk.id} className="border-b border-border/50">
-                        <td className="py-2 pr-4 text-text">{tk.name}</td>
+                      <tr
+                        key={tk.id}
+                        className="border-b border-border last:border-b-0 hover:bg-bg-subtle transition-colors"
+                      >
+                        <td className="py-2 pr-4 text-text-main">{tk.name}</td>
                         <td className="py-2 pr-4">
                           <Badge variant={SCOPE_VARIANT[tk.scope] || "default"}>{tk.scope}</Badge>
                         </td>
@@ -271,8 +274,12 @@ export default function AccessTokensTab() {
                               : L("accessTokensStatusActive", "active")}
                           </Badge>
                         </td>
-                        <td className="py-2 pr-4 text-text-muted">{fmt(tk.lastUsedAt)}</td>
-                        <td className="py-2 pr-4 text-text-muted">{fmt(tk.expiresAt)}</td>
+                        <td className="py-2 pr-4 text-text-muted tabular-nums">
+                          {fmt(tk.lastUsedAt)}
+                        </td>
+                        <td className="py-2 pr-4 text-text-muted tabular-nums">
+                          {fmt(tk.expiresAt)}
+                        </td>
                         <td className="py-2 text-right">
                           {!revoked && (
                             <Button variant="ghost" size="sm" onClick={() => setRevokeTarget(tk)}>

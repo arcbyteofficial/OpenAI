@@ -33,20 +33,20 @@ function SourceNodeImpl({ data }: { data: OrchNode }) {
       aria-expanded={!collapsed}
       title={t(collapsed ? "sourceExpand" : "sourceCollapse")}
     >
-      <div className="text-xs font-semibold flex items-center gap-1.5">
+      <div className="text-xs font-semibold text-text-main flex items-center gap-1.5">
         <span aria-hidden>{collapsed ? "▸" : "▾"}</span>
         {stale && <span aria-hidden>⚠</span>}
         {label}
       </div>
       {stale && <div className="text-[10px] text-warning">{t("sourceStale", { since })}</div>}
       {data.sourceIssue === "offline" && (
-        <div className="text-[10px] text-muted">{t("sourceOffline")}</div>
+        <div className="text-[10px] text-text-muted">{t("sourceOffline")}</div>
       )}
       <div className="flex flex-wrap gap-1 mt-1">
         {ORCH_STATES.filter((s) => (data.counts?.[s] ?? 0) > 0).map((s) => (
           <span
             key={s}
-            className="text-[9px] px-1.5 py-0.5 rounded-full"
+            className="text-[9px] font-medium tabular-nums px-1.5 py-0.5 rounded-full"
             style={{ backgroundColor: orchStateBadgeBg(s), color: orchStateColor(s) }}
           >
             {data.counts?.[s]}

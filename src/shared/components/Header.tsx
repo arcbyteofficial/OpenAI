@@ -205,9 +205,9 @@ export default function Header({
 
   return (
     <header
-      className="sticky top-0 z-10 flex items-center justify-between border-b border-black/5 bg-bg px-8 py-4 dark:border-white/5"
+      className="sticky top-0 z-10 flex min-h-14 items-center justify-between border-b border-border bg-bg/80 px-4 py-2 backdrop-blur-md sm:px-6 lg:px-8"
       style={{
-        paddingTop: isMacElectron ? "calc(1rem + var(--desktop-safe-top))" : undefined,
+        paddingTop: isMacElectron ? "calc(0.5rem + var(--desktop-safe-top))" : undefined,
       }}
     >
       {/* Mobile menu button */}
@@ -215,9 +215,9 @@ export default function Header({
         {showMenuButton && (
           <button
             onClick={onMenuClick}
-            className="text-text-main hover:text-primary transition-colors"
+            className="inline-flex items-center justify-center size-8 rounded-control text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
           >
-            <span className="material-symbols-outlined">menu</span>
+            <span className="material-symbols-outlined text-[20px]">menu</span>
           </button>
         )}
       </div>
@@ -225,9 +225,9 @@ export default function Header({
       {/* Page title with icon - desktop */}
       <div className="hidden lg:flex items-center gap-3">
         {(icon || providerId) && (
-          <div className="flex items-center justify-center size-9 rounded-lg bg-primary/10 shrink-0">
+          <div className="flex items-center justify-center size-8 rounded-control border border-border bg-surface shrink-0">
             {icon ? (
-              <span className="material-symbols-outlined text-primary text-[20px]">{icon}</span>
+              <span className="material-symbols-outlined text-text-muted text-[18px]">{icon}</span>
             ) : (
               providerId && <ProviderIcon providerId={providerId} size={22} type="color" />
             )}
@@ -235,36 +235,38 @@ export default function Header({
         )}
         {title && (
           <div>
-            <h1 className="text-xl font-semibold text-text-main tracking-tight">{title}</h1>
-            {description && <p className="text-xs text-text-muted mt-0.5">{description}</p>}
+            <h1 className="text-[15px] leading-5 font-semibold text-text-main tracking-tight">
+              {title}
+            </h1>
+            {description && <p className="text-xs text-text-muted">{description}</p>}
           </div>
         )}
       </div>
 
       {/* Right actions */}
-      <div className="flex items-center gap-3 ml-auto">
+      <div className="flex items-center gap-1.5 ml-auto">
         {onOpenCommandPalette && (
           <>
             <button
               type="button"
               onClick={onOpenCommandPalette}
-              className="hidden md:inline-flex items-center gap-2 px-2.5 py-1.5 rounded-lg border border-black/10 dark:border-white/10 bg-bg-subtle text-text-muted hover:text-text-main hover:bg-black/[0.04] dark:hover:bg-white/[0.04] transition-colors"
+              className="hidden md:inline-flex items-center gap-2 h-8 px-2.5 me-1.5 rounded-control border border-border bg-surface text-text-subtle hover:text-text-main hover:border-border-strong transition-colors"
               title={t("quickNavigationTitle")}
               aria-label={t("openQuickNavigation")}
             >
               <span className="material-symbols-outlined text-[16px]">search</span>
-              <span className="text-xs">{t("quickNavigation")}</span>
-              <kbd className="hidden lg:inline-flex font-mono text-[10px] px-1 py-0.5 rounded bg-black/5 dark:bg-white/5 border border-black/10 dark:border-white/10">
+              <span className="text-[13px]">{t("quickNavigation")}</span>
+              <kbd className="hidden lg:inline-flex ms-2 font-mono text-[11px] leading-4 px-1 rounded border border-border bg-bg-subtle text-text-muted">
                 {isMac ? "⌘K" : "Ctrl+K"}
               </kbd>
             </button>
             <button
               type="button"
               onClick={onOpenCommandPalette}
-              className="md:hidden p-2 rounded-lg text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+              className="md:hidden inline-flex items-center justify-center size-8 rounded-control text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
               aria-label={t("openQuickNavigation")}
             >
-              <span className="material-symbols-outlined">search</span>
+              <span className="material-symbols-outlined text-[20px]">search</span>
             </button>
           </>
         )}
@@ -274,11 +276,11 @@ export default function Header({
         {!isE2EMode && <TokenHealthBadge />}
         <button
           onClick={handleLogout}
-          className="flex items-center justify-center p-2 rounded-lg text-text-muted hover:text-red-500 hover:bg-red-500/10 transition-all"
+          className="flex items-center justify-center size-8 rounded-control text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
           title={t("logout")}
           aria-label={t("logout")}
         >
-          <span className="material-symbols-outlined">logout</span>
+          <span className="material-symbols-outlined text-[18px]">logout</span>
         </button>
       </div>
     </header>

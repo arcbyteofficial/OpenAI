@@ -17,8 +17,10 @@ export default function QuotaConceptCard() {
         aria-expanded={expanded}
       >
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-[20px] text-primary">info</span>
-          <span className="text-sm font-semibold text-text-main">{t("conceptTitle")}</span>
+          <span className="material-symbols-outlined text-[18px] text-text-muted">info</span>
+          <span className="text-sm font-semibold tracking-tight text-text-main">
+            {t("conceptTitle")}
+          </span>
         </div>
         <span className="material-symbols-outlined text-[18px] text-text-muted">
           {expanded ? "expand_less" : "expand_more"}
@@ -52,8 +54,8 @@ export default function QuotaConceptCard() {
 
 function ConceptItem({ icon, text }: { icon: string; text: string }) {
   return (
-    <div className="flex items-start gap-1.5 rounded-md bg-bg-subtle/40 p-2">
-      <span className="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">
+    <div className="flex items-start gap-1.5 rounded-md border border-border bg-bg-subtle p-2">
+      <span className="material-symbols-outlined text-[16px] text-text-muted shrink-0 mt-0.5">
         {icon}
       </span>
       <span>{text}</span>
@@ -63,8 +65,8 @@ function ConceptItem({ icon, text }: { icon: string; text: string }) {
 
 function ConceptItemWithDesc({ icon, title, desc }: { icon: string; title: string; desc: string }) {
   return (
-    <div className="flex items-start gap-1.5 rounded-md bg-bg-subtle/40 p-2">
-      <span className="material-symbols-outlined text-[16px] text-primary shrink-0 mt-0.5">
+    <div className="flex items-start gap-1.5 rounded-md border border-border bg-bg-subtle p-2">
+      <span className="material-symbols-outlined text-[16px] text-text-muted shrink-0 mt-0.5">
         {icon}
       </span>
       <div className="flex flex-col gap-0.5">

@@ -184,7 +184,7 @@ export default function UsageAnalytics() {
   if (loading && !analytics) return <CardSkeleton />;
   if (error)
     return (
-      <Card className="p-6 text-center text-red-500">
+      <Card className="p-6 text-center text-sm text-error">
         {tCommon("errorShort")}: {error}
       </Card>
     );
@@ -200,8 +200,8 @@ export default function UsageAnalytics() {
     <div className="flex flex-col gap-5 min-w-0">
       {/* Header + Filters */}
       <div className="flex items-center justify-between flex-wrap gap-3">
-        <h2 className="text-xl font-semibold flex items-center gap-2">
-          <span className="material-symbols-outlined text-primary text-[22px]">analytics</span>
+        <h2 className="text-xl font-semibold tracking-tight text-text-main flex items-center gap-2">
+          <span className="material-symbols-outlined text-text-muted text-[20px]">analytics</span>
           {t("usageAnalyticsTitle")}
         </h2>
         <div className="flex items-center gap-2.5">
@@ -214,17 +214,17 @@ export default function UsageAnalytics() {
 
           {/* Period Selector + Custom */}
           <div
-            className="relative flex items-center gap-1 bg-black/[0.03] dark:bg-white/[0.03] rounded-lg p-1 border border-black/5 dark:border-white/5"
+            className="relative flex items-center gap-1 bg-bg-subtle rounded-lg p-1 border border-border"
             ref={customPickerAnchorRef}
           >
             {ranges.map((r) => (
               <button
                 key={r.value}
                 onClick={() => handleRangeSelect(r.value)}
-                className={`px-3 py-1 rounded-md text-xs font-semibold transition-all ${
+                className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
                   range === r.value
-                    ? "bg-primary text-white shadow-sm"
-                    : "text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5"
+                    ? "bg-surface dark:bg-white/10 text-text-main shadow-[0_1px_2px_rgba(0,0,0,0.08),0_0_0_0.5px_rgba(0,0,0,0.06)]"
+                    : "text-text-muted hover:text-text-main"
                 }`}
               >
                 {r.label}
@@ -232,10 +232,10 @@ export default function UsageAnalytics() {
             ))}
             <button
               onClick={() => handleRangeSelect("custom")}
-              className={`px-3 py-1 rounded-md text-xs font-semibold transition-all flex items-center gap-1 ${
+              className={`px-3 py-1 rounded-md text-xs font-medium transition-colors flex items-center gap-1 ${
                 range === "custom"
-                  ? "bg-primary text-white shadow-sm"
-                  : "text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5"
+                  ? "bg-surface dark:bg-white/10 text-text-main shadow-[0_1px_2px_rgba(0,0,0,0.08),0_0_0_0.5px_rgba(0,0,0,0.06)]"
+                  : "text-text-muted hover:text-text-main"
               }`}
             >
               <span className="material-symbols-outlined text-[13px]">date_range</span>
@@ -283,14 +283,14 @@ export default function UsageAnalytics() {
           label={t("inputTokens")}
           value={fmt(s.promptTokens)}
           tooltip={fmtFull(s.promptTokens)}
-          color="text-primary"
+          color="text-text-main"
         />
         <StatCard
           icon="output"
           label={t("outputTokens")}
           value={fmt(s.completionTokens)}
           tooltip={fmtFull(s.completionTokens)}
-          color="text-emerald-500"
+          color="text-text-main"
         />
         <StatCard
           icon="payments"
@@ -301,7 +301,7 @@ export default function UsageAnalytics() {
               ? `$${Number(s.totalCost).toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 6 })}`
               : undefined
           }
-          color="text-amber-500"
+          color="text-text-main"
         />
       </div>
 
@@ -316,7 +316,7 @@ export default function UsageAnalytics() {
                 icon: "dns",
                 label: t("infraProviders"),
                 value: providerCount,
-                color: "text-indigo-500",
+                color: "text-text-main",
               },
               { icon: "vpn_key", label: t("infraApiKeys"), value: s.uniqueApiKeys || 0 },
               { icon: "model_training", label: t("infraModels"), value: s.uniqueModels || 0 },
@@ -330,7 +330,7 @@ export default function UsageAnalytics() {
                 label: t("perfAvgTokens"),
                 value: fmt(avgTokensPerReq),
                 tooltip: `tokens : ${fmtFull(avgTokensPerReq)} tokens`,
-                color: "text-cyan-500",
+                color: "text-text-main",
               },
               {
                 icon: "request_quote",
@@ -339,20 +339,20 @@ export default function UsageAnalytics() {
                 tooltip: costPerReq
                   ? `cost : $${Number(costPerReq).toLocaleString(undefined, { minimumFractionDigits: 4, maximumFractionDigits: 6 })}`
                   : undefined,
-                color: "text-orange-500",
+                color: "text-text-main",
               },
               {
                 icon: "compare_arrows",
                 label: t("perfIoRatio"),
                 value: `${ioRatio}x`,
-                color: "text-violet-500",
+                color: "text-text-main",
               },
               {
                 icon: "bolt",
                 label: t("perfFastReq"),
                 value: fmt(s.fastRequests || 0),
                 tooltip: `requests : ${fmtFull(s.fastRequests || 0)} requests`,
-                color: "text-sky-500",
+                color: "text-text-main",
               },
             ],
           },
@@ -364,31 +364,31 @@ export default function UsageAnalytics() {
                 icon: "star",
                 label: t("highlightsTopModel"),
                 value: topModel,
-                color: "text-pink-500",
+                color: "text-text-main",
               },
               {
                 icon: "cloud",
                 label: t("highlightsTopProvider"),
                 value: topProvider,
-                color: "text-teal-500",
+                color: "text-text-main",
               },
               {
                 icon: "today",
                 label: t("highlightsBusiestDay"),
                 value: busiestDay,
-                color: "text-rose-500",
+                color: "text-text-main",
               },
               {
                 icon: "network_node",
                 label: t("highlightsDiversity"),
                 value: `${providerDiversity.toFixed(1)}%`,
-                color: "text-sky-500",
+                color: "text-text-main",
               },
               {
                 icon: "swap_horiz",
                 label: t("highlightsFallbackRate"),
                 value: `${Number(s.fallbackRatePct || 0).toFixed(1)}%`,
-                color: "text-amber-500",
+                color: "text-text-main",
               },
             ],
           },

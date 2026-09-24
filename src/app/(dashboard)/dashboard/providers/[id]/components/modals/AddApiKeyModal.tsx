@@ -536,7 +536,7 @@ export default function AddApiKeyModal({
             href={webProviderHostLink.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-center justify-center gap-1.5 rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-sm font-medium text-primary transition-colors hover:bg-primary/20"
+            className="flex items-center justify-center gap-1.5 rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle"
           >
             <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               open_in_new
@@ -555,9 +555,9 @@ export default function AddApiKeyModal({
                 setBulkResult(null);
                 setBulkWarnings([]);
               }}
-              className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 text-[13px] font-medium transition-colors ${
                 mode === "single"
-                  ? "border-b-2 border-primary text-text-main"
+                  ? "border-b-2 border-text-main text-text-main"
                   : "text-text-muted hover:text-text-main"
               }`}
             >
@@ -569,9 +569,9 @@ export default function AddApiKeyModal({
                 setMode("bulk");
                 setSaveError(null);
               }}
-              className={`px-3 py-1.5 text-sm font-medium transition-colors ${
+              className={`px-3 py-1.5 text-[13px] font-medium transition-colors ${
                 mode === "bulk"
-                  ? "border-b-2 border-primary text-text-main"
+                  ? "border-b-2 border-text-main text-text-main"
                   : "text-text-muted hover:text-text-main"
               }`}
             >
@@ -588,7 +588,7 @@ export default function AddApiKeyModal({
             {openRouterPreset.input}
             {freeModelsToggle}
             <textarea
-              className="w-full rounded border border-border bg-background p-2 text-sm font-mono resize-y min-h-[140px] focus:outline-none focus:ring-1 focus:ring-primary"
+              className="w-full rounded-control border border-border-strong bg-surface p-2 text-[13px] font-mono text-text-main placeholder:text-text-subtle resize-y min-h-[140px] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
               placeholder={
                 isCloudflare
                   ? "name1|account-id-1|cf-token-1\nname2|account-id-2|cf-token-2"
@@ -611,7 +611,7 @@ export default function AddApiKeyModal({
                       priority: Number.parseInt(e.target.value) || 1,
                     })
                   }
-                  className="w-20 px-2 py-1 text-sm border border-border rounded bg-background"
+                  className="w-20 px-2 py-1 text-sm tabular-nums border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-primary"
                 />
               </div>
               <label className="flex items-center gap-2 text-sm text-text-muted cursor-pointer">
@@ -625,7 +625,7 @@ export default function AddApiKeyModal({
               </label>
             </div>
             {bulkWarnings.length > 0 && (
-              <div className="rounded border border-amber-500/25 bg-amber-500/10 p-2 text-xs text-amber-200 space-y-1">
+              <div className="rounded-md border border-warning/25 bg-warning/10 p-2 text-xs text-warning space-y-1">
                 {bulkWarnings.map((w, i) => (
                   <div key={i}>{w}</div>
                 ))}
@@ -634,7 +634,7 @@ export default function AddApiKeyModal({
             {bulkResult && (
               <div
                 className={`text-sm font-medium ${
-                  bulkResult.failed > 0 ? "text-amber-300" : "text-emerald-400"
+                  bulkResult.failed > 0 ? "text-warning" : "text-success"
                 }`}
               >
                 {t("bulkAddedCount", { count: bulkResult.success })}
@@ -655,7 +655,7 @@ export default function AddApiKeyModal({
                 )}
               </div>
             )}
-            {saveError && <div className="text-sm text-rose-400">{saveError}</div>}
+            {saveError && <div className="text-sm text-error">{saveError}</div>}
             <div className="flex gap-2">
               <Button onClick={handleBulkSubmit} fullWidth disabled={saving || !bulkText.trim()}>
                 {saving ? t("adding") : t("bulkAddAllKeys")}
@@ -670,9 +670,9 @@ export default function AddApiKeyModal({
         {(!bulkSupported || mode === "single") && (
           <>
             {isCcCompatible && (
-              <div className="rounded-lg border border-amber-500/25 bg-amber-500/10 px-3 py-2 text-sm text-text-muted">
+              <div className="rounded-lg border border-warning/25 bg-warning/10 px-3 py-2 text-sm text-text-muted">
                 <div className="flex items-start gap-2">
-                  <span className="material-symbols-outlined mt-0.5 text-[18px] text-amber-500">
+                  <span className="material-symbols-outlined mt-0.5 text-[18px] text-warning">
                     warning
                   </span>
                   <p>{t("ccCompatibleValidationHint")}</p>
@@ -680,9 +680,9 @@ export default function AddApiKeyModal({
               </div>
             )}
             {isCommandCode && onStartCommandCodeAuth && (
-              <div className="rounded-lg border border-sky-500/20 bg-sky-500/10 px-3 py-3 text-sm">
+              <div className="rounded-lg border border-border bg-bg-subtle px-3 py-3 text-sm">
                 <div className="flex items-start gap-3">
-                  <span className="material-symbols-outlined mt-0.5 text-[18px] text-sky-500">
+                  <span className="material-symbols-outlined mt-0.5 text-[18px] text-text-muted">
                     open_in_new
                   </span>
                   <div className="min-w-0 flex-1">
@@ -832,7 +832,7 @@ export default function AddApiKeyModal({
                 );
               })()}
             {isChatGptWebCodex && (
-              <div className="space-y-3 rounded-lg border border-border bg-surface/40 p-3">
+              <div className="space-y-3 rounded-lg border border-border bg-surface-2 p-3">
                 <div>
                   <p className="text-sm font-medium text-text-main">Codex-Toolverbindung</p>
                   <p className="mt-1 text-xs text-text-muted">
@@ -985,12 +985,12 @@ export default function AddApiKeyModal({
               </Badge>
             )}
             {saveError && (
-              <div className="text-sm text-red-500 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+              <div className="text-sm text-error bg-error/10 border border-error/20 rounded-lg px-3 py-2">
                 {saveError}
               </div>
             )}
             {(isCcCompatible || openRouterPreset.input) && (
-              <div className="flex flex-col gap-4 rounded-lg border border-border/50 bg-surface/20 p-4">
+              <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-2 p-4">
                 {isCcCompatible && (
                   <CcCompatibleRequestDefaultsFields
                     values={formData}
@@ -1030,7 +1030,7 @@ export default function AddApiKeyModal({
             )}
             <button
               type="button"
-              className="text-sm text-text-muted hover:text-text-primary flex items-center gap-1"
+              className="text-[13px] text-text-muted hover:text-text-main transition-colors flex items-center gap-1"
               onClick={() => setShowAdvanced(!showAdvanced)}
               aria-expanded={showAdvanced}
               aria-controls="add-api-key-advanced-settings"
@@ -1142,7 +1142,7 @@ export default function AddApiKeyModal({
                   <select
                     value={formData.apiRegion}
                     onChange={(e) => setFormData({ ...formData, apiRegion: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border border-border rounded-lg bg-background focus:outline-none focus:border-primary"
+                    className="w-full px-3 py-2 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-primary"
                   >
                     <option value="international">{t("apiRegionInternational")}</option>
                     <option value="china">{t("apiRegionChina")}</option>

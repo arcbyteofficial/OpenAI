@@ -36,19 +36,21 @@ export default function SiliconFlowEndpointModal({
             key={endpoint.id}
             type="button"
             onClick={() => onSelect(endpoint.baseUrl)}
-            className="w-full p-4 text-left border border-border rounded-lg hover:bg-sidebar transition-colors"
+            className="w-full p-4 text-left border border-border rounded-lg hover:bg-bg-subtle hover:border-border-strong transition-colors"
           >
             <div className="flex items-start gap-3">
-              <span className="material-symbols-outlined text-primary mt-0.5">public</span>
+              <span className="material-symbols-outlined text-[18px] text-text-muted mt-0.5">
+                public
+              </span>
               <div className="flex-1">
-                <h3 className="font-semibold mb-1">
+                <h3 className="text-sm font-semibold mb-1">
                   {providerText(
                     t,
                     endpoint.id === "siliconflow" ? "endpointGlobal" : "endpointChina",
                     endpoint.label
                   )}
                 </h3>
-                <p className="text-sm text-text-muted font-mono">{endpoint.baseUrl}</p>
+                <p className="text-[13px] text-text-muted font-mono">{endpoint.baseUrl}</p>
               </div>
             </div>
           </button>

@@ -49,10 +49,10 @@ function ModalityBridgePageContent() {
             aria-selected={activeTab === tab.id}
             aria-controls="modality-bridge-tabpanel"
             onClick={() => handleTabChange(tab.id)}
-            className={`whitespace-nowrap border-b-2 px-4 py-2 text-sm font-medium transition-colors ${
+            className={`whitespace-nowrap border-b-2 px-3 py-2 text-sm font-medium transition-colors ${
               activeTab === tab.id
-                ? "border-primary text-primary"
-                : "border-transparent text-text-muted hover:text-text"
+                ? "border-text-main text-text-main"
+                : "border-transparent text-text-muted hover:text-text-main"
             }`}
           >
             {t(tab.labelKey)}

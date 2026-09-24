@@ -36,7 +36,7 @@ export function SortIndicator({ active, sortOrder }: { active: boolean; sortOrde
     );
   }
   return (
-    <span className="material-symbols-outlined text-[12px] text-primary">
+    <span className="material-symbols-outlined text-[12px] text-text-main">
       {sortOrder === "asc" ? "expand_less" : "expand_more"}
     </span>
   );
@@ -70,7 +70,7 @@ export function StatCard({
 
   const valueElement = (
     <span
-      className={`text-2xl font-bold ${color} truncate cursor-default`}
+      className={`text-2xl font-semibold tracking-tight tabular-nums ${color} truncate cursor-default`}
       data-tooltip={tooltip}
       title={tooltip ? undefined : String(value)}
     >
@@ -80,7 +80,7 @@ export function StatCard({
 
   return (
     <Card className="px-4 py-3 flex flex-col gap-1 min-w-0">
-      <div className="flex items-center gap-1.5 text-text-muted text-[11px] uppercase font-semibold tracking-wide min-w-0">
+      <div className="flex items-center gap-1.5 text-text-muted text-[13px] min-w-0">
         <span className="material-symbols-outlined text-[14px] shrink-0">{icon}</span>
         <span className="truncate">{label}</span>
       </div>
@@ -88,10 +88,10 @@ export function StatCard({
         <Tooltip
           content={
             <div className="flex flex-col gap-0.5 text-left py-0.5 min-w-[140px]">
-              <div className="font-semibold text-white/95 text-xs">{label}</div>
+              <div className="font-semibold text-xs">{label}</div>
               <div
                 className={`font-mono text-xs ${
-                  color && color !== "text-text-main" ? color : "text-violet-400"
+                  color && color !== "text-text-main" ? color : "opacity-80"
                 } tracking-wide`}
               >
                 {tooltipText}
@@ -126,10 +126,8 @@ export function CompactStatGrid({ sections }: { sections: CompactStatSection[] }
       <div className="flex flex-col gap-3">
         {sections.map((section, si) => (
           <div key={si}>
-            {si > 0 && (
-              <div className="border-t border-black/[0.06] dark:border-white/[0.06] mb-3" />
-            )}
-            <div className="text-[10px] uppercase font-semibold tracking-widest text-text-muted/50 mb-2">
+            {si > 0 && <div className="border-t border-border mb-3" />}
+            <div className="text-[11px] uppercase font-medium tracking-wider text-text-subtle mb-2">
               {section.title}
             </div>
             <div
@@ -142,7 +140,7 @@ export function CompactStatGrid({ sections }: { sections: CompactStatSection[] }
               {section.items.map((stat, i) => {
                 const statValueEl = (
                   <span
-                    className={`text-sm font-bold text-right cursor-default ${section.wideValues ? "truncate min-w-0" : "shrink-0"} ${stat.color || "text-text-main"}`}
+                    className={`text-sm font-semibold tabular-nums text-right cursor-default ${section.wideValues ? "truncate min-w-0" : "shrink-0"} ${stat.color || "text-text-main"}`}
                     data-tooltip={stat.tooltip}
                     title={stat.tooltip ? undefined : String(stat.value)}
                   >
@@ -159,7 +157,7 @@ export function CompactStatGrid({ sections }: { sections: CompactStatSection[] }
                         {stat.icon}
                       </span>
                       <span
-                        className={`text-[11px] uppercase font-semibold tracking-wide text-text-muted ${section.wideValues ? "whitespace-nowrap" : "truncate"}`}
+                        className={`text-xs text-text-muted ${section.wideValues ? "whitespace-nowrap" : "truncate"}`}
                       >
                         {stat.label}
                       </span>
@@ -168,9 +166,9 @@ export function CompactStatGrid({ sections }: { sections: CompactStatSection[] }
                       <Tooltip
                         content={
                           <div className="flex flex-col gap-0.5 text-left py-0.5 min-w-[120px]">
-                            <div className="font-semibold text-white/95 text-xs">{stat.label}</div>
+                            <div className="font-semibold text-xs">{stat.label}</div>
                             <div
-                              className={`font-mono text-xs ${stat.color || "text-violet-400"} tracking-wide`}
+                              className={`font-mono text-xs ${stat.color || "opacity-80"} tracking-wide`}
                             >
                               {String(stat.tooltip).includes(":")
                                 ? stat.tooltip
@@ -272,7 +270,7 @@ export function ActivityHeatmap({ activityMap }) {
   );
 
   function getCellColor(value) {
-    if (!value || value === 0) return "bg-white/[0.04]";
+    if (!value || value === 0) return "bg-border";
     const intensity = Math.min(value / (cells.maxVal || 1), 1);
     if (intensity < 0.25) return "bg-primary/20";
     if (intensity < 0.5) return "bg-primary/40";
@@ -283,9 +281,7 @@ export function ActivityHeatmap({ activityMap }) {
   return (
     <Card className="p-4 h-full min-w-0 overflow-hidden">
       <div className="flex items-center justify-between mb-3">
-        <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider">
-          {t("overview")}
-        </h3>
+        <h3 className="text-sm font-semibold text-text-main">{t("overview")}</h3>
         <span className="text-xs text-text-muted">
           {t("activitySummary", {
             active: Object.keys(activityMap || {}).length,
@@ -347,7 +343,7 @@ export function ActivityHeatmap({ activityMap }) {
 
       <div className="flex items-center gap-1 mt-2 ml-6 text-[10px] text-text-muted">
         <span>{t("activityLess")}</span>
-        <div className="w-[10px] h-[10px] rounded-[2px] bg-white/[0.04]" />
+        <div className="w-[10px] h-[10px] rounded-[2px] bg-border" />
         <div className="w-[10px] h-[10px] rounded-[2px] bg-primary/20" />
         <div className="w-[10px] h-[10px] rounded-[2px] bg-primary/40" />
         <div className="w-[10px] h-[10px] rounded-[2px] bg-primary/60" />
@@ -406,69 +402,65 @@ export function ApiKeyTable({ byApiKey }) {
   if (!hasData) {
     return (
       <Card className="p-4 flex-1">
-        <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider mb-3">
-          {t("chartApiKeyBreakdown")}
-        </h3>
+        <h3 className="text-sm font-semibold text-text-main mb-3">{t("chartApiKeyBreakdown")}</h3>
         <div className="text-center text-text-muted text-sm py-8">{t("chartNoData")}</div>
       </Card>
     );
   }
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden p-0">
       <div className="p-4 border-b border-border flex items-center justify-between gap-3">
-        <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider">
-          {t("chartApiKeyBreakdown")}
-        </h3>
+        <h3 className="text-sm font-semibold text-text-main">{t("chartApiKeyBreakdown")}</h3>
         <input
           type="text"
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t("filterSearchKeys")}
-          className="w-full max-w-[220px] px-3 py-1.5 rounded-lg bg-bg-subtle border border-border text-xs text-text-primary placeholder:text-text-muted focus:outline-none focus:border-primary"
+          className="w-full max-w-[220px] px-3 py-1.5 rounded-control bg-surface border border-border-strong text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
         />
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead className="text-xs text-text-muted uppercase bg-black/[0.02] dark:bg-white/[0.02]">
+        <table className="w-full text-[13px]">
+          <thead className="text-xs text-text-muted bg-surface-2 border-b border-border">
             <tr>
               <th
-                className="px-4 py-2.5 text-left cursor-pointer group"
+                className="px-4 py-2.5 text-left font-medium cursor-pointer group hover:text-text-main transition-colors"
                 onClick={() => toggleSort("apiKeyName")}
               >
                 {t("chartApiKey")}{" "}
                 <SortIndicator active={sortBy === "apiKeyName"} sortOrder={sortOrder} />
               </th>
               <th
-                className="px-4 py-2.5 text-right cursor-pointer group"
+                className="px-4 py-2.5 text-right font-medium cursor-pointer group hover:text-text-main transition-colors"
                 onClick={() => toggleSort("requests")}
               >
                 {t("chartRequests")}{" "}
                 <SortIndicator active={sortBy === "requests"} sortOrder={sortOrder} />
               </th>
               <th
-                className="px-4 py-2.5 text-right cursor-pointer group"
+                className="px-4 py-2.5 text-right font-medium cursor-pointer group hover:text-text-main transition-colors"
                 onClick={() => toggleSort("promptTokens")}
               >
                 {t("chartInput")}{" "}
                 <SortIndicator active={sortBy === "promptTokens"} sortOrder={sortOrder} />
               </th>
               <th
-                className="px-4 py-2.5 text-right cursor-pointer group"
+                className="px-4 py-2.5 text-right font-medium cursor-pointer group hover:text-text-main transition-colors"
                 onClick={() => toggleSort("completionTokens")}
               >
                 {t("chartOutput")}{" "}
                 <SortIndicator active={sortBy === "completionTokens"} sortOrder={sortOrder} />
               </th>
               <th
-                className="px-4 py-2.5 text-right cursor-pointer group"
+                className="px-4 py-2.5 text-right font-medium cursor-pointer group hover:text-text-main transition-colors"
                 onClick={() => toggleSort("totalTokens")}
               >
                 {t("chartTotal")}{" "}
                 <SortIndicator active={sortBy === "totalTokens"} sortOrder={sortOrder} />
               </th>
               <th
-                className="px-4 py-2.5 text-right cursor-pointer group"
+                className="px-4 py-2.5 text-right font-medium cursor-pointer group hover:text-text-main transition-colors"
                 onClick={() => toggleSort("cost")}
               >
                 {t("chartCost")} <SortIndicator active={sortBy === "cost"} sortOrder={sortOrder} />
@@ -479,7 +471,7 @@ export function ApiKeyTable({ byApiKey }) {
             {sorted.map((row, i) => (
               <tr
                 key={`${row.apiKeyId || row.apiKeyName || "key"}-${i}`}
-                className="hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors"
+                className="hover:bg-bg-subtle transition-colors"
               >
                 <td className="px-4 py-2.5">
                   <span className="font-medium" title={row.apiKeyName || row.apiKeyId || "unknown"}>
@@ -490,24 +482,24 @@ export function ApiKeyTable({ byApiKey }) {
                   {fmtFull(row.requests)}
                 </td>
                 <td
-                  className="px-4 py-2.5 text-right font-mono text-primary"
+                  className="px-4 py-2.5 text-right font-mono text-text-muted"
                   title={fmtFull(row.promptTokens)}
                 >
                   {fmt(row.promptTokens)}
                 </td>
                 <td
-                  className="px-4 py-2.5 text-right font-mono text-emerald-500"
+                  className="px-4 py-2.5 text-right font-mono text-text-muted"
                   title={fmtFull(row.completionTokens)}
                 >
                   {fmt(row.completionTokens)}
                 </td>
                 <td
-                  className="px-4 py-2.5 text-right font-mono font-semibold"
+                  className="px-4 py-2.5 text-right font-mono font-medium text-text-main"
                   title={fmtFull(row.totalTokens)}
                 >
                   {fmt(row.totalTokens)}
                 </td>
-                <td className="px-4 py-2.5 text-right font-mono text-amber-500">
+                <td className="px-4 py-2.5 text-right font-mono text-text-main">
                   {fmtCost(row.cost)}
                 </td>
               </tr>
@@ -565,22 +557,22 @@ export function MostActiveDay7d({ activityMap }) {
 
   return (
     <Card className="p-4 flex flex-col justify-center" style={{ flex: 1, minHeight: 0 }}>
-      <h3
-        className="text-xs font-semibold uppercase tracking-wider mb-2"
-        style={{ color: "var(--color-text-muted)" }}
-      >
+      <h3 className="text-[13px] font-medium mb-2" style={{ color: "var(--color-text-muted)" }}>
         {t("mostActiveDay")}
       </h3>
       {data ? (
         <>
-          <span className="text-xl font-bold capitalize" style={{ lineHeight: 1.2 }}>
+          <span
+            className="text-xl font-semibold tracking-tight capitalize"
+            style={{ lineHeight: 1.2 }}
+          >
             {data.weekday}
           </span>
           <Tooltip
             content={
               <div className="flex flex-col gap-0.5 text-left py-0.5 min-w-[140px]">
-                <div className="font-semibold text-white/95 text-xs">{data.weekday}</div>
-                <div className="font-mono text-xs text-violet-400 tracking-wide">
+                <div className="font-semibold text-xs">{data.weekday}</div>
+                <div className="font-mono text-xs opacity-80 tracking-wide">
                   tokens : {fmtFull(data.tokens)} tokens
                 </div>
               </div>
@@ -642,17 +634,14 @@ export function WeeklySquares7d({ activityMap }) {
   }, [activityMap, dateFormatter, weekdayFormatter]);
 
   function getSquareStyle(intensity) {
-    if (intensity === 0) return { background: "rgba(255,255,255,0.04)" };
+    if (intensity === 0) return { background: "var(--color-border)" };
     const opacity = 0.15 + intensity * 0.75;
-    return { background: `rgba(229, 77, 94, ${opacity.toFixed(2)})` };
+    return { background: `rgb(from var(--color-primary) r g b / ${opacity.toFixed(2)})` };
   }
 
   return (
     <Card className="p-4 flex flex-col justify-center" style={{ flex: 1, minHeight: 0 }}>
-      <h3
-        className="text-xs font-semibold uppercase tracking-wider mb-3"
-        style={{ color: "var(--color-text-muted)" }}
-      >
+      <h3 className="text-[13px] font-medium mb-3" style={{ color: "var(--color-text-muted)" }}>
         {t("chartWeekly")}
       </h3>
       <div style={{ display: "flex", alignItems: "flex-end", gap: 6, justifyContent: "center" }}>
@@ -668,7 +657,7 @@ export function WeeklySquares7d({ activityMap }) {
                 height: 36,
                 borderRadius: 8,
                 ...getSquareStyle(d.intensity),
-                transition: "all 0.2s",
+                transition: "background-color 0.2s",
                 cursor: "default",
               }}
             />
@@ -700,19 +689,19 @@ function getServiceTierIcon(serviceTier) {
 }
 
 function getServiceTierIconClass(serviceTier) {
-  if (serviceTier === "priority") return "text-sky-500";
-  if (serviceTier === "flex") return "text-emerald-500";
+  if (serviceTier === "priority") return "text-primary";
+  if (serviceTier === "flex") return "text-success";
   return "text-text-muted";
 }
 
 function getServiceTierBarClass(serviceTier) {
-  if (serviceTier === "priority") return "bg-sky-500";
-  if (serviceTier === "flex") return "bg-emerald-500";
+  if (serviceTier === "priority") return "bg-primary";
+  if (serviceTier === "flex") return "bg-success";
   return "bg-text-muted/50";
 }
 
 function getServiceTierCostClass(serviceTier) {
-  return serviceTier === "flex" ? "text-emerald-500" : "text-amber-500";
+  return serviceTier === "flex" ? "text-success" : "text-text-main";
 }
 
 export function ServiceTierBreakdown({ byServiceTier, summary }) {
@@ -727,9 +716,9 @@ export function ServiceTierBreakdown({ byServiceTier, summary }) {
   }
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden p-0">
       <div className="p-4 border-b border-border flex items-center justify-between gap-3">
-        <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider">
+        <h3 className="text-sm font-semibold text-text-main">
           {translateCostText(t, "serviceTierBreakdownTitle", "Service Tier")}
         </h3>
         <span className="text-[11px] text-text-muted">
@@ -794,7 +783,7 @@ export function ServiceTierBreakdown({ byServiceTier, summary }) {
                   <div className="text-xs text-text-muted">{costDetailText}</div>
                 </div>
               </div>
-              <div className="h-1.5 rounded-full bg-black/5 dark:bg-white/10 overflow-hidden">
+              <div className="h-1.5 rounded-full bg-border overflow-hidden">
                 <div
                   className={`h-full rounded-full ${getServiceTierBarClass(tier.serviceTier)}`}
                   style={{ width: `${requestPct}%` }}
@@ -813,21 +802,21 @@ export function ServiceTierBreakdown({ byServiceTier, summary }) {
 export function UsageDetail({ summary }) {
   const t = useTranslations("analytics");
   const items = [
-    { label: t("chartInput"), value: summary?.promptTokens, color: "text-primary" },
+    { label: t("chartInput"), value: summary?.promptTokens, color: "text-text-muted" },
     { label: t("chartCacheRead"), value: 0, color: "text-text-muted" },
-    { label: t("chartOutput"), value: summary?.completionTokens, color: "text-emerald-500" },
+    { label: t("chartOutput"), value: summary?.completionTokens, color: "text-text-muted" },
   ];
 
   return (
     <Card className="p-4 flex-1">
-      <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider mb-3">
-        {t("chartUsageDetail")}
-      </h3>
+      <h3 className="text-sm font-semibold text-text-main mb-3">{t("chartUsageDetail")}</h3>
       <div className="flex flex-col gap-2">
         {items.map((item, i) => (
           <div key={i} className="flex items-center justify-between">
             <span className={`text-sm ${item.color}`}>{item.label}</span>
-            <span className="font-mono font-medium text-sm">{fmtFull(item.value)}</span>
+            <span className="font-mono font-medium text-sm text-text-main">
+              {fmtFull(item.value)}
+            </span>
           </div>
         ))}
       </div>
@@ -872,77 +861,70 @@ export function ProviderTable({ byProvider }) {
   if (!data.length) {
     return (
       <Card className="p-4">
-        <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider mb-3">
-          {t("chartProviderBreakdown")}
-        </h3>
+        <h3 className="text-sm font-semibold text-text-main mb-3">{t("chartProviderBreakdown")}</h3>
         <div className="text-center text-text-muted text-sm py-8">{t("chartNoData")}</div>
       </Card>
     );
   }
 
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden p-0">
       <div className="p-4 border-b border-border">
-        <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider">
-          {t("chartProviderBreakdown")}
-        </h3>
+        <h3 className="text-sm font-semibold text-text-main">{t("chartProviderBreakdown")}</h3>
       </div>
       <div className="overflow-x-auto">
-        <table className="w-full text-sm">
-          <thead className="text-xs text-text-muted uppercase bg-black/[0.02] dark:bg-white/[0.02]">
+        <table className="w-full text-[13px]">
+          <thead className="text-xs text-text-muted bg-surface-2 border-b border-border">
             <tr>
               <th
-                className="px-4 py-2.5 text-left cursor-pointer group"
+                className="px-4 py-2.5 text-left font-medium cursor-pointer group hover:text-text-main transition-colors"
                 onClick={() => toggleSort("provider")}
               >
                 {t("chartProvider")}{" "}
                 <SortIndicator active={sortBy === "provider"} sortOrder={sortOrder} />
               </th>
               <th
-                className="px-4 py-2.5 text-right cursor-pointer group"
+                className="px-4 py-2.5 text-right font-medium cursor-pointer group hover:text-text-main transition-colors"
                 onClick={() => toggleSort("requests")}
               >
                 {t("chartRequests")}{" "}
                 <SortIndicator active={sortBy === "requests"} sortOrder={sortOrder} />
               </th>
               <th
-                className="px-4 py-2.5 text-right cursor-pointer group"
+                className="px-4 py-2.5 text-right font-medium cursor-pointer group hover:text-text-main transition-colors"
                 onClick={() => toggleSort("promptTokens")}
               >
                 {t("chartInput")}{" "}
                 <SortIndicator active={sortBy === "promptTokens"} sortOrder={sortOrder} />
               </th>
               <th
-                className="px-4 py-2.5 text-right cursor-pointer group"
+                className="px-4 py-2.5 text-right font-medium cursor-pointer group hover:text-text-main transition-colors"
                 onClick={() => toggleSort("completionTokens")}
               >
                 {t("chartOutput")}{" "}
                 <SortIndicator active={sortBy === "completionTokens"} sortOrder={sortOrder} />
               </th>
               <th
-                className="px-4 py-2.5 text-right cursor-pointer group"
+                className="px-4 py-2.5 text-right font-medium cursor-pointer group hover:text-text-main transition-colors"
                 onClick={() => toggleSort("totalTokens")}
               >
                 {t("chartTotal")}{" "}
                 <SortIndicator active={sortBy === "totalTokens"} sortOrder={sortOrder} />
               </th>
               <th
-                className="px-4 py-2.5 text-right cursor-pointer group"
+                className="px-4 py-2.5 text-right font-medium cursor-pointer group hover:text-text-main transition-colors"
                 onClick={() => toggleSort("cost")}
               >
                 {t("chartCost")} <SortIndicator active={sortBy === "cost"} sortOrder={sortOrder} />
               </th>
-              <th className="px-4 py-2.5 text-right w-36">{t("chartShare")}</th>
+              <th className="px-4 py-2.5 text-right font-medium w-36">{t("chartShare")}</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-border">
             {sorted.map((p, i) => {
               const pct = totalTokens > 0 ? ((p.totalTokens / totalTokens) * 100).toFixed(1) : "0";
               return (
-                <tr
-                  key={`${p.provider}-${i}`}
-                  className="hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors"
-                >
+                <tr key={`${p.provider}-${i}`} className="hover:bg-bg-subtle transition-colors">
                   <td className="px-4 py-2.5">
                     <div className="flex items-center gap-2">
                       <span
@@ -956,31 +938,31 @@ export function ProviderTable({ byProvider }) {
                     {fmtFull(p.requests)}
                   </td>
                   <td
-                    className="px-4 py-2.5 text-right font-mono text-primary"
+                    className="px-4 py-2.5 text-right font-mono text-text-muted"
                     title={fmtFull(p.promptTokens)}
                   >
                     {fmt(p.promptTokens)}
                   </td>
                   <td
-                    className="px-4 py-2.5 text-right font-mono text-emerald-500"
+                    className="px-4 py-2.5 text-right font-mono text-text-muted"
                     title={fmtFull(p.completionTokens)}
                   >
                     {fmt(p.completionTokens)}
                   </td>
                   <td
-                    className="px-4 py-2.5 text-right font-mono font-semibold"
+                    className="px-4 py-2.5 text-right font-mono font-medium text-text-main"
                     title={fmtFull(p.totalTokens)}
                   >
                     {fmt(p.totalTokens)}
                   </td>
-                  <td className="px-4 py-2.5 text-right font-mono text-amber-500">
+                  <td className="px-4 py-2.5 text-right font-mono text-text-main">
                     {fmtCost(p.cost)}
                   </td>
                   <td className="px-4 py-2.5 text-right">
                     <div className="flex items-center gap-2 justify-end">
-                      <div className="w-16 h-1.5 rounded-full bg-white/[0.06] overflow-hidden">
+                      <div className="w-16 h-1.5 rounded-full bg-border overflow-hidden">
                         <div
-                          className="h-full rounded-full transition-all"
+                          className="h-full rounded-full transition-[width]"
                           style={{
                             width: `${pct}%`,
                             backgroundColor: PROVIDER_COLORS[i % PROVIDER_COLORS.length],

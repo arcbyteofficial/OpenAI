@@ -43,7 +43,11 @@ function getServerSnapshot(): boolean {
  */
 export default function FirstRunReadinessCard({ setupComplete }: FirstRunReadinessCardProps) {
   const t = useTranslations("home");
-  const dismissed = useSyncExternalStore(subscribeReadiness, isReadinessDismissed, getServerSnapshot);
+  const dismissed = useSyncExternalStore(
+    subscribeReadiness,
+    isReadinessDismissed,
+    getServerSnapshot
+  );
 
   const dismiss = useCallback(() => {
     try {
@@ -67,23 +71,21 @@ export default function FirstRunReadinessCard({ setupComplete }: FirstRunReadine
     <div
       role="region"
       aria-label={t("readinessTitle")}
-      className="mb-4 rounded-xl border border-blue-200 dark:border-blue-500/30 bg-blue-50 dark:bg-blue-500/10 px-5 py-4"
+      className="mb-4 rounded-card border border-border bg-surface px-5 py-4"
     >
       <div className="flex items-start justify-between gap-4">
         <div className="min-w-0 flex-1">
-          <p className="text-xs font-medium uppercase tracking-wide text-blue-700/80 dark:text-blue-300/80">
+          <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
             {t("readinessEyebrow")}
           </p>
-          <h2 className="mt-1 text-lg font-semibold text-blue-950 dark:text-blue-100">
+          <h2 className="mt-1 text-base font-semibold tracking-tight text-text-main">
             {t("readinessTitle")}
           </h2>
-          <p className="mt-1 text-sm text-blue-900/80 dark:text-blue-200/80">
-            {t("readinessSubtitle")}
-          </p>
-          <ol className="mt-3 space-y-1.5 text-sm text-blue-900 dark:text-blue-100">
+          <p className="mt-1 text-sm text-text-muted">{t("readinessSubtitle")}</p>
+          <ol className="mt-3 space-y-1.5 text-sm text-text-main">
             {steps.map((label, index) => (
               <li key={label} className="flex items-center gap-2">
-                <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-blue-200/80 dark:bg-blue-400/20 text-xs font-semibold text-blue-800 dark:text-blue-200">
+                <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-bg-subtle text-xs font-medium tabular-nums text-text-muted">
                   {index + 1}
                 </span>
                 <span>{label}</span>
@@ -93,14 +95,14 @@ export default function FirstRunReadinessCard({ setupComplete }: FirstRunReadine
           <div className="mt-4 flex flex-wrap items-center gap-3">
             <Link
               href="/dashboard/onboarding"
-              className="inline-flex items-center rounded-lg bg-blue-600 px-3.5 py-2 text-sm font-medium text-white hover:bg-blue-700 dark:bg-blue-500 dark:hover:bg-blue-400"
+              className="inline-flex items-center rounded-control bg-contrast px-3.5 py-2 text-sm font-medium text-contrast-fg transition-colors hover:bg-contrast-hover"
             >
               {t("readinessContinue")}
             </Link>
             <button
               type="button"
               onClick={dismiss}
-              className="text-sm font-medium text-blue-800/80 hover:text-blue-950 dark:text-blue-200/80 dark:hover:text-blue-100"
+              className="text-sm font-medium text-text-muted transition-colors hover:text-text-main"
             >
               {t("readinessDismiss")}
             </button>

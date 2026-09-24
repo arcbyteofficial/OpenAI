@@ -34,13 +34,13 @@ export default function CacheTrends({
   return (
     <div
       data-testid="cache-trends"
-      className="rounded-xl border border-border bg-surface p-5 flex flex-col gap-4"
+      className="rounded-card border border-border bg-surface p-5 flex flex-col gap-4"
     >
       <div className="flex items-center gap-2">
         <span className="material-symbols-outlined text-base text-text-muted" aria-hidden="true">
           timeline
         </span>
-        <h2 className="font-medium text-sm">{t("trend24h")}</h2>
+        <h2 className="text-sm font-semibold text-text-main">{t("trend24h")}</h2>
       </div>
 
       {loading ? (
@@ -53,11 +53,11 @@ export default function CacheTrends({
         </div>
       ) : error ? (
         <div className="flex flex-col items-center gap-3 py-6">
-          <span className="text-sm text-red-500">{error}</span>
+          <span className="text-sm text-error">{error}</span>
           {onRetry && (
             <button
               onClick={onRetry}
-              className="px-3 py-1.5 text-xs rounded border border-border hover:bg-surface-raised transition-colors"
+              className="px-3 py-1.5 text-xs rounded-control border border-border-strong text-text-main hover:bg-bg-subtle transition-colors"
             >
               Retry
             </button>
@@ -74,7 +74,7 @@ export default function CacheTrends({
           {maxCachedRequests > 0 && (
             <div className="text-xs text-text-muted">
               {t("peakCached")}:{" "}
-              <span className="font-medium text-foreground">
+              <span className="font-medium tabular-nums text-text-main">
                 {maxCachedRequests} / {maxRequests}
               </span>
             </div>
@@ -97,13 +97,13 @@ export default function CacheTrends({
                   data-testid="trend-bar"
                   className="flex-1 flex flex-col items-center gap-1 group relative"
                 >
-                  <div className="absolute bottom-full mb-1 hidden group-hover:block bg-surface-raised border border-border rounded px-2 py-1 text-xs whitespace-nowrap z-10">
+                  <div className="absolute bottom-full mb-1 hidden group-hover:block bg-surface border border-border rounded-md shadow-[var(--shadow-elevated)] px-2 py-1 text-xs whitespace-nowrap z-10">
                     {hour}: {point.requests} {t("requests").toLowerCase()}, {point.cachedRequests}{" "}
                     {t("cached").toLowerCase()}
                   </div>
                   <div className="w-full flex flex-col justify-end h-full gap-px">
                     <div
-                      className="w-full bg-green-500/30 rounded-t"
+                      className="w-full bg-success/30 rounded-t"
                       style={{ height: `${cachedHeight}%` }}
                     />
                     <div
@@ -125,7 +125,7 @@ export default function CacheTrends({
               <span>{t("total")}</span>
             </div>
             <div className="flex items-center gap-1.5">
-              <div className="w-3 h-3 rounded bg-green-500/30" />
+              <div className="w-3 h-3 rounded bg-success/30" />
               <span>{t("cached")}</span>
             </div>
           </div>

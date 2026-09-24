@@ -67,9 +67,9 @@ export default function ResultsPanel({
   };
 
   const getScoreBg = (score: number) => {
-    if (score >= 0.9) return "bg-green-500/10";
-    if (score >= 0.7) return "bg-yellow-500/10";
-    return "bg-red-500/10";
+    if (score >= 0.9) return "bg-success/10";
+    if (score >= 0.7) return "bg-warning/10";
+    return "bg-error/10";
   };
 
   const editorTheme =
@@ -82,7 +82,7 @@ export default function ResultsPanel({
       {/* Header */}
       <div className="flex justify-between items-center p-3 border-b border-border">
         <div className="flex items-center gap-2">
-          <span className="text-xs font-semibold text-text-muted uppercase tracking-wider">
+          <span className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
             {t("searchResults")}
           </span>
           {statusCode > 0 && (
@@ -90,27 +90,27 @@ export default function ResultsPanel({
               <Badge variant={statusCode < 400 ? "success" : "error"} size="sm">
                 {statusCode}
               </Badge>
-              <span className="text-xs text-text-muted">{duration}ms</span>
+              <span className="text-xs text-text-muted font-mono tabular-nums">{duration}ms</span>
             </>
           )}
         </div>
         {response && (
           <div className="flex gap-1">
             <button
-              className={`text-xs px-3 py-1 rounded-md ${
+              className={`text-xs px-3 py-1 rounded-control font-medium transition-colors ${
                 !showJson
-                  ? "bg-primary/15 text-primary font-medium"
-                  : "bg-black/5 dark:bg-white/5 text-text-muted"
+                  ? "bg-primary/10 text-primary"
+                  : "text-text-muted hover:text-text-main hover:bg-bg-subtle"
               }`}
               onClick={() => setShowJson(false)}
             >
               {t("formatted")}
             </button>
             <button
-              className={`text-xs px-3 py-1 rounded-md ${
+              className={`text-xs px-3 py-1 rounded-control font-medium transition-colors ${
                 showJson
-                  ? "bg-primary/15 text-primary font-medium"
-                  : "bg-black/5 dark:bg-white/5 text-text-muted"
+                  ? "bg-primary/10 text-primary"
+                  : "text-text-muted hover:text-text-main hover:bg-bg-subtle"
               }`}
               onClick={() => setShowJson(true)}
             >
@@ -123,7 +123,7 @@ export default function ResultsPanel({
       {/* Content */}
       {loading && (
         <div className="flex items-center justify-center py-20">
-          <span className="material-symbols-outlined text-[24px] text-primary animate-spin">
+          <span className="material-symbols-outlined text-[24px] text-text-muted animate-spin">
             progress_activity
           </span>
         </div>
@@ -138,13 +138,13 @@ export default function ResultsPanel({
       {response && !showJson && !loading && (
         <div className="p-4 space-y-3">
           {/* Meta bar */}
-          <div className="flex justify-between items-center p-2 bg-bg-alt rounded-lg">
-            <div className="flex items-center gap-3 text-xs text-text-muted">
+          <div className="flex justify-between items-center p-2 bg-bg-subtle rounded-lg">
+            <div className="flex items-center gap-3 text-xs text-text-muted tabular-nums">
               <span>
                 {response.results.length} {t("results").toLowerCase()}
               </span>
               <span className="flex items-center gap-1">
-                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                <span className="w-1.5 h-1.5 rounded-full bg-text-subtle" />
                 {response.provider}
               </span>
               <span>{response.metrics?.response_time_ms}ms</span>
@@ -169,7 +169,7 @@ export default function ResultsPanel({
           {response.results.map((r, i) => (
             <div
               key={i}
-              className="border-l-[3px] border-l-primary p-3 bg-surface rounded-r-lg border border-border"
+              className="p-3 bg-surface rounded-lg border border-border hover:border-border-strong transition-colors"
             >
               <div className="flex justify-between items-start">
                 <span className="text-sm font-medium text-text-main">
@@ -177,7 +177,7 @@ export default function ResultsPanel({
                 </span>
                 {r.score != null && (
                   <span
-                    className={`text-[10px] px-2 py-0.5 rounded-md ml-2 whitespace-nowrap ${getScoreBg(r.score)} ${getScoreColor(r.score)}`}
+                    className={`text-[10px] font-mono tabular-nums px-2 py-0.5 rounded-md ml-2 whitespace-nowrap ${getScoreBg(r.score)} ${getScoreColor(r.score)}`}
                   >
                     {r.score.toFixed(2)}
                   </span>
@@ -187,7 +187,7 @@ export default function ResultsPanel({
                 href={r.url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-accent text-[11px] block mt-0.5"
+                className="text-primary font-mono text-[11px] block mt-0.5 hover:underline"
               >
                 {r.url}
               </a>

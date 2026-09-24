@@ -70,7 +70,7 @@ export default function ImprovePromptButton({
             setConfirmOpen(true);
           }}
           disabled={isDisabled}
-          className="flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded border border-border text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5 transition-colors disabled:opacity-40 disabled:cursor-not-allowed self-start"
+          className="flex items-center gap-1.5 text-xs px-2.5 py-1.5 rounded-control border border-border text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-40 disabled:cursor-not-allowed self-start"
           aria-label={t("improvePromptAria")}
           title={!configState.model.trim() ? t("setModelFirst") : t("improvePromptTitle")}
         >
@@ -78,20 +78,20 @@ export default function ImprovePromptButton({
           {loading ? t("improvingPrompt") : t("improvePrompt")}
         </button>
 
-        {improveError && <p className="text-[11px] text-destructive">{improveError}</p>}
+        {improveError && <p className="text-[11px] text-error">{improveError}</p>}
       </div>
 
       {/* Quota confirmation modal */}
       {confirmOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/50"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
           onClick={() => setConfirmOpen(false)}
           role="dialog"
           aria-modal="true"
           aria-label={t("confirmImprovePrompt")}
         >
           <div
-            className="bg-surface border border-border rounded-xl p-5 w-80 shadow-2xl"
+            className="bg-surface border border-border rounded-card p-5 w-80 shadow-[var(--shadow-elevated)]"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-start gap-3 mb-4">
@@ -114,13 +114,13 @@ export default function ImprovePromptButton({
             <div className="flex items-center justify-end gap-2">
               <button
                 onClick={() => setConfirmOpen(false)}
-                className="text-xs px-3 py-1.5 rounded border border-border text-text-muted hover:text-text-main transition-colors"
+                className="text-xs font-medium px-3 py-1.5 rounded-control border border-border-strong text-text-main hover:bg-bg-subtle transition-colors"
               >
                 {t("cancel")}
               </button>
               <button
                 onClick={() => void handleConfirm()}
-                className="flex items-center gap-1.5 text-xs px-3 py-1.5 rounded bg-primary text-white hover:bg-primary/90 transition-colors"
+                className="flex items-center gap-1.5 text-xs font-medium px-3 py-1.5 rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors"
               >
                 <span className="text-[12px]">✨</span>
                 {t("improveConfirm")}

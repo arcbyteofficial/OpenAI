@@ -23,9 +23,9 @@ import QuotaCardExpanded from "./parts/QuotaCardExpanded";
 import ProviderUsdCostModal from "./ProviderUsdCostModal";
 
 const STATUS_BORDER: Record<CardStatus, string> = {
-  critical: "#ef4444",
-  alert: "#eab308",
-  ok: "#22c55e",
+  critical: "var(--color-error)",
+  alert: "var(--color-warning)",
+  ok: "var(--color-success)",
   empty: "transparent",
 };
 
@@ -134,7 +134,7 @@ export default function QuotaCard({
     <Card
       padding="none"
       className={`flex flex-col overflow-hidden transition-opacity ${isActive ? "" : "opacity-60"}`}
-      style={{ borderLeft: `3px solid ${STATUS_BORDER[cardStatus]}` }}
+      style={{ borderLeft: `2px solid ${STATUS_BORDER[cardStatus]}` }}
     >
       <QuotaCardHeader
         connection={connection}

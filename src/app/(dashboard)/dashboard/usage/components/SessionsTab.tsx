@@ -70,20 +70,20 @@ export default function SessionsTab() {
   return (
     <Card>
       <div className="flex items-center gap-3 mb-5">
-        <div className="p-2 rounded-lg bg-cyan-500/10 text-cyan-500">
-          <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+        <div className="text-text-muted">
+          <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
             fingerprint
           </span>
         </div>
         <div className="flex-1">
-          <h3 className="text-lg font-semibold">{t("activeSessions")}</h3>
-          <p className="text-sm text-text-muted">{t("sessionsTrackedHint")}</p>
+          <h3 className="text-sm font-semibold text-text-main">{t("activeSessions")}</h3>
+          <p className="text-[13px] text-text-muted">{t("sessionsTrackedHint")}</p>
         </div>
         <div className="flex items-center gap-2">
-          <span className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-cyan-500/10 border border-cyan-500/20">
-            <span className="w-2 h-2 rounded-full bg-cyan-500 animate-pulse" />
+          <span className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-bg-subtle border border-border">
+            <span className="w-2 h-2 rounded-full bg-success animate-pulse" />
             <span
-              className="text-sm font-semibold tabular-nums text-cyan-400"
+              className="text-[13px] font-medium tabular-nums text-text-main"
               data-testid="session-count"
             >
               {displaySessions.length}
@@ -95,7 +95,7 @@ export default function SessionsTab() {
       {displaySessions.length === 0 ? (
         <div className="text-center py-8 text-text-muted">
           <span
-            className="material-symbols-outlined text-[40px] mb-2 block opacity-40"
+            className="material-symbols-outlined text-[32px] mb-2 block text-text-subtle"
             aria-hidden="true"
           >
             fingerprint
@@ -105,19 +105,19 @@ export default function SessionsTab() {
         </div>
       ) : (
         <div className="overflow-x-auto">
-          <table className="w-full text-sm">
+          <table className="w-full text-[13px]">
             <thead>
-              <tr className="border-b border-border/30">
-                <th className="text-left py-2 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider">
+              <tr className="border-b border-border">
+                <th className="text-left py-2 px-3 text-xs font-medium text-text-muted">
                   {t("session")}
                 </th>
-                <th className="text-left py-2 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider">
+                <th className="text-left py-2 px-3 text-xs font-medium text-text-muted">
                   {t("age")}
                 </th>
-                <th className="text-right py-2 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider">
+                <th className="text-right py-2 px-3 text-xs font-medium text-text-muted">
                   {t("requests")}
                 </th>
-                <th className="text-left py-2 px-3 text-xs font-semibold text-text-muted uppercase tracking-wider">
+                <th className="text-left py-2 px-3 text-xs font-medium text-text-muted">
                   {t("connection")}
                 </th>
               </tr>
@@ -128,18 +128,18 @@ export default function SessionsTab() {
                 return (
                   <tr
                     key={s.sessionId}
-                    className="border-b border-border/10 hover:bg-surface/20 transition-colors"
+                    className="border-b border-border last:border-b-0 hover:bg-bg-subtle transition-colors"
                   >
                     <td className="py-2.5 px-3">
                       <div className="flex items-center gap-2">
                         <span
-                          className="font-mono text-xs px-2 py-1 rounded bg-surface/40 text-text-muted"
+                          className="font-mono text-[12px] px-1.5 py-0.5 rounded-md bg-bg-subtle text-text-muted"
                           title={s.sessionId}
                         >
                           {s.sessionId.slice(0, 12)}…
                         </span>
                         {leaseBacked && s.active && (
-                          <span className="text-[10px] font-semibold tracking-wide px-2 py-0.5 rounded-full border text-green-400 border-green-500/30 bg-green-500/10">
+                          <span className="text-[10px] font-medium tracking-wide px-2 py-0.5 rounded-full border text-success border-success/30 bg-success/10">
                             {tCommon("active")}
                           </span>
                         )}
@@ -149,15 +149,20 @@ export default function SessionsTab() {
                       {formatAge(s.ageMs)}
                     </td>
                     <td className="py-2.5 px-3 text-right">
-                      <span className="font-semibold tabular-nums">{s.requestCount}</span>
+                      <span className="font-medium tabular-nums text-text-main">
+                        {s.requestCount}
+                      </span>
                     </td>
                     <td className="py-2.5 px-3">
                       {s.connectionId ? (
-                        <span className="text-xs font-mono text-cyan-400" title={s.connectionId}>
+                        <span
+                          className="text-[12px] font-mono text-text-main"
+                          title={s.connectionId}
+                        >
                           {(leaseBacked && s.connectionName) || s.connectionId.slice(0, 10)}
                         </span>
                       ) : (
-                        <span className="text-text-muted/40">{t("notAvailableSymbol")}</span>
+                        <span className="text-text-subtle">{t("notAvailableSymbol")}</span>
                       )}
                     </td>
                   </tr>

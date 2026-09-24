@@ -83,9 +83,7 @@ export default function ExclusionsPanel() {
           </span>
           <div className="flex items-center gap-2">
             {status === "saved" && (
-              <span className="text-xs text-emerald-600 dark:text-emerald-400">
-                {t("compressionExclusionsSaved")}
-              </span>
+              <span className="text-xs text-success">{t("compressionExclusionsSaved")}</span>
             )}
             <Button
               size="sm"

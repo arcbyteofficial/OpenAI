@@ -89,7 +89,7 @@ function TabList({
           key={tb}
           role="tab"
           aria-selected={tab === tb}
-          className={`px-3 py-1.5 text-sm rounded-t ${tab === tb ? "border border-b-0 border-border bg-surface font-medium" : "text-muted"}`}
+          className={`-mb-px px-3 py-1.5 text-sm border-b-2 transition-colors ${tab === tb ? "border-text-main text-text-main font-medium" : "border-transparent text-text-muted hover:text-text-main"}`}
           onClick={() => onSelect(tb)}
         >
           {t(TAB_KEY[tb])}

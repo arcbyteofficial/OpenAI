@@ -136,13 +136,13 @@ export default function ImportGrokCliAuthModal({
         {/* Tab toggle */}
         <div className="flex gap-2 border-b border-border pb-3">
           <button
-            className={`text-sm px-3 py-1 rounded-t ${tab === "upload" ? "font-semibold border-b-2 border-primary text-primary" : "text-text-muted"}`}
+            className={`text-sm px-3 py-1 rounded-t transition-colors ${tab === "upload" ? "font-medium border-b-2 border-text-main text-text-main" : "text-text-muted hover:text-text-main"}`}
             onClick={() => setTab("upload")}
           >
             {t("grokUploadFile")}
           </button>
           <button
-            className={`text-sm px-3 py-1 rounded-t ${tab === "paste" ? "font-semibold border-b-2 border-primary text-primary" : "text-text-muted"}`}
+            className={`text-sm px-3 py-1 rounded-t transition-colors ${tab === "paste" ? "font-medium border-b-2 border-text-main text-text-main" : "text-text-muted hover:text-text-main"}`}
             onClick={() => setTab("paste")}
           >
             {t("grokPasteJson")}
@@ -156,7 +156,7 @@ export default function ImportGrokCliAuthModal({
               type="file"
               accept=".json"
               onChange={handleFileChange}
-              className="text-sm text-text-muted file:mr-3 file:py-2 file:px-4 file:rounded file:border-0 file:text-sm file:font-medium file:bg-primary/10 file:text-primary hover:file:bg-primary/20 cursor-pointer"
+              className="text-sm text-text-muted file:mr-3 file:py-2 file:px-4 file:rounded-control file:border-0 file:text-sm file:font-medium file:bg-bg-subtle file:text-text-main hover:file:bg-border file:transition-colors cursor-pointer"
             />
           </div>
         )}
@@ -165,7 +165,7 @@ export default function ImportGrokCliAuthModal({
         {tab === "paste" && (
           <div className="flex flex-col gap-3">
             <textarea
-              className="w-full h-32 p-3 text-sm font-mono bg-input border border-border rounded-md resize-none focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full h-32 p-3 text-[13px] font-mono text-text-main bg-surface border border-border-strong rounded-control resize-none placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
               placeholder='{"https://auth.x.ai::clientId": {"key": "eyJ...", ...}}'
               value={pasteText}
               onChange={(e) => handlePasteChange(e.target.value)}
@@ -174,21 +174,21 @@ export default function ImportGrokCliAuthModal({
         )}
 
         {/* Parse error */}
-        {parseError && <p className="text-sm text-red-500">{parseError}</p>}
+        {parseError && <p className="text-sm text-error">{parseError}</p>}
 
         {/* Detected info */}
         {parsedJson && (
           <div className="flex flex-col gap-3">
-            <div className="bg-green-500/10 border border-green-500/20 rounded-md p-3">
-              <p className="text-sm text-green-400">
+            <div className="bg-success/10 border border-success/20 rounded-lg p-3">
+              <p className="text-sm text-success">
                 {t("grokValidToken")}
                 {detectedEmail ? ` (${detectedEmail})` : ""}
               </p>
               {hasRefreshToken && (
-                <p className="text-xs text-green-500 mt-1">{t("grokRefreshIncluded")}</p>
+                <p className="text-xs text-success mt-1">{t("grokRefreshIncluded")}</p>
               )}
               {!hasRefreshToken && (
-                <p className="text-xs text-amber-400 mt-1">{t("grokRefreshMissing")}</p>
+                <p className="text-xs text-warning mt-1">{t("grokRefreshMissing")}</p>
               )}
             </div>
             <input
@@ -196,13 +196,13 @@ export default function ImportGrokCliAuthModal({
               placeholder={t("grokConnectionName")}
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-2 text-sm bg-input border border-border rounded-md focus:outline-none focus:ring-2 focus:ring-primary"
+              className="w-full p-2 text-sm text-text-main bg-surface border border-border-strong rounded-control placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
             />
           </div>
         )}
 
         {/* Submit error */}
-        {error && <p className="text-sm text-red-500">{error}</p>}
+        {error && <p className="text-sm text-error">{error}</p>}
 
         {/* Buttons */}
         <div className="flex gap-2">

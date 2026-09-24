@@ -48,7 +48,11 @@ export function CaptureModesToolbar({ customHostCount }: CaptureModesToolbarProp
     fetchTproxyStatus()
       .then((s) => {
         if (alive) {
-          setTproxy({ running: s.running, available: s.available, interceptCount: s.interceptCount });
+          setTproxy({
+            running: s.running,
+            available: s.available,
+            interceptCount: s.interceptCount,
+          });
         }
       })
       .catch(() => {
@@ -108,7 +112,7 @@ export function CaptureModesToolbar({ customHostCount }: CaptureModesToolbarProp
 
   return (
     <>
-      <div className="flex flex-wrap items-center gap-2 rounded-lg border border-border bg-bg-subtle px-3 py-2">
+      <div className="flex flex-wrap items-center gap-2 rounded-card border border-border bg-surface px-3 py-2">
         {buttons.map(({ key, label, alwaysOn, warn }) => {
           const active = modes[key];
           return (
@@ -118,23 +122,23 @@ export function CaptureModesToolbar({ customHostCount }: CaptureModesToolbarProp
               onClick={() => toggleMode(key)}
               disabled={alwaysOn}
               className={cn(
-                "inline-flex items-center gap-1.5 rounded border px-2.5 py-1 text-xs font-medium transition-colors",
+                "inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-colors",
                 "focus-ring disabled:cursor-default",
                 active
                   ? warn
-                    ? "border-amber-500/50 bg-amber-900/30 text-amber-300"
-                    : "border-green-500/50 bg-green-900/30 text-green-300"
-                  : "border-border text-text-muted hover:text-text-main hover:bg-surface"
+                    ? "border-warning/40 bg-warning/10 text-warning"
+                    : "border-success/40 bg-success/10 text-success"
+                  : "border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
               )}
             >
               <span
                 className={cn(
                   "inline-block h-1.5 w-1.5 rounded-full",
-                  active ? (warn ? "bg-amber-400" : "bg-green-400") : "bg-gray-600"
+                  active ? (warn ? "bg-warning" : "bg-success") : "bg-text-subtle"
                 )}
               />
               {label}
-              {warn && <span className="text-amber-400">⚠</span>}
+              {warn && <span className="text-warning">⚠</span>}
             </button>
           );
         })}
@@ -145,38 +149,38 @@ export function CaptureModesToolbar({ customHostCount }: CaptureModesToolbarProp
           disabled={!tproxy.available || tproxyBusy}
           title={!tproxy.available ? t("tproxyModeUnavailable") : undefined}
           className={cn(
-            "inline-flex items-center gap-1.5 rounded border px-2.5 py-1 text-xs font-medium transition-colors",
+            "inline-flex items-center gap-1.5 rounded-md border px-2.5 py-1 text-xs font-medium transition-colors",
             "focus-ring disabled:cursor-not-allowed disabled:opacity-50",
             tproxy.running
-              ? "border-amber-500/50 bg-amber-900/30 text-amber-300"
-              : "border-border text-text-muted hover:text-text-main hover:bg-surface"
+              ? "border-warning/40 bg-warning/10 text-warning"
+              : "border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
           )}
         >
           <span
             className={cn(
               "inline-block h-1.5 w-1.5 rounded-full",
-              tproxy.running ? "bg-amber-400" : "bg-gray-600"
+              tproxy.running ? "bg-warning" : "bg-text-subtle"
             )}
           />
           {t("tproxyMode")}
           {tproxy.running && typeof tproxy.interceptCount === "number" && (
-            <span className="text-amber-400">· {tproxy.interceptCount}</span>
+            <span className="text-warning">· {tproxy.interceptCount}</span>
           )}
-          <span className="text-amber-400">⚠</span>
+          <span className="text-warning">⚠</span>
         </button>
 
         <div className="ml-auto flex items-center gap-2">
           <button
             type="button"
             onClick={() => setShowHosts(true)}
-            className="text-xs text-text-muted hover:text-text-main focus-ring rounded"
+            className="text-xs text-text-muted hover:text-text-main transition-colors focus-ring rounded-md"
           >
             ⚙ {t("manageHosts")}
           </button>
           <button
             type="button"
             onClick={() => setShowProxy(true)}
-            className="text-xs text-text-muted hover:text-text-main focus-ring rounded"
+            className="text-xs text-text-muted hover:text-text-main transition-colors focus-ring rounded-md"
           >
             ⬇ {t("copySnippet")}
           </button>

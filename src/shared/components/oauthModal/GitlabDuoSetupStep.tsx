@@ -24,8 +24,8 @@ export default function GitlabDuoSetupStep({ onContinue, onClose }: GitlabDuoSet
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="rounded-md border border-border bg-muted/40 px-3 py-3 text-left">
-        <p className="text-sm font-medium mb-2">{t("gitlabDuoSetupTitle")}</p>
+      <div className="rounded-lg border border-border bg-surface-2 px-3 py-3 text-left">
+        <p className="text-sm font-medium text-text-main mb-2">{t("gitlabDuoSetupTitle")}</p>
         <p className="text-sm text-text-muted leading-relaxed">
           <LinkifiedText
             text={t("gitlabDuoSetupMessage", {

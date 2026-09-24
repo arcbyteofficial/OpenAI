@@ -218,7 +218,7 @@ export function AddWebhookWizard({
               type="button"
               onClick={handleClose}
               disabled={saving}
-              className="rounded-lg px-4 py-2 text-sm font-medium text-text-muted transition-colors hover:bg-sidebar hover:text-text-main disabled:opacity-40"
+              className="rounded-control px-4 py-2 text-sm font-medium text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main disabled:opacity-40"
             >
               {t("wizard.cancel")}
             </button>
@@ -227,7 +227,7 @@ export function AddWebhookWizard({
                 type="button"
                 onClick={() => setStep((s) => s - 1)}
                 disabled={saving}
-                className="rounded-lg border border-border px-4 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar disabled:opacity-40"
+                className="rounded-control border border-border-strong px-4 py-2 text-sm font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-40"
               >
                 {t("wizard.back")}
               </button>
@@ -237,7 +237,7 @@ export function AddWebhookWizard({
                 type="button"
                 onClick={() => (step === 2 ? void handleNextFromStep2() : setStep((s) => s + 1))}
                 disabled={!canGoNext || saving}
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90 disabled:opacity-40"
+                className="inline-flex items-center gap-2 rounded-control bg-contrast px-4 py-2 text-sm font-medium text-contrast-fg transition-colors hover:bg-contrast-hover disabled:opacity-40"
               >
                 {saving && step === 2 && (
                   <span className="material-symbols-outlined animate-spin text-[16px]">sync</span>
@@ -249,7 +249,7 @@ export function AddWebhookWizard({
                 type="button"
                 onClick={() => void finish()}
                 disabled={saving}
-                className="inline-flex items-center gap-2 rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-primary/90 disabled:opacity-40"
+                className="inline-flex items-center gap-2 rounded-control bg-contrast px-4 py-2 text-sm font-medium text-contrast-fg transition-colors hover:bg-contrast-hover disabled:opacity-40"
               >
                 {saving && (
                   <span className="material-symbols-outlined animate-spin text-[16px]">sync</span>
@@ -264,7 +264,7 @@ export function AddWebhookWizard({
       <div className="flex gap-6">
         <div className="min-w-0 flex-1">
           {error && (
-            <div className="mb-4 rounded-lg border border-red-500/30 bg-red-500/10 px-4 py-3 text-sm text-red-600 dark:text-red-300">
+            <div className="mb-4 rounded-lg border border-error/30 bg-error/10 px-4 py-3 text-sm text-error">
               {error}
             </div>
           )}

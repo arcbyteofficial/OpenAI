@@ -272,7 +272,7 @@ export function DarioAccountPanel() {
     <Card padding="md">
       <div className="space-y-4">
         <div>
-          <p className="text-sm font-medium">Claude accounts</p>
+          <p className="text-sm font-semibold tracking-tight text-text-main">Claude accounts</p>
           <p className="text-xs text-text-muted mt-0.5">
             Authenticate Dario with your Claude Pro/Max subscription. Traffic bills to your
             subscription pool. At least one account is required before Dario can route requests
@@ -283,7 +283,7 @@ export function DarioAccountPanel() {
         {/* Account list */}
         <div className="space-y-2">
           {loading && accounts.length === 0 ? (
-            <div className="h-10 animate-pulse bg-bg-subtle rounded" />
+            <div className="h-10 animate-pulse bg-bg-subtle rounded-lg" />
           ) : accounts.length === 0 ? (
             <p className="text-xs text-text-muted">No accounts configured yet.</p>
           ) : (
@@ -293,7 +293,7 @@ export function DarioAccountPanel() {
                 className="flex items-center justify-between gap-3 rounded-lg border border-border px-3 py-2"
               >
                 <div className="min-w-0">
-                  <p className="text-sm font-mono truncate">{acc.alias}</p>
+                  <p className="text-[13px] font-mono text-text-main truncate">{acc.alias}</p>
                   <p className="text-xs text-text-muted truncate">
                     {[
                       formatExpiry(acc),
@@ -316,13 +316,13 @@ export function DarioAccountPanel() {
 
         {/* Import from OmniRoute */}
         <div className="space-y-2 border-t border-border pt-3">
-          <p className="text-xs font-medium">Import from OmniRoute</p>
+          <p className="text-xs font-medium text-text-main">Import from OmniRoute</p>
           <p className="text-xs text-text-muted">
             Reuse an existing OmniRoute Claude connection&apos;s OAuth tokens instead of logging in
             again — skips the browser approval step entirely.
           </p>
           {omniLoading && omniConnections.length === 0 ? (
-            <div className="h-8 animate-pulse bg-bg-subtle rounded" />
+            <div className="h-8 animate-pulse bg-bg-subtle rounded-lg" />
           ) : omniConnections.length === 0 ? (
             <div className="flex items-center justify-between gap-3 rounded-lg border border-border px-3 py-2">
               <p className="text-xs text-text-muted">
@@ -341,7 +341,7 @@ export function DarioAccountPanel() {
                 className="flex items-center justify-between gap-3 rounded-lg border border-border px-3 py-2"
               >
                 <div className="min-w-0">
-                  <p className="text-sm truncate">{c.name}</p>
+                  <p className="text-sm text-text-main truncate">{c.name}</p>
                   <p className="text-xs text-text-muted truncate">
                     {[c.organizationType, c.organizationRateLimitTier].filter(Boolean).join(" · ")}
                   </p>
@@ -366,7 +366,7 @@ export function DarioAccountPanel() {
               placeholder="alias (optional)"
               value={aliasInput}
               onChange={(e) => setAliasInput(e.target.value)}
-              className="flex-1 min-w-[140px] bg-transparent text-xs border border-border rounded px-2 py-1.5 outline-none placeholder:text-text-muted"
+              className="flex-1 min-w-[140px] bg-surface text-xs text-text-main border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
             />
             <Button size="sm" disabled={busy !== null} onClick={startLogin}>
               {busy === "start" ? "Starting…" : "Start Login"}
@@ -390,7 +390,7 @@ export function DarioAccountPanel() {
               href={pending.authorizeUrl}
               target="_blank"
               rel="noopener noreferrer"
-              className="block text-xs text-primary underline break-all"
+              className="block text-xs font-mono text-primary hover:underline break-all"
             >
               {pending.authorizeUrl}
             </a>
@@ -406,7 +406,7 @@ export function DarioAccountPanel() {
                 placeholder="code#state or bare code"
                 value={codeInput}
                 onChange={(e) => setCodeInput(e.target.value)}
-                className="flex-1 min-w-[180px] bg-transparent text-xs border border-border rounded px-2 py-1.5 outline-none placeholder:text-text-muted font-mono"
+                className="flex-1 min-w-[180px] bg-surface text-xs text-text-main border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] font-mono"
               />
               <Button
                 size="sm"
@@ -430,8 +430,8 @@ export function DarioAccountPanel() {
           </div>
         )}
 
-        {notice && <p className="text-xs text-green-600 dark:text-green-400">{notice}</p>}
-        {error && <p className="text-xs text-red-600 dark:text-red-400 break-words">{error}</p>}
+        {notice && <p className="text-xs text-success">{notice}</p>}
+        {error && <p className="text-xs text-error break-words">{error}</p>}
       </div>
     </Card>
   );

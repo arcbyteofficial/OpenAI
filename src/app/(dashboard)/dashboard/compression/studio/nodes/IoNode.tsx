@@ -22,10 +22,10 @@ export function IoNode({ data }: NodeProps) {
 
   return (
     <div
-      className="rounded-xl border-2 bg-bg px-4 py-3 min-w-[120px] text-center transition-all duration-200"
+      className="rounded-lg border bg-surface px-4 py-3 min-w-[120px] text-center transition-colors duration-200"
       style={{
         borderColor: color,
-        boxShadow: `0 0 12px ${color}25`,
+        boxShadow: `0 1px 2px ${color}25`,
       }}
     >
       {/* Input only uses source handle; Output only uses target handle */}
@@ -47,10 +47,10 @@ export function IoNode({ data }: NodeProps) {
         {isInput ? "Input" : "Output"}
       </div>
 
-      <div className="text-base font-bold" style={{ color }}>
+      <div className="text-base font-semibold tabular-nums" style={{ color }}>
         {(tokens as number).toLocaleString()}
       </div>
-      <div className="text-[10px] text-muted">tokens</div>
+      <div className="text-[10px] text-text-muted">tokens</div>
 
       {!isInput && savingsPercent != null && (
         <div

@@ -81,13 +81,18 @@ export default function AutoDisableCard() {
 
   return (
     <Card className="p-0 overflow-hidden">
-      <div className="p-6">
+      <div className="p-5">
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-xl text-primary" aria-hidden="true">
+            <span
+              className="material-symbols-outlined text-[18px] text-text-muted"
+              aria-hidden="true"
+            >
               block
             </span>
-            <h2 className="text-lg font-bold">{t("autoDisableBannedAccounts")}</h2>
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
+              {t("autoDisableBannedAccounts")}
+            </h2>
           </div>
           {editMode ? (
             <div className="flex gap-2">
@@ -121,21 +126,21 @@ export default function AutoDisableCard() {
         <p className="text-sm text-text-muted mb-4">{t("autoDisableDescription")}</p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="rounded-lg bg-black/5 dark:bg-white/5 p-4 flex flex-col justify-center">
+          <div className="rounded-lg border border-border bg-surface-2 p-4 flex flex-col justify-center">
             <label className="flex items-center gap-3 cursor-pointer">
               <input
                 type="checkbox"
                 checked={current.enabled}
                 onChange={(e) => setDraft((prev) => ({ ...prev, enabled: e.target.checked }))}
                 disabled={!editMode}
-                className="w-4 h-4 text-primary bg-surface/50 border-white/20 rounded focus:ring-primary/50"
+                className="w-4 h-4 accent-primary text-primary bg-surface border-border-strong rounded focus:ring-primary/40"
               />
               <span className="text-sm font-medium">{t("autoDisableBannedAccounts")}</span>
             </label>
           </div>
 
-          <div className="rounded-lg bg-black/5 dark:bg-white/5 p-4">
-            <h3 className="text-xs font-bold uppercase tracking-wider mb-2 flex items-center gap-2">
+          <div className="rounded-lg border border-border bg-surface-2 p-4">
+            <h3 className="text-[11px] font-medium uppercase tracking-wider text-text-muted mb-2 flex items-center gap-2">
               {t("autoDisableThreshold")}
             </h3>
             {editMode ? (
@@ -157,8 +162,10 @@ export default function AutoDisableCard() {
           </div>
         </div>
 
-        <div className={`mt-4 rounded-lg bg-black/5 dark:bg-white/5 p-4 ${!current.enabled ? "opacity-50" : ""}`}>
-          <h3 className="text-xs font-bold uppercase tracking-wider mb-2">
+        <div
+          className={`mt-4 rounded-lg border border-border bg-surface-2 p-4 ${!current.enabled ? "opacity-50" : ""}`}
+        >
+          <h3 className="text-[11px] font-medium uppercase tracking-wider text-text-muted mb-2">
             {t("autoDisableBannedScope")}
           </h3>
           <p className="text-xs text-text-muted mb-3">{t("autoDisableBannedScopeDesc")}</p>
@@ -166,7 +173,7 @@ export default function AutoDisableCard() {
             {scopes.map((scope) => (
               <label
                 key={scope}
-                className={`flex items-start gap-3 rounded-lg border border-white/10 p-3 ${editMode && current.enabled ? "cursor-pointer" : "cursor-default"}`}
+                className={`flex items-start gap-3 rounded-lg border border-border bg-surface p-3 ${editMode && current.enabled ? "cursor-pointer" : "cursor-default"}`}
               >
                 <input
                   type="radio"
@@ -175,7 +182,7 @@ export default function AutoDisableCard() {
                   checked={current.scope === scope}
                   onChange={() => setDraft((prev) => ({ ...prev, scope }))}
                   disabled={!editMode || !current.enabled}
-                  className="mt-1 w-4 h-4 text-primary bg-surface/50 border-white/20 focus:ring-primary/50"
+                  className="mt-1 w-4 h-4 accent-primary text-primary bg-surface border-border-strong focus:ring-primary/40"
                 />
                 <span>
                   <span className="block text-sm font-medium">

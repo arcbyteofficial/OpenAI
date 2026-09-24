@@ -372,10 +372,10 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
             <button
               key={tab}
               onClick={() => setTopTab(tab)}
-              className={`px-3 py-1.5 text-sm rounded-t-md transition-colors ${
+              className={`px-3 py-1.5 text-[13px] font-medium rounded-t-md transition-colors ${
                 topTab === tab
-                  ? "bg-primary/10 text-primary border-b-2 border-primary"
-                  : "text-text-muted hover:text-text-primary"
+                  ? "text-text-main border-b-2 border-text-main"
+                  : "text-text-muted hover:text-text-main"
               }`}
             >
               {tabLabels[tab]}
@@ -391,10 +391,10 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
                 <button
                   key={sub}
                   onClick={() => setSingleSubTab(sub)}
-                  className={`px-2 py-1 text-xs rounded transition-colors ${
+                  className={`px-2 py-1 text-xs font-medium rounded-md transition-colors ${
                     singleSubTab === sub
-                      ? "bg-bg-subtle text-text-primary"
-                      : "text-text-muted hover:text-text-primary"
+                      ? "bg-bg-subtle text-text-main"
+                      : "text-text-muted hover:text-text-main"
                   }`}
                 >
                   {sub === "upload"
@@ -421,12 +421,12 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
                   className="block w-full text-sm"
                 />
                 {singleJson && previewClaudeJson(singleJson).valid && (
-                  <p className="mt-1 text-xs text-emerald-500">
+                  <p className="mt-1 text-xs text-success">
                     {t("providerDetailValidClaudeCredentialsFile")}
                   </p>
                 )}
                 {singleJson && !previewClaudeJson(singleJson).valid && (
-                  <p className="mt-1 text-xs text-red-500">
+                  <p className="mt-1 text-xs text-error">
                     {typeof t.has === "function" && t.has("claudeImportInvalidShape")
                       ? t("claudeImportInvalidShape")
                       : "The file is not a valid .credentials.json"}
@@ -444,7 +444,7 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
                   value={singlePasteText}
                   onChange={(e) => setSinglePasteText(e.target.value)}
                   rows={6}
-                  className="w-full rounded border border-border bg-bg-subtle px-2 py-1.5 text-xs font-mono text-text-main"
+                  className="w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
                   placeholder='{ "claudeAiOauth": { ... } }'
                 />
               </div>
@@ -461,7 +461,7 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
                   value={singleEmail}
                   onChange={(e) => setSingleEmail(e.target.value)}
                   placeholder="auto-detected"
-                  className="w-full rounded border border-border bg-bg-subtle px-2 py-1.5 text-xs text-text-main"
+                  className="w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
                 />
               </div>
               <div>
@@ -475,7 +475,7 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
                   value={singleName}
                   onChange={(e) => setSingleName(e.target.value)}
                   placeholder={t("providerDetailMyClaudeAccountPlaceholder")}
-                  className="w-full rounded border border-border bg-bg-subtle px-2 py-1.5 text-xs text-text-main"
+                  className="w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
                 />
               </div>
             </div>
@@ -512,10 +512,10 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
                     setBulkSubMode(mode);
                     setBulkEntries([]);
                   }}
-                  className={`px-2 py-1 text-xs rounded transition-colors ${
+                  className={`px-2 py-1 text-xs font-medium rounded-md transition-colors ${
                     bulkSubMode === mode
-                      ? "bg-bg-subtle text-text-primary"
-                      : "text-text-muted hover:text-text-primary"
+                      ? "bg-bg-subtle text-text-main"
+                      : "text-text-muted hover:text-text-main"
                   }`}
                 >
                   {mode === "upload"
@@ -560,7 +560,7 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
                   value={bulkPasteText}
                   onChange={(e) => handleBulkPasteChange(e.target.value)}
                   rows={6}
-                  className="w-full rounded border border-border bg-bg-subtle px-2 py-1.5 text-xs font-mono text-text-main"
+                  className="w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
                   placeholder="[{ ... }, { ... }]"
                 />
               </div>
@@ -590,11 +590,11 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
             )}
 
             {bulkEntries.length > 0 && (
-              <div className="rounded border border-border bg-bg-subtle px-2 py-1.5 max-h-36 overflow-y-auto">
+              <div className="rounded-md border border-border bg-bg-subtle px-2 py-1.5 max-h-36 overflow-y-auto">
                 {bulkEntries.map((e, i) => (
                   <div
                     key={i}
-                    className={`text-xs py-0.5 flex items-center gap-1 ${e.parseError ? "text-red-500" : "text-text-main"}`}
+                    className={`text-xs py-0.5 flex items-center gap-1 ${e.parseError ? "text-error" : "text-text-main"}`}
                   >
                     <span className="material-symbols-outlined text-[12px]">
                       {e.parseError ? "error" : "check_circle"}
@@ -619,15 +619,15 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
             </label>
 
             {bulkResult && (
-              <div className="rounded bg-bg-subtle px-2 py-1.5 text-xs">
+              <div className="rounded-md bg-bg-subtle px-2 py-1.5 text-xs tabular-nums">
                 {bulkResult.success}/{bulkResult.total} imported
                 {bulkResult.failed > 0 ? `, ${bulkResult.failed} failed` : ""}
               </div>
             )}
             {bulkErrors.length > 0 && (
-              <div className="rounded border border-red-500/30 bg-red-500/5 px-2 py-1.5 max-h-28 overflow-y-auto">
+              <div className="rounded-md border border-error/30 bg-error/5 px-2 py-1.5 max-h-28 overflow-y-auto">
                 {bulkErrors.map((e) => (
-                  <div key={e.index} className="text-xs text-red-500 py-0.5">
+                  <div key={e.index} className="text-xs text-error py-0.5">
                     {e.name}: {e.message}
                   </div>
                 ))}
@@ -700,19 +700,23 @@ export function ApplyClaudeAuthModal({
     <Modal isOpen={isOpen} title={title} onClose={onClose}>
       <div className="flex flex-col gap-4">
         <div>
-          <div className="text-xs uppercase text-text-muted mb-1">{targetLabel}</div>
-          <code className="block rounded bg-sidebar px-2 py-1.5 text-xs font-mono text-text-main">
+          <div className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-1">
+            {targetLabel}
+          </div>
+          <code className="block rounded-md border border-border bg-bg-subtle px-2 py-1.5 text-xs font-mono text-text-main">
             ~/.claude/.credentials.json
           </code>
           <p className="mt-1 text-xs text-text-muted">{t("providerDetailPathAutoDetected")}</p>
         </div>
         <div>
-          <div className="text-xs uppercase text-text-muted mb-1">{backupLabel}</div>
-          <code className="block rounded bg-sidebar px-2 py-1.5 text-xs font-mono text-text-main">
+          <div className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-1">
+            {backupLabel}
+          </div>
+          <code className="block rounded-md border border-border bg-bg-subtle px-2 py-1.5 text-xs font-mono text-text-main">
             {"~/.claude/credentials-{timestamp}.bak"}
           </code>
         </div>
-        <div className="rounded bg-sky-500/10 border border-sky-500/20 px-3 py-2 text-xs text-sky-400">
+        <div className="rounded-md bg-bg-subtle border border-border px-3 py-2 text-xs text-text-muted">
           {mcpHint}
         </div>
         <p className="text-sm text-text-muted">{warning}</p>

@@ -280,50 +280,55 @@
   --radius-control: var(--radius-control);
 }
 
-/* ── Focus Indicators (U-3) ── */
-:root {
-  --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
-}
+/* Base element rules live in @layer base so Tailwind utilities (a primitive's
+   focus:ring-*, rounded-control, font-*) can override them; unlayered rules would
+   beat every layered utility regardless of specificity. */
+@layer base {
+  /* ── Focus Indicators (U-3) ── */
+  :root {
+    --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+  }
 
-/* Visible focus ring on keyboard navigation only */
-:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-  border-radius: 4px;
-}
+  /* Visible focus ring on keyboard navigation only */
+  :focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+    border-radius: 4px;
+  }
 
-/* Utility class for custom focus ring */
-.focus-ring:focus-visible {
-  outline: none;
-  box-shadow: var(--focus-ring);
-}
+  /* Utility class for custom focus ring */
+  .focus-ring:focus-visible {
+    outline: none;
+    box-shadow: var(--focus-ring);
+  }
 
-/* Remove focus ring from mouse clicks */
-:focus:not(:focus-visible) {
-  outline: none;
-  box-shadow: none;
-}
+  /* Remove focus ring from mouse clicks */
+  :focus:not(:focus-visible) {
+    outline: none;
+    box-shadow: none;
+  }
 
-/* Base styles */
-body {
-  background-color: var(--color-bg);
-  color: var(--color-text-main);
-  font-family: var(--font-sans);
-  font-feature-settings:
-    "rlig" 1,
-    "calt" 1;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
-}
+  /* Base styles */
+  body {
+    background-color: var(--color-bg);
+    color: var(--color-text-main);
+    font-family: var(--font-sans);
+    font-feature-settings:
+      "rlig" 1,
+      "calt" 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+  }
 
-/* Headings read tighter at display sizes (Geist / SF Pro convention). */
-:where(h1, h2, h3) {
-  letter-spacing: -0.02em;
-}
+  /* Headings read tighter at display sizes (Geist / SF Pro convention). */
+  :where(h1, h2, h3) {
+    letter-spacing: -0.02em;
+  }
 
-:where(code, kbd, samp, pre) {
-  font-family: var(--font-mono);
+  :where(code, kbd, samp, pre) {
+    font-family: var(--font-mono);
+  }
 }
 
 body.electron-macos {

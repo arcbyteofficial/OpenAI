@@ -88,7 +88,7 @@ export default function DataTable({
           justifyContent: "center",
           padding: "48px 24px",
           color: "var(--color-text-muted)",
-          fontSize: "14px",
+          fontSize: "13px",
         }}
       >
         <span
@@ -113,10 +113,10 @@ export default function DataTable({
           justifyContent: "center",
           padding: "48px 24px",
           color: "var(--color-text-muted)",
-          fontSize: "14px",
+          fontSize: "13px",
         }}
       >
-        <span style={{ fontSize: "32px", marginBottom: "8px", opacity: 0.6 }}>{emptyIcon}</span>
+        <span style={{ fontSize: "24px", marginBottom: "8px", opacity: 0.6 }}>{emptyIcon}</span>
         {resolvedEmptyMessage}
       </div>
     );
@@ -139,6 +139,7 @@ export default function DataTable({
           borderCollapse: "collapse",
           fontSize: "12px",
           tableLayout: "auto",
+          fontVariantNumeric: "tabular-nums",
         }}
       >
         <thead>
@@ -149,7 +150,7 @@ export default function DataTable({
                 style={{
                   padding: "8px 10px",
                   textAlign: "left",
-                  fontWeight: 600,
+                  fontWeight: 500,
                   color: "var(--color-text-muted)",
                   borderBottom: "1px solid var(--color-border)",
                   position: "sticky",
@@ -157,9 +158,9 @@ export default function DataTable({
                   background: "var(--table-header-bg)",
                   zIndex: 1,
                   whiteSpace: "nowrap",
-                  fontSize: "11px",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.5px",
+                  fontSize: "12px",
+                  textTransform: "none",
+                  letterSpacing: "normal",
                 }}
               >
                 {renderHeader ? renderHeader(col) : col.label}

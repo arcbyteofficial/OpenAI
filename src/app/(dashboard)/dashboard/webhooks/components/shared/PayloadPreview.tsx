@@ -10,9 +10,9 @@ export function PayloadPreview({ payload, label }: PayloadPreviewProps) {
   return (
     <div className="space-y-1">
       {label && (
-        <p className="text-xs font-medium uppercase tracking-wider text-text-muted">{label}</p>
+        <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">{label}</p>
       )}
-      <pre className="overflow-x-auto rounded-lg bg-sidebar p-3 text-xs text-text-main">
+      <pre className="overflow-x-auto rounded-lg border border-border bg-bg-subtle p-3 font-mono text-[12px] text-text-main">
         {JSON.stringify(payload, null, 2)}
       </pre>
     </div>

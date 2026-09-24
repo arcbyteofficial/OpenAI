@@ -75,11 +75,11 @@ const TASK_STATES: Array<"all" | A2ATaskState> = [
 ];
 
 function stateClass(state: A2ATaskState) {
-  if (state === "completed") return "bg-green-500/15 text-green-500";
-  if (state === "failed") return "bg-red-500/15 text-red-500";
-  if (state === "working") return "bg-amber-500/15 text-amber-500";
-  if (state === "cancelled") return "bg-gray-500/15 text-gray-400";
-  return "bg-blue-500/15 text-blue-500";
+  if (state === "completed") return "bg-success/10 text-success";
+  if (state === "failed") return "bg-error/10 text-error";
+  if (state === "working") return "bg-warning/10 text-warning";
+  if (state === "cancelled") return "bg-bg-subtle text-text-muted";
+  return "bg-primary/10 text-primary";
 }
 
 export default function A2ADashboardPage() {
@@ -323,13 +323,15 @@ export default function A2ADashboardPage() {
       </div>
 
       <Card className="p-5">
-        <h2 className="text-lg font-semibold mb-4">{t("taskStateOverview")}</h2>
+        <h2 className="text-base font-semibold tracking-tight mb-4">{t("taskStateOverview")}</h2>
         <div className="grid grid-cols-2 md:grid-cols-5 gap-3">
           {(["submitted", "working", "completed", "failed", "cancelled"] as A2ATaskState[]).map(
             (state) => (
-              <div key={state} className="rounded-lg border border-border p-3 bg-bg">
-                <p className="text-xs text-text-muted uppercase">{t(`state.${state}`)}</p>
-                <p className="text-2xl font-semibold mt-1">{status?.tasks?.counts?.[state] || 0}</p>
+              <div key={state} className="rounded-lg border border-border p-3 bg-bg-subtle">
+                <p className="text-[13px] text-text-muted">{t(`state.${state}`)}</p>
+                <p className="text-2xl font-semibold tracking-tight tabular-nums mt-1">
+                  {status?.tasks?.counts?.[state] || 0}
+                </p>
               </div>
             )
           )}
@@ -338,7 +340,7 @@ export default function A2ADashboardPage() {
 
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
         <Card className="p-5">
-          <h2 className="text-lg font-semibold mb-3">{t("agentCard")}</h2>
+          <h2 className="text-base font-semibold tracking-tight mb-3">{t("agentCard")}</h2>
           {status?.agent ? (
             <div className="space-y-2 text-sm">
               <p className="font-semibold">{status.agent.name}</p>
@@ -350,8 +352,10 @@ export default function A2ADashboardPage() {
                 {t("url")}: <span className="font-mono text-xs break-all">{status.agent.url}</span>
               </p>
               <div className="pt-2">
-                <p className="text-xs uppercase text-text-muted mb-1">{t("capabilities")}</p>
-                <code className="text-xs break-all">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-1">
+                  {t("capabilities")}
+                </p>
+                <code className="font-mono text-[12px] break-all">
                   {JSON.stringify(status.capabilities || {}, null, 2)}
                 </code>
               </div>
@@ -362,7 +366,7 @@ export default function A2ADashboardPage() {
         </Card>
 
         <Card className="p-5">
-          <h2 className="text-lg font-semibold mb-3">{t("quickValidation")}</h2>
+          <h2 className="text-base font-semibold tracking-tight mb-3">{t("quickValidation")}</h2>
           <p className="text-sm text-text-muted mb-3">{t("quickValidationDescription")}</p>
           <div className="flex flex-wrap gap-2">
             <Button
@@ -389,14 +393,14 @@ export default function A2ADashboardPage() {
       <Card className="p-5">
         <div className="flex flex-wrap items-end justify-between gap-3 mb-4">
           <div>
-            <h2 className="text-lg font-semibold">{t("taskManagement")}</h2>
+            <h2 className="text-base font-semibold tracking-tight">{t("taskManagement")}</h2>
             <p className="text-sm text-text-muted">
               {t("taskSummary", { total: tasksData.total, page: currentPage, totalPages })}
             </p>
           </div>
           <div className="flex flex-wrap gap-2">
             <select
-              className="rounded-lg border border-border bg-bg px-3 py-2 text-sm"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
               value={stateFilter}
               onChange={(event) => {
                 setOffset(0);
@@ -410,7 +414,7 @@ export default function A2ADashboardPage() {
               ))}
             </select>
             <select
-              className="rounded-lg border border-border bg-bg px-3 py-2 text-sm"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
               value={skillFilter}
               onChange={(event) => {
                 setOffset(0);
@@ -433,41 +437,56 @@ export default function A2ADashboardPage() {
           <p className="text-sm text-text-muted">{t("noTasksForFilters")}</p>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full text-sm">
+            <table className="w-full text-[13px]">
               <thead>
                 <tr className="border-b border-border">
-                  <th className="text-left py-2 pr-2">{t("tableTask")}</th>
-                  <th className="text-left py-2 pr-2">{t("tableSkill")}</th>
-                  <th className="text-left py-2 pr-2">{t("tableState")}</th>
-                  <th className="text-left py-2 pr-2">{t("tablePhase")}</th>
-                  <th className="text-left py-2 pr-2">{t("tableUpdated")}</th>
-                  <th className="text-left py-2">{t("tableActions")}</th>
+                  <th className="text-left py-2 pr-2 text-xs font-medium text-text-muted">
+                    {t("tableTask")}
+                  </th>
+                  <th className="text-left py-2 pr-2 text-xs font-medium text-text-muted">
+                    {t("tableSkill")}
+                  </th>
+                  <th className="text-left py-2 pr-2 text-xs font-medium text-text-muted">
+                    {t("tableState")}
+                  </th>
+                  <th className="text-left py-2 pr-2 text-xs font-medium text-text-muted">
+                    {t("tablePhase")}
+                  </th>
+                  <th className="text-left py-2 pr-2 text-xs font-medium text-text-muted">
+                    {t("tableUpdated")}
+                  </th>
+                  <th className="text-left py-2 text-xs font-medium text-text-muted">
+                    {t("tableActions")}
+                  </th>
                 </tr>
               </thead>
               <tbody>
                 {tasksData.tasks.map((task) => {
                   const fsmPhase =
                     task.metadata?.fsmPhase || (task.metadata?.workflowFSM as any)?.currentPhase;
-                  let fsmBadgeColor = "bg-gray-500/15 text-gray-500";
+                  let fsmBadgeColor = "bg-bg-subtle text-text-muted";
                   if (fsmPhase === "plan" || fsmPhase === "plan_review")
-                    fsmBadgeColor = "bg-purple-500/15 text-purple-500";
-                  else if (fsmPhase === "execute") fsmBadgeColor = "bg-blue-500/15 text-blue-500";
+                    fsmBadgeColor = "bg-bg-subtle text-text-main";
+                  else if (fsmPhase === "execute") fsmBadgeColor = "bg-primary/10 text-primary";
                   else if (
                     ["code_review", "quality_review", "security", "test", "output_review"].includes(
                       fsmPhase
                     )
                   )
-                    fsmBadgeColor = "bg-amber-500/15 text-amber-500";
-                  else if (fsmPhase === "done") fsmBadgeColor = "bg-green-500/15 text-green-500";
-                  else if (fsmPhase === "failed") fsmBadgeColor = "bg-red-500/15 text-red-500";
+                    fsmBadgeColor = "bg-warning/10 text-warning";
+                  else if (fsmPhase === "done") fsmBadgeColor = "bg-success/10 text-success";
+                  else if (fsmPhase === "failed") fsmBadgeColor = "bg-error/10 text-error";
 
                   return (
-                    <tr key={task.id} className="border-b border-border/40">
-                      <td className="py-2 pr-2 font-mono text-xs">{task.id}</td>
+                    <tr
+                      key={task.id}
+                      className="border-b border-border last:border-b-0 transition-colors hover:bg-bg-subtle/60"
+                    >
+                      <td className="py-2 pr-2 font-mono text-[12px] text-text-muted">{task.id}</td>
                       <td className="py-2 pr-2">{task.skill}</td>
                       <td className="py-2 pr-2">
                         <span
-                          className={`text-xs px-2 py-1 rounded-full ${stateClass(task.state)}`}
+                          className={`text-xs font-medium px-2 py-0.5 rounded-full ${stateClass(task.state)}`}
                         >
                           {t(`state.${task.state}`)}
                         </span>
@@ -475,7 +494,7 @@ export default function A2ADashboardPage() {
                       <td className="py-2 pr-2">
                         {fsmPhase ? (
                           <span
-                            className={`text-xs px-2 py-1 rounded border border-current/20 font-medium ${fsmBadgeColor}`}
+                            className={`text-xs px-2 py-0.5 rounded-md border border-current/20 font-mono font-medium ${fsmBadgeColor}`}
                           >
                             {fsmPhase}
                           </span>
@@ -483,7 +502,7 @@ export default function A2ADashboardPage() {
                           <span className="text-xs text-text-muted">—</span>
                         )}
                       </td>
-                      <td className="py-2 pr-2 text-xs">
+                      <td className="py-2 pr-2 text-xs text-text-muted">
                         {new Date(task.updatedAt).toLocaleString()}
                       </td>
                       <td className="py-2 flex gap-2">
@@ -543,15 +562,17 @@ export default function A2ADashboardPage() {
       {selectedTask && (
         <Card className="p-5">
           <div className="flex items-center justify-between mb-3">
-            <h2 className="text-lg font-semibold">{t("taskDetail")}</h2>
+            <h2 className="text-base font-semibold tracking-tight">{t("taskDetail")}</h2>
             <Button size="sm" variant="secondary" onClick={() => setSelectedTask(null)}>
               {t("close")}
             </Button>
           </div>
           <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
-            <div className="rounded-lg border border-border p-3 bg-bg">
-              <p className="text-xs uppercase text-text-muted mb-2">{t("metadata")}</p>
-              <code className="text-xs break-all whitespace-pre-wrap">
+            <div className="rounded-lg border border-border p-3 bg-bg-subtle">
+              <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-2">
+                {t("metadata")}
+              </p>
+              <code className="font-mono text-[12px] break-all whitespace-pre-wrap">
                 {JSON.stringify(
                   {
                     id: selectedTask.id,
@@ -567,16 +588,20 @@ export default function A2ADashboardPage() {
                 )}
               </code>
             </div>
-            <div className="rounded-lg border border-border p-3 bg-bg">
-              <p className="text-xs uppercase text-text-muted mb-2">{t("events")}</p>
-              <code className="text-xs break-all whitespace-pre-wrap">
+            <div className="rounded-lg border border-border p-3 bg-bg-subtle">
+              <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-2">
+                {t("events")}
+              </p>
+              <code className="font-mono text-[12px] break-all whitespace-pre-wrap">
                 {JSON.stringify(selectedTask.events, null, 2)}
               </code>
             </div>
           </div>
-          <div className="rounded-lg border border-border p-3 bg-bg mt-4">
-            <p className="text-xs uppercase text-text-muted mb-2">{t("artifacts")}</p>
-            <code className="text-xs break-all whitespace-pre-wrap">
+          <div className="rounded-lg border border-border p-3 bg-bg-subtle mt-4">
+            <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-2">
+              {t("artifacts")}
+            </p>
+            <code className="font-mono text-[12px] break-all whitespace-pre-wrap">
               {JSON.stringify(selectedTask.artifacts, null, 2)}
             </code>
           </div>
@@ -588,9 +613,9 @@ export default function A2ADashboardPage() {
 
 function StatCard({ label, value }: { label: string; value: string | number }) {
   return (
-    <div className="rounded-lg border border-border bg-bg p-4">
-      <p className="text-xs text-text-muted uppercase tracking-wide">{label}</p>
-      <p className="text-xl font-semibold mt-1">{value}</p>
+    <div className="rounded-card border border-border bg-surface p-4">
+      <p className="text-[13px] text-text-muted">{label}</p>
+      <p className="text-2xl font-semibold tracking-tight tabular-nums mt-1">{value}</p>
     </div>
   );
 }

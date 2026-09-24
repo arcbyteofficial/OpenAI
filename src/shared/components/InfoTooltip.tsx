@@ -11,7 +11,7 @@ export default function InfoTooltip({ text, className }: InfoTooltipProps) {
   return (
     <span className={cn("relative inline-flex group", className)}>
       <span
-        className="material-symbols-outlined text-[16px] text-text-muted cursor-help"
+        className="material-symbols-outlined text-[16px] text-text-subtle hover:text-text-muted transition-colors cursor-help"
         aria-label={text}
       >
         info
@@ -20,9 +20,9 @@ export default function InfoTooltip({ text, className }: InfoTooltipProps) {
         role="tooltip"
         className={cn(
           "absolute bottom-full left-1/2 -translate-x-1/2 mb-2",
-          "px-2.5 py-1.5 text-xs font-medium text-white bg-gray-900/95 rounded-md shadow-lg",
+          "px-2 py-1 text-xs font-medium text-contrast-fg bg-contrast rounded-md",
           "whitespace-nowrap pointer-events-none",
-          "border border-white/10",
+          "dark:bg-surface-2 dark:text-text-main shadow-[var(--shadow-elevated)]",
           "opacity-0 group-hover:opacity-100 transition-opacity duration-150",
           "z-50"
         )}

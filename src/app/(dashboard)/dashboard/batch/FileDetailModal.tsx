@@ -142,24 +142,24 @@ export default function FileDetailModal({
       />
 
       {/* Panel */}
-      <div className="relative w-full sm:max-w-3xl bg-[var(--color-surface)] border border-[var(--color-border)] rounded-t-2xl sm:rounded-xl shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-200 max-h-[90vh] flex flex-col">
+      <div className="relative w-full sm:max-w-3xl bg-surface border border-border rounded-t-card sm:rounded-card shadow-[var(--shadow-elevated)] animate-in fade-in slide-in-from-bottom-4 duration-200 max-h-[90vh] flex flex-col">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--color-border)] flex-shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-border flex-shrink-0">
           <div className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-[20px] text-[var(--color-text-muted)]">
+            <span className="material-symbols-outlined text-[18px] text-text-muted">
               description
             </span>
             <div>
-              <h2 className="text-base font-semibold text-[var(--color-text-main)]">
+              <h2 className="text-base font-semibold tracking-tight text-text-main">
                 {t("batchFileContents")}
               </h2>
               <div className="flex items-center gap-2 mt-0.5">
-                <p className="text-xs text-[var(--color-text-muted)] font-mono">{file.id}</p>
+                <p className="text-xs text-text-muted font-mono">{file.id}</p>
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText(file.id);
                   }}
-                  className="text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors"
+                  className="text-text-muted hover:text-text-main transition-colors"
                   title={t("batchFileDetailCopyId")}
                 >
                   <span className="material-symbols-outlined text-[12px]">content_copy</span>
@@ -170,43 +170,41 @@ export default function FileDetailModal({
           <button
             onClick={onClose}
             aria-label={t("batchFileDetailClose")}
-            className="p-1.5 rounded-lg text-[var(--color-text-muted)] hover:bg-[var(--color-bg-alt)] transition-colors"
+            className="p-1.5 rounded-md text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
           >
-            <span className="material-symbols-outlined text-[20px]">close</span>
+            <span className="material-symbols-outlined text-[18px]">close</span>
           </button>
         </div>
 
         {/* Body */}
         <div className="overflow-y-auto flex-1 p-6 flex flex-col gap-6">
           {/* Metadata */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-xl bg-[var(--color-bg-alt)] border border-[var(--color-border)]">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 p-4 rounded-lg bg-bg-subtle border border-border">
             <div className="flex flex-col gap-0.5">
-              <span className="text-[10px] uppercase tracking-wider font-medium text-[var(--color-text-muted)]">
+              <span className="text-[10px] uppercase tracking-wider font-medium text-text-subtle">
                 {t("batchFilesSizeColumn")}
               </span>
-              <span className="text-sm text-[var(--color-text-main)]">
-                {formatBytes(file.bytes)}
-              </span>
+              <span className="text-sm text-text-main">{formatBytes(file.bytes)}</span>
             </div>
             <div className="flex flex-col gap-0.5">
-              <span className="text-[10px] uppercase tracking-wider font-medium text-[var(--color-text-muted)]">
+              <span className="text-[10px] uppercase tracking-wider font-medium text-text-subtle">
                 {t("batchFilesPurpose")}
               </span>
-              <span className="text-sm text-[var(--color-text-main)]">{file.purpose}</span>
+              <span className="text-sm text-text-main">{file.purpose}</span>
             </div>
             <div className="flex flex-col gap-0.5">
-              <span className="text-[10px] uppercase tracking-wider font-medium text-[var(--color-text-muted)]">
+              <span className="text-[10px] uppercase tracking-wider font-medium text-text-subtle">
                 {t("batchDetailCreated")}
               </span>
-              <span className="text-sm text-[var(--color-text-main)]">
+              <span className="text-sm text-text-main">
                 {createdAtTs ? relativeTime(createdAtTs, t) : "—"}
               </span>
             </div>
             <div className="flex flex-col gap-0.5">
-              <span className="text-[10px] uppercase tracking-wider font-medium text-[var(--color-text-muted)]">
+              <span className="text-[10px] uppercase tracking-wider font-medium text-text-subtle">
                 {t("batchFilesExpires")}
               </span>
-              <span className="text-sm text-[var(--color-text-main)]">
+              <span className="text-sm text-text-main">
                 {expiresAtTs ? relativeExpiration(expiresAtTs, t) : t("batchFilesNeverExpires")}
               </span>
             </div>
@@ -215,26 +213,26 @@ export default function FileDetailModal({
           {/* Related batches */}
           {relatedBatches.length > 0 && (
             <div>
-              <h3 className="text-[11px] uppercase tracking-wider font-medium text-[var(--color-text-muted)] mb-2">
+              <h3 className="text-[11px] uppercase tracking-wider font-medium text-text-subtle mb-2">
                 {t("batchFileUsedByCount", { count: relatedBatches.length })}
               </h3>
               <div className="space-y-1.5">
                 {relatedBatches.map((b) => (
                   <div
                     key={b.id}
-                    className="flex items-center gap-3 px-3 py-2 rounded-lg bg-[var(--color-bg-alt)] border border-[var(--color-border)] text-xs"
+                    className="flex items-center gap-3 px-3 py-2 rounded-lg bg-bg-subtle border border-border text-xs"
                   >
-                    <span className="material-symbols-outlined text-[14px] text-[var(--color-text-muted)]">
+                    <span className="material-symbols-outlined text-[14px] text-text-muted">
                       pending_actions
                     </span>
-                    <span className="font-mono text-[var(--color-text-main)] truncate">{b.id}</span>
+                    <span className="font-mono text-text-main truncate">{b.id}</span>
                     <span
-                      className={`ml-auto px-1.5 py-0.5 rounded text-[10px] font-medium border ${
+                      className={`ml-auto px-1.5 py-0.5 rounded-md text-[10px] font-medium border ${
                         b.status === "completed"
-                          ? "bg-emerald-500/15 text-emerald-400 border-emerald-500/25"
+                          ? "bg-success/10 text-success border-success/20"
                           : b.status === "failed"
-                            ? "bg-red-500/15 text-red-400 border-red-500/25"
-                            : "bg-gray-500/15 text-gray-400 border-gray-500/25"
+                            ? "bg-error/10 text-error border-error/20"
+                            : "bg-bg-subtle text-text-muted border-border"
                       }`}
                     >
                       {BATCH_STATUS_TRANSLATION_KEYS[b.status]
@@ -250,13 +248,13 @@ export default function FileDetailModal({
           {/* Contents */}
           <div className="flex-1 flex flex-col min-h-[300px]">
             <div className="flex items-center justify-between mb-2">
-              <h3 className="text-xs font-semibold uppercase tracking-wider text-[var(--color-text-muted)]">
+              <h3 className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                 {t("batchFilePreview")}
               </h3>
               {contents && (
                 <button
                   onClick={handleCopy}
-                  className="flex items-center gap-1.5 px-2 py-1 text-xs font-medium rounded border border-[var(--color-border)] bg-[var(--color-bg-alt)] text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors"
+                  className="flex items-center gap-1.5 px-2 py-1 text-xs font-medium rounded-md border border-border-strong bg-surface text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
                 >
                   <span className="material-symbols-outlined text-[14px]">
                     {copied ? "check" : "content_copy"}
@@ -268,24 +266,24 @@ export default function FileDetailModal({
 
             <div className="flex-1 relative group">
               {loading ? (
-                <div className="absolute inset-0 flex items-center justify-center bg-[var(--color-bg)]/50 rounded-lg">
-                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-[var(--color-accent)]" />
+                <div className="absolute inset-0 flex items-center justify-center bg-bg/50 rounded-lg">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-text-muted" />
                 </div>
               ) : contents ? (
                 <div className="h-full flex flex-col">
-                  <pre className="flex-1 overflow-auto text-[11px] bg-[var(--color-bg)] rounded-lg p-4 border border-[var(--color-border)] text-[var(--color-text-muted)] font-mono leading-relaxed">
+                  <pre className="flex-1 overflow-auto text-[11px] bg-bg rounded-lg p-4 border border-border text-text-muted font-mono leading-relaxed">
                     {displayedLines.join("\n")}
                   </pre>
                   {isTruncated && (
-                    <div className="mt-3 p-3 bg-yellow-500/10 border border-yellow-500/25 rounded-lg text-xs text-yellow-400 flex items-center gap-2">
+                    <div className="mt-3 p-3 bg-warning/10 border border-warning/20 rounded-lg text-xs text-warning flex items-center gap-2">
                       <span className="material-symbols-outlined text-[16px]">warning</span>
                       {t("batchFilePreviewTruncated", { shown: 1000, total: lineCount })}
                     </div>
                   )}
                 </div>
               ) : (
-                <div className="flex flex-col items-center justify-center h-full py-12 rounded-lg border border-dashed border-[var(--color-border)] text-[var(--color-text-muted)]">
-                  <span className="material-symbols-outlined text-[40px] mb-2 opacity-20">
+                <div className="flex flex-col items-center justify-center h-full py-12 rounded-lg border border-dashed border-border text-text-muted">
+                  <span className="material-symbols-outlined text-[32px] mb-2 text-text-subtle">
                     find_in_page
                   </span>
                   <p className="text-sm">{t("batchFileDetailFailedToLoad")}</p>
@@ -298,9 +296,9 @@ export default function FileDetailModal({
           <div className="flex justify-end gap-3 mt-2">
             <Button
               onClick={handleDownload}
-              className="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-lg bg-[var(--color-accent)] text-white hover:opacity-90 transition-opacity"
+              className="flex items-center justify-center gap-2 px-4 py-2 text-sm font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors"
             >
-              <span className="material-symbols-outlined text-[18px]">download</span>
+              <span className="material-symbols-outlined text-[16px]">download</span>
               {t("batchFileDownloadFull")}
             </Button>
           </div>

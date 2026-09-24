@@ -23,18 +23,21 @@ export default function OfflinePage() {
 
   return (
     <main className="min-h-screen text-text-main flex items-center justify-center p-6">
-      <section className="w-full max-w-xl rounded-2xl border border-border bg-surface p-8 shadow-soft text-center">
-        <span className="material-symbols-outlined text-5xl text-primary mb-3" aria-hidden="true">
+      <section className="w-full max-w-xl rounded-card border border-border bg-surface p-6 text-center">
+        <span
+          className="material-symbols-outlined text-[40px] text-text-subtle mb-3"
+          aria-hidden="true"
+        >
           wifi_off
         </span>
-        <h1 className="text-2xl font-semibold">{t("offline.title")}</h1>
-        <p className="mt-3 text-text-muted leading-relaxed">{t("offline.description")}</p>
+        <h1 className="text-2xl font-semibold tracking-tight">{t("offline.title")}</h1>
+        <p className="mt-2 text-sm text-text-muted leading-relaxed">{t("offline.description")}</p>
 
         <div
-          className={`mt-6 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-sm border ${
+          className={`mt-5 inline-flex items-center gap-2 rounded-full px-3 py-1.5 text-[13px] border ${
             isOnline
-              ? "border-green-500/30 text-green-600 dark:text-green-400 bg-green-500/10"
-              : "border-amber-500/30 text-amber-600 dark:text-amber-400 bg-amber-500/10"
+              ? "border-success/30 text-success bg-success/10"
+              : "border-warning/30 text-warning bg-warning/10"
           }`}
           aria-live="polite"
         >
@@ -46,16 +49,16 @@ export default function OfflinePage() {
           </span>
         </div>
 
-        <div className="mt-8 flex flex-col sm:flex-row gap-3">
+        <div className="mt-6 flex flex-col sm:flex-row gap-3">
           <button
             onClick={() => window.location.reload()}
-            className="inline-flex items-center justify-center px-6 py-3 rounded-lg text-white text-sm font-semibold bg-gradient-to-br from-primary to-primary-hover hover:shadow-elevated transition-all duration-200 motion-reduce:transition-none"
+            className="inline-flex items-center justify-center px-4 py-2.5 rounded-control bg-contrast text-contrast-fg text-sm font-medium hover:bg-contrast-hover transition-colors duration-150 motion-reduce:transition-none"
           >
             {t("offline.retryConnection")}
           </button>
           <Link
             href="/status"
-            className="inline-flex items-center justify-center px-6 py-3 rounded-lg text-sm font-semibold border border-border hover:bg-bg-alt transition-colors duration-200 motion-reduce:transition-none"
+            className="inline-flex items-center justify-center px-4 py-2.5 rounded-control text-sm font-medium text-text-main border border-border-strong hover:bg-bg-subtle transition-colors duration-150 motion-reduce:transition-none"
           >
             {t("offline.openStatusPage")}
           </Link>

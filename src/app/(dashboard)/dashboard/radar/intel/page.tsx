@@ -90,14 +90,14 @@ export default function RadarIntelPage() {
           >
             ← {t("backToRadar")}
           </Link>
-          <h1 className="mt-3 text-2xl font-bold">{t("title")}</h1>
+          <h1 className="mt-3 text-xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
           <p className="mt-1 text-sm text-text-muted">{t("subtitle")}</p>
         </div>
         <div className="flex items-center gap-2">
           {meta?.supporterVerified === true && (
             <span
               data-badge-id="radar-supporter"
-              className="rounded-full border border-violet-500 px-3 py-1 text-sm text-violet-300"
+              className="rounded-full border border-primary/30 bg-primary/10 px-3 py-1 text-xs font-medium text-primary"
             >
               {t("supporterBadge")}
             </span>
@@ -106,14 +106,14 @@ export default function RadarIntelPage() {
             type="button"
             onClick={() => void sync()}
             disabled={syncing}
-            className="rounded-lg border border-violet-500 px-4 py-2 text-sm font-medium text-violet-400 disabled:opacity-50"
+            className="rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] font-medium text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
           >
             {syncing ? t("syncing") : t("refresh")}
           </button>
         </div>
       </div>
 
-      {error && <div className="rounded-lg bg-red-500/10 p-3 text-sm text-red-400">{error}</div>}
+      {error && <div className="rounded-lg bg-error/10 p-3 text-sm text-error">{error}</div>}
 
       {loading ? (
         <div className="flex min-h-48 items-center justify-center text-text-muted">
@@ -127,8 +127,8 @@ export default function RadarIntelPage() {
         <>
           <div className="grid gap-4 md:grid-cols-3">
             <Card>
-              <p className="text-xs uppercase tracking-wide text-text-muted">{t("methodology")}</p>
-              <p className="mt-2 font-semibold">
+              <p className="text-[13px] text-text-muted">{t("methodology")}</p>
+              <p className="mt-2 font-semibold text-text-main">
                 {t("eloMethod", {
                   initial: intel.methodology.initialRating,
                   factor: intel.methodology.kFactor,
@@ -136,8 +136,8 @@ export default function RadarIntelPage() {
               </p>
             </Card>
             <Card>
-              <p className="text-xs uppercase tracking-wide text-text-muted">{t("freshness")}</p>
-              <p className="mt-2 font-semibold">
+              <p className="text-[13px] text-text-muted">{t("freshness")}</p>
+              <p className="mt-2 font-semibold text-text-main">
                 {t(`freshnessValues.${intel.catalog.freshness}`)}
               </p>
               <p className="mt-1 text-sm text-text-muted">
@@ -145,8 +145,10 @@ export default function RadarIntelPage() {
               </p>
             </Card>
             <Card>
-              <p className="text-xs uppercase tracking-wide text-text-muted">{t("trend")}</p>
-              <p className="mt-2 font-semibold">{t(`trendValues.${intel.catalog.trend}`)}</p>
+              <p className="text-[13px] text-text-muted">{t("trend")}</p>
+              <p className="mt-2 font-semibold text-text-main">
+                {t(`trendValues.${intel.catalog.trend}`)}
+              </p>
               <p className="mt-1 text-sm text-text-muted">
                 {t("modelDelta", {
                   current: intel.catalog.models.current,
@@ -159,21 +161,23 @@ export default function RadarIntelPage() {
 
           <Card>
             <div className="mb-4 flex items-center justify-between gap-3">
-              <h2 className="text-lg font-semibold">{t("ranking")}</h2>
-              <span className="text-xs text-text-muted">{meta.version}</span>
+              <h2 className="text-sm font-semibold tracking-tight text-text-main">
+                {t("ranking")}
+              </h2>
+              <span className="font-mono text-[12px] text-text-muted">{meta.version}</span>
             </div>
             {intel.rankings.length === 0 ? (
               <p className="py-6 text-center text-text-muted">{t("noRankings")}</p>
             ) : (
               <div className="overflow-x-auto">
-                <table className="w-full text-left text-sm">
-                  <thead className="text-text-muted">
+                <table className="w-full text-left text-[13px]">
+                  <thead className="text-xs font-medium text-text-muted">
                     <tr>
-                      <th className="pb-3">#</th>
-                      <th className="pb-3">{t("model")}</th>
-                      <th className="pb-3">{t("category")}</th>
-                      <th className="pb-3 text-right">{t("rating")}</th>
-                      <th className="pb-3 text-right">{t("matches")}</th>
+                      <th className="pb-3 font-medium">#</th>
+                      <th className="pb-3 font-medium">{t("model")}</th>
+                      <th className="pb-3 font-medium">{t("category")}</th>
+                      <th className="pb-3 font-medium text-right">{t("rating")}</th>
+                      <th className="pb-3 font-medium text-right">{t("matches")}</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -182,13 +186,13 @@ export default function RadarIntelPage() {
                         key={`${ranking.category}:${ranking.provider}:${ranking.modelId}`}
                         className="border-t border-border"
                       >
-                        <td className="py-3">{ranking.rank}</td>
-                        <td className="py-3 font-mono">
+                        <td className="py-3 tabular-nums text-text-muted">{ranking.rank}</td>
+                        <td className="py-3 font-mono text-[12px] text-text-main">
                           {ranking.provider}/{ranking.modelId}
                         </td>
                         <td className="py-3">{ranking.category}</td>
-                        <td className="py-3 text-right">{ranking.rating}</td>
-                        <td className="py-3 text-right">{ranking.matches}</td>
+                        <td className="py-3 text-right tabular-nums">{ranking.rating}</td>
+                        <td className="py-3 text-right tabular-nums">{ranking.matches}</td>
                       </tr>
                     ))}
                   </tbody>

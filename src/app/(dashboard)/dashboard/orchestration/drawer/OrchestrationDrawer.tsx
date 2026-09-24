@@ -56,7 +56,9 @@ function isHttpUrl(url: string | undefined): url is string {
 function Section({ title, children }: { title: string; children: React.ReactNode }) {
   return (
     <div className="mb-4">
-      <div className="text-[10px] font-semibold uppercase text-muted mb-1">{title}</div>
+      <div className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-1.5">
+        {title}
+      </div>
       {children}
     </div>
   );
@@ -69,7 +71,7 @@ function Timeline({ node, detail }: { node: OrchNode; detail: unknown }) {
       <ol className="text-xs flex flex-col gap-1.5">
         {(t?.activities ?? []).map((a) => (
           <li key={a.id} className="flex gap-2">
-            <code className="text-[9px] shrink-0 text-muted">{a.type}</code>
+            <code className="font-mono text-[10px] shrink-0 text-text-muted">{a.type}</code>
             <span className="break-words">{a.content}</span>
           </li>
         ))}
@@ -82,7 +84,7 @@ function Timeline({ node, detail }: { node: OrchNode; detail: unknown }) {
       <ol className="text-xs flex flex-col gap-1">
         {(t?.events ?? []).map((e, i) => (
           <li key={i}>
-            <code className="text-[9px] text-muted mr-1">{e.state}</code>
+            <code className="font-mono text-[10px] text-text-muted mr-1">{e.state}</code>
             {e.message ?? e.timestamp}
           </li>
         ))}
@@ -90,7 +92,7 @@ function Timeline({ node, detail }: { node: OrchNode; detail: unknown }) {
     );
   }
   return (
-    <pre className="text-[10px] bg-surface-muted rounded p-2 overflow-x-auto">
+    <pre className="font-mono text-[11px] bg-bg-subtle border border-border rounded-md p-2 overflow-x-auto">
       {JSON.stringify(detail, null, 2)}
     </pre>
   );
@@ -128,15 +130,25 @@ function DrawerHeader({
         pulse={state === "running"}
       />
       <div className="min-w-0">
-        <div className="text-sm font-semibold truncate">{node.label}</div>
-        <div className="text-[10px] text-muted">
+        <div className="text-sm font-semibold tracking-tight text-text-main truncate">
+          {node.label}
+        </div>
+        <div className="text-[11px] text-text-muted">
           {node.source} · {t(STATE_KEY[state])}
         </div>
       </div>
-      <button className="ml-auto text-muted" onClick={copyTrace} aria-label={t("copyTrace")}>
+      <button
+        className="ml-auto rounded-md px-1.5 py-0.5 text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
+        onClick={copyTrace}
+        aria-label={t("copyTrace")}
+      >
         ⧉
       </button>
-      <button className="text-muted" onClick={onClose} aria-label={t("drawerClose")}>
+      <button
+        className="rounded-md px-1.5 py-0.5 text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
+        onClick={onClose}
+        aria-label={t("drawerClose")}
+      >
         ✕
       </button>
     </div>
@@ -200,7 +212,7 @@ function DrawerBanners({
           {t(errorKind === "detail" ? "detailFailed" : "actionFailed", { error })}
         </div>
       )}
-      {isLoading && <div className="text-xs text-muted mb-3">…</div>}
+      {isLoading && <div className="text-xs text-text-muted mb-3">…</div>}
     </>
   );
 }
@@ -242,14 +254,22 @@ function DrawerResult({
     <Section title={t("drawerResult")}>
       {ca?.result?.prUrl &&
         (isHttpUrl(ca.result.prUrl) ? (
-          <a className="text-xs underline" href={ca.result.prUrl} target="_blank" rel="noreferrer">
+          <a
+            className="text-xs text-primary underline-offset-2 hover:underline"
+            href={ca.result.prUrl}
+            target="_blank"
+            rel="noreferrer"
+          >
             {ca.result.prUrl}
           </a>
         ) : (
           <span className="text-xs break-words">{ca.result.prUrl}</span>
         ))}
       {a2a?.artifacts?.map((art, i) => (
-        <pre key={i} className="text-[10px] bg-surface-muted rounded p-2 mt-1 overflow-x-auto">
+        <pre
+          key={i}
+          className="font-mono text-[11px] bg-bg-subtle border border-border rounded-md p-2 mt-1 overflow-x-auto"
+        >
           {art.content}
         </pre>
       ))}
@@ -289,9 +309,9 @@ function DrawerMemory({ a2a, t }: { a2a: A2ATask | null; t: Translate }) {
       <ul className="text-xs flex flex-col gap-1.5">
         {hits.map((h) => (
           <li key={h.id}>
-            <code className="text-[9px] text-muted mr-1">{h.type}</code>
+            <code className="font-mono text-[10px] text-text-muted mr-1">{h.type}</code>
             <span className="font-medium">{h.key}</span>
-            <div className="text-[10px] text-muted break-words">{h.snippet}</div>
+            <div className="text-[11px] text-text-muted break-words">{h.snippet}</div>
           </li>
         ))}
       </ul>
@@ -367,7 +387,7 @@ function RepeatButton({
   });
   return (
     <button
-      className="text-xs rounded border border-border px-2 py-1 disabled:opacity-50"
+      className="text-xs font-medium rounded-control border border-border-strong bg-surface text-text-main px-2 py-1 hover:bg-bg-subtle transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       onClick={onClick}
       disabled={!canRepeat}
       title={canRepeat || busy ? undefined : t("repeatUnavailable")}
@@ -415,7 +435,7 @@ function DrawerActions({
       <div className="flex gap-2">
         {canApprove && (
           <button
-            className="text-xs rounded border border-success px-2 py-1 disabled:opacity-50"
+            className="text-xs font-medium rounded-control border border-success/30 bg-success/10 text-success px-2 py-1 hover:bg-success/15 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() => run(approve)}
             disabled={busy}
           >
@@ -424,7 +444,7 @@ function DrawerActions({
         )}
         {canCancel && (
           <button
-            className="text-xs rounded border border-error px-2 py-1 disabled:opacity-50"
+            className="text-xs font-medium rounded-control border border-error/30 bg-error/10 text-error px-2 py-1 hover:bg-error/15 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             onClick={() => run(cancel)}
             disabled={busy}
           >
@@ -520,7 +540,7 @@ export function OrchestrationDrawer({
     <>
       <div className="fixed inset-0 bg-black/20 z-30" onClick={onClose} aria-hidden />
       <aside
-        className="fixed right-0 top-0 h-full w-[380px] bg-surface border-l border-border z-40 overflow-y-auto p-4"
+        className="fixed right-0 top-0 h-full w-[380px] bg-surface text-text-main border-l border-border shadow-[var(--shadow-elevated)] z-40 overflow-y-auto p-4"
         role="dialog"
         aria-label={node.label}
       >

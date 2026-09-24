@@ -61,18 +61,21 @@ export default function CloudflareRelayModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-labelledby="cloudflare-relay-title"
     >
-      <div className="bg-surface rounded-lg shadow-xl p-6 w-full max-w-md space-y-4">
+      <div className="bg-surface rounded-card shadow-[var(--shadow-elevated)] p-6 w-full max-w-md space-y-4">
         <div className="flex items-center justify-between">
           <h2
             id="cloudflare-relay-title"
-            className="text-lg font-bold flex items-center gap-2"
+            className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2"
           >
-            <span className="material-symbols-outlined text-primary" aria-hidden="true">
+            <span
+              className="material-symbols-outlined text-[20px] text-text-muted"
+              aria-hidden="true"
+            >
               cloud
             </span>
             {t("cloudflareRelayModalTitle")}
@@ -80,7 +83,7 @@ export default function CloudflareRelayModal({
           <button
             onClick={onClose}
             aria-label={t("close")}
-            className="text-text-muted hover:text-text"
+            className="text-text-muted hover:text-text-main transition-colors"
           >
             <span className="material-symbols-outlined" aria-hidden="true">
               close
@@ -88,7 +91,7 @@ export default function CloudflareRelayModal({
           </button>
         </div>
 
-        <div className="bg-orange-500/10 border border-orange-500/30 rounded p-3 text-xs text-orange-300 space-y-1">
+        <div className="bg-warning/5 border border-warning/30 rounded-lg p-3 text-xs text-warning space-y-1">
           <p>{t("cloudflareRelayWarning")}</p>
           <p className="text-text-muted">{t("cloudflareRelayTokenHowto")}</p>
         </div>
@@ -103,13 +106,11 @@ export default function CloudflareRelayModal({
               type="text"
               value={accountId}
               onChange={(e) => setAccountId(e.target.value)}
-              className="w-full text-sm bg-surface-alt border border-border rounded px-3 py-2 focus:outline-none focus:border-primary"
+              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
               placeholder="your-cloudflare-account-id"
               autoComplete="off"
             />
-            <p className="text-xs text-text-muted mt-1">
-              {t("cloudflareRelayAccountIdHint")}
-            </p>
+            <p className="text-xs text-text-muted mt-1">{t("cloudflareRelayAccountIdHint")}</p>
           </div>
           <div>
             <label className="text-sm font-medium mb-1 block" htmlFor="cloudflare-api-token">
@@ -120,13 +121,11 @@ export default function CloudflareRelayModal({
               type="password"
               value={apiToken}
               onChange={(e) => setApiToken(e.target.value)}
-              className="w-full text-sm bg-surface-alt border border-border rounded px-3 py-2 focus:outline-none focus:border-primary"
+              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
               placeholder="cloudflare-api-token"
               autoComplete="off"
             />
-            <p className="text-xs text-text-muted mt-1">
-              {t("cloudflareRelayApiTokenHint")}
-            </p>
+            <p className="text-xs text-text-muted mt-1">{t("cloudflareRelayApiTokenHint")}</p>
           </div>
           <div>
             <label className="text-sm font-medium mb-1 block" htmlFor="cloudflare-project-name">
@@ -137,14 +136,14 @@ export default function CloudflareRelayModal({
               type="text"
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
-              className="w-full text-sm bg-surface-alt border border-border rounded px-3 py-2 focus:outline-none focus:border-primary"
+              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
               placeholder="omniroute-relay"
             />
           </div>
         </div>
 
         {error && (
-          <div className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded p-2">
+          <div className="text-sm text-error bg-error/10 border border-error/20 rounded-md p-2">
             {error}
           </div>
         )}

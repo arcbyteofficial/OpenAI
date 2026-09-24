@@ -53,7 +53,7 @@ export function ModelMappingTable({ agentId, mappings, onSave }: ModelMappingTab
   return (
     <div className="flex flex-col gap-3">
       {rows.length === 0 ? (
-        <div className="rounded-lg border border-border/40 bg-surface/30 px-4 py-6 text-center">
+        <div className="rounded-lg border border-border bg-surface-2 px-4 py-6 text-center">
           <p className="text-xs text-text-muted mb-3">
             {t("noMappingsDesc") ||
               "No model mappings configured yet. Add mappings to route agent requests through OmniRoute."}
@@ -61,7 +61,7 @@ export function ModelMappingTable({ agentId, mappings, onSave }: ModelMappingTab
           <button
             type="button"
             onClick={addMapping}
-            className="inline-flex items-center gap-1.5 rounded-lg bg-primary/10 text-primary px-3 py-1.5 text-xs font-medium hover:bg-primary/20 transition-colors"
+            className="inline-flex items-center gap-1.5 rounded-control border border-border-strong bg-surface text-text-main px-3 py-1.5 text-xs font-medium hover:bg-bg-subtle transition-colors"
           >
             <span className="material-symbols-outlined text-[14px]">add</span>
             {t("addMapping") || "Add mapping"}
@@ -69,10 +69,10 @@ export function ModelMappingTable({ agentId, mappings, onSave }: ModelMappingTab
         </div>
       ) : (
         <>
-          <div className="rounded-lg border border-border/40 overflow-hidden bg-surface">
-            <table className="w-full text-sm">
+          <div className="rounded-lg border border-border overflow-hidden bg-surface">
+            <table className="w-full text-[13px]">
               <thead>
-                <tr className="border-b border-border/40 bg-surface/60">
+                <tr className="border-b border-border bg-bg-subtle">
                   <th className="px-3 py-2 text-left text-xs font-medium text-text-muted">
                     {t("sourceModel") || "Source model (agent native)"}
                   </th>
@@ -84,21 +84,21 @@ export function ModelMappingTable({ agentId, mappings, onSave }: ModelMappingTab
               </thead>
               <tbody>
                 {rows.map((row, i) => (
-                  <tr key={i} className="border-b border-border/20 last:border-0">
+                  <tr key={i} className="border-b border-border last:border-0">
                     <td className="px-3 py-2">
                       <input
                         type="text"
                         value={row.source}
                         onChange={(e) => updateSource(i, e.target.value)}
                         placeholder="e.g., gemini-3.6-flash-medium, or * for all unmapped"
-                        className="w-full rounded border border-border/40 bg-card px-2 py-1 text-xs font-mono focus:outline-none focus:ring-2 focus:ring-primary/50"
+                        className="w-full rounded-md border border-border-strong bg-surface px-2 py-1 text-xs font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
                       />
                     </td>
                     <td className="px-3 py-2">
                       <button
                         type="button"
                         onClick={() => setSelectorOpen(i)}
-                        className="inline-flex items-center gap-1.5 rounded-lg border border-border/40 bg-card px-2.5 py-1 text-xs hover:bg-surface transition-colors font-mono w-full justify-between"
+                        className="inline-flex items-center gap-1.5 rounded-md border border-border-strong bg-surface px-2.5 py-1 text-xs text-text-main hover:bg-bg-subtle transition-colors font-mono w-full justify-between"
                       >
                         {row.target || (
                           <span className="text-text-muted italic">
@@ -114,7 +114,7 @@ export function ModelMappingTable({ agentId, mappings, onSave }: ModelMappingTab
                       <button
                         type="button"
                         onClick={() => removeMapping(i)}
-                        className="text-text-muted hover:text-red-500 transition-colors"
+                        className="text-text-muted hover:text-error transition-colors"
                         aria-label="Remove mapping"
                       >
                         <span className="material-symbols-outlined text-[16px]">delete</span>
@@ -134,7 +134,7 @@ export function ModelMappingTable({ agentId, mappings, onSave }: ModelMappingTab
             <button
               type="button"
               onClick={addMapping}
-              className="inline-flex items-center gap-1.5 rounded-lg border border-border/40 bg-card px-3 py-1.5 text-xs font-medium hover:bg-surface transition-colors"
+              className="inline-flex items-center gap-1.5 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-xs font-medium text-text-main hover:bg-bg-subtle transition-colors"
             >
               <span className="material-symbols-outlined text-[14px]">add</span>
               {t("addMapping") || "Add mapping"}
@@ -143,7 +143,7 @@ export function ModelMappingTable({ agentId, mappings, onSave }: ModelMappingTab
               type="button"
               onClick={handleSave}
               disabled={saving}
-              className="rounded-lg bg-primary/10 text-primary px-4 py-1.5 text-sm font-medium hover:bg-primary/20 transition-colors disabled:opacity-50"
+              className="rounded-control bg-contrast text-contrast-fg px-3 py-1.5 text-[13px] font-medium hover:bg-contrast-hover transition-colors disabled:opacity-50"
             >
               {saving ? t("saving") || "Saving…" : t("saveMappings") || "Save mappings"}
             </button>

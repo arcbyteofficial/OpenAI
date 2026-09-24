@@ -215,14 +215,14 @@ export default function ModelsDevSyncTab() {
     return (
       <Card>
         <div className="flex items-center gap-3">
-          <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="p-2 rounded-lg bg-bg-subtle text-text-muted">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               sync
             </span>
           </div>
           <div>
-            <h3 className="text-lg font-semibold">{t("modelsDevTitle")}</h3>
-            <p className="text-sm text-text-muted">{t("modelsDevDesc")}</p>
+            <h3 className="text-sm font-semibold text-text-main">{t("modelsDevTitle")}</h3>
+            <p className="text-[13px] text-text-muted">{t("modelsDevDesc")}</p>
           </div>
         </div>
         <div className="mt-4 text-sm text-text-muted">{t("loading")}...</div>
@@ -248,19 +248,19 @@ export default function ModelsDevSyncTab() {
       {/* Main sync card */}
       <Card>
         <div className="flex items-center gap-3 mb-5">
-          <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="p-2 rounded-lg bg-bg-subtle text-text-muted">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               database
             </span>
           </div>
           <div>
-            <h3 className="text-lg font-semibold">{t("modelsDevTitle")}</h3>
-            <p className="text-sm text-text-muted">{t("modelsDevDesc")}</p>
+            <h3 className="text-sm font-semibold text-text-main">{t("modelsDevTitle")}</h3>
+            <p className="text-[13px] text-text-muted">{t("modelsDevDesc")}</p>
           </div>
           {feedback && (
             <span
               className={`ml-auto text-xs font-medium flex items-center gap-1 ${
-                feedback.type === "success" ? "text-emerald-500" : "text-red-500"
+                feedback.type === "success" ? "text-success" : "text-error"
               }`}
             >
               <span className="material-symbols-outlined text-[14px]">
@@ -272,7 +272,7 @@ export default function ModelsDevSyncTab() {
         </div>
 
         {/* Enable toggle */}
-        <div className="flex items-center justify-between p-4 rounded-lg bg-surface/30 border border-border/30 mb-4">
+        <div className="flex items-center justify-between p-4 rounded-lg bg-surface-2 border border-border mb-4">
           <div>
             <p className="text-sm font-medium">{t("modelsDevEnabled")}</p>
             <p className="text-xs text-text-muted mt-0.5">{t("modelsDevEnabledDesc")}</p>
@@ -281,7 +281,7 @@ export default function ModelsDevSyncTab() {
             onClick={toggleEnabled}
             disabled={saving}
             className={`relative w-11 h-6 rounded-full transition-colors ${
-              enabled ? "bg-blue-500" : "bg-border"
+              enabled ? "bg-primary" : "bg-border-strong"
             }`}
             role="switch"
             aria-checked={enabled}
@@ -296,10 +296,10 @@ export default function ModelsDevSyncTab() {
 
         {/* Sync interval */}
         {enabled && (
-          <div className="p-4 rounded-lg bg-surface/30 border border-border/30 mb-4">
+          <div className="p-4 rounded-lg bg-surface-2 border border-border mb-4">
             <div className="flex items-center justify-between mb-3">
               <p className="text-sm font-medium">{t("modelsDevInterval")}</p>
-              <span className="text-sm font-mono tabular-nums text-blue-400">
+              <span className="text-sm font-mono tabular-nums text-text-main">
                 {formatInterval(positionToHours(draftPos))}
               </span>
             </div>
@@ -314,7 +314,7 @@ export default function ModelsDevSyncTab() {
               onTouchEnd={commitDraftInterval}
               onBlur={commitDraftInterval}
               aria-label={t("modelsDevInterval")}
-              className="w-full accent-blue-500"
+              className="w-full accent-primary"
             />
             <div className="flex justify-between text-xs text-text-muted mt-1">
               <span>1h</span>
@@ -330,7 +330,7 @@ export default function ModelsDevSyncTab() {
           <button
             onClick={triggerSync}
             disabled={syncing}
-            className="px-4 py-2 text-sm font-medium rounded-lg bg-blue-500 text-white hover:bg-blue-600 disabled:opacity-50 transition-colors flex items-center gap-2"
+            className="px-4 py-2 text-sm font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover disabled:opacity-50 transition-colors flex items-center gap-2"
           >
             <span
               className={`material-symbols-outlined text-[16px] ${syncing ? "animate-spin" : ""}`}
@@ -351,41 +351,41 @@ export default function ModelsDevSyncTab() {
       {status && (status.providerCount > 0 || status.modelCount > 0) && (
         <Card>
           <div className="flex items-center gap-3 mb-5">
-            <div className="p-2 rounded-lg bg-emerald-500/10 text-emerald-500">
-              <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+            <div className="p-2 rounded-lg bg-bg-subtle text-text-muted">
+              <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                 bar_chart
               </span>
             </div>
             <div>
-              <h3 className="text-lg font-semibold">{t("modelsDevStats")}</h3>
-              <p className="text-sm text-text-muted">{t("modelsDevStatsDesc")}</p>
+              <h3 className="text-sm font-semibold text-text-main">{t("modelsDevStats")}</h3>
+              <p className="text-[13px] text-text-muted">{t("modelsDevStatsDesc")}</p>
             </div>
           </div>
 
           <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-            <div className="p-4 rounded-lg bg-surface/30 border border-border/30 text-center">
-              <p className="text-2xl font-bold text-blue-400">
+            <div className="p-4 rounded-lg bg-surface-2 border border-border text-center">
+              <p className="text-2xl font-semibold tabular-nums tracking-tight text-text-main">
                 {status.providerCount.toLocaleString()}
               </p>
-              <p className="text-xs text-text-muted mt-1">{t("providers")}</p>
+              <p className="text-[13px] text-text-muted mt-1">{t("providers")}</p>
             </div>
-            <div className="p-4 rounded-lg bg-surface/30 border border-border/30 text-center">
-              <p className="text-2xl font-bold text-emerald-400">
+            <div className="p-4 rounded-lg bg-surface-2 border border-border text-center">
+              <p className="text-2xl font-semibold tabular-nums tracking-tight text-text-main">
                 {status.modelCount.toLocaleString()}
               </p>
-              <p className="text-xs text-text-muted mt-1">{t("modelsWithPricing")}</p>
+              <p className="text-[13px] text-text-muted mt-1">{t("modelsWithPricing")}</p>
             </div>
-            <div className="p-4 rounded-lg bg-surface/30 border border-border/30 text-center">
-              <p className="text-2xl font-bold text-violet-400">
+            <div className="p-4 rounded-lg bg-surface-2 border border-border text-center">
+              <p className="text-2xl font-semibold tabular-nums tracking-tight text-text-main">
                 {status.capabilityCount.toLocaleString()}
               </p>
-              <p className="text-xs text-text-muted mt-1">{t("capabilities")}</p>
+              <p className="text-[13px] text-text-muted mt-1">{t("capabilities")}</p>
             </div>
-            <div className="p-4 rounded-lg bg-surface/30 border border-border/30 text-center">
-              <p className="text-2xl font-bold text-amber-400">
+            <div className="p-4 rounded-lg bg-surface-2 border border-border text-center">
+              <p className="text-2xl font-semibold tabular-nums tracking-tight text-text-main">
                 {status.lastSyncModelCount > 0 ? status.lastSyncModelCount.toLocaleString() : "—"}
               </p>
-              <p className="text-xs text-text-muted mt-1">{t("lastSyncCount")}</p>
+              <p className="text-[13px] text-text-muted mt-1">{t("lastSyncCount")}</p>
             </div>
           </div>
 
@@ -400,19 +400,21 @@ export default function ModelsDevSyncTab() {
       {/* Info card */}
       <Card>
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="p-2 rounded-lg bg-bg-subtle text-text-muted">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               info
             </span>
           </div>
           <div>
-            <h3 className="text-lg font-semibold">{t("modelsDevInfo")}</h3>
+            <h3 className="text-sm font-semibold text-text-main">{t("modelsDevInfo")}</h3>
           </div>
         </div>
         <div className="text-sm text-text-muted space-y-2">
           <p>{t("modelsDevInfoDesc")}</p>
           <p>{t("modelsDevInfoResolution")}</p>
-          <p className="text-xs font-mono bg-surface/50 p-2 rounded">{t("modelsDevInfoOrder")}</p>
+          <p className="text-xs font-mono bg-bg-subtle border border-border p-2 rounded-md">
+            {t("modelsDevInfoOrder")}
+          </p>
         </div>
       </Card>
     </div>

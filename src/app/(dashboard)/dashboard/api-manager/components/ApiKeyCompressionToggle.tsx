@@ -24,10 +24,10 @@ export function ApiKeyCompressionToggle({
         role="switch"
         aria-checked={enabled}
         onClick={onToggle}
-        className={`inline-flex shrink-0 items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+        className={`inline-flex shrink-0 items-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors ${
           enabled
-            ? "bg-cyan-500/15 text-cyan-700 dark:text-cyan-300 border border-cyan-500/30"
-            : "bg-black/5 dark:bg-white/5 text-text-muted border border-border"
+            ? "bg-primary/10 text-primary border border-primary/30"
+            : "bg-bg-subtle text-text-muted border border-border"
         }`}
       >
         <span className="material-symbols-outlined text-[14px]">

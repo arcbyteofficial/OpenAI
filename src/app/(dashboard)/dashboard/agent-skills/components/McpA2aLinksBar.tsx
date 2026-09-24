@@ -36,8 +36,8 @@ function LinkCard({ label, url, icon, prompt }: LinkCardProps): JSX.Element {
 
   return (
     <div className="flex-1 flex items-start gap-3 rounded-lg border border-border bg-bg-subtle p-3 min-w-0">
-      <div className="flex items-center justify-center size-8 rounded-lg bg-primary/10 shrink-0">
-        <span className="material-symbols-outlined text-primary text-[16px]">{icon}</span>
+      <div className="flex items-center justify-center size-8 rounded-lg border border-border bg-surface shrink-0">
+        <span className="material-symbols-outlined text-text-muted text-[16px]">{icon}</span>
       </div>
       <div className="flex-1 min-w-0">
         <div className="flex items-center justify-between gap-1 mb-1">
@@ -46,8 +46,8 @@ function LinkCard({ label, url, icon, prompt }: LinkCardProps): JSX.Element {
             onClick={() => void handleCopy()}
             className={`flex items-center gap-1 rounded px-1.5 py-0.5 text-[10px] font-medium transition-colors shrink-0 ${
               copied
-                ? "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
-                : "bg-bg text-text-muted hover:text-text-main"
+                ? "bg-success/10 text-success"
+                : "bg-surface text-text-muted hover:text-text-main"
             }`}
             title={t("copyUrl")}
             aria-label={`${t("copyUrl")} ${label}`}

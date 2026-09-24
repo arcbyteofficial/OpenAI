@@ -512,17 +512,21 @@ export default function CostOverviewTab() {
       <Card className="p-6">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h2 className="text-xl font-bold text-text-main">{t("overviewTitle")}</h2>
+            <h2 className="text-xl font-semibold tracking-tight text-text-main">
+              {t("overviewTitle")}
+            </h2>
             <p className="text-sm text-text-muted mt-1">{t("overviewDescription")}</p>
           </div>
           <div className="flex flex-wrap items-center gap-3">
             {summary.streak > 0 && (
-              <div className="flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-amber-500/10 border border-amber-500/20">
-                <span className="material-symbols-outlined text-amber-400 text-sm">
+              <div className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-bg-subtle border border-border">
+                <span className="material-symbols-outlined text-warning text-[16px]">
                   local_fire_department
                 </span>
-                <span className="text-sm font-semibold text-amber-400">{summary.streak}</span>
-                <span className="text-xs text-amber-400/70">{t("dayStreak")}</span>
+                <span className="text-sm font-semibold tabular-nums text-text-main">
+                  {summary.streak}
+                </span>
+                <span className="text-xs text-text-muted">{t("dayStreak")}</span>
               </div>
             )}
             {analytics && summary.totalCost > 0 && (
@@ -533,7 +537,7 @@ export default function CostOverviewTab() {
                     const dateStr = new Date().toISOString().slice(0, 10);
                     downloadFile(csv, `omniroute-costs-${range}-${dateStr}.csv`, "text/csv");
                   }}
-                  className="flex items-center gap-1 px-2.5 py-1.5 text-xs text-text-muted hover:text-text-main hover:bg-surface/50 rounded-lg border border-border/30 transition-colors"
+                  className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-text-muted hover:text-text-main hover:bg-bg-subtle rounded-control border border-border-strong transition-colors"
                   title={t("exportCSV")}
                 >
                   <span className="material-symbols-outlined text-sm">download</span>
@@ -549,7 +553,7 @@ export default function CostOverviewTab() {
                       "application/json"
                     );
                   }}
-                  className="flex items-center gap-1 px-2.5 py-1.5 text-xs text-text-muted hover:text-text-main hover:bg-surface/50 rounded-lg border border-border/30 transition-colors"
+                  className="flex items-center gap-1 px-2.5 py-1.5 text-xs font-medium text-text-muted hover:text-text-main hover:bg-bg-subtle rounded-control border border-border-strong transition-colors"
                   title={t("exportJSON")}
                 >
                   <span className="material-symbols-outlined text-sm">download</span>
@@ -574,32 +578,32 @@ export default function CostOverviewTab() {
           label={t("spendToday")}
           value={formatCurrencyCost(locale, presetCosts["1d"] || 0)}
           loading={summaryLoading}
-          color="text-emerald-400"
+          color="text-text-main"
         />
         <MetricCard
           label={t("spend7d")}
           value={formatCurrencyCost(locale, presetCosts["7d"] || 0)}
           loading={summaryLoading}
-          color="text-sky-400"
+          color="text-text-main"
         />
         <MetricCard
           label={t("spend30d")}
           value={formatCurrencyCost(locale, presetCosts["30d"] || 0)}
           loading={summaryLoading}
-          color="text-violet-400"
+          color="text-text-main"
         />
         <MetricCard
           label={t("selectedWindow")}
           value={formatCurrencyCost(locale, summary.totalCost || 0)}
           subValue={selectedRangeLabel}
-          color="text-amber-400"
+          color="text-text-main"
         />
       </div>
 
       {includesFlatRateEstimates && (
-        <div className="flex items-start gap-2 rounded-lg border border-amber-500/20 bg-amber-500/5 px-4 py-3">
-          <span className="material-symbols-outlined text-amber-400 text-base leading-5">info</span>
-          <p className="text-xs text-amber-300/90">{t("flatRateEstimateNotice")}</p>
+        <div className="flex items-start gap-2 rounded-lg border border-warning/20 bg-warning/5 px-4 py-3">
+          <span className="material-symbols-outlined text-warning text-base leading-5">info</span>
+          <p className="text-xs text-text-main">{t("flatRateEstimateNotice")}</p>
         </div>
       )}
 
@@ -652,7 +656,7 @@ export default function CostOverviewTab() {
       />
 
       <Card className="p-5">
-        <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-4">
+        <h3 className="text-sm font-semibold tracking-tight text-text-main mb-4">
           {t("tokenUsage")}
         </h3>
         <div className="grid grid-cols-2 xl:grid-cols-4 gap-4">
@@ -687,15 +691,13 @@ export default function CostOverviewTab() {
 
       {summary.totalRequests > 0 && (
         <Card className="p-5">
-          <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-4">
+          <h3 className="text-sm font-semibold tracking-tight text-text-main mb-4">
             {t("routingEfficiency")}
           </h3>
           <div className="grid grid-cols-2 xl:grid-cols-3 gap-4">
-            <div className="rounded-lg border border-border/20 bg-surface/20 px-4 py-3">
-              <p className="text-xs uppercase tracking-wide text-text-muted font-semibold">
-                {t("fallbackCount")}
-              </p>
-              <p className="text-lg font-semibold text-text-main mt-1">
+            <div className="rounded-lg border border-border bg-surface-2 px-4 py-3">
+              <p className="text-[13px] text-text-muted">{t("fallbackCount")}</p>
+              <p className="text-lg font-semibold tabular-nums text-text-main mt-1">
                 {new Intl.NumberFormat(locale).format(summary.fallbackCount || 0)}
               </p>
               <p className="text-xs text-text-muted mt-1">
@@ -704,18 +706,16 @@ export default function CostOverviewTab() {
                 })}
               </p>
             </div>
-            <div className="rounded-lg border border-border/20 bg-surface/20 px-4 py-3">
-              <p className="text-xs uppercase tracking-wide text-text-muted font-semibold">
-                {t("fallbackRate")}
-              </p>
+            <div className="rounded-lg border border-border bg-surface-2 px-4 py-3">
+              <p className="text-[13px] text-text-muted">{t("fallbackRate")}</p>
               <div className="flex items-center gap-2 mt-1">
                 <p
-                  className={`text-lg font-semibold ${
+                  className={`text-lg font-semibold tabular-nums ${
                     (summary.fallbackRatePct || 0) > 10
-                      ? "text-red-400"
+                      ? "text-error"
                       : (summary.fallbackRatePct || 0) > 5
-                        ? "text-amber-400"
-                        : "text-emerald-400"
+                        ? "text-warning"
+                        : "text-success"
                   }`}
                 >
                   {(summary.fallbackRatePct || 0).toFixed(1)}%
@@ -725,21 +725,19 @@ export default function CostOverviewTab() {
                   style={{
                     color:
                       (summary.fallbackRatePct || 0) > 10
-                        ? "#f87171"
+                        ? "var(--color-error)"
                         : (summary.fallbackRatePct || 0) > 5
-                          ? "#fbbf24"
-                          : "#34d399",
+                          ? "var(--color-warning)"
+                          : "var(--color-success)",
                   }}
                 >
                   {(summary.fallbackRatePct || 0) > 5 ? "warning" : "check_circle"}
                 </span>
               </div>
             </div>
-            <div className="rounded-lg border border-border/20 bg-surface/20 px-4 py-3">
-              <p className="text-xs uppercase tracking-wide text-text-muted font-semibold">
-                {t("modelCoverage")}
-              </p>
-              <p className="text-lg font-semibold text-text-main mt-1">
+            <div className="rounded-lg border border-border bg-surface-2 px-4 py-3">
+              <p className="text-[13px] text-text-muted">{t("modelCoverage")}</p>
+              <p className="text-lg font-semibold tabular-nums text-text-main mt-1">
                 {(summary.requestedModelCoveragePct || 0).toFixed(1)}%
               </p>
               <p className="text-xs text-text-muted mt-1">{t("modelCoverageDesc")}</p>
@@ -752,13 +750,15 @@ export default function CostOverviewTab() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Card className="p-5">
             <div className="flex items-center gap-2 mb-3">
-              <span className="material-symbols-outlined text-sky-400 text-lg">trending_up</span>
-              <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wide">
+              <span className="material-symbols-outlined text-text-muted text-[18px]">
+                trending_up
+              </span>
+              <h3 className="text-sm font-semibold tracking-tight text-text-main">
                 {t("monthlyForecast")}
               </h3>
             </div>
             <div className="flex items-end gap-3">
-              <p className="text-3xl font-bold text-sky-400">
+              <p className="text-2xl font-semibold tracking-tight tabular-nums text-text-main">
                 {currencyFormatter.format(projectedMonthEnd)}
               </p>
               <p className="text-xs text-text-muted pb-1">
@@ -772,26 +772,26 @@ export default function CostOverviewTab() {
               <span>{t("daysRemaining", { days: daysRemainingInMonth })}</span>
             </div>
             {includesFlatRateEstimates && (
-              <p className="mt-2 text-xs text-amber-300/90">{t("flatRateEstimateForecast")}</p>
+              <p className="mt-2 text-xs text-warning">{t("flatRateEstimateForecast")}</p>
             )}
           </Card>
 
           <Card className="p-5">
             <div className="flex items-center gap-2 mb-3">
-              <span className="material-symbols-outlined text-violet-400 text-lg">
+              <span className="material-symbols-outlined text-text-muted text-[18px]">
                 compare_arrows
               </span>
-              <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wide">
+              <h3 className="text-sm font-semibold tracking-tight text-text-main">
                 {t("periodComparison")}
               </h3>
             </div>
             <div className="flex items-end gap-3">
               <p
-                className={`text-3xl font-bold ${
+                className={`text-2xl font-semibold tracking-tight tabular-nums ${
                   costChangePct > 0
-                    ? "text-red-400"
+                    ? "text-error"
                     : costChangePct < 0
-                      ? "text-emerald-400"
+                      ? "text-success"
                       : "text-text-main"
                 }`}
               >
@@ -799,11 +799,11 @@ export default function CostOverviewTab() {
                 {costChangePct.toFixed(1)}%
               </p>
               <span
-                className={`material-symbols-outlined text-lg pb-1 ${
+                className={`material-symbols-outlined text-[18px] pb-1 ${
                   costChangePct > 0
-                    ? "text-red-400"
+                    ? "text-error"
                     : costChangePct < 0
-                      ? "text-emerald-400"
+                      ? "text-success"
                       : "text-text-muted"
                 }`}
               >
@@ -1030,10 +1030,12 @@ function CostExplorerCard({
       <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between mb-5">
         <div>
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-emerald-400 text-xl">
+            <span className="material-symbols-outlined text-text-muted text-[18px]">
               travel_explore
             </span>
-            <h3 className="text-lg font-bold text-text-main">{t("costExplorerTitle")}</h3>
+            <h3 className="text-base font-semibold tracking-tight text-text-main">
+              {t("costExplorerTitle")}
+            </h3>
           </div>
           <p className="text-sm text-text-muted mt-1">{t("costExplorerDescription")}</p>
         </div>
@@ -1051,7 +1053,7 @@ function CostExplorerCard({
               value={searchQuery}
               onChange={(event) => onSearchChange(event.target.value)}
               placeholder={t("filterRows")}
-              className="w-full rounded-lg border border-border/40 bg-surface/40 py-2 pl-9 pr-3 text-sm text-text-main placeholder:text-text-muted focus:border-primary focus:outline-none"
+              className="w-full rounded-control border border-border-strong bg-surface py-2 pl-9 pr-3 text-sm text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none transition-colors"
               aria-label={t("filterCostExplorerRows")}
             />
           </label>
@@ -1059,7 +1061,7 @@ function CostExplorerCard({
       </div>
 
       {rows.length === 0 ? (
-        <div className="rounded-xl border border-border/30 bg-surface/20 p-6">
+        <div className="rounded-lg border border-border bg-surface-2 p-6">
           <EmptyState
             icon="manage_search"
             title={t("noMatchingCostRows")}
@@ -1069,20 +1071,20 @@ function CostExplorerCard({
       ) : (
         <>
           <div className="overflow-x-auto">
-            <table className="w-full min-w-205 text-sm">
+            <table className="w-full min-w-205 text-[13px]">
               <thead>
-                <tr className="border-b border-border/30 text-[11px] uppercase text-text-muted">
+                <tr className="border-b border-border text-xs text-text-muted">
                   {columns.map((column) => (
                     <th
                       key={column.key}
-                      className={`pb-2 font-semibold ${
+                      className={`pb-2 font-medium ${
                         column.align === "right" ? "text-right" : "text-left"
                       }`}
                     >
                       <button
                         type="button"
                         onClick={() => onSort(column.key)}
-                        className={`inline-flex items-center gap-1 hover:text-text-main ${
+                        className={`inline-flex items-center gap-1 hover:text-text-main transition-colors ${
                           column.align === "right" ? "justify-end" : "justify-start"
                         }`}
                       >
@@ -1095,9 +1097,9 @@ function CostExplorerCard({
                   ))}
                 </tr>
               </thead>
-              <tbody className="divide-y divide-border/20">
+              <tbody className="divide-y divide-border">
                 {rows.map((row) => (
-                  <tr key={row.id} className="hover:bg-surface/20">
+                  <tr key={row.id} className="hover:bg-bg-subtle transition-colors">
                     <td className="py-3 pr-4">
                       <div className="flex flex-col">
                         <span className="font-medium text-text-main">{row.name}</span>
@@ -1124,9 +1126,9 @@ function CostExplorerCard({
                     </td>
                     <td className="py-3 text-right">
                       <div className="flex items-center justify-end gap-2">
-                        <div className="h-1.5 w-16 overflow-hidden rounded-full bg-surface/60">
+                        <div className="h-1.5 w-16 overflow-hidden rounded-full bg-bg-subtle">
                           <div
-                            className="h-full rounded-full bg-emerald-400"
+                            className="h-full rounded-full bg-primary"
                             style={{ width: `${Math.min(Math.max(row.sharePct, 0), 100)}%` }}
                           />
                         </div>
@@ -1149,9 +1151,9 @@ function CostExplorerCard({
 
 function CompactMetric({ label, value }: { label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-border/20 bg-surface/20 px-4 py-3">
-      <p className="text-xs uppercase tracking-wide text-text-muted font-semibold">{label}</p>
-      <p className="text-lg font-semibold text-text-main mt-1">{value}</p>
+    <div className="rounded-lg border border-border bg-surface-2 px-4 py-3">
+      <p className="text-[13px] text-text-muted">{label}</p>
+      <p className="text-lg font-semibold tabular-nums text-text-main mt-1">{value}</p>
     </div>
   );
 }
@@ -1184,12 +1186,12 @@ function ActivityHeatmap({
 
   const maxValue = Math.max(...days.map((day) => day.value), 1);
   const getIntensity = (value: number): string => {
-    if (value === 0) return "bg-surface/30";
+    if (value === 0) return "bg-bg-subtle";
     const ratio = value / maxValue;
-    if (ratio < 0.25) return "bg-emerald-900/50";
-    if (ratio < 0.5) return "bg-emerald-700/60";
-    if (ratio < 0.75) return "bg-emerald-500/70";
-    return "bg-emerald-400";
+    if (ratio < 0.25) return "bg-success/25";
+    if (ratio < 0.5) return "bg-success/45";
+    if (ratio < 0.75) return "bg-success/70";
+    return "bg-success";
   };
 
   const weeks: Array<Array<{ date: string; value: number }>> = [];
@@ -1199,9 +1201,7 @@ function ActivityHeatmap({
 
   return (
     <Card className="p-5">
-      <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-4">
-        {title}
-      </h3>
+      <h3 className="text-sm font-semibold tracking-tight text-text-main mb-4">{title}</h3>
       <div className="overflow-x-auto">
         <div className="flex gap-0.75">
           {weeks.map((week) => (
@@ -1224,11 +1224,11 @@ function ActivityHeatmap({
       <div className="flex items-center gap-2 mt-3 text-[10px] text-text-muted">
         <span>{lessLabel}</span>
         <div className="flex gap-0.5">
-          <div className="w-2.5 h-2.5 rounded-xs bg-surface/30" />
-          <div className="w-2.5 h-2.5 rounded-xs bg-emerald-900/50" />
-          <div className="w-2.5 h-2.5 rounded-xs bg-emerald-700/60" />
-          <div className="w-2.5 h-2.5 rounded-xs bg-emerald-500/70" />
-          <div className="w-2.5 h-2.5 rounded-xs bg-emerald-400" />
+          <div className="w-2.5 h-2.5 rounded-xs bg-bg-subtle" />
+          <div className="w-2.5 h-2.5 rounded-xs bg-success/25" />
+          <div className="w-2.5 h-2.5 rounded-xs bg-success/45" />
+          <div className="w-2.5 h-2.5 rounded-xs bg-success/70" />
+          <div className="w-2.5 h-2.5 rounded-xs bg-success" />
         </div>
         <span>{moreLabel}</span>
       </div>
@@ -1274,17 +1274,15 @@ function CostBreakdownTable({
 
   return (
     <Card className="p-5">
-      <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wide mb-4">
-        {title}
-      </h3>
+      <h3 className="text-sm font-semibold tracking-tight text-text-main mb-4">{title}</h3>
       <div className="overflow-x-auto">
-        <table className="w-full text-sm">
+        <table className="w-full text-[13px]">
           <thead>
-            <tr className="text-[11px] text-text-muted uppercase border-b border-border/30">
+            <tr className="text-xs text-text-muted border-b border-border">
               {columns.map((column) => (
                 <th
                   key={column.key}
-                  className={`pb-2 font-semibold ${
+                  className={`pb-2 font-medium ${
                     column.align === "right" ? "text-right" : "text-left"
                   }`}
                 >
@@ -1293,9 +1291,12 @@ function CostBreakdownTable({
               ))}
             </tr>
           </thead>
-          <tbody className="divide-y divide-border/20">
+          <tbody className="divide-y divide-border">
             {rows.map((row) => (
-              <tr key={String(row[columns[0].key])} className="hover:bg-surface/20">
+              <tr
+                key={String(row[columns[0].key])}
+                className="hover:bg-bg-subtle transition-colors"
+              >
                 {columns.map((column) => (
                   <td
                     key={column.key}

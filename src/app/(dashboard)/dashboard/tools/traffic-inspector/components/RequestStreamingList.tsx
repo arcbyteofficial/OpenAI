@@ -35,12 +35,12 @@ export function RequestStreamingList({
     return (
       <div className="h-full flex flex-col">
         {sameContextKey && (
-          <div className="shrink-0 flex items-center gap-2 px-2 py-1 bg-blue-900/30 border-b border-blue-500/40 text-xs text-blue-300 font-mono">
+          <div className="shrink-0 flex items-center gap-2 px-2 py-1 bg-primary/10 border-b border-primary/20 text-xs text-primary font-mono">
             <span>{t("filteringContext", { context: sameContextKey.slice(0, 6) })}</span>
             <button
               type="button"
               onClick={onClearContextFilter}
-              className="ml-1 underline hover:text-blue-100 focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-400"
+              className="ml-1 underline hover:text-text-main focus:outline-none focus-visible:ring-1 focus-visible:ring-primary"
             >
               [{t("clear")}]
             </button>
@@ -52,7 +52,7 @@ export function RequestStreamingList({
         >
           <div className="text-center space-y-2">
             <span
-              className="material-symbols-outlined text-[36px] text-text-muted block"
+              className="material-symbols-outlined text-[32px] text-text-subtle block"
               aria-hidden="true"
             >
               network_check
@@ -68,12 +68,12 @@ export function RequestStreamingList({
   return (
     <div className="h-full flex flex-col">
       {sameContextKey && (
-        <div className="shrink-0 flex items-center gap-2 px-2 py-1 bg-blue-900/30 border-b border-blue-500/40 text-xs text-blue-300 font-mono">
+        <div className="shrink-0 flex items-center gap-2 px-2 py-1 bg-primary/10 border-b border-primary/20 text-xs text-primary font-mono">
           <span>{t("filteringContext", { context: sameContextKey.slice(0, 6) })}</span>
           <button
             type="button"
             onClick={onClearContextFilter}
-            className="ml-1 underline hover:text-blue-100 focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-400"
+            className="ml-1 underline hover:text-text-main focus:outline-none focus-visible:ring-1 focus-visible:ring-primary"
           >
             [{t("clear")}]
           </button>

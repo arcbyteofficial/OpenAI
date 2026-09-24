@@ -49,24 +49,27 @@ export function RiskNoticeModal({
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/50 backdrop-blur-sm"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-[2px]"
       role="dialog"
       aria-modal="true"
       aria-labelledby="risk-modal-title"
     >
-      <div className="w-full max-w-md rounded-xl border border-amber-500/30 bg-card p-6 shadow-xl">
+      <div className="w-full max-w-md rounded-card border border-border bg-surface p-5 shadow-[var(--shadow-elevated)]">
         <div className="flex items-start gap-3 mb-4">
-          <div className="p-2 rounded-lg bg-amber-500/10 text-amber-500 shrink-0">
-            <span className="material-symbols-outlined text-[20px]">warning</span>
+          <div className="p-1.5 rounded-md bg-warning/10 text-warning shrink-0">
+            <span className="material-symbols-outlined text-[18px]">warning</span>
           </div>
-          <h2 id="risk-modal-title" className="text-base font-semibold text-text-main pt-1">
+          <h2
+            id="risk-modal-title"
+            className="text-[15px] font-semibold tracking-tight text-text-main pt-1"
+          >
             {title}
           </h2>
         </div>
 
-        <p className="text-sm text-text-muted mb-6 leading-relaxed">{body}</p>
+        <p className="text-sm text-text-muted mb-5 leading-relaxed">{body}</p>
 
-        <div className="flex gap-3 justify-end">
+        <div className="flex gap-2 justify-end">
           <Button variant="ghost" onClick={onCancel}>
             {t("cancel") || "Cancel"}
           </Button>

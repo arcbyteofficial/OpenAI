@@ -60,10 +60,10 @@ export default function CliCompanionPanel({ targets, statuses, loading, error }:
   return (
     <section
       aria-labelledby={id}
-      className="min-w-0 space-y-4 rounded-lg border border-border bg-surface p-4 sm:p-5"
+      className="min-w-0 space-y-4 rounded-card border border-border bg-surface p-4 sm:p-5"
     >
       <div className="max-w-prose space-y-2">
-        <h2 id={id} className="text-base font-semibold text-text-main">
+        <h2 id={id} className="text-base font-semibold tracking-tight text-text-main">
           {t("title")}
         </h2>
         <p className="text-sm text-text-main">{t("intro")}</p>

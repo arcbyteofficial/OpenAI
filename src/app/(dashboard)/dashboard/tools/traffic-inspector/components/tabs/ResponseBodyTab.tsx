@@ -40,17 +40,19 @@ export function ResponseBodyTab({ request }: ResponseBodyTabProps) {
           <button
             type="button"
             onClick={() => setShowRaw((r) => !r)}
-            className="text-xs text-text-muted hover:text-text-main border border-border rounded px-2 py-0.5 focus-ring"
+            className="text-xs text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors border border-border-strong rounded-control px-2 py-0.5 focus-ring"
           >
             {showRaw ? t("mergedView") : t("rawEvents")}
           </button>
         )}
-        <span className="ml-auto text-xs text-text-muted">{request.responseSize} B</span>
+        <span className="ml-auto text-xs text-text-muted font-mono tabular-nums">
+          {request.responseSize} B
+        </span>
         {request.status === "in-flight" && (
-          <span className="text-xs text-amber-400 animate-pulse">{t("streaming")}</span>
+          <span className="text-xs text-primary animate-pulse">{t("streaming")}</span>
         )}
       </div>
-      <div className="flex-1 overflow-auto bg-bg-subtle rounded border border-border p-2">
+      <div className="flex-1 overflow-auto bg-bg-subtle rounded-lg border border-border p-2">
         {isSSE && showRaw ? (
           <SseEventList events={events} />
         ) : isSSE && merged ? (

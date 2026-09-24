@@ -21,17 +21,20 @@ export default function RequestCountDateFilter({
 }: RequestCountDateFilterProps) {
   return (
     <div className="p-4 border-b border-border flex items-center justify-between flex-wrap gap-2">
-      <h3 className="text-sm font-semibold text-text-muted uppercase tracking-wider">{title}</h3>
+      <h3 className="text-sm font-semibold text-text-main">{title}</h3>
       <div className="flex items-center gap-2">
         <input
           type="date"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           aria-label={dateLabel}
-          className="px-2 py-1 rounded-md text-xs bg-black/[0.03] dark:bg-white/[0.03] border border-black/5 dark:border-white/5"
+          className="px-2 py-1 rounded-control text-xs text-text-main bg-surface border border-border-strong focus:outline-none focus:border-primary"
         />
         {value && (
-          <button onClick={() => onChange("")} className="text-xs text-text-muted hover:text-text-main">
+          <button
+            onClick={() => onChange("")}
+            className="text-xs text-text-muted hover:text-text-main transition-colors"
+          >
             <span className="material-symbols-outlined text-[14px]">close</span>
           </button>
         )}

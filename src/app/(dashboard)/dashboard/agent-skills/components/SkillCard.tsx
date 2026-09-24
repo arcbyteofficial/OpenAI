@@ -20,7 +20,7 @@ export function SkillCard({ skill, selected, onClick }: SkillCardProps): JSX.Ele
         onClick();
       }
     },
-    [onClick],
+    [onClick]
   );
 
   const previewItems: string[] =
@@ -38,20 +38,20 @@ export function SkillCard({ skill, selected, onClick }: SkillCardProps): JSX.Ele
       onClick={onClick}
       onKeyDown={handleKeyDown}
       data-testid={`skill-card-${skill.id}`}
-      className={`flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/50 ${
+      className={`flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
         selected
-          ? "border-primary/40 bg-primary/5"
-          : "border-border bg-bg hover:bg-bg-subtle hover:border-border"
+          ? "border-border-strong bg-bg-subtle"
+          : "border-border bg-surface hover:bg-bg-subtle hover:border-border-strong"
       }`}
     >
       <div
         className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-lg ${
-          selected ? "bg-primary/15" : "bg-bg-subtle"
+          selected ? "border border-border bg-surface" : "border border-border bg-bg-subtle"
         }`}
       >
         <span
           className={`material-symbols-outlined text-[18px] ${
-            selected ? "text-primary" : "text-text-muted"
+            selected ? "text-text-main" : "text-text-muted"
           }`}
         >
           {skill.icon ?? "article"}
@@ -63,12 +63,12 @@ export function SkillCard({ skill, selected, onClick }: SkillCardProps): JSX.Ele
           <span className="text-sm font-semibold text-text-main">{skill.name}</span>
 
           <span
-            className={`rounded-full px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide ${
+            className={`rounded-md px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide ${
               skill.category === "api"
-                ? "bg-blue-500/10 text-blue-700 dark:text-blue-400"
+                ? "bg-bg-subtle text-text-muted"
                 : skill.category === "cli"
-                  ? "bg-violet-500/10 text-violet-700 dark:text-violet-400"
-                  : "bg-emerald-500/10 text-emerald-700 dark:text-emerald-400"
+                  ? "bg-bg-subtle text-text-muted"
+                  : "bg-bg-subtle text-text-muted"
             }`}
           >
             {skill.category === "api"
@@ -79,13 +79,13 @@ export function SkillCard({ skill, selected, onClick }: SkillCardProps): JSX.Ele
           </span>
 
           {skill.isEntry && (
-            <span className="rounded-full bg-primary/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-primary">
+            <span className="rounded-md bg-primary/10 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-primary">
               start
             </span>
           )}
 
           {skill.isNew && (
-            <span className="rounded-full bg-amber-500/10 px-1.5 py-0.5 text-[10px] font-bold uppercase tracking-wide text-amber-700 dark:text-amber-400">
+            <span className="rounded-md bg-warning/10 px-1.5 py-0.5 text-[10px] font-medium uppercase tracking-wide text-warning">
               new
             </span>
           )}
@@ -98,7 +98,7 @@ export function SkillCard({ skill, selected, onClick }: SkillCardProps): JSX.Ele
             {previewItems.map((item) => (
               <code
                 key={item}
-                className="rounded bg-bg-subtle px-1.5 py-0.5 font-mono text-[10px] text-text-muted border border-border/50"
+                className="rounded bg-bg-subtle px-1.5 py-0.5 font-mono text-[10px] text-text-muted border border-border"
               >
                 {item}
               </code>

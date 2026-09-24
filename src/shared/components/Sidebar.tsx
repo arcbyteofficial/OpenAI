@@ -1,13 +1,6 @@
 "use client";
 
-import {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  useSyncExternalStore,
-  type CSSProperties,
-} from "react";
+import { useState, useEffect, useRef, useCallback, useSyncExternalStore } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { cn } from "@/shared/utils/cn";
@@ -38,7 +31,6 @@ import {
   normalizeHiddenSidebarItems,
   applySectionOrder,
   applyItemOrder,
-  getSidebarIconAccent,
   isSidebarItemVisibleForFlags,
   resolveRuntimeSidebarSections,
   type SidebarSectionId,
@@ -52,11 +44,6 @@ const DEFAULT_EXPANDED: SidebarSectionId = "omni-proxy";
 const EXPANDED_SECTIONS_KEY = "sidebar-expanded-sections";
 const PINNED_SECTIONS_KEY = "sidebar-pinned-sections";
 const PINNED_ITEMS_KEY = "sidebar-pinned-items";
-
-type SidebarGlyphStyle = CSSProperties & {
-  "--sidebar-icon-accent": string;
-  color: string;
-};
 
 type SidebarProps = {
   onClose?: () => void;
@@ -119,13 +106,6 @@ export default function Sidebar({
   onToggleCollapse,
   isMacElectron = false,
 }: SidebarProps) {
-  const getIconStyle = (itemId: string): SidebarGlyphStyle => {
-    const accent = getSidebarIconAccent(itemId);
-    return {
-      "--sidebar-icon-accent": accent,
-      color: accent,
-    };
-  };
   const pathname = usePathname();
   const t = useTranslations("sidebar");
   const tc = useTranslations("common");
@@ -507,26 +487,24 @@ export default function Sidebar({
     const isItemPinned = pinnedItems.has(item.id);
     const itemKey = keyPrefix ? `${keyPrefix}-${item.href}` : item.href;
     const className = cn(
-      "flex items-center gap-3 rounded-lg transition-all group",
-      collapsed ? "justify-center px-2 py-2.5" : "px-3 py-1.5",
+      "flex items-center gap-2 rounded-md transition-colors group",
+      collapsed ? "justify-center px-2 h-9" : "px-2 min-h-8 py-1",
       active
-        ? "bg-primary/10 text-primary"
-        : "text-text-muted hover:bg-surface/50 hover:text-text-main"
+        ? "bg-text-main/[0.07] text-text-main"
+        : "text-text-muted hover:bg-text-main/[0.04] hover:text-text-main"
     );
     const iconClassName = cn(
       "material-symbols-outlined text-[18px] shrink-0",
-      active ? "fill-1" : "group-hover/nav-item:text-primary transition-colors"
+      active ? "fill-1" : "transition-colors"
     );
     const content = (
       <>
-        <span className={iconClassName} style={getIconStyle(item.id)}>
-          {item.icon}
-        </span>
+        <span className={iconClassName}>{item.icon}</span>
         {!collapsed && (
           <div className="flex min-w-0 flex-1 flex-col">
-            <span className="truncate text-sm font-medium">{item.label}</span>
+            <span className="truncate text-[13px] font-medium">{item.label}</span>
             {item.subtitle && (
-              <span className="truncate text-[10px] text-text-muted/60">{item.subtitle}</span>
+              <span className="truncate text-[11px] text-text-subtle">{item.subtitle}</span>
             )}
           </div>
         )}
@@ -579,10 +557,10 @@ export default function Sidebar({
         title={isItemPinned ? t("unpinItem") : t("pinItem")}
         aria-label={isItemPinned ? t("unpinItem") : t("pinItem")}
         className={cn(
-          "mr-1.5 p-0.5 rounded transition-all shrink-0",
+          "mr-1 p-0.5 rounded transition-[color,opacity] shrink-0",
           isItemPinned
-            ? "text-primary opacity-100 hover:text-primary/80"
-            : "text-text-muted/30 opacity-0 group-hover/nav-item:opacity-100 hover:text-text-muted/80"
+            ? "text-text-muted opacity-100 hover:text-text-main"
+            : "text-text-subtle opacity-0 group-hover/nav-item:opacity-100 hover:text-text-main"
         )}
       >
         <span
@@ -598,12 +576,12 @@ export default function Sidebar({
     );
 
     const containerClassName = cn(
-      "group/nav-item flex items-center rounded-lg transition-all",
+      "group/nav-item flex items-center rounded-md transition-colors",
       active
-        ? "bg-primary/10 text-primary"
-        : "text-text-muted hover:bg-surface/50 hover:text-text-main"
+        ? "bg-text-main/[0.07] text-text-main"
+        : "text-text-muted hover:bg-text-main/[0.04] hover:text-text-main"
     );
-    const innerLinkClassName = "flex min-w-0 flex-1 items-center gap-3 px-3 py-1.5";
+    const innerLinkClassName = "flex min-w-0 flex-1 items-center gap-2 px-2 min-h-8 py-1";
 
     if (item.external) {
       return (
@@ -644,14 +622,14 @@ export default function Sidebar({
       <aside
         ref={sidebarRef}
         className={cn(
-          "flex h-full min-h-0 flex-col border-r border-black/5 bg-sidebar transition-all duration-300 ease-in-out dark:border-white/5",
+          "flex h-full min-h-0 flex-col border-r border-border bg-sidebar transition-[width] duration-200 ease-out",
           collapsed ? "w-16" : "w-[220px]"
         )}
         style={{ paddingTop: isMacElectron ? "var(--desktop-safe-top)" : undefined }}
       >
         <a
           href="#main-content"
-          className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-3 focus:bg-primary focus:text-white focus:rounded-md focus:m-2"
+          className="sr-only focus:not-sr-only focus:absolute focus:z-50 focus:p-3 focus:bg-contrast focus:text-contrast-fg focus:rounded-control focus:m-2"
         >
           {t("skipToContent")}
         </a>
@@ -659,19 +637,12 @@ export default function Sidebar({
         {(onToggleCollapse || !isMacElectron) && (
           <div
             className={cn(
-              "flex items-center gap-2 pb-2",
-              isMacElectron ? "pt-3" : "pt-5",
-              collapsed ? "px-3 justify-center" : "px-4"
+              "flex items-center gap-2 pb-0",
+              isMacElectron ? "pt-3" : "pt-2",
+              collapsed ? "px-3 justify-center" : "px-3"
             )}
             aria-hidden="true"
           >
-            {!isMacElectron && (
-              <>
-                <div className="w-3 h-3 rounded-full bg-[#FF5F56]" />
-                <div className="w-3 h-3 rounded-full bg-[#FFBD2E]" />
-                <div className="w-3 h-3 rounded-full bg-[#27C93F]" />
-              </>
-            )}
             {!collapsed && <div className="flex-1" />}
             {onToggleCollapse && (
               <button
@@ -680,8 +651,8 @@ export default function Sidebar({
                 aria-expanded={!collapsed}
                 aria-label={collapsed ? t("expandSidebar") : t("collapseSidebar")}
                 className={cn(
-                  "rounded-md p-1 text-text-muted/50 transition-colors hover:bg-black/5 hover:text-text-muted dark:hover:bg-white/5",
-                  collapsed && !isMacElectron && "mt-2",
+                  "rounded-md p-1 text-text-subtle transition-colors hover:bg-text-main/[0.04] hover:text-text-main",
+                  collapsed && !isMacElectron && "mt-0",
                   isMacElectron && "ms-auto"
                 )}
               >
@@ -693,13 +664,13 @@ export default function Sidebar({
           </div>
         )}
 
-        <div className={cn("py-3", collapsed ? "px-2" : "px-4")}>
+        <div className={cn("py-2", collapsed ? "px-2" : "px-3")}>
           <Link
             href="/home"
             prefetch={false}
-            className={cn("flex items-center", collapsed ? "justify-center" : "gap-2.5")}
+            className={cn("flex items-center", collapsed ? "justify-center" : "gap-2.5 px-2")}
           >
-            <div className="flex items-center justify-center size-8 rounded bg-linear-to-br from-[#E54D5E] to-[#C93D4E] shrink-0">
+            <div className="flex items-center justify-center size-7 rounded-md bg-contrast shrink-0">
               {customLogo ? (
                 <img
                   src={customLogo}
@@ -707,22 +678,22 @@ export default function Sidebar({
                   className="size-5 object-contain"
                 />
               ) : (
-                <OmniRouteLogo size={18} className="text-white" />
+                <OmniRouteLogo size={18} className="text-contrast-fg" />
               )}
             </div>
             {!collapsed && (
               <div className="flex flex-col min-w-0">
-                <h1 className="text-sm font-semibold tracking-tight text-text-main truncate">
+                <h1 className="text-[13px] font-semibold tracking-tight text-text-main truncate">
                   {customAppName || APP_CONFIG.name}
                 </h1>
-                <span className="text-[10px] text-text-muted">v{APP_CONFIG.version}</span>
+                <span className="text-[11px] text-text-subtle">v{APP_CONFIG.version}</span>
               </div>
             )}
           </Link>
         </div>
 
         {!collapsed && (
-          <div className="px-4 pb-2">
+          <div className="px-3 pb-2">
             <Input
               type="search"
               value={searchQuery}
@@ -731,7 +702,7 @@ export default function Sidebar({
               aria-label={tc("search")}
               icon="search"
               className="gap-0"
-              inputClassName="py-1.5 text-xs"
+              inputClassName="h-8 py-0 text-[13px] sm:text-[13px] bg-surface border-border"
             />
           </div>
         )}
@@ -744,7 +715,7 @@ export default function Sidebar({
           )}
         >
           {isSearching && displaySections.length === 0 && (
-            <p className="px-2 py-3 text-xs text-text-muted/60">{tc("noResults")}</p>
+            <p className="px-2 py-3 text-[13px] text-text-subtle">{tc("noResults")}</p>
           )}
           {displaySections.map((section, idx) => {
             const sectionId = section.id as SidebarSectionId;
@@ -761,9 +732,7 @@ export default function Sidebar({
             if (collapsed) {
               return (
                 <div key={section.id}>
-                  {!isFirst && (
-                    <div className="border-t border-black/5 dark:border-white/5 my-1.5" />
-                  )}
+                  {!isFirst && <div className="border-t border-border my-1.5" />}
                   {sectionItems.map((item: any) =>
                     renderNavLink(item, section.id === "pinned" ? "pinned" : undefined)
                   )}
@@ -786,12 +755,12 @@ export default function Sidebar({
             return (
               <div key={section.id} className={isFirst ? "space-y-0.5" : "mt-2"}>
                 <div
-                  className="flex items-center gap-0.5 px-2 py-1 rounded-md hover:bg-surface/30 transition-colors cursor-pointer group/header"
+                  className="flex items-center gap-0.5 px-2 h-7 rounded-md hover:bg-text-main/[0.04] transition-colors cursor-pointer group/header"
                   onClick={() => toggleSection(sectionId)}
                   role="button"
                   aria-expanded={isExpanded}
                 >
-                  <span className="flex-1 text-[10px] font-semibold text-text-muted/60 uppercase tracking-wider group-hover/header:text-text-muted/90 transition-colors">
+                  <span className="flex-1 text-[11px] font-medium text-text-subtle tracking-normal group-hover/header:text-text-muted transition-colors">
                     {section.title}
                   </span>
 
@@ -804,16 +773,16 @@ export default function Sidebar({
                       }}
                       title={isPinned ? t("unpinSection") : t("pinSectionOpen")}
                       className={cn(
-                        "p-0.5 rounded transition-all shrink-0",
+                        "p-0.5 rounded transition-[color,opacity] shrink-0",
                         isPinned
-                          ? "text-primary opacity-100"
-                          : "text-text-muted/30 opacity-0 group-hover/header:opacity-100 hover:text-text-muted/70"
+                          ? "text-text-muted opacity-100"
+                          : "text-text-subtle opacity-0 group-hover/header:opacity-100 hover:text-text-main"
                       )}
                     >
                       <span
                         className="material-symbols-outlined"
                         style={{
-                          fontSize: "10px",
+                          fontSize: "12px",
                           ...(isPinned ? { fontVariationSettings: "'FILL' 1" } : {}),
                         }}
                       >
@@ -824,7 +793,7 @@ export default function Sidebar({
 
                   <span
                     className={cn(
-                      "material-symbols-outlined text-[14px] text-text-muted/40 transition-all duration-200 group-hover/header:text-text-muted/70 shrink-0",
+                      "material-symbols-outlined text-[14px] text-text-subtle transition-[color,transform] duration-200 group-hover/header:text-text-muted shrink-0",
                       isExpanded && "rotate-180"
                     )}
                   >
@@ -842,8 +811,8 @@ export default function Sidebar({
                           <div key={child.id} className={separatorHidden ? "mt-0.5" : "mt-2"}>
                             {!separatorHidden && (
                               <div className="flex items-center gap-1.5 px-2 py-0.5 mb-0.5">
-                                <div className="h-px flex-1 bg-black/8 dark:bg-white/8" />
-                                <span className="text-[8px] font-semibold text-text-muted/40 uppercase tracking-widest">
+                                <div className="h-px flex-1 bg-border" />
+                                <span className="text-[10px] font-medium text-text-subtle">
                                   {child.title}
                                 </span>
                               </div>
@@ -867,7 +836,7 @@ export default function Sidebar({
 
         <div
           className={cn(
-            "shrink-0 border-t border-black/5 dark:border-white/5",
+            "shrink-0 border-t border-border",
             collapsed ? "p-2 flex flex-col gap-1" : "p-2 flex gap-2"
           )}
           style={{
@@ -878,8 +847,8 @@ export default function Sidebar({
             onClick={() => setShowRestartModal(true)}
             title={t("restart")}
             className={cn(
-              "flex items-center justify-center gap-2 rounded-lg font-medium transition-all",
-              "text-amber-500 hover:bg-amber-500/10 border border-amber-500/20 hover:border-amber-500/40",
+              "flex items-center justify-center gap-1.5 rounded-control font-medium transition-colors",
+              "text-text-muted border border-border hover:text-warning hover:bg-warning/10 hover:border-warning/30",
               collapsed ? "p-2" : "flex-1 min-w-0 px-2 py-1.5 text-xs"
             )}
           >
@@ -890,8 +859,8 @@ export default function Sidebar({
             onClick={() => setShowShutdownModal(true)}
             title={t("shutdown")}
             className={cn(
-              "flex items-center justify-center gap-2 rounded-lg font-medium transition-all",
-              "text-red-500 hover:bg-red-500/10 border border-red-500/20 hover:border-red-500/40",
+              "flex items-center justify-center gap-1.5 rounded-control font-medium transition-colors",
+              "text-text-muted border border-border hover:text-error hover:bg-error/10 hover:border-error/30",
               collapsed ? "p-2" : "flex-1 min-w-0 px-2 py-1.5 text-xs"
             )}
           >
@@ -907,8 +876,8 @@ export default function Sidebar({
           className="fixed z-[200] pointer-events-none flex items-center"
           style={{ left: hoveredItem.x, top: hoveredItem.y, transform: "translateY(-50%)" }}
         >
-          <div className="w-0 h-0 border-t-[5px] border-b-[5px] border-r-[6px] border-t-transparent border-b-transparent border-r-sidebar dark:border-r-sidebar" />
-          <div className="px-2.5 py-1.5 bg-sidebar text-text-main text-xs font-medium rounded-md shadow-lg border border-black/10 dark:border-white/10 whitespace-nowrap">
+          <div className="w-0 h-0 border-t-[5px] border-b-[5px] border-r-[6px] border-t-transparent border-b-transparent border-r-contrast" />
+          <div className="px-2 py-1 bg-contrast text-contrast-fg text-xs font-medium rounded-md shadow-[var(--shadow-elevated)] whitespace-nowrap">
             {hoveredItem.label}
           </div>
         </div>
@@ -941,7 +910,7 @@ export default function Sidebar({
       {isDisconnected && (
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 backdrop-blur-sm">
           <div className="text-center p-8">
-            <div className="flex items-center justify-center size-16 rounded-full bg-red-500/20 text-red-500 mx-auto mb-4">
+            <div className="flex items-center justify-center size-16 rounded-full bg-error/15 text-error mx-auto mb-4">
               <span className="material-symbols-outlined text-[32px]">power_off</span>
             </div>
             <h2 className="text-xl font-semibold text-white mb-2">{t("serverDisconnected")}</h2>

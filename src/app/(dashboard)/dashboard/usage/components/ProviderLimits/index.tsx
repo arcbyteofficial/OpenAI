@@ -125,9 +125,9 @@ const getQuotaBarWidthClass = (pct: number) => {
 };
 
 const getQuotaToneClasses = (pct: number) => {
-  if (pct <= QUOTA_BAR_YELLOW_THRESHOLD) return "bg-red-500 text-red-500";
-  if (pct <= QUOTA_BAR_GREEN_THRESHOLD) return "bg-yellow-500 text-yellow-500";
-  return "bg-green-500 text-green-500";
+  if (pct <= QUOTA_BAR_YELLOW_THRESHOLD) return "bg-error text-error";
+  if (pct <= QUOTA_BAR_GREEN_THRESHOLD) return "bg-warning text-warning";
+  return "bg-success text-success";
 };
 
 const STATUS_TONE: Record<
@@ -142,25 +142,25 @@ const STATUS_TONE: Record<
     dot: "var(--color-text-muted)",
   },
   critical: {
-    bar: "#ef4444",
-    text: "#ef4444",
-    bg: "rgba(239,68,68,0.10)",
-    ring: "rgba(239,68,68,0.40)",
-    dot: "#ef4444",
+    bar: "var(--color-error)",
+    text: "var(--color-error)",
+    bg: "color-mix(in srgb, var(--color-error) 8%, transparent)",
+    ring: "color-mix(in srgb, var(--color-error) 40%, transparent)",
+    dot: "var(--color-error)",
   },
   alert: {
-    bar: "#eab308",
-    text: "#eab308",
-    bg: "rgba(234,179,8,0.10)",
-    ring: "rgba(234,179,8,0.40)",
-    dot: "#eab308",
+    bar: "var(--color-warning)",
+    text: "var(--color-warning)",
+    bg: "color-mix(in srgb, var(--color-warning) 8%, transparent)",
+    ring: "color-mix(in srgb, var(--color-warning) 40%, transparent)",
+    dot: "var(--color-warning)",
   },
   ok: {
-    bar: "#22c55e",
-    text: "#22c55e",
-    bg: "rgba(34,197,94,0.10)",
-    ring: "rgba(34,197,94,0.40)",
-    dot: "#22c55e",
+    bar: "var(--color-success)",
+    text: "var(--color-success)",
+    bg: "color-mix(in srgb, var(--color-success) 8%, transparent)",
+    ring: "color-mix(in srgb, var(--color-success) 40%, transparent)",
+    dot: "var(--color-success)",
   },
   empty: {
     bar: "var(--color-text-muted)",
@@ -796,7 +796,7 @@ export default function ProviderLimits({
                 {q.unlimited ? "∞" : `${pct}%`}
               </span>
               {!q.unlimited && (
-                <span className="h-1 w-14 rounded-sm bg-border/60 overflow-hidden">
+                <span className="h-1 w-14 rounded-sm bg-border overflow-hidden">
                   <span
                     className={`block h-full ${tone.split(" ")[0]} ${getQuotaBarWidthClass(pct)}`}
                   />
@@ -823,8 +823,8 @@ export default function ProviderLimits({
     return (
       <Card padding="lg">
         <div className="text-center py-12">
-          <span className="material-symbols-outlined text-[64px] opacity-15">cloud_off</span>
-          <h3 className="mt-4 text-lg font-semibold text-text-main">{t("noProviders")}</h3>
+          <span className="material-symbols-outlined text-[40px] text-text-subtle">cloud_off</span>
+          <h3 className="mt-4 text-base font-semibold text-text-main">{t("noProviders")}</h3>
           <p className="mt-2 text-sm text-text-muted max-w-[400px] mx-auto">
             {t("connectProvidersForQuota")}
           </p>
@@ -838,7 +838,9 @@ export default function ProviderLimits({
       {/* Header */}
       <div className="flex items-center justify-between flex-wrap gap-3">
         <div className="flex items-center gap-3">
-          <h2 className="text-lg font-semibold text-text-main m-0">{t("providerLimits")}</h2>
+          <h2 className="text-base font-semibold tracking-tight text-text-main m-0">
+            {t("providerLimits")}
+          </h2>
           <span className="text-[13px] text-text-muted">
             {t("accountsCount", { count: visibleConnections.length })}
             {visibleConnections.length !== sortedConnections.length &&
@@ -861,7 +863,7 @@ export default function ProviderLimits({
                 ? "Switch to full quota layout"
                 : "Switch to compact quota layout"
             }
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-bg-subtle border border-border text-text-main text-[13px] cursor-pointer"
+            className="flex items-center gap-1.5 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-text-main text-[13px] font-medium transition-colors hover:bg-bg-subtle cursor-pointer"
           >
             <span className="material-symbols-outlined text-[16px]" aria-hidden>
               {layoutMode === "compact" ? "view_agenda" : "grid_view"}
@@ -873,7 +875,7 @@ export default function ProviderLimits({
           <button
             onClick={refreshAll}
             disabled={refreshingAll}
-            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg bg-bg-subtle border border-border text-text-main text-[13px] disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+            className="flex items-center gap-1.5 px-3.5 py-1.5 rounded-control bg-surface border border-border-strong text-text-main text-[13px] font-medium transition-colors hover:bg-bg-subtle disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
             title={
               autoRefreshIntervalMs > 0 ? tr("autoRefreshing", "Auto-refreshing") : t("refreshAll")
             }
@@ -916,16 +918,14 @@ export default function ProviderLimits({
                   key={key}
                   type="button"
                   onClick={() => handleSetStatusFilter(key)}
-                  className="text-left rounded-lg px-3 py-2.5 border transition-colors cursor-pointer"
+                  className="text-left rounded-card px-3 py-2.5 border transition-colors cursor-pointer"
                   style={{
                     background: active ? tone.bg : "var(--color-surface)",
                     borderColor: active ? tone.ring : "var(--color-border)",
                   }}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-[11px] uppercase tracking-wider font-semibold text-text-muted">
-                      {labelMap[key]}
-                    </span>
+                    <span className="text-[13px] text-text-muted">{labelMap[key]}</span>
                     {key !== "all" && (
                       <span
                         className="w-1.5 h-1.5 rounded-full"
@@ -935,7 +935,7 @@ export default function ProviderLimits({
                     )}
                   </div>
                   <div
-                    className="mt-0.5 text-2xl font-bold tabular-nums"
+                    className="mt-0.5 text-2xl font-semibold tabular-nums"
                     style={{ color: key === "all" ? "var(--color-text-main)" : tone.text }}
                   >
                     {count}
@@ -947,7 +947,7 @@ export default function ProviderLimits({
 
           {/* Purchase Type filter */}
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-[11px] uppercase tracking-wider text-text-muted font-semibold mr-1">
+            <span className="text-[11px] uppercase tracking-wider text-text-subtle font-medium mr-1">
               {tr("filterPurchaseTypeLabel", "Type")}
             </span>
             {PURCHASE_TYPES.map((type) => {
@@ -958,17 +958,17 @@ export default function ProviderLimits({
                 <button
                   key={type.key}
                   onClick={() => handleSetPurchaseFilter(type.key)}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors cursor-pointer"
                   style={{
                     border: active
-                      ? "1px solid var(--color-primary, #E54D5E)"
+                      ? "1px solid var(--color-border-strong)"
                       : "1px solid var(--color-border)",
-                    background: active ? "rgba(229,77,94,0.1)" : "transparent",
-                    color: active ? "var(--color-primary, #E54D5E)" : "var(--color-text-muted)",
+                    background: active ? "var(--color-bg-subtle)" : "transparent",
+                    color: active ? "var(--color-text-main)" : "var(--color-text-muted)",
                   }}
                 >
                   <span>{tr(type.labelKey, type.fallback)}</span>
-                  <span className="opacity-85">{count}</span>
+                  <span className="tabular-nums opacity-70">{count}</span>
                 </button>
               );
             })}
@@ -976,7 +976,7 @@ export default function ProviderLimits({
 
           {/* Tier filter */}
           <div className="flex items-center gap-2 flex-wrap">
-            <span className="text-[11px] uppercase tracking-wider text-text-muted font-semibold mr-1">
+            <span className="text-[11px] uppercase tracking-wider text-text-subtle font-medium mr-1">
               {tr("filterTierLabel", "Tier")}
             </span>
             {TIER_FILTERS.map((tier) => {
@@ -986,17 +986,17 @@ export default function ProviderLimits({
                 <button
                   key={tier.key}
                   onClick={() => setTierFilter(tier.key)}
-                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold cursor-pointer"
+                  className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors cursor-pointer"
                   style={{
                     border: active
-                      ? "1px solid var(--color-primary, #E54D5E)"
+                      ? "1px solid var(--color-border-strong)"
                       : "1px solid var(--color-border)",
-                    background: active ? "rgba(229,77,94,0.1)" : "transparent",
-                    color: active ? "var(--color-primary, #E54D5E)" : "var(--color-text-muted)",
+                    background: active ? "var(--color-bg-subtle)" : "transparent",
+                    color: active ? "var(--color-text-main)" : "var(--color-text-muted)",
                   }}
                 >
                   <span>{tier.label || t(tier.labelKey!)}</span>
-                  <span className="opacity-85">{tierCounts[tier.key] || 0}</span>
+                  <span className="tabular-nums opacity-70">{tierCounts[tier.key] || 0}</span>
                 </button>
               );
             })}
@@ -1007,7 +1007,7 @@ export default function ProviderLimits({
               the persisted choice no longer exists in this session. */}
           {providerOptions.length > 1 && (
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[11px] uppercase tracking-wider text-text-muted font-semibold mr-1">
+              <span className="text-[11px] uppercase tracking-wider text-text-subtle font-medium mr-1">
                 {tr("filterProviderLabel", "Provider")}
               </span>
               <select
@@ -1018,7 +1018,7 @@ export default function ProviderLimits({
                 }
                 onChange={(event) => handleSetProviderFilter(event.target.value)}
                 aria-label={tr("filterProviderAriaLabel", "Filter quota providers")}
-                className="h-8 rounded-full border border-border bg-transparent px-3 text-xs font-semibold text-text-muted cursor-pointer"
+                className="h-8 rounded-full border border-border bg-transparent px-3 text-xs font-medium text-text-muted cursor-pointer"
               >
                 <option value="all">{tr("filterProviderAll", "All providers")}</option>
                 {providerOptions.map((provider) => (
@@ -1033,7 +1033,7 @@ export default function ProviderLimits({
           {/* Env filter — only renders when at least one connection has a tag */}
           {envTags.length > 0 && (
             <div className="flex items-center gap-2 flex-wrap">
-              <span className="text-[11px] uppercase tracking-wider text-text-muted font-semibold mr-1">
+              <span className="text-[11px] uppercase tracking-wider text-text-subtle font-medium mr-1">
                 {tr("filterEnvLabel", "Env")}
               </span>
               {(["all", ...envTags] as string[]).map((tag) => {
@@ -1044,17 +1044,17 @@ export default function ProviderLimits({
                   <button
                     key={tag}
                     onClick={() => handleSetEnvFilter(tag)}
-                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-semibold cursor-pointer"
+                    className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-xs font-medium transition-colors cursor-pointer"
                     style={{
                       border: active
-                        ? "1px solid var(--color-primary, #E54D5E)"
+                        ? "1px solid var(--color-border-strong)"
                         : "1px solid var(--color-border)",
-                      background: active ? "rgba(229,77,94,0.1)" : "transparent",
-                      color: active ? "var(--color-primary, #E54D5E)" : "var(--color-text-muted)",
+                      background: active ? "var(--color-bg-subtle)" : "transparent",
+                      color: active ? "var(--color-text-main)" : "var(--color-text-muted)",
                     }}
                   >
                     <span>{label}</span>
-                    <span className="opacity-85">{count}</span>
+                    <span className="tabular-nums opacity-70">{count}</span>
                   </button>
                 );
               })}
@@ -1066,7 +1066,7 @@ export default function ProviderLimits({
       {/* Provider groups */}
       <div className="flex flex-col gap-3">
         {visibleConnections.length === 0 && (
-          <div className="py-6 px-4 text-center text-text-muted text-[13px] rounded-lg border border-border bg-surface">
+          <div className="py-6 px-4 text-center text-text-muted text-[13px] rounded-card border border-border bg-surface">
             {t("noAccountsForTierFilter")}{" "}
             <strong>
               {(() => {

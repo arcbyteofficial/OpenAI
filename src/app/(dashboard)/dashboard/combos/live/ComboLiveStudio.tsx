@@ -62,7 +62,7 @@ function FleetOverview({ comboEvents }: FleetOverviewProps) {
 
   if (total === 0) {
     return (
-      <div className="flex flex-col items-center justify-center h-full gap-2 text-muted">
+      <div className="flex flex-col items-center justify-center h-full gap-2 text-text-muted">
         <span className="text-2xl opacity-40">⌁</span>
         <p className="text-sm">{t("liveNoProviders")}</p>
         <p className="text-xs opacity-60">{t("liveFleetDataHint")}</p>
@@ -74,7 +74,7 @@ function FleetOverview({ comboEvents }: FleetOverviewProps) {
     <div className="flex flex-col gap-3 p-4 h-full overflow-auto" data-testid="fleet-overview">
       {sets.active.size > 0 && (
         <div>
-          <div className="text-[10px] font-semibold uppercase tracking-wide text-muted mb-1.5">
+          <div className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-1.5">
             {t("liveActiveCount", { count: sets.active.size })}
           </div>
           <div className="flex flex-wrap gap-1.5">
@@ -95,7 +95,7 @@ function FleetOverview({ comboEvents }: FleetOverviewProps) {
       )}
       {sets.error.size > 0 && (
         <div>
-          <div className="text-[10px] font-semibold uppercase tracking-wide text-muted mb-1.5">
+          <div className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-1.5">
             {t("liveErrorCount", { count: sets.error.size })}
           </div>
           <div className="flex flex-wrap gap-1.5">
@@ -116,7 +116,7 @@ function FleetOverview({ comboEvents }: FleetOverviewProps) {
       )}
       {sets.last.size > 0 && (
         <div>
-          <div className="text-[10px] font-semibold uppercase tracking-wide text-muted mb-1.5">
+          <div className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-1.5">
             {t("liveInactiveCount", { count: sets.last.size })}
           </div>
           <div className="flex flex-wrap gap-1.5">
@@ -145,7 +145,7 @@ function EmptyState() {
   const t = useTranslations("combos");
   return (
     <div
-      className="flex flex-col items-center justify-center h-full gap-3 text-muted"
+      className="flex flex-col items-center justify-center h-full gap-3 text-text-muted"
       data-testid="combo-live-studio-empty"
     >
       <span className="text-3xl opacity-40">⌁</span>
@@ -161,10 +161,10 @@ function DisconnectedBanner() {
   const t = useTranslations("combos");
   return (
     <div
-      className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border bg-bg/80 text-xs text-muted shrink-0"
+      className="flex items-center gap-2 px-3 py-1.5 rounded-lg border border-border bg-surface text-xs text-text-muted shrink-0"
       data-testid="combo-disconnected-banner"
     >
-      <span className="text-amber-500 font-semibold">●</span>
+      <span className="text-warning">●</span>
       <span>{t("liveDisconnected")}</span>
     </div>
   );
@@ -291,10 +291,10 @@ export function ComboLiveStudio({
   return (
     <div className="flex flex-col h-full gap-2" data-testid="combo-live-studio">
       {/* ── Toolbar ──────────────────────────────────────────────────────── */}
-      <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-bg/60 shrink-0 flex-wrap">
+      <div className="flex items-center gap-2 px-3 py-2 rounded-lg border border-border bg-surface shrink-0 flex-wrap">
         {showSelector && (
           <select
-            className="text-xs border border-border rounded px-2 py-1 bg-bg text-muted"
+            className="text-xs border border-border-strong rounded-control px-2 py-1 bg-surface text-text-main"
             value={selectedCombo}
             onChange={(e) => setSelectedCombo(e.target.value)}
             aria-label={t("liveSelectCombo")}
@@ -311,20 +311,22 @@ export function ComboLiveStudio({
 
         {displayRun && (
           <>
-            <span className="text-xs font-mono text-muted truncate">{displayRun.comboName}</span>
+            <span className="text-xs font-mono text-text-muted truncate">
+              {displayRun.comboName}
+            </span>
             {displayRun.strategy && (
               <span
-                className="text-xs px-1.5 py-0.5 rounded-full font-semibold"
-                style={{ backgroundColor: "#6366f120", color: "#6366f1" }}
+                className="text-xs px-1.5 py-0.5 rounded-full font-medium"
+                style={{ backgroundColor: "var(--color-border)", color: "inherit" }}
               >
                 {displayRun.strategy}
               </span>
             )}
-            <span className="text-xs text-muted">
+            <span className="text-xs text-text-muted">
               {t("liveTargetCount", { count: displayRun.targets.length })}
             </span>
             <span
-              className="text-xs font-bold"
+              className="text-xs font-semibold"
               style={{
                 color:
                   displayRun.outcome === "succeeded"
@@ -341,12 +343,12 @@ export function ComboLiveStudio({
         )}
 
         {/* Single ⇄ Fleet toggle */}
-        <div className="ml-auto flex items-center border border-border rounded overflow-hidden text-xs">
+        <div className="ml-auto flex items-center border border-border rounded-control overflow-hidden text-xs">
           <button
-            className="px-2.5 py-1 transition-colors"
+            className="px-2.5 py-1 font-medium transition-colors"
             style={{
-              background: mode === "single" ? "var(--color-primary)" : "transparent",
-              color: mode === "single" ? "#fff" : "var(--color-text-muted)",
+              background: mode === "single" ? "var(--color-bg-subtle)" : "transparent",
+              color: mode === "single" ? "var(--color-text-main)" : "var(--color-text-muted)",
             }}
             onClick={() => setMode("single")}
             data-testid="mode-single"
@@ -354,10 +356,10 @@ export function ComboLiveStudio({
             {t("liveSingle")}
           </button>
           <button
-            className="px-2.5 py-1 transition-colors"
+            className="px-2.5 py-1 font-medium transition-colors"
             style={{
-              background: mode === "fleet" ? "var(--color-primary)" : "transparent",
-              color: mode === "fleet" ? "#fff" : "var(--color-text-muted)",
+              background: mode === "fleet" ? "var(--color-bg-subtle)" : "transparent",
+              color: mode === "fleet" ? "var(--color-text-main)" : "var(--color-text-muted)",
             }}
             onClick={() => setMode("fleet")}
             data-testid="mode-fleet"

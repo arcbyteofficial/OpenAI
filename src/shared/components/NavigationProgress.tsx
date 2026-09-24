@@ -93,11 +93,11 @@ export default function NavigationProgress() {
   return (
     <div className="pointer-events-none fixed inset-x-0 top-0 z-[9999] h-0.5" aria-hidden="true">
       <div
-        className="h-full origin-left bg-gradient-to-r from-primary via-accent to-primary transition-[width,opacity] duration-200 ease-out"
+        className="h-full origin-left bg-primary transition-[width,opacity] duration-200 ease-out"
         style={{
           width: `${progress}%`,
           opacity: progress >= 100 ? 0 : 1,
-          boxShadow: "0 0 10px rgba(99, 102, 241, 0.6), 0 0 4px rgba(229, 77, 94, 0.4)",
+          boxShadow: "none",
         }}
       />
     </div>

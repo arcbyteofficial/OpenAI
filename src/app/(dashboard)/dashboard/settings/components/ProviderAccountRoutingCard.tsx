@@ -117,8 +117,8 @@ export default function ProviderAccountRoutingCard({ providerKey, connectionCoun
   if (connectionCount < 2) return null;
 
   return (
-    <div className="mb-4 rounded-lg border border-border/60 bg-black/[0.02] dark:bg-white/[0.02] p-3">
-      <p className="text-sm font-medium">{t("providerAccountRoutingTitle")}</p>
+    <div className="mb-4 rounded-lg border border-border bg-surface-2 p-3">
+      <p className="text-sm font-medium text-text-main">{t("providerAccountRoutingTitle")}</p>
       <p className="text-xs text-text-muted mb-3">{t("providerAccountRoutingDesc")}</p>
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <Select

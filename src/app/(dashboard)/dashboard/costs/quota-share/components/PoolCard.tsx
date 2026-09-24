@@ -34,9 +34,7 @@ export interface PoolCardProps {
 function computeStatus(usage: PoolUsageSnapshot | null): "green" | "amber" | "red" {
   const dims = usage?.dimensions ?? [];
   if (dims.length === 0) return "green";
-  const utilizations = dims.map((d) =>
-    d.limit > 0 ? (d.consumedTotal / d.limit) * 100 : 0
-  );
+  const utilizations = dims.map((d) => (d.limit > 0 ? (d.consumedTotal / d.limit) * 100 : 0));
   const avg = utilizations.reduce((s, u) => s + u, 0) / utilizations.length;
   if (avg > 80) return "red";
   if (avg > 50) return "amber";
@@ -44,9 +42,9 @@ function computeStatus(usage: PoolUsageSnapshot | null): "green" | "amber" | "re
 }
 
 const STATUS_ICONS = {
-  green: { icon: "check_circle", cls: "text-emerald-400" },
-  amber: { icon: "warning", cls: "text-amber-400" },
-  red: { icon: "error", cls: "text-red-400" },
+  green: { icon: "check_circle", cls: "text-success" },
+  amber: { icon: "warning", cls: "text-warning" },
+  red: { icon: "error", cls: "text-error" },
 };
 
 export default function PoolCard({
@@ -66,7 +64,9 @@ export default function PoolCard({
   const { icon: statusIcon, cls: statusCls } = STATUS_ICONS[status];
 
   const displayName = emailsVisible ? pool.name : maskEmailLikeValue(pool.name);
-  const displayConnectionLabel = emailsVisible ? connectionLabel : maskEmailLikeValue(connectionLabel);
+  const displayConnectionLabel = emailsVisible
+    ? connectionLabel
+    : maskEmailLikeValue(connectionLabel);
 
   // Check for plan dimensions from usage
   const hasDimensions = !!usage?.dimensions?.length;
@@ -88,7 +88,7 @@ export default function PoolCard({
                 </div>
               ))}
               {providers.length > 3 && (
-                <span className="text-[10px] text-text-muted font-semibold ml-0.5">
+                <span className="text-[10px] text-text-muted font-medium ml-0.5">
                   +{providers.length - 3}
                 </span>
               )}
@@ -103,12 +103,13 @@ export default function PoolCard({
               <span className={`material-symbols-outlined text-[16px] shrink-0 ${statusCls}`}>
                 {statusIcon}
               </span>
-              <span className="text-sm font-bold text-text-main truncate">
+              <span className="text-sm font-semibold tracking-tight text-text-main truncate">
                 {displayName} · {displayConnectionLabel}
               </span>
             </div>
             <div className="text-[11px] text-text-muted">
-              {t("allocationsCount", { count: pool.allocations.length })} · ID: {pool.id.slice(0, 12)}
+              {t("allocationsCount", { count: pool.allocations.length })} · ID:{" "}
+              {pool.id.slice(0, 12)}
             </div>
           </div>
         </div>
@@ -117,7 +118,7 @@ export default function PoolCard({
             type="button"
             onClick={onEdit}
             title={t("editAllocations")}
-            className="p-1.5 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main cursor-pointer"
+            className="p-1.5 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[16px]">edit</span>
           </button>
@@ -125,7 +126,7 @@ export default function PoolCard({
             type="button"
             onClick={onRemove}
             title={t("removePool")}
-            className="p-1.5 rounded-md hover:bg-red-500/10 text-text-muted hover:text-red-400 cursor-pointer"
+            className="p-1.5 rounded-md hover:bg-error/10 text-text-muted hover:text-error transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[16px]">delete</span>
           </button>
@@ -155,34 +156,22 @@ export default function PoolCard({
       )}
 
       {/* Stacked allocation bar — per-key slices */}
-      <StackedAllocationBar
-        allocations={pool.allocations}
-        usage={usage}
-        keyLabels={keyLabels}
-      />
+      <StackedAllocationBar allocations={pool.allocations} usage={usage} keyLabels={keyLabels} />
 
       {/* Allocation table */}
       <div className="mb-3">
-        <h4 className="text-[10px] uppercase tracking-wide font-bold text-text-muted mb-1.5">
+        <h4 className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mb-1.5">
           Allocations
         </h4>
-        <AllocationTable
-          allocations={pool.allocations}
-          usage={usage}
-          keyLabels={keyLabels}
-        />
+        <AllocationTable allocations={pool.allocations} usage={usage} keyLabels={keyLabels} />
       </div>
 
       {/* Account quota row — read-only upstream quota per connection */}
-      <AccountQuotaRow
-        provider={provider}
-        providers={providers}
-        connectionIds={connectionIds}
-      />
+      <AccountQuotaRow provider={provider} providers={providers} connectionIds={connectionIds} />
 
       {/* Burn rate chart */}
       {usage && (
-        <div className="pt-2 border-t border-border/30">
+        <div className="pt-2 border-t border-border">
           <BurnRateChart usage={usage} />
         </div>
       )}

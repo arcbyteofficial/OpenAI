@@ -25,34 +25,34 @@ const CATEGORY_STYLES: Record<
   { bg: string; border: string; text: string }
 > = {
   security: {
-    bg: "bg-red-50 dark:bg-red-500/15",
-    border: "border-red-200 dark:border-red-500/20",
-    text: "text-red-700 dark:text-red-300",
+    bg: "bg-bg-subtle",
+    border: "border-border",
+    text: "text-text-muted",
   },
   network: {
-    bg: "bg-sky-50 dark:bg-blue-500/15",
-    border: "border-sky-200 dark:border-blue-500/20",
-    text: "text-sky-700 dark:text-blue-300",
+    bg: "bg-bg-subtle",
+    border: "border-border",
+    text: "text-text-muted",
   },
   policies: {
-    bg: "bg-amber-50 dark:bg-amber-500/15",
-    border: "border-amber-200 dark:border-amber-500/20",
-    text: "text-amber-700 dark:text-amber-300",
+    bg: "bg-bg-subtle",
+    border: "border-border",
+    text: "text-text-muted",
   },
   runtime: {
-    bg: "bg-violet-50 dark:bg-purple-500/15",
-    border: "border-violet-200 dark:border-purple-500/20",
-    text: "text-violet-700 dark:text-purple-300",
+    bg: "bg-bg-subtle",
+    border: "border-border",
+    text: "text-text-muted",
   },
   cli: {
-    bg: "bg-emerald-50 dark:bg-green-500/15",
-    border: "border-emerald-200 dark:border-green-500/20",
-    text: "text-emerald-700 dark:text-green-300",
+    bg: "bg-bg-subtle",
+    border: "border-border",
+    text: "text-text-muted",
   },
   health: {
-    bg: "bg-cyan-50 dark:bg-cyan-500/15",
-    border: "border-cyan-200 dark:border-cyan-500/20",
-    text: "text-cyan-700 dark:text-cyan-300",
+    bg: "bg-bg-subtle",
+    border: "border-border",
+    text: "text-text-muted",
   },
 };
 
@@ -61,21 +61,21 @@ const SOURCE_STYLES: Record<
   { bg: string; border: string; text: string; label: string }
 > = {
   db: {
-    bg: "bg-sky-50 dark:bg-blue-500/20",
-    border: "border-sky-200 dark:border-blue-500/30",
-    text: "text-sky-700 dark:text-blue-300",
+    bg: "bg-primary/10",
+    border: "border-primary/20",
+    text: "text-primary",
     label: "DB",
   },
   env: {
-    bg: "bg-amber-50 dark:bg-amber-500/20",
-    border: "border-amber-200 dark:border-amber-500/30",
-    text: "text-amber-700 dark:text-amber-300",
+    bg: "bg-warning/10",
+    border: "border-warning/20",
+    text: "text-warning",
     label: "ENV",
   },
   default: {
-    bg: "bg-slate-100 dark:bg-slate-500/20",
-    border: "border-slate-200 dark:border-slate-500/30",
-    text: "text-slate-600 dark:text-slate-300",
+    bg: "bg-bg-subtle",
+    border: "border-border",
+    text: "text-text-muted",
     label: "DEF",
   },
 };
@@ -109,7 +109,7 @@ function EnvPrecedenceWarning({
 }) {
   if (flag.key !== "EXPOSE_CC_DISCOVERY_ALIASES" || flag.source !== "env") return null;
   return (
-    <p className="mb-3 rounded border border-amber-200 bg-amber-50 px-2 py-1 text-xs text-amber-800 dark:border-amber-500/30 dark:bg-amber-500/10 dark:text-amber-300">
+    <p className="mb-3 rounded-md border border-warning/30 bg-warning/10 px-2 py-1 text-xs text-warning">
       {text}
     </p>
   );
@@ -126,16 +126,13 @@ export default function FeatureFlagCard({
   const category = CATEGORY_STYLES[flag.category];
   const source = SOURCE_STYLES[flag.source];
 
-  const cardBorder =
-    flag.type === "boolean" && enabled
-      ? "border-emerald-300 shadow-emerald-500/10 dark:border-green-500/30"
-      : "border-border";
+  const cardBorder = flag.type === "boolean" && enabled ? "border-border-strong" : "border-border";
 
   return (
     <div
       role="group"
       aria-label={flag.label}
-      className={`rounded-xl border bg-card p-4 shadow-soft transition-all duration-200 hover:-translate-y-px hover:border-black/15 hover:bg-bg-subtle/60 hover:shadow-elevated dark:hover:border-white/15 dark:hover:bg-surface ${cardBorder}`}
+      className={`rounded-card border bg-surface p-4 transition-colors duration-150 hover:border-border-strong ${cardBorder}`}
     >
       {/* Top row: category badge + toggle/select */}
       <div className="flex items-center justify-between mb-3">
@@ -157,11 +154,11 @@ export default function FeatureFlagCard({
               disabled={saving}
               onClick={() => onToggle(flag.key, enabled ? "false" : "true")}
               className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-50 ${
-                enabled ? "bg-emerald-500" : "bg-slate-300 dark:bg-white/20"
+                enabled ? "bg-primary" : "bg-border-strong"
               }`}
             >
               <span
-                className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow transition-transform ${
+                className={`inline-block h-3.5 w-3.5 transform rounded-full bg-white shadow-[0_1px_2px_rgba(0,0,0,0.2),0_0_0_0.5px_rgba(0,0,0,0.06)] transition-transform ${
                   enabled ? "translate-x-4" : "translate-x-0.5"
                 }`}
                 aria-hidden="true"
@@ -173,10 +170,10 @@ export default function FeatureFlagCard({
               disabled={saving}
               value={flag.effectiveValue}
               onChange={(e) => onToggle(flag.key, e.target.value)}
-              className="rounded-md border border-border bg-bg-subtle px-2 py-0.5 text-xs text-text-primary focus:outline-none focus:ring-1 focus:ring-primary disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-control border border-border-strong bg-surface px-2 py-0.5 text-xs text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {(flag.enumValues ?? []).map((val) => (
-                <option key={val} value={val} className="bg-card text-text-primary">
+                <option key={val} value={val} className="bg-surface text-text-main">
                   {t.has(`enumValues.${val}`) ? t(`enumValues.${val}`) : val}
                 </option>
               ))}
@@ -192,18 +189,18 @@ export default function FeatureFlagCard({
         </span>
 
         {flag.warningLevel === "caution" && (
-          <span className="text-sm text-amber-500 dark:text-amber-300" aria-label={t("caution")}>
+          <span className="text-sm text-warning" aria-label={t("caution")}>
             ⚠️
           </span>
         )}
         {flag.warningLevel === "danger" && (
-          <span className="text-sm animate-pulse" aria-label={t("danger")}>
+          <span className="text-sm" aria-label={t("danger")}>
             🔴
           </span>
         )}
         {flag.requiresRestart && (
           <span
-            className="rounded border border-slate-300 bg-slate-50 px-1 text-[10px] text-slate-600 dark:border-slate-400/30 dark:bg-transparent dark:text-slate-300"
+            className="rounded border border-border bg-bg-subtle px-1 text-[10px] text-text-muted"
             title={t("requiresRestart")}
             aria-label={t("requiresRestart")}
           >

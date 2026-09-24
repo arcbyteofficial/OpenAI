@@ -26,15 +26,9 @@ export default function DimensionBar({ dimension, consumedTotal, resetAt }: Dime
   const t = useTranslations("quotaShare");
   // Capture mount time once — avoids impure Date.now() call on every render
   const [now] = useState(() => Date.now());
-  const usedPct =
-    dimension.limit > 0 ? Math.min((consumedTotal / dimension.limit) * 100, 100) : 0;
+  const usedPct = dimension.limit > 0 ? Math.min((consumedTotal / dimension.limit) * 100, 100) : 0;
 
-  const barColor =
-    usedPct >= 90
-      ? "bg-red-500"
-      : usedPct >= 70
-        ? "bg-amber-400"
-        : "bg-primary";
+  const barColor = usedPct >= 90 ? "bg-error" : usedPct >= 70 ? "bg-warning" : "bg-primary";
 
   const resetMs = resetAt ? new Date(resetAt).getTime() - now : null;
   const countdown = resetMs !== null && resetMs > 0 ? fmtCountdown(resetMs) : null;
@@ -42,15 +36,28 @@ export default function DimensionBar({ dimension, consumedTotal, resetAt }: Dime
   return (
     <div className="flex flex-col gap-1 min-w-0">
       <div className="flex items-center justify-between text-[10px] text-text-muted">
-        <span className="font-semibold uppercase tracking-wide">
+        <span className="font-medium uppercase tracking-wider">
           {dimension.unit} / {dimension.window}
         </span>
-        <span className="tabular-nums font-bold" style={{ color: usedPct >= 90 ? "#f87171" : usedPct >= 70 ? "#fbbf24" : undefined }}>
+        <span
+          className="tabular-nums font-semibold"
+          style={{
+            color:
+              usedPct >= 90
+                ? "var(--color-error)"
+                : usedPct >= 70
+                  ? "var(--color-warning)"
+                  : undefined,
+          }}
+        >
           {Math.round(usedPct)}%
         </span>
       </div>
-      <div className="h-1.5 rounded-sm bg-black/6 dark:bg-white/6 overflow-hidden">
-        <div className={`h-full rounded-sm transition-all ${barColor}`} style={{ width: `${usedPct}%` }} />
+      <div className="h-1.5 rounded-sm bg-border overflow-hidden">
+        <div
+          className={`h-full rounded-sm transition-[width] ${barColor}`}
+          style={{ width: `${usedPct}%` }}
+        />
       </div>
       {countdown && (
         <div className="text-[10px] text-text-muted">

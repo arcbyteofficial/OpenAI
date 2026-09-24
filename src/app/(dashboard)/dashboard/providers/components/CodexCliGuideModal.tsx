@@ -7,12 +7,12 @@ import { Modal, Button } from "@/shared/components";
 
 const markdownComponents: Components = {
   h1({ children }) {
-    return <h1 className="mb-4 text-xl font-bold text-text-main">{children}</h1>;
+    return <h1 className="mb-4 text-xl font-semibold tracking-tight text-text-main">{children}</h1>;
   },
   h2({ children }) {
     return (
-      <h2 className="mt-6 mb-3 flex items-center gap-2 text-base font-bold text-text-main first:mt-0">
-        <span className="material-symbols-outlined text-[16px] text-primary">terminal</span>
+      <h2 className="mt-6 mb-3 flex items-center gap-2 text-base font-semibold text-text-main first:mt-0">
+        <span className="material-symbols-outlined text-[16px] text-text-muted">terminal</span>
         {children}
       </h2>
     );
@@ -57,7 +57,7 @@ const markdownComponents: Components = {
       );
     }
     return (
-      <code className="rounded border border-black/5 bg-bg-subtle px-1 py-0.5 font-mono text-[12px] text-text-main dark:border-white/5">
+      <code className="rounded border border-border bg-bg-subtle px-1 py-0.5 font-mono text-[12px] text-text-main">
         {children}
       </code>
     );
@@ -71,7 +71,7 @@ const markdownComponents: Components = {
   },
   blockquote({ children }) {
     return (
-      <blockquote className="my-2 border-l-2 border-primary/40 pl-3 text-sm text-text-muted/80 italic">
+      <blockquote className="my-2 border-l-2 border-border-strong pl-3 text-sm text-text-muted/80 italic">
         {children}
       </blockquote>
     );
@@ -84,13 +84,13 @@ const markdownComponents: Components = {
     );
   },
   thead({ children }) {
-    return <thead className="bg-bg-subtle text-xs text-text-muted">{children}</thead>;
+    return <thead className="bg-bg-subtle text-xs font-medium text-text-muted">{children}</thead>;
   },
   tr({ children }) {
     return <tr className="border-b border-border last:border-0">{children}</tr>;
   },
   th({ children }) {
-    return <th className="px-3 py-2 text-left font-semibold">{children}</th>;
+    return <th className="px-3 py-2 text-left font-medium">{children}</th>;
   },
   td({ children }) {
     return <td className="px-3 py-2 text-text-muted">{children}</td>;
@@ -167,7 +167,7 @@ export default function CodexCliGuideModal({ isOpen, onClose }: CodexCliGuideMod
         )}
         {error && (
           <div className="flex flex-col items-center justify-center py-12 text-text-muted gap-3">
-            <span className="material-symbols-outlined text-[40px] text-red-500/50">
+            <span className="material-symbols-outlined text-[40px] text-error/50">
               error_outline
             </span>
             <p className="text-sm">

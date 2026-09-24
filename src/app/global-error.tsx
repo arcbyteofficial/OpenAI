@@ -57,16 +57,13 @@ function GlobalErrorContent({ error, reset }: GlobalErrorProps) {
 
   return (
     <main role="alert" aria-live="assertive" className="flex flex-col items-center">
-      <div className="text-[64px] mb-4" aria-hidden="true">
-        ⚠️
-      </div>
-      <h1 className="text-[28px] font-bold mb-2">{t("globalError.title")}</h1>
-      <p className="text-[15px] text-text-muted max-w-[400px] leading-relaxed mb-6">
+      <h1 className="text-2xl font-semibold tracking-tight mb-2">{t("globalError.title")}</h1>
+      <p className="text-sm text-text-muted max-w-[400px] leading-relaxed mb-6">
         {t("globalError.description")}
       </p>
       {process.env.NODE_ENV === "development" && error?.message && (
         <pre
-          className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-500 text-xs max-w-[600px] overflow-auto text-left mb-6"
+          className="p-4 rounded-lg bg-error/5 border border-error/30 text-error font-mono text-xs max-w-[600px] overflow-auto text-left mb-6"
           aria-label={t("globalError.detailsAriaLabel")}
         >
           {error.message}
@@ -76,13 +73,13 @@ function GlobalErrorContent({ error, reset }: GlobalErrorProps) {
         <button
           onClick={reset}
           aria-label={t("globalError.retryAriaLabel")}
-          className="px-8 py-3 rounded-[10px] text-white border-none text-sm font-semibold cursor-pointer transition-transform duration-200 motion-reduce:transition-none motion-reduce:transform-none shadow-warm hover:-translate-y-0.5 bg-gradient-to-br from-primary to-primary-hover focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="px-4 py-2.5 rounded-control bg-contrast text-contrast-fg border-none text-sm font-medium cursor-pointer transition-colors duration-150 motion-reduce:transition-none hover:bg-contrast-hover focus:outline-2 focus:outline-offset-2 focus:outline-primary"
         >
           {t("globalError.tryAgain")}
         </button>
         <a
           href="/status"
-          className="px-8 py-3 rounded-[10px] text-sm font-semibold border border-[var(--color-border)] hover:bg-[var(--color-bg-alt)] no-underline focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="px-4 py-2.5 rounded-control text-sm font-medium text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors duration-150 motion-reduce:transition-none no-underline focus:outline-2 focus:outline-offset-2 focus:outline-primary"
           aria-label={t("globalError.statusAriaLabel")}
         >
           {t("globalError.systemStatus")}

@@ -85,31 +85,31 @@ function VerifyControls({
   const t = useTranslations("compressionStudio");
   return (
     <>
-      <label className="text-[10px]">
+      <label className="text-[11px] text-text-muted">
         {t("provider")}
         <input
-          className="ml-1 w-24 rounded border px-1 text-xs"
+          className="ml-1 w-24 rounded-control border border-border-strong bg-surface px-1.5 py-0.5 text-xs text-text-main focus:border-primary focus:outline-none"
           value={provider}
           onChange={(e) => onProvider(e.target.value)}
         />
       </label>
-      <label className="text-[10px]">
+      <label className="text-[11px] text-text-muted">
         {t("judgeModel")}
         <input
           data-testid="verify-model"
-          className="ml-1 w-32 rounded border px-1 text-xs"
+          className="ml-1 w-32 rounded-control border border-border-strong bg-surface px-1.5 py-0.5 text-xs text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none"
           value={judgeModel}
           onChange={(e) => onJudgeModel(e.target.value)}
           placeholder={t("judgeModelPlaceholder")}
         />
       </label>
-      <label className="text-[10px]">
+      <label className="text-[11px] text-text-muted">
         {t("maxCostUsd")}
         <input
           type="number"
           step="0.01"
           min="0"
-          className="ml-1 w-16 rounded border px-1 text-xs"
+          className="ml-1 w-16 rounded-control border border-border-strong bg-surface px-1.5 py-0.5 text-xs text-text-main tabular-nums focus:border-primary focus:outline-none"
           value={capUsd}
           onChange={(e) => onCapUsd(Number(e.target.value))}
         />
@@ -119,12 +119,12 @@ function VerifyControls({
         onClick={onVerify}
         disabled={verifying || !judgeModel}
         title={!judgeModel ? t("enterJudgeModel") : undefined}
-        className="rounded bg-purple-500/30 px-3 py-1 text-sm disabled:opacity-40"
+        className="rounded-control border border-border-strong bg-surface px-3 py-1 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-50"
       >
         {verifying ? t("verifying") : `⚖ ${t("verifyAll")}`}
       </button>
       {spent !== null && (
-        <span className="text-[10px] opacity-70">
+        <span className="text-[11px] text-text-muted tabular-nums">
           {t("spent", { spent: spent.toFixed(3), cap: capUsd.toFixed(2) })}
           {capped ? ` · ${t("capReached")}` : ""}
         </span>
@@ -142,9 +142,9 @@ function ComparisonTable({
 }) {
   const t = useTranslations("compressionStudio");
   return (
-    <table className="w-full text-xs">
+    <table className="w-full text-[13px]">
       <thead>
-        <tr className="text-left opacity-60">
+        <tr className="border-b border-border text-left text-xs font-medium text-text-muted">
           <th>{t("engine")}</th>
           <th>{t("savings")}</th>
           <th>{t("retention")}</th>
@@ -156,8 +156,8 @@ function ComparisonTable({
         {rows.map((row) => {
           const verdict = verdicts[row.engine];
           return (
-            <tr key={row.engine} data-testid="compare-row" className="border-b">
-              <td className="font-semibold">{row.engine}</td>
+            <tr key={row.engine} data-testid="compare-row" className="border-b border-border">
+              <td className="font-mono text-[12px] font-medium text-text-main">{row.engine}</td>
               <td>−{row.meanSavingsPercent.toFixed(0)}%</td>
               <td>{Math.round(row.meanRetention * 100)}%</td>
               <td>{row.totalCompressedTokens}</td>
@@ -223,7 +223,7 @@ export function CompareView({ text }: CompareViewProps) {
           data-testid="compare-load"
           onClick={load}
           disabled={loading}
-          className="rounded bg-blue-500/30 px-3 py-1 text-sm"
+          className="rounded-control bg-contrast px-3 py-1 text-[13px] font-medium text-contrast-fg transition-colors hover:bg-contrast-hover disabled:opacity-50"
         >
           {loading ? t("running") : t("loadAb")}
         </button>

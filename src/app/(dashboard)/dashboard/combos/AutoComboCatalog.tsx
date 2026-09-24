@@ -73,9 +73,13 @@ export default function AutoComboCatalog({
       >
         <div className="min-w-0">
           <div className="flex items-center gap-2">
-            <span className="material-symbols-outlined text-xl text-primary">auto_awesome</span>
-            <h2 className="text-base font-bold text-text-main">{t("autoCatalogTitle")}</h2>
-            <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-semibold text-primary">
+            <span className="material-symbols-outlined text-[18px] text-text-muted">
+              auto_awesome
+            </span>
+            <h2 className="text-sm font-semibold tracking-tight text-text-main">
+              {t("autoCatalogTitle")}
+            </h2>
+            <span className="rounded-full bg-bg-subtle px-2 py-0.5 text-[10px] font-medium tabular-nums text-text-muted">
               {t("autoCatalogTemplateCount", { count: AUTO_COMBO_TEMPLATES.length })}
             </span>
           </div>
@@ -96,7 +100,7 @@ export default function AutoComboCatalog({
               <button
                 onClick={() => handleDuplicateTemplate(tpl)}
                 disabled={duplicatingName !== null}
-                className="absolute bottom-1.5 right-1.5 p-0.5 hover:bg-black/5 dark:hover:bg-white/5 rounded text-text-muted hover:text-primary transition-colors"
+                className="absolute bottom-1.5 right-1.5 p-0.5 hover:bg-surface rounded text-text-muted hover:text-text-main transition-colors"
                 title={t("duplicateAutoComboTitle", { name: tpl.name })}
               >
                 <span
@@ -108,16 +112,16 @@ export default function AutoComboCatalog({
 
               <div className="flex items-center justify-between gap-2">
                 <code className="font-mono text-sm text-text-main">{tpl.name}</code>
-                <span className="rounded bg-black/5 px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-text-muted dark:bg-white/5">
+                <span className="rounded bg-surface px-1.5 py-0.5 text-[10px] uppercase tracking-wide text-text-muted ring-1 ring-inset ring-border">
                   {tpl.strategy}
                 </span>
               </div>
-              <p className="mt-1 text-[11px] font-semibold text-text-main">{tpl.displayName}</p>
+              <p className="mt-1 text-[11px] font-medium text-text-main">{tpl.displayName}</p>
               <div className="mt-2 flex flex-wrap gap-1">
                 {tpl.categories.map((cat) => (
                   <span
                     key={cat}
-                    className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] text-primary"
+                    className="rounded-full bg-surface px-2 py-0.5 text-[10px] text-text-main ring-1 ring-inset ring-border"
                   >
                     {cat}
                   </span>
@@ -125,7 +129,7 @@ export default function AutoComboCatalog({
                 {tpl.tiers.map((tier) => (
                   <span
                     key={tier}
-                    className="rounded-full bg-black/[0.04] px-2 py-0.5 text-[10px] text-text-muted dark:bg-white/[0.04]"
+                    className="rounded-full bg-surface px-2 py-0.5 text-[10px] text-text-muted"
                   >
                     {tier}
                   </span>

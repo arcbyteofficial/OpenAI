@@ -170,7 +170,7 @@ export default function PassthroughModelRow({
 
   return (
     <div
-      className={`flex min-w-0 flex-col gap-2 rounded-lg border border-border px-3.5 py-3 transition-opacity hover:bg-sidebar/50 ${
+      className={`flex min-w-0 flex-col gap-2 rounded-lg border border-border px-3.5 py-3 transition-[opacity,background-color] hover:bg-bg-subtle ${
         isHidden ? "opacity-50" : ""
       }`}
     >
@@ -182,7 +182,7 @@ export default function PassthroughModelRow({
           smart_toy
         </span>
         <code
-          className="min-w-0 truncate rounded bg-sidebar px-1.5 py-0.5 font-mono text-xs text-text-muted"
+          className="min-w-0 truncate rounded-md bg-bg-subtle px-1.5 py-0.5 font-mono text-xs text-text-muted"
           title={fullModel}
         >
           {fullModel}
@@ -198,7 +198,7 @@ export default function PassthroughModelRow({
                 onBlur={handleAliasSubmit}
                 onKeyDown={handleKeyDown}
                 placeholder={providerText(t, "aliasInputPlaceholder", "alias name")}
-                className="bg-surface border border-primary/50 rounded px-1 py-0.5 text-[9px] text-text-main outline-none w-24"
+                className="bg-surface border border-primary/50 rounded-md px-1 py-0.5 text-[9px] text-text-main outline-none w-24"
               />
             ) : (
               <span
@@ -232,7 +232,7 @@ export default function PassthroughModelRow({
               is visible after reload instead of being write-only. */}
           {typeof contextWindowOverride === "number" && !editingContext && (
             <span
-              className="shrink-0 rounded-full bg-orange-500/15 px-1.5 py-0.5 text-[10px] font-medium text-orange-400"
+              className="shrink-0 rounded-full bg-bg-subtle px-1.5 py-0.5 text-[10px] font-medium tabular-nums text-text-muted"
               title={t("contextWindowOverrideHint")}
             >
               {`🪟 ${contextWindowOverride.toLocaleString()}`}
@@ -251,12 +251,12 @@ export default function PassthroughModelRow({
                 placeholder={t("contextWindowOverridePlaceholder")}
                 title={t("contextWindowOverrideHint")}
                 aria-label={t("contextWindowOverrideLabel")}
-                className="w-28 rounded border border-border bg-background px-1.5 py-0.5 text-[11px]"
+                className="w-28 rounded-md border border-border-strong bg-surface px-1.5 py-0.5 text-[11px] outline-none focus:border-primary"
               />
               <button
                 onClick={() => void submitContextOverride()}
                 disabled={savingContextOverride}
-                className="rounded p-0.5 text-text-muted hover:bg-sidebar hover:text-primary disabled:opacity-40"
+                className="rounded-md p-0.5 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main disabled:opacity-40"
                 title={providerText(t, "save", "Save")}
               >
                 <span className="material-symbols-outlined text-sm">check</span>
@@ -264,7 +264,7 @@ export default function PassthroughModelRow({
               <button
                 onClick={() => setEditingContext(false)}
                 disabled={savingContextOverride}
-                className="rounded p-0.5 text-text-muted hover:bg-sidebar hover:text-primary disabled:opacity-40"
+                className="rounded-md p-0.5 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main disabled:opacity-40"
                 title={providerText(t, "cancel", "Cancel")}
               >
                 <span className="material-symbols-outlined text-sm">close</span>
@@ -279,7 +279,7 @@ export default function PassthroughModelRow({
           {onSaveContextWindowOverride && !editingContext && (
             <button
               onClick={startEditingContext}
-              className="rounded p-0.5 text-text-muted hover:bg-sidebar hover:text-primary"
+              className="rounded-md p-0.5 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
               title={t("contextWindowOverrideLabel")}
               aria-label={t("contextWindowOverrideLabel")}
             >
@@ -288,7 +288,7 @@ export default function PassthroughModelRow({
           )}
           <button
             onClick={() => onCopy(fullModel, `model-${modelId}`)}
-            className="rounded p-0.5 text-text-muted hover:bg-sidebar hover:text-primary"
+            className="rounded-md p-0.5 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
             title={t("copyModel")}
           >
             <span className="material-symbols-outlined text-sm">
@@ -299,7 +299,7 @@ export default function PassthroughModelRow({
             <button
               onClick={() => onTestModel(modelId, fullModel)}
               disabled={testingModel}
-              className={`rounded p-0.5 hover:bg-sidebar transition-colors disabled:opacity-40 disabled:cursor-not-allowed ${testStatus === "ok" ? "text-green-500" : testStatus === "quota" ? "text-amber-500" : testStatus === "error" ? "text-red-500" : "text-text-muted hover:text-primary"}`}
+              className={`rounded-md p-0.5 hover:bg-bg-subtle transition-colors disabled:opacity-40 disabled:cursor-not-allowed ${testStatus === "ok" ? "text-success" : testStatus === "quota" ? "text-warning" : testStatus === "error" ? "text-error" : "text-text-muted hover:text-text-main"}`}
               title={
                 testingModel
                   ? t("testingModel")
@@ -331,7 +331,7 @@ export default function PassthroughModelRow({
             <button
               onClick={() => onToggleHidden(modelId, !isHidden)}
               disabled={togglingHidden}
-              className="rounded p-0.5 text-text-muted hover:bg-sidebar hover:text-primary disabled:cursor-not-allowed disabled:opacity-40"
+              className="rounded-md p-0.5 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main disabled:cursor-not-allowed disabled:opacity-40"
               title={
                 isHidden
                   ? providerText(t, "showModel", "Show model")
@@ -360,7 +360,7 @@ export default function PassthroughModelRow({
           {onDeleteAlias && (
             <button
               onClick={onDeleteAlias}
-              className="rounded p-1 text-red-500 hover:bg-red-50"
+              className="rounded-md p-1 text-error transition-colors hover:bg-error/10"
               title={t("removeModel")}
             >
               <span className="material-symbols-outlined text-sm">delete</span>

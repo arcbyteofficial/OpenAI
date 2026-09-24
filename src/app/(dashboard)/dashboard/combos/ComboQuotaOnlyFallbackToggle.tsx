@@ -23,10 +23,8 @@ export function ComboTargetOptions({
     <>
       {strategy === "cost-optimized" && (
         <span
-          className={`text-[9px] px-1.5 py-0.5 rounded-full uppercase font-semibold ${
-            hasPricing
-              ? "bg-emerald-500/15 text-emerald-600 dark:text-emerald-400"
-              : "bg-amber-500/15 text-amber-600 dark:text-amber-400"
+          className={`text-[9px] px-1.5 py-0.5 rounded-full uppercase font-medium tracking-wide ${
+            hasPricing ? "bg-success/10 text-success" : "bg-warning/10 text-warning"
           }`}
           title={translate(
             hasPricing ? "pricingAvailable" : "pricingMissing",

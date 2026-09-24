@@ -63,23 +63,21 @@ export function CustomConfigForm({ value, onChange, t, isEditing }: CustomConfig
   return (
     <div className="space-y-4">
       <div>
-        <label className="text-xs font-medium uppercase tracking-wider text-text-muted">
-          {t("custom.endpointUrl")}
-        </label>
+        <label className="text-[13px] font-medium text-text-muted">{t("custom.endpointUrl")}</label>
         <input
           value={value.endpointUrl}
           onChange={(e) => onChange({ ...value, endpointUrl: e.target.value })}
           placeholder={t("custom.endpointUrlPlaceholder")}
-          className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40"
+          className="mt-1 w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
         />
         {urlHint && (
           <p
             className={`mt-1 text-xs ${
               urlState === "ok"
-                ? "text-emerald-500"
+                ? "text-success"
                 : urlState === "checking"
                   ? "text-text-muted"
-                  : "text-red-500"
+                  : "text-error"
             }`}
           >
             {urlHint}
@@ -87,16 +85,14 @@ export function CustomConfigForm({ value, onChange, t, isEditing }: CustomConfig
         )}
       </div>
       <div>
-        <label className="text-xs font-medium uppercase tracking-wider text-text-muted">
-          {t("custom.secretKey")}
-        </label>
+        <label className="text-[13px] font-medium text-text-muted">{t("custom.secretKey")}</label>
         <input
           type="password"
           value={value.secretKey}
           onChange={(e) => onChange({ ...value, secretKey: e.target.value })}
           placeholder={isEditing ? t("secretEditPlaceholder") : t("custom.secretKeyPlaceholder")}
           autoComplete="new-password"
-          className="mt-1 w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40"
+          className="mt-1 w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
         />
         <p className="mt-1 text-xs text-text-muted">{t("custom.secretKeyHint")}</p>
       </div>

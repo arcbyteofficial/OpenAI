@@ -530,7 +530,7 @@ export default function ProviderDetailPageClient() {
 
   if (loading) {
     return (
-      <div className="flex flex-col gap-8">
+      <div className="flex flex-col gap-6">
         <CardSkeleton />
         <CardSkeleton />
       </div>
@@ -549,7 +549,7 @@ export default function ProviderDetailPageClient() {
   }
 
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       <ProviderPageHeader
         providerId={providerId}
         providerInfo={{ ...providerInfo, website: providerHeaderWebsite }}
@@ -755,7 +755,7 @@ export default function ProviderDetailPageClient() {
       {/* Models — hidden for search providers (they don't have models) */}
       {!isSearchProvider && !isUpstreamProxyProvider && (
         <Card>
-          <h2 className="text-lg font-semibold mb-4">{t("availableModels")}</h2>
+          <h2 className="text-base font-semibold tracking-tight mb-4">{t("availableModels")}</h2>
           <ProviderModelsSection
             providerId={providerId}
             providerAlias={providerAlias}

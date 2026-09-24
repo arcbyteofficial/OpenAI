@@ -19,26 +19,26 @@ export default function FlowAnimation() {
     {
       id: "openai",
       name: t("flowProviderOpenAI"),
-      color: "bg-emerald-500",
-      textColor: "text-white",
+      color: "bg-surface",
+      textColor: "text-text-main",
     },
     {
       id: "anthropic",
       name: t("flowProviderAnthropic"),
-      color: "bg-orange-400",
-      textColor: "text-white",
+      color: "bg-surface",
+      textColor: "text-text-main",
     },
     {
       id: "gemini",
       name: t("flowProviderGemini"),
-      color: "bg-blue-500",
-      textColor: "text-white",
+      color: "bg-surface",
+      textColor: "text-text-main",
     },
     {
       id: "github",
       name: t("flowProviderGithubCopilot"),
-      color: "bg-gray-700",
-      textColor: "text-white",
+      color: "bg-surface",
+      textColor: "text-text-main",
     },
   ];
 
@@ -51,16 +51,18 @@ export default function FlowAnimation() {
 
   return (
     <div className="mt-16 w-full max-w-4xl overflow-hidden">
-      <div className="relative h-[360px] hidden md:flex items-center justify-center animate-[float_6s_ease-in-out_infinite] overflow-hidden">
+      <div className="relative h-[360px] hidden md:flex items-center justify-center overflow-hidden">
         {/* OmniRoute Hub - Center */}
-        <div className="relative z-20 w-32 h-32 rounded-full bg-[#111520] border-2 border-[#E54D5E] shadow-[0_0_40px_rgba(229,77,94,0.3)] flex flex-col items-center justify-center gap-1 group cursor-pointer hover:scale-105 transition-transform duration-500">
-          <span className="material-symbols-outlined text-4xl text-[#E54D5E]" aria-hidden="true">
+        <div className="relative z-20 w-32 h-32 rounded-full bg-contrast border-2 border-contrast flex flex-col items-center justify-center gap-1 group cursor-pointer">
+          <span
+            className="material-symbols-outlined text-[32px] text-contrast-fg"
+            aria-hidden="true"
+          >
             hub
           </span>
-          <span className="text-xs font-bold text-white tracking-widest uppercase">
+          <span className="text-[11px] font-semibold text-contrast-fg tracking-wider uppercase">
             {t("brandName")}
           </span>
-          <div className="absolute inset-0 rounded-full border border-[#E54D5E]/30 animate-ping opacity-20"></div>
         </div>
 
         {/* CLI Tools - Left side */}
@@ -70,7 +72,7 @@ export default function FlowAnimation() {
               key={tool.id}
               className="flex items-center gap-3 opacity-70 hover:opacity-100 transition-opacity group"
             >
-              <div className="w-16 h-16 rounded-2xl bg-[#111520] border border-[#2D333B] flex items-center justify-center overflow-hidden p-2 hover:border-[#E54D5E]/50 transition-all hover:scale-105">
+              <div className="w-16 h-16 rounded-card bg-surface border border-border flex items-center justify-center overflow-hidden p-2 hover:border-border-strong transition-colors">
                 <ProviderIcon providerId={tool.id} size={48} type="color" />
               </div>
             </div>
@@ -79,7 +81,7 @@ export default function FlowAnimation() {
 
         {/* SVG Lines from CLI to OmniRoute */}
         <svg
-          className="absolute inset-0 w-full h-full z-10 pointer-events-none stroke-yellow-700"
+          className="absolute inset-0 w-full h-full z-10 pointer-events-none stroke-border-strong"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
@@ -120,30 +122,30 @@ export default function FlowAnimation() {
           <path
             d="M 440 180 C 550 180, 550 50, 740 50"
             fill="none"
-            stroke={activeFlow === 0 ? "#E54D5E" : "rgb(75, 85, 99)"}
+            stroke={activeFlow === 0 ? "var(--color-primary)" : "var(--color-border-strong)"}
             strokeWidth={activeFlow === 0 ? "3" : "2"}
-            className={activeFlow === 0 ? "animate-pulse" : ""}
+            className={activeFlow === 0 ? "stroke-primary" : "stroke-border-strong"}
           ></path>
           <path
             d="M 440 180 C 550 180, 550 130, 740 130"
             fill="none"
-            stroke={activeFlow === 1 ? "#E54D5E" : "rgb(75, 85, 99)"}
+            stroke={activeFlow === 1 ? "var(--color-primary)" : "var(--color-border-strong)"}
             strokeWidth={activeFlow === 1 ? "3" : "2"}
-            className={activeFlow === 1 ? "animate-pulse" : ""}
+            className={activeFlow === 1 ? "stroke-primary" : "stroke-border-strong"}
           ></path>
           <path
             d="M 440 180 C 550 180, 550 230, 740 230"
             fill="none"
-            stroke={activeFlow === 2 ? "#E54D5E" : "rgb(75, 85, 99)"}
+            stroke={activeFlow === 2 ? "var(--color-primary)" : "var(--color-border-strong)"}
             strokeWidth={activeFlow === 2 ? "3" : "2"}
-            className={activeFlow === 2 ? "animate-pulse" : ""}
+            className={activeFlow === 2 ? "stroke-primary" : "stroke-border-strong"}
           ></path>
           <path
             d="M 440 180 C 550 180, 550 310, 740 310"
             fill="none"
-            stroke={activeFlow === 3 ? "#E54D5E" : "rgb(75, 85, 99)"}
+            stroke={activeFlow === 3 ? "var(--color-primary)" : "var(--color-border-strong)"}
             strokeWidth={activeFlow === 3 ? "3" : "2"}
-            className={activeFlow === 3 ? "animate-pulse" : ""}
+            className={activeFlow === 3 ? "stroke-primary" : "stroke-border-strong"}
           ></path>
         </svg>
 
@@ -152,8 +154,8 @@ export default function FlowAnimation() {
           {providers.map((provider, idx) => (
             <div
               key={provider.id}
-              className={`px-3 py-2 rounded-lg ${provider.color} ${provider.textColor} flex items-center justify-center font-bold text-[11px] leading-tight text-center shadow-lg hover:scale-110 transition-all cursor-help min-w-[110px] max-w-[140px] ${
-                activeFlow === idx ? "ring-4 ring-[#E54D5E]/50 scale-110" : ""
+              className={`px-3 py-2 rounded-lg ${provider.color} ${provider.textColor} border flex items-center justify-center font-medium text-xs leading-tight text-center transition-colors cursor-help min-w-[110px] max-w-[140px] ${
+                activeFlow === idx ? "border-primary ring-2 ring-primary/15" : "border-border"
               }`}
               title={provider.name}
             >
@@ -164,8 +166,8 @@ export default function FlowAnimation() {
       </div>
 
       {/* Mobile fallback */}
-      <div className="md:hidden mt-8 w-full p-4 rounded-lg bg-[#111520] border border-[#2D333B]">
-        <p className="text-sm text-center text-gray-400">{t("interactiveDiagram")}</p>
+      <div className="md:hidden mt-8 w-full p-4 rounded-card bg-surface border border-border">
+        <p className="text-sm text-center text-text-muted">{t("interactiveDiagram")}</p>
       </div>
     </div>
   );

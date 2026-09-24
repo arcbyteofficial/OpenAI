@@ -20,17 +20,17 @@ export default function MitmProxyMovedPage() {
   }, [router]);
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background p-8">
-      <div className="rounded-xl border border-amber-500/40 bg-amber-900/20 p-8 text-center max-w-md w-full space-y-4">
+    <div className="flex min-h-screen items-center justify-center bg-transparent p-8">
+      <div className="rounded-card border border-border bg-surface p-6 text-center max-w-md w-full space-y-4">
         <div className="flex items-center justify-center gap-2">
-          <span className="material-symbols-outlined text-amber-400 text-[28px]">info</span>
-          <h1 className="text-lg font-semibold text-amber-200">{t("title")}</h1>
+          <span className="material-symbols-outlined text-text-muted text-[20px]">info</span>
+          <h1 className="text-base font-semibold tracking-tight text-text-main">{t("title")}</h1>
         </div>
-        <p className="text-sm text-amber-300/80">{t("message")}</p>
+        <p className="text-sm text-text-muted">{t("message")}</p>
         <button
           type="button"
           onClick={() => router.replace("/dashboard/tools/agent-bridge")}
-          className="inline-flex items-center gap-1.5 rounded-lg bg-amber-500/20 text-amber-200 px-4 py-2 text-sm font-medium hover:bg-amber-500/30 transition-colors"
+          className="inline-flex items-center gap-1.5 rounded-control bg-contrast text-contrast-fg px-3 py-1.5 text-[13px] font-medium hover:bg-contrast-hover transition-colors"
         >
           {t("goNow")}
         </button>

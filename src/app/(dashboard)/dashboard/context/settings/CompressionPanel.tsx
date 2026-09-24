@@ -147,7 +147,7 @@ function AdaptiveContextBudgetDial({
   // the panel has no selected-model context here; 200k is Claude-class default.
   const target = getAdaptiveTargetSummary(contextBudget, 200000);
   return (
-    <div className="mb-4 space-y-2 rounded-md border border-border/60 bg-bg-subtle px-3 py-2">
+    <div className="mb-4 space-y-2 rounded-lg border border-border bg-bg-subtle px-3 py-2">
       <label className="flex items-center justify-between gap-3">
         <span className="text-sm font-medium text-text-main">{t("compressionAdaptiveMode")}</span>
         <select
@@ -160,7 +160,7 @@ function AdaptiveContextBudgetDial({
             }
           }}
           disabled={saving}
-          className="w-44 rounded border border-border bg-surface px-2 py-1 text-sm text-text-main"
+          className="w-44 rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main"
         >
           <option value="off">{t("compressionAdaptiveModeOff")}</option>
           <option value="floor">{t("compressionAdaptiveModeFloor")}</option>
@@ -182,7 +182,7 @@ function AdaptiveContextBudgetDial({
               }
             }}
             disabled={saving}
-            className="w-44 rounded border border-border bg-surface px-2 py-1 text-sm text-text-main"
+            className="w-44 rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main"
           >
             <option value="reserve-output">{t("compressionAdaptivePolicyReserve")}</option>
             <option value="percentage">{t("compressionAdaptivePolicyPercentage")}</option>
@@ -383,24 +383,26 @@ export default function CompressionPanel() {
         : t("compressionDerivedMode", { mode: derived.mode });
   if (loading) {
     return (
-      <Card className="p-6">
+      <Card className="p-5">
         <p className="text-sm text-text-muted">{t("loading")}</p>
       </Card>
     );
   }
 
   return (
-    <Card className="p-6" data-testid="compression-panel">
+    <Card className="p-5" data-testid="compression-panel">
       {/* Master */}
       <div className="mb-5 flex items-start justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="rounded-lg bg-blue-500/10 p-2 text-blue-500">
+          <div className="rounded-lg border border-border bg-bg-subtle p-2 text-text-muted">
             <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
               compress
             </span>
           </div>
           <div>
-            <h3 className="text-lg font-semibold">{t("compressionTitle")}</h3>
+            <h3 className="text-base font-semibold tracking-tight text-text-main">
+              {t("compressionTitle")}
+            </h3>
             <p className="text-sm text-text-muted">{t("compressionDesc")}</p>
             <a
               href="https://github.com/diegosouzapw/OmniRoute/blob/main/docs/compression/COMPRESSION_GUIDE.md"
@@ -418,13 +420,13 @@ export default function CompressionPanel() {
         </div>
         <div className="flex items-center gap-3">
           {status === "saved" && (
-            <span className="flex items-center gap-1 text-xs font-medium text-emerald-500">
+            <span className="flex items-center gap-1 text-xs font-medium text-success">
               <span className="material-symbols-outlined text-[14px]">check_circle</span>{" "}
               {t("saved")}
             </span>
           )}
           {status === "error" && (
-            <span className="flex items-center gap-1 text-xs font-medium text-red-500">
+            <span className="flex items-center gap-1 text-xs font-medium text-error">
               <span className="material-symbols-outlined text-[14px]">error</span> {t("saveFailed")}
             </span>
           )}
@@ -441,7 +443,7 @@ export default function CompressionPanel() {
       {/* Derived pipeline preview */}
       <div
         data-testid="derived-pipeline-preview"
-        className="mb-4 rounded-md border border-border/60 bg-bg-subtle px-3 py-2 text-xs text-text-muted"
+        className="mb-4 rounded-lg border border-border bg-bg-subtle px-3 py-2 text-xs text-text-muted"
       >
         <span className="font-medium text-text-main">{t("compressionEffectivePipeline")}</span>{" "}
         {derivedText}
@@ -477,7 +479,7 @@ export default function CompressionPanel() {
                   {engineLabel}
                   <Link
                     href={`/dashboard/context/${id}`}
-                    className="rounded border border-border bg-bg-subtle px-1.5 py-0.5 text-[10px] uppercase tracking-wider text-text-muted hover:border-primary/40 hover:text-primary"
+                    className="rounded-md border border-border bg-bg-subtle px-1.5 py-0.5 font-mono text-[11px] text-text-muted transition-colors hover:border-border-strong hover:text-text-main"
                   >
                     {id}
                   </Link>
@@ -496,7 +498,7 @@ export default function CompressionPanel() {
                     value={level}
                     onChange={(e) => setEngine(id, { level: e.target.value })}
                     disabled={!config.enabled || !engine.enabled || saving}
-                    className="w-28 rounded border border-border bg-surface px-2 py-1 text-xs text-text-main"
+                    className="w-28 rounded-control border border-border-strong bg-surface px-2 py-1 text-xs text-text-main"
                   >
                     {levels.map((lvl) => (
                       <option key={lvl} value={lvl}>
@@ -521,7 +523,7 @@ export default function CompressionPanel() {
       </div>
 
       {/* Output Styles — response-output instruction injection (Phase 4A, catalog-driven) */}
-      <div className="mt-2 flex flex-col gap-3 border-t border-border/30 py-3">
+      <div className="mt-2 flex flex-col gap-3 border-t border-border py-3">
         <div className="min-w-0 flex-1">
           <p className="text-sm font-medium text-text-main">
             {t("compressionSettingsOutputStyles")}
@@ -556,7 +558,7 @@ export default function CompressionPanel() {
                     setOutputStyle(id, { level: e.target.value as CavemanIntensity })
                   }
                   disabled={!sel || saving}
-                  className="w-28 rounded border border-border bg-surface px-2 py-1 text-xs text-text-main"
+                  className="w-28 rounded-control border border-border-strong bg-surface px-2 py-1 text-xs text-text-main"
                 >
                   {CAVEMAN_OUTPUT_LEVELS.map((lvl) => (
                     <option key={lvl} value={lvl}>
@@ -581,7 +583,7 @@ export default function CompressionPanel() {
 
       {/* Ultra SLM tier — Phase 4 (B): pick the `ultra`-mode engine (heuristic Tier-A
           or the opt-in LLMLingua-2 SLM Tier-B) + best-effort pre-warm. */}
-      <div className="mt-2 flex flex-col gap-3 border-t border-border/30 py-3">
+      <div className="mt-2 flex flex-col gap-3 border-t border-border py-3">
         <label className="flex items-center justify-between">
           <span className="text-sm font-medium text-text-main">{t("compressionUltraEngine")}</span>
           <select
@@ -589,7 +591,7 @@ export default function CompressionPanel() {
             value={config.ultraEngine ?? "heuristic"}
             onChange={(e) => save({ ultraEngine: e.target.value === "slm" ? "slm" : "heuristic" })}
             disabled={saving}
-            className="w-44 rounded border border-border bg-surface px-2 py-1 text-sm text-text-main"
+            className="w-44 rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main"
           >
             <option value="heuristic">{t("compressionUltraEngineHeuristic")}</option>
             <option value="slm">{t("compressionUltraEngineSlm")}</option>
@@ -616,7 +618,7 @@ export default function CompressionPanel() {
       </div>
 
       {/* mcpAccessibility — writes its own endpoint / separate store */}
-      <div className="flex flex-col gap-2 border-t border-border/30 py-3 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-2 border-t border-border py-3 sm:flex-row sm:items-center sm:justify-between">
         <div className="min-w-0 flex-1">
           <p className="text-sm font-medium text-text-main">{t("mcpAccessibilityTitle")}</p>
           <p className="mt-0.5 text-xs text-text-muted">{t("mcpAccessibilityDescription")}</p>
@@ -632,7 +634,7 @@ export default function CompressionPanel() {
       </div>
 
       {/* General */}
-      <div className="space-y-3 border-t border-border/30 pt-4">
+      <div className="space-y-3 border-t border-border pt-4">
         <h4 className="text-sm font-medium text-text-main">{t("compressionGeneral")}</h4>
         <label className="flex items-center justify-between">
           <span className="text-sm text-text-muted">{t("compressionAutoTrigger")}</span>
@@ -643,7 +645,7 @@ export default function CompressionPanel() {
               max={100000}
               value={config.autoTriggerTokens}
               onChange={(e) => save({ autoTriggerTokens: parseInt(e.target.value) || 0 })}
-              className="w-24 rounded border border-border bg-surface px-2 py-1 text-sm text-text-main"
+              className="w-24 rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main"
             />
             <span className="text-xs text-text-muted">{t("tokens")}</span>
           </div>
@@ -663,7 +665,7 @@ export default function CompressionPanel() {
             disabled={saving}
             aria-label={t("compressionPreserveSystem")}
             data-testid="preserve-system-mode-select"
-            className="w-36 rounded border border-border bg-surface px-2 py-1 text-sm text-text-main"
+            className="w-36 rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main"
           >
             <option value="always">{t("compressionPreserveSystemAlways")}</option>
             <option value="whenNoCache">{t("compressionPreserveSystemWhenNoCache")}</option>

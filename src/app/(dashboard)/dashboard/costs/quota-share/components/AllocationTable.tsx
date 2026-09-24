@@ -27,7 +27,7 @@ export default function AllocationTable({ allocations, usage, keyLabels }: Alloc
 
   if (allocations.length === 0) {
     return (
-      <div className="text-[11px] text-text-muted italic py-3 text-center bg-bg-subtle/40 rounded-md">
+      <div className="text-[11px] text-text-muted italic py-3 text-center bg-bg-subtle rounded-md">
         {t("noAllocations")}
       </div>
     );
@@ -40,12 +40,12 @@ export default function AllocationTable({ allocations, usage, keyLabels }: Alloc
     <div className="overflow-x-auto">
       <table className="w-full text-[11px]">
         <thead>
-          <tr className="text-[10px] uppercase tracking-wide text-text-muted border-b border-border/40">
-            <th className="text-left py-1 pr-2 font-semibold">{t("apiKeyColumn")}</th>
-            <th className="text-right py-1 pr-2 font-semibold">{t("weightColumn")}</th>
-            <th className="text-right py-1 pr-2 font-semibold">{t("realConsumedColumn")}</th>
-            <th className="text-right py-1 pr-2 font-semibold">{t("deficitColumn")}</th>
-            <th className="text-right py-1 font-semibold">{t("policy")}</th>
+          <tr className="text-[11px] text-text-muted border-b border-border">
+            <th className="text-left py-1 pr-2 font-medium">{t("apiKeyColumn")}</th>
+            <th className="text-right py-1 pr-2 font-medium">{t("weightColumn")}</th>
+            <th className="text-right py-1 pr-2 font-medium">{t("realConsumedColumn")}</th>
+            <th className="text-right py-1 pr-2 font-medium">{t("deficitColumn")}</th>
+            <th className="text-right py-1 font-medium">{t("policy")}</th>
           </tr>
         </thead>
         <tbody>
@@ -60,7 +60,7 @@ export default function AllocationTable({ allocations, usage, keyLabels }: Alloc
             const borrowing = perKeyData?.borrowing ?? false;
 
             return (
-              <tr key={alloc.apiKeyId} className="border-b border-border/20 last:border-0">
+              <tr key={alloc.apiKeyId} className="border-b border-border last:border-0">
                 <td className="py-1.5 pr-2">
                   <div className="flex items-center gap-1.5 min-w-0">
                     <span
@@ -70,7 +70,7 @@ export default function AllocationTable({ allocations, usage, keyLabels }: Alloc
                     <span className="font-mono truncate text-text-main">{label}</span>
                     {borrowing && (
                       <span
-                        className="text-[9px] px-1 py-0.5 rounded bg-amber-500/15 text-amber-400 font-bold shrink-0"
+                        className="text-[9px] px-1 py-0.5 rounded bg-warning/10 text-warning font-medium shrink-0"
                         title={t("borrowingIndicator")}
                       >
                         {t("borrowingIndicator")}
@@ -78,7 +78,7 @@ export default function AllocationTable({ allocations, usage, keyLabels }: Alloc
                     )}
                   </div>
                 </td>
-                <td className="py-1.5 pr-2 text-right font-bold tabular-nums" style={{ color }}>
+                <td className="py-1.5 pr-2 text-right font-semibold tabular-nums" style={{ color }}>
                   {alloc.weight}%
                 </td>
                 <td className="py-1.5 pr-2 text-right tabular-nums text-text-muted">
@@ -89,9 +89,9 @@ export default function AllocationTable({ allocations, usage, keyLabels }: Alloc
                     <span
                       className={
                         deficit > 0
-                          ? "text-red-400"
+                          ? "text-error"
                           : deficit < 0
-                            ? "text-emerald-400"
+                            ? "text-success"
                             : "text-text-muted"
                       }
                     >
@@ -109,12 +109,12 @@ export default function AllocationTable({ allocations, usage, keyLabels }: Alloc
                 </td>
                 <td className="py-1.5 text-right">
                   <span
-                    className={`text-[9px] px-1.5 py-0.5 rounded font-semibold ${
+                    className={`text-[9px] px-1.5 py-0.5 rounded font-medium ${
                       alloc.policy === "hard"
-                        ? "bg-red-500/10 text-red-400"
+                        ? "bg-error/10 text-error"
                         : alloc.policy === "soft"
-                          ? "bg-amber-500/10 text-amber-400"
-                          : "bg-emerald-500/10 text-emerald-400"
+                          ? "bg-warning/10 text-warning"
+                          : "bg-success/10 text-success"
                     }`}
                   >
                     {t(`policy${alloc.policy[0].toUpperCase()}${alloc.policy.slice(1)}`)}

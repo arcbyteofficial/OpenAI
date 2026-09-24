@@ -27,12 +27,12 @@ export function ApiKeyCatalogScopeSelect({
   const tSettings = useTranslations("settings");
 
   return (
-    <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface/40">
+    <div className="flex flex-col gap-2 p-3 rounded-lg border border-border bg-surface-2">
       <div className="flex flex-col gap-1">
         <p className="text-sm font-medium text-text-main">{tSettings("catalogScopeTitle")}</p>
         <p className="text-xs text-text-muted">{tSettings("catalogScopeDesc")}</p>
       </div>
-      <div className="flex items-center gap-1 p-1 rounded-lg bg-black/5 dark:bg-white/5">
+      <div className="flex items-center gap-1 p-1 rounded-lg bg-bg-subtle">
         {OPTIONS.map((opt) => (
           <button
             key={opt.value}
@@ -40,10 +40,10 @@ export function ApiKeyCatalogScopeSelect({
             role="radio"
             aria-checked={value === opt.value}
             onClick={() => onChange(opt.value)}
-            className={`flex-1 inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-semibold transition-colors ${
+            className={`flex-1 inline-flex items-center justify-center gap-1.5 px-2.5 py-1.5 rounded-md text-xs font-medium transition-colors ${
               value === opt.value
-                ? "bg-primary text-white"
-                : "text-text-muted hover:bg-black/5 dark:hover:bg-white/5"
+                ? "bg-surface text-text-main shadow-sm"
+                : "text-text-muted hover:text-text-main"
             }`}
           >
             <span className="material-symbols-outlined text-[14px]">{opt.icon}</span>

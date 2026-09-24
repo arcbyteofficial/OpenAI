@@ -50,8 +50,8 @@ export default function CompressionLogTab() {
     return (
       <Card className="p-6">
         <div className="flex items-center gap-3 mb-4">
-          <span className="material-symbols-outlined text-blue-500 text-[20px]">compress</span>
-          <h3 className="text-lg font-semibold">{t("compressionLogTitle")}</h3>
+          <span className="material-symbols-outlined text-text-muted text-[18px]">compress</span>
+          <h3 className="text-sm font-semibold text-text-main">{t("compressionLogTitle")}</h3>
         </div>
         <p className="text-sm text-text-muted">{t("compressionLogEmpty")}</p>
       </Card>
@@ -61,8 +61,8 @@ export default function CompressionLogTab() {
   return (
     <Card className="p-6">
       <div className="flex items-center gap-3 mb-5">
-        <span className="material-symbols-outlined text-blue-500 text-[20px]">compress</span>
-        <h3 className="text-lg font-semibold">{t("compressionLogTitle")}</h3>
+        <span className="material-symbols-outlined text-text-muted text-[18px]">compress</span>
+        <h3 className="text-sm font-semibold text-text-main">{t("compressionLogTitle")}</h3>
       </div>
 
       <div className="space-y-3">
@@ -73,14 +73,14 @@ export default function CompressionLogTab() {
           return (
             <div
               key={entry.id}
-              className="p-3 rounded-lg border border-border/50 bg-surface/30 space-y-2"
+              className="p-3 rounded-lg border border-border bg-surface-2 space-y-2"
             >
               <div className="flex items-center justify-between">
                 <div className="flex items-center gap-2 text-sm">
-                  <span className="font-mono text-text-main">
+                  <span className="font-mono text-[13px] text-text-main">
                     {entry.provider}/{entry.model}
                   </span>
-                  <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-blue-500/10 text-blue-400 border border-blue-500/20">
+                  <span className="px-1.5 py-0.5 rounded text-[10px] font-medium bg-bg-subtle text-text-muted border border-border">
                     {stats.mode}
                   </span>
                 </div>
@@ -91,9 +91,9 @@ export default function CompressionLogTab() {
                   <span
                     className={`font-medium ${
                       stats.savingsPercent >= 25
-                        ? "text-emerald-400"
+                        ? "text-success"
                         : stats.savingsPercent >= 10
-                          ? "text-yellow-400"
+                          ? "text-warning"
                           : "text-text-muted"
                     }`}
                   >
@@ -108,7 +108,7 @@ export default function CompressionLogTab() {
                   {stats.techniquesUsed.map((technique) => (
                     <span
                       key={technique}
-                      className="px-1.5 py-0.5 rounded text-[10px] bg-surface text-text-muted border border-border/30"
+                      className="px-1.5 py-0.5 rounded text-[10px] bg-bg-subtle text-text-muted border border-border"
                     >
                       {technique}
                     </span>
@@ -121,7 +121,7 @@ export default function CompressionLogTab() {
                   {stats.rulesApplied.map((rule) => (
                     <span
                       key={rule}
-                      className="px-1.5 py-0.5 rounded text-[10px] bg-purple-500/10 text-purple-400 border border-purple-500/20"
+                      className="px-1.5 py-0.5 rounded text-[10px] bg-primary/10 text-primary border border-primary/20"
                     >
                       {rule.replace(/_/g, " ")}
                     </span>

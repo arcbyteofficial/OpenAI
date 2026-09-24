@@ -85,7 +85,7 @@ export default function NoAuthProvidersSection({
   return (
     <div className="flex flex-col gap-4">
       <div className="flex flex-wrap items-center gap-2">
-        <h2 className="text-xl font-semibold flex items-center gap-2 flex-1 min-w-0">
+        <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2 flex-1 min-w-0">
           {t("noAuthProviders")}{" "}
           <span className="size-2.5 rounded-full bg-stone-500" title={t("noAuthLabel")} />
           <ProviderCountBadge {...count} />
@@ -93,10 +93,10 @@ export default function NoAuthProvidersSection({
         <button
           onClick={() => onBatchTest("no-auth")}
           disabled={!!testingMode}
-          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
             testingMode === "no-auth"
-              ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-              : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+              ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+              : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
           }`}
           title={t("testAll")}
         >
@@ -130,21 +130,21 @@ export default function NoAuthProvidersSection({
             {blockedEntries.map(({ providerId, provider }) => (
               <div
                 key={providerId}
-                className="flex items-center justify-between gap-2 rounded-xl border border-border bg-bg-subtle px-3 py-2.5 opacity-80"
+                className="flex items-center justify-between gap-2 rounded-lg border border-border bg-bg-subtle px-3 py-2.5 opacity-80"
               >
                 <div className="flex min-w-0 flex-col">
                   <span className="truncate text-sm font-medium text-text-main">
                     {provider.name}
                   </span>
-                  <span className="inline-flex items-center gap-1 text-[10px] font-semibold uppercase tracking-wide text-red-600 dark:text-red-400">
-                    <span className="size-1.5 rounded-full bg-red-500" />
+                  <span className="inline-flex items-center gap-1 text-[10px] font-medium uppercase tracking-wide text-error">
+                    <span className="size-1.5 rounded-full bg-error" />
                     {t("disabled")}
                   </span>
                 </div>
                 <button
                   type="button"
                   onClick={() => handleUnblock(providerId)}
-                  className="shrink-0 rounded-md border border-border px-2 py-1 text-xs font-medium text-text-muted transition-colors hover:border-primary/40 hover:text-text-primary"
+                  className="shrink-0 rounded-control border border-border-strong px-2 py-1 text-xs font-medium text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
                   title={t("enableProvider")}
                 >
                   {t("enableProvider")}

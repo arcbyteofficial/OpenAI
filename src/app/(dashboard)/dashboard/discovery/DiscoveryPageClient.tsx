@@ -191,7 +191,10 @@ function DiscoveryScanForm({
     <Card className="p-4">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
         <div className="flex-1">
-          <label className="mb-1 block text-sm font-medium" htmlFor="discovery-scan-target">
+          <label
+            className="mb-1 block text-[13px] font-medium text-text-main"
+            htmlFor="discovery-scan-target"
+          >
             {t("scanLabel")}
           </label>
           <Input
@@ -208,7 +211,7 @@ function DiscoveryScanForm({
           {scanning ? t("scanning") : t("scan")}
         </Button>
       </div>
-      <p className="mt-2 text-xs text-muted-foreground">{t("localOnlyNote")}</p>
+      <p className="mt-2 text-xs text-text-muted">{t("localOnlyNote")}</p>
     </Card>
   );
 }
@@ -231,21 +234,21 @@ function DiscoveryResultCard({
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="font-medium">{row.providerId}</span>
+            <span className="text-sm font-medium text-text-main">{row.providerId}</span>
             <Badge variant={STATUS_VARIANT[row.status] ?? "default"}>{row.status}</Badge>
             <Badge variant={RISK_VARIANT[row.riskLevel] ?? "default"}>
               {t("risk")}: {row.riskLevel}
             </Badge>
           </div>
-          <div className="text-xs text-muted-foreground">
+          <div className="text-xs text-text-muted">
             {t("method")}: {row.method} · {t("auth")}: {row.authType} · {t("feasibility")}:{" "}
             {row.feasibility}/5
           </div>
           {row.endpoint && (
-            <div className="text-xs text-muted-foreground break-all">{row.endpoint}</div>
+            <div className="font-mono text-[12px] text-text-muted break-all">{row.endpoint}</div>
           )}
           {row.models && row.models.length > 0 && (
-            <div className="text-xs text-muted-foreground">
+            <div className="text-xs text-text-muted">
               {t("models")}: {row.models.join(", ")}
             </div>
           )}
@@ -271,8 +274,8 @@ export function DiscoveryPageClient() {
   return (
     <div className="space-y-6">
       <header className="space-y-1">
-        <h1 className="text-2xl font-semibold">{d.t("title")}</h1>
-        <p className="text-sm text-muted-foreground">{d.t("subtitle")}</p>
+        <h1 className="text-2xl font-semibold tracking-tight text-text-main">{d.t("title")}</h1>
+        <p className="text-sm text-text-muted">{d.t("subtitle")}</p>
       </header>
 
       <DiscoveryScanForm
@@ -288,8 +291,8 @@ export function DiscoveryPageClient() {
           role="status"
           className={
             d.feedback.type === "error"
-              ? "rounded-md border border-red-300 bg-red-50 px-3 py-2 text-sm text-red-700"
-              : "rounded-md border border-green-300 bg-green-50 px-3 py-2 text-sm text-green-700"
+              ? "rounded-lg border border-error/30 bg-error/10 px-3 py-2 text-sm text-error"
+              : "rounded-lg border border-success/30 bg-success/10 px-3 py-2 text-sm text-success"
           }
         >
           {d.feedback.message}

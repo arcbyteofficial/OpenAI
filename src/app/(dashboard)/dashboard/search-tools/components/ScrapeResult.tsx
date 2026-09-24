@@ -35,7 +35,7 @@ export default function ScrapeResult({ result, latencyMs }: ScrapeResultProps) {
   return (
     <div className="space-y-3" data-testid="scrape-result">
       {/* Meta bar */}
-      <div className="flex flex-wrap justify-between items-center gap-2 p-3 bg-bg-alt rounded-lg border border-border text-xs text-text-muted">
+      <div className="flex flex-wrap justify-between items-center gap-2 p-3 bg-surface rounded-lg border border-border text-xs text-text-muted">
         <div className="flex flex-wrap gap-x-4 gap-y-1 items-center">
           {result.provider && (
             <span>
@@ -46,12 +46,16 @@ export default function ScrapeResult({ result, latencyMs }: ScrapeResultProps) {
           {latencyMs != null && (
             <span>
               {`${t("latency")}: `}
-              <span className="font-medium text-text-main">{latencyMs}ms</span>
+              <span className="font-medium font-mono tabular-nums text-text-main">
+                {latencyMs}ms
+              </span>
             </span>
           )}
           <span>
             {`${t("size")}: `}
-            <span className="font-medium text-text-main">{formatBytes(contentSize)}</span>
+            <span className="font-medium font-mono tabular-nums text-text-main">
+              {formatBytes(contentSize)}
+            </span>
           </span>
           {result.links.length > 0 && (
             <span>
@@ -65,10 +69,10 @@ export default function ScrapeResult({ result, latencyMs }: ScrapeResultProps) {
         <div className="flex gap-1">
           <button
             className={[
-              "px-2.5 py-1 rounded-md text-[11px] font-medium transition-colors",
+              "px-2.5 py-1 rounded-control text-[11px] font-medium transition-colors",
               mode === "markdown"
-                ? "bg-primary/15 text-primary"
-                : "bg-black/5 dark:bg-white/5 text-text-muted hover:text-text-main",
+                ? "bg-primary/10 text-primary"
+                : "text-text-muted hover:text-text-main hover:bg-bg-subtle",
             ].join(" ")}
             onClick={() => setMode("markdown")}
             data-testid="toggle-markdown"
@@ -77,10 +81,10 @@ export default function ScrapeResult({ result, latencyMs }: ScrapeResultProps) {
           </button>
           <button
             className={[
-              "px-2.5 py-1 rounded-md text-[11px] font-medium transition-colors",
+              "px-2.5 py-1 rounded-control text-[11px] font-medium transition-colors",
               mode === "raw"
-                ? "bg-primary/15 text-primary"
-                : "bg-black/5 dark:bg-white/5 text-text-muted hover:text-text-main",
+                ? "bg-primary/10 text-primary"
+                : "text-text-muted hover:text-text-main hover:bg-bg-subtle",
             ].join(" ")}
             onClick={() => setMode("raw")}
             data-testid="toggle-raw"
@@ -103,7 +107,7 @@ export default function ScrapeResult({ result, latencyMs }: ScrapeResultProps) {
             href={result.url}
             target="_blank"
             rel="noopener noreferrer"
-            className="text-accent hover:underline block mt-1 truncate"
+            className="text-primary font-mono hover:underline block mt-1 truncate"
           >
             {result.url}
           </a>
@@ -118,7 +122,7 @@ export default function ScrapeResult({ result, latencyMs }: ScrapeResultProps) {
         >
           <span>{t("contentTruncated", { size: formatBytes(contentSize) })}</span>
           <button
-            className="ml-3 text-xs px-2 py-1 rounded bg-warning/20 text-warning hover:bg-warning/30 transition-colors"
+            className="ml-3 text-xs font-medium px-2 py-1 rounded-control bg-warning/15 text-warning hover:bg-warning/25 transition-colors"
             onClick={() => setRawModalOpen(true)}
             data-testid="view-raw-button"
           >
@@ -154,16 +158,16 @@ export default function ScrapeResult({ result, latencyMs }: ScrapeResultProps) {
       {/* Raw full-content modal (for truncated content) */}
       {rawModalOpen && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
           data-testid="raw-modal"
         >
-          <div className="bg-surface border border-border rounded-xl shadow-2xl w-[90vw] max-w-4xl h-[80vh] flex flex-col">
+          <div className="bg-surface border border-border rounded-card shadow-[var(--shadow-elevated)] w-[90vw] max-w-4xl h-[80vh] flex flex-col">
             <div className="flex justify-between items-center px-4 py-3 border-b border-border">
               <span className="text-sm font-semibold text-text-main">
                 {t("rawContent", { size: formatBytes(contentSize) })}
               </span>
               <button
-                className="text-text-muted hover:text-text-main"
+                className="text-text-muted hover:text-text-main transition-colors"
                 onClick={() => setRawModalOpen(false)}
                 aria-label={t("closeRawModal")}
               >
@@ -173,7 +177,7 @@ export default function ScrapeResult({ result, latencyMs }: ScrapeResultProps) {
             <textarea
               readOnly
               value={result.content}
-              className="flex-1 bg-bg-alt p-4 text-xs text-text-main font-mono resize-none focus:outline-none rounded-b-xl"
+              className="flex-1 bg-bg-subtle p-4 text-xs text-text-main font-mono resize-none focus:outline-none rounded-b-card"
               data-testid="raw-modal-content"
             />
           </div>

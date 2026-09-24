@@ -61,14 +61,14 @@ export default function ActivityFeedClient() {
       {/* Header */}
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-xl font-bold text-[var(--color-text-main)]">{t("title")}</h1>
-          <p className="text-sm text-[var(--color-text-muted)] mt-1">{t("description")}</p>
+          <h1 className="text-2xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
+          <p className="text-sm text-text-muted mt-1">{t("description")}</p>
         </div>
         <button
           type="button"
           onClick={() => fetchEntries()}
           disabled={loading}
-          className="px-4 py-2 rounded-lg text-sm font-medium bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-main)] hover:bg-[var(--color-bg-alt)] transition-colors disabled:opacity-50"
+          className="px-3 py-1.5 rounded-control text-[13px] font-medium bg-surface border border-border-strong text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
           aria-label={t("refreshAria")}
         >
           {loading ? (
@@ -98,7 +98,7 @@ export default function ActivityFeedClient() {
       {/* Error */}
       {error && (
         <div
-          className="p-4 rounded-lg bg-red-500/10 border border-red-500/30 text-red-400 text-sm"
+          className="p-4 rounded-lg bg-error/10 border border-error/20 text-error text-sm"
           role="alert"
         >
           {error}
@@ -106,11 +106,11 @@ export default function ActivityFeedClient() {
       )}
 
       {/* Feed */}
-      <div className="rounded-xl border border-[var(--color-border)] overflow-hidden bg-[var(--color-surface)]">
+      <div className="rounded-card border border-border overflow-hidden bg-surface">
         {loading ? (
-          <div className="flex items-center justify-center py-20 text-[var(--color-text-muted)]">
+          <div className="flex items-center justify-center py-20 text-text-muted">
             <span
-              className="material-symbols-outlined text-[32px] animate-spin mr-3"
+              className="material-symbols-outlined text-[20px] animate-spin mr-3"
               aria-hidden="true"
             >
               progress_activity

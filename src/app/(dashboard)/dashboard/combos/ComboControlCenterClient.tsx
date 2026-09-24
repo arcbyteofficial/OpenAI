@@ -48,10 +48,10 @@ type CallLogEntry = {
 const TIME_RANGES: TimeRange[] = ["1h", "24h", "7d", "30d"];
 
 const STATE_STYLES: Record<ComboControlCenterSummary["healthState"], string> = {
-  healthy: "border-emerald-500/20 bg-emerald-500/10 text-emerald-400",
-  warning: "border-amber-500/20 bg-amber-500/10 text-amber-400",
-  critical: "border-red-500/20 bg-red-500/10 text-red-400",
-  idle: "border-blue-500/20 bg-blue-500/10 text-blue-400",
+  healthy: "border-success/20 bg-success/10 text-success",
+  warning: "border-warning/20 bg-warning/10 text-warning",
+  critical: "border-error/20 bg-error/10 text-error",
+  idle: "border-border bg-bg-subtle text-text-muted",
 };
 
 function toArray<T>(value: unknown): T[] {
@@ -97,9 +97,11 @@ function shortId(value: string | null | undefined, fallback: string, max = 10): 
 
 function metricValue(label: string, value: string, hint?: string) {
   return (
-    <div className="rounded-xl border border-border bg-bg-subtle p-3">
-      <p className="text-xs uppercase tracking-wide text-text-muted">{label}</p>
-      <p className="mt-1 text-xl font-semibold text-text-main">{value}</p>
+    <div className="rounded-card border border-border bg-surface p-4">
+      <p className="text-[13px] text-text-muted">{label}</p>
+      <p className="mt-1 text-2xl font-semibold tabular-nums tracking-tight text-text-main">
+        {value}
+      </p>
       {hint && <p className="mt-1 text-xs text-text-muted">{hint}</p>}
     </div>
   );
@@ -133,29 +135,29 @@ function targetHealthTone(target: ComboControlCenterTarget | ComboControlCenterT
   const health = "health" in target ? target.health : target;
   if (!health) return "border-border bg-surface text-text-muted";
   if (health.lastStatus === "error" || health.quotaIsExhausted) {
-    return "border-red-500/20 bg-red-500/10 text-red-300";
+    return "border-error/20 bg-error/10 text-error";
   }
   if ((health.quotaRemainingPct ?? 100) < 25 || (health.successRate ?? 100) < 95) {
-    return "border-amber-500/20 bg-amber-500/10 text-amber-300";
+    return "border-warning/20 bg-warning/10 text-warning";
   }
-  return "border-emerald-500/20 bg-emerald-500/10 text-emerald-300";
+  return "border-success/20 bg-success/10 text-success";
 }
 
 function TargetConfiguredRow({ target }: { target: ComboControlCenterTarget }) {
   const t = useTranslations("comboControl");
   return (
-    <div className="rounded-xl border border-border bg-surface p-3">
+    <div className="rounded-lg border border-border bg-surface p-3">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
-            <span className="inline-flex size-6 items-center justify-center rounded-full bg-primary/10 text-xs font-semibold text-primary">
+            <span className="inline-flex size-6 items-center justify-center rounded-full bg-bg-subtle text-xs font-medium tabular-nums text-text-muted">
               {target.index + 1}
             </span>
             <span className="rounded-full border border-border bg-bg-subtle px-2 py-0.5 text-[11px] uppercase tracking-wide text-text-muted">
               {target.kind === "combo-ref" ? t("nestedCombo") : t("modelTarget")}
             </span>
             {target.weight > 0 && (
-              <span className="rounded-full border border-amber-500/20 bg-amber-500/10 px-2 py-0.5 text-[11px] text-amber-300">
+              <span className="rounded-full border border-warning/20 bg-warning/10 px-2 py-0.5 text-[11px] text-warning">
                 {t("weight", { value: target.weight })}
               </span>
             )}
@@ -169,15 +171,19 @@ function TargetConfiguredRow({ target }: { target: ComboControlCenterTarget }) {
         <div className={`rounded-lg border px-3 py-2 text-xs ${targetHealthTone(target)}`}>
           <div className="grid grid-cols-2 gap-x-4 gap-y-1">
             <span>{t("requests")}</span>
-            <span className="text-right font-semibold">{target.health?.requests ?? 0}</span>
+            <span className="text-right font-medium tabular-nums">
+              {target.health?.requests ?? 0}
+            </span>
             <span>{t("success")}</span>
-            <span className="text-right font-semibold">
+            <span className="text-right font-medium tabular-nums">
               {fmtPercent(target.health?.successRate)}
             </span>
             <span>{t("latency")}</span>
-            <span className="text-right font-semibold">{fmtMs(target.health?.avgLatencyMs)}</span>
+            <span className="text-right font-medium tabular-nums">
+              {fmtMs(target.health?.avgLatencyMs)}
+            </span>
             <span>{t("quota")}</span>
-            <span className="text-right font-semibold">
+            <span className="text-right font-medium tabular-nums">
               {fmtPercent(target.health?.quotaRemainingPct)}
             </span>
           </div>
@@ -190,7 +196,7 @@ function TargetConfiguredRow({ target }: { target: ComboControlCenterTarget }) {
 function ResolvedTargetRow({ target }: { target: ComboControlCenterTargetHealth }) {
   const t = useTranslations("comboControl");
   return (
-    <div className="rounded-xl border border-border bg-surface p-3">
+    <div className="rounded-lg border border-border bg-surface p-3">
       <div className="flex flex-col gap-3 lg:flex-row lg:items-center lg:justify-between">
         <div className="min-w-0">
           <p className="truncate font-mono text-sm text-text-main">
@@ -223,7 +229,7 @@ function RecentLogRow({ log }: { log: CallLogEntry }) {
       <div className="flex flex-col gap-2 md:flex-row md:items-center md:justify-between">
         <div className="min-w-0">
           <p className="truncate text-sm text-text-main">
-            <span className={ok ? "text-emerald-400" : "text-red-400"}>{log.status || "—"}</span>{" "}
+            <span className={ok ? "text-success" : "text-error"}>{log.status || "—"}</span>{" "}
             {log.model || t("unknownModel")}
           </p>
           <p className="text-xs text-text-muted">
@@ -235,7 +241,7 @@ function RecentLogRow({ log }: { log: CallLogEntry }) {
         </div>
         <div className="text-xs text-text-muted">{fmtMs(log.duration)}</div>
       </div>
-      {log.error && <p className="mt-1 text-xs text-red-300">{log.error}</p>}
+      {log.error && <p className="mt-1 text-xs text-error">{log.error}</p>}
     </div>
   );
 }
@@ -312,9 +318,9 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
         <Link href="/dashboard/combos" className="text-sm text-primary hover:underline">
           ← {t("backToCombos")}
         </Link>
-        <Card className="border border-red-500/20 bg-red-500/10 p-6">
-          <h1 className="text-lg font-semibold text-red-300">{t("unavailable")}</h1>
-          <p className="mt-2 text-sm text-red-200">{error}</p>
+        <Card className="border-error/20 bg-error/5 p-6">
+          <h1 className="text-lg font-semibold tracking-tight text-error">{t("unavailable")}</h1>
+          <p className="mt-2 text-sm text-text-muted">{error}</p>
         </Card>
       </div>
     );
@@ -330,7 +336,7 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
             ← {t("backToCombos")}
           </Link>
           <div className="mt-3 flex flex-wrap items-center gap-3">
-            <h1 className="text-2xl font-semibold text-text-main">{t("title")}</h1>
+            <h1 className="text-2xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
             <span
               className={`rounded-full border px-3 py-1 text-xs font-medium ${STATE_STYLES[summary.healthState]}`}
             >
@@ -350,13 +356,13 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
           <button
             type="button"
             onClick={() => void load()}
-            className="rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main transition-colors hover:bg-surface/80"
+            className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-bg-subtle"
           >
             {t("refresh")}
           </button>
           <Link
             href="/dashboard/combos"
-            className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-2 text-sm text-primary transition-colors hover:bg-primary/20"
+            className="rounded-control border border-contrast bg-contrast px-3 py-2 text-sm font-medium text-contrast-fg transition-colors hover:bg-contrast-hover"
           >
             {t("editInCombos")}
           </Link>
@@ -377,19 +383,21 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
       <Card className="p-5">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
           <div>
-            <h2 className="text-lg font-semibold text-text-main">{t("overview")}</h2>
+            <h2 className="text-base font-semibold tracking-tight text-text-main">
+              {t("overview")}
+            </h2>
             <p className="mt-1 text-sm text-text-muted">{t("overviewDescription")}</p>
           </div>
-          <div className="flex flex-wrap gap-1 rounded-xl border border-border bg-bg-subtle p-1">
+          <div className="flex flex-wrap gap-1 rounded-lg border border-border bg-bg-subtle p-1">
             {TIME_RANGES.map((item) => (
               <button
                 key={item}
                 type="button"
                 onClick={() => setRange(item)}
-                className={`rounded-lg px-3 py-1.5 text-xs transition-colors ${
+                className={`rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
                   range === item
-                    ? "bg-primary/10 text-primary"
-                    : "text-text-muted hover:bg-surface hover:text-text-main"
+                    ? "bg-surface text-text-main ring-1 ring-border"
+                    : "text-text-muted hover:text-text-main"
                 }`}
               >
                 {item}
@@ -399,12 +407,12 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
         </div>
 
         <div className="mt-4 grid gap-3 md:grid-cols-3">
-          <div className="rounded-xl border border-border bg-bg-subtle p-3">
-            <p className="text-xs uppercase tracking-wide text-text-muted">{t("strategy")}</p>
+          <div className="rounded-lg border border-border bg-surface-2 p-3">
+            <p className="text-[13px] text-text-muted">{t("strategy")}</p>
             <p className="mt-1 font-semibold text-text-main">{summary.strategy}</p>
           </div>
-          <div className="rounded-xl border border-border bg-bg-subtle p-3">
-            <p className="text-xs uppercase tracking-wide text-text-muted">{t("targets")}</p>
+          <div className="rounded-lg border border-border bg-surface-2 p-3">
+            <p className="text-[13px] text-text-muted">{t("targets")}</p>
             <p className="mt-1 font-semibold text-text-main">
               {t("targetCounts", {
                 configured: summary.targetCount,
@@ -412,13 +420,13 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
               })}
             </p>
           </div>
-          <div className="rounded-xl border border-border bg-bg-subtle p-3">
-            <p className="text-xs uppercase tracking-wide text-text-muted">{t("providers")}</p>
+          <div className="rounded-lg border border-border bg-surface-2 p-3">
+            <p className="text-[13px] text-text-muted">{t("providers")}</p>
             <p className="mt-1 font-semibold text-text-main">{summary.providerCount}</p>
           </div>
         </div>
 
-        <div className="mt-4 rounded-xl border border-border bg-surface p-3">
+        <div className="mt-4 rounded-lg border border-border bg-surface p-3">
           <p className="text-sm font-medium text-text-main">{t("healthReasons")}</p>
           <div className="mt-2 flex flex-wrap gap-2">
             {summary.healthReasons.map((reason) => (
@@ -437,7 +445,9 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
         <Card className="p-5">
           <div className="flex items-start justify-between gap-3">
             <div>
-              <h2 className="text-lg font-semibold text-text-main">{t("configuredTargets")}</h2>
+              <h2 className="text-base font-semibold tracking-tight text-text-main">
+                {t("configuredTargets")}
+              </h2>
               <p className="mt-1 text-sm text-text-muted">{t("configuredTargetsDescription")}</p>
             </div>
           </div>
@@ -453,7 +463,9 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
         </Card>
 
         <Card className="p-5">
-          <h2 className="text-lg font-semibold text-text-main">{t("runtimeConfig")}</h2>
+          <h2 className="text-base font-semibold tracking-tight text-text-main">
+            {t("runtimeConfig")}
+          </h2>
           <p className="mt-1 text-sm text-text-muted">{t("runtimeConfigDescription")}</p>
           <div className="mt-4 space-y-2">
             {Object.keys(runtimeConfig).length === 0 ? (
@@ -476,7 +488,9 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
       </div>
 
       <Card className="p-5">
-        <h2 className="text-lg font-semibold text-text-main">{t("resolvedTargets")}</h2>
+        <h2 className="text-base font-semibold tracking-tight text-text-main">
+          {t("resolvedTargets")}
+        </h2>
         <p className="mt-1 text-sm text-text-muted">{t("resolvedTargetsDescription")}</p>
         <div className="mt-4 space-y-3">
           {resolvedTargets.length === 0 ? (
@@ -494,7 +508,9 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
 
       <div className="grid gap-6 xl:grid-cols-2">
         <Card className="p-5">
-          <h2 className="text-lg font-semibold text-text-main">{t("quotaDistribution")}</h2>
+          <h2 className="text-base font-semibold tracking-tight text-text-main">
+            {t("quotaDistribution")}
+          </h2>
           <div className="mt-4 space-y-3">
             {(health?.quotaHealth?.providers || []).length === 0 ? (
               <p className="text-sm text-text-muted">{t("noQuotaSnapshots")}</p>
@@ -508,7 +524,7 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
                     <span className="text-text-main">
                       {getProviderDisplayName(provider.provider)}
                     </span>
-                    <span className={provider.isExhausted ? "text-red-300" : "text-text-muted"}>
+                    <span className={provider.isExhausted ? "text-error" : "text-text-muted"}>
                       {fmtPercent(provider.remainingPct)} · {provider.trend}
                     </span>
                   </div>
@@ -523,7 +539,9 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
         </Card>
 
         <Card className="p-5">
-          <h2 className="text-lg font-semibold text-text-main">{t("recentDecisions")}</h2>
+          <h2 className="text-base font-semibold tracking-tight text-text-main">
+            {t("recentDecisions")}
+          </h2>
           <p className="mt-1 text-sm text-text-muted">{t("recentDecisionsDescription")}</p>
           <div className="mt-4 space-y-2">
             {logs.length === 0 ? (
@@ -538,7 +556,7 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
       </div>
 
       <Card className="p-5">
-        <h2 className="text-lg font-semibold text-text-main">{t("quickLinks")}</h2>
+        <h2 className="text-base font-semibold tracking-tight text-text-main">{t("quickLinks")}</h2>
         <div className="mt-4 flex flex-wrap gap-2">
           {[
             [t("comboHealth"), "/dashboard/analytics/combo-health"],
@@ -551,7 +569,7 @@ export default function ComboControlCenterClient({ comboId }: { comboId: string 
             <Link
               key={href}
               href={href}
-              className="rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main transition-colors hover:bg-surface/80"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-bg-subtle"
             >
               {label}
             </Link>

@@ -818,7 +818,7 @@ export default function ModelSelectModal({
           onClose();
           setSearchQuery("");
         }}
-        className="w-full px-3 py-2 text-sm font-medium rounded border border-primary bg-primary text-white hover:bg-primary/90 transition-colors"
+        className="w-full px-3 py-2 text-sm font-medium rounded-control border border-contrast bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors"
       >
         {t("done")}
       </button>
@@ -847,7 +847,7 @@ export default function ModelSelectModal({
             placeholder={t("search")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full pl-8 pr-3 py-1.5 bg-surface border border-border rounded text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
+            className="w-full pl-8 pr-3 py-1.5 bg-surface border border-border-strong rounded-control text-xs placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary/50"
           />
         </div>
       </div>
@@ -869,7 +869,7 @@ export default function ModelSelectModal({
               type="button"
               onClick={handleToggleSelectAllVisible}
               data-testid="model-select-toggle-all-visible"
-              className="shrink-0 px-2 py-1 text-xs font-medium rounded border border-border bg-surface text-text-main hover:border-primary/50 hover:bg-primary/5 transition-colors"
+              className="shrink-0 px-2 py-1 text-xs font-medium rounded-control border border-border bg-surface text-text-main hover:border-border-strong hover:bg-bg-subtle transition-colors"
             >
               {allVisibleSelected
                 ? labelOrFallback("unselectAll", "Unselect all")
@@ -883,7 +883,7 @@ export default function ModelSelectModal({
 
         {showProviderTestControls && (
           <div
-            className="rounded-lg border border-border bg-black/[0.02] dark:bg-white/[0.02] px-2.5 py-2 space-y-2"
+            className="rounded-lg border border-border bg-bg-subtle px-2.5 py-2 space-y-2"
             data-testid="model-select-provider-test-panel"
           >
             <p className="text-[11px] text-text-muted leading-snug">
@@ -909,7 +909,7 @@ export default function ModelSelectModal({
                   }
                   disabled={visibleProviderIds.length === 0 || testingProviders}
                   data-testid="model-select-toggle-all-providers"
-                  className="px-2 py-0.5 text-[11px] font-medium rounded border border-border bg-surface text-text-main hover:border-primary/50 hover:bg-primary/5 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                  className="px-2 py-0.5 text-[11px] font-medium rounded-control border border-border bg-surface text-text-main hover:border-border-strong hover:bg-bg-subtle transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   {allProvidersChecked
                     ? labelOrFallback("clearProviderSelection", "Uncheck providers")
@@ -924,7 +924,7 @@ export default function ModelSelectModal({
                   disabled={testingProviders || selectedProviderIds.size === 0}
                   data-testid="model-select-test-selected-providers"
                   title={labelOrFallback("testSelectedProviders", "Test providers")}
-                  className="flex items-center gap-1 px-2 py-1 text-xs font-medium rounded border border-border bg-surface text-text-main hover:border-primary/50 hover:bg-primary/5 transition-colors disabled:cursor-not-allowed disabled:opacity-50"
+                  className="flex items-center gap-1 px-2 py-1 text-xs font-medium rounded-control border border-border bg-surface text-text-main hover:border-border-strong hover:bg-bg-subtle transition-colors disabled:cursor-not-allowed disabled:opacity-50"
                 >
                   <span
                     className={`material-symbols-outlined text-[14px] ${
@@ -950,10 +950,10 @@ export default function ModelSelectModal({
                     onClick={handleToggleWorkingModels}
                     disabled={!canAddWorking && !canRemoveWorking}
                     data-testid="model-select-working-models"
-                    className={`shrink-0 px-2 py-1 text-xs font-medium rounded border transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
+                    className={`shrink-0 px-2 py-1 text-xs font-medium rounded-control border transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
                       canRemoveWorking
-                        ? "border-emerald-500/40 bg-emerald-500/15 text-emerald-700 dark:text-emerald-400"
-                        : "border-border bg-surface text-text-main hover:border-primary/50 hover:bg-primary/5"
+                        ? "border-success/30 bg-success/10 text-success"
+                        : "border-border bg-surface text-text-main hover:border-border-strong hover:bg-bg-subtle"
                     }`}
                   >
                     {canRemoveWorking
@@ -984,8 +984,8 @@ export default function ModelSelectModal({
         {showCombos && filteredCombos.length > 0 && (
           <div>
             <div className="flex items-center gap-1.5 mb-1.5 sticky top-0 z-10 bg-surface py-1">
-              <span className="material-symbols-outlined text-primary text-[14px]">layers</span>
-              <span className="text-xs font-medium text-primary">{t("combos")}</span>
+              <span className="material-symbols-outlined text-text-muted text-[14px]">layers</span>
+              <span className="text-xs font-medium text-text-main">{t("combos")}</span>
               <span className="text-[10px] text-text-muted">({filteredCombos.length})</span>
             </div>
             <div className="flex flex-wrap gap-1.5">
@@ -998,11 +998,11 @@ export default function ModelSelectModal({
                       handleSelect({ id: combo.name, name: combo.name, value: combo.name })
                     }
                     className={`
-                      px-2 py-1 rounded-xl text-xs font-medium transition-all border hover:cursor-pointer
+                      px-2 py-1 rounded-md text-xs font-medium transition-colors border hover:cursor-pointer
                       ${
                         isSelected
-                          ? "bg-primary text-white border-primary"
-                          : "bg-surface border-border text-text-main hover:border-primary/50 hover:bg-primary/5"
+                          ? "bg-primary/10 text-primary border-primary/40"
+                          : "bg-surface border-border text-text-main hover:border-border-strong hover:bg-bg-subtle"
                       }
                     `}
                   >
@@ -1039,7 +1039,9 @@ export default function ModelSelectModal({
                       className="w-2 h-2 rounded-full shrink-0"
                       style={{ backgroundColor: group.color }}
                     />
-                    <span className="text-xs font-medium text-primary truncate">{group.name}</span>
+                    <span className="text-xs font-medium text-text-main truncate">
+                      {group.name}
+                    </span>
                     <span className="text-[10px] text-text-muted shrink-0">
                       ({group.models.length})
                     </span>
@@ -1050,7 +1052,7 @@ export default function ModelSelectModal({
                       className="w-2 h-2 rounded-full shrink-0"
                       style={{ backgroundColor: group.color }}
                     />
-                    <span className="text-xs font-medium text-primary">{group.name}</span>
+                    <span className="text-xs font-medium text-text-main">{group.name}</span>
                     <span className="text-[10px] text-text-muted">({group.models.length})</span>
                   </>
                 )}
@@ -1066,17 +1068,17 @@ export default function ModelSelectModal({
                       key={model.id}
                       onClick={() => handleSelect(model)}
                       className={`
-                      px-2 py-1 rounded-xl text-xs font-medium transition-all border hover:cursor-pointer
+                      px-2 py-1 rounded-md text-xs font-medium transition-colors border hover:cursor-pointer
                       ${
                         isSelected
-                          ? "bg-primary text-white border-primary"
+                          ? "bg-primary/10 text-primary border-primary/40"
                           : isAdded
-                            ? "bg-emerald-500/15 border-emerald-500/30 text-emerald-700 dark:text-emerald-400"
+                            ? "bg-success/10 border-success/30 text-success"
                             : testStatus === "ok"
-                              ? "bg-surface border-emerald-500/40 text-text-main"
+                              ? "bg-surface border-success/40 text-text-main"
                               : testStatus === "error"
-                                ? "bg-surface border-red-500/40 text-text-main"
-                                : "bg-surface border-border text-text-main hover:border-primary/50 hover:bg-primary/5"
+                                ? "bg-surface border-error/40 text-text-main"
+                                : "bg-surface border-border text-text-main hover:border-border-strong hover:bg-bg-subtle"
                       }
                     `}
                     >
@@ -1088,12 +1090,12 @@ export default function ModelSelectModal({
                         </span>
                       )}
                       {testStatus === "ok" && (
-                        <span className="ml-1 rounded px-1 py-px text-[9px] font-semibold uppercase tracking-wide bg-emerald-500/20 text-emerald-700 dark:text-emerald-400">
+                        <span className="ml-1 rounded px-1 py-px text-[9px] font-semibold uppercase tracking-wide bg-success/15 text-success">
                           ok
                         </span>
                       )}
                       {testStatus === "error" && (
-                        <span className="ml-1 rounded px-1 py-px text-[9px] font-semibold uppercase tracking-wide bg-red-500/20 text-red-600 dark:text-red-400">
+                        <span className="ml-1 rounded px-1 py-px text-[9px] font-semibold uppercase tracking-wide bg-error/15 text-error">
                           fail
                         </span>
                       )}
@@ -1119,7 +1121,7 @@ export default function ModelSelectModal({
             <button
               type="button"
               onClick={() => onSelect(null)}
-              className="px-2 py-1 text-xs rounded border border-border bg-surface hover:bg-primary/5"
+              className="px-2 py-1 text-xs rounded-control border border-border bg-surface text-text-main hover:bg-bg-subtle transition-colors"
             >
               {t("clear")}
             </button>
@@ -1129,7 +1131,7 @@ export default function ModelSelectModal({
                 onClose();
                 setSearchQuery("");
               }}
-              className="px-2 py-1 text-xs rounded border border-border bg-surface hover:bg-primary/5"
+              className="px-2 py-1 text-xs rounded-control border border-border bg-surface text-text-main hover:bg-bg-subtle transition-colors"
             >
               {t("done")}
             </button>

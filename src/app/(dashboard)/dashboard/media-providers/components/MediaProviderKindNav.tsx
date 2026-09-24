@@ -25,8 +25,8 @@ export default function MediaProviderKindNav({ activeKind }: MediaProviderKindNa
             href={`/dashboard/media-providers/${kind}`}
             className={`flex items-center px-3 py-1.5 rounded-full border text-xs font-medium transition-colors ${
               isActive
-                ? "bg-primary text-white border-primary"
-                : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/30"
+                ? "bg-bg-subtle border-border-strong text-text-main"
+                : "bg-transparent border-border text-text-muted hover:text-text-main hover:bg-bg-subtle"
             }`}
             aria-current={isActive ? "page" : undefined}
           >

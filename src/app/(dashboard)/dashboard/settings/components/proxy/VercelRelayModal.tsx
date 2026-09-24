@@ -50,27 +50,37 @@ export default function VercelRelayModal({ isOpen, onClose, onDeployed }: Vercel
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-black/60"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm"
       role="dialog"
       aria-modal="true"
       aria-labelledby="vercel-relay-title"
     >
-      <div className="bg-surface rounded-lg shadow-xl p-6 w-full max-w-md space-y-4">
+      <div className="bg-surface rounded-card shadow-[var(--shadow-elevated)] p-6 w-full max-w-md space-y-4">
         <div className="flex items-center justify-between">
-          <h2 id="vercel-relay-title" className="text-lg font-bold flex items-center gap-2">
-            <span className="material-symbols-outlined text-primary" aria-hidden="true">
+          <h2
+            id="vercel-relay-title"
+            className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2"
+          >
+            <span
+              className="material-symbols-outlined text-[20px] text-text-muted"
+              aria-hidden="true"
+            >
               cloud_upload
             </span>
             {t("vercelRelayModalTitle")}
           </h2>
-          <button onClick={onClose} aria-label={t("close")} className="text-text-muted hover:text-text">
+          <button
+            onClick={onClose}
+            aria-label={t("close")}
+            className="text-text-muted hover:text-text-main transition-colors"
+          >
             <span className="material-symbols-outlined" aria-hidden="true">
               close
             </span>
           </button>
         </div>
 
-        <div className="bg-yellow-500/10 border border-yellow-500/30 rounded p-3 text-xs text-yellow-300">
+        <div className="bg-warning/5 border border-warning/30 rounded-lg p-3 text-xs text-warning">
           {t("vercelRelayWarning")}
         </div>
 
@@ -84,13 +94,11 @@ export default function VercelRelayModal({ isOpen, onClose, onDeployed }: Vercel
               type="password"
               value={token}
               onChange={(e) => setToken(e.target.value)}
-              className="w-full text-sm bg-surface-alt border border-border rounded px-3 py-2 focus:outline-none focus:border-primary"
+              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
               placeholder="vercel_pat_..."
               autoComplete="off"
             />
-            <p className="text-xs text-text-muted mt-1">
-              {t("vercelRelayTokenHint")}
-            </p>
+            <p className="text-xs text-text-muted mt-1">{t("vercelRelayTokenHint")}</p>
           </div>
           <div>
             <label className="text-sm font-medium mb-1 block" htmlFor="vercel-project-name">
@@ -101,14 +109,14 @@ export default function VercelRelayModal({ isOpen, onClose, onDeployed }: Vercel
               type="text"
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
-              className="w-full text-sm bg-surface-alt border border-border rounded px-3 py-2 focus:outline-none focus:border-primary"
+              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
               placeholder="omniroute-relay"
             />
           </div>
         </div>
 
         {error && (
-          <div className="text-sm text-red-400 bg-red-500/10 border border-red-500/20 rounded p-2">
+          <div className="text-sm text-error bg-error/10 border border-error/20 rounded-md p-2">
             {error}
           </div>
         )}

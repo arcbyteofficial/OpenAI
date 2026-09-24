@@ -73,7 +73,7 @@ export function PlaygroundCard({
       {/* Endpoint display */}
       <div className="mb-3">
         <label className="block text-xs text-text-muted mb-1">{t("endpoint")}</label>
-        <code className="block text-xs font-mono bg-bg-subtle rounded px-2 py-1.5 border border-border text-text-main truncate">
+        <code className="block text-[12px] font-mono bg-bg-subtle rounded-control px-2 py-1.5 border border-border text-text-main truncate">
           {apiEndpoint}
         </code>
       </div>
@@ -86,7 +86,7 @@ export function PlaygroundCard({
         <button
           type="button"
           onClick={handleCopyCurl}
-          className="inline-flex items-center gap-1.5 text-xs text-text-muted hover:text-text-primary transition-colors"
+          className="inline-flex items-center gap-1.5 text-xs text-text-muted hover:text-text-main transition-colors"
         >
           <span className="material-symbols-outlined text-[14px]">content_copy</span>
           {curlCopied ? t("copied") : t("copyCurl")}
@@ -104,12 +104,12 @@ export function PlaygroundCard({
             <button
               type="button"
               onClick={() => setKeyRevealed((v) => !v)}
-              className="text-xs text-text-muted hover:text-text-primary"
+              className="text-xs text-text-muted hover:text-text-main transition-colors"
             >
               {keyRevealed ? t("hideKey") : t("revealKey")}
             </button>
           </div>
-          <pre className="text-xs bg-bg-subtle border border-border rounded p-2 overflow-x-auto whitespace-pre-wrap break-all">
+          <pre className="text-[12px] font-mono bg-bg-subtle border border-border rounded-lg p-3 overflow-x-auto whitespace-pre-wrap break-all">
             {displayedCurl}
           </pre>
         </div>
@@ -117,9 +117,9 @@ export function PlaygroundCard({
 
       {/* Error display */}
       {error && (
-        <div className="mt-3 flex items-start gap-2 rounded-lg bg-red-500/10 border border-red-500/20 px-3 py-2">
-          <span className="material-symbols-outlined text-[16px] text-red-400 shrink-0">error</span>
-          <p className="text-xs text-red-400">{error}</p>
+        <div className="mt-3 flex items-start gap-2 rounded-lg bg-error/10 border border-error/20 px-3 py-2">
+          <span className="material-symbols-outlined text-[16px] text-error shrink-0">error</span>
+          <p className="text-xs text-error">{error}</p>
         </div>
       )}
 

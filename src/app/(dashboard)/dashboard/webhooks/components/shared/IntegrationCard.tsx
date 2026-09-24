@@ -15,10 +15,10 @@ const KIND_ICONS: Record<AnyKind, string> = {
 };
 
 const KIND_COLORS: Record<AnyKind, string> = {
-  slack: "text-emerald-500",
-  telegram: "text-blue-500",
-  discord: "text-violet-500",
-  custom: "text-amber-500",
+  slack: "text-text-main",
+  telegram: "text-text-main",
+  discord: "text-text-main",
+  custom: "text-text-main",
   email: "text-text-muted",
   pagerduty: "text-text-muted",
   teams: "text-text-muted",
@@ -48,12 +48,12 @@ export function IntegrationCard({
       type="button"
       onClick={!disabled && onSelect ? () => onSelect(kind as WebhookKind) : undefined}
       disabled={disabled}
-      className={`relative flex w-full flex-col items-start gap-2 rounded-xl border p-4 text-left transition-all disabled:cursor-not-allowed disabled:opacity-50 ${
+      className={`relative flex w-full flex-col items-start gap-2 rounded-card border p-4 text-left transition-colors disabled:cursor-not-allowed disabled:opacity-50 ${
         disabled
           ? "border-border bg-surface"
           : selected
-            ? "border-primary bg-primary/5 shadow-sm"
-            : "border-border bg-surface hover:border-primary/40 hover:bg-primary/5"
+            ? "border-primary bg-primary/5"
+            : "border-border bg-surface hover:border-border-strong hover:bg-bg-subtle"
       }`}
     >
       {comingSoonLabel && (
@@ -61,7 +61,7 @@ export function IntegrationCard({
           {comingSoonLabel}
         </span>
       )}
-      <span className={`material-symbols-outlined text-[28px] ${KIND_COLORS[kind]}`}>
+      <span className={`material-symbols-outlined text-[22px] ${KIND_COLORS[kind]}`}>
         {KIND_ICONS[kind]}
       </span>
       <div>

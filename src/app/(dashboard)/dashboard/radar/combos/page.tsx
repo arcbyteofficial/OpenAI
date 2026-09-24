@@ -126,12 +126,12 @@ export default function RadarCombosPage() {
           ← {t("backToRadar")}
         </Link>
         <div>
-          <h1 className="text-2xl font-bold">{t("title")}</h1>
+          <h1 className="text-xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
           <p className="text-sm text-text-muted mt-1">{t("subtitle")}</p>
         </div>
       </div>
 
-      {error && <div className="p-3 rounded-lg bg-red-500/10 text-red-400 text-sm">{error}</div>}
+      {error && <div className="p-3 rounded-lg bg-error/10 text-error text-sm">{error}</div>}
 
       {loading ? (
         <div className="flex items-center justify-center min-h-[200px] text-text-muted">
@@ -154,22 +154,26 @@ export default function RadarCombosPage() {
               <Card key={suggestion.familyId}>
                 <div className="flex flex-col gap-4">
                   <div className="flex flex-col gap-1">
-                    <span className="text-xs uppercase tracking-wide text-text-muted">
+                    <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                       {t("familyLabel")}
                     </span>
-                    <h2 className="text-lg font-semibold font-mono">{suggestion.familyId}</h2>
+                    <h2 className="text-base font-semibold font-mono text-text-main">
+                      {suggestion.familyId}
+                    </h2>
                     <p className="text-sm text-text-muted">{t("strategyReason")}</p>
                   </div>
 
                   <div className="flex flex-col gap-2">
-                    <span className="text-sm font-medium">{t("modelsLabel")}</span>
+                    <span className="text-sm font-medium text-text-main">{t("modelsLabel")}</span>
                     {suggestion.models.map((model) => (
                       <div
                         key={`${model.providerId}:${model.modelId}`}
                         className="flex flex-wrap items-center justify-between gap-2 rounded-lg border border-border px-3 py-2"
                       >
-                        <span className="font-medium">{model.providerName}</span>
-                        <span className="font-mono text-sm text-text-muted">
+                        <span className="text-sm font-medium text-text-main">
+                          {model.providerName}
+                        </span>
+                        <span className="font-mono text-[12px] text-text-muted">
                           {model.qualifiedModel}
                         </span>
                       </div>
@@ -180,7 +184,7 @@ export default function RadarCombosPage() {
                     type="button"
                     onClick={() => void createSuggestion(suggestion)}
                     disabled={creating || suggestion.alreadyExists}
-                    className="self-start px-4 py-2 text-sm font-medium rounded-lg bg-violet-500 text-white hover:bg-violet-600 transition-colors disabled:opacity-50"
+                    className="self-start px-3 py-1.5 text-[13px] font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors disabled:opacity-50"
                   >
                     {created
                       ? t("created")

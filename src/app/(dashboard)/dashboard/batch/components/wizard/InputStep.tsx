@@ -45,7 +45,12 @@ export default function InputStep({ input, onChange, destination }: InputStepPro
   const isCsv = input.kind === "csv";
 
   function handleKindChange(kind: "jsonl" | "csv") {
-    onChange({ kind, fileName: null, rawContent: null, csvMapping: kind === "csv" ? {} : undefined });
+    onChange({
+      kind,
+      fileName: null,
+      rawContent: null,
+      csvMapping: kind === "csv" ? {} : undefined,
+    });
     setCsvJsonl(null);
   }
 
@@ -122,18 +127,18 @@ export default function InputStep({ input, onChange, destination }: InputStepPro
   return (
     <div className="flex flex-col gap-6">
       {/* Kind toggle */}
-      <div className="flex rounded-lg border border-[var(--color-border)] overflow-hidden self-start">
+      <div className="flex rounded-control border border-border-strong overflow-hidden self-start">
         <button
           type="button"
           onClick={() => handleKindChange("jsonl")}
-          className={`px-4 py-2 text-sm font-medium transition-colors ${isJsonl ? "bg-[var(--color-accent)] text-white" : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"}`}
+          className={`px-4 py-2 text-sm font-medium transition-colors ${isJsonl ? "bg-bg-subtle text-text-main" : "text-text-muted hover:text-text-main"}`}
         >
           {t("wizardInputKindJsonl")}
         </button>
         <button
           type="button"
           onClick={() => handleKindChange("csv")}
-          className={`px-4 py-2 text-sm font-medium transition-colors ${isCsv ? "bg-[var(--color-accent)] text-white" : "text-[var(--color-text-muted)] hover:text-[var(--color-text)]"}`}
+          className={`px-4 py-2 text-sm font-medium transition-colors ${isCsv ? "bg-bg-subtle text-text-main" : "text-text-muted hover:text-text-main"}`}
         >
           {t("wizardInputKindCsv")}
         </button>
@@ -152,24 +157,22 @@ export default function InputStep({ input, onChange, destination }: InputStepPro
           if (e.key === "Enter" || e.key === " ") fileInputRef.current?.click();
         }}
         aria-disabled={isReading}
-        className={`rounded-xl border-2 border-dashed p-8 flex flex-col items-center gap-3 transition-colors
+        className={`rounded-card border-2 border-dashed p-8 flex flex-col items-center gap-3 transition-colors
           ${isReading ? "cursor-wait opacity-60 pointer-events-none" : "cursor-pointer"}
-          ${isDragging ? "border-[var(--color-accent)] bg-[var(--color-accent)]/5" : "border-[var(--color-border)] hover:border-[var(--color-accent)]/50"}`}
+          ${isDragging ? "border-primary bg-primary/5" : "border-border-strong hover:border-text-subtle"}`}
       >
-        <span className="material-symbols-outlined text-3xl text-[var(--color-text-muted)]">
-          upload_file
-        </span>
+        <span className="material-symbols-outlined text-3xl text-text-subtle">upload_file</span>
         {isReading ? (
-          <span className="text-sm text-[var(--color-text-muted)]">{t("wizardInputReading")}</span>
+          <span className="text-sm text-text-muted">{t("wizardInputReading")}</span>
         ) : hasFile ? (
           <div className="flex flex-col items-center gap-1">
-            <span className="text-sm text-[var(--color-text)] font-medium">{input.fileName}</span>
-            <span className="text-xs text-[var(--color-text-muted)]">
+            <span className="text-sm text-text-main font-medium">{input.fileName}</span>
+            <span className="text-xs text-text-muted">
               {isLargeFile ? t("wizardInputLargeFileLabel") : t("wizardInputReady")}
             </span>
           </div>
         ) : (
-          <span className="text-sm text-[var(--color-text-muted)]">{t("wizardDropOrPick")}</span>
+          <span className="text-sm text-text-muted">{t("wizardDropOrPick")}</span>
         )}
         <input
           ref={fileInputRef}
@@ -182,14 +185,14 @@ export default function InputStep({ input, onChange, destination }: InputStepPro
 
       {/* Large file warning */}
       {isLargeFile && (
-        <div className="rounded-lg border border-yellow-500/25 bg-yellow-500/10 px-3 py-2 text-xs text-yellow-400">
+        <div className="rounded-lg border border-warning/20 bg-warning/10 px-3 py-2 text-xs text-warning">
           {t("wizardInputLargeFileWarning")}
         </div>
       )}
 
       {/* CSV mapping (inline step 2.5) */}
       {isCsv && hasFile && input.rawContent && (
-        <div className="rounded-xl border border-[var(--color-border)] p-4">
+        <div className="rounded-lg border border-border p-4">
           <CsvMappingStep
             csvContent={input.rawContent}
             mapping={input.csvMapping ?? {}}
@@ -198,7 +201,7 @@ export default function InputStep({ input, onChange, destination }: InputStepPro
             onJsonlReady={handleJsonlReady}
           />
           {csvMappingReady && (
-            <p className="mt-3 text-xs text-emerald-400">{t("wizardInputCsvJsonlReady")}</p>
+            <p className="mt-3 text-xs text-success">{t("wizardInputCsvJsonlReady")}</p>
           )}
         </div>
       )}

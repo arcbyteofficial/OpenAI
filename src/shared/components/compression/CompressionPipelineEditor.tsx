@@ -42,7 +42,7 @@ type Props = {
 };
 
 const SELECT_CLASS =
-  "rounded-lg border border-border bg-bg px-3 py-2 text-sm text-text-main w-full";
+  "rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[13px] text-text-main focus:border-primary focus:outline-none transition-colors w-full";
 
 function SortableRow(props: {
   id: string;
@@ -74,7 +74,7 @@ function SortableRow(props: {
         type="button"
         aria-label={t("dragToReorder")}
         data-testid={`pipeline-drag-${props.index}`}
-        className="cursor-grab rounded-lg border border-border px-2 py-2 text-sm text-text-muted"
+        className="cursor-grab rounded-control border border-border px-2 py-1.5 text-sm text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
         {...attributes}
         {...listeners}
       >
@@ -109,7 +109,7 @@ function SortableRow(props: {
         onClick={props.onRemove}
         disabled={!props.canRemove}
         data-testid={`pipeline-remove-${props.index}`}
-        className="rounded-lg border border-border px-3 py-2 text-sm text-text-main disabled:opacity-50"
+        className="rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] font-medium text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
       >
         {t("removeStep")}
       </button>
@@ -145,7 +145,7 @@ export function CompressionPipelineEditor({ steps, onChange, engineIntensities }
           type="button"
           data-testid="pipeline-add-step"
           onClick={() => onChange(addLayer(steps, { engine: firstEngine }, engineIntensities))}
-          className="rounded-lg border border-border px-3 py-1.5 text-xs text-text-main"
+          className="rounded-control border border-border-strong bg-surface px-2.5 py-1 text-xs font-medium text-text-main hover:bg-bg-subtle transition-colors"
         >
           {t("addStep")}
         </button>

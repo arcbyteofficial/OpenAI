@@ -51,9 +51,9 @@ export default function CodexAccountDetails({ pool }: CodexAccountDetailsProps) 
     fully_limited: t("codexPoolFullyLimited"),
   };
   return (
-    <div className="mt-3 rounded-lg border border-border/60 bg-surface-secondary/30 p-3">
+    <div className="mt-3 rounded-lg border border-border bg-surface-2 p-3">
       <div className="mb-2 flex items-center justify-between gap-2 text-xs">
-        <span className="font-medium">{t("codexQuotaPools")}</span>
+        <span className="font-medium text-text-main">{t("codexQuotaPools")}</span>
         <span className="text-text-muted">
           {limited ? statusLabels.fully_limited : statusLabels.available}
         </span>
@@ -64,11 +64,11 @@ export default function CodexAccountDetails({ pool }: CodexAccountDetailsProps) 
           .map((child) => (
             <div
               key={child.key.scope}
-              className="rounded-md border border-border/50 bg-background/60 px-2.5 py-2 text-xs"
+              className="rounded-md border border-border bg-surface px-2.5 py-2 text-xs"
             >
               <div className="flex items-center justify-between gap-2">
                 <span className="font-medium">Codex</span>
-                <span className={limited ? "text-amber-500" : "text-text-muted"}>
+                <span className={limited ? "text-warning" : "text-text-muted"}>
                   {limited && child.quota.exhaustedWindow
                     ? t("codexPoolQuotaExhausted")
                     : limited && child.cooldown.active
@@ -81,7 +81,7 @@ export default function CodexAccountDetails({ pool }: CodexAccountDetailsProps) 
                 <span>7d: {formatQuota(child.quota.windows["7d"], t("codexPoolUsed"))}</span>
               </div>
               {limited && child.cooldown.rateLimitedUntil ? (
-                <div className="mt-1 text-[11px] text-amber-500">
+                <div className="mt-1 text-[11px] text-warning">
                   {t("codexPoolUntil", {
                     value: new Intl.DateTimeFormat(locale, {
                       dateStyle: "short",
@@ -110,7 +110,7 @@ export default function CodexAccountDetails({ pool }: CodexAccountDetailsProps) 
         </p>
       )}
       {failed && (
-        <p role="alert" className="mt-2 text-xs text-red-500">
+        <p role="alert" className="mt-2 text-xs text-error">
           {t("codexCooldownReleaseFailed")}
         </p>
       )}

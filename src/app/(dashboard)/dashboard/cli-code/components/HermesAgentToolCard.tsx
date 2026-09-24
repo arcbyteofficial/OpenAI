@@ -365,7 +365,7 @@ export default function HermesAgentToolCard({
                 )}
               </h3>
               {(Object.keys(displayRoles).length > 0 || Object.keys(selections).length > 0) && (
-                <span className="text-[10px] px-1.5 py-px rounded bg-emerald-500/10 text-emerald-600">
+                <span className="text-[10px] px-1.5 py-px rounded bg-success/10 text-success">
                   {t("hermesConfiguredRoles", {
                     configured: configuredRolesCount,
                     total: HERMES_ROLES.length,
@@ -410,7 +410,7 @@ export default function HermesAgentToolCard({
                   <button
                     key={modelValue}
                     onClick={() => applyToAll(modelValue)}
-                    className="px-2 py-0.5 rounded border border-border bg-surface hover:bg-bg-secondary text-text-main transition-colors"
+                    className="px-2 py-0.5 rounded-md border border-border-strong bg-surface hover:bg-bg-subtle text-text-main transition-colors"
                     title={t("hermesApplyModelToAll", { model: modelValue })}
                   >
                     {modelValue}
@@ -475,7 +475,7 @@ export default function HermesAgentToolCard({
                   <div className="flex items-center gap-2 shrink-0">
                     {displayedModel ? (
                       <code
-                        className="px-1.5 py-0.5 rounded bg-black/5 dark:bg-white/10 font-mono text-text-main text-[10px] max-w-[200px] truncate"
+                        className="px-1.5 py-0.5 rounded bg-bg-subtle font-mono text-text-main text-[10px] max-w-[200px] truncate"
                         title={displayedModel}
                       >
                         {displayedModel}
@@ -488,8 +488,8 @@ export default function HermesAgentToolCard({
                       <div
                         className={`text-[10px] px-1.5 py-px rounded shrink-0 ${
                           badge.outsideOmniRoute
-                            ? "bg-amber-500/10 text-amber-600"
-                            : "bg-emerald-500/10 text-emerald-600"
+                            ? "bg-warning/10 text-warning"
+                            : "bg-success/10 text-success"
                         }`}
                       >
                         {badge.label}
@@ -531,7 +531,7 @@ export default function HermesAgentToolCard({
 
           {/* Message (standard colored info bar like other cards) */}
           {message && (
-            <div className="flex items-center gap-2 px-2 py-1.5 rounded text-xs bg-green-500/10 text-green-600">
+            <div className="flex items-center gap-2 px-2 py-1.5 rounded-md text-xs bg-success/10 text-success">
               <span className="material-symbols-outlined text-[14px]">check_circle</span>
               <span>{message}</span>
             </div>
@@ -582,7 +582,7 @@ export default function HermesAgentToolCard({
               <div className="text-[10px] font-medium text-text-muted mb-1.5 flex items-center gap-1.5">
                 <span>{t("hermesPreviewPath")}</span>
               </div>
-              <pre className="p-4 bg-bg-secondary rounded-lg border border-border overflow-auto max-h-80 text-xs">
+              <pre className="p-4 bg-bg-subtle rounded-lg border border-border overflow-auto max-h-80 text-xs">
                 <code className="font-mono whitespace-pre text-text-main">{previewYaml}</code>
               </pre>
             </div>

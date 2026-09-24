@@ -36,16 +36,16 @@ function MemoryPageContent() {
 
       {/* Tab navigation + memory enable toggle */}
       <div className="flex items-center justify-between gap-4 flex-wrap">
-        <div className="flex gap-1 p-1 rounded-lg bg-surface/50 border border-border/60 w-fit">
+        <div className="flex gap-1 p-1 rounded-lg bg-bg-subtle border border-border w-fit">
           {TABS.map((tab) => (
             <button
               key={tab}
               type="button"
               data-testid={`tab-${tab}`}
               onClick={() => setTab(tab)}
-              className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+              className={`px-3 py-1.5 rounded-md text-[13px] font-medium transition-colors ${
                 activeTab === tab
-                  ? "bg-bg text-text-main shadow-sm"
+                  ? "bg-surface dark:bg-white/10 text-text-main shadow-[0_1px_2px_rgba(0,0,0,0.08),0_0_0_0.5px_rgba(0,0,0,0.06)]"
                   : "text-text-muted hover:text-text-main"
               }`}
             >
@@ -62,7 +62,7 @@ function MemoryPageContent() {
             data-testid="memory-enabled-toggle"
             onClick={() => void save({ enabled: !memoryEnabled })}
             className={`relative w-11 h-6 rounded-full transition-colors ${
-              memoryEnabled ? "bg-violet-500" : "bg-border"
+              memoryEnabled ? "bg-primary" : "bg-border-strong"
             }`}
           >
             <span

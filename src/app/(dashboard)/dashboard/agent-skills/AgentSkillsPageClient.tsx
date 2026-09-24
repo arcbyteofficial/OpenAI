@@ -206,18 +206,18 @@ export function AgentSkillsPageClient(): JSX.Element {
       <SkillsConceptCard variant="agent" />
 
       {/* Header: coverage + MCP/A2A bar + generate button */}
-      <div className="flex flex-col gap-3 rounded-xl border border-border bg-bg p-4">
+      <div className="flex flex-col gap-3 rounded-card border border-border bg-surface p-4">
         {/* Coverage */}
         <div>
           <div className="mb-2 flex items-center justify-between gap-2">
-            <span className="text-xs font-semibold text-text-muted uppercase tracking-wide">
+            <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
               {t("coverageLabel")}
             </span>
             {showGenerateButton && (
               <button
                 onClick={() => void handleGenerate()}
                 disabled={generatingSkills}
-                className="flex items-center gap-1.5 rounded-lg border border-primary/30 bg-primary/5 px-3 py-1.5 text-xs font-medium text-primary hover:bg-primary/10 transition-colors disabled:opacity-60"
+                className="flex items-center gap-1.5 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-xs font-medium text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-60"
                 data-testid="generate-button"
               >
                 <span
@@ -247,7 +247,7 @@ export function AgentSkillsPageClient(): JSX.Element {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder={t("filters.searchPlaceholder")}
-            className="w-full rounded-lg border border-border bg-bg py-2 pl-9 pr-3 text-sm text-text-main placeholder:text-text-muted focus:outline-none focus:ring-2 focus:ring-primary/40"
+            className="w-full rounded-control border border-border-strong bg-surface py-2 pl-9 pr-3 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-colors"
             data-testid="search-input"
           />
         </div>
@@ -257,10 +257,10 @@ export function AgentSkillsPageClient(): JSX.Element {
               key={cat}
               onClick={() => setFilter(cat)}
               data-testid={`filter-${cat}`}
-              className={`rounded-lg px-3 py-2 text-xs font-medium transition-colors border ${
+              className={`rounded-control px-3 py-2 text-xs font-medium transition-colors border ${
                 filter === cat
-                  ? "bg-primary/10 text-primary border-primary/30"
-                  : "bg-bg text-text-muted border-border hover:bg-bg-subtle hover:text-text-main"
+                  ? "bg-bg-subtle text-text-main border-border-strong"
+                  : "bg-surface text-text-muted border-border hover:bg-bg-subtle hover:text-text-main"
               }`}
             >
               {cat === "all"
@@ -282,7 +282,7 @@ export function AgentSkillsPageClient(): JSX.Element {
           {loadingCatalog ? (
             Array.from({ length: 6 }).map((_, i) => <SkillCardSkeleton key={i} />)
           ) : filteredSkills.length === 0 ? (
-            <div className="flex flex-col items-center justify-center rounded-xl border border-dashed border-border p-8 text-center">
+            <div className="flex flex-col items-center justify-center rounded-card border border-dashed border-border p-8 text-center">
               <span className="material-symbols-outlined text-[32px] text-text-muted mb-3">
                 search_off
               </span>

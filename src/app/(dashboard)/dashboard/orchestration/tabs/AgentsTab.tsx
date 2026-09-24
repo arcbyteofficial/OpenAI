@@ -70,9 +70,13 @@ export function AgentsTab({
   // advice — offer to clear the filter instead.
   if (!hasWork && !isEmptyFilter(filter)) {
     return (
-      <div className="flex flex-col items-center justify-center h-full gap-3 text-muted">
+      <div className="flex flex-col items-center justify-center h-full gap-3 text-text-muted">
         <p className="text-sm">{t("noMatches")}</p>
-        <button type="button" className="text-xs underline" onClick={() => onClearFilters?.()}>
+        <button
+          type="button"
+          className="text-xs text-text-main underline underline-offset-2 hover:text-primary transition-colors"
+          onClick={() => onClearFilters?.()}
+        >
           {t("clearFilters")}
         </button>
       </div>
@@ -81,16 +85,25 @@ export function AgentsTab({
 
   if (!hasWork) {
     return (
-      <div className="flex flex-col items-center justify-center h-full gap-3 text-muted">
+      <div className="flex flex-col items-center justify-center h-full gap-3 text-text-muted">
         <p className="text-sm">{t("emptyTitle")}</p>
         <div className="flex gap-2 text-xs">
-          <Link className="underline" href="/dashboard/cloud-agents">
+          <Link
+            className="text-text-main underline underline-offset-2 hover:text-primary transition-colors"
+            href="/dashboard/cloud-agents"
+          >
             {t("emptyCloudAgentCta")}
           </Link>
-          <Link className="underline" href="/dashboard/endpoint">
+          <Link
+            className="text-text-main underline underline-offset-2 hover:text-primary transition-colors"
+            href="/dashboard/endpoint"
+          >
             {t("emptyA2ACta")}
           </Link>
-          <Link className="underline" href="/dashboard/conductor">
+          <Link
+            className="text-text-main underline underline-offset-2 hover:text-primary transition-colors"
+            href="/dashboard/conductor"
+          >
             {t("emptyConductorCta")}
           </Link>
         </div>
@@ -99,7 +112,7 @@ export function AgentsTab({
   }
   return (
     <div className="relative h-full orchestration-canvas">
-      <label className="absolute top-2 right-2 z-10 flex items-center gap-1.5 text-xs text-muted">
+      <label className="absolute top-2 right-2 z-10 flex items-center gap-1.5 rounded-control border border-border bg-surface px-2 py-1 text-xs text-text-muted">
         <input
           type="checkbox"
           checked={showCompleted}

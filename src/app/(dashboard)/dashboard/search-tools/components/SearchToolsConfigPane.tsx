@@ -40,19 +40,19 @@ export default function SearchToolsConfigPane({
 
   return (
     <aside
-      className="w-[220px] shrink-0 border-l border-border bg-bg-alt overflow-y-auto flex flex-col"
+      className="w-[220px] shrink-0 border-l border-border bg-surface overflow-y-auto flex flex-col"
       data-testid="search-tools-config-pane"
       aria-label={t("configurationPane")}
     >
       <div className="p-3 border-b border-border">
-        <span className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">
+        <span className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
           {t("configuration")}
         </span>
       </div>
 
       {/* Provider selector */}
       <div className="p-3 border-b border-border space-y-2">
-        <label className="block text-[10px] text-text-muted uppercase tracking-wider mb-1">
+        <label className="block text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
           {t("provider")}
         </label>
         <Select
@@ -112,7 +112,7 @@ export default function SearchToolsConfigPane({
       {/* Search tab options */}
       {activeTab === "search" && (
         <div className="p-3 border-b border-border space-y-2">
-          <label className="block text-[10px] text-text-muted uppercase tracking-wider mb-1">
+          <label className="block text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
             {t("searchType")}
           </label>
           <Select
@@ -132,7 +132,7 @@ export default function SearchToolsConfigPane({
       {/* Scrape tab options */}
       {activeTab === "scrape" && (
         <div className="p-3 border-b border-border space-y-2">
-          <label className="block text-[10px] text-text-muted uppercase tracking-wider mb-1">
+          <label className="block text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
             {t("scrapeFormat")}
           </label>
           <Select
@@ -169,7 +169,7 @@ export default function SearchToolsConfigPane({
       {/* Rerank model (only for search tab) */}
       {activeTab === "search" && rerankModels.length > 0 && (
         <div className="p-3 border-b border-border space-y-1">
-          <label className="block text-[10px] text-text-muted uppercase tracking-wider mb-1">
+          <label className="block text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1">
             {t("rerankModelLabel")}
           </label>
           <Select
@@ -190,7 +190,7 @@ export default function SearchToolsConfigPane({
           onClick={() => setHistoryExpanded((e) => !e)}
           aria-expanded={historyExpanded}
         >
-          <span className="text-[10px] font-semibold text-text-muted uppercase tracking-wider">
+          <span className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
             {t("history")}
           </span>
           <span className="text-text-muted text-xs" aria-hidden="true">

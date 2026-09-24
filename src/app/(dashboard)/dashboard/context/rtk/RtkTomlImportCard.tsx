@@ -72,7 +72,7 @@ function RtkTomlEditor({
             accept=".toml,text/plain,application/toml"
             onChange={(event) => onFileChange(event.target.files?.[0])}
             data-testid="rtk-toml-file"
-            className="mt-1 block w-full text-xs text-text-muted file:mr-3 file:rounded file:border file:border-border file:bg-bg file:px-2.5 file:py-1 file:text-xs file:text-text-main"
+            className="mt-1 block w-full text-xs text-text-muted file:mr-3 file:rounded-control file:border file:border-border-strong file:bg-surface file:px-2.5 file:py-1 file:text-xs file:font-medium file:text-text-main"
           />
         </label>
         <textarea
@@ -80,7 +80,7 @@ function RtkTomlEditor({
           onChange={(event) => onContentChange(event.target.value)}
           placeholder={t("tomlImportPlaceholder")}
           data-testid="rtk-toml-content"
-          className="h-56 w-full rounded-lg border border-border bg-bg p-3 font-mono text-xs text-text-main"
+          className="h-56 w-full rounded-control border border-border-strong bg-surface p-3 font-mono text-xs text-text-main"
         />
       </div>
 
@@ -90,7 +90,7 @@ function RtkTomlEditor({
           onClick={() => onProcess("validate")}
           disabled={processing !== null || !content.trim()}
           data-testid="rtk-toml-validate"
-          className="rounded border border-border px-3 py-1.5 text-xs font-medium text-text-main hover:bg-surface-hover disabled:opacity-50"
+          className="rounded-control border border-border-strong px-3 py-1.5 text-xs font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-50"
         >
           {processing === "validate" ? t("tomlValidating") : t("tomlValidate")}
         </button>
@@ -99,7 +99,7 @@ function RtkTomlEditor({
           onClick={() => onProcess("install")}
           disabled={processing !== null || !content.trim()}
           data-testid="rtk-toml-install"
-          className="rounded bg-primary px-3 py-1.5 text-xs font-medium text-white disabled:opacity-50"
+          className="rounded-control bg-contrast px-3 py-1.5 text-xs font-medium text-contrast-fg transition-colors hover:bg-contrast-hover disabled:opacity-50"
         >
           {processing === "install" ? t("tomlInstalling") : t("tomlInstall")}
         </button>
@@ -120,7 +120,10 @@ function RtkTomlEditor({
 function RtkTomlResult({ result }: { result: ImportResult }) {
   const t = useTranslations("contextRtk");
   return (
-    <div className="mt-4 rounded-lg border border-border bg-bg p-3" data-testid="rtk-toml-result">
+    <div
+      className="mt-4 rounded-lg border border-border bg-bg-subtle p-3"
+      data-testid="rtk-toml-result"
+    >
       <p className="text-xs font-medium text-text-main">
         {result.installedPath
           ? t("tomlInstalled", { path: result.installedPath })
@@ -151,13 +154,7 @@ function RtkTomlResult({ result }: { result: ImportResult }) {
         <ul className="mt-2 space-y-1 text-[11px] text-text-main">
           {result.outcomes.map((outcome) => (
             <li key={`${outcome.filterId}:${outcome.testName}`}>
-              <span
-                className={
-                  outcome.passed
-                    ? "text-emerald-700 dark:text-emerald-300"
-                    : "text-red-600 dark:text-red-400"
-                }
-              >
+              <span className={outcome.passed ? "text-success" : "text-error"}>
                 {outcome.passed ? t("tomlTestPassed") : t("tomlTestFailed")}
               </span>{" "}
               · <code>{outcome.filterId}</code> · {outcome.testName}
@@ -166,7 +163,7 @@ function RtkTomlResult({ result }: { result: ImportResult }) {
         </ul>
       )}
       {result.warnings.length > 0 && (
-        <ul className="mt-2 space-y-1 text-[11px] text-amber-700 dark:text-amber-300">
+        <ul className="mt-2 space-y-1 text-[11px] text-warning">
           {result.warnings.map((warning) => (
             <li key={warning}>{warning}</li>
           ))}
@@ -225,7 +222,7 @@ export default function RtkTomlImportCard({ onInstalled }: RtkTomlImportCardProp
 
   return (
     <section
-      className="rounded-lg border border-border bg-surface p-4"
+      className="rounded-card border border-border bg-surface p-4"
       data-testid="rtk-toml-import"
     >
       <h2 className="text-sm font-semibold text-text-main">{t("tomlImportTitle")}</h2>
@@ -244,7 +241,7 @@ export default function RtkTomlImportCard({ onInstalled }: RtkTomlImportCardProp
       />
 
       {error && (
-        <p className="mt-3 text-xs text-red-600 dark:text-red-400" data-testid="rtk-toml-error">
+        <p className="mt-3 text-xs text-error" data-testid="rtk-toml-error">
           {error}
         </p>
       )}

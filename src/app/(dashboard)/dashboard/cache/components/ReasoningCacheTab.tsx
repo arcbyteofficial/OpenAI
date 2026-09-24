@@ -61,14 +61,16 @@ function StatCard({
   accent?: string;
 }) {
   return (
-    <div className="rounded-2xl border border-border/30 bg-surface-raised/70 p-4">
-      <div className="flex items-center gap-1.5 text-xs text-text-muted">
+    <div className="rounded-card border border-border bg-surface p-4">
+      <div className="flex items-center gap-1.5 text-[13px] text-text-muted">
         <span className="material-symbols-outlined text-base leading-none" aria-hidden="true">
           {icon}
         </span>
         <span>{label}</span>
       </div>
-      <div className={`mt-3 text-2xl font-semibold tabular-nums ${accent}`}>{value}</div>
+      <div className={`mt-3 text-2xl font-semibold tracking-tight tabular-nums ${accent}`}>
+        {value}
+      </div>
       {sub && <div className="mt-1 text-xs text-text-muted">{sub}</div>}
     </div>
   );
@@ -85,16 +87,16 @@ function SectionBadge({
 }) {
   const toneClass =
     tone === "green"
-      ? "border-green-500/20 bg-green-500/10 text-green-300"
+      ? "border-success/20 bg-success/10 text-success"
       : tone === "amber"
-        ? "border-amber-400/20 bg-amber-400/10 text-amber-300"
+        ? "border-warning/20 bg-warning/10 text-warning"
         : tone === "blue"
-          ? "border-blue-400/20 bg-blue-400/10 text-blue-300"
-          : "border-border/40 bg-surface/50 text-text-muted";
+          ? "border-primary/20 bg-primary/10 text-primary"
+          : "border-border bg-bg-subtle text-text-muted";
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.12em] ${toneClass}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium uppercase tracking-wider ${toneClass}`}
     >
       <span className="material-symbols-outlined text-sm leading-none" aria-hidden="true">
         {icon}
@@ -108,7 +110,7 @@ function InfoRow({ icon, children }: { icon: string; children: React.ReactNode }
   return (
     <div className="flex gap-2 text-sm text-text-muted">
       <span
-        className="material-symbols-outlined shrink-0 text-base leading-5 text-blue-400"
+        className="material-symbols-outlined shrink-0 text-base leading-5 text-text-subtle"
         aria-hidden="true"
       >
         {icon}
@@ -189,8 +191,8 @@ export default function ReasoningCacheTab() {
   if (loading) {
     return (
       <div className="space-y-4" aria-busy="true">
-        <div className="h-32 rounded-2xl bg-surface-raised animate-pulse" />
-        <div className="h-48 rounded-2xl bg-surface-raised animate-pulse" />
+        <div className="h-32 rounded-card bg-bg-subtle animate-pulse" />
+        <div className="h-48 rounded-card bg-bg-subtle animate-pulse" />
       </div>
     );
   }
@@ -223,7 +225,9 @@ export default function ReasoningCacheTab() {
             {t("reasoningCache")}
           </SectionBadge>
           <div>
-            <h2 className="text-lg font-semibold text-text-main">{t("reasoningCache")}</h2>
+            <h2 className="text-lg font-semibold tracking-tight text-text-main">
+              {t("reasoningCache")}
+            </h2>
             <p className="mt-1 max-w-3xl text-sm text-text-muted">{t("reasoningCacheDesc")}</p>
           </div>
         </div>
@@ -247,50 +251,50 @@ export default function ReasoningCacheTab() {
           label={t("reasoningEntries")}
           value={stats.totalEntries}
           sub={`${stats.memoryEntries} memory / ${stats.dbEntries} DB`}
-          accent="text-blue-400"
+          accent="text-text-main"
         />
         <StatCard
           icon="speed"
           label={t("reasoningReplayRate")}
           value={stats.replayRate}
           sub={`${totalLookups.toLocaleString()} lookups`}
-          accent="text-emerald-500"
+          accent="text-text-main"
         />
         <StatCard
           icon="replay"
           label={t("reasoningReplays")}
           value={stats.replays.toLocaleString()}
           sub={t("reasoningBehaviorReplay")}
-          accent="text-cyan-400"
+          accent="text-text-main"
         />
         <StatCard
           icon="text_fields"
           label={t("reasoningCharsCached")}
           value={formatChars(stats.totalChars)}
           sub={`${stats.totalChars.toLocaleString()} chars`}
-          accent="text-purple-400"
+          accent="text-text-main"
         />
         <StatCard
           icon="error_outline"
           label={t("reasoningMisses")}
           value={stats.misses.toLocaleString()}
           sub={`${stats.hits.toLocaleString()} hits`}
-          accent="text-red-400"
+          accent="text-text-main"
         />
       </div>
 
       {/* By Provider */}
       {providerEntries.length > 0 && (
-        <div className="rounded-2xl border border-border/30 bg-surface/20 p-5">
-          <h3 className="text-sm font-medium text-text-main">{t("reasoningByProvider")}</h3>
-          <div className="mt-3 overflow-x-auto rounded-2xl border border-border/20 bg-surface">
-            <table className="w-full text-sm">
+        <div className="rounded-card border border-border bg-surface p-5">
+          <h3 className="text-sm font-semibold text-text-main">{t("reasoningByProvider")}</h3>
+          <div className="mt-3 overflow-x-auto rounded-lg border border-border bg-surface">
+            <table className="w-full text-[13px]">
               <thead>
-                <tr className="border-b border-border/20 text-left text-[11px] uppercase tracking-[0.12em] text-text-muted">
-                  <th className="px-4 py-3">{t("tableProvider")}</th>
-                  <th className="px-4 py-3">{t("reasoningEntries")}</th>
-                  <th className="px-4 py-3">{t("reasoningChars")}</th>
-                  <th className="px-4 py-3">{t("tableShare")}</th>
+                <tr className="border-b border-border text-left text-xs text-text-muted">
+                  <th className="px-4 py-3 font-medium">{t("tableProvider")}</th>
+                  <th className="px-4 py-3 font-medium">{t("reasoningEntries")}</th>
+                  <th className="px-4 py-3 font-medium">{t("reasoningChars")}</th>
+                  <th className="px-4 py-3 font-medium">{t("tableShare")}</th>
                 </tr>
               </thead>
               <tbody>
@@ -300,25 +304,25 @@ export default function ReasoningCacheTab() {
                       ? ((d.entries / stats.totalEntries) * 100).toFixed(1)
                       : "0.0";
                   return (
-                    <tr key={prov} className="border-b border-border/15 last:border-b-0">
+                    <tr key={prov} className="border-b border-border last:border-b-0">
                       <td className="px-4 py-3 font-medium text-text-main">{prov}</td>
                       <td className="px-4 py-3 tabular-nums text-text-main">
                         {d.entries.toLocaleString()}
                       </td>
-                      <td className="px-4 py-3 tabular-nums text-purple-400">
+                      <td className="px-4 py-3 tabular-nums text-text-muted">
                         {formatChars(d.chars)}
                       </td>
                       <td className="px-4 py-3">
                         <div className="flex items-center gap-2">
-                          <div className="h-2 w-20 overflow-hidden rounded-full bg-surface/60">
+                          <div className="h-2 w-20 overflow-hidden rounded-full bg-bg-subtle">
                             <div
-                              className="h-full rounded-full bg-blue-400"
+                              className="h-full rounded-full bg-primary"
                               style={{
                                 width: `${Math.min(parseFloat(share), 100)}%`,
                               }}
                             />
                           </div>
-                          <span className="text-xs font-semibold tabular-nums text-text-main">
+                          <span className="text-xs font-medium tabular-nums text-text-main">
                             {share}%
                           </span>
                         </div>
@@ -334,31 +338,31 @@ export default function ReasoningCacheTab() {
 
       {/* By Model */}
       {modelEntries.length > 0 && (
-        <div className="rounded-2xl border border-border/30 bg-surface/20 p-5">
-          <h3 className="text-sm font-medium text-text-main">{t("reasoningByModel")}</h3>
-          <div className="mt-3 overflow-x-auto rounded-2xl border border-border/20 bg-surface">
-            <table className="w-full text-sm">
+        <div className="rounded-card border border-border bg-surface p-5">
+          <h3 className="text-sm font-semibold text-text-main">{t("reasoningByModel")}</h3>
+          <div className="mt-3 overflow-x-auto rounded-lg border border-border bg-surface">
+            <table className="w-full text-[13px]">
               <thead>
-                <tr className="border-b border-border/20 text-left text-[11px] uppercase tracking-[0.12em] text-text-muted">
-                  <th className="px-4 py-3">{t("tableModel")}</th>
-                  <th className="px-4 py-3">{t("reasoningEntries")}</th>
-                  <th className="px-4 py-3">{t("reasoningAvgChars")}</th>
-                  <th className="px-4 py-3">{t("reasoningChars")}</th>
+                <tr className="border-b border-border text-left text-xs text-text-muted">
+                  <th className="px-4 py-3 font-medium">{t("tableModel")}</th>
+                  <th className="px-4 py-3 font-medium">{t("reasoningEntries")}</th>
+                  <th className="px-4 py-3 font-medium">{t("reasoningAvgChars")}</th>
+                  <th className="px-4 py-3 font-medium">{t("reasoningChars")}</th>
                 </tr>
               </thead>
               <tbody>
                 {modelEntries.map(([mdl, d]) => {
                   const avgChars = d.entries > 0 ? Math.round(d.chars / d.entries) : 0;
                   return (
-                    <tr key={mdl} className="border-b border-border/15 last:border-b-0">
+                    <tr key={mdl} className="border-b border-border last:border-b-0">
                       <td className="px-4 py-3 font-medium text-text-main">{mdl}</td>
                       <td className="px-4 py-3 tabular-nums text-text-main">
                         {d.entries.toLocaleString()}
                       </td>
-                      <td className="px-4 py-3 tabular-nums text-cyan-400">
+                      <td className="px-4 py-3 tabular-nums text-text-muted">
                         {avgChars.toLocaleString()}
                       </td>
-                      <td className="px-4 py-3 tabular-nums text-purple-400">
+                      <td className="px-4 py-3 tabular-nums text-text-muted">
                         {formatChars(d.chars)}
                       </td>
                     </tr>
@@ -371,19 +375,19 @@ export default function ReasoningCacheTab() {
       )}
 
       {/* Recent Entries */}
-      <div className="rounded-2xl border border-border/30 bg-surface/20 p-5">
+      <div className="rounded-card border border-border bg-surface p-5">
         <div className="mb-4 flex flex-col gap-1">
-          <h3 className="text-sm font-medium text-text-main">{t("reasoningRecentEntries")}</h3>
+          <h3 className="text-sm font-semibold text-text-main">{t("reasoningRecentEntries")}</h3>
           <p className="text-sm text-text-muted">{t("reasoningCacheDesc")}</p>
         </div>
 
         {entries.length === 0 ? (
-          <div className="rounded-2xl border border-dashed border-border/40 bg-surface/10 px-4 py-6 text-sm text-text-muted">
+          <div className="rounded-lg border border-dashed border-border-strong px-4 py-6 text-sm text-text-muted">
             {t("reasoningNoData")}
           </div>
         ) : (
-          <div className="overflow-hidden rounded-2xl border border-border/20 bg-surface">
-            <div className="grid grid-cols-[minmax(120px,1fr)_100px_minmax(100px,1fr)_80px_80px_60px] gap-3 border-b border-border/20 px-4 py-3 text-[11px] font-medium uppercase tracking-[0.12em] text-text-muted">
+          <div className="overflow-hidden rounded-lg border border-border bg-surface">
+            <div className="grid grid-cols-[minmax(120px,1fr)_100px_minmax(100px,1fr)_80px_80px_60px] gap-3 border-b border-border px-4 py-3 text-xs font-medium text-text-muted">
               <span>{t("reasoningToolCallId")}</span>
               <span>{t("tableProvider")}</span>
               <span>{t("tableModel")}</span>
@@ -394,27 +398,27 @@ export default function ReasoningCacheTab() {
             <div className="max-h-96 overflow-y-auto">
               {entries.map((entry) => (
                 <div key={entry.toolCallId}>
-                  <div className="grid grid-cols-[minmax(120px,1fr)_100px_minmax(100px,1fr)_80px_80px_60px] gap-3 border-b border-border/15 px-4 py-3 last:border-b-0">
+                  <div className="grid grid-cols-[minmax(120px,1fr)_100px_minmax(100px,1fr)_80px_80px_60px] gap-3 border-b border-border px-4 py-3 last:border-b-0">
                     <div
-                      className="truncate text-sm font-mono text-text-main"
+                      className="truncate text-[12px] font-mono text-text-main"
                       title={entry.toolCallId}
                     >
                       {entry.toolCallId}
                     </div>
-                    <div className="text-sm text-text-muted">{entry.provider}</div>
-                    <div className="truncate text-sm text-text-muted" title={entry.model}>
+                    <div className="text-[13px] text-text-muted">{entry.provider}</div>
+                    <div className="truncate text-[13px] text-text-muted" title={entry.model}>
                       {entry.model}
                     </div>
-                    <div className="text-sm tabular-nums text-purple-400">
+                    <div className="text-[13px] tabular-nums text-text-muted">
                       {entry.charCount.toLocaleString()}
                     </div>
-                    <div className="text-sm text-text-muted">{timeAgo(entry.createdAt)}</div>
+                    <div className="text-[13px] text-text-muted">{timeAgo(entry.createdAt)}</div>
                     <button
                       type="button"
                       onClick={() =>
                         setExpandedId(expandedId === entry.toolCallId ? null : entry.toolCallId)
                       }
-                      className="flex items-center justify-center rounded-md p-1 text-text-muted transition-colors hover:bg-surface/60 hover:text-text-main"
+                      className="flex items-center justify-center rounded-md p-1 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
                       aria-label={t("reasoningView")}
                     >
                       <span className="material-symbols-outlined text-lg">
@@ -425,16 +429,16 @@ export default function ReasoningCacheTab() {
 
                   {/* Expanded Detail */}
                   {expandedId === entry.toolCallId && (
-                    <div className="border-b border-border/15 bg-surface/15 px-4 py-4">
+                    <div className="border-b border-border bg-surface-2 px-4 py-4">
                       <div className="flex items-center gap-2 text-xs text-text-muted mb-2">
-                        <span className="material-symbols-outlined text-sm text-blue-400">
+                        <span className="material-symbols-outlined text-sm text-text-muted">
                           psychology
                         </span>
                         <span className="font-medium">
                           {t("reasoningDetail")} ({entry.toolCallId})
                         </span>
                       </div>
-                      <pre className="max-h-72 overflow-auto rounded-xl bg-black/20 p-4 text-xs leading-relaxed text-text-main font-mono whitespace-pre-wrap break-words">
+                      <pre className="max-h-72 overflow-auto rounded-lg border border-border bg-bg-subtle p-4 text-xs leading-relaxed text-text-main font-mono whitespace-pre-wrap break-words">
                         {entry.reasoning}
                       </pre>
                       <div className="mt-3 flex flex-wrap gap-4 text-xs text-text-muted">
@@ -459,9 +463,7 @@ export default function ReasoningCacheTab() {
                         </span>
                         <span>
                           {t("reasoningChars")}:{" "}
-                          <span className="text-purple-400">
-                            {entry.charCount.toLocaleString()}
-                          </span>
+                          <span className="text-text-main">{entry.charCount.toLocaleString()}</span>
                         </span>
                       </div>
                     </div>
@@ -474,8 +476,8 @@ export default function ReasoningCacheTab() {
       </div>
 
       {/* Behavior Info */}
-      <div className="rounded-2xl border border-border/30 bg-surface/20 p-5">
-        <h3 className="text-sm font-medium text-text-main">{t("reasoningBehavior")}</h3>
+      <div className="rounded-card border border-border bg-surface p-5">
+        <h3 className="text-sm font-semibold text-text-main">{t("reasoningBehavior")}</h3>
         <div className="mt-4 grid gap-3">
           <InfoRow icon="info">{t("reasoningBehaviorCapture")}</InfoRow>
           <InfoRow icon="info">{t("reasoningBehaviorReplay")}</InfoRow>

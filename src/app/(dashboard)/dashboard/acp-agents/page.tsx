@@ -168,21 +168,29 @@ export default function AgentsPage() {
       {/* Summary Cards */}
       {summary && (
         <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
-          <div className="rounded-xl border border-border/50 bg-card p-4 text-center">
-            <div className="text-2xl font-bold text-primary">{summary.installed}</div>
-            <div className="text-xs text-text-muted mt-1">{t("installed")}</div>
+          <div className="rounded-card border border-border bg-surface p-4 text-center">
+            <div className="text-2xl font-semibold tabular-nums text-text-main">
+              {summary.installed}
+            </div>
+            <div className="text-[13px] text-text-muted mt-1">{t("installed")}</div>
           </div>
-          <div className="rounded-xl border border-border/50 bg-card p-4 text-center">
-            <div className="text-2xl font-bold text-text-muted">{summary.notFound}</div>
-            <div className="text-xs text-text-muted mt-1">{t("notFound")}</div>
+          <div className="rounded-card border border-border bg-surface p-4 text-center">
+            <div className="text-2xl font-semibold tabular-nums text-text-muted">
+              {summary.notFound}
+            </div>
+            <div className="text-[13px] text-text-muted mt-1">{t("notFound")}</div>
           </div>
-          <div className="rounded-xl border border-border/50 bg-card p-4 text-center">
-            <div className="text-2xl font-bold">{summary.builtIn}</div>
-            <div className="text-xs text-text-muted mt-1">{t("builtIn")}</div>
+          <div className="rounded-card border border-border bg-surface p-4 text-center">
+            <div className="text-2xl font-semibold tabular-nums text-text-main">
+              {summary.builtIn}
+            </div>
+            <div className="text-[13px] text-text-muted mt-1">{t("builtIn")}</div>
           </div>
-          <div className="rounded-xl border border-border/50 bg-card p-4 text-center">
-            <div className="text-2xl font-bold text-amber-500">{summary.custom}</div>
-            <div className="text-xs text-text-muted mt-1">{t("custom")}</div>
+          <div className="rounded-card border border-border bg-surface p-4 text-center">
+            <div className="text-2xl font-semibold tabular-nums text-text-main">
+              {summary.custom}
+            </div>
+            <div className="text-[13px] text-text-muted mt-1">{t("custom")}</div>
           </div>
         </div>
       )}
@@ -191,38 +199,40 @@ export default function AgentsPage() {
       <Card>
         <div className="flex items-center justify-between gap-3 mb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-blue-500/10 text-blue-500">
-              <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+            <div className="leading-none text-text-muted">
+              <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
                 support
               </span>
             </div>
-            <h3 className="text-lg font-semibold">{t("setupGuideTitle")}</h3>
+            <h3 className="text-base font-semibold tracking-tight text-text-main">
+              {t("setupGuideTitle")}
+            </h3>
           </div>
           <Link
             href="/dashboard/cli-code"
-            className="text-xs px-2.5 py-1.5 rounded-lg border border-border/60 hover:bg-surface/40 transition-colors"
+            className="text-xs font-medium px-2.5 py-1.5 rounded-control border border-border-strong text-text-main hover:bg-bg-subtle transition-colors"
           >
             {t("cliCodeRedirectCta")}
           </Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
-          <div className="rounded-lg border border-border/50 bg-black/[0.02] dark:bg-white/[0.02] p-3">
+          <div className="rounded-lg border border-border bg-surface-2 p-3">
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="material-symbols-outlined text-[16px] text-blue-500">radar</span>
+              <span className="material-symbols-outlined text-[16px] text-text-muted">radar</span>
               <p className="text-sm font-medium">{t("setupGuideDetectCliTitle")}</p>
             </div>
             <p className="text-xs text-text-muted">{t("setupGuideDetectCliDesc")}</p>
           </div>
-          <div className="rounded-lg border border-border/50 bg-black/[0.02] dark:bg-white/[0.02] p-3">
+          <div className="rounded-lg border border-border bg-surface-2 p-3">
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="material-symbols-outlined text-[16px] text-amber-500">build</span>
+              <span className="material-symbols-outlined text-[16px] text-text-muted">build</span>
               <p className="text-sm font-medium">{t("setupGuideCustomAgentTitle")}</p>
             </div>
             <p className="text-xs text-text-muted">{t("setupGuideCustomAgentDesc")}</p>
           </div>
-          <div className="rounded-lg border border-border/50 bg-black/[0.02] dark:bg-white/[0.02] p-3">
+          <div className="rounded-lg border border-border bg-surface-2 p-3">
             <div className="flex items-center gap-2 mb-1.5">
-              <span className="material-symbols-outlined text-[16px] text-emerald-500">
+              <span className="material-symbols-outlined text-[16px] text-text-muted">
                 terminal
               </span>
               <p className="text-sm font-medium">{t("setupGuideCommandMissingTitle")}</p>
@@ -230,7 +240,7 @@ export default function AgentsPage() {
             <p className="text-xs text-text-muted">{t("setupGuideCommandMissingDesc")}</p>
           </div>
         </div>
-        <div className="mt-3 flex items-center gap-2 rounded-lg border border-border/30 bg-surface/20 p-3">
+        <div className="mt-3 flex items-center gap-2 rounded-lg border border-border bg-bg-subtle p-3">
           <span className="material-symbols-outlined text-[14px] text-text-muted">fingerprint</span>
           <p className="text-xs text-text-muted">
             {t("fingerprintSettingsHint")}{" "}
@@ -248,10 +258,10 @@ export default function AgentsPage() {
             <div className="flex items-start justify-between">
               <div className="flex items-center gap-3">
                 <div
-                  className={`p-2 rounded-lg ${
+                  className={`p-2 rounded-lg border border-border ${
                     agent.installed
-                      ? "bg-emerald-500/10 text-emerald-600 dark:text-emerald-400"
-                      : "bg-zinc-500/10 text-zinc-400"
+                      ? "bg-bg-subtle text-text-main"
+                      : "bg-bg-subtle text-text-subtle"
                   }`}
                 >
                   {getAgentIconId(agent.id) ? (
@@ -266,31 +276,31 @@ export default function AgentsPage() {
                   <div className="font-semibold text-sm flex items-center gap-1.5">
                     {agent.name}
                     {agent.isCustom && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/10 text-amber-600 dark:text-amber-400 font-medium">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle border border-border text-text-muted font-medium">
                         {t("custom")}
                       </span>
                     )}
                   </div>
-                  <code className="text-xs text-text-muted">{agent.binary}</code>
+                  <code className="font-mono text-[12px] text-text-muted">{agent.binary}</code>
                 </div>
               </div>
               <div className="flex items-center gap-1">
                 {agent.installed ? (
-                  <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 font-medium">
+                  <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-success/10 text-success font-medium">
                     <span className="material-symbols-outlined text-[12px]">check_circle</span>
                     {agent.version || t("installed")}
                   </span>
                 ) : (
-                  <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-zinc-500/10 text-zinc-500 font-medium">
+                  <span className="inline-flex items-center gap-1 text-xs px-2 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium">
                     <span className="material-symbols-outlined text-[12px]">cancel</span>
                     {t("notFound")}
                   </span>
                 )}
               </div>
             </div>
-            <div className="flex items-center justify-between mt-3 pt-3 border-t border-border/30">
+            <div className="flex items-center justify-between mt-3 pt-3 border-t border-border">
               <div>
-                <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-blue-500/10 text-blue-500 font-mono">
+                <span className="inline-flex items-center gap-1 text-[10px] px-2 py-0.5 rounded-full bg-bg-subtle border border-border text-text-muted font-mono">
                   {agent.protocol}
                 </span>
                 {agent.installed && (
@@ -300,7 +310,7 @@ export default function AgentsPage() {
               {agent.isCustom && (
                 <button
                   onClick={() => handleRemoveAgent(agent.id)}
-                  className="text-xs text-red-500 hover:text-red-400 transition-colors flex items-center gap-0.5"
+                  className="text-xs text-error hover:text-error/80 transition-colors flex items-center gap-0.5"
                   title={t("remove")}
                 >
                   <span className="material-symbols-outlined text-[14px]">delete</span>
@@ -316,11 +326,13 @@ export default function AgentsPage() {
       <Card>
         <div className="flex items-center justify-between mb-4">
           <div className="flex items-center gap-3">
-            <div className="p-2 rounded-lg bg-amber-500/10 text-amber-600 dark:text-amber-400">
-              <span className="material-symbols-outlined text-[20px]">add_circle</span>
+            <div className="leading-none text-text-muted">
+              <span className="material-symbols-outlined text-[18px]">add_circle</span>
             </div>
             <div>
-              <h3 className="text-lg font-semibold">{t("addCustomAgent")}</h3>
+              <h3 className="text-base font-semibold tracking-tight text-text-main">
+                {t("addCustomAgent")}
+              </h3>
               <p className="text-sm text-text-muted">{t("addCustomAgentDesc")}</p>
             </div>
           </div>
@@ -334,7 +346,7 @@ export default function AgentsPage() {
         {showAddForm && (
           <form
             onSubmit={handleAddAgent}
-            className="flex flex-col gap-4 pt-4 border-t border-border/50"
+            className="flex flex-col gap-4 pt-4 border-t border-border"
           >
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input

@@ -31,7 +31,7 @@ export default function MediaProviderHeader({
     <div className="flex flex-col gap-3">
       <Link
         href={backHref}
-        className="inline-flex items-center gap-1.5 text-sm text-text-muted hover:text-text-primary transition-colors w-fit"
+        className="inline-flex items-center gap-1.5 text-[13px] text-text-muted hover:text-text-main transition-colors w-fit"
       >
         <span className="material-symbols-outlined text-[16px]">arrow_back</span>
         {t("backToProviders")}
@@ -39,19 +39,19 @@ export default function MediaProviderHeader({
 
       <div className="flex items-start gap-4">
         <div
-          className="size-12 rounded-xl flex items-center justify-center shrink-0"
+          className="size-12 rounded-lg border border-border flex items-center justify-center shrink-0"
           style={{ backgroundColor: `${providerColor ?? "#64748b"}20` }}
         >
           <ProviderIcon providerId={providerId} size={32} type="color" />
         </div>
         <div className="flex-1 min-w-0">
           <div className="flex items-center gap-2 flex-wrap">
-            <h1 className="text-xl font-semibold">{providerName}</h1>
-            <span className="text-xs px-2 py-0.5 rounded-full bg-bg-subtle border border-border text-text-muted">
+            <h1 className="text-xl font-semibold tracking-tight text-text-main">{providerName}</h1>
+            <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-bg-subtle border border-border text-text-muted">
               {kindLabel}
             </span>
             {hasFree && (
-              <span className="text-xs px-2 py-0.5 rounded-full bg-green-500/10 border border-green-500/20 text-green-600 dark:text-green-400">
+              <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-success/10 text-success">
                 Free
               </span>
             )}

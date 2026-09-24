@@ -52,9 +52,9 @@ function formatRelativeTime(timestamp) {
 }
 
 const CB_STYLES = {
-  CLOSED: { bg: "bg-green-500/10", text: "text-green-500", labelKey: "healthy" },
-  OPEN: { bg: "bg-red-500/10", text: "text-red-500", labelKey: "down" },
-  HALF_OPEN: { bg: "bg-amber-500/10", text: "text-amber-500", labelKey: "recovering" },
+  CLOSED: { bg: "bg-success/10", text: "text-success", labelKey: "healthy" },
+  OPEN: { bg: "bg-error/10", text: "text-error", labelKey: "down" },
+  HALF_OPEN: { bg: "bg-warning/10", text: "text-warning", labelKey: "recovering" },
 };
 
 export default function HealthPage() {
@@ -209,8 +209,8 @@ export default function HealthPage() {
     return (
       <div className="flex items-center justify-center min-h-100">
         <div className="text-center">
-          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary" />
-          <p className="text-text-muted mt-4">{t("loadingHealth")}</p>
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-text-muted" />
+          <p className="text-sm text-text-muted mt-4">{t("loadingHealth")}</p>
         </div>
       </div>
     );
@@ -219,12 +219,12 @@ export default function HealthPage() {
   if (error && !data) {
     return (
       <div>
-        <div className="bg-red-500/10 border border-red-500/30 rounded-xl p-6 text-center">
-          <span className="material-symbols-outlined text-red-500 text-[32px] mb-2">error</span>
-          <p className="text-red-400">{t("failedToLoad", { error })}</p>
+        <div className="bg-error/5 border border-error/20 rounded-card p-6 text-center">
+          <span className="material-symbols-outlined text-error text-[28px] mb-2">error</span>
+          <p className="text-sm text-error">{t("failedToLoad", { error })}</p>
           <button
             onClick={fetchHealth}
-            className="mt-4 px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors"
+            className="mt-4 px-3 py-1.5 rounded-control border border-border-strong bg-surface text-text-main text-[13px] font-medium hover:bg-bg-subtle transition-colors"
           >
             {t("retry")}
           </button>
@@ -260,7 +260,7 @@ export default function HealthPage() {
             fetchExtras();
             fetchDbHealth();
           }}
-          className="p-2 rounded-lg bg-surface hover:bg-surface/80 text-text-muted hover:text-text-main transition-colors"
+          className="p-1.5 rounded-control border border-border bg-surface hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
           title={tc("refresh")}
         >
           <span className="material-symbols-outlined text-[18px]">refresh</span>
@@ -269,50 +269,54 @@ export default function HealthPage() {
 
       {/* Status Banner */}
       {/* Verdict Header */}
-      <div className="mb-8">
-        <h1 className="text-3xl font-bold mb-2">
-          {
-            data.status === "healthy"
-              ? t("healthVerdictReady")
-              : data.status === "cooling"
-                ? t("healthVerdictCoolingDown")
-                : t("healthVerdictActionRequired")
-          }
+      <div className="mb-6">
+        <h1 className="text-2xl font-semibold tracking-tight text-text-main mb-1">
+          {data.status === "healthy"
+            ? t("healthVerdictReady")
+            : data.status === "cooling"
+              ? t("healthVerdictCoolingDown")
+              : t("healthVerdictActionRequired")}
         </h1>
-        <p className="text-text-muted text-lg">{t("healthSubtitle")}</p>
+        <p className="text-text-muted text-sm">{t("healthSubtitle")}</p>
       </div>
 
       {/* Status Details */}
       <div
         role="status"
         aria-live="polite"
-        className={`rounded-xl p-4 flex items-center gap-3 ${
+        className={`rounded-card p-4 flex items-center gap-3 ${
           data.status === "healthy"
-            ? "bg-green-500/10 border border-green-500/20"
-            : "bg-red-500/10 border border-red-500/20"
+            ? "bg-success/5 border border-success/20"
+            : "bg-error/5 border border-error/20"
         }`}
       >
         <span
-          className={`material-symbols-outlined text-[24px] ${
-            data.status === "healthy" ? "text-green-500" : "text-red-500"
+          className={`material-symbols-outlined text-[20px] ${
+            data.status === "healthy" ? "text-success" : "text-error"
           }`}
         >
           {data.status === "healthy" ? "check_circle" : "error"}
         </span>
-        <span className={data.status === "healthy" ? "text-green-400" : "text-red-400"}>
-          {data.status === "healthy"
-            ? t("allOperational")
-            : t("issuesDetected")}
+        <span
+          className={
+            data.status === "healthy"
+              ? "text-sm font-medium text-success"
+              : "text-sm font-medium text-error"
+          }
+        >
+          {data.status === "healthy" ? t("allOperational") : t("issuesDetected")}
         </span>
       </div>
 
       {/* Advanced Diagnostics Section */}
       <div className="mt-8">
         <div className="flex justify-between items-center mb-4">
-          <h2 className="text-xl font-semibold">{t("advancedDiagnosticsTitle")}</h2>
+          <h2 className="text-base font-semibold tracking-tight text-text-main">
+            {t("advancedDiagnosticsTitle")}
+          </h2>
           <button
             onClick={() => setShowAdvanced(!showAdvanced)}
-            className="text-primary hover:underline"
+            className="text-[13px] font-medium text-primary hover:underline"
           >
             {showAdvanced ? t("hide") : t("show")}
           </button>
@@ -331,36 +335,38 @@ export default function HealthPage() {
               <div
                 className={`flex items-center justify-center size-9 rounded-lg ${
                   dbHealth?.isHealthy
-                    ? "bg-green-500/10 text-green-500"
-                    : "bg-amber-500/10 text-amber-500"
+                    ? "border border-border bg-bg-subtle text-success"
+                    : "border border-border bg-bg-subtle text-warning"
                 }`}
               >
                 <span className="material-symbols-outlined text-[18px]">database</span>
               </div>
               <div>
-                <h2 className="text-lg font-semibold text-text-main">{t("databaseHealth")}</h2>
+                <h2 className="text-base font-semibold tracking-tight text-text-main">
+                  {t("databaseHealth")}
+                </h2>
                 <p className="text-sm text-text-muted">{t("databaseHealthDescription")}</p>
               </div>
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 mt-4">
-              <div className="rounded-xl border border-border bg-surface/50 p-3">
-                <p className="text-xs uppercase tracking-wide text-text-muted">{t("status")}</p>
+              <div className="rounded-lg border border-border bg-surface-2 p-3">
+                <p className="text-xs text-text-muted">{t("status")}</p>
                 <p
                   className={`mt-1 text-sm font-medium ${
-                    dbHealth?.isHealthy ? "text-green-400" : "text-amber-400"
+                    dbHealth?.isHealthy ? "text-success" : "text-warning"
                   }`}
                 >
                   {dbHealth?.isHealthy ? t("healthy") : t("attentionNeeded")}
                 </p>
               </div>
-              <div className="rounded-xl border border-border bg-surface/50 p-3">
-                <p className="text-xs uppercase tracking-wide text-text-muted">{t("issues")}</p>
+              <div className="rounded-lg border border-border bg-surface-2 p-3">
+                <p className="text-xs text-text-muted">{t("issues")}</p>
                 <p className="mt-1 text-sm font-medium text-text-main">
                   {dbHealth?.issues?.length ?? 0}
                 </p>
               </div>
-              <div className="rounded-xl border border-border bg-surface/50 p-3">
-                <p className="text-xs uppercase tracking-wide text-text-muted">{t("repairs")}</p>
+              <div className="rounded-lg border border-border bg-surface-2 p-3">
+                <p className="text-xs text-text-muted">{t("repairs")}</p>
                 <p className="mt-1 text-sm font-medium text-text-main">
                   {dbHealth?.repairedCount ?? 0}
                 </p>
@@ -371,14 +377,14 @@ export default function HealthPage() {
             <button
               onClick={handleRepairDb}
               disabled={repairingDb}
-              className="px-4 py-2 rounded-lg bg-primary/10 text-primary text-sm hover:bg-primary/20 transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
+              className="px-3 py-1.5 rounded-control border border-border-strong bg-surface text-text-main text-[13px] font-medium hover:bg-bg-subtle transition-colors disabled:opacity-60 disabled:cursor-not-allowed"
             >
               {repairingDb ? t("repairing") : t("runAutoRepair")}
             </button>
             {dbHealth?.backupCreated && (
               <p className="text-xs text-text-muted">{t("repairBackupCreated")}</p>
             )}
-            {dbHealthError && <p className="text-xs text-red-400">{dbHealthError}</p>}
+            {dbHealthError && <p className="text-xs text-error">{dbHealthError}</p>}
           </div>
         </div>
         {Array.isArray(dbHealth?.issues) && dbHealth.issues.length > 0 && (
@@ -386,11 +392,11 @@ export default function HealthPage() {
             {dbHealth.issues.map((issue, index) => (
               <div
                 key={`${issue.table}-${issue.type}-${index}`}
-                className="rounded-xl border border-amber-500/20 bg-amber-500/5 px-3 py-2"
+                className="rounded-lg border border-warning/20 bg-warning/5 px-3 py-2"
               >
                 <div className="flex items-center justify-between gap-3">
                   <p className="text-sm text-text-main">{issue.description}</p>
-                  <span className="text-xs text-amber-400">{issue.count}</span>
+                  <span className="text-xs tabular-nums text-warning">{issue.count}</span>
                 </div>
                 <p className="text-xs text-text-muted mt-1">
                   {issue.table} · {issue.type}
@@ -405,22 +411,26 @@ export default function HealthPage() {
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
         <Card className="p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="flex items-center justify-center size-8 rounded-lg bg-primary/10 text-primary">
+            <div className="flex items-center justify-center size-8 rounded-lg border border-border bg-bg-subtle text-text-muted">
               <span className="material-symbols-outlined text-[18px]">timer</span>
             </div>
-            <span className="text-sm text-text-muted">{t("uptime")}</span>
+            <span className="text-[13px] text-text-muted">{t("uptime")}</span>
           </div>
-          <p className="text-xl font-semibold text-text-main">{formatUptime(system.uptime)}</p>
+          <p className="text-2xl font-semibold tracking-tight tabular-nums text-text-main">
+            {formatUptime(system.uptime)}
+          </p>
         </Card>
 
         <Card className="p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="flex items-center justify-center size-8 rounded-lg bg-blue-500/10 text-blue-500">
+            <div className="flex items-center justify-center size-8 rounded-lg border border-border bg-bg-subtle text-text-muted">
               <span className="material-symbols-outlined text-[18px]">info</span>
             </div>
-            <span className="text-sm text-text-muted">{t("version")}</span>
+            <span className="text-[13px] text-text-muted">{t("version")}</span>
           </div>
-          <p className="text-xl font-semibold text-text-main">v{system.version}</p>
+          <p className="text-2xl font-semibold tracking-tight tabular-nums text-text-main">
+            v{system.version}
+          </p>
           <p className="text-xs text-text-muted mt-1">
             {t("nodeVersion", { version: system.nodeVersion })}
           </p>
@@ -428,12 +438,12 @@ export default function HealthPage() {
 
         <Card className="p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="flex items-center justify-center size-8 rounded-lg bg-purple-500/10 text-purple-500">
+            <div className="flex items-center justify-center size-8 rounded-lg border border-border bg-bg-subtle text-text-muted">
               <span className="material-symbols-outlined text-[18px]">memory</span>
             </div>
-            <span className="text-sm text-text-muted">{t("memoryRss")}</span>
+            <span className="text-[13px] text-text-muted">{t("memoryRss")}</span>
           </div>
-          <p className="text-xl font-semibold text-text-main">
+          <p className="text-2xl font-semibold tracking-tight tabular-nums text-text-main">
             {formatBytes(system.memoryUsage?.rss || 0)}
           </p>
           <p className="text-xs text-text-muted mt-1">
@@ -444,12 +454,12 @@ export default function HealthPage() {
 
         <Card className="p-4">
           <div className="flex items-center gap-3 mb-2">
-            <div className="flex items-center justify-center size-8 rounded-lg bg-amber-500/10 text-amber-500">
+            <div className="flex items-center justify-center size-8 rounded-lg border border-border bg-bg-subtle text-text-muted">
               <span className="material-symbols-outlined text-[18px]">dns</span>
             </div>
-            <span className="text-sm text-text-muted">{t("providers")}</span>
+            <span className="text-[13px] text-text-muted">{t("providers")}</span>
           </div>
-          <p className="text-xl font-semibold text-text-main">
+          <p className="text-2xl font-semibold tracking-tight tabular-nums text-text-main">
             {providerSummary?.configuredCount ?? cbEntries.length}
           </p>
           <p
@@ -488,8 +498,8 @@ export default function HealthPage() {
       <div className="grid grid-cols-1 xl:grid-cols-2 gap-4">
         <Card className="p-5">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-text-main flex items-center gap-2">
-              <span className="material-symbols-outlined text-[20px] text-primary">groups</span>
+            <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2">
+              <span className="material-symbols-outlined text-[18px] text-text-muted">groups</span>
               {t("sessionActivity")}
             </h2>
             <span className="text-xs text-text-muted">
@@ -497,15 +507,15 @@ export default function HealthPage() {
             </span>
           </div>
           <div className="grid grid-cols-2 gap-3 mb-4">
-            <div className="rounded-xl border border-border/40 bg-surface/30 p-3">
+            <div className="rounded-lg border border-border bg-surface-2 p-3">
               <div className="text-xs text-text-muted">{t("stickyBoundSessions")}</div>
-              <div className="text-2xl font-semibold text-text-main mt-1">
+              <div className="text-2xl font-semibold tracking-tight tabular-nums text-text-main mt-1">
                 {sessions?.stickyBoundCount ?? 0}
               </div>
             </div>
-            <div className="rounded-xl border border-border/40 bg-surface/30 p-3">
+            <div className="rounded-lg border border-border bg-surface-2 p-3">
               <div className="text-xs text-text-muted">{t("sessionsByApiKey")}</div>
-              <div className="text-2xl font-semibold text-text-main mt-1">
+              <div className="text-2xl font-semibold tracking-tight tabular-nums text-text-main mt-1">
                 {Object.keys(sessions?.byApiKey || {}).length}
               </div>
             </div>
@@ -515,7 +525,7 @@ export default function HealthPage() {
               {sessions.top.slice(0, 5).map((session: any) => (
                 <div
                   key={session.sessionId}
-                  className="rounded-lg border border-border/30 bg-surface/20 p-3 flex items-center justify-between gap-3"
+                  className="rounded-lg border border-border p-3 flex items-center justify-between gap-3"
                 >
                   <div className="min-w-0">
                     <div className="font-mono text-xs text-text-main truncate">
@@ -542,8 +552,8 @@ export default function HealthPage() {
 
         <Card className="p-5">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-text-main flex items-center gap-2">
-              <span className="material-symbols-outlined text-[20px] text-primary">radar</span>
+            <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2">
+              <span className="material-symbols-outlined text-[18px] text-text-muted">radar</span>
               {t("quotaMonitors")}
             </h2>
             <span className="text-xs text-text-muted">
@@ -551,27 +561,27 @@ export default function HealthPage() {
             </span>
           </div>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-4">
-            <div className="rounded-xl border border-border/40 bg-surface/30 p-3">
+            <div className="rounded-lg border border-border bg-surface-2 p-3">
               <div className="text-xs text-text-muted">{t("alerting")}</div>
-              <div className="text-2xl font-semibold text-amber-400 mt-1">
+              <div className="text-2xl font-semibold tracking-tight tabular-nums text-warning mt-1">
                 {quotaMonitor?.alerting ?? 0}
               </div>
             </div>
-            <div className="rounded-xl border border-border/40 bg-surface/30 p-3">
+            <div className="rounded-lg border border-border bg-surface-2 p-3">
               <div className="text-xs text-text-muted">{t("limitExhausted")}</div>
-              <div className="text-2xl font-semibold text-red-400 mt-1">
+              <div className="text-2xl font-semibold tracking-tight tabular-nums text-error mt-1">
                 {quotaMonitor?.exhausted ?? 0}
               </div>
             </div>
-            <div className="rounded-xl border border-border/40 bg-surface/30 p-3">
+            <div className="rounded-lg border border-border bg-surface-2 p-3">
               <div className="text-xs text-text-muted">{t("errors")}</div>
-              <div className="text-2xl font-semibold text-orange-400 mt-1">
+              <div className="text-2xl font-semibold tracking-tight tabular-nums text-error mt-1">
                 {quotaMonitor?.errors ?? 0}
               </div>
             </div>
-            <div className="rounded-xl border border-border/40 bg-surface/30 p-3">
+            <div className="rounded-lg border border-border bg-surface-2 p-3">
               <div className="text-xs text-text-muted">{t("providers")}</div>
-              <div className="text-2xl font-semibold text-text-main mt-1">
+              <div className="text-2xl font-semibold tracking-tight tabular-nums text-text-main mt-1">
                 {Object.keys(quotaMonitor?.byProvider || {}).length}
               </div>
             </div>
@@ -581,7 +591,7 @@ export default function HealthPage() {
               {quotaMonitor.monitors.slice(0, 5).map((monitor: any) => (
                 <div
                   key={`${monitor.sessionId}:${monitor.accountId}`}
-                  className="rounded-lg border border-border/30 bg-surface/20 p-3 flex items-center justify-between gap-3"
+                  className="rounded-lg border border-border p-3 flex items-center justify-between gap-3"
                 >
                   <div className="min-w-0">
                     <div className="text-sm font-medium text-text-main truncate">
@@ -595,11 +605,11 @@ export default function HealthPage() {
                     <div
                       className={
                         monitor.status === "exhausted"
-                          ? "text-red-400"
+                          ? "text-error"
                           : monitor.status === "warning"
-                            ? "text-amber-400"
+                            ? "text-warning"
                             : monitor.status === "error"
-                              ? "text-orange-400"
+                              ? "text-error"
                               : "text-text-main"
                       }
                     >
@@ -626,21 +636,21 @@ export default function HealthPage() {
       {degradation && degradation.features && degradation.features.length > 0 && (
         <Card className="p-5" role="region" aria-label={t("gracefulDegradationStatus")}>
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-text-main flex items-center gap-2">
-              <span className="material-symbols-outlined text-[20px] text-primary">healing</span>
+            <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2">
+              <span className="material-symbols-outlined text-[18px] text-text-muted">healing</span>
               {t("gracefulDegradationStatus")}
             </h2>
             <div className="flex items-center gap-3 text-xs text-text-muted font-medium">
-              <span className="px-2 py-0.5 rounded bg-green-500/10 text-green-400">
+              <span className="px-2 py-0.5 rounded-md bg-success/10 text-success">
                 {t("degradationFull")}: {degradation.summary.full}
               </span>
-              <span className="px-2 py-0.5 rounded bg-amber-500/10 text-amber-500">
+              <span className="px-2 py-0.5 rounded-md bg-warning/10 text-warning">
                 {t("degradationReduced")}: {degradation.summary.reduced}
               </span>
-              <span className="px-2 py-0.5 rounded bg-orange-500/10 text-orange-500">
+              <span className="px-2 py-0.5 rounded-md bg-orange-500/10 text-orange-500">
                 {t("degradationMinimal")}: {degradation.summary.minimal}
               </span>
-              <span className="px-2 py-0.5 rounded bg-red-500/10 text-red-500">
+              <span className="px-2 py-0.5 rounded-md bg-error/10 text-error">
                 {t("degradationDefault")}: {degradation.summary.default}
               </span>
             </div>
@@ -649,44 +659,44 @@ export default function HealthPage() {
             {degradation.features.map((feat: any) => {
               const bg =
                 feat.level === "full"
-                  ? "bg-green-500/5 border-green-500/10"
+                  ? "bg-success/5 border-success/20"
                   : feat.level === "reduced"
-                    ? "bg-amber-500/5 border-amber-500/20"
+                    ? "bg-warning/5 border-warning/20"
                     : feat.level === "minimal"
                       ? "bg-orange-500/5 border-orange-500/20"
-                      : "bg-red-500/5 border-red-500/20";
+                      : "bg-error/5 border-error/20";
               const dot =
                 feat.level === "full"
-                  ? "bg-green-500"
+                  ? "bg-success"
                   : feat.level === "reduced"
-                    ? "bg-amber-500"
+                    ? "bg-warning"
                     : feat.level === "minimal"
                       ? "bg-orange-500"
-                      : "bg-red-500";
+                      : "bg-error";
               return (
                 <div
                   key={feat.feature}
                   className={`rounded-lg p-3 border ${bg} flex flex-col gap-2`}
                 >
                   <div className="flex items-center justify-between">
-                    <span className="text-sm font-semibold capitalize flex items-center gap-2 text-(--text-primary,#fff)">
+                    <span className="text-sm font-semibold capitalize flex items-center gap-2 text-text-main">
                       <span className={`w-2 h-2 rounded-full ${dot}`}></span>
                       {feat.feature}
                     </span>
-                    <span className="text-xs uppercase tracking-wider font-bold opacity-70">
+                    <span className="text-[11px] uppercase tracking-wider font-medium text-text-subtle">
                       {feat.level}
                     </span>
                   </div>
-                  <div className="text-xs text-(--text-secondary,#aaa)">{feat.capability}</div>
+                  <div className="text-xs text-text-muted">{feat.capability}</div>
                   {feat.reason && (
                     <div
-                      className="text-[10px] text-red-300 mt-1 bg-red-900/20 p-1.5 rounded"
+                      className="text-[11px] text-error mt-1 bg-error/10 p-1.5 rounded-md"
                       title={feat.reason}
                     >
                       {feat.reason.length > 80 ? feat.reason.substring(0, 80) + "..." : feat.reason}
                     </div>
                   )}
-                  <div className="text-[10px] text-(--text-muted,#666) text-right mt-1">
+                  <div className="text-[10px] text-text-subtle text-right mt-1">
                     {t("sinceTime", {
                       time: new Date(feat.since).toLocaleTimeString(locale),
                     })}
@@ -702,25 +712,27 @@ export default function HealthPage() {
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
         {/* Prompt Cache Card */}
         <Card className="p-4">
-          <h3 className="text-sm font-semibold text-text-muted mb-3 flex items-center gap-2">
-            <span className="material-symbols-outlined text-[18px]">cached</span>
+          <h3 className="text-sm font-semibold text-text-main mb-3 flex items-center gap-2">
+            <span className="material-symbols-outlined text-[18px] text-text-muted">cached</span>
             {t("promptCache")}
           </h3>
           {cache ? (
             <div className="space-y-2 text-sm">
               <div className="flex justify-between">
                 <span className="text-text-muted">{t("entries")}</span>
-                <span className="font-mono">
+                <span className="font-mono text-[13px] tabular-nums text-text-main">
                   {cache.size}/{cache.maxSize}
                 </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-text-muted">{t("hitRate")}</span>
-                <span className="font-mono">{cache.hitRate?.toFixed(1) ?? 0}%</span>
+                <span className="font-mono text-[13px] tabular-nums text-text-main">
+                  {cache.hitRate?.toFixed(1) ?? 0}%
+                </span>
               </div>
               <div className="flex justify-between">
                 <span className="text-text-muted">{t("hitsMisses")}</span>
-                <span className="font-mono">
+                <span className="font-mono text-[13px] tabular-nums text-text-main">
                   {cache.hits ?? 0} / {cache.misses ?? 0}
                 </span>
               </div>
@@ -732,8 +744,8 @@ export default function HealthPage() {
 
         {/* Signature Cache Card */}
         <Card className="p-4">
-          <h3 className="text-sm font-semibold text-text-muted mb-3 flex items-center gap-2">
-            <span className="material-symbols-outlined text-[18px]">database</span>
+          <h3 className="text-sm font-semibold text-text-main mb-3 flex items-center gap-2">
+            <span className="material-symbols-outlined text-[18px] text-text-muted">database</span>
             {t("signatureCache")}
           </h3>
           {signatureCache ? (
@@ -747,24 +759,26 @@ export default function HealthPage() {
                 {
                   label: t("signatureTool"),
                   value: `${signatureCache.tool.entries}/${signatureCache.tool.patterns}`,
-                  color: "text-blue-400",
+                  color: "text-text-main",
                 },
                 {
                   label: t("signatureFamily"),
                   value: `${signatureCache.family.entries}/${signatureCache.family.patterns}`,
-                  color: "text-purple-400",
+                  color: "text-text-main",
                 },
                 {
                   label: t("signatureSession"),
                   value: `${signatureCache.session.entries}/${signatureCache.session.patterns}`,
-                  color: "text-cyan-400",
+                  color: "text-text-main",
                 },
               ].map(({ label, value, color }) => (
                 <div
                   key={label}
-                  className="text-center p-2 rounded-lg bg-surface/30 border border-border/30"
+                  className="text-center p-2 rounded-lg bg-surface-2 border border-border"
                 >
-                  <p className={`text-lg font-bold tabular-nums ${color}`}>{value}</p>
+                  <p className={`text-lg font-semibold tracking-tight tabular-nums ${color}`}>
+                    {value}
+                  </p>
                   <p className="text-xs text-text-muted mt-0.5">{label}</p>
                 </div>
               ))}
@@ -778,8 +792,8 @@ export default function HealthPage() {
       {/* Provider Health */}
       <Card className="p-5" role="region" aria-label={t("providerHealthStatusAria")}>
         <div className="flex items-center justify-between mb-4">
-          <h2 className="text-lg font-semibold text-text-main flex items-center gap-2">
-            <span className="material-symbols-outlined text-[20px] text-primary">
+          <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2">
+            <span className="material-symbols-outlined text-[18px] text-text-muted">
               health_and_safety
             </span>
             {t("providerHealth")}
@@ -789,10 +803,10 @@ export default function HealthPage() {
               <button
                 onClick={handleResetHealth}
                 disabled={resetting}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium transition-colors ${
                   resetting
-                    ? "bg-surface/50 text-text-muted cursor-wait"
-                    : "bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 border border-red-500/20"
+                    ? "bg-bg-subtle text-text-muted cursor-wait"
+                    : "bg-error/10 text-error hover:bg-error/15 border border-error/20"
                 }`}
                 title={t("resetAllTitle")}
               >
@@ -814,13 +828,13 @@ export default function HealthPage() {
             {cbEntries.length > 0 && (
               <div className="flex items-center gap-3 text-xs text-text-muted">
                 <span className="flex items-center gap-1">
-                  <span className="size-2 rounded-full bg-green-500" /> {t("healthy")}
+                  <span className="size-2 rounded-full bg-success" /> {t("healthy")}
                 </span>
                 <span className="flex items-center gap-1">
-                  <span className="size-2 rounded-full bg-amber-500" /> {t("recovering")}
+                  <span className="size-2 rounded-full bg-warning" /> {t("recovering")}
                 </span>
                 <span className="flex items-center gap-1">
-                  <span className="size-2 rounded-full bg-red-500" /> {t("down")}
+                  <span className="size-2 rounded-full bg-error" /> {t("down")}
                 </span>
               </div>
             )}
@@ -837,7 +851,7 @@ export default function HealthPage() {
                 {/* Unhealthy providers first */}
                 {unhealthy.length > 0 && (
                   <div className="space-y-2">
-                    <p className="text-xs font-medium text-red-400 uppercase tracking-wide">
+                    <p className="text-[11px] font-medium text-error uppercase tracking-wider">
                       {t("issuesLabel")}
                     </p>
                     {unhealthy.map(([provider, cb]: [string, any]) => {
@@ -850,10 +864,10 @@ export default function HealthPage() {
                       return (
                         <div
                           key={provider}
-                          className={`rounded-lg p-3 ${style.bg} border border-white/5 flex items-center gap-3`}
+                          className={`rounded-lg p-3 ${style.bg} border border-border flex items-center gap-3`}
                         >
                           <div
-                            className="size-8 rounded-lg flex items-center justify-center shrink-0 text-xs font-bold"
+                            className="size-8 rounded-lg flex items-center justify-center shrink-0 text-xs font-semibold"
                             style={{
                               backgroundColor: `${providerInfo?.color || "#888"}15`,
                               color: providerInfo?.color || "#888",
@@ -867,7 +881,7 @@ export default function HealthPage() {
                                 {displayName}
                               </span>
                               <span
-                                className={`text-xs font-semibold px-1.5 py-0.5 rounded ${style.bg} ${style.text}`}
+                                className={`text-[11px] font-medium px-1.5 py-0.5 rounded-md ${style.bg} ${style.text}`}
                               >
                                 {t(style.labelKey)}
                               </span>
@@ -899,7 +913,7 @@ export default function HealthPage() {
                 {healthy.length > 0 && (
                   <div>
                     {unhealthy.length > 0 && (
-                      <p className="text-xs font-medium text-green-400 uppercase tracking-wide mb-2">
+                      <p className="text-[11px] font-medium text-success uppercase tracking-wider mb-2">
                         {t("operational")}
                       </p>
                     )}
@@ -913,9 +927,9 @@ export default function HealthPage() {
                         return (
                           <div
                             key={provider}
-                            className="rounded-lg p-2.5 bg-green-500/5 border border-white/5 flex items-center gap-2"
+                            className="rounded-lg p-2.5 bg-surface-2 border border-border flex items-center gap-2"
                           >
-                            <span className="size-2 rounded-full bg-green-500 shrink-0" />
+                            <span className="size-2 rounded-full bg-success shrink-0" />
                             <span
                               className="text-xs font-medium text-text-main truncate"
                               title={displayName}
@@ -970,8 +984,8 @@ export default function HealthPage() {
           return (
             <Card className="p-5">
               <div className="flex items-center justify-between mb-4">
-                <h2 className="text-lg font-semibold text-text-main flex items-center gap-2">
-                  <span className="material-symbols-outlined text-[20px] text-amber-500">
+                <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2">
+                  <span className="material-symbols-outlined text-[18px] text-text-muted">
                     speed
                   </span>
                   {t("rateLimitStatus")}
@@ -1014,18 +1028,18 @@ export default function HealthPage() {
                         key={key}
                         className={`rounded-lg p-3 border transition-colors ${
                           exhausted
-                            ? "bg-red-500/5 border-red-500/20"
+                            ? "bg-error/5 border-error/20"
                             : isQueued || lowRemaining
-                              ? "bg-amber-500/5 border-amber-500/20"
+                              ? "bg-warning/5 border-warning/20"
                               : isActive
-                                ? "bg-blue-500/5 border-blue-500/15"
-                                : "bg-surface/30 border-white/5"
+                                ? "bg-primary/5 border-primary/20"
+                                : "bg-surface-2 border-border"
                         }`}
                         title={key}
                       >
                         <div className="flex items-center gap-2.5 mb-2">
                           <div
-                            className="size-7 rounded-md flex items-center justify-center shrink-0 text-[10px] font-bold"
+                            className="size-7 rounded-md flex items-center justify-center shrink-0 text-[10px] font-semibold"
                             style={{
                               backgroundColor: `${providerInfo?.color || "#888"}15`,
                               color: providerInfo?.color || "#888",
@@ -1049,14 +1063,14 @@ export default function HealthPage() {
                             )}
                           </div>
                           <span
-                            className={`inline-flex items-center px-1.5 py-0.5 rounded text-[10px] font-semibold ${
+                            className={`inline-flex items-center px-1.5 py-0.5 rounded-md text-[10px] font-medium ${
                               exhausted
-                                ? "bg-red-500/15 text-red-400"
+                                ? "bg-error/10 text-error"
                                 : isQueued || lowRemaining
-                                  ? "bg-amber-500/15 text-amber-400"
+                                  ? "bg-warning/10 text-warning"
                                   : isActive
-                                    ? "bg-blue-500/15 text-blue-400"
-                                    : "bg-green-500/10 text-green-400"
+                                    ? "bg-primary/10 text-primary"
+                                    : "bg-success/10 text-success"
                             }`}
                           >
                             {exhausted
@@ -1079,14 +1093,14 @@ export default function HealthPage() {
                                 })}
                               </span>
                             </div>
-                            <div className="h-2 overflow-hidden rounded-full bg-surface/70">
+                            <div className="h-2 overflow-hidden rounded-full bg-bg-subtle">
                               <div
                                 className={`h-full rounded-full ${
                                   exhausted
-                                    ? "bg-red-500"
+                                    ? "bg-error"
                                     : lowRemaining
-                                      ? "bg-amber-500"
-                                      : "bg-emerald-500"
+                                      ? "bg-warning"
+                                      : "bg-success"
                                 }`}
                                 style={{ width: `${quotaProgress}%` }}
                               />
@@ -1132,18 +1146,14 @@ export default function HealthPage() {
       {lockoutEntries.length > 0 && (
         <Card className="p-5">
           <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-text-main flex items-center gap-2">
-              <span className="material-symbols-outlined text-[20px] text-red-500">lock</span>
+            <h2 className="text-base font-semibold tracking-tight text-text-main flex items-center gap-2">
+              <span className="material-symbols-outlined text-[18px] text-text-muted">lock</span>
               {t("activeLockouts")}
             </h2>
             <button
               onClick={handleUnblockAll}
               disabled={unblocking}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg
-                bg-amber-500/10 border border-amber-500/30 text-amber-600
-                hover:bg-amber-500/15 hover:border-amber-500/50
-                dark:text-amber-400 transition-all duration-200
-                disabled:opacity-50 disabled:cursor-not-allowed"
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <span className="material-symbols-outlined text-[16px]">lock_open</span>
               {unblocking ? "Unblocking..." : "Unblock all"}
@@ -1157,7 +1167,7 @@ export default function HealthPage() {
               return (
                 <div
                   key={key}
-                  className="rounded-lg p-3 bg-red-500/5 border border-red-500/10 flex items-center justify-between"
+                  className="rounded-lg p-3 bg-error/5 border border-error/15 flex items-center justify-between"
                 >
                   <div className="min-w-0">
                     <span className="text-sm font-medium text-text-main">
@@ -1167,7 +1177,7 @@ export default function HealthPage() {
                       <span className="text-xs text-text-muted ml-2">({lockout.reason})</span>
                     )}
                     {lockout.until && (
-                      <span className="text-xs text-red-400 ml-2">
+                      <span className="text-xs text-error ml-2">
                         until {new Date(lockout.until).toLocaleTimeString()}
                       </span>
                     )}
@@ -1175,11 +1185,7 @@ export default function HealthPage() {
                   <button
                     onClick={() => handleUnblockOne(lockProvider, lockModel)}
                     disabled={unblockingKey === lockKey}
-                    className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-lg
-                      bg-amber-500/10 border border-amber-500/20 text-amber-600
-                      hover:bg-amber-500/15 hover:border-amber-500/40
-                      dark:text-amber-400 transition-all duration-200
-                      disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
+                    className="flex items-center gap-1 px-2.5 py-1 text-xs font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0"
                   >
                     <span className="material-symbols-outlined text-[14px]">lock_open</span>
                     {unblockingKey === lockKey ? "..." : "Unblock"}

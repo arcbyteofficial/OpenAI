@@ -67,7 +67,9 @@ export default function VscodeTokenAliasCard({
     }
 
     const storedCopilotKeyId =
-      typeof window !== "undefined" ? window.localStorage.getItem("omniroute-cli-key-copilot") : null;
+      typeof window !== "undefined"
+        ? window.localStorage.getItem("omniroute-cli-key-copilot")
+        : null;
 
     return (
       (storedCopilotKeyId ? cliApiKeys.find((key) => key.id === storedCopilotKeyId) : null) ??
@@ -109,13 +111,13 @@ export default function VscodeTokenAliasCard({
 
   if (variant === "catalog") {
     return (
-      <Card className={`overflow-hidden ${className}`.trim()}>
-        <div className="flex items-center gap-2 px-4 py-3 border-b border-black/5 dark:border-white/5">
-          <span className="material-symbols-outlined text-[14px] text-primary">key</span>
-          <h3 className="text-xs font-semibold uppercase tracking-wider text-text-muted">
+      <Card className={`overflow-hidden p-0 ${className}`.trim()}>
+        <div className="flex items-center gap-2 px-4 py-3 border-b border-border">
+          <span className="material-symbols-outlined text-[14px] text-text-muted">key</span>
+          <h3 className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
             {t("vscodeAliasTitle")}
           </h3>
-          <div className="flex-1 h-px bg-border/30" />
+          <div className="flex-1 h-px bg-border" />
           <Link
             href="/dashboard/cli-tools"
             className="shrink-0 text-[11px] font-medium text-primary hover:underline"
@@ -146,10 +148,10 @@ export default function VscodeTokenAliasCard({
   }
 
   return (
-    <div className={`rounded-lg border border-sky-500/20 bg-sky-500/5 p-3 ${className}`.trim()}>
+    <div className={`rounded-lg border border-border bg-bg-subtle p-3 ${className}`.trim()}>
       <div className="flex items-start justify-between gap-3">
         <div>
-          <p className="text-[10px] font-semibold uppercase tracking-wider text-sky-600 dark:text-sky-400">
+          <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
             {t("vscodeAliasTitle")}
           </p>
           <p className="mt-1 text-xs text-text-muted">{description}</p>
@@ -193,16 +195,16 @@ function CopyableEndpointRow({
 }>) {
   const rowClassName =
     variant === "catalog"
-      ? "flex items-center gap-2 min-w-0 rounded-lg border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] px-3 py-2.5"
-      : "flex items-center gap-2 min-w-0 rounded-md border border-sky-500/15 bg-background/60 px-2.5 py-2";
+      ? "flex items-center gap-2 min-w-0 rounded-lg border border-border bg-bg-subtle px-3 py-2.5"
+      : "flex items-center gap-2 min-w-0 rounded-md border border-border bg-surface px-2.5 py-2";
 
   return (
     <div className={rowClassName}>
       <span className="w-24 shrink-0 text-[11px] font-medium text-text-muted">{label}</span>
-      <code className="flex-1 min-w-0 truncate text-[11px] font-mono text-text-main">{url}</code>
+      <code className="flex-1 min-w-0 truncate text-[12px] font-mono text-text-main">{url}</code>
       <button
         onClick={() => copy(url, copyKey)}
-        className="shrink-0 flex items-center gap-1 rounded border border-border/70 px-2 py-1 text-text-muted transition-colors hover:text-text"
+        className="shrink-0 flex items-center gap-1 rounded-md border border-border px-2 py-1 text-text-muted transition-colors hover:border-border-strong hover:text-text-main"
       >
         <span className="material-symbols-outlined text-[12px]">
           {copied === copyKey ? "check" : "content_copy"}

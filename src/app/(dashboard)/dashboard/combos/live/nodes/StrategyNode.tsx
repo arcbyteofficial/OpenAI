@@ -51,10 +51,10 @@ export function StrategyNode({ data }: NodeProps) {
 
   return (
     <div
-      className="flex flex-col items-center gap-1 px-3 py-2 rounded-full border-2 bg-bg transition-all duration-300"
+      className="flex flex-col items-center gap-1 px-3 py-2 rounded-full border-2 bg-surface transition-[border-color,box-shadow] duration-300"
       style={{
         borderColor: color,
-        boxShadow: `0 0 10px ${color}30`,
+        boxShadow: `0 0 0 3px ${color}1f`,
         minWidth: "110px",
       }}
       data-testid="strategy-node"

@@ -39,22 +39,24 @@ export function HomeProviderTopologySection({
     <Card>
       <div className="flex items-center justify-between mb-3">
         <div>
-          <h2 className="text-base font-semibold">{t("providerTopology")}</h2>
+          <h2 className="text-sm font-semibold tracking-tight text-text-main">
+            {t("providerTopology")}
+          </h2>
           <p className="text-xs text-text-muted">
             {t("activeError", { active: activeProviderCount, errors: errorProvider ? 1 : 0 })}
           </p>
         </div>
         <div className="flex items-center gap-3 text-[11px] text-text-muted">
           <span className="flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-green-500" />
+            <span className="size-2 rounded-full bg-success" />
             {t("topologyLegendActive")}
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-amber-500" />
+            <span className="size-2 rounded-full bg-warning" />
             {t("topologyLegendRecent")}
           </span>
           <span className="flex items-center gap-1.5">
-            <span className="size-2 rounded-full bg-red-500" />
+            <span className="size-2 rounded-full bg-error" />
             {t("topologyLegendError")}
           </span>
         </div>

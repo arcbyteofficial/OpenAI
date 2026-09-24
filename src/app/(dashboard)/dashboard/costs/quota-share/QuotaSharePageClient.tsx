@@ -65,18 +65,20 @@ function StatCard({
 }) {
   const color =
     tone === "amber"
-      ? "text-amber-400"
+      ? "text-warning"
       : tone === "red"
-        ? "text-red-400"
+        ? "text-error"
         : tone === "green"
-          ? "text-emerald-400"
+          ? "text-success"
           : "text-text-main";
   return (
-    <div className="rounded-lg border border-border/40 bg-bg-subtle/30 px-4 py-3">
-      <div className="text-[10px] uppercase tracking-wide text-text-muted font-semibold">
-        {label}
+    <div className="rounded-card border border-border bg-surface p-4">
+      <div className="text-[13px] text-text-muted">{label}</div>
+      <div
+        className={`mt-1 text-2xl font-semibold tracking-tight tabular-nums leading-tight ${color}`}
+      >
+        {value}
       </div>
-      <div className={`text-2xl font-bold tabular-nums leading-tight ${color}`}>{value}</div>
     </div>
   );
 }
@@ -415,15 +417,15 @@ export default function QuotaSharePageClient() {
       {removeError && (
         <div
           role="alert"
-          className="flex items-start gap-2 rounded-lg border border-red-500/40 bg-red-500/10 px-3 py-2 text-[12px] text-red-700 dark:text-red-200"
+          className="flex items-start gap-2 rounded-lg border border-error/30 bg-error/10 px-3 py-2 text-[12px] text-error"
         >
-          <span className="material-symbols-outlined text-[16px] text-red-500 shrink-0">error</span>
+          <span className="material-symbols-outlined text-[16px] text-error shrink-0">error</span>
           <span className="flex-1">{removeError}</span>
           <button
             type="button"
             onClick={() => setRemoveError(null)}
             aria-label={t("dismiss")}
-            className="shrink-0 text-red-500 hover:text-red-400 cursor-pointer"
+            className="shrink-0 text-error/80 hover:text-error transition-colors cursor-pointer"
           >
             <span className="material-symbols-outlined text-[16px]">close</span>
           </button>
@@ -433,8 +435,8 @@ export default function QuotaSharePageClient() {
       {/* Header */}
       <div className="flex items-start justify-between flex-wrap gap-3">
         <div>
-          <h1 className="text-xl font-bold text-text-main flex items-center gap-2">
-            <span className="material-symbols-outlined text-[24px] text-primary">pie_chart</span>
+          <h1 className="text-xl font-semibold tracking-tight text-text-main flex items-center gap-2">
+            <span className="material-symbols-outlined text-[20px] text-text-muted">pie_chart</span>
             {t("title")}
           </h1>
           <p className="text-sm text-text-muted mt-0.5">{t("description")}</p>
@@ -448,10 +450,8 @@ export default function QuotaSharePageClient() {
       </div>
 
       {/* Beta banner — scoped to this page only */}
-      <div className="flex items-center gap-2 rounded-lg border border-amber-500/40 bg-amber-500/10 px-3 py-2 text-[12px] text-amber-700 dark:text-amber-200">
-        <span className="material-symbols-outlined text-[16px] text-amber-500 shrink-0">
-          science
-        </span>
+      <div className="flex items-center gap-2 rounded-lg border border-warning/20 bg-warning/5 px-3 py-2 text-[12px] text-text-main">
+        <span className="material-symbols-outlined text-[16px] text-warning shrink-0">science</span>
         <span className="flex-1">
           <span className="font-semibold">{t("betaTitle")}</span> — {t("betaText")}
         </span>
@@ -459,7 +459,7 @@ export default function QuotaSharePageClient() {
           href="https://github.com/diegosouzapw/OmniRoute/issues/new?labels=quota-share,beta&title=%5Bquota-share%5D%20"
           target="_blank"
           rel="noopener noreferrer"
-          className="shrink-0 inline-flex items-center gap-1 font-medium text-amber-600 dark:text-amber-300 hover:underline"
+          className="shrink-0 inline-flex items-center gap-1 font-medium text-warning hover:underline"
         >
           <span className="material-symbols-outlined text-[14px]">bug_report</span>
           {t("betaReportLink")}
@@ -467,15 +467,15 @@ export default function QuotaSharePageClient() {
       </div>
 
       {/* Group bar */}
-      <div className="flex items-center gap-2 flex-wrap rounded-lg border border-border/40 bg-bg-subtle/20 px-3 py-2">
-        <span className="text-[11px] uppercase tracking-wide text-text-muted font-semibold shrink-0">
+      <div className="flex items-center gap-2 flex-wrap rounded-lg border border-border bg-surface px-3 py-2">
+        <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle shrink-0">
           {t("groupLabel")}
         </span>
         <select
           value={selectedGroupId}
           onChange={(e) => setSelectedGroupId(e.target.value)}
           title={t("groupSelectHint")}
-          className="px-2 py-1 rounded border border-border bg-bg-base text-sm text-text-main min-w-[120px]"
+          className="px-2 py-1 rounded-control border border-border-strong bg-surface text-sm text-text-main min-w-[120px] focus:border-primary focus:outline-none"
         >
           <option value="all">{t("allGroups")}</option>
           {groups.map((g) => (
@@ -499,13 +499,13 @@ export default function QuotaSharePageClient() {
               }}
               placeholder={t("groupNamePrompt")}
               autoFocus
-              className="px-2 py-1 rounded border border-border bg-bg-base text-sm w-36"
+              className="px-2 py-1 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle w-36 focus:border-primary focus:outline-none"
             />
             <button
               type="button"
               onClick={() => void handleCreateGroup()}
               disabled={!newGroupInput.trim()}
-              className="text-xs px-2 py-1 rounded bg-primary/15 text-primary hover:bg-primary/25 transition-colors disabled:opacity-40"
+              className="text-xs font-medium px-2 py-1 rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors disabled:opacity-40"
             >
               {t("newGroup")}
             </button>
@@ -515,7 +515,7 @@ export default function QuotaSharePageClient() {
                 setShowNewGroupInput(false);
                 setNewGroupInput("");
               }}
-              className="text-xs px-2 py-1 rounded border border-border text-text-muted hover:text-text-main transition-colors"
+              className="text-xs px-2 py-1 rounded-control border border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
             >
               {t("cancel")}
             </button>
@@ -545,7 +545,7 @@ export default function QuotaSharePageClient() {
           <button
             type="button"
             onClick={() => void handleDeleteGroup()}
-            className="flex items-center gap-1 text-xs text-text-muted hover:text-red-400 transition-colors"
+            className="flex items-center gap-1 text-xs text-text-muted hover:text-error transition-colors"
           >
             <span className="material-symbols-outlined text-[14px]">delete</span>
             {t("deleteGroup")}
@@ -586,8 +586,8 @@ export default function QuotaSharePageClient() {
           {t("loading")}
         </div>
       ) : pools.length === 0 ? (
-        <div className="rounded-xl border border-border bg-surface py-16 text-center">
-          <span className="material-symbols-outlined text-[64px] opacity-15">pie_chart</span>
+        <div className="rounded-card border border-border bg-surface py-16 text-center">
+          <span className="material-symbols-outlined text-[40px] text-text-subtle">pie_chart</span>
           <h3 className="mt-3 text-base font-semibold text-text-main">{t("emptyTitle")}</h3>
           <p className="mt-1 text-sm text-text-muted max-w-md mx-auto">{t("emptyDescription")}</p>
           <Button variant="primary" size="sm" className="mt-4" onClick={() => setCreateOpen(true)}>
@@ -598,7 +598,7 @@ export default function QuotaSharePageClient() {
       ) : (
         <>
           {groupsToRender.length === 0 ? (
-            <div className="rounded-xl border border-dashed border-border bg-surface py-10 text-center">
+            <div className="rounded-card border border-dashed border-border-strong bg-surface py-10 text-center">
               <p className="text-sm text-text-muted">{t("emptyDescription")}</p>
               <Button
                 variant="primary"
@@ -626,7 +626,7 @@ export default function QuotaSharePageClient() {
                     <span className="text-[11px] text-text-muted">({groupPools.length})</span>
                   </div>
                   {groupPools.length === 0 ? (
-                    <div className="rounded-xl border border-dashed border-border bg-surface py-6 text-center">
+                    <div className="rounded-card border border-dashed border-border-strong bg-surface py-6 text-center">
                       <p className="text-sm text-text-muted">{t("emptyDescription")}</p>
                       <Button
                         variant="primary"
@@ -669,13 +669,13 @@ export default function QuotaSharePageClient() {
           {selectedGroupId === "all" && orphanPools.length > 0 && (
             <div className="flex flex-col gap-3">
               <div className="flex items-center gap-2">
-                <span className="material-symbols-outlined text-[16px] text-amber-400">
+                <span className="material-symbols-outlined text-[16px] text-warning">
                   folder_off
                 </span>
                 <span className="text-sm font-semibold text-text-main">{t("ungroupedTitle")}</span>
                 <span className="text-[11px] text-text-muted">({orphanPools.length})</span>
               </div>
-              <p className="text-[11px] text-amber-400/80">{t("ungroupedHint")}</p>
+              <p className="text-[11px] text-warning">{t("ungroupedHint")}</p>
               <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
                 {orphanPools.map((pool) => (
                   <PoolCardWithUsage

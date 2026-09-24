@@ -63,8 +63,8 @@ export default function EventTypeFilter({ value, onChange }: EventTypeFilterProp
           className={[
             "px-3 py-1 rounded-full text-xs font-medium border transition-colors",
             value === cat
-              ? "bg-[var(--color-accent)] text-white border-[var(--color-accent)]"
-              : "bg-[var(--color-surface)] text-[var(--color-text-muted)] border-[var(--color-border)] hover:bg-[var(--color-bg-alt)]",
+              ? "bg-bg-subtle text-text-main border-border-strong"
+              : "bg-surface text-text-muted border-border hover:bg-bg-subtle hover:text-text-main",
           ].join(" ")}
         >
           {t(labelKey[cat])}

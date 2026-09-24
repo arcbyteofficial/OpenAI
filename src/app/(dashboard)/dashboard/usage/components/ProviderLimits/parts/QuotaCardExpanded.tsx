@@ -52,7 +52,7 @@ function ProviderBillingDetails({ billing }: { billing: ProviderBillingStatus })
       );
 
   return (
-    <div className="flex flex-col gap-1.5 border-t border-border/40 pt-2 text-[11px] text-text-main">
+    <div className="flex flex-col gap-1.5 border-t border-border pt-2 text-[11px] text-text-main">
       {rows.map((row) =>
         row.kind === "link" ? (
           <a
@@ -214,7 +214,7 @@ function QuotaDetailRow({
             onOpenResetCredits?.();
           }}
           aria-label={translateUsageOrFallback(t, "viewResetCredits", "View reset credits")}
-          className="inline-flex h-6 shrink-0 items-center gap-1 rounded-md px-1.5 text-[12px] font-bold leading-none tabular-nums hover:bg-black/[0.05] disabled:cursor-default dark:hover:bg-white/[0.05]"
+          className="inline-flex h-6 shrink-0 items-center gap-1 rounded-md px-1.5 text-[12px] font-semibold leading-none tabular-nums hover:bg-bg-subtle disabled:cursor-default"
           style={{ color: colors.text }}
         >
           {loadingResetCredits && (
@@ -252,7 +252,7 @@ function QuotaDetailRow({
           </span>
         </span>
         <span
-          className="inline-flex h-6 shrink-0 items-center text-[12px] font-bold leading-none tabular-nums"
+          className="inline-flex h-6 shrink-0 items-center text-[12px] font-semibold leading-none tabular-nums"
           style={{ color: colors.text }}
         >
           {sym}
@@ -276,7 +276,7 @@ function QuotaDetailRow({
       <div className="flex items-center justify-between gap-2">
         <span className="text-[12px] font-medium text-text-main truncate">{label}</span>
         <span
-          className="text-[12px] font-bold tabular-nums shrink-0"
+          className="text-[12px] font-semibold tabular-nums shrink-0"
           style={{ color: colors.text }}
         >
           {q.unlimited ? "∞" : translateUsageOrFallback(t, "percentLeft", `${pct}% left`, { pct })}
@@ -288,7 +288,7 @@ function QuotaDetailRow({
               e.stopPropagation();
               onHideQuota?.(q);
             }}
-            className="inline-flex size-5 shrink-0 items-center justify-center rounded text-text-muted transition-colors hover:bg-black/5 hover:text-text-main dark:hover:bg-white/5"
+            className="inline-flex size-5 shrink-0 items-center justify-center rounded-md text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
             title={translateUsageOrFallback(t, "hideQuotaRow", "Hide this quota row")}
             aria-label={translateUsageOrFallback(t, "hideQuotaRow", "Hide this quota row")}
           >
@@ -379,7 +379,7 @@ export default function QuotaCardExpanded({
           {t("loadingQuotas")}
         </div>
       ) : error ? (
-        <div className="text-[11px] text-red-500 flex items-start gap-1.5">
+        <div className="text-[11px] text-error flex items-start gap-1.5">
           <span className="material-symbols-outlined text-[13px]">error</span>
           <span>{error}</span>
         </div>
@@ -390,7 +390,7 @@ export default function QuotaCardExpanded({
       ) : quotas.length === 0 ? (
         <div className="text-[11px] text-text-muted italic">{t("noQuotaData")}</div>
       ) : (
-        <div className="flex flex-col divide-y divide-border/40">
+        <div className="flex flex-col divide-y divide-border">
           {visibleQuotas.map((q, i) => (
             <QuotaDetailRow
               key={`${q.name}-${q.modelKey ?? ""}-${i}`}
@@ -409,7 +409,7 @@ export default function QuotaCardExpanded({
       )}
 
       {hiddenQuotaRows.length > 0 && (
-        <div className="flex flex-wrap items-center gap-1 border-t border-border/40 pt-1.5 text-[10px] text-text-muted">
+        <div className="flex flex-wrap items-center gap-1 border-t border-border pt-1.5 text-[10px] text-text-muted">
           <span className="material-symbols-outlined text-[12px]">visibility_off</span>
           <span>{tr("hiddenQuotaRowsLabel", "Hidden:")}</span>
           {hiddenQuotaRows.map((q) => (
@@ -420,7 +420,7 @@ export default function QuotaCardExpanded({
                 e.stopPropagation();
                 onShowQuota?.(q);
               }}
-              className="rounded-md border border-border px-1.5 py-0.5 transition-colors hover:bg-black/5 hover:text-text-main dark:hover:bg-white/5"
+              className="rounded-md border border-border bg-surface px-1.5 py-0.5 transition-colors hover:bg-bg-subtle hover:text-text-main"
               title={translateUsageOrFallback(t, "showQuotaRow", "Show this quota row")}
             >
               {q.displayName || formatQuotaLabel(q.name)}
@@ -436,7 +436,7 @@ export default function QuotaCardExpanded({
             e.stopPropagation();
             setExpanded((prev) => !prev);
           }}
-          className="inline-flex items-center justify-center gap-1 text-[11px] font-medium px-2 py-1 rounded-md border border-border bg-bg-subtle hover:bg-black/[0.04] dark:hover:bg-white/[0.04] cursor-pointer"
+          className="inline-flex items-center justify-center gap-1 text-[11px] font-medium px-2 py-1 rounded-md border border-border bg-surface transition-colors hover:bg-bg-subtle cursor-pointer"
         >
           <span className="material-symbols-outlined text-[12px]">
             {expanded ? "expand_less" : "expand_more"}
@@ -447,11 +447,11 @@ export default function QuotaCardExpanded({
         </button>
       )}
 
-      <div className="flex flex-wrap items-center justify-between gap-1.5 pt-1.5 border-t border-border/40">
+      <div className="flex flex-wrap items-center justify-between gap-1.5 pt-1.5 border-t border-border">
         {refreshedLabel && (
           <span
             className={`text-[10px] tabular-nums shrink-0 ${
-              hasStaleData ? "text-amber-500" : "text-text-muted"
+              hasStaleData ? "text-warning" : "text-text-muted"
             }`}
             title={
               hasStaleData
@@ -471,7 +471,7 @@ export default function QuotaCardExpanded({
                 e.stopPropagation();
                 onOpenResetCredits?.();
               }}
-              className="inline-flex shrink-0 items-center gap-1 text-[11px] font-medium px-2 py-1 rounded-md border border-primary/40 text-primary bg-bg-subtle hover:bg-black/[0.04] dark:hover:bg-white/[0.04] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+              className="inline-flex shrink-0 items-center gap-1 text-[11px] font-medium px-2 py-1 rounded-md border border-primary/40 text-primary bg-surface transition-colors hover:bg-bg-subtle disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
             >
               <span
                 className={`material-symbols-outlined text-[12px] ${
@@ -490,7 +490,7 @@ export default function QuotaCardExpanded({
               e.stopPropagation();
               onOpenCutoff();
             }}
-            className={`inline-flex shrink-0 items-center gap-1 text-[11px] font-medium px-2 py-1 rounded-md border bg-bg-subtle hover:bg-black/[0.04] dark:hover:bg-white/[0.04] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer ${
+            className={`inline-flex shrink-0 items-center gap-1 text-[11px] font-medium px-2 py-1 rounded-md border bg-surface transition-colors hover:bg-bg-subtle disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer ${
               hasCutoffOverrides ? "border-primary/40 text-primary" : "border-border"
             }`}
           >
@@ -503,7 +503,7 @@ export default function QuotaCardExpanded({
               e.stopPropagation();
               onOpenCost();
             }}
-            className="inline-flex shrink-0 items-center gap-1 text-[11px] font-medium px-2 py-1 rounded-md border border-border bg-bg-subtle hover:bg-black/[0.04] dark:hover:bg-white/[0.04] cursor-pointer"
+            className="inline-flex shrink-0 items-center gap-1 text-[11px] font-medium px-2 py-1 rounded-md border border-border bg-surface transition-colors hover:bg-bg-subtle cursor-pointer"
           >
             <span className="material-symbols-outlined text-[12px]">bar_chart</span>
             {t("usdCost")}
@@ -515,7 +515,7 @@ export default function QuotaCardExpanded({
               e.stopPropagation();
               onRefresh();
             }}
-            className="inline-flex shrink-0 items-center gap-1 text-[11px] font-medium px-2 py-1 rounded-md border border-border bg-bg-subtle hover:bg-black/[0.04] dark:hover:bg-white/[0.04] disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+            className="inline-flex shrink-0 items-center gap-1 text-[11px] font-medium px-2 py-1 rounded-md border border-border bg-surface transition-colors hover:bg-bg-subtle disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
           >
             <span
               className={`material-symbols-outlined text-[12px] ${loading ? "animate-spin" : ""}`}

@@ -50,10 +50,11 @@ export default function EmptyState({
     >
       <div
         style={{
-          fontSize: "48px",
-          marginBottom: "16px",
+          fontSize: "32px",
+          marginBottom: "12px",
           opacity: 0.8,
-          animation: "emptyBounce 2s ease-in-out infinite",
+          color: "var(--color-text-subtle)",
+          animation: "none",
         }}
         role="img"
         aria-hidden="true"
@@ -68,9 +69,9 @@ export default function EmptyState({
       </div>
       <h3
         style={{
-          fontSize: "18px",
+          fontSize: "14px",
           fontWeight: 600,
-          color: "var(--text-primary, #e0e0e0)",
+          color: "var(--color-text-main)",
           marginBottom: "8px",
           margin: 0,
         }}
@@ -80,11 +81,11 @@ export default function EmptyState({
       {description && (
         <p
           style={{
-            fontSize: "14px",
-            color: "var(--text-secondary, #888)",
+            fontSize: "13px",
+            color: "var(--color-text-muted)",
             maxWidth: "320px",
             lineHeight: 1.5,
-            marginTop: "8px",
+            marginTop: "4px",
           }}
         >
           {description}
@@ -94,24 +95,24 @@ export default function EmptyState({
         <button
           onClick={onAction}
           style={{
-            marginTop: "20px",
-            padding: "10px 24px",
-            borderRadius: "8px",
-            border: "1px solid rgba(99, 102, 241, 0.4)",
-            background: "rgba(99, 102, 241, 0.15)",
-            color: "#818cf8",
-            fontSize: "14px",
+            marginTop: "16px",
+            padding: "6px 12px",
+            borderRadius: "var(--radius-control)",
+            border: "1px solid transparent",
+            background: "var(--color-contrast)",
+            color: "var(--color-contrast-fg)",
+            fontSize: "13px",
             fontWeight: 500,
             cursor: "pointer",
-            transition: "all 0.2s ease",
+            transition: "background-color 0.15s ease",
           }}
           onMouseEnter={(e) => {
-            (e.currentTarget as HTMLElement).style.background = "rgba(99, 102, 241, 0.25)";
-            (e.currentTarget as HTMLElement).style.transform = "translateY(-1px)";
+            (e.currentTarget as HTMLElement).style.background = "var(--color-contrast-hover)";
+            (e.currentTarget as HTMLElement).style.transform = "none";
           }}
           onMouseLeave={(e) => {
-            (e.currentTarget as HTMLElement).style.background = "rgba(99, 102, 241, 0.15)";
-            (e.currentTarget as HTMLElement).style.transform = "translateY(0)";
+            (e.currentTarget as HTMLElement).style.background = "var(--color-contrast)";
+            (e.currentTarget as HTMLElement).style.transform = "none";
           }}
         >
           {actionLabel}

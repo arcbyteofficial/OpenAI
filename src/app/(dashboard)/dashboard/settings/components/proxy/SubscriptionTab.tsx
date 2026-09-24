@@ -251,9 +251,9 @@ export default function SubscriptionTab() {
   };
 
   const statusBadge: Record<SubscriptionRecord["status"], string> = {
-    ok: "bg-green-500/15 text-green-600 border-green-500/30",
-    error: "bg-red-500/15 text-red-600 border-red-500/30",
-    empty: "bg-yellow-500/15 text-yellow-600 border-yellow-500/30",
+    ok: "bg-success/10 text-success border-success/20",
+    error: "bg-error/10 text-error border-error/20",
+    empty: "bg-warning/10 text-warning border-warning/20",
   };
 
   return (
@@ -268,7 +268,7 @@ export default function SubscriptionTab() {
       </div>
 
       {error && (
-        <div className="rounded-md border border-red-500/30 bg-red-500/10 px-3 py-2 text-sm text-red-600">
+        <div className="rounded-lg border border-error/20 bg-error/10 px-3 py-2 text-sm text-error">
           {error}
         </div>
       )}
@@ -290,7 +290,7 @@ export default function SubscriptionTab() {
             <label className="flex flex-col gap-1 text-sm">
               <span className="text-text-muted">{t("proxySubscription.name")}</span>
               <input
-                className="rounded border border-border bg-surface px-2 py-1.5 text-text outline-none focus:border-primary"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1.5 text-text-main placeholder:text-text-subtle outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder={t("proxySubscription.namePlaceholder")}
@@ -300,7 +300,7 @@ export default function SubscriptionTab() {
             <label className="flex flex-col gap-1 text-sm">
               <span className="text-text-muted">{t("proxySubscription.url")}</span>
               <input
-                className="rounded border border-border bg-surface px-2 py-1.5 text-text outline-none focus:border-primary"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1.5 text-text-main placeholder:text-text-subtle outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
                 value={form.url}
                 onChange={(e) => setForm({ ...form, url: e.target.value })}
                 placeholder={t("proxySubscription.urlPlaceholder")}
@@ -317,10 +317,10 @@ export default function SubscriptionTab() {
                     key={m}
                     type="button"
                     onClick={() => setForm({ ...form, mode: m })}
-                    className={`px-3 py-1.5 rounded text-sm border transition-colors ${
+                    className={`px-3 py-1.5 rounded-control text-sm border transition-colors ${
                       form.mode === m
-                        ? "border-primary bg-primary/20 text-primary"
-                        : "border-border text-text-muted hover:text-text"
+                        ? "border-primary/40 bg-primary/10 text-primary"
+                        : "border-border text-text-muted hover:border-border-strong hover:text-text-main"
                     }`}
                   >
                     {m === "global"
@@ -340,7 +340,7 @@ export default function SubscriptionTab() {
               <span className="text-text-muted">{t("proxySubscription.localCoreEndpoint")}</span>
               <textarea
                 rows={3}
-                className="rounded border border-border bg-surface px-2 py-1.5 text-text outline-none focus:border-primary"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1.5 text-text-main placeholder:text-text-subtle outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
                 value={form.localCoreEndpoint}
                 onChange={(e) => setForm({ ...form, localCoreEndpoint: e.target.value })}
                 placeholder={t("proxySubscription.localCoreEndpointPlaceholder")}
@@ -374,10 +374,10 @@ export default function SubscriptionTab() {
                               : [...form.ruleProviders, p.id],
                           })
                         }
-                        className={`px-3 py-1 rounded text-xs border transition-colors ${
+                        className={`px-3 py-1 rounded-md text-xs border transition-colors ${
                           checked
-                            ? "border-primary bg-primary/20 text-primary"
-                            : "border-border text-text-muted hover:text-text"
+                            ? "border-primary/40 bg-primary/10 text-primary"
+                            : "border-border text-text-muted hover:border-border-strong hover:text-text-main"
                         }`}
                       >
                         {p.name}
@@ -395,7 +395,7 @@ export default function SubscriptionTab() {
               <input
                 type="number"
                 min={5}
-                className="rounded border border-border bg-surface px-2 py-1.5 text-text outline-none focus:border-primary"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1.5 text-text-main placeholder:text-text-subtle outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
                 value={form.updateIntervalMinutes}
                 onChange={(e) =>
                   setForm({ ...form, updateIntervalMinutes: Number(e.target.value) || 60 })
@@ -412,7 +412,7 @@ export default function SubscriptionTab() {
             </label>
           </div>
 
-          {formError && <div className="text-sm text-red-600">{formError}</div>}
+          {formError && <div className="text-sm text-error">{formError}</div>}
 
           <div className="flex justify-end gap-2">
             <Button size="sm" variant="secondary" onClick={resetForm}>
@@ -447,7 +447,7 @@ export default function SubscriptionTab() {
                   <div className="flex items-center gap-2">
                     <span className="font-medium truncate">{sub.name}</span>
                     <span
-                      className={`text-xs px-2 py-0.5 rounded border ${
+                      className={`text-xs px-2 py-0.5 rounded-md border ${
                         statusBadge[sub.status] || statusBadge.empty
                       }`}
                     >
@@ -457,12 +457,12 @@ export default function SubscriptionTab() {
                           ? t("proxySubscription.statusError")
                           : t("proxySubscription.statusEmpty")}
                     </span>
-                    <span className="text-xs px-2 py-0.5 rounded border border-border text-text-muted">
+                    <span className="text-xs px-2 py-0.5 rounded-md border border-border text-text-muted">
                       {sub.mode === "global"
                         ? t("proxySubscription.global")
                         : t("proxySubscription.rule")}
                     </span>
-                    <span className="text-xs px-2 py-0.5 rounded border border-border text-text-muted">
+                    <span className="text-xs px-2 py-0.5 rounded-md border border-border text-text-muted">
                       {sub.enabled
                         ? t("proxySubscription.enabled")
                         : t("proxySubscription.disabled")}
@@ -472,31 +472,31 @@ export default function SubscriptionTab() {
                     {sub.url}
                   </p>
                   {resolveSubError(sub.error) && (
-                    <p className="text-xs text-amber-600 mt-1 break-words">
+                    <p className="text-xs text-warning mt-1 break-words">
                       {resolveSubError(sub.error)}
                     </p>
                   )}
                   {showCoreHint && (
-                    <div className="mt-2 rounded-md border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-xs text-amber-700 space-y-1.5">
+                    <div className="mt-2 rounded-lg border border-warning/30 bg-warning/5 px-3 py-2 text-xs text-warning space-y-1.5">
                       <p className="font-medium">
                         {t("proxySubscription.coreHintTitle", { count: needsCoreNodes.length })}
                       </p>
                       <p>{t("proxySubscription.coreHintDesc")}</p>
                       <div className="flex flex-wrap items-center gap-2">
-                        <code className="rounded bg-surface px-2 py-1 border border-border">
+                        <code className="rounded-md bg-surface px-2 py-1 border border-border font-mono text-[12px] text-text-main">
                           socks5://127.0.0.1:2080
                         </code>
                         <button
                           type="button"
                           onClick={() => navigator.clipboard?.writeText("socks5://127.0.0.1:2080")}
-                          className="px-2 py-1 rounded border border-border hover:border-primary/50"
+                          className="px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors"
                         >
                           {t("proxySubscription.copy")}
                         </button>
                         <button
                           type="button"
                           onClick={() => startEdit(sub)}
-                          className="px-2 py-1 rounded border border-border hover:border-primary/50"
+                          className="px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors"
                         >
                           {t("proxySubscription.goConfigure")}
                         </button>
@@ -524,7 +524,7 @@ export default function SubscriptionTab() {
                     type="button"
                     disabled={busyId === sub.id}
                     onClick={() => toggleEnabled(sub)}
-                    className="px-2 py-1 text-xs rounded border border-border hover:border-primary/50"
+                    className="px-2 py-1 text-xs rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
                     title={
                       sub.enabled ? t("proxySubscription.disable") : t("proxySubscription.enable")
                     }
@@ -535,7 +535,7 @@ export default function SubscriptionTab() {
                     type="button"
                     disabled={busyId === sub.id}
                     onClick={() => refresh(sub)}
-                    className="px-2 py-1 text-xs rounded border border-border hover:border-primary/50"
+                    className="px-2 py-1 text-xs rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
                     title={t("proxySubscription.refreshNodes")}
                   >
                     {t("proxySubscription.refreshNodes")}
@@ -544,7 +544,7 @@ export default function SubscriptionTab() {
                     type="button"
                     disabled={busyId === sub.id}
                     onClick={() => startEdit(sub)}
-                    className="px-2 py-1 text-xs rounded border border-border hover:border-primary/50"
+                    className="px-2 py-1 text-xs rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
                     title={t("proxySubscription.edit")}
                   >
                     {t("proxySubscription.edit")}
@@ -553,7 +553,7 @@ export default function SubscriptionTab() {
                     type="button"
                     disabled={busyId === sub.id}
                     onClick={() => remove(sub)}
-                    className="px-2 py-1 text-xs rounded border border-red-500/30 text-red-600 hover:bg-red-500/10"
+                    className="px-2 py-1 text-xs rounded-control border border-error/30 text-error hover:bg-error/10 transition-colors disabled:opacity-50"
                     title={t("proxySubscription.delete")}
                   >
                     {t("proxySubscription.delete")}

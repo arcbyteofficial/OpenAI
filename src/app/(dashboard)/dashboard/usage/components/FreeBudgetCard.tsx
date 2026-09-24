@@ -270,13 +270,13 @@ function tosBadge(
   labels: FreeBudgetLabels
 ): { icon: string; cls: string; title: string } | null {
   if (tos === "avoid") {
-    return { icon: "warning", cls: "text-amber-400", title: labels.tosTitles.avoid };
+    return { icon: "warning", cls: "text-warning", title: labels.tosTitles.avoid };
   }
   if (tos === "caution") {
     return { icon: "bolt", cls: "text-text-muted", title: labels.tosTitles.caution };
   }
   if (tos === "ok") {
-    return { icon: "check_circle", cls: "text-emerald-500", title: labels.tosTitles.ok };
+    return { icon: "check_circle", cls: "text-success", title: labels.tosTitles.ok };
   }
   return null;
 }
@@ -287,9 +287,9 @@ function tosBadge(
 
 function Kpi({ label, value, valueClass }: { label: string; value: string; valueClass?: string }) {
   return (
-    <div className="flex flex-col gap-0.5 px-3 py-2 rounded-md border border-border bg-black/[0.015] dark:bg-white/[0.015]">
-      <span className="text-[10px] uppercase tracking-wide text-text-muted">{label}</span>
-      <span className={`text-[19px] font-bold tabular-nums ${valueClass ?? "text-text-main"}`}>
+    <div className="flex flex-col gap-0.5 px-3 py-2 rounded-lg border border-border bg-surface">
+      <span className="text-[11px] text-text-muted">{label}</span>
+      <span className={`text-[19px] font-semibold tabular-nums ${valueClass ?? "text-text-main"}`}>
         {value}
       </span>
     </div>
@@ -307,8 +307,8 @@ function FreeTypeBadge({ freeType, label }: { freeType: string; label: string })
       data-testid="free-type-badge"
       className={`inline-flex items-center gap-0.5 rounded-full border px-1.5 py-0.5 text-[10px] font-medium whitespace-nowrap ${
         isKeyless
-          ? "border-emerald-500/40 bg-emerald-500/10 text-emerald-500"
-          : "border-border bg-black/[0.02] dark:bg-white/[0.03] text-text-muted"
+          ? "border-success/30 bg-success/10 text-success"
+          : "border-border bg-bg-subtle text-text-muted"
       }`}
     >
       {isKeyless && <span className="material-symbols-outlined text-[10px]">lock_open</span>}
@@ -377,7 +377,7 @@ export function FreeBudgetView({
   const freshness = catalogUpdatedAt ? relativeTimeFromNow(catalogUpdatedAt) : null;
 
   return (
-    <div className="rounded-lg border border-border bg-surface">
+    <div className="rounded-card border border-border bg-surface">
       {/* Header */}
       <div className="flex items-center gap-2 px-3 py-2 border-b border-border">
         <span className="material-symbols-outlined text-[14px] text-text-muted">savings</span>
@@ -402,7 +402,7 @@ export function FreeBudgetView({
         <Kpi
           label={labels.firstMonth}
           value={`~${fmt(firstMonthRealisticTokens)}`}
-          valueClass="text-emerald-500"
+          valueClass="text-success"
         />
         <Kpi label={labels.usedThisMonth} value={fmt(usedThisMonth)} valueClass="text-text-muted" />
       </div>
@@ -432,13 +432,11 @@ export function FreeBudgetView({
       {keylessProviders.length > 0 && (
         <div
           data-testid="keyless-section"
-          className="mx-3 mt-2 rounded-md border border-emerald-500/30 bg-emerald-500/5 px-3 py-2"
+          className="mx-3 mt-2 rounded-lg border border-success/30 bg-success/5 px-3 py-2"
         >
           <div className="flex items-center gap-1.5">
-            <span className="material-symbols-outlined text-[14px] text-emerald-500">
-              lock_open
-            </span>
-            <span className="text-[11px] font-semibold text-emerald-500">{labels.noApiKey}</span>
+            <span className="material-symbols-outlined text-[14px] text-success">lock_open</span>
+            <span className="text-[11px] font-semibold text-success">{labels.noApiKey}</span>
             <span className="text-[10.5px] text-text-muted">
               ({keylessModels.length}个模型 · {keylessProviders.length}个提供者)
             </span>
@@ -448,7 +446,7 @@ export function FreeBudgetView({
               <span
                 key={p}
                 className="inline-flex items-center rounded-full border px-2 py-0.5 text-[10.5px] text-text-muted tabular-nums"
-                style={{ borderColor: providerColor.get(p) ?? "var(--border)" }}
+                style={{ borderColor: providerColor.get(p) ?? "var(--color-border)" }}
               >
                 {p}
               </span>
@@ -459,22 +457,20 @@ export function FreeBudgetView({
 
       {/* Boost + uncapped callouts */}
       {boostMonthlyTokens > 0 && (
-        <div className="mx-3 mt-2 flex items-center gap-2 rounded-md border border-emerald-500/30 bg-emerald-500/10 px-3 py-1.5">
-          <span className="material-symbols-outlined text-[14px] text-emerald-500">bolt</span>
-          <span className="text-[11px] text-emerald-500">
-            {labels.boost(fmt(boostMonthlyTokens))}
-          </span>
+        <div className="mx-3 mt-2 flex items-center gap-2 rounded-lg border border-success/30 bg-success/10 px-3 py-1.5">
+          <span className="material-symbols-outlined text-[14px] text-success">bolt</span>
+          <span className="text-[11px] text-success">{labels.boost(fmt(boostMonthlyTokens))}</span>
         </div>
       )}
       {uncappedProviders.length > 0 && (
-        <div className="mx-3 mt-2 rounded-md border border-border bg-black/[0.015] dark:bg-white/[0.015] px-3 py-2">
+        <div className="mx-3 mt-2 rounded-lg border border-border bg-bg-subtle px-3 py-2">
           <span className="text-[11px] text-text-muted">{labels.uncapped}</span>
           <div className="mt-1 flex flex-wrap gap-1">
             {uncappedProviders.map((p) => (
               <span
                 key={p}
                 className="inline-flex items-center rounded-full border border-border px-2 py-0.5 text-[10.5px] text-text-muted tabular-nums"
-                style={{ borderColor: providerColor.get(p) ?? "var(--border)" }}
+                style={{ borderColor: providerColor.get(p) ?? "var(--color-border)" }}
               >
                 {p}
               </span>
@@ -483,8 +479,8 @@ export function FreeBudgetView({
         </div>
       )}
       {gatedRecurringTokens > 0 && (
-        <div className="mx-3 mt-2 rounded-md border border-amber-500/30 bg-amber-500/10 px-3 py-2">
-          <span className="text-[11px] text-amber-600 dark:text-amber-400">
+        <div className="mx-3 mt-2 rounded-lg border border-warning/30 bg-warning/10 px-3 py-2">
+          <span className="text-[11px] text-warning">
             {labels.gated(fmt(gatedRecurringTokens))}
           </span>
           <div className="mt-1 flex flex-wrap gap-1">
@@ -502,9 +498,9 @@ export function FreeBudgetView({
 
       {/* ToS-restricted callout */}
       {avoidModels.length > 0 && (
-        <div className="mx-3 mt-2 flex items-center gap-2 rounded-md border border-amber-500/30 bg-amber-500/10 px-3 py-1.5">
-          <span className="material-symbols-outlined text-[14px] text-text-muted">warning</span>
-          <span className="text-[11px] text-amber-400">
+        <div className="mx-3 mt-2 flex items-center gap-2 rounded-lg border border-warning/30 bg-warning/10 px-3 py-1.5">
+          <span className="material-symbols-outlined text-[14px] text-warning">warning</span>
+          <span className="text-[11px] text-warning">
             {labels.tosRestricted(avoidModels.length)}
           </span>
         </div>
@@ -542,7 +538,7 @@ export function FreeBudgetView({
                 return (
                   <tr
                     key={`${m.provider}:${m.modelId}`}
-                    className="border-b border-border/40 hover:bg-black/[0.02] dark:hover:bg-white/[0.02]"
+                    className="border-b border-border last:border-b-0 hover:bg-bg-subtle"
                   >
                     <td className="py-1 pr-2">
                       <span className="inline-flex items-center gap-1.5">
@@ -629,14 +625,14 @@ export default function FreeBudgetCard() {
           placeholder="Search model, provider…"
           aria-label="Search free models"
           data-testid="budget-search-input"
-          className="rounded border border-border bg-surface px-2 py-1 text-[11px] text-text-main placeholder:text-text-muted min-w-[160px]"
+          className="rounded-control border border-border-strong bg-surface px-2 py-1 text-[11px] text-text-main placeholder:text-text-subtle min-w-[160px]"
         />
         <select
           value={providerFilter}
           onChange={(e) => setProviderFilter(e.target.value)}
           aria-label="Filter by provider"
           data-testid="budget-provider-select"
-          className="rounded border border-border bg-surface px-1.5 py-1 text-[11px] text-text-main"
+          className="rounded-control border border-border-strong bg-surface px-1.5 py-1 text-[11px] text-text-main"
         >
           <option value="all">{t("allProviders")}</option>
           {providers.map((p) => (
@@ -650,7 +646,7 @@ export default function FreeBudgetCard() {
             type="checkbox"
             checked={keylessOnly}
             onChange={(e) => setKeylessOnly(e.target.checked)}
-            className="accent-emerald-500"
+            className="accent-primary"
             data-testid="budget-keyless-toggle"
           />
           Keyless only
@@ -660,7 +656,7 @@ export default function FreeBudgetCard() {
             type="checkbox"
             checked={hideAvoid}
             onChange={(e) => setHideAvoid(e.target.checked)}
-            className="accent-indigo-500"
+            className="accent-primary"
           />
           {t("hideTosRestricted")}
         </label>
@@ -669,7 +665,7 @@ export default function FreeBudgetCard() {
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value as FreeBudgetSort)}
-            className="rounded border border-border bg-surface px-1.5 py-0.5 text-[11px] text-text-main"
+            className="rounded-control border border-border-strong bg-surface px-1.5 py-0.5 text-[11px] text-text-main"
           >
             <option value="tokens">{t("tokensMonth")}</option>
             <option value="provider">{t("provider")}</option>

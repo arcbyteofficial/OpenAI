@@ -111,18 +111,15 @@ export default function IntelligentComboPanel({
   };
 
   return (
-    <Card
-      className="border-primary/10 bg-gradient-to-br from-primary/[0.04] via-transparent to-transparent"
-      padding="sm"
-    >
+    <Card className="border-border" padding="sm">
       <div className="flex flex-col gap-4">
         <div className="flex flex-col lg:flex-row lg:items-start lg:justify-between gap-3">
           <div>
             <div className="flex items-center gap-2">
-              <span className="material-symbols-outlined text-primary text-[18px]">
+              <span className="material-symbols-outlined text-text-muted text-[18px]">
                 auto_awesome
               </span>
-              <h2 className="text-lg font-semibold text-text-main">
+              <h2 className="text-base font-semibold tracking-tight text-text-main">
                 {getI18nOrFallback(t, "intelligentPanelTitle", "Intelligent Routing Dashboard")}
               </h2>
             </div>
@@ -134,7 +131,7 @@ export default function IntelligentComboPanel({
               )}
             </p>
             <div className="mt-2 flex flex-wrap items-center gap-2 text-[11px] text-text-muted">
-              <code className="rounded bg-black/5 dark:bg-white/5 px-2 py-1 text-text-main">
+              <code className="rounded-md bg-bg-subtle px-2 py-1 text-text-main">
                 {combo?.name}
               </code>
               <span>{t("intelligentComboCount", { count: allCombos.length })}</span>
@@ -142,7 +139,7 @@ export default function IntelligentComboPanel({
             </div>
           </div>
 
-          <div className="inline-flex items-center gap-2 rounded-full bg-blue-500/15 px-3 py-1.5 text-xs font-medium text-blue-600 dark:text-blue-300">
+          <div className="inline-flex items-center gap-2 rounded-full bg-bg-subtle px-3 py-1.5 text-xs font-medium text-text-muted ring-1 ring-inset ring-border">
             <span className="material-symbols-outlined text-[14px]">tune</span>
             {getI18nOrFallback(t, "configOnlyStatus", "Configuration View")}
           </div>
@@ -163,11 +160,13 @@ export default function IntelligentComboPanel({
                   )}
                 </p>
               </div>
-              <div className="rounded-lg bg-black/5 dark:bg-white/5 px-3 py-2 text-right">
+              <div className="rounded-lg bg-bg-subtle px-3 py-2 text-right">
                 <p className="text-[10px] uppercase tracking-wide text-text-muted">
                   {getI18nOrFallback(t, "candidatePoolLabel", "Candidate Pool")}
                 </p>
-                <p className="text-lg font-semibold text-text-main">{providerScopeCount}</p>
+                <p className="text-lg font-semibold tabular-nums text-text-main">
+                  {providerScopeCount}
+                </p>
               </div>
             </div>
           </Card.Section>
@@ -237,7 +236,7 @@ export default function IntelligentComboPanel({
 
             <div className="mt-3 flex flex-col gap-2">
               {providerScores.length === 0 ? (
-                <div className="rounded-lg border border-dashed border-black/10 dark:border-white/10 p-3 text-[11px] text-text-muted">
+                <div className="rounded-lg border border-dashed border-border-strong p-3 text-[11px] text-text-muted">
                   {getI18nOrFallback(
                     t,
                     "allProvidersEvaluated",
@@ -250,7 +249,7 @@ export default function IntelligentComboPanel({
                   return (
                     <div
                       key={entry.provider}
-                      className="rounded-lg border border-black/8 dark:border-white/8 bg-white/60 dark:bg-white/[0.03] p-3"
+                      className="rounded-lg border border-border bg-surface p-3"
                     >
                       <div className="flex items-center justify-between gap-2">
                         <div>
@@ -259,14 +258,14 @@ export default function IntelligentComboPanel({
                           </p>
                           <p className="text-[11px] text-text-muted mt-0.5">{entry.model}</p>
                         </div>
-                        <span className="rounded-full bg-primary/10 px-2 py-1 text-[11px] font-semibold text-primary">
+                        <span className="rounded-full bg-bg-subtle px-2 py-1 text-[11px] font-medium tabular-nums text-text-main">
                           {percentage}%
                         </span>
                       </div>
 
-                      <div className="mt-2 h-2 rounded-full bg-black/8 dark:bg-white/8 overflow-hidden">
+                      <div className="mt-2 h-2 rounded-full bg-bg-subtle overflow-hidden">
                         <div
-                          className="h-full rounded-full bg-blue-500 transition-all"
+                          className="h-full rounded-full bg-primary transition-[width]"
                           style={{ width: `${percentage}%` }}
                         />
                       </div>
@@ -275,7 +274,7 @@ export default function IntelligentComboPanel({
                         {Object.entries(entry.factors).map(([factorKey, factorValue]) => (
                           <span
                             key={`${entry.provider}-${factorKey}`}
-                            className="rounded-full bg-black/5 dark:bg-white/5 px-2 py-1 text-[10px] text-text-muted"
+                            className="rounded-full bg-bg-subtle px-2 py-1 text-[10px] text-text-muted"
                           >
                             {FACTOR_LABELS[factorKey as keyof typeof FACTOR_LABELS]}{" "}
                             {Math.round(Number(factorValue) * 100)}%
@@ -306,7 +305,7 @@ export default function IntelligentComboPanel({
             </div>
 
             <div className="mt-3 grid grid-cols-1 gap-2 sm:grid-cols-2">
-              <div className="rounded-lg border border-black/8 bg-white/60 p-3 dark:border-white/8 dark:bg-white/[0.03]">
+              <div className="rounded-lg border border-border bg-surface p-3">
                 <p className="text-[11px] uppercase tracking-wide text-text-muted">
                   {t("modePack")}
                 </p>
@@ -314,7 +313,7 @@ export default function IntelligentComboPanel({
                   {normalizedConfig.modePack}
                 </p>
               </div>
-              <div className="rounded-lg border border-black/8 bg-white/60 p-3 dark:border-white/8 dark:bg-white/[0.03]">
+              <div className="rounded-lg border border-border bg-surface p-3">
                 <p className="text-[11px] uppercase tracking-wide text-text-muted">
                   {getI18nOrFallback(t, "explorationRateLabel", "Exploration Rate")}
                 </p>

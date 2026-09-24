@@ -411,8 +411,8 @@ export default function CustomModelsSection({
 
   return (
     <div className="mt-6 pt-6 border-t border-border">
-      <h3 className="text-sm font-semibold mb-3 flex items-center gap-2">
-        <span className="material-symbols-outlined text-base text-primary">tune</span>
+      <h3 className="text-sm font-semibold text-text-main mb-3 flex items-center gap-2">
+        <span className="material-symbols-outlined text-base text-text-muted">tune</span>
         {t("customModels")}
       </h3>
       <p className="text-xs text-text-muted mb-3">{t("customModelsHint")}</p>
@@ -431,7 +431,7 @@ export default function CustomModelsSection({
               onChange={(e) => setNewModelId(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleAdd()}
               placeholder={t("customModelPlaceholder")}
-              className="w-full px-3 py-2 text-sm border border-border rounded-lg bg-background focus:outline-none focus:border-primary"
+              className="w-full px-3 py-2 text-sm text-text-main border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-primary"
             />
           </div>
           <div className="w-40">
@@ -445,7 +445,7 @@ export default function CustomModelsSection({
               onChange={(e) => setNewModelName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleAdd()}
               placeholder={t("optional")}
-              className="w-full px-3 py-2 text-sm border border-border rounded-lg bg-background focus:outline-none focus:border-primary"
+              className="w-full px-3 py-2 text-sm text-text-main border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-primary"
             />
           </div>
           <Button size="sm" icon="add" onClick={handleAdd} disabled={!newModelId.trim() || adding}>
@@ -463,7 +463,7 @@ export default function CustomModelsSection({
               id="custom-api-format"
               value={newApiFormat}
               onChange={(e) => setNewApiFormat(e.target.value)}
-              className="w-full px-3 py-2 text-sm border border-border rounded-lg bg-background focus:outline-none focus:border-primary"
+              className="w-full px-3 py-2 text-sm text-text-main border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-primary"
             >
               <option value="chat-completions">{t("chatCompletions")}</option>
               <option value="responses">{t("responsesApi")}</option>
@@ -484,7 +484,7 @@ export default function CustomModelsSection({
               value={newTargetFormat}
               onChange={(e) => setNewTargetFormat(e.target.value)}
               title={t("targetFormatHint")}
-              className="w-full px-3 py-2 text-sm border border-border rounded-lg bg-background focus:outline-none focus:border-primary"
+              className="w-full px-3 py-2 text-sm text-text-main border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-primary"
             >
               <option value="">{t("targetFormatAuto")}</option>
               <option value="openai">{t("compatProtocolOpenAI")}</option>
@@ -514,7 +514,7 @@ export default function CustomModelsSection({
                         setNewEndpoints((prev) => prev.filter((x) => x !== ep));
                       }
                     }}
-                    className="rounded border-border"
+                    className="rounded border-border-strong"
                   />
                   {endpointLabel(ep, t)}
                 </label>
@@ -533,7 +533,7 @@ export default function CustomModelsSection({
                 type="checkbox"
                 checked={newSupportsVision}
                 onChange={(e) => setNewSupportsVision(e.target.checked)}
-                className="rounded border-border"
+                className="rounded border-border-strong"
               />
               {`👁️ ${t("visionCapableLabel")}`}
             </label>
@@ -547,7 +547,7 @@ export default function CustomModelsSection({
                 type="checkbox"
                 checked={newIsFree}
                 onChange={(e) => setNewIsFree(e.target.checked)}
-                className="rounded border-border"
+                className="rounded border-border-strong"
               />
               FREE
             </label>
@@ -567,22 +567,24 @@ export default function CustomModelsSection({
             return (
               <div
                 key={model.id}
-                className="flex items-center gap-3 rounded-lg border border-border p-3 hover:bg-sidebar/50"
+                className="flex items-center gap-3 rounded-lg border border-border p-3 transition-colors hover:bg-bg-subtle"
               >
                 {editingModelId !== model.id && (
-                  <span className="material-symbols-outlined text-base text-primary shrink-0">
+                  <span className="material-symbols-outlined text-base text-text-muted shrink-0">
                     tune
                   </span>
                 )}
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium truncate">{model.name || model.id}</p>
+                  <p className="text-sm font-medium text-text-main truncate">
+                    {model.name || model.id}
+                  </p>
                   <div className="flex items-center gap-1 mt-1 flex-wrap">
-                    <code className="text-xs text-text-muted font-mono bg-sidebar px-1.5 py-0.5 rounded">
+                    <code className="text-xs text-text-muted font-mono bg-bg-subtle px-1.5 py-0.5 rounded">
                       {fullModel}
                     </code>
                     <button
                       onClick={() => onCopy(fullModel, copyKey)}
-                      className="p-0.5 hover:bg-sidebar rounded text-text-muted hover:text-primary"
+                      className="p-0.5 hover:bg-bg-subtle rounded text-text-muted hover:text-text-main"
                       title={t("copyModel")}
                     >
                       <span className="material-symbols-outlined text-sm">
@@ -590,7 +592,7 @@ export default function CustomModelsSection({
                       </span>
                     </button>
                     {model.apiFormat === "responses" && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-blue-500/15 text-blue-400 font-medium">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium">
                         {t("responses")}
                       </span>
                     )}
@@ -608,7 +610,7 @@ export default function CustomModelsSection({
                     )}
                     {model.targetFormat && (
                       <span
-                        className="text-[10px] px-1.5 py-0.5 rounded-full bg-emerald-500/15 text-emerald-400 font-medium"
+                        className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium"
                         title={t("targetFormatHint")}
                       >
                         {`→ ${targetFormatLabel(model.targetFormat, t)}`}
@@ -616,7 +618,7 @@ export default function CustomModelsSection({
                     )}
                     {typeof model.contextWindowOverride === "number" && (
                       <span
-                        className="text-[10px] px-1.5 py-0.5 rounded-full bg-orange-500/15 text-orange-400 font-medium"
+                        className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium"
                         title={t("contextWindowOverrideHint")}
                       >
                         {`🪟 ${model.contextWindowOverride.toLocaleString()}`}
@@ -624,51 +626,51 @@ export default function CustomModelsSection({
                     )}
                     {model.supportsVision === true && (
                       <span
-                        className="text-[10px] px-1.5 py-0.5 rounded-full bg-pink-500/15 text-pink-400 font-medium"
+                        className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium"
                         title={t("visionCapableHint")}
                       >
                         {`👁️ ${t("visionCapableLabel")}`}
                       </span>
                     )}
                     {model.isFree === true && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-green-500/15 text-green-400 font-medium">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-success/10 text-success font-medium">
                         FREE
                       </span>
                     )}
                     {model.supportedEndpoints?.includes("embeddings") && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-purple-500/15 text-purple-400 font-medium">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium">
                         {`📐 ${t("supportedEndpointEmbeddings")}`}
                       </span>
                     )}
                     {model.supportedEndpoints?.includes("images") && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-amber-500/15 text-amber-400 font-medium">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium">
                         {`🖼️ ${t("imagesShortLabel")}`}
                       </span>
                     )}
                     {model.supportedEndpoints?.includes("audio") && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-green-500/15 text-green-400 font-medium">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium">
                         {`🔊 ${t("audioShortLabel")}`}
                       </span>
                     )}
                     {(model.supportedEndpoints?.includes("videos") ||
                       model.supportedEndpoints?.includes("video")) && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-red-500/15 text-red-400 font-medium">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium">
                         🎬 Video
                       </span>
                     )}
                     {model.supportedEndpoints?.includes("audio-speech") && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-green-500/15 text-green-400 font-medium">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium">
                         {`🔊 ${t("audioSpeech")}`}
                       </span>
                     )}
                     {model.supportedEndpoints?.includes("audio-transcriptions") && (
-                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-400 font-medium">
+                      <span className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium">
                         {`🎙️ ${t("audioTranscriptions")}`}
                       </span>
                     )}
                     {anyNormalizeCompatBadge(model.id!, customMap, overrideMap) && (
                       <span
-                        className="text-[10px] px-1.5 py-0.5 rounded-full bg-slate-500/15 text-slate-400 font-medium"
+                        className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium"
                         title={t("normalizeToolCallIdLabel")}
                       >
                         ID×9
@@ -676,7 +678,7 @@ export default function CustomModelsSection({
                     )}
                     {anyNoPreserveCompatBadge(model.id!, customMap, overrideMap) && (
                       <span
-                        className="text-[10px] px-1.5 py-0.5 rounded-full bg-cyan-500/15 text-cyan-400 font-medium"
+                        className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium"
                         title={t("compatDoNotPreserveDeveloper")}
                       >
                         {t("compatBadgeNoPreserve")}
@@ -684,7 +686,7 @@ export default function CustomModelsSection({
                     )}
                     {anyUpstreamHeadersBadge(model.id!, customMap, overrideMap) && (
                       <span
-                        className="text-[10px] px-1.5 py-0.5 rounded-full bg-violet-500/15 text-violet-400 font-medium"
+                        className="text-[10px] px-1.5 py-0.5 rounded-full bg-bg-subtle text-text-muted font-medium"
                         title={t("compatUpstreamHeadersLabel")}
                       >
                         {t("compatBadgeUpstreamHeaders")}
@@ -693,7 +695,7 @@ export default function CustomModelsSection({
                   </div>
 
                   {editingModelId === model.id && (
-                    <div className="mt-3 min-w-0 max-w-full rounded-lg border border-border bg-muted p-3 dark:bg-zinc-900">
+                    <div className="mt-3 min-w-0 max-w-full rounded-lg border border-border bg-surface-2 p-3">
                       <div className="flex min-w-0 flex-wrap items-end gap-x-3 gap-y-2">
                         <div className="w-[11rem] shrink-0 min-w-0">
                           <label className="text-xs text-text-muted mb-1 block">
@@ -702,7 +704,7 @@ export default function CustomModelsSection({
                           <select
                             value={editingApiFormat}
                             onChange={(e) => setEditingApiFormat(e.target.value)}
-                            className="w-full px-2.5 py-2 text-xs border border-border rounded-lg bg-background text-text-main focus:outline-none focus:border-primary"
+                            className="w-full px-2.5 py-2 text-xs border border-border-strong rounded-control bg-surface text-text-main transition-colors focus:outline-none focus:border-primary"
                           >
                             <option value="chat-completions">{t("chatCompletions")}</option>
                             <option value="responses">{t("responsesApi")}</option>
@@ -722,7 +724,7 @@ export default function CustomModelsSection({
                             value={editingTargetFormat}
                             onChange={(e) => setEditingTargetFormat(e.target.value)}
                             title={t("targetFormatHint")}
-                            className="w-full px-2.5 py-2 text-xs border border-border rounded-lg bg-background text-text-main focus:outline-none focus:border-primary"
+                            className="w-full px-2.5 py-2 text-xs border border-border-strong rounded-control bg-surface text-text-main transition-colors focus:outline-none focus:border-primary"
                           >
                             <option value="">{t("targetFormatAuto")}</option>
                             <option value="openai">{t("compatProtocolOpenAI")}</option>
@@ -745,7 +747,7 @@ export default function CustomModelsSection({
                             onChange={(e) => setEditingContextWindowOverride(e.target.value)}
                             placeholder={t("contextWindowOverridePlaceholder")}
                             title={t("contextWindowOverrideHint")}
-                            className="w-full px-2.5 py-2 text-xs border border-border rounded-lg bg-background text-text-main focus:outline-none focus:border-primary"
+                            className="w-full px-2.5 py-2 text-xs border border-border-strong rounded-control bg-surface text-text-main transition-colors focus:outline-none focus:border-primary"
                           />
                         </div>
                         <div className="w-[9rem] shrink-0 min-w-0">
@@ -760,7 +762,7 @@ export default function CustomModelsSection({
                               type="checkbox"
                               checked={editingSupportsVision}
                               onChange={(e) => setEditingSupportsVision(e.target.checked)}
-                              className="rounded border-border"
+                              className="rounded border-border-strong"
                             />
                             {`👁️ ${t("visionCapableLabel")}`}
                           </label>
@@ -774,7 +776,7 @@ export default function CustomModelsSection({
                               type="checkbox"
                               checked={editingIsFree}
                               onChange={(e) => setEditingIsFree(e.target.checked)}
-                              className="rounded border-border"
+                              className="rounded border-border-strong"
                             />
                             FREE
                           </label>
@@ -801,7 +803,7 @@ export default function CustomModelsSection({
                                       setEditingEndpoints((prev) => prev.filter((x) => x !== ep));
                                     }
                                   }}
-                                  className="rounded border-border"
+                                  className="rounded border-border-strong"
                                 />
                                 {endpointLabel(ep, t)}
                               </label>
@@ -827,7 +829,7 @@ export default function CustomModelsSection({
                 <div className="flex shrink-0 items-center gap-1">
                   <button
                     onClick={() => beginEdit(model)}
-                    className="rounded p-1 text-text-muted hover:bg-sidebar hover:text-primary"
+                    className="rounded-md p-1 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
                     title={t("edit")}
                   >
                     <span className="material-symbols-outlined text-sm">edit</span>
@@ -856,7 +858,7 @@ export default function CustomModelsSection({
                   <button
                     onClick={() => handleToggleHidden(model.id!, !model.isHidden)}
                     disabled={togglingModelId === model.id}
-                    className="rounded p-1 text-text-muted hover:bg-sidebar hover:text-primary disabled:opacity-50"
+                    className="rounded-md p-1 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main disabled:opacity-50"
                     title={model.isHidden ? t("unhideModel") : t("hideModel")}
                   >
                     <span className="material-symbols-outlined text-sm">
@@ -866,7 +868,7 @@ export default function CustomModelsSection({
                   {hasSyncedBase && (
                     <button
                       onClick={() => handleResetToUpstreamDefaults(model.id!)}
-                      className="rounded p-1 text-amber-600 hover:bg-amber-50 dark:text-amber-400 dark:hover:bg-amber-900/20"
+                      className="rounded-md p-1 text-warning transition-colors hover:bg-warning/10"
                       title={providerText(
                         t,
                         "resetToUpstreamDefaults",
@@ -878,7 +880,7 @@ export default function CustomModelsSection({
                   )}
                   <button
                     onClick={() => handleRemove(model.id!)}
-                    className="rounded p-1 text-red-500 hover:bg-red-50"
+                    className="rounded-md p-1 text-text-muted transition-colors hover:bg-error/10 hover:text-error"
                     title={t("removeCustomModel")}
                   >
                     <span className="material-symbols-outlined text-sm">delete</span>

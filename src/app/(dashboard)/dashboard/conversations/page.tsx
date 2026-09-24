@@ -45,10 +45,10 @@ interface ConversationRow {
 function ActiveSpinner() {
   return (
     <span
-      className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-amber-500/15 border border-amber-500/25 shrink-0"
+      className="inline-flex items-center justify-center w-5 h-5 rounded-full bg-warning/15 border border-warning/25 shrink-0"
       title="In progress"
     >
-      <span className="inline-block h-2.5 w-2.5 rounded-full border-2 border-amber-500 border-t-transparent animate-spin" />
+      <span className="inline-block h-2.5 w-2.5 rounded-full border-2 border-warning border-t-transparent animate-spin" />
     </span>
   );
 }
@@ -73,14 +73,14 @@ function ProviderBadge({ provider }: { provider: string | null }) {
   ];
   if (!style) {
     return (
-      <span className="inline-block px-2 py-0.5 rounded-full text-[9px] font-bold bg-bg-subtle text-text-muted border border-border">
+      <span className="inline-block px-2 py-0.5 rounded-full text-[9px] font-semibold bg-bg-subtle text-text-muted border border-border">
         {provider}
       </span>
     );
   }
   return (
     <span
-      className="inline-block px-2 py-0.5 rounded-full text-[9px] font-bold"
+      className="inline-block px-2 py-0.5 rounded-full text-[9px] font-semibold"
       style={{ backgroundColor: style.bg, color: style.text }}
     >
       {style.label}
@@ -93,7 +93,7 @@ function StatusBadge({ status }: { status: number | null }) {
   const style = getHttpStatusStyle(status);
   return (
     <span
-      className="inline-block px-2 py-0.5 rounded-full text-[9px] font-bold"
+      className="inline-block px-2 py-0.5 rounded-full text-[9px] font-semibold"
       style={{ backgroundColor: style.bg, color: style.text ?? "#fff" }}
     >
       {status}
@@ -110,7 +110,7 @@ function ContinuationBadge({ isGenuine }: { isGenuine: boolean }) {
   return (
     <span
       title="Latest turn used previous_response_id and it resolved server-side"
-      className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[9px] font-bold bg-emerald-500/15 text-emerald-500 border border-emerald-500/25"
+      className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[9px] font-semibold bg-success/10 text-success border border-success/20"
     >
       <span className="material-symbols-outlined text-[11px] leading-none">bolt</span>
       continuation
@@ -130,7 +130,7 @@ function StalledBadge({ isStalled }: { isStalled: boolean }) {
   return (
     <span
       title="Latest turn didn't end in stop and nothing has continued for 5+ minutes"
-      className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[9px] font-bold bg-red-500/15 text-red-500 border border-red-500/25"
+      className="inline-flex items-center gap-0.5 px-2 py-0.5 rounded-full text-[9px] font-semibold bg-error/10 text-error border border-error/20"
     >
       <span className="material-symbols-outlined text-[11px] leading-none">error</span>
       stalled
@@ -175,7 +175,7 @@ function ConversationLogView({
           type="button"
           onClick={onLoadOlder}
           disabled={loadingMore}
-          className="self-center mb-2 px-3 py-1.5 rounded-md border border-border text-xs text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
+          className="self-center mb-2 px-3 py-1.5 rounded-control border border-border-strong text-xs text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
         >
           {loadingMore ? "Loading…" : "Load more"}
         </button>
@@ -185,8 +185,8 @@ function ConversationLogView({
       ))}
       {livePartialText && (
         <div className="flex flex-col gap-1">
-          <div className="flex items-center gap-1.5 text-[10px] text-amber-600 dark:text-amber-400">
-            <span className="inline-block h-1.5 w-1.5 rounded-full bg-amber-500 animate-pulse" />
+          <div className="flex items-center gap-1.5 text-[10px] text-warning">
+            <span className="inline-block h-1.5 w-1.5 rounded-full bg-warning animate-pulse" />
             Generating…
           </div>
           <ChatBubble
@@ -754,13 +754,13 @@ function ConversationsPageContent() {
   return (
     <div className="flex flex-col gap-4">
       <div className="flex items-center justify-between gap-4 flex-wrap">
-        <h2 className="text-lg font-semibold text-text-main">Conversations</h2>
+        <h2 className="text-xl font-semibold tracking-tight text-text-main">Conversations</h2>
         <div className="flex items-center gap-3">
           <span className="text-xs text-text-muted">
             {total} conversation{total === 1 ? "" : "s"} with 2+ turns
           </span>
           <label
-            className="flex items-center gap-1 px-2 py-1 text-[11px] text-text-muted bg-bg-subtle rounded-md border border-border"
+            className="flex items-center gap-1 px-2 py-1 text-[11px] text-text-muted bg-surface rounded-control border border-border-strong"
             title="How often this list re-fetches from the server."
           >
             <span>Auto-refresh</span>
@@ -804,7 +804,7 @@ function ConversationsPageContent() {
               <div
                 key={row.id}
                 onClick={() => openConversation(row)}
-                className="rounded-xl border border-border p-3 flex flex-col gap-2 active:bg-bg-subtle cursor-pointer"
+                className="rounded-card border border-border bg-surface p-3 flex flex-col gap-2 active:bg-bg-subtle cursor-pointer"
               >
                 <div className="flex items-center justify-between gap-2">
                   <span className="flex items-center gap-1.5 min-w-0">
@@ -841,10 +841,10 @@ function ConversationsPageContent() {
           </div>
 
           {/* Desktop/tablet: full table */}
-          <div className="hidden sm:block overflow-x-auto rounded-xl border border-border">
-            <table className="w-full text-sm">
+          <div className="hidden sm:block overflow-x-auto rounded-card border border-border bg-surface">
+            <table className="w-full text-[13px]">
               <thead>
-                <tr className="border-b border-border bg-bg-subtle text-left text-[11px] uppercase tracking-wider text-text-muted">
+                <tr className="border-b border-border bg-bg-subtle text-left text-xs font-medium text-text-muted">
                   <th className="px-3 py-2">Conversation</th>
                   <th className="px-3 py-2 text-right">Turns</th>
                   <th className="px-3 py-2">Continuation</th>
@@ -858,7 +858,7 @@ function ConversationsPageContent() {
                 {conversations.map((row) => (
                   <tr
                     key={row.id}
-                    className="border-b border-border/50 last:border-0 hover:bg-bg-subtle cursor-pointer transition-colors"
+                    className="border-b border-border last:border-0 hover:bg-bg-subtle cursor-pointer transition-colors"
                     onClick={() => openConversation(row)}
                   >
                     <td className="px-3 py-2 font-mono text-[11px] text-text-main">
@@ -909,13 +909,13 @@ function ConversationsPageContent() {
           aria-modal="true"
           aria-label="Conversation"
         >
-          <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+          <div className="absolute inset-0 bg-black/40 backdrop-blur-sm" />
           <div
             ref={conversationPanelRef}
-            className="relative w-full max-w-3xl max-h-[90vh] overflow-x-hidden overflow-y-auto rounded-xl border border-border bg-bg-primary shadow-2xl"
+            className="relative w-full max-w-3xl max-h-[90vh] overflow-x-hidden overflow-y-auto rounded-card border border-border bg-surface shadow-[var(--shadow-elevated)]"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="sticky top-0 z-10 flex items-center justify-between gap-3 px-4 py-3 border-b border-border bg-bg-primary/95 backdrop-blur-sm rounded-t-xl sm:px-6 sm:py-4">
+            <div className="sticky top-0 z-10 flex items-center justify-between gap-3 px-4 py-3 border-b border-border bg-surface/95 backdrop-blur-sm rounded-t-card sm:px-6 sm:py-4">
               <div className="min-w-0">
                 <h3 className="text-sm font-semibold text-text-main">Conversation</h3>
                 <span
@@ -932,7 +932,7 @@ function ConversationsPageContent() {
                   disabled={!hasPreviousConversation}
                   title="Previous conversation"
                   aria-label="Previous conversation"
-                  className="p-1 rounded hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                  className="p-1 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors disabled:opacity-30 disabled:pointer-events-none"
                 >
                   <span className="material-symbols-outlined text-[18px]">chevron_left</span>
                 </button>
@@ -942,7 +942,7 @@ function ConversationsPageContent() {
                   disabled={!hasNextConversation}
                   title="Next conversation"
                   aria-label="Next conversation"
-                  className="p-1 rounded hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                  className="p-1 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors disabled:opacity-30 disabled:pointer-events-none"
                 >
                   <span className="material-symbols-outlined text-[18px]">chevron_right</span>
                 </button>
@@ -950,7 +950,7 @@ function ConversationsPageContent() {
                   <button
                     type="button"
                     onClick={gotoLatestRequest}
-                    className="px-2 py-1 rounded-md border border-border text-[11px] text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors whitespace-nowrap"
+                    className="px-2 py-1 rounded-control border border-border-strong text-[11px] text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors whitespace-nowrap"
                   >
                     Goto latest request
                   </button>
@@ -959,7 +959,7 @@ function ConversationsPageContent() {
                   type="button"
                   onClick={scrollToBottom}
                   title="Go to bottom"
-                  className="p-1 rounded hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors"
+                  className="p-1 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
                   aria-label="Go to bottom"
                 >
                   <span className="material-symbols-outlined text-[18px]">
@@ -969,7 +969,7 @@ function ConversationsPageContent() {
                 <button
                   type="button"
                   onClick={closeConversation}
-                  className="p-1 rounded hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors"
+                  className="p-1 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
                   aria-label="Close conversation"
                 >
                   <span className="material-symbols-outlined text-[20px]">close</span>

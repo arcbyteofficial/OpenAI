@@ -142,7 +142,7 @@ export default function StudioConfigPane({ configState, setConfigState }: Studio
       <div className="flex flex-col items-center w-8 shrink-0">
         <button
           onClick={() => setCollapsed(false)}
-          className="mt-2 p-1.5 rounded hover:bg-black/5 dark:hover:bg-white/5 text-text-muted hover:text-text-main transition-colors"
+          className="mt-2 p-1.5 rounded-control hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
           title={tp("expandConfig")}
           aria-label={tp("expandConfig")}
         >
@@ -154,7 +154,7 @@ export default function StudioConfigPane({ configState, setConfigState }: Studio
 
   return (
     <aside
-      className="w-72 shrink-0 border-l border-border bg-bg-alt flex flex-col overflow-y-auto"
+      className="w-72 shrink-0 border-l border-border bg-surface flex flex-col overflow-y-auto"
       aria-label={tp("configPane")}
     >
       {/* Header */}
@@ -164,7 +164,7 @@ export default function StudioConfigPane({ configState, setConfigState }: Studio
         </span>
         <button
           onClick={() => setCollapsed(true)}
-          className="p-1 rounded hover:bg-black/5 dark:hover:bg-white/5 text-text-muted hover:text-text-main transition-colors"
+          className="p-1 rounded-control hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
           title={tp("collapseConfig")}
           aria-label={tp("collapseConfig")}
         >
@@ -184,7 +184,7 @@ export default function StudioConfigPane({ configState, setConfigState }: Studio
           <select
             value={configState.endpoint}
             onChange={(e) => update("endpoint", e.target.value as PlaygroundEndpoint)}
-            className="w-full text-xs bg-surface border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+            className="w-full text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
           >
             {ENDPOINT_OPTIONS.map((opt) => (
               <option key={opt.value} value={opt.value}>
@@ -207,7 +207,7 @@ export default function StudioConfigPane({ configState, setConfigState }: Studio
               update("model", "");
             }}
             disabled={loadingProviders}
-            className="w-full text-xs bg-surface border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+            className="w-full text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
           >
             <option value="">{tp("autoProvider")}</option>
             {providerOptions.map((opt) => (
@@ -232,14 +232,14 @@ export default function StudioConfigPane({ configState, setConfigState }: Studio
                   onChange={(e) => setModelQuery(e.target.value)}
                   placeholder={t("search")}
                   aria-label={t("search")}
-                  className="w-full text-xs bg-surface border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+                  className="w-full text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
                 />
               )}
               <select
                 value={configState.model}
                 onChange={(e) => update("model", e.target.value)}
                 disabled={loadingModels}
-                className="w-full text-xs bg-surface border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+                className="w-full text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
               >
                 {filteredModels.map((m) => (
                   <option key={m} value={m}>
@@ -254,7 +254,7 @@ export default function StudioConfigPane({ configState, setConfigState }: Studio
               value={configState.model}
               onChange={(e) => update("model", e.target.value)}
               placeholder={tp("modelPlaceholder")}
-              className="w-full text-xs bg-surface border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+              className="w-full text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
             />
           )}
         </div>
@@ -269,7 +269,7 @@ export default function StudioConfigPane({ configState, setConfigState }: Studio
             onChange={(e) => update("systemPrompt", e.target.value)}
             placeholder={tp("systemPromptPlaceholder")}
             rows={4}
-            className="w-full text-xs bg-surface border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main resize-y"
+            className="w-full text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main resize-y"
           />
           {/* ImprovePromptButton — injected by F7 */}
           <ImprovePromptButton configState={configState} setConfigState={setConfigState} />

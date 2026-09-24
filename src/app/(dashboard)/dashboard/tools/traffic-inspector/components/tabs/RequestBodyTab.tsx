@@ -45,13 +45,15 @@ export function RequestBodyTab({ request }: RequestBodyTabProps) {
         <button
           type="button"
           onClick={() => setRaw((r) => !r)}
-          className="text-xs text-text-muted hover:text-text-main border border-border rounded px-2 py-0.5 focus-ring"
+          className="text-xs text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors border border-border-strong rounded-control px-2 py-0.5 focus-ring"
         >
           {raw ? t("formatted") : t("raw")}
         </button>
-        <span className="ml-auto text-xs text-text-muted">{request.requestSize} B</span>
+        <span className="ml-auto text-xs text-text-muted font-mono tabular-nums">
+          {request.requestSize} B
+        </span>
       </div>
-      <div className="flex-1 overflow-auto bg-bg-subtle rounded border border-border p-2">
+      <div className="flex-1 overflow-auto bg-bg-subtle rounded-lg border border-border p-2">
         {raw || !parsed ? (
           <pre className="text-xs font-mono text-text-main whitespace-pre-wrap break-all">
             {display}

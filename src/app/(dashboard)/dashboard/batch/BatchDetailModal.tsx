@@ -73,19 +73,19 @@ interface BatchDetailModalProps {
 }
 
 const STATUS_STYLES: Record<string, string> = {
-  completed: "bg-emerald-500/15 text-emerald-400 border-emerald-500/25",
-  completed_with_failures: "bg-red-500/15 text-red-400 border-red-500/25",
-  failed: "bg-red-500/15 text-red-400 border-red-500/25",
-  in_progress: "bg-blue-500/15 text-blue-400 border-blue-500/25",
-  in_progress_with_failures: "bg-orange-500/15 text-orange-400 border-orange-500/25",
-  finalizing: "bg-violet-500/15 text-violet-400 border-violet-500/25",
-  finalizing_with_failures: "bg-orange-500/15 text-orange-400 border-orange-500/25",
-  validating: "bg-yellow-500/15 text-yellow-400 border-yellow-500/25",
-  cancelling: "bg-orange-500/15 text-orange-400 border-orange-500/25",
-  cancelled: "bg-gray-500/15 text-gray-400 border-gray-500/25",
-  cancelled_with_failures: "bg-red-500/15 text-red-400 border-red-500/25",
-  expired: "bg-gray-500/15 text-gray-400 border-gray-500/25",
-  expired_with_failures: "bg-orange-500/15 text-orange-400 border-orange-500/25",
+  completed: "bg-success/10 text-success border-success/20",
+  completed_with_failures: "bg-error/10 text-error border-error/20",
+  failed: "bg-error/10 text-error border-error/20",
+  in_progress: "bg-primary/10 text-primary border-primary/20",
+  in_progress_with_failures: "bg-warning/10 text-warning border-warning/20",
+  finalizing: "bg-primary/10 text-primary border-primary/20",
+  finalizing_with_failures: "bg-warning/10 text-warning border-warning/20",
+  validating: "bg-warning/10 text-warning border-warning/20",
+  cancelling: "bg-warning/10 text-warning border-warning/20",
+  cancelled: "bg-bg-subtle text-text-muted border-border",
+  cancelled_with_failures: "bg-error/10 text-error border-error/20",
+  expired: "bg-bg-subtle text-text-muted border-border",
+  expired_with_failures: "bg-warning/10 text-warning border-warning/20",
 };
 
 const STATUS_LABELS: Record<string, string> = {
@@ -127,7 +127,7 @@ function effectiveStatus(batch: BatchRecord): string {
 
 function StatusBadge({ batch, t }: { batch: BatchRecord; t: BatchTranslator }) {
   const key = effectiveStatus(batch);
-  const cls = STATUS_STYLES[key] ?? "bg-gray-500/15 text-gray-400 border-gray-500/25";
+  const cls = STATUS_STYLES[key] ?? "bg-bg-subtle text-text-muted border-border";
   const label = STATUS_TRANSLATION_KEYS[key]
     ? t(STATUS_TRANSLATION_KEYS[key])
     : (STATUS_LABELS[key] ?? key.replace(/_/g, " "));
@@ -141,10 +141,10 @@ function StatusBadge({ batch, t }: { batch: BatchRecord; t: BatchTranslator }) {
 function Field({ label, value }: { label: string; value: React.ReactNode }) {
   return (
     <div className="flex flex-col gap-0.5">
-      <span className="text-[11px] uppercase tracking-wider font-medium text-[var(--color-text-muted)]">
+      <span className="text-[11px] uppercase tracking-wider font-medium text-text-subtle">
         {label}
       </span>
-      <span className="text-sm text-[var(--color-text-main)] font-mono break-all">{value}</span>
+      <span className="text-[13px] text-text-main font-mono break-all">{value}</span>
     </div>
   );
 }
@@ -216,31 +216,31 @@ export default function BatchDetailModal({
 
       {/* Panel */}
       <div
-        className="relative w-full sm:max-w-2xl bg-[var(--color-surface)] border border-[var(--color-border)] rounded-t-2xl sm:rounded-xl shadow-2xl animate-in fade-in slide-in-from-bottom-4 duration-200 max-h-[90vh] flex flex-col"
+        className="relative w-full sm:max-w-2xl bg-surface border border-border rounded-t-card sm:rounded-card shadow-[var(--shadow-elevated)] animate-in fade-in slide-in-from-bottom-4 duration-200 max-h-[90vh] flex flex-col"
         role="dialog"
         aria-modal="true"
         aria-labelledby="batch-detail-modal-title"
       >
         {/* Header */}
-        <div className="flex items-center justify-between px-6 py-4 border-b border-[var(--color-border)] flex-shrink-0">
+        <div className="flex items-center justify-between px-6 py-4 border-b border-border flex-shrink-0">
           <div className="flex items-center gap-3">
-            <span className="material-symbols-outlined text-[20px] text-[var(--color-text-muted)]">
+            <span className="material-symbols-outlined text-[18px] text-text-muted">
               pending_actions
             </span>
             <div>
               <h2
                 id="batch-detail-modal-title"
-                className="text-base font-semibold text-[var(--color-text-main)]"
+                className="text-base font-semibold tracking-tight text-text-main"
               >
                 {t("batchDetailsTitle")}
               </h2>
               <div className="flex items-center gap-2 mt-0.5">
-                <p className="text-xs text-[var(--color-text-muted)] font-mono">{batch.id}</p>
+                <p className="text-xs text-text-muted font-mono">{batch.id}</p>
                 <button
                   onClick={() => {
                     navigator.clipboard.writeText(batch.id);
                   }}
-                  className="text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors"
+                  className="text-text-muted hover:text-text-main transition-colors"
                   title={t("batchDetailCopyId")}
                 >
                   <span className="material-symbols-outlined text-[12px]">content_copy</span>
@@ -251,9 +251,9 @@ export default function BatchDetailModal({
           <button
             onClick={onClose}
             aria-label={t("batchDetailClose")}
-            className="p-1.5 rounded-lg text-[var(--color-text-muted)] hover:bg-[var(--color-bg-alt)] transition-colors"
+            className="p-1.5 rounded-md text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors"
           >
-            <span className="material-symbols-outlined text-[20px]">close</span>
+            <span className="material-symbols-outlined text-[18px]">close</span>
           </button>
         </div>
 
@@ -262,7 +262,7 @@ export default function BatchDetailModal({
           {/* Status + meta */}
           <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
             <div className="flex flex-col gap-0.5">
-              <span className="text-[11px] uppercase tracking-wider font-medium text-[var(--color-text-muted)]">
+              <span className="text-[11px] uppercase tracking-wider font-medium text-text-subtle">
                 {t("status")}
               </span>
               <StatusBadge batch={batch} t={t} />
@@ -282,24 +282,24 @@ export default function BatchDetailModal({
           {total > 0 && (
             <div className="space-y-2">
               <div className="flex items-center justify-between text-xs">
-                <span className="text-[var(--color-text-muted)] uppercase tracking-wider font-medium">
+                <span className="text-[11px] text-text-subtle uppercase tracking-wider font-medium">
                   {t("batchProgress")}
                 </span>
-                <span className="text-[var(--color-text-muted)]">
+                <span className="text-text-muted tabular-nums">
                   {completed} / {total} ({pct}%)
                 </span>
               </div>
-              <div className="h-2 rounded-full bg-[var(--color-bg-alt)] overflow-hidden flex">
+              <div className="h-2 rounded-full bg-bg-subtle overflow-hidden flex">
                 <div
-                  className="h-full bg-emerald-500 transition-all"
+                  className="h-full bg-success transition-[width]"
                   style={{ width: `${donePct}%` }}
                 />
                 <div
-                  className="h-full bg-red-500 transition-all"
+                  className="h-full bg-error transition-[width]"
                   style={{ width: `${failedPct}%` }}
                 />
               </div>
-              <div className="flex gap-4 text-xs text-[var(--color-text-muted)]">
+              <div className="flex gap-4 text-xs text-text-muted">
                 <span>{t("batchCompletedCount", { count: completed })}</span>
                 {failed > 0 && <span>{t("batchFailedCount", { count: failed })}</span>}
                 <span>{t("batchPendingCount", { count: total - completed - failed })}</span>
@@ -309,7 +309,7 @@ export default function BatchDetailModal({
 
           {/* Timestamps */}
           <div>
-            <h3 className="text-[11px] uppercase tracking-wider font-medium text-[var(--color-text-muted)] mb-3">
+            <h3 className="text-[11px] uppercase tracking-wider font-medium text-text-subtle mb-3">
               {t("batchTimeline")}
             </h3>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 text-sm">
@@ -327,12 +327,10 @@ export default function BatchDetailModal({
                 .filter((t) => t.ts)
                 .map(({ label, ts }) => (
                   <div key={label} className="flex flex-col gap-0.5">
-                    <span className="text-[10px] uppercase tracking-wider text-[var(--color-text-muted)]">
+                    <span className="text-[10px] uppercase tracking-wider text-text-subtle">
                       {label}
                     </span>
-                    <span className="text-xs font-mono text-[var(--color-text-main)]">
-                      {formatTs(ts)}
-                    </span>
+                    <span className="text-xs font-mono text-text-main">{formatTs(ts)}</span>
                   </div>
                 ))}
             </div>
@@ -340,7 +338,7 @@ export default function BatchDetailModal({
 
           {/* Files */}
           <div>
-            <h3 className="text-[11px] uppercase tracking-wider font-medium text-[var(--color-text-muted)] mb-3">
+            <h3 className="text-[11px] uppercase tracking-wider font-medium text-text-subtle mb-3">
               Files
             </h3>
             <div className="space-y-2">
@@ -365,22 +363,22 @@ export default function BatchDetailModal({
                 .map(({ role, fileId, record }) => (
                   <div
                     key={role}
-                    className="flex items-center justify-between px-3 py-2 rounded-lg bg-[var(--color-bg-alt)] border border-[var(--color-border)]"
+                    className="flex items-center justify-between px-3 py-2 rounded-lg bg-bg-subtle border border-border"
                   >
                     <div className="flex items-center gap-3 min-w-0">
-                      <span className="material-symbols-outlined text-[16px] text-[var(--color-text-muted)] flex-shrink-0">
+                      <span className="material-symbols-outlined text-[16px] text-text-muted flex-shrink-0">
                         insert_drive_file
                       </span>
                       <div className="min-w-0">
-                        <p className="text-xs font-medium text-[var(--color-text-muted)]">{role}</p>
-                        <p className="text-xs font-mono text-[var(--color-text-main)] truncate">
+                        <p className="text-xs font-medium text-text-muted">{role}</p>
+                        <p className="text-xs font-mono text-text-main truncate">
                           {record?.filename ?? fileId}
                         </p>
                       </div>
                     </div>
                     <div className="flex items-center gap-3 flex-shrink-0 ml-4">
                       {record && (
-                        <span className="text-xs text-[var(--color-text-muted)]">
+                        <span className="text-xs text-text-muted">
                           {(record.bytes / 1024).toFixed(1)} KB
                         </span>
                       )}
@@ -389,7 +387,7 @@ export default function BatchDetailModal({
                         download={record?.filename || fileId}
                         target="_blank"
                         rel="noopener noreferrer"
-                        className="flex items-center gap-1 px-2 py-1 text-xs rounded bg-[var(--color-surface)] border border-[var(--color-border)] text-[var(--color-text-muted)] hover:text-[var(--color-text-main)] transition-colors"
+                        className="flex items-center gap-1 px-2 py-1 text-xs rounded-md bg-surface border border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors"
                       >
                         <span className="material-symbols-outlined text-[13px]">download</span>
                         {t("filesListDownload")}
@@ -403,10 +401,10 @@ export default function BatchDetailModal({
           {/* Usage */}
           {batch.usage && (
             <div>
-              <h3 className="text-[11px] uppercase tracking-wider font-medium text-[var(--color-text-muted)] mb-3">
+              <h3 className="text-[11px] uppercase tracking-wider font-medium text-text-subtle mb-3">
                 {t("batchTokenUsage")}
               </h3>
-              <pre className="p-3 rounded-lg bg-[var(--color-bg-alt)] border border-[var(--color-border)] text-xs font-mono text-[var(--color-text-main)] overflow-x-auto">
+              <pre className="p-3 rounded-lg bg-bg-subtle border border-border text-xs font-mono text-text-main overflow-x-auto">
                 {JSON.stringify(batch.usage, null, 2)}
               </pre>
             </div>
@@ -415,10 +413,10 @@ export default function BatchDetailModal({
           {/* Errors */}
           {batch.errors && (
             <div>
-              <h3 className="text-[11px] uppercase tracking-wider font-medium text-red-400 mb-3">
+              <h3 className="text-[11px] uppercase tracking-wider font-medium text-error mb-3">
                 {t("errors")}
               </h3>
-              <pre className="p-3 rounded-lg bg-red-500/5 border border-red-500/20 text-xs font-mono text-red-300 overflow-x-auto">
+              <pre className="p-3 rounded-lg bg-error/5 border border-error/20 text-xs font-mono text-error overflow-x-auto">
                 {JSON.stringify(batch.errors, null, 2)}
               </pre>
             </div>
@@ -427,18 +425,18 @@ export default function BatchDetailModal({
           {/* Metadata */}
           {batch.metadata && Object.keys(batch.metadata).length > 0 && (
             <div>
-              <h3 className="text-[11px] uppercase tracking-wider font-medium text-[var(--color-text-muted)] mb-3">
+              <h3 className="text-[11px] uppercase tracking-wider font-medium text-text-subtle mb-3">
                 {t("batchMetadata")}
               </h3>
               <div className="space-y-1">
                 {Object.entries(batch.metadata).map(([k, v]) => (
                   <div
                     key={k}
-                    className="flex items-center gap-2 text-xs font-mono px-3 py-1.5 rounded bg-[var(--color-bg-alt)] border border-[var(--color-border)]"
+                    className="flex items-center gap-2 text-xs font-mono px-3 py-1.5 rounded-md bg-bg-subtle border border-border"
                   >
-                    <span className="text-[var(--color-text-muted)]">{k}</span>
-                    <span className="text-[var(--color-text-muted)]">=</span>
-                    <span className="text-[var(--color-text-main)]">{String(v)}</span>
+                    <span className="text-text-muted">{k}</span>
+                    <span className="text-text-muted">=</span>
+                    <span className="text-text-main">{String(v)}</span>
                   </div>
                 ))}
               </div>
@@ -448,13 +446,13 @@ export default function BatchDetailModal({
 
         {/* ── Action footer (F7) ─────────────────────────────────────────── */}
         {(canCancel || canRetry || batch.outputFileId || batch.errorFileId) && (
-          <div className="flex flex-wrap gap-2 px-6 py-4 border-t border-[var(--color-border)] flex-shrink-0">
+          <div className="flex flex-wrap gap-2 px-6 py-4 border-t border-border flex-shrink-0">
             {/* Download output */}
             {batch.outputFileId && (
               <a
                 href={downloadHrefOutput(batch.outputFileId) ?? "#"}
                 download={`batch-${batch.id}-output.jsonl`}
-                className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg bg-[var(--color-bg-alt)] border border-[var(--color-border)] text-[var(--color-text-main)] hover:opacity-90 transition-opacity"
+                className="flex items-center gap-2 px-3 py-2 text-[13px] font-medium rounded-control bg-surface border border-border-strong text-text-main hover:bg-bg-subtle transition-colors"
               >
                 <span className="material-symbols-outlined text-[16px]">download</span>
                 {t("batchActionDownloadOutput")}
@@ -466,7 +464,7 @@ export default function BatchDetailModal({
               <a
                 href={downloadHrefErrors(batch.errorFileId) ?? "#"}
                 download={`batch-${batch.id}-errors.jsonl`}
-                className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg bg-red-500/10 border border-red-500/25 text-red-400 hover:text-red-300 transition-colors"
+                className="flex items-center gap-2 px-3 py-2 text-[13px] font-medium rounded-control bg-surface border border-border-strong text-error hover:bg-error/10 transition-colors"
               >
                 <span className="material-symbols-outlined text-[16px]">error_outline</span>
                 {t("batchActionDownloadErrors")}
@@ -493,7 +491,7 @@ export default function BatchDetailModal({
                   }
                 }}
                 disabled={retrying}
-                className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg bg-blue-500/10 border border-blue-500/25 text-blue-400 hover:text-blue-300 transition-colors disabled:opacity-50"
+                className="flex items-center gap-2 px-3 py-2 text-[13px] font-medium rounded-control bg-surface border border-border-strong text-text-main hover:bg-bg-subtle transition-colors disabled:opacity-50"
               >
                 <span className="material-symbols-outlined text-[16px]">
                   {retrying ? "hourglass_empty" : "refresh"}
@@ -512,7 +510,7 @@ export default function BatchDetailModal({
                   }
                 }}
                 disabled={cancelling}
-                className="flex items-center gap-2 px-3 py-2 text-sm font-medium rounded-lg bg-orange-500/10 border border-orange-500/25 text-orange-400 hover:text-orange-300 transition-colors disabled:opacity-50 ml-auto"
+                className="flex items-center gap-2 px-3 py-2 text-[13px] font-medium rounded-control bg-surface border border-border-strong text-warning hover:bg-warning/10 transition-colors disabled:opacity-50 ml-auto"
               >
                 <span className="material-symbols-outlined text-[16px]">
                   {cancelling ? "hourglass_empty" : "close"}
@@ -523,7 +521,7 @@ export default function BatchDetailModal({
 
             {/* Action error — uses i18n key set by hook (D14: never raw err.message/stack) */}
             {actionError && (
-              <div role="alert" className="basis-full mt-1 text-xs text-red-400">
+              <div role="alert" className="basis-full mt-1 text-xs text-error">
                 {/* actionError is an i18n key from the hook (e.g. "batchActionCancel").
                     Cast is needed because next-intl types its arg as a specific union;
                     the hook guarantees this is always a valid message key. */}

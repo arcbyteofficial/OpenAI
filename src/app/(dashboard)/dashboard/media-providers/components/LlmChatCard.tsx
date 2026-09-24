@@ -392,7 +392,7 @@ export function LlmChatCard({
     <div
       className={cn(
         "flex flex-col gap-3",
-        embedded ? "flex-1 min-h-0" : "rounded-lg border border-border bg-bg-card p-4"
+        embedded ? "flex-1 min-h-0" : "rounded-card border border-border bg-surface p-4"
       )}
     >
       {/* Header controls (hidden when parent renders its own toolbar) */}
@@ -405,9 +405,11 @@ export function LlmChatCard({
               value={model || firstModel}
               onChange={(e) => setModel(e.target.value)}
               disabled={loading}
-              className="min-w-0 flex-1 rounded-md border border-border bg-bg-subtle text-xs px-2 py-1 text-text-main focus:outline-none focus:ring-1 focus:ring-primary disabled:opacity-60"
+              className="min-w-0 flex-1 rounded-control border border-border-strong bg-surface text-xs px-2 py-1 text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 disabled:opacity-60"
             >
-              {modelOptions.length === 0 && !loading && <option value="">{initialModel || "—"}</option>}
+              {modelOptions.length === 0 && !loading && (
+                <option value="">{initialModel || "—"}</option>
+              )}
               {loading && <option value="">{t("loading") ?? "Loading…"}</option>}
               {modelOptions.map((m) => (
                 <option key={m.id} value={m.id}>
@@ -416,14 +418,14 @@ export function LlmChatCard({
               ))}
             </select>
             {error && (
-              <span className="text-xs text-red-500 flex items-center gap-1" role="alert">
+              <span className="text-xs text-error flex items-center gap-1" role="alert">
                 <span className="truncate max-w-[180px]" title={String(error)}>
                   {String(error)}
                 </span>
                 <button
                   type="button"
                   onClick={retry}
-                  className="shrink-0 text-xs text-primary hover:text-primary-strong underline"
+                  className="shrink-0 text-xs text-primary hover:text-primary-hover underline"
                 >
                   {t("retry") ?? "Retry"}
                 </button>
@@ -437,7 +439,7 @@ export function LlmChatCard({
               <select
                 value={selectedKey}
                 onChange={(e) => setSelectedKey(e.target.value)}
-                className="rounded-md border border-border bg-bg-subtle text-xs px-2 py-1 text-text-main focus:outline-none focus:ring-1 focus:ring-primary"
+                className="rounded-control border border-border-strong bg-surface text-xs px-2 py-1 text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
               >
                 <option value="">{t("defaultKey")}</option>
                 {keys.map((k) => (
@@ -453,7 +455,7 @@ export function LlmChatCard({
             <button
               type="button"
               onClick={handleClear}
-              className="text-xs text-text-muted hover:text-text-primary transition-colors"
+              className="text-xs text-text-muted hover:text-text-main transition-colors"
             >
               {t("clear")}
             </button>
@@ -465,7 +467,7 @@ export function LlmChatCard({
       <div
         ref={scrollRef}
         className={cn(
-          "rounded-md border border-border bg-bg-subtle overflow-y-auto",
+          "rounded-lg border border-border bg-bg-subtle overflow-y-auto",
           embedded
             ? "flex-1 min-h-0"
             : messages.length === 0
@@ -475,11 +477,11 @@ export function LlmChatCard({
       >
         {messages.length === 0 ? (
           <div className="flex h-full min-h-[180px] flex-col items-center justify-center gap-3 p-6 text-center">
-            <div className="size-10 rounded-full bg-accent/10 flex items-center justify-center">
-              <span className="material-symbols-outlined text-accent text-[22px]">forum</span>
+            <div className="size-10 rounded-full border border-border bg-surface flex items-center justify-center">
+              <span className="material-symbols-outlined text-text-muted text-[20px]">forum</span>
             </div>
             <p className="text-sm text-text-muted">{t("emptyConversation")}</p>
-            <p className="text-[11px] text-text-muted/70">{t("sendHint")}</p>
+            <p className="text-[11px] text-text-subtle">{t("sendHint")}</p>
           </div>
         ) : (
           <div className="mx-auto flex max-w-3xl flex-col divide-y divide-border/60">
@@ -494,17 +496,17 @@ export function LlmChatCard({
                   key={i}
                   className={cn(
                     "flex gap-3 px-4 py-4",
-                    isUser ? "bg-transparent" : "bg-bg-card/40"
+                    isUser ? "bg-transparent" : "bg-surface/60"
                   )}
                 >
                   <div
                     className={cn(
                       "size-7 rounded-md flex items-center justify-center shrink-0 text-[14px] font-semibold",
                       isUser
-                        ? "bg-primary/15 text-primary"
+                        ? "border border-border bg-surface text-text-muted"
                         : isError
-                          ? "bg-red-500/15 text-red-400"
-                          : "bg-accent/15 text-accent"
+                          ? "bg-error/10 text-error"
+                          : "border border-border bg-surface text-text-main"
                     )}
                     aria-hidden="true"
                   >
@@ -523,7 +525,7 @@ export function LlmChatCard({
                       </span>
                       {!isUser && !isError && msg.model && (
                         <span
-                          className="text-[10px] font-mono text-text-muted/60 truncate"
+                          className="text-[10px] font-mono text-text-subtle truncate"
                           title={msg.model}
                         >
                           · {msg.model}
@@ -533,7 +535,7 @@ export function LlmChatCard({
                     <div
                       className={cn(
                         "text-sm whitespace-pre-wrap break-words leading-relaxed",
-                        isError ? "text-red-400" : "text-text-main"
+                        isError ? "text-error" : "text-text-main"
                       )}
                     >
                       {msg.content}
@@ -550,7 +552,7 @@ export function LlmChatCard({
       </div>
 
       {/* Input row */}
-      <div className="relative flex items-end gap-2 rounded-lg border border-border bg-bg-subtle px-3 py-2 focus-within:ring-1 focus-within:ring-primary focus-within:border-primary/50 transition-colors">
+      <div className="relative flex items-end gap-2 rounded-lg border border-border-strong bg-surface px-3 py-2 focus-within:border-primary focus-within:ring-[3px] focus-within:ring-primary/15 transition-[border-color,box-shadow]">
         <textarea
           ref={textareaRef}
           value={input}
@@ -558,14 +560,14 @@ export function LlmChatCard({
           onKeyDown={handleKeyDown}
           rows={1}
           placeholder={`${t("send")}…`}
-          className="flex-1 bg-transparent text-sm py-1.5 text-text-main placeholder:text-text-muted focus:outline-none resize-none max-h-32"
+          className="flex-1 bg-transparent text-sm py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none resize-none max-h-32"
         />
         {streaming ? (
           <button
             type="button"
             onClick={handleStop}
             title={t("stop")}
-            className="size-8 flex items-center justify-center rounded-md border border-red-500/30 bg-red-500/10 text-red-400 hover:bg-red-500/20 transition-colors shrink-0"
+            className="size-8 flex items-center justify-center rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors shrink-0"
           >
             <span className="material-symbols-outlined text-[18px]">stop</span>
           </button>
@@ -575,7 +577,7 @@ export function LlmChatCard({
             onClick={() => void handleSend()}
             disabled={!input.trim()}
             title={t("send")}
-            className="size-8 flex items-center justify-center rounded-md bg-primary text-white hover:opacity-90 disabled:opacity-40 transition-opacity shrink-0"
+            className="size-8 flex items-center justify-center rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover disabled:opacity-40 transition-colors shrink-0"
           >
             <span className="material-symbols-outlined text-[18px]">arrow_upward</span>
           </button>

@@ -113,7 +113,7 @@ export default function HarImportButton({ provider, onImport }: HarImportButtonP
           onClick={() => fileInputRef.current?.click()}
           disabled={state.phase === "reading"}
           data-testid="har-import-button"
-          className="inline-flex items-center gap-1.5 rounded border border-border px-2.5 py-1.5 text-xs font-medium text-text-main hover:bg-surface-hover disabled:opacity-50"
+          className="inline-flex items-center gap-1.5 rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-50"
         >
           <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
             upload_file
@@ -142,7 +142,7 @@ export default function HarImportButton({ provider, onImport }: HarImportButtonP
         />
       </div>
       {state.phase === "error" && (
-        <p className="text-xs text-red-600 dark:text-red-400" data-testid="har-import-error">
+        <p className="text-xs text-error" data-testid="har-import-error">
           {state.message}
         </p>
       )}
@@ -150,10 +150,10 @@ export default function HarImportButton({ provider, onImport }: HarImportButtonP
         <p
           className={
             expiry?.tone === "bad"
-              ? "text-xs text-red-600 dark:text-red-400"
+              ? "text-xs text-error"
               : expiry?.tone === "warn"
-                ? "text-xs text-amber-700 dark:text-amber-300"
-                : "text-xs text-emerald-700 dark:text-emerald-300"
+                ? "text-xs text-warning"
+                : "text-xs text-success"
           }
           data-testid="har-import-status"
         >

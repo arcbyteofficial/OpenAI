@@ -333,10 +333,10 @@ export default function OpenClawToolCard({
           )}
 
           {!checkingOpenclaw && openclawStatus && !cliReady && (
-            <div className="flex items-center gap-3 p-4 bg-yellow-500/10 border border-yellow-500/30 rounded-lg">
-              <span className="material-symbols-outlined text-yellow-500">warning</span>
+            <div className="flex items-center gap-3 p-4 bg-warning/10 border border-warning/30 rounded-lg">
+              <span className="material-symbols-outlined text-warning">warning</span>
               <div className="flex-1">
-                <p className="font-medium text-yellow-600 dark:text-yellow-400">
+                <p className="font-medium text-warning">
                   {openclawStatus.installed
                     ? t("cliNotRunnable", { tool: "Open Claw" })
                     : t("cliNotInstalled", { tool: "Open Claw" })}
@@ -394,12 +394,12 @@ export default function OpenClawToolCard({
                     value={getDisplayUrl()}
                     onChange={(e) => setCustomBaseUrl(e.target.value)}
                     placeholder={t("baseUrlPlaceholder")}
-                    className="flex-1 px-2 py-1.5 bg-surface rounded border border-border text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
                   />
                   {customBaseUrl && customBaseUrl !== baseUrl && (
                     <button
                       onClick={() => setCustomBaseUrl("")}
-                      className="p-1 text-text-muted hover:text-primary rounded transition-colors"
+                      className="p-1 text-text-muted hover:text-text-main rounded-md transition-colors"
                       title={t("resetToDefault")}
                     >
                       <span className="material-symbols-outlined text-[14px]">restart_alt</span>
@@ -419,7 +419,7 @@ export default function OpenClawToolCard({
                     <select
                       value={effectiveApiKeyId}
                       onChange={(e) => setSelectedApiKeyId(e.target.value)}
-                      className="flex-1 px-2 py-1.5 bg-surface rounded text-xs border border-border focus:outline-none focus:ring-1 focus:ring-primary/50"
+                      className="flex-1 px-2 py-1.5 bg-surface rounded-control text-xs border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
                     >
                       {apiKeys.map((key) => (
                         <option key={key.id} value={key.id}>
@@ -447,19 +447,19 @@ export default function OpenClawToolCard({
                     value={selectedModel}
                     onChange={(e) => setSelectedModel(e.target.value)}
                     placeholder={t("providerModelPlaceholder")}
-                    className="flex-1 px-2 py-1.5 bg-surface rounded border border-border text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
                   />
                   <button
                     onClick={() => setModalOpen(true)}
                     disabled={!hasActiveProviders}
-                    className={`px-2 py-1.5 rounded border text-xs transition-colors shrink-0 whitespace-nowrap ${hasActiveProviders ? "bg-surface border-border text-text-main hover:border-primary cursor-pointer" : "opacity-50 cursor-not-allowed border-border"}`}
+                    className={`px-2 py-1.5 rounded-control border text-xs transition-colors shrink-0 whitespace-nowrap ${hasActiveProviders ? "bg-surface border-border-strong text-text-main hover:bg-bg-subtle cursor-pointer" : "opacity-50 cursor-not-allowed border-border"}`}
                   >
                     {t("selectModel")}
                   </button>
                   {selectedModel && (
                     <button
                       onClick={() => setSelectedModel("")}
-                      className="p-1 text-text-muted hover:text-red-500 rounded transition-colors"
+                      className="p-1 text-text-muted hover:text-error rounded-md transition-colors"
                       title={t("clear")}
                     >
                       <span className="material-symbols-outlined text-[14px]">close</span>
@@ -470,7 +470,7 @@ export default function OpenClawToolCard({
 
               {message && (
                 <div
-                  className={`flex items-center gap-2 px-2 py-1.5 rounded text-xs ${message.type === "success" ? "bg-green-500/10 text-green-600" : "bg-red-500/10 text-red-600"}`}
+                  className={`flex items-center gap-2 px-2 py-1.5 rounded-md text-xs ${message.type === "success" ? "bg-success/10 text-success" : "bg-error/10 text-error"}`}
                 >
                   <span className="material-symbols-outlined text-[14px]">
                     {message.type === "success" ? "check_circle" : "error"}
@@ -532,7 +532,7 @@ export default function OpenClawToolCard({
                       {backups.map((b) => (
                         <div
                           key={b.id}
-                          className="flex items-center gap-2 px-2 py-1.5 bg-black/5 dark:bg-white/5 rounded text-xs"
+                          className="flex items-center gap-2 px-2 py-1.5 bg-bg-subtle rounded-md text-xs"
                         >
                           <span className="material-symbols-outlined text-[14px] text-text-muted">
                             description
@@ -546,7 +546,7 @@ export default function OpenClawToolCard({
                           <button
                             onClick={() => handleRestoreBackup(b.id)}
                             disabled={restoringBackup === b.id}
-                            className="px-2 py-0.5 bg-primary/10 text-primary rounded text-[10px] font-medium hover:bg-primary/20 transition-colors disabled:opacity-50"
+                            className="px-2 py-0.5 bg-surface border border-border-strong text-text-main rounded-md text-[10px] font-medium hover:bg-bg-subtle transition-colors disabled:opacity-50"
                           >
                             {restoringBackup === b.id ? "..." : t("restore")}
                           </button>

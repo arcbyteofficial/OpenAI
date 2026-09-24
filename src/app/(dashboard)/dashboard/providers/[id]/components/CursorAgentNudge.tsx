@@ -77,14 +77,16 @@ export default function CursorAgentNudge() {
     <div
       role="complementary"
       aria-label={t("cursorAgentNudgeTitle") || "Enable automatic Cursor session renewal"}
-      className="flex items-start gap-3 rounded-xl border border-blue-500/30 bg-blue-500/5 px-4 py-3"
+      className="flex items-start gap-3 rounded-card border border-border bg-surface-2 px-4 py-3"
     >
-      <span className="material-symbols-outlined text-blue-500 shrink-0 mt-0.5">info</span>
+      <span className="material-symbols-outlined text-[18px] text-primary shrink-0 mt-0.5">
+        info
+      </span>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-blue-700 dark:text-blue-400">
+        <p className="text-sm font-semibold text-text-main">
           {t("cursorAgentNudgeTitle") || "Enable automatic Cursor session renewal"}
         </p>
-        <p className="text-xs text-blue-600/80 dark:text-blue-300/70 mt-0.5">
+        <p className="text-xs text-text-muted mt-0.5">
           {t("cursorAgentNudgeBody") ||
             "Install cursor-agent for automatic session renewal — without it, Cursor connections need periodic manual reconnection roughly every 24 hours."}
         </p>
@@ -93,7 +95,7 @@ export default function CursorAgentNudge() {
         type="button"
         onClick={dismiss}
         aria-label={t("cursorAgentNudgeDismiss") || "Dismiss"}
-        className="shrink-0 text-blue-500 hover:text-blue-400 transition-colors"
+        className="shrink-0 text-text-muted hover:text-text-main transition-colors"
       >
         <span className="material-symbols-outlined text-[18px]">close</span>
       </button>

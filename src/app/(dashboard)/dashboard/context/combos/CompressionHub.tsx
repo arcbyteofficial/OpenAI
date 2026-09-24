@@ -48,7 +48,7 @@ function Toggle({
       aria-label={ariaLabel}
       onClick={onChange}
       className={`relative w-10 h-5 rounded-full transition-colors ${
-        checked ? "bg-green-500" : "bg-border"
+        checked ? "bg-primary" : "bg-border-strong"
       }`}
     >
       <span
@@ -146,34 +146,39 @@ export default function CompressionHub() {
     : "";
 
   return (
-    <section className="flex flex-col gap-5 rounded-xl border border-primary/30 bg-surface p-5">
+    <section className="flex flex-col gap-5 rounded-card border border-border bg-surface p-5">
       {/* ── Header ── */}
       <div className="flex items-start justify-between gap-3">
         <div className="flex items-center gap-3">
-          <span className="material-symbols-outlined text-[26px] text-primary" aria-hidden="true">
+          <span
+            className="material-symbols-outlined text-[22px] text-text-muted"
+            aria-hidden="true"
+          >
             hub
           </span>
           <div>
-            <h1 className="text-xl font-bold text-text-main">{t("hubTitle")}</h1>
+            <h1 className="text-xl font-semibold tracking-tight text-text-main">{t("hubTitle")}</h1>
             <p className="text-sm text-text-muted">{t("hubDescription")}</p>
           </div>
         </div>
         <button
           type="button"
           onClick={() => setExplainerOpen((v) => !v)}
-          className="shrink-0 rounded-lg border border-border px-3 py-1.5 text-xs text-text-main hover:bg-bg"
+          className="shrink-0 rounded-control border border-border-strong px-3 py-1.5 text-xs font-medium text-text-main transition-colors hover:bg-bg-subtle"
         >
           {explainerOpen ? t("hideExplanation") : t("howItWorks")}
         </button>
       </div>
 
       {error && (
-        <p className="rounded border border-danger/40 px-3 py-2 text-xs text-danger">{error}</p>
+        <p className="rounded-lg border border-error/30 bg-error/10 px-3 py-2 text-xs text-error">
+          {error}
+        </p>
       )}
 
       {/* ── Explainer ── */}
       {explainerOpen && (
-        <div className="rounded-lg border border-border bg-bg p-4 text-sm text-text-muted">
+        <div className="rounded-lg border border-border bg-bg-subtle p-4 text-sm text-text-muted">
           <p className="mb-2">
             {t.rich("explanationIntro", {
               strong: (chunks) => <strong className="text-text-main">{chunks}</strong>,
@@ -205,7 +210,7 @@ export default function CompressionHub() {
       )}
 
       {/* ── Active profile ── */}
-      <div className="flex flex-col gap-3 rounded-lg border border-border bg-bg p-4">
+      <div className="flex flex-col gap-3 rounded-lg border border-border bg-bg-subtle p-4">
         <div className="flex flex-col gap-1">
           <label htmlFor="active-profile" className="text-sm font-semibold text-text-main">
             {t("activeProfile")}
@@ -217,7 +222,7 @@ export default function CompressionHub() {
           data-testid="active-profile-select"
           value={settings?.activeComboId ?? ""}
           onChange={(e) => saveSettings({ activeComboId: e.target.value || null })}
-          className="rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main"
+          className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main"
         >
           <option value="">{t("defaultFromPanel")}</option>
           {combos.map((c) => (
@@ -249,7 +254,7 @@ export default function CompressionHub() {
       {/* ── Provider-delegated compression ── */}
       <div className="flex flex-col gap-3">
         <h2 className="text-sm font-semibold text-text-main">{t("providerDelegated")}</h2>
-        <div className="flex items-center gap-3 rounded-lg border border-border bg-bg p-4">
+        <div className="flex items-center gap-3 rounded-lg border border-border bg-bg-subtle p-4">
           <div className="min-w-0 flex-1">
             <p className="text-sm font-semibold text-text-main">{t("contextEditingClaude")}</p>
             <p className="text-xs text-text-muted">{t("contextEditingDescription")}</p>
@@ -262,7 +267,7 @@ export default function CompressionHub() {
             ariaLabel={t("contextEditingAria")}
           />
         </div>
-        <div className="flex items-start gap-2 rounded-lg border border-amber-500/40 bg-amber-500/5 px-3 py-2 text-xs text-amber-500">
+        <div className="flex items-start gap-2 rounded-lg border border-warning/30 bg-warning/10 px-3 py-2 text-xs text-warning">
           <span className="material-symbols-outlined text-[16px]">info</span>
           <span>{t("contextEditingNote")}</span>
         </div>

@@ -192,7 +192,7 @@ export default function ProviderSummaryCard({
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery("")}
-                className="absolute inset-y-0 right-0 flex items-center pr-2.5 text-text-muted hover:text-text-primary transition-colors"
+                className="absolute inset-y-0 right-0 flex items-center pr-2.5 text-text-subtle hover:text-text-main transition-colors"
                 aria-label={tc("clear")}
               >
                 <span className="material-symbols-outlined text-[18px]">close</span>
@@ -211,7 +211,7 @@ export default function ProviderSummaryCard({
             {modelSearchQuery && (
               <button
                 onClick={() => setModelSearchQuery("")}
-                className="absolute inset-y-0 right-0 flex items-center pr-2.5 text-text-muted hover:text-text-primary transition-colors"
+                className="absolute inset-y-0 right-0 flex items-center pr-2.5 text-text-subtle hover:text-text-main transition-colors"
                 aria-label={tc("clear")}
               >
                 <span className="material-symbols-outlined text-[18px]">close</span>
@@ -233,10 +233,10 @@ export default function ProviderSummaryCard({
           <button
             onClick={() => onBatchTest("all")}
             disabled={!!testingMode}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium border transition-colors ${
+            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-control text-xs font-medium border transition-colors ${
               testingMode === "all"
-                ? "bg-primary/20 border-primary/40 text-primary animate-pulse"
-                : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/40"
+                ? "bg-primary/10 border-primary/30 text-primary animate-pulse"
+                : "bg-surface border-border-strong text-text-muted hover:text-text-main hover:bg-bg-subtle"
             }`}
             title={t("testAll")}
           >
@@ -262,14 +262,16 @@ export default function ProviderSummaryCard({
                 onClick={() => onCategoryChange(cat.key, cat.key === "free")}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-medium transition-colors ${
                   isActive
-                    ? "bg-primary text-white border-primary"
-                    : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/30"
+                    ? "bg-primary/10 text-primary border-primary/30"
+                    : "bg-surface border-border text-text-muted hover:text-text-main hover:bg-bg-subtle"
                 }`}
                 title={cat.title || cat.label}
               >
                 {cat.color && <CategoryDot color={cat.color} label={cat.label} />}
                 <span>{cat.label}</span>
-                <span className={`text-[11px] ${isActive ? "text-white/80" : "text-text-muted"}`}>
+                <span
+                  className={`text-[11px] ${isActive ? "text-primary/80" : "text-text-subtle"} tabular-nums`}
+                >
                   {cat.stat.configured}
                   <span className="opacity-70">/{cat.stat.total}</span>
                 </span>
@@ -279,7 +281,7 @@ export default function ProviderSummaryCard({
         </div>
 
         <div className="border-t border-border pt-3 flex flex-wrap items-center gap-2">
-          <span className="text-[11px] font-medium uppercase tracking-wide text-text-muted mr-1">
+          <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle mr-1">
             {providerText(t, "filterByMedia", "Media")}
           </span>
           {SERVICE_KIND_CHIPS.map((chip) => {
@@ -291,8 +293,8 @@ export default function ProviderSummaryCard({
                 aria-pressed={isActive}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-full border text-xs font-medium transition-colors ${
                   isActive
-                    ? "bg-primary text-white border-primary"
-                    : "bg-bg-subtle border-border text-text-muted hover:text-text-primary hover:border-primary/30"
+                    ? "bg-primary/10 text-primary border-primary/30"
+                    : "bg-surface border-border text-text-muted hover:text-text-main hover:bg-bg-subtle"
                 }`}
               >
                 <span className="material-symbols-outlined text-[14px]">{chip.icon}</span>
@@ -303,7 +305,7 @@ export default function ProviderSummaryCard({
           {activeServiceKind && (
             <button
               onClick={() => onServiceKindChange(null)}
-              className="text-[11px] text-text-muted hover:text-text-primary underline-offset-2 hover:underline"
+              className="text-[11px] text-text-muted hover:text-text-main underline-offset-2 hover:underline"
             >
               {providerText(t, "clearMediaFilter", "Clear")}
             </button>

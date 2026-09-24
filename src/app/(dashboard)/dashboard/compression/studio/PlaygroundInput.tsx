@@ -41,7 +41,9 @@ function EngineOptions({
   const t = useTranslations("compressionStudio");
   return (
     <div>
-      <div className="text-[10px] uppercase opacity-60">{t("activeCombined")}</div>
+      <div className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
+        {t("activeCombined")}
+      </div>
       {LANE_ENGINES.map((engine) => (
         <label key={engine} className="flex items-center gap-2 text-sm">
           <input
@@ -52,7 +54,7 @@ function EngineOptions({
           {engine}
         </label>
       ))}
-      <label className="flex items-center gap-2 text-sm opacity-50">
+      <label className="flex items-center gap-2 text-sm text-text-muted opacity-50">
         <input type="checkbox" disabled /> llmlingua{" "}
         <span className="text-[10px]">({t("requiresOnnx")})</span>
       </label>
@@ -104,7 +106,7 @@ export function PlaygroundInput({
     <div className="flex flex-col gap-3">
       <textarea
         data-testid="play-input"
-        className="min-h-[160px] w-full rounded border p-2 font-mono text-xs"
+        className="min-h-[160px] w-full rounded-control border border-border-strong bg-surface p-2 font-mono text-xs text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none focus:ring-[3px] focus:ring-primary/15"
         value={text}
         onChange={(e) => onText(e.target.value)}
         placeholder={t("inputPlaceholder")}
@@ -137,7 +139,7 @@ export function PlaygroundInput({
       </ToggleOption>
       <button
         data-testid="play-run"
-        className="rounded bg-blue-500/30 py-2 font-semibold"
+        className="rounded-control bg-contrast py-2 text-sm font-medium text-contrast-fg transition-colors hover:bg-contrast-hover disabled:opacity-50"
         onClick={onRun}
         disabled={loading}
       >

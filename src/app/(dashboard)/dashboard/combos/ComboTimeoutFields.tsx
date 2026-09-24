@@ -40,7 +40,7 @@ function secondsInputToOptionalMs(value: string, maxSeconds = MAX_SECONDS): numb
 }
 
 const INPUT_CLASS =
-  "w-full text-xs py-1.5 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none";
+  "w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none";
 
 export default function ComboTimeoutFields({ config, setConfig, t, showHelp = true }: Props) {
   return (

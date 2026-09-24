@@ -88,14 +88,14 @@ export function EngineNode({ data }: NodeProps) {
 
   return (
     <div
-      className="rounded-lg border-2 bg-bg transition-all duration-300 min-w-[150px] max-w-[180px]"
+      className="rounded-lg border bg-surface transition-colors duration-300 min-w-[150px] max-w-[180px]"
       style={{
         borderColor,
         boxShadow: running
-          ? `0 0 14px ${flowColorAlpha(RUNNING_COLOR, 25)}`
+          ? `0 0 0 3px ${flowColorAlpha(RUNNING_COLOR, 25)}`
           : skipped
             ? "none"
-            : `0 0 10px ${flowColorAlpha(color, 19)}`,
+            : `0 1px 2px ${flowColorAlpha(color, 19)}`,
       }}
     >
       <Handle
@@ -118,18 +118,18 @@ export function EngineNode({ data }: NodeProps) {
         <span className="text-xs font-semibold truncate flex-1" title={engine as string}>
           {engine as string}
         </span>
-        {skipped && <span className="text-[10px] text-muted px-1 rounded bg-muted/10">skip</span>}
+        {skipped && <span className="text-[10px] text-text-muted px-1 rounded">skip</span>}
       </div>
 
       {/* Body — token bar */}
       {!skipped && (
         <div className="px-2.5 py-1.5">
-          <div className="flex justify-between text-[10px] text-muted mb-0.5">
+          <div className="flex justify-between text-[10px] text-text-muted tabular-nums mb-0.5">
             <span>{tokIn.toLocaleString()}</span>
             <span>→</span>
             <span>{tokOut.toLocaleString()}</span>
           </div>
-          <div className="relative h-1.5 rounded-full overflow-hidden bg-border">
+          <div className="relative h-1.5 rounded-full overflow-hidden bg-bg-subtle">
             <div
               className="absolute inset-y-0 left-0 rounded-full"
               style={{
@@ -144,20 +144,24 @@ export function EngineNode({ data }: NodeProps) {
       {/* Footer */}
       <div className="px-2.5 pb-2 pt-1 flex flex-col gap-0.5">
         {!skipped && (
-          <span className="text-[11px] font-bold" style={{ color }} data-testid="savings-percent">
+          <span
+            className="text-[11px] font-semibold"
+            style={{ color }}
+            data-testid="savings-percent"
+          >
             {`-${savings.toFixed(1)}%`}
           </span>
         )}
         {techniques.length > 0 && (
           <span
-            className="text-[9px] text-muted truncate"
+            className="text-[9px] text-text-muted truncate"
             title={(techniquesUsed as string[]).join(", ")}
           >
             {techniques.join(", ")}
           </span>
         )}
         {durationMs != null && (
-          <span className="text-[9px] text-muted">{(durationMs as number).toFixed(1)}ms</span>
+          <span className="text-[9px] text-text-subtle">{(durationMs as number).toFixed(1)}ms</span>
         )}
         {/* Layer pills */}
         {layers.length > 0 && (

@@ -50,14 +50,16 @@ export function RiskNoticeBanner() {
   return (
     <div
       role="alert"
-      className="flex items-start gap-3 rounded-xl border border-amber-500/30 bg-amber-500/5 px-4 py-3"
+      className="flex items-start gap-3 rounded-card border border-warning/30 bg-warning/5 px-4 py-3"
     >
-      <span className="material-symbols-outlined text-amber-500 shrink-0 mt-0.5">warning</span>
+      <span className="material-symbols-outlined text-[18px] text-warning shrink-0 mt-0.5">
+        warning
+      </span>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-amber-700 dark:text-amber-400">
+        <p className="text-sm font-semibold text-warning">
           {t("riskBannerTitle") || "Use at your own risk"}
         </p>
-        <p className="text-xs text-amber-600/80 dark:text-amber-300/70 mt-0.5">
+        <p className="text-xs text-text-muted mt-0.5">
           {t("riskBannerBody") ||
             "AgentBridge intercepts HTTPS traffic from IDE agents. By activating it you accept responsibility for compliance with the terms of service of each agent. Never use on devices or networks where TLS inspection is prohibited."}
         </p>
@@ -66,7 +68,7 @@ export function RiskNoticeBanner() {
         type="button"
         onClick={dismiss}
         aria-label={t("riskBannerDismiss") || "Dismiss"}
-        className="shrink-0 text-amber-500 hover:text-amber-400 transition-colors"
+        className="shrink-0 text-warning/80 hover:text-warning transition-colors"
       >
         <span className="material-symbols-outlined text-[18px]">close</span>
       </button>

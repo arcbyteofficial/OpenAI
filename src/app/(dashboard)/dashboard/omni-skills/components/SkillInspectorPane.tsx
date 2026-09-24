@@ -94,7 +94,9 @@ export function SkillInspectorPane({
   if (!selectedSkillId || !skill) {
     return (
       <div className="flex flex-col items-center justify-center h-full min-h-[300px] text-text-muted text-sm text-center p-6">
-        <span className="material-symbols-outlined text-[40px] mb-3 opacity-30">manage_search</span>
+        <span className="material-symbols-outlined text-[32px] mb-3 text-text-subtle">
+          manage_search
+        </span>
         <span>{t("selectSkillToInspect")}</span>
       </div>
     );
@@ -114,25 +116,25 @@ export function SkillInspectorPane({
       {/* Inspector header */}
       <div className="px-4 pt-4 pb-2 border-b border-border">
         <div className="flex items-center gap-2 mb-1">
-          <span className="material-symbols-outlined text-[18px] text-violet-400">
+          <span className="material-symbols-outlined text-[18px] text-text-muted">
             auto_fix_high
           </span>
-          <h3 className="font-semibold text-text-main text-sm">{skill.name}</h3>
+          <h3 className="font-semibold tracking-tight text-text-main text-sm">{skill.name}</h3>
         </div>
         <p className="text-xs text-text-muted line-clamp-2">{skill.description}</p>
         <div className="flex items-center gap-1.5 mt-1.5">
           <span
-            className={`text-[10px] px-1.5 py-0.5 rounded ${
+            className={`text-[10px] font-medium px-1.5 py-0.5 rounded ${
               effectiveMode === "on"
-                ? "bg-emerald-500/10 text-emerald-400"
+                ? "bg-success/10 text-success"
                 : effectiveMode === "auto"
-                  ? "bg-amber-500/10 text-amber-400"
-                  : "bg-surface/60 text-text-muted"
+                  ? "bg-warning/10 text-warning"
+                  : "bg-bg-subtle text-text-muted"
             }`}
           >
             {t("mode")}: {effectiveMode}
           </span>
-          <span className="text-[10px] px-1.5 py-0.5 rounded bg-surface/60 text-text-muted">
+          <span className="text-[10px] px-1.5 py-0.5 rounded bg-bg-subtle text-text-muted">
             {(skill.sourceProvider || "local").toUpperCase()}
           </span>
         </div>
@@ -146,7 +148,7 @@ export function SkillInspectorPane({
             onClick={() => setActiveTab(tab.id)}
             className={`px-3 py-2 text-xs font-medium border-b-2 transition-colors ${
               activeTab === tab.id
-                ? "border-violet-500 text-violet-400"
+                ? "border-text-main text-text-main"
                 : "border-transparent text-text-muted hover:text-text-main"
             }`}
           >
@@ -160,18 +162,18 @@ export function SkillInspectorPane({
         {activeTab === "schema" && (
           <div className="space-y-3">
             <div>
-              <p className="text-xs font-medium text-text-muted uppercase tracking-wide mb-1.5">
+              <p className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1.5">
                 {t("inputSchema")}
               </p>
-              <pre className="text-xs bg-surface/40 rounded-lg p-3 overflow-auto max-h-[200px] text-text-main font-mono whitespace-pre-wrap">
+              <pre className="text-xs bg-bg-subtle border border-border rounded-lg p-3 overflow-auto max-h-[200px] text-text-main font-mono whitespace-pre-wrap">
                 {JSON.stringify(detail?.schema?.input ?? {}, null, 2) || "{}"}
               </pre>
             </div>
             <div>
-              <p className="text-xs font-medium text-text-muted uppercase tracking-wide mb-1.5">
+              <p className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1.5">
                 {t("outputSchema")}
               </p>
-              <pre className="text-xs bg-surface/40 rounded-lg p-3 overflow-auto max-h-[200px] text-text-main font-mono whitespace-pre-wrap">
+              <pre className="text-xs bg-bg-subtle border border-border rounded-lg p-3 overflow-auto max-h-[200px] text-text-main font-mono whitespace-pre-wrap">
                 {JSON.stringify(detail?.schema?.output ?? {}, null, 2) || "{}"}
               </pre>
             </div>
@@ -180,10 +182,10 @@ export function SkillInspectorPane({
 
         {activeTab === "handler" && (
           <div>
-            <p className="text-xs font-medium text-text-muted uppercase tracking-wide mb-1.5">
+            <p className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1.5">
               {t("handlerCode")}
             </p>
-            <pre className="text-xs bg-surface/40 rounded-lg p-3 overflow-auto max-h-[400px] text-text-main font-mono whitespace-pre-wrap">
+            <pre className="text-xs bg-bg-subtle border border-border rounded-lg p-3 overflow-auto max-h-[400px] text-text-main font-mono whitespace-pre-wrap">
               {detail?.handler ?? `// ${t("handlerUnavailable")}`}
             </pre>
           </div>
@@ -206,21 +208,23 @@ export function SkillInspectorPane({
                 </thead>
                 <tbody>
                   {executions.map((exec) => (
-                    <tr key={exec.id} className="border-b border-border/40">
+                    <tr key={exec.id} className="border-b border-border last:border-b-0">
                       <td className="py-2">
                         <span
-                          className={`px-1.5 py-0.5 rounded ${
+                          className={`px-1.5 py-0.5 rounded font-medium ${
                             exec.status === "success"
-                              ? "bg-emerald-500/10 text-emerald-400"
+                              ? "bg-success/10 text-success"
                               : exec.status === "error"
-                                ? "bg-red-500/10 text-red-400"
-                                : "bg-amber-500/10 text-amber-400"
+                                ? "bg-error/10 text-error"
+                                : "bg-warning/10 text-warning"
                           }`}
                         >
                           {exec.status}
                         </span>
                       </td>
-                      <td className="py-2 text-text-muted">{exec.duration}ms</td>
+                      <td className="py-2 font-mono tabular-nums text-text-muted">
+                        {exec.duration}ms
+                      </td>
                       <td className="py-2 text-text-muted">
                         {new Date(exec.createdAt).toLocaleString(locale)}
                       </td>
@@ -234,7 +238,7 @@ export function SkillInspectorPane({
 
         {activeTab === "sandbox" && (
           <div className="space-y-2">
-            <p className="text-xs font-medium text-text-muted uppercase tracking-wide mb-1.5">
+            <p className="text-[11px] font-medium text-text-subtle uppercase tracking-wider mb-1.5">
               {t("sandboxConfig")}
             </p>
             {[
@@ -245,16 +249,16 @@ export function SkillInspectorPane({
             ].map((item) => (
               <div
                 key={item.label}
-                className="flex items-center justify-between p-2.5 rounded-lg bg-surface/30"
+                className="flex items-center justify-between p-2.5 rounded-lg bg-bg-subtle border border-border"
               >
                 <div>
-                  <p className="text-xs font-medium">{item.label}</p>
+                  <p className="text-xs font-medium text-text-main">{item.label}</p>
                   <p className="text-[10px] text-text-muted">{item.desc}</p>
                 </div>
                 <span className="text-xs font-mono text-text-muted">{item.value}</span>
               </div>
             ))}
-            <button className="w-full mt-3 px-3 py-2 text-xs font-medium rounded-lg border border-border text-text-muted hover:text-text-main hover:border-violet-500/50 transition-colors">
+            <button className="w-full mt-3 px-3 py-2 text-xs font-medium rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle transition-colors">
               {t("runTestPlaceholder")}
             </button>
           </div>
@@ -268,14 +272,14 @@ export function SkillInspectorPane({
             key={mode}
             onClick={() => onSetMode(skill.id, mode)}
             aria-label={t("setModeAria", { mode })}
-            className={`flex-1 text-xs px-2 py-1.5 rounded border transition-colors ${
+            className={`flex-1 text-xs font-medium px-2 py-1.5 rounded-control border transition-colors ${
               effectiveMode === mode
                 ? mode === "on"
-                  ? "border-emerald-500 text-emerald-400 bg-emerald-500/5"
+                  ? "border-success/40 text-success bg-success/10"
                   : mode === "auto"
-                    ? "border-amber-500 text-amber-400 bg-amber-500/5"
-                    : "border-red-500 text-red-400 bg-red-500/5"
-                : "border-border text-text-muted hover:border-border/80"
+                    ? "border-warning/40 text-warning bg-warning/10"
+                    : "border-border-strong text-text-main bg-bg-subtle"
+                : "border-border text-text-muted hover:border-border-strong hover:text-text-main"
             }`}
           >
             {mode === "on" ? t("onMode") : mode === "auto" ? t("autoMode") : t("offMode")}
@@ -284,7 +288,7 @@ export function SkillInspectorPane({
         <button
           onClick={() => onUninstall(skill.id)}
           aria-label={t("uninstallSkill")}
-          className="flex-1 text-xs px-2 py-1.5 rounded border border-border text-red-400 hover:bg-red-500/10 transition-colors"
+          className="flex-1 text-xs font-medium px-2 py-1.5 rounded-control border border-border text-error hover:bg-error/10 transition-colors"
         >
           {t("delete")}
         </button>

@@ -63,13 +63,13 @@ export default function CliAgentsPageClient({ machineId: _machineId }: CliAgents
       {/* Page header */}
       <div className="flex items-start justify-between gap-4 flex-wrap">
         <div>
-          <h1 className="text-xl font-bold text-text-main">{t("pageTitle")}</h1>
+          <h1 className="text-2xl font-semibold tracking-tight text-text-main">{t("pageTitle")}</h1>
           <p className="text-sm text-text-muted mt-1">{t("pageSubtitle")}</p>
         </div>
         <button
           type="button"
           onClick={() => void refetch()}
-          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium rounded-lg border border-black/10 dark:border-white/10 bg-black/[0.02] dark:bg-white/[0.02] hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+          className="inline-flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-text-main rounded-control border border-border-strong bg-surface hover:bg-bg-subtle transition-colors"
           aria-label={t("refreshDetection")}
         >
           <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
@@ -89,7 +89,7 @@ export default function CliAgentsPageClient({ machineId: _machineId }: CliAgents
       <div className="flex items-center gap-3 flex-wrap">
         <div className="relative flex-1 min-w-[180px] max-w-sm">
           <span
-            className="absolute left-2.5 top-1/2 -translate-y-1/2 material-symbols-outlined text-[16px] text-text-muted pointer-events-none"
+            className="absolute left-2.5 top-1/2 -translate-y-1/2 material-symbols-outlined text-[16px] text-text-subtle pointer-events-none"
             aria-hidden="true"
           >
             search
@@ -99,7 +99,7 @@ export default function CliAgentsPageClient({ machineId: _machineId }: CliAgents
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={t("searchPlaceholder")}
-            className="w-full pl-8 pr-3 py-1.5 text-sm bg-surface border border-black/10 dark:border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+            className="w-full pl-8 pr-3 py-1.5 text-sm text-text-main bg-surface border border-border-strong rounded-control placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
             aria-label={t("searchPlaceholder")}
           />
         </div>
@@ -107,7 +107,7 @@ export default function CliAgentsPageClient({ machineId: _machineId }: CliAgents
         <select
           value={detectionFilter}
           onChange={(e) => setDetectionFilter(e.target.value)}
-          className="px-2.5 py-1.5 text-sm bg-surface border border-black/10 dark:border-white/10 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary/50"
+          className="px-2.5 py-1.5 text-sm text-text-main bg-surface border border-border-strong rounded-control focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
           aria-label={t("detectionFilterLabel")}
         >
           <option value={DETECTION_ALL}>{t("detectionAll")}</option>
@@ -115,7 +115,7 @@ export default function CliAgentsPageClient({ machineId: _machineId }: CliAgents
           <option value={DETECTION_NOT_INSTALLED}>{t("detectionNotInstalled")}</option>
         </select>
 
-        <span className="text-xs text-text-muted whitespace-nowrap">
+        <span className="text-xs text-text-muted tabular-nums whitespace-nowrap">
           {t("visibleCount", { count: filteredTools.length })}
         </span>
       </div>
@@ -132,7 +132,10 @@ export default function CliAgentsPageClient({ machineId: _machineId }: CliAgents
           className="flex flex-col items-center justify-center py-16 gap-3 text-text-muted"
           data-testid="empty-state"
         >
-          <span className="material-symbols-outlined text-[40px]" aria-hidden="true">
+          <span
+            className="material-symbols-outlined text-[32px] text-text-subtle"
+            aria-hidden="true"
+          >
             search_off
           </span>
           <p className="text-sm">{t("emptyState")}</p>

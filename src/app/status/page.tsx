@@ -77,12 +77,12 @@ export default function StatusPage() {
       <section className="max-w-4xl mx-auto space-y-6">
         <header className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-3">
           <div>
-            <h1 className="text-3xl font-bold tracking-tight">{t("status.title")}</h1>
-            <p className="text-text-muted mt-1">{t("status.description")}</p>
+            <h1 className="text-2xl font-semibold tracking-tight">{t("status.title")}</h1>
+            <p className="text-sm text-text-muted mt-1">{t("status.description")}</p>
           </div>
           <button
             onClick={() => void loadHealth()}
-            className="inline-flex items-center justify-center px-4 py-2 rounded-lg text-sm font-semibold bg-gradient-to-br from-primary to-primary-hover text-white transition-all duration-200 motion-reduce:transition-none"
+            className="inline-flex items-center justify-center px-3 py-1.5 rounded-control text-[13px] font-medium bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors duration-150 motion-reduce:transition-none"
           >
             {tc("refresh")}
           </button>
@@ -90,31 +90,29 @@ export default function StatusPage() {
 
         {loading && (
           <div
-            className="rounded-xl border border-border bg-surface p-6 flex items-center gap-3"
+            className="rounded-card border border-border bg-surface p-5 flex items-center gap-3"
             role="status"
             aria-live="polite"
           >
             <Spinner size="md" />
-            <span className="text-text-muted">{t("status.loadingHealth")}</span>
+            <span className="text-sm text-text-muted">{t("status.loadingHealth")}</span>
           </div>
         )}
 
         {!loading && error && (
-          <div className="rounded-xl border border-red-500/30 bg-red-500/10 p-6" role="alert">
-            <h2 className="text-lg font-semibold text-red-600 dark:text-red-400">
-              {t("status.healthCheckFailed")}
-            </h2>
+          <div className="rounded-card border border-error/30 bg-error/5 p-5" role="alert">
+            <h2 className="text-sm font-semibold text-error">{t("status.healthCheckFailed")}</h2>
             <p className="mt-2 text-sm text-text-muted">{error}</p>
             <div className="mt-4 flex flex-wrap gap-2">
               <Link
                 href="/offline"
-                className="px-3 py-2 rounded-lg border border-border text-sm font-medium hover:bg-bg-alt transition-colors"
+                className="px-3 py-1.5 rounded-control border border-border-strong bg-surface text-[13px] font-medium text-text-main hover:bg-bg-subtle transition-colors"
               >
                 {t("status.openConnectivityHelp")}
               </Link>
               <Link
                 href="/maintenance"
-                className="px-3 py-2 rounded-lg border border-border text-sm font-medium hover:bg-bg-alt transition-colors"
+                className="px-3 py-1.5 rounded-control border border-border-strong bg-surface text-[13px] font-medium text-text-main hover:bg-bg-subtle transition-colors"
               >
                 {t("status.maintenanceInfo")}
               </Link>
@@ -125,39 +123,47 @@ export default function StatusPage() {
         {!loading && health && (
           <>
             <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
-              <div className="rounded-xl border border-border bg-surface p-4">
-                <p className="text-xs uppercase tracking-wide text-text-muted">
+              <div className="rounded-card border border-border bg-surface p-4">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {t("status.service")}
                 </p>
-                <p className="mt-2 text-xl font-semibold">{health.status || t("status.unknown")}</p>
+                <p className="mt-1.5 text-xl font-semibold tracking-tight tabular-nums">
+                  {health.status || t("status.unknown")}
+                </p>
               </div>
-              <div className="rounded-xl border border-border bg-surface p-4">
-                <p className="text-xs uppercase tracking-wide text-text-muted">{tc("version")}</p>
-                <p className="mt-2 text-xl font-semibold">
+              <div className="rounded-card border border-border bg-surface p-4">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
+                  {tc("version")}
+                </p>
+                <p className="mt-1.5 text-xl font-semibold tracking-tight tabular-nums">
                   {health.system?.version || t("status.notAvailable")}
                 </p>
               </div>
-              <div className="rounded-xl border border-border bg-surface p-4">
-                <p className="text-xs uppercase tracking-wide text-text-muted">{tc("uptime")}</p>
-                <p className="mt-2 text-xl font-semibold">
+              <div className="rounded-card border border-border bg-surface p-4">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
+                  {tc("uptime")}
+                </p>
+                <p className="mt-1.5 text-xl font-semibold tracking-tight tabular-nums">
                   {formatUptime(health.system?.uptime, t)}
                 </p>
               </div>
-              <div className="rounded-xl border border-border bg-surface p-4">
-                <p className="text-xs uppercase tracking-wide text-text-muted">
+              <div className="rounded-card border border-border bg-surface p-4">
+                <p className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {t("status.providersTracked")}
                 </p>
-                <p className="mt-2 text-xl font-semibold">{providerStats.total}</p>
+                <p className="mt-1.5 text-xl font-semibold tracking-tight tabular-nums">
+                  {providerStats.total}
+                </p>
               </div>
             </div>
 
-            <div className="rounded-xl border border-border bg-surface p-6">
-              <h2 className="text-lg font-semibold">{t("status.circuitBreakerState")}</h2>
-              <p className="text-sm text-text-muted mt-1">
+            <div className="rounded-card border border-border bg-surface p-5">
+              <h2 className="text-sm font-semibold">{t("status.circuitBreakerState")}</h2>
+              <p className="font-mono text-[13px] text-text-muted mt-1">
                 OPEN: {providerStats.open} · HALF_OPEN: {providerStats.halfOpen} · CLOSED:{" "}
                 {providerStats.closed}
               </p>
-              <p className="mt-4 text-xs text-text-muted">
+              <p className="mt-4 text-xs text-text-subtle">
                 {t("status.lastUpdate", {
                   timestamp: health.timestamp
                     ? new Date(health.timestamp).toLocaleString()

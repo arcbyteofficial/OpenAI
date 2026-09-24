@@ -239,12 +239,12 @@ function StreamSection({ title, sectionId, json, onCopy }) {
     <div>
       <div className="flex items-center justify-between mb-2">
         <div className="flex items-center gap-3">
-          <h3 className="text-[11px] text-text-muted uppercase tracking-wider font-bold">
+          <h3 className="text-[11px] text-text-muted uppercase tracking-wider font-medium">
             {title}
           </h3>
           <button
             onClick={() => setOpen((v) => !v)}
-            className="p-1 rounded hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors"
+            className="p-1 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
             aria-label={open ? t("collapse", { title }) : t("expand", { title })}
           >
             <span className="material-symbols-outlined text-[16px]">
@@ -257,7 +257,7 @@ function StreamSection({ title, sectionId, json, onCopy }) {
             onClick={toggleRaw}
             title={showRaw ? t("rawViewOn") : t("rawViewOff")}
             aria-label={showRaw ? t("rawViewOn") : t("rawViewOff")}
-            className={`p-1 rounded hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors ${showRaw ? "text-primary" : ""}`}
+            className={`p-1 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors ${showRaw ? "text-primary" : ""}`}
             aria-pressed={showRaw}
           >
             <span className="material-symbols-outlined text-[18px]">code</span>
@@ -265,14 +265,14 @@ function StreamSection({ title, sectionId, json, onCopy }) {
           <button
             onClick={toggleAutoscroll}
             title={autoscroll ? t("autoscrollOn") : t("autoscrollOff")}
-            className={`p-1 rounded hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors ${autoscroll ? "text-primary" : ""}`}
+            className={`p-1 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors ${autoscroll ? "text-primary" : ""}`}
             aria-pressed={autoscroll}
           >
             <span className="material-symbols-outlined text-[18px]">vertical_align_bottom</span>
           </button>
           <button
             onClick={handleCopy}
-            className="flex items-center gap-1 px-2 py-1 text-xs text-text-muted hover:text-text-primary transition-colors"
+            className="flex items-center gap-1 px-2 py-1 text-xs text-text-muted hover:text-text-main transition-colors"
             aria-label={t("copyTitle", { title })}
           >
             <span className="material-symbols-outlined text-[14px]">
@@ -288,7 +288,7 @@ function StreamSection({ title, sectionId, json, onCopy }) {
       {open && (
         <div
           ref={ref}
-          className="p-4 rounded-xl bg-black/5 dark:bg-black/30 border border-border overflow-x-auto text-xs font-mono text-text-main max-h-150 overflow-y-auto leading-relaxed"
+          className="p-4 rounded-lg bg-bg-subtle border border-border overflow-x-auto text-xs font-mono text-text-main max-h-150 overflow-y-auto leading-relaxed"
         >
           {showRaw ? (
             <pre className="whitespace-pre-wrap break-words">{json}</pre>
@@ -543,8 +543,8 @@ export default function RequestLoggerDetail({
   const cacheSourceLabel = cacheSource === "semantic" ? t("semanticCache") : t("upstreamCache");
   const cacheSourceClassName =
     cacheSource === "semantic"
-      ? "bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border-emerald-500/30"
-      : "bg-sky-500/20 text-sky-700 dark:text-sky-300 border-sky-500/30";
+      ? "bg-surface text-text-main border-border-strong"
+      : "bg-bg-subtle text-text-muted border-border";
   const accountLabel = maskAccount(detail?.account || log.account, emailsVisible);
   const codexAccountRotation = getCodexAccountRotation(detail);
   return (
@@ -556,55 +556,55 @@ export default function RequestLoggerDetail({
       aria-modal="true"
       aria-label={t("ariaLabel")}
     >
-      <div className="absolute inset-0 bg-black/60 backdrop-blur-sm" />
+      <div className="absolute inset-0 bg-black/40 backdrop-blur-[2px]" />
       <div
         ref={modalScrollRef}
-        className="relative w-full max-w-225 max-h-[90vh] overflow-x-hidden overflow-y-auto rounded-xl border border-border bg-bg-primary shadow-2xl"
+        className="relative w-full max-w-225 max-h-[90vh] overflow-x-hidden overflow-y-auto rounded-card border border-border bg-surface shadow-[var(--shadow-elevated)]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Modal Header */}
-        <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-3 border-b border-border bg-bg-primary/95 backdrop-blur-sm rounded-t-xl sm:px-6 sm:py-4">
+        <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-x-3 gap-y-2 px-4 py-3 border-b border-border bg-surface/95 backdrop-blur-sm rounded-t-card sm:px-6 sm:py-4">
           <div className="flex flex-wrap items-center gap-2 min-w-0 sm:gap-3">
             <div className="flex flex-col">
               <div className="flex items-center gap-2">
                 {log.active ? (
-                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-bold bg-amber-500/20 text-amber-600 dark:text-amber-400 border border-amber-500/30">
+                  <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-semibold bg-warning/10 text-warning border border-warning/30">
                     <span className="inline-block h-3 w-3 rounded-full border-2 border-current border-t-transparent animate-spin" />
                   </span>
                 ) : log.status === 0 ? (
-                  <span className="inline-block px-2.5 py-1 rounded text-xs font-bold bg-emerald-500/20 text-emerald-700 dark:text-emerald-300 border border-emerald-500/30">
+                  <span className="inline-block px-2.5 py-1 rounded-md text-xs font-semibold bg-success/10 text-success border border-success/30">
                     {t("completed")}
                   </span>
                 ) : (
                   <span
-                    className="inline-block px-2.5 py-1 rounded text-xs font-bold"
+                    className="inline-block px-2.5 py-1 rounded-md text-xs font-semibold tabular-nums"
                     style={{ backgroundColor: statusStyle.bg, color: statusStyle.text }}
                   >
                     {log.status}
                   </span>
                 )}
                 {hasStatusDiscrepancy && (
-                  <span className="text-[10px] font-bold px-2 py-0.5 rounded bg-bg-subtle border border-border text-text-muted">
+                  <span className="text-[10px] font-medium px-2 py-0.5 rounded-md bg-bg-subtle border border-border text-text-muted">
                     {t("upstreamStatus", { status: providerStatus })}
                   </span>
                 )}
-                {log.method && <span className="font-bold text-lg">{log.method}</span>}
+                {log.method && <span className="font-semibold text-lg">{log.method}</span>}
               </div>
               {hasStatusDiscrepancy && (
-                <span className="text-[10px] text-amber-600 dark:text-amber-400 font-medium mt-0.5">
+                <span className="text-[10px] text-warning font-medium mt-0.5">
                   {t("statusDiscrepancy", { status: log.status, provider: providerStatus })}
                 </span>
               )}
             </div>
             <span className="text-text-muted font-mono text-sm self-center ml-2">{log.path}</span>
             {log.id && (
-              <span className="text-[10px] text-text-muted/50 font-mono self-center ml-2 px-1.5 py-0.5 rounded bg-bg-subtle border border-border/40 select-all">
+              <span className="text-[10px] text-text-subtle font-mono self-center ml-2 px-1.5 py-0.5 rounded-md bg-bg-subtle border border-border select-all">
                 {log.id}
               </span>
             )}
             {log.correlationId && (
               <span
-                className="text-[10px] text-text-muted/50 font-mono self-center ml-2 px-1.5 py-0.5 rounded bg-bg-subtle border border-border/40 select-all"
+                className="text-[10px] text-text-subtle font-mono self-center ml-2 px-1.5 py-0.5 rounded-md bg-bg-subtle border border-border select-all"
                 title={t("correlationId")}
               >
                 {t("correlationIdValue", { id: log.correlationId })}
@@ -614,7 +614,7 @@ export default function RequestLoggerDetail({
           <div className="flex items-center gap-1 shrink-0">
             <button
               onClick={handleCopyAll}
-              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors"
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-control hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
               aria-label={t("copyAll")}
               title={t("copyAll")}
             >
@@ -634,7 +634,7 @@ export default function RequestLoggerDetail({
                 <button
                   onClick={onPrevious}
                   disabled={!onPrevious}
-                  className="p-1.5 rounded-lg hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                  className="p-1.5 rounded-control hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors disabled:opacity-30 disabled:pointer-events-none"
                   aria-label={t("previousRequest")}
                 >
                   <span className="material-symbols-outlined text-[18px]">chevron_left</span>
@@ -642,7 +642,7 @@ export default function RequestLoggerDetail({
                 <button
                   onClick={onNext}
                   disabled={!onNext}
-                  className="p-1.5 rounded-lg hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors disabled:opacity-30 disabled:pointer-events-none"
+                  className="p-1.5 rounded-control hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors disabled:opacity-30 disabled:pointer-events-none"
                   aria-label={t("nextRequest")}
                 >
                   <span className="material-symbols-outlined text-[18px]">chevron_right</span>
@@ -651,10 +651,10 @@ export default function RequestLoggerDetail({
             )}
             <button
               onClick={onClose}
-              className="p-1.5 rounded-lg hover:bg-bg-subtle text-text-muted hover:text-text-primary transition-colors"
+              className="p-1.5 rounded-control hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
               aria-label={t("close")}
             >
-              <span className="material-symbols-outlined">close</span>
+              <span className="material-symbols-outlined text-[20px]">close</span>
             </button>
           </div>
         </div>
@@ -662,7 +662,7 @@ export default function RequestLoggerDetail({
         <div className="p-4 flex flex-col gap-6 sm:p-6">
           {/* Metadata Grid */}
           {log.active ? (
-            <div className="flex flex-wrap gap-4 p-4 bg-bg-subtle rounded-xl border border-border">
+            <div className="flex flex-wrap gap-4 p-4 bg-bg-subtle rounded-lg border border-border">
               <div className="min-w-[140px] flex-1">
                 <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
                   {t("startedAt")}
@@ -679,14 +679,14 @@ export default function RequestLoggerDetail({
                 <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
                   {t("model")}
                 </div>
-                <div className="text-sm font-medium text-primary font-mono">{log.model}</div>
+                <div className="text-sm font-medium text-text-main font-mono">{log.model}</div>
               </div>
               <div className="min-w-[120px] flex-1">
                 <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
                   {t("provider")}
                 </div>
                 <span
-                  className="inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase"
+                  className="inline-block px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase"
                   style={{ backgroundColor: providerColor.bg, color: providerColor.text }}
                 >
                   {providerLabel}
@@ -701,7 +701,7 @@ export default function RequestLoggerDetail({
             </div>
           ) : (
             <div
-              className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-bg-subtle rounded-xl border border-border"
+              className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4 bg-bg-subtle rounded-lg border border-border"
               data-testid="request-log-metadata-grid"
             >
               <div>
@@ -740,13 +740,13 @@ export default function RequestLoggerDetail({
                   className="flex flex-wrap items-center gap-1.5"
                   data-testid="token-group-input"
                 >
-                  <span className="px-2 py-0.5 rounded bg-primary/20 text-primary text-xs font-bold">
+                  <span className="px-2 py-0.5 rounded-md bg-surface border border-border-strong text-text-main text-xs font-medium tabular-nums">
                     {t("totalIn", { value: formatTokenValue(tokenStats.totalIn) })}
                   </span>
-                  <span className="px-2 py-0.5 rounded bg-sky-500/20 text-sky-700 dark:text-sky-400 text-xs font-bold">
+                  <span className="px-2 py-0.5 rounded-md bg-surface border border-border text-text-muted text-xs font-medium tabular-nums">
                     {t("cacheRead", { value: formatTokenValue(tokenStats.cacheRead) })}
                   </span>
-                  <span className="px-2 py-0.5 rounded bg-amber-500/20 text-amber-700 dark:text-amber-400 text-xs font-bold">
+                  <span className="px-2 py-0.5 rounded-md bg-surface border border-border text-text-muted text-xs font-medium tabular-nums">
                     {t("cacheWrite", { value: formatTokenValue(tokenStats.cacheWrite) })}
                   </span>
                   {tokenStats.compressed != null &&
@@ -759,7 +759,7 @@ export default function RequestLoggerDetail({
                           ? Math.max(0, Math.min(100, Math.round((saved / fromTokens) * 100)))
                           : 100;
                       return (
-                        <span className="px-2 py-0.5 rounded bg-purple-500/20 text-purple-700 dark:text-purple-300 text-xs font-bold">
+                        <span className="px-2 py-0.5 rounded-md bg-surface border border-border text-text-muted text-xs font-medium tabular-nums">
                           {t("compressed", {
                             from: fromTokens.toLocaleString(),
                             to: Math.max(0, tokenStats.totalIn).toLocaleString(),
@@ -778,10 +778,10 @@ export default function RequestLoggerDetail({
                   className="flex flex-wrap items-center gap-1.5"
                   data-testid="token-group-output"
                 >
-                  <span className="px-2 py-0.5 rounded bg-emerald-500/20 text-emerald-700 dark:text-emerald-400 text-xs font-bold">
+                  <span className="px-2 py-0.5 rounded-md bg-surface border border-border-strong text-text-main text-xs font-medium tabular-nums">
                     {t("totalOut", { value: formatTokenValue(tokenStats.totalOut) })}
                   </span>
-                  <span className="px-2 py-0.5 rounded bg-violet-500/20 text-violet-700 dark:text-violet-400 text-xs font-bold">
+                  <span className="px-2 py-0.5 rounded-md bg-surface border border-border text-text-muted text-xs font-medium tabular-nums">
                     {t("reasoning", { value: formatTokenValue(tokenStats.reasoning) })}
                   </span>
                 </div>
@@ -790,7 +790,7 @@ export default function RequestLoggerDetail({
                 <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
                   {t("model")}
                 </div>
-                <div className="text-sm font-medium text-primary font-mono">{log.model}</div>
+                <div className="text-sm font-medium text-text-main font-mono">{log.model}</div>
               </div>
               <div>
                 <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
@@ -800,7 +800,7 @@ export default function RequestLoggerDetail({
                   className={`text-sm font-medium font-mono ${
                     (detail?.requestedModel || log.requestedModel) &&
                     (detail?.requestedModel || log.requestedModel) !== log.model
-                      ? "text-amber-600 dark:text-amber-400"
+                      ? "text-warning"
                       : "text-text-muted"
                   }`}
                 >
@@ -812,7 +812,7 @@ export default function RequestLoggerDetail({
                   {t("provider")}
                 </div>
                 <span
-                  className="inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase"
+                  className="inline-block px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase"
                   style={{ backgroundColor: providerColor.bg, color: providerColor.text }}
                 >
                   {providerLabel}
@@ -823,7 +823,7 @@ export default function RequestLoggerDetail({
                   {t("requestProtocol")}
                 </div>
                 <span
-                  className="inline-block px-2.5 py-1 rounded text-[10px] font-bold uppercase"
+                  className="inline-block px-2.5 py-1 rounded-md text-[10px] font-semibold uppercase"
                   style={{ backgroundColor: protocol.bg, color: protocol.text }}
                 >
                   {protocol.label}
@@ -834,7 +834,7 @@ export default function RequestLoggerDetail({
                   {t("cacheSource")}
                 </div>
                 <span
-                  className={`inline-block px-2.5 py-1 rounded text-[10px] font-bold border ${cacheSourceClassName}`}
+                  className={`inline-block px-2.5 py-1 rounded-md text-[10px] font-semibold border ${cacheSourceClassName}`}
                 >
                   {cacheSourceLabel}
                 </span>
@@ -844,7 +844,7 @@ export default function RequestLoggerDetail({
                   <div className="text-[10px] text-text-muted uppercase tracking-wider mb-1">
                     {t("modelPinning")}
                   </div>
-                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded text-[10px] font-bold bg-violet-500/15 text-violet-600 dark:text-violet-400 border border-violet-500/25">
+                  <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-md text-[10px] font-semibold bg-surface text-text-main border border-border-strong">
                     <svg className="w-3 h-3" viewBox="0 0 16 16" fill="currentColor">
                       <path d="M4.5 2A1.5 1.5 0 003 3.5v1.9l-1.4 2.8A.5.5 0 002 9h4v4.5a.5.5 0 00.5.5h3a.5.5 0 00.5-.5V9h4a.5.5 0 00.44-.73L13 5.4V3.5A1.5 1.5 0 0011.5 2h-7z" />
                     </svg>
@@ -859,7 +859,7 @@ export default function RequestLoggerDetail({
                 <div className="text-sm font-medium">{accountLabel}</div>
                 {codexAccountRotation && (
                   <div
-                    className="mt-1 text-[10px] text-amber-600 dark:text-amber-400 font-mono"
+                    className="mt-1 text-[10px] text-warning font-mono"
                     title={`${codexAccountRotation.initialConnectionId} -> ${codexAccountRotation.finalConnectionId}`}
                   >
                     {t("rotated", {
@@ -894,7 +894,7 @@ export default function RequestLoggerDetail({
                   {t("combo")}
                 </div>
                 {detail?.comboName || log.comboName ? (
-                  <span className="inline-block px-2.5 py-1 rounded-full text-[10px] font-bold bg-violet-500/20 text-violet-700 dark:text-violet-300 border border-violet-500/30">
+                  <span className="inline-block px-2.5 py-1 rounded-full text-[10px] font-medium bg-surface text-text-main border border-border-strong">
                     {detail?.comboName || log.comboName}
                   </span>
                 ) : (
@@ -922,19 +922,19 @@ export default function RequestLoggerDetail({
 
           {/* Error Message */}
           {(detail?.error || log.error) && (
-            <div className="p-4 rounded-xl bg-red-500/10 border border-red-500/30">
+            <div className="p-4 rounded-lg bg-error/5 border border-error/25">
               <div className="flex items-center justify-between mb-1">
-                <div className="text-[10px] text-red-600 dark:text-red-400 uppercase tracking-wider font-bold">
+                <div className="text-[10px] text-error uppercase tracking-wider font-medium">
                   {t("error")}
                 </div>
                 {isCombo503 && !cleared && (
                   <button
                     onClick={handleUnblockAll}
                     disabled={unblockAllBusy}
-                    className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-medium rounded-lg
-                      bg-amber-500/10 border border-amber-500/30 text-amber-600
-                      hover:bg-amber-500/15 hover:border-amber-500/50
-                      dark:text-amber-400 transition-all duration-200
+                    className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-medium rounded-control
+                      bg-warning/10 border border-warning/30 text-warning
+                      hover:bg-warning/15 hover:border-warning/50
+                      transition-colors duration-150
                       disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <svg
@@ -953,7 +953,7 @@ export default function RequestLoggerDetail({
                   </button>
                 )}
                 {isCombo503 && cleared && (
-                  <span className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-medium rounded-lg bg-green-500/10 border border-green-500/30 text-green-600 dark:text-green-400">
+                  <span className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-medium rounded-control bg-success/10 border border-success/30 text-success">
                     <svg
                       width="10"
                       height="10"
@@ -971,10 +971,10 @@ export default function RequestLoggerDetail({
                   <button
                     onClick={handleUnblockModel}
                     disabled={unblocking}
-                    className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-medium rounded-lg
-                      bg-amber-500/10 border border-amber-500/30 text-amber-600
-                      hover:bg-amber-500/15 hover:border-amber-500/50
-                      dark:text-amber-400 transition-all duration-200
+                    className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-medium rounded-control
+                      bg-warning/10 border border-warning/30 text-warning
+                      hover:bg-warning/15 hover:border-warning/50
+                      transition-colors duration-150
                       disabled:opacity-50 disabled:cursor-not-allowed"
                   >
                     <svg
@@ -993,7 +993,7 @@ export default function RequestLoggerDetail({
                   </button>
                 )}
                 {isModelCooldown && cleared && (
-                  <span className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-medium rounded-lg bg-green-500/10 border border-green-500/30 text-green-600 dark:text-green-400">
+                  <span className="flex items-center gap-1 px-2.5 py-1 text-[10px] font-medium rounded-control bg-success/10 border border-success/30 text-success">
                     <svg
                       width="10"
                       height="10"
@@ -1008,7 +1008,7 @@ export default function RequestLoggerDetail({
                   </span>
                 )}
               </div>
-              <div className="text-sm text-red-600 dark:text-red-300 font-mono whitespace-pre-wrap break-words">
+              <div className="text-sm text-error font-mono whitespace-pre-wrap break-words">
                 {formatErrorForDisplay(detail?.error || log.error)}
               </div>
             </div>
@@ -1016,8 +1016,8 @@ export default function RequestLoggerDetail({
 
           {/* Related Requests (same correlation ID) */}
           {relatedLogs.length > 1 && (
-            <div className="p-4 rounded-xl bg-bg-subtle border border-border">
-              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-2 font-bold">
+            <div className="p-4 rounded-lg bg-bg-subtle border border-border">
+              <div className="text-[10px] text-text-muted uppercase tracking-wider mb-2 font-medium">
                 {t("relatedRequests", { count: relatedLogs.length })}
               </div>
               <div className="flex flex-col gap-1">
@@ -1036,14 +1036,14 @@ export default function RequestLoggerDetail({
                         key={r.id}
                         onClick={() => !isCurrent && onSelectRelated?.(r)}
                         disabled={isCurrent}
-                        className={`flex items-center gap-2 px-2 py-1.5 rounded text-left text-xs transition-colors ${
+                        className={`flex items-center gap-2 px-2 py-1.5 rounded-md text-left text-xs transition-colors ${
                           isCurrent
-                            ? "bg-primary/10 border border-primary/30 cursor-default"
-                            : "hover:bg-bg-hover cursor-pointer"
+                            ? "bg-surface border border-border-strong cursor-default"
+                            : "hover:bg-surface cursor-pointer"
                         }`}
                       >
                         <span
-                          className="inline-block px-1.5 py-0.5 rounded text-[9px] font-bold min-w-[28px] text-center"
+                          className="inline-block px-1.5 py-0.5 rounded text-[9px] font-semibold min-w-[28px] text-center"
                           style={
                             rStatusStyle
                               ? { backgroundColor: rStatusStyle.bg, color: rStatusStyle.text }
@@ -1061,7 +1061,7 @@ export default function RequestLoggerDetail({
                           {formatDuration(r.duration)}
                         </span>
                         {isCurrent && (
-                          <span className="text-[9px] text-primary font-bold ml-1">
+                          <span className="text-[9px] text-text-main font-semibold ml-1">
                             {t("current")}
                           </span>
                         )}
@@ -1073,11 +1073,11 @@ export default function RequestLoggerDetail({
           )}
 
           {detailIssue && (
-            <div className="p-4 rounded-xl bg-amber-500/10 border border-amber-500/30">
-              <div className="text-[10px] text-amber-700 dark:text-amber-400 uppercase tracking-wider mb-1 font-bold">
+            <div className="p-4 rounded-lg bg-warning/5 border border-warning/25">
+              <div className="text-[10px] text-warning uppercase tracking-wider mb-1 font-medium">
                 {t("detailStatus")}
               </div>
-              <div className="text-sm text-amber-700 dark:text-amber-200">{detailIssue}</div>
+              <div className="text-sm text-text-main">{detailIssue}</div>
             </div>
           )}
 

@@ -90,9 +90,9 @@ function statusNumberClass(status: PipelineStep["status"]): string {
     case "active":
       return "bg-primary/10 text-primary";
     case "done":
-      return "bg-emerald-500/10 text-emerald-500";
+      return "bg-success/10 text-success";
     case "error":
-      return "bg-red-500/10 text-red-500";
+      return "bg-error/10 text-error";
     default:
       return "bg-bg-subtle text-text-muted";
   }
@@ -172,7 +172,7 @@ export default function PipelineView({
       subtitle={tr("advancedPipelineSubtitle", "Visualize cada passo da tradução (hub-and-spoke).")}
       icon="route"
       defaultOpen={defaultOpen || forceOpen}
-      className="border-black/5 dark:border-white/5"
+      className="border-border"
     >
       {/* D7 lazy-render container */}
       <div
@@ -228,9 +228,9 @@ export default function PipelineView({
                     <Card
                       className={
                         step.status === "error"
-                          ? "border-red-500/30"
+                          ? "border-error/30"
                           : isExpanded
-                            ? "border-primary/30"
+                            ? "border-border-strong"
                             : step.status === "pending"
                               ? "opacity-60"
                               : ""
@@ -245,7 +245,7 @@ export default function PipelineView({
                       >
                         {/* Step number circle */}
                         <div
-                          className={`flex items-center justify-center w-7 h-7 rounded-full text-xs font-bold shrink-0 ${statusNumberClass(step.status)}`}
+                          className={`flex items-center justify-center w-7 h-7 rounded-full text-xs font-semibold tabular-nums shrink-0 ${statusNumberClass(step.status)}`}
                           aria-hidden="true"
                         >
                           {step.status === "error" ? "!" : i + 1}
@@ -255,7 +255,7 @@ export default function PipelineView({
                         <div className="flex-1 min-w-0">
                           <p className="text-sm font-medium text-text-main">{step.name}</p>
                           {step.description && (
-                            <p className="text-[10px] text-text-muted truncate">
+                            <p className="text-[11px] text-text-muted truncate">
                               {step.description}
                             </p>
                           )}
@@ -291,7 +291,7 @@ export default function PipelineView({
                           role="region"
                           aria-label={`${step.name} details`}
                         >
-                          <pre className="text-xs text-text-muted bg-bg-subtle border border-border rounded-lg p-3 overflow-x-auto whitespace-pre-wrap break-words max-h-60 overflow-y-auto font-mono">
+                          <pre className="text-[12px] text-text-muted bg-bg-subtle border border-border rounded-lg p-3 overflow-x-auto whitespace-pre-wrap break-words max-h-60 overflow-y-auto font-mono">
                             {step.content || tr("noContent", "(no content)")}
                           </pre>
                         </div>

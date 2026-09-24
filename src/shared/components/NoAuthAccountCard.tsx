@@ -218,7 +218,7 @@ export default function NoAuthAccountCard({
     }
   };
 
-   const handleAddManualApiKey = async () => {
+  const handleAddManualApiKey = async () => {
     if (!manualApiKey.trim()) return;
     setAddingManualKey(true);
     try {
@@ -363,11 +363,11 @@ export default function NoAuthAccountCard({
     <Card>
       <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
         <div className="flex min-w-0 items-center gap-3">
-          <div className="inline-flex shrink-0 items-center justify-center w-10 h-10 rounded-full bg-green-500/10 text-green-500">
-            <span className="material-symbols-outlined text-[20px]">lock_open</span>
+          <div className="inline-flex shrink-0 items-center justify-center w-10 h-10 rounded-lg border border-border bg-bg-subtle text-text-muted">
+            <span className="material-symbols-outlined text-[18px]">lock_open</span>
           </div>
           <div className="flex-1 min-w-0">
-            <p className="text-sm font-medium">{t("title")}</p>
+            <p className="text-sm font-medium text-text-main">{t("title")}</p>
             <p className="text-xs text-text-muted">{resolvedDescription}</p>
           </div>
         </div>
@@ -384,7 +384,7 @@ export default function NoAuthAccountCard({
 
       <div className="border-t border-border pt-3 mt-3">
         <div className="mb-2 flex items-center justify-between">
-          <span className="text-sm font-medium">
+          <span className="text-sm font-medium text-text-main">
             {t("accounts", { count: loading ? "..." : allAccountIds.length })}
           </span>
           <div className="flex items-center justify-end gap-2">
@@ -405,7 +405,7 @@ export default function NoAuthAccountCard({
                   value={manualApiKey}
                   onChange={(e) => setManualApiKey(e.target.value)}
                   placeholder="Paste API key..."
-                  className="rounded-md border border-black/10 bg-bg px-2 py-1 text-xs dark:border-white/10"
+                  className="rounded-control border border-border-strong bg-surface px-2 py-1 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
                   disabled={addingManualKey || !enabled}
                 />
                 <Button
@@ -422,7 +422,7 @@ export default function NoAuthAccountCard({
                     setShowManualKeyInput(false);
                     setManualApiKey("");
                   }}
-                  className="rounded p-1 text-text-muted hover:bg-black/5 dark:hover:bg-white/5"
+                  className="rounded-md p-1 text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
                 >
                   <span className="material-symbols-outlined text-[16px]">close</span>
                 </button>
@@ -432,7 +432,7 @@ export default function NoAuthAccountCard({
               <button
                 type="button"
                 onClick={() => setShowManualKeyInput(true)}
-                className="rounded-md px-2 py-1 text-xs text-text-muted transition-colors hover:bg-black/5 hover:text-text-main dark:hover:bg-white/5"
+                className="rounded-control px-2 py-1 text-xs text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
               >
                 {t("manualApiKey")}
               </button>
@@ -460,9 +460,9 @@ export default function NoAuthAccountCard({
                 <div
                   key={id}
                   data-account-id={id}
-                  className="group flex items-center gap-2 rounded-lg border border-border bg-bg/40 px-2.5 py-2 transition-colors hover:bg-black/[0.03] dark:hover:bg-white/[0.03]"
+                  className="group flex items-center gap-2 rounded-lg border border-border bg-surface-2 px-2.5 py-2 transition-colors hover:bg-bg-subtle"
                 >
-                  <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-bg text-[10px] font-medium text-text-muted">
+                  <span className="inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-bg-subtle text-[10px] font-medium tabular-nums text-text-muted">
                     {i + 1}
                   </span>
                   <span className="min-w-0 flex-1 truncate font-mono text-xs text-text-muted">
@@ -471,7 +471,7 @@ export default function NoAuthAccountCard({
                   <button
                     type="button"
                     onClick={() => openProxyConfig(id)}
-                    className={`inline-flex h-6 w-6 shrink-0 items-center justify-center rounded transition-colors hover:bg-black/5 dark:hover:bg-white/5 ${proxy ? "text-blue-400" : "text-text-muted"}`}
+                    className={`inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-md transition-colors hover:bg-bg-subtle ${proxy ? "text-primary" : "text-text-muted"}`}
                     title={
                       proxy
                         ? `Proxy: ${proxy.type}://${proxy.host}:${proxy.port}`
@@ -491,7 +491,7 @@ export default function NoAuthAccountCard({
                   <button
                     type="button"
                     onClick={() => handleRemoveAccount(id)}
-                    className="shrink-0 rounded p-1 text-text-muted opacity-0 transition-colors hover:bg-red-500/10 hover:text-red-500 group-hover:opacity-100"
+                    className="shrink-0 rounded-md p-1 text-text-muted opacity-0 transition-colors hover:bg-error/10 hover:text-error group-hover:opacity-100"
                     aria-label={t("removeAccount")}
                   >
                     <span className="material-symbols-outlined text-[16px]">delete</span>
@@ -506,9 +506,9 @@ export default function NoAuthAccountCard({
           <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 p-4">
             <div
               ref={popoverRef}
-              className="w-80 max-w-full rounded-lg border border-black/10 bg-surface p-4 shadow-lg dark:border-white/10"
+              className="w-80 max-w-full rounded-card border border-border bg-surface p-4 shadow-[var(--shadow-elevated)]"
             >
-              <p className="mb-3 text-sm font-medium">
+              <p className="mb-3 text-sm font-semibold text-text-main">
                 {t("proxyForAccount", {
                   number: allAccountIds.indexOf(proxyAccountId) + 1,
                 })}
@@ -522,7 +522,7 @@ export default function NoAuthAccountCard({
                     onClick={() => setProxyMode("saved")}
                     className={`flex-1 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
                       proxyMode === "saved"
-                        ? "bg-primary text-white"
+                        ? "bg-surface dark:bg-white/10 text-text-main shadow-[0_1px_2px_rgba(0,0,0,0.08),0_0_0_0.5px_rgba(0,0,0,0.06)]"
                         : "text-text-muted hover:text-text-main"
                     }`}
                   >
@@ -533,7 +533,7 @@ export default function NoAuthAccountCard({
                     onClick={() => setProxyMode("custom")}
                     className={`flex-1 rounded-md px-3 py-1.5 text-xs font-medium transition-colors ${
                       proxyMode === "custom"
-                        ? "bg-primary text-white"
+                        ? "bg-surface dark:bg-white/10 text-text-main shadow-[0_1px_2px_rgba(0,0,0,0.08),0_0_0_0.5px_rgba(0,0,0,0.06)]"
                         : "text-text-muted hover:text-text-main"
                     }`}
                   >
@@ -545,7 +545,7 @@ export default function NoAuthAccountCard({
                   <select
                     value={selectedProxyId}
                     onChange={(e) => setSelectedProxyId(e.target.value)}
-                    className="w-full rounded-md border border-black/10 bg-bg px-2.5 py-1.5 text-xs dark:border-white/10"
+                    className="w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
                   >
                     <option value="">
                       {savedProxies.length === 0 ? t("noSavedProxies") : t("directConnection")}
@@ -562,7 +562,7 @@ export default function NoAuthAccountCard({
                       <select
                         value={proxyType}
                         onChange={(e) => setProxyType(e.target.value)}
-                        className="flex-shrink-0 rounded-md border border-black/10 bg-bg px-2.5 py-1.5 text-xs dark:border-white/10"
+                        className="flex-shrink-0 rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
                       >
                         {PROXY_TYPES.map((t) => (
                           <option key={t.value} value={t.value}>
@@ -575,14 +575,14 @@ export default function NoAuthAccountCard({
                         value={proxyHost}
                         onChange={(e) => setProxyHost(e.target.value)}
                         placeholder={t("host")}
-                        className="flex-1 rounded-md border border-black/10 bg-bg px-2.5 py-1.5 text-xs dark:border-white/10"
+                        className="flex-1 rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
                       />
                       <input
                         type="text"
                         value={proxyPort}
                         onChange={(e) => setProxyPort(e.target.value)}
                         placeholder={t("port")}
-                        className="w-16 rounded-md border border-black/10 bg-bg px-2.5 py-1.5 text-xs dark:border-white/10"
+                        className="w-16 rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
                       />
                     </div>
                     <input
@@ -590,14 +590,14 @@ export default function NoAuthAccountCard({
                       value={proxyUsername}
                       onChange={(e) => setProxyUsername(e.target.value)}
                       placeholder={t("usernameOptional")}
-                      className="w-full rounded-md border border-black/10 bg-bg px-2.5 py-1.5 text-xs dark:border-white/10"
+                      className="w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
                     />
                     <input
                       type="password"
                       value={proxyPassword}
                       onChange={(e) => setProxyPassword(e.target.value)}
                       placeholder={t("passwordOptional")}
-                      className="w-full rounded-md border border-black/10 bg-bg px-2.5 py-1.5 text-xs dark:border-white/10"
+                      className="w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
                     />
                   </>
                 )}
@@ -605,7 +605,7 @@ export default function NoAuthAccountCard({
                   <button
                     type="button"
                     onClick={() => setProxyAccountId(null)}
-                    className="rounded-md px-3 py-1.5 text-xs text-text-muted transition-colors hover:bg-black/5 hover:text-text-main dark:hover:bg-white/5"
+                    className="rounded-control px-3 py-1.5 text-xs text-text-muted transition-colors hover:bg-bg-subtle hover:text-text-main"
                   >
                     {t("cancel")}
                   </button>
@@ -613,7 +613,7 @@ export default function NoAuthAccountCard({
                     type="button"
                     onClick={handleSaveProxy}
                     disabled={savingProxy}
-                    className="rounded-md bg-primary/10 px-3 py-1.5 text-xs text-primary transition-colors hover:bg-primary/20 disabled:opacity-50"
+                    className="rounded-control bg-contrast px-3 py-1.5 text-xs font-medium text-contrast-fg transition-colors hover:bg-contrast-hover disabled:opacity-50"
                   >
                     {savingProxy ? t("saving") : t("save")}
                   </button>

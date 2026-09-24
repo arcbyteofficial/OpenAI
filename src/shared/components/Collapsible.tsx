@@ -42,16 +42,16 @@ export default function Collapsible({
 
   const wrapperClasses = cn(
     variant === "default"
-      ? "rounded-lg border border-black/5 dark:border-white/5 bg-surface"
-      : "rounded-md border border-black/5 dark:border-white/5 bg-black/[0.02] dark:bg-white/[0.02]",
+      ? "rounded-card border border-border bg-surface"
+      : "rounded-lg border border-border bg-surface-2",
     className
   );
 
   const headerRowClasses = cn(
     "flex items-center gap-3",
     variant === "default" ? "p-4" : "p-3",
-    "hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors",
-    open && "border-b border-black/5 dark:border-white/5"
+    "hover:bg-bg-subtle/60 transition-colors",
+    open && "border-b border-border"
   );
 
   // The chevron + title region is the click target. Trailing interactive
@@ -64,17 +64,17 @@ export default function Collapsible({
           type="button"
           onClick={() => setOpen((v) => !v)}
           aria-expanded={open}
-          className="flex items-center gap-3 flex-1 min-w-0 text-left -m-1 p-1 rounded"
+          className="flex items-center gap-3 flex-1 min-w-0 text-left -m-1 p-1 rounded-md"
         >
           <span
-            className="material-symbols-outlined text-text-muted text-[20px] shrink-0"
+            className="material-symbols-outlined text-text-subtle text-[18px] shrink-0"
             aria-hidden="true"
           >
             {open ? "expand_more" : "chevron_right"}
           </span>
           {icon && (
             <span
-              className="material-symbols-outlined text-text-muted text-[18px] shrink-0"
+              className="material-symbols-outlined text-text-muted text-[16px] shrink-0"
               aria-hidden="true"
             >
               {icon}

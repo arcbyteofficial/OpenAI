@@ -6,7 +6,10 @@ import { useApiKey } from "../../providers/hooks/useApiKey";
 import { useProviderModels } from "../../providers/hooks/useProviderModels";
 import { PlaygroundCard } from "./PlaygroundCard";
 import { buildCurl } from "../../providers/utils/buildCurl";
-import { PLAYGROUND_KEY_ID_HEADER, resolvePlaygroundKeyId } from "../../providers/utils/playgroundAuth";
+import {
+  PLAYGROUND_KEY_ID_HEADER,
+  resolvePlaygroundKeyId,
+} from "../../providers/utils/playgroundAuth";
 
 interface Props {
   providerId: string;
@@ -151,7 +154,7 @@ export function SttExampleCard({ providerId }: Props) {
         <select
           value={model || firstModel}
           onChange={(e) => setModel(e.target.value)}
-          className="w-full rounded-md border border-border bg-bg-subtle text-sm px-2 py-1.5 text-text-main focus:outline-none focus:ring-1 focus:ring-primary"
+          className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
         >
           {modelOptions.map((m) => (
             <option key={m.id} value={m.id}>
@@ -167,7 +170,7 @@ export function SttExampleCard({ providerId }: Props) {
           <button
             type="button"
             onClick={() => inputRef.current?.click()}
-            className="inline-flex items-center gap-1.5 text-xs rounded-md border border-border bg-bg-subtle px-3 py-1.5 text-text-main hover:bg-black/5 dark:hover:bg-white/5 transition-colors"
+            className="inline-flex items-center gap-1.5 text-xs font-medium rounded-control border border-border-strong bg-surface px-3 py-1.5 text-text-main hover:bg-bg-subtle transition-colors"
           >
             <span className="material-symbols-outlined text-[14px]">upload_file</span>
             {file ? file.name : t("chooseFile")}
@@ -183,7 +186,7 @@ export function SttExampleCard({ providerId }: Props) {
           className="hidden"
           onChange={handleFileChange}
         />
-        {fileError && <p className="text-xs text-red-400 mt-1">{fileError}</p>}
+        {fileError && <p className="text-xs text-error mt-1">{fileError}</p>}
         <p className="text-xs text-text-muted mt-1">{t("audioFormats25Mb")}</p>
       </div>
     </PlaygroundCard>

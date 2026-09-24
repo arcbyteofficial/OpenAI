@@ -70,7 +70,7 @@ export default function StructuredOutputEditor({ structuredOutput }: StructuredO
           aria-checked={enabled}
           onClick={() => setEnabled(!enabled)}
           className={`relative inline-flex w-10 h-5 rounded-full transition-colors ${
-            enabled ? "bg-primary" : "bg-text-muted/30"
+            enabled ? "bg-primary" : "bg-border-strong"
           }`}
           aria-label={enabled ? t("disableJsonMode") : t("enableJsonMode")}
         >
@@ -87,7 +87,7 @@ export default function StructuredOutputEditor({ structuredOutput }: StructuredO
         <div className="flex flex-col gap-2 border border-border rounded-lg p-3 bg-surface">
           {/* Schema name */}
           <div className="flex flex-col gap-1">
-            <label className="text-[10px] text-text-muted uppercase tracking-wider">
+            <label className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
               {t("schemaName")}
             </label>
             <input
@@ -95,38 +95,36 @@ export default function StructuredOutputEditor({ structuredOutput }: StructuredO
               value={nameField}
               onChange={(e) => setNameField(e.target.value)}
               placeholder="my_schema"
-              className="text-xs bg-bg-alt border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+              className="text-xs font-mono bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
             />
           </div>
 
           {/* Schema JSON textarea */}
           <div className="flex flex-col gap-1">
-            <label className="text-[10px] text-text-muted uppercase tracking-wider">
+            <label className="text-[11px] font-medium text-text-subtle uppercase tracking-wider">
               {t("jsonSchema")}
             </label>
             <textarea
               value={schemaRaw}
               onChange={(e) => setSchemaRaw(e.target.value)}
               rows={8}
-              className="text-xs font-mono bg-bg-alt border border-border rounded px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main resize-y"
+              className="text-xs font-mono bg-surface border border-border-strong rounded-control px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main resize-y"
               aria-label={t("jsonSchemaEditor")}
             />
           </div>
 
           {/* Errors */}
-          {(parseError ?? error) && (
-            <p className="text-xs text-destructive">{parseError ?? error}</p>
-          )}
+          {(parseError ?? error) && <p className="text-xs text-error">{parseError ?? error}</p>}
 
           {/* Status — show when schema is set and no errors */}
           {schema != null && !parseError && !error && (
-            <p className="text-xs text-green-600 dark:text-green-400">✓ {t("schemaValidated")}</p>
+            <p className="text-xs text-success">✓ {t("schemaValidated")}</p>
           )}
 
           {/* Validate button */}
           <button
             onClick={handleValidate}
-            className="text-xs px-3 py-1.5 rounded border border-border text-text-muted hover:text-text-main hover:bg-black/5 dark:hover:bg-white/5 transition-colors self-start"
+            className="text-xs font-medium px-3 py-1.5 rounded-control border border-border-strong text-text-main hover:bg-bg-subtle transition-colors self-start"
           >
             {t("validateSchema")}
           </button>

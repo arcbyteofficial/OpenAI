@@ -246,7 +246,7 @@ export default function RawJsonPanel({
       )}
       icon="code"
       defaultOpen={defaultOpen || forceOpen}
-      className="border-black/5 dark:border-white/5"
+      className="border-border"
     >
       {/* Internal open-state control — Collapsible owns its own open state,
           but we mirror it here for the lazy-render guard and onOpenChange. */}
@@ -269,7 +269,7 @@ export default function RawJsonPanel({
           <>
             {/* Error banner */}
             {errorMessage && (
-              <div className="flex items-start gap-2 px-3 py-2 rounded-lg bg-red-500/10 border border-red-500/20 text-sm text-red-500">
+              <div className="flex items-start gap-2 px-3 py-2 rounded-lg bg-error/10 border border-error/20 text-sm text-error">
                 <span
                   className="material-symbols-outlined text-[16px] mt-0.5 shrink-0"
                   aria-hidden="true"
@@ -285,7 +285,7 @@ export default function RawJsonPanel({
               <div className="p-4 flex flex-col sm:flex-row items-center gap-4">
                 {/* Source Format */}
                 <div className="flex-1 w-full">
-                  <label className="block text-xs font-medium text-text-muted mb-1.5 uppercase tracking-wider">
+                  <label className="block text-xs font-medium text-text-muted mb-1.5">
                     {tr("source", "Source")}
                   </label>
                   <div className="flex items-center gap-2">
@@ -316,18 +316,18 @@ export default function RawJsonPanel({
                 <button
                   type="button"
                   onClick={handleSwapFormats}
-                  className="p-2 rounded-full hover:bg-primary/10 text-text-muted hover:text-primary transition-all mt-4 sm:mt-5"
+                  className="p-2 rounded-control hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors mt-4 sm:mt-5"
                   title={tr("swapFormats", "Swap formats")}
                   aria-label={tr("swapFormats", "Swap formats")}
                 >
-                  <span className="material-symbols-outlined text-[24px]" aria-hidden="true">
+                  <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
                     swap_horiz
                   </span>
                 </button>
 
                 {/* Target Format */}
                 <div className="flex-1 w-full">
-                  <label className="block text-xs font-medium text-text-muted mb-1.5 uppercase tracking-wider">
+                  <label className="block text-xs font-medium text-text-muted mb-1.5">
                     {tr("target", "Target")}
                   </label>
                   <div className="flex items-center gap-2">
@@ -416,7 +416,7 @@ export default function RawJsonPanel({
                       >
                         input
                       </span>
-                      <h3 className="text-sm font-semibold text-text-main">
+                      <h3 className="text-sm font-semibold tracking-tight text-text-main">
                         {tr("input", "Input")}
                       </h3>
                       {detectedFormat && (
@@ -437,7 +437,7 @@ export default function RawJsonPanel({
                       <button
                         type="button"
                         onClick={() => handleCopy(inputContent)}
-                        className="p-1.5 rounded hover:bg-black/5 dark:hover:bg-white/5 text-text-muted hover:text-text-main transition-colors"
+                        className="p-1.5 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
                         title={tc("copy" as Parameters<typeof tc>[0])}
                         aria-label={tr("input", "Input") + " — copy"}
                       >
@@ -454,7 +454,7 @@ export default function RawJsonPanel({
                           setActiveTemplate(null);
                           setErrorMessage(null);
                         }}
-                        className="p-1.5 rounded hover:bg-black/5 dark:hover:bg-white/5 text-text-muted hover:text-text-main transition-colors"
+                        className="p-1.5 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
                         title={tr("clear", "Clear")}
                         aria-label={tr("clear", "Clear") + " input"}
                       >
@@ -492,12 +492,12 @@ export default function RawJsonPanel({
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-2">
                         <span
-                          className="material-symbols-outlined text-[18px] text-amber-500"
+                          className="material-symbols-outlined text-[18px] text-text-muted"
                           aria-hidden="true"
                         >
                           hub
                         </span>
-                        <h3 className="text-sm font-semibold text-text-main">
+                        <h3 className="text-sm font-semibold tracking-tight text-text-main">
                           {tr("openaiIntermediatePanel", "OpenAI Intermediate")}
                         </h3>
                         <Badge variant="warning" size="sm">
@@ -507,7 +507,7 @@ export default function RawJsonPanel({
                       <button
                         type="button"
                         onClick={() => handleCopy(intermediateContent)}
-                        className="p-1.5 rounded hover:bg-black/5 dark:hover:bg-white/5 text-text-muted hover:text-text-main transition-colors"
+                        className="p-1.5 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
                         title={tc("copy" as Parameters<typeof tc>[0])}
                         aria-label={tr("copyIntermediateJson", "Copy intermediate JSON")}
                       >
@@ -548,7 +548,7 @@ export default function RawJsonPanel({
                       >
                         output
                       </span>
-                      <h3 className="text-sm font-semibold text-text-main">
+                      <h3 className="text-sm font-semibold tracking-tight text-text-main">
                         {tr("output", "Output")}
                       </h3>
                       {outputContent && (
@@ -560,7 +560,7 @@ export default function RawJsonPanel({
                     <button
                       type="button"
                       onClick={() => handleCopy(outputContent)}
-                      className="p-1.5 rounded hover:bg-black/5 dark:hover:bg-white/5 text-text-muted hover:text-text-main transition-colors"
+                      className="p-1.5 rounded-md hover:bg-bg-subtle text-text-muted hover:text-text-main transition-colors"
                       title={tc("copy" as Parameters<typeof tc>[0])}
                       aria-label={tr("copyOutputJson", "Copy output JSON")}
                     >
@@ -595,12 +595,12 @@ export default function RawJsonPanel({
               <div className="p-4 space-y-3">
                 <div className="flex items-center gap-2">
                   <span
-                    className="material-symbols-outlined text-[18px] text-primary"
+                    className="material-symbols-outlined text-[18px] text-text-muted"
                     aria-hidden="true"
                   >
                     library_books
                   </span>
-                  <h3 className="text-sm font-semibold text-text-main">
+                  <h3 className="text-sm font-semibold tracking-tight text-text-main">
                     {tr("exampleTemplates", "Example Templates")}
                   </h3>
                   <span className="text-xs text-text-muted">
@@ -614,19 +614,19 @@ export default function RawJsonPanel({
                       type="button"
                       onClick={() => loadTemplate(template)}
                       className={`
-                        group flex flex-col items-center gap-1.5 p-3 rounded-lg border transition-all text-center
+                        group flex flex-col items-center gap-1.5 p-3 rounded-lg border transition-colors text-center
                         ${
                           activeTemplate === template.id
-                            ? "border-primary bg-primary/5 text-primary"
-                            : "border-border hover:border-primary/30 hover:bg-primary/5 text-text-muted hover:text-text-main"
+                            ? "border-primary/40 bg-primary/5 text-primary"
+                            : "border-border hover:border-border-strong hover:bg-bg-subtle text-text-muted hover:text-text-main"
                         }
                       `}
                     >
                       <span
-                        className={`material-symbols-outlined text-[22px] ${
+                        className={`material-symbols-outlined text-[20px] ${
                           activeTemplate === template.id
                             ? "text-primary"
-                            : "text-text-muted group-hover:text-primary"
+                            : "text-text-muted group-hover:text-text-main"
                         } transition-colors`}
                         aria-hidden="true"
                       >

@@ -18,8 +18,11 @@ export function EncoderComparisonTable({ comparison }: { comparison: EncoderComp
   ].sort((a, b) => (a.size?.tokens ?? Infinity) - (b.size?.tokens ?? Infinity));
 
   return (
-    <section data-testid="encoder-comparison" className="rounded border p-2 text-xs">
-      <header className="mb-1 font-semibold">
+    <section
+      data-testid="encoder-comparison"
+      className="rounded-lg border border-border bg-surface p-3 text-xs"
+    >
+      <header className="mb-2 font-semibold text-text-main">
         {t("encoderComparison", { count: comparison.arraysCompared })}{" "}
         <span data-testid="encoder-winner" className="font-mono">
           {t("encoderWinner", { winner: comparison.winner })}
@@ -27,7 +30,7 @@ export function EncoderComparisonTable({ comparison }: { comparison: EncoderComp
       </header>
       <table className="w-full font-mono">
         <thead>
-          <tr className="text-left text-muted-foreground">
+          <tr className="border-b border-border text-left font-medium text-text-muted">
             <th>{t("encoder")}</th>
             <th>{t("bytes")}</th>
             <th>{t("tokensCl100k")}</th>
@@ -35,7 +38,12 @@ export function EncoderComparisonTable({ comparison }: { comparison: EncoderComp
         </thead>
         <tbody>
           {rows.map((r) => (
-            <tr key={r.key} className={r.key === comparison.winner ? "font-bold" : ""}>
+            <tr
+              key={r.key}
+              className={
+                r.key === comparison.winner ? "font-semibold text-text-main" : "text-text-muted"
+              }
+            >
               <td>
                 {r.label}
                 {r.key === comparison.winner ? " ✓" : ""}

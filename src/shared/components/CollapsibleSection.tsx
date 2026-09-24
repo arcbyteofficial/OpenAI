@@ -23,22 +23,22 @@ export default function CollapsibleSection({
   const [open, setOpen] = useState(defaultOpen);
 
   return (
-    <div className={cn("border border-black/5 dark:border-white/5 rounded-lg", className)}>
+    <div className={cn("border border-border rounded-card", className)}>
       <button
         type="button"
         onClick={() => setOpen((v) => !v)}
         className={cn(
           "flex items-center justify-between w-full px-4 py-3 text-left",
-          "hover:bg-black/[0.02] dark:hover:bg-white/[0.02] transition-colors",
-          "rounded-t-lg",
-          !open && "rounded-b-lg"
+          "hover:bg-bg-subtle/60 transition-colors",
+          "rounded-t-card",
+          !open && "rounded-b-card"
         )}
         aria-expanded={open}
       >
         <div className="flex items-center gap-3 min-w-0">
           <span className="text-sm font-semibold text-text-main truncate">{title}</span>
           {count != null && (
-            <span className="px-2 py-0.5 text-[10px] font-semibold rounded-full bg-black/5 dark:bg-white/10 text-text-muted">
+            <span className="px-1.5 text-[11px] leading-4 font-medium tabular-nums rounded-full border border-border bg-bg-subtle text-text-muted">
               {count}
             </span>
           )}
@@ -47,7 +47,7 @@ export default function CollapsibleSection({
           )}
         </div>
         <span
-          className="material-symbols-outlined text-[20px] text-text-muted transition-transform duration-200 shrink-0"
+          className="material-symbols-outlined text-[18px] text-text-subtle transition-transform duration-200 shrink-0"
           style={{ transform: open ? "rotate(0deg)" : "rotate(-90deg)" }}
         >
           expand_more

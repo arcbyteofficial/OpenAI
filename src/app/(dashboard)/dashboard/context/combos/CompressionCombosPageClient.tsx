@@ -183,7 +183,9 @@ function NamedCombosManager() {
   return (
     <div className="flex flex-col gap-4">
       <div>
-        <h2 className="text-lg font-semibold text-text-main">{t("namedCombos")}</h2>
+        <h2 className="text-base font-semibold tracking-tight text-text-main">
+          {t("namedCombos")}
+        </h2>
         <p className="text-sm text-text-muted">{t("namedCombosDescription")}</p>
       </div>
 
@@ -194,7 +196,7 @@ function NamedCombosManager() {
         <div
           role="alert"
           data-testid="compression-master-switch-warning"
-          className="rounded-lg border border-amber-500/40 bg-amber-500/10 p-3 text-sm text-amber-600 dark:text-amber-400"
+          className="rounded-lg border border-warning/30 bg-warning/10 p-3 text-sm text-warning"
         >
           {t("activeProfileMasterSwitchOffWarning")}{" "}
           <Link href="/dashboard/context/settings" className="font-medium underline">
@@ -203,19 +205,19 @@ function NamedCombosManager() {
         </div>
       )}
 
-      <section className="rounded-lg border border-border bg-surface p-4">
+      <section className="rounded-card border border-border bg-surface p-4">
         <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
           <input
             value={name}
             onChange={(event) => setName(event.target.value)}
             placeholder={t("comboNamePlaceholder")}
-            className="rounded-lg border border-border bg-bg px-3 py-2 text-sm text-text-main"
+            className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main"
           />
           <input
             value={description}
             onChange={(event) => setDescription(event.target.value)}
             placeholder={t("descriptionPlaceholder")}
-            className="rounded-lg border border-border bg-bg px-3 py-2 text-sm text-text-main"
+            className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main"
           />
         </div>
 
@@ -259,7 +261,7 @@ function NamedCombosManager() {
             <select
               value={outputModeIntensity}
               onChange={(event) => setOutputModeIntensity(event.target.value)}
-              className="w-full rounded-lg border border-border bg-bg px-3 py-2 text-sm"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main"
             >
               <option value="lite">{t("intensityLite")}</option>
               <option value="full">{t("intensityFull")}</option>
@@ -289,7 +291,7 @@ function NamedCombosManager() {
                         combo={{ id, config: combo.config }}
                         disabled={!compressionEnabled}
                         title="Compression override"
-                        className="w-24 shrink-0 rounded-lg border border-border bg-bg px-2 py-1 text-xs text-text-main disabled:opacity-50"
+                        className="w-24 shrink-0 rounded-control border border-border-strong bg-surface px-2 py-1 text-xs text-text-main disabled:opacity-50"
                       />
                     </div>
                   );
@@ -300,7 +302,7 @@ function NamedCombosManager() {
         </div>
 
         {error && (
-          <p className="mt-4 text-sm text-danger" role="alert">
+          <p className="mt-4 text-sm text-error" role="alert">
             {error}
           </p>
         )}
@@ -309,14 +311,14 @@ function NamedCombosManager() {
           <button
             onClick={saveCombo}
             disabled={saving}
-            className="rounded-lg bg-primary px-4 py-2 text-sm font-medium text-white"
+            className="rounded-control bg-contrast px-4 py-2 text-sm font-medium text-contrast-fg transition-colors hover:bg-contrast-hover disabled:opacity-50"
           >
             {editingId ? t("save") : t("createCombo")}
           </button>
           {editingId && (
             <button
               onClick={resetForm}
-              className="rounded-lg border border-border px-4 py-2 text-sm text-text-main"
+              className="rounded-control border border-border-strong px-4 py-2 text-sm font-medium text-text-main transition-colors hover:bg-bg-subtle"
             >
               {t("cancel")}
             </button>
@@ -326,16 +328,16 @@ function NamedCombosManager() {
 
       <section className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {combos.map((combo) => (
-          <div key={combo.id} className="rounded-lg border border-border bg-surface p-4">
+          <div key={combo.id} className="rounded-card border border-border bg-surface p-4">
             <div className="flex items-start justify-between gap-3">
               <div className="min-w-0">
-                <h3 className="truncate text-base font-semibold text-text-main">{combo.name}</h3>
+                <h3 className="truncate text-sm font-semibold text-text-main">{combo.name}</h3>
                 <p className="mt-1 text-sm text-text-muted">{combo.description}</p>
               </div>
               {combo.id === activeComboId && (
                 <span
                   data-testid={`active-badge-${combo.id}`}
-                  className="rounded-full bg-green-500/10 px-2 py-1 text-xs font-medium text-green-500"
+                  className="rounded-full bg-success/10 px-2 py-1 text-xs font-medium text-success"
                 >
                   ● {t("active")}
                 </span>
@@ -345,7 +347,7 @@ function NamedCombosManager() {
               {combo.pipeline.map((step, index) => (
                 <span
                   key={`${combo.id}-${index}`}
-                  className="rounded-lg border border-border bg-bg px-2 py-1 font-mono text-xs text-text-muted"
+                  className="rounded-md border border-border bg-bg-subtle px-2 py-1 font-mono text-xs text-text-muted"
                 >
                   {index + 1}. {step.engine}
                   {step.intensity ? `:${step.intensity}` : ""}
@@ -358,14 +360,14 @@ function NamedCombosManager() {
             <div className="mt-4 flex flex-wrap gap-2">
               <button
                 onClick={() => editCombo(combo)}
-                className="rounded-lg border border-border px-3 py-1.5 text-xs text-text-main"
+                className="rounded-control border border-border-strong px-3 py-1.5 text-xs font-medium text-text-main transition-colors hover:bg-bg-subtle"
               >
                 {t("editCombo")}
               </button>
               {!combo.isDefault && (
                 <button
                   onClick={() => deleteCombo(combo)}
-                  className="rounded-lg border border-danger/40 px-3 py-1.5 text-xs text-danger"
+                  className="rounded-control border border-error/30 px-3 py-1.5 text-xs font-medium text-error transition-colors hover:bg-error/10"
                 >
                   {t("deleteCombo")}
                 </button>
@@ -380,7 +382,7 @@ function NamedCombosManager() {
 
 export default function CompressionCombosPageClient() {
   return (
-    <div className="flex flex-col gap-8">
+    <div className="flex flex-col gap-6">
       <CompressionHub />
       <NamedCombosManager />
     </div>

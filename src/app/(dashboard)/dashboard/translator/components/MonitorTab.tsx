@@ -36,12 +36,12 @@ interface StatCardProps {
 }
 
 const COLOR_MAP: Record<StatCardProps["color"], { shell: string; icon: string }> = {
-  blue: { shell: "bg-blue-500/10", icon: "text-blue-500" },
-  green: { shell: "bg-green-500/10", icon: "text-green-500" },
-  red: { shell: "bg-red-500/10", icon: "text-red-500" },
-  purple: { shell: "bg-purple-500/10", icon: "text-purple-500" },
-  amber: { shell: "bg-amber-500/10", icon: "text-amber-500" },
-  cyan: { shell: "bg-cyan-500/10", icon: "text-cyan-500" },
+  blue: { shell: "bg-bg-subtle border border-border", icon: "text-text-muted" },
+  green: { shell: "bg-bg-subtle border border-border", icon: "text-success" },
+  red: { shell: "bg-bg-subtle border border-border", icon: "text-error" },
+  purple: { shell: "bg-bg-subtle border border-border", icon: "text-text-muted" },
+  amber: { shell: "bg-bg-subtle border border-border", icon: "text-text-muted" },
+  cyan: { shell: "bg-bg-subtle border border-border", icon: "text-text-muted" },
 };
 
 function StatCard({ icon, label, value, color }: StatCardProps) {
@@ -50,17 +50,19 @@ function StatCard({ icon, label, value, color }: StatCardProps) {
   return (
     <Card>
       <div className="p-4 flex items-center gap-3">
-        <div className={`flex items-center justify-center w-10 h-10 rounded-lg ${resolved.shell}`}>
+        <div className={`flex items-center justify-center w-10 h-10 rounded-md ${resolved.shell}`}>
           <span
-            className={`material-symbols-outlined text-[22px] ${resolved.icon}`}
+            className={`material-symbols-outlined text-[18px] ${resolved.icon}`}
             aria-hidden="true"
           >
             {icon}
           </span>
         </div>
         <div>
-          <p className="text-lg font-bold text-text-main">{value}</p>
-          <p className="text-[10px] text-text-muted uppercase tracking-wider">{label}</p>
+          <p className="text-lg font-semibold tracking-tight tabular-nums text-text-main">
+            {value}
+          </p>
+          <p className="text-xs text-text-muted">{label}</p>
         </div>
       </div>
     </Card>
@@ -146,11 +148,11 @@ export default function MonitorTab({ onGoToTranslate }: MonitorTabProps) {
     <div className="space-y-5 min-w-0">
       {/* Origin hint — always visible (monitorOriginHint) */}
       <div
-        className="flex items-start gap-3 px-4 py-3 rounded-lg bg-primary/5 border border-primary/10 text-sm text-text-muted"
+        className="flex items-start gap-3 px-4 py-3 rounded-card bg-surface border border-border text-sm text-text-muted"
         data-testid="monitor-origin-hint"
       >
         <span
-          className="material-symbols-outlined text-primary text-[20px] mt-0.5 shrink-0"
+          className="material-symbols-outlined text-text-muted text-[18px] mt-0.5 shrink-0"
           aria-hidden="true"
         >
           info
@@ -194,8 +196,8 @@ export default function MonitorTab({ onGoToTranslate }: MonitorTabProps) {
       </div>
 
       {/* Memory note */}
-      <div className="flex items-center gap-2 rounded-lg border border-amber-500/10 bg-amber-500/5 px-3 py-2 text-xs text-amber-600 dark:text-amber-400">
-        <span className="material-symbols-outlined text-[14px]">memory</span>
+      <div className="flex items-center gap-2 rounded-lg border border-border bg-surface-2 px-3 py-2 text-xs text-text-main">
+        <span className="material-symbols-outlined text-[14px] text-text-muted">memory</span>
         <p>
           {t("liveMonitorMemoryNote")}{" "}
           <span className="text-text-muted">{t("liveMonitorMemoryCapNote")}</span>
@@ -207,7 +209,7 @@ export default function MonitorTab({ onGoToTranslate }: MonitorTabProps) {
         <div className="p-3 flex items-center justify-between">
           <div className="flex items-center gap-2">
             <span
-              className={`material-symbols-outlined text-[18px] ${autoRefresh ? "text-green-500 animate-pulse" : "text-text-muted"}`}
+              className={`material-symbols-outlined text-[18px] ${autoRefresh ? "text-success animate-pulse" : "text-text-muted"}`}
               aria-hidden="true"
             >
               {autoRefresh ? "radio_button_checked" : "radio_button_unchecked"}
@@ -253,7 +255,9 @@ export default function MonitorTab({ onGoToTranslate }: MonitorTabProps) {
       {/* Events table */}
       <Card>
         <div className="p-4">
-          <h3 className="text-sm font-semibold text-text-main mb-3">{t("recentTranslations")}</h3>
+          <h3 className="text-sm font-semibold tracking-tight text-text-main mb-3">
+            {t("recentTranslations")}
+          </h3>
 
           {loading ? (
             <div className="flex items-center justify-center py-12 text-text-muted">
@@ -278,9 +282,9 @@ export default function MonitorTab({ onGoToTranslate }: MonitorTabProps) {
             </div>
           ) : (
             <div className="overflow-x-auto" data-testid="monitor-events-table">
-              <table className="w-full text-sm">
+              <table className="w-full text-[13px]">
                 <thead>
-                  <tr className="text-left text-xs text-text-muted border-b border-border">
+                  <tr className="text-left text-xs font-medium text-text-muted border-b border-border">
                     <th className="pb-2 pr-4">{t("time")}</th>
                     <th className="pb-2 pr-4">{translateOrFallback("routeDetails", "Route")}</th>
                     <th className="pb-2 pr-4">{t("source")}</th>
@@ -304,10 +308,10 @@ export default function MonitorTab({ onGoToTranslate }: MonitorTabProps) {
                     return (
                       <tr
                         key={event.id ?? i}
-                        className="border-b border-border/50 hover:bg-bg-subtle/50 transition-colors"
+                        className="border-b border-border last:border-0 hover:bg-bg-subtle transition-colors"
                         data-testid="monitor-event-row"
                       >
-                        <td className="py-2 pr-4 text-xs text-text-muted whitespace-nowrap">
+                        <td className="py-2 pr-4 font-mono text-[12px] tabular-nums text-text-muted whitespace-nowrap">
                           {event.timestamp
                             ? new Date(event.timestamp).toLocaleTimeString()
                             : notAvailable}
@@ -348,7 +352,7 @@ export default function MonitorTab({ onGoToTranslate }: MonitorTabProps) {
                             {tgtMeta.label}
                           </Badge>
                         </td>
-                        <td className="py-2 pr-4 text-xs font-mono text-text-muted break-all">
+                        <td className="py-2 pr-4 text-[12px] font-mono text-text-muted break-all">
                           {event.model ?? notAvailable}
                         </td>
                         <td className="py-2 pr-4">
@@ -362,7 +366,7 @@ export default function MonitorTab({ onGoToTranslate }: MonitorTabProps) {
                             </Badge>
                           )}
                         </td>
-                        <td className="py-2 text-right text-xs text-text-muted">
+                        <td className="py-2 text-right font-mono text-[12px] tabular-nums text-text-muted">
                           {event.latency ? formatLatency(event.latency) : notAvailable}
                         </td>
                       </tr>

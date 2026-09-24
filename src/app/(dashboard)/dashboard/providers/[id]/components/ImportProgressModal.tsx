@@ -49,10 +49,10 @@ export default function ImportProgressModal({
             </span>
           )}
           {importProgress.phase === "done" && (
-            <span className="material-symbols-outlined text-green-500">check_circle</span>
+            <span className="material-symbols-outlined text-success">check_circle</span>
           )}
           {importProgress.phase === "error" && (
-            <span className="material-symbols-outlined text-red-500">error</span>
+            <span className="material-symbols-outlined text-error">error</span>
           )}
           <span className="text-sm font-medium text-text-main">{importProgress.status}</span>
         </div>
@@ -69,15 +69,15 @@ export default function ImportProgressModal({
                   {Math.round((importProgress.current / importProgress.total) * 100)}%
                 </span>
               </div>
-              <div className="w-full h-2.5 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
+              <div className="w-full h-2.5 bg-border rounded-full overflow-hidden">
                 <div
-                  className="h-full rounded-full transition-all duration-300 ease-out"
+                  className="h-full rounded-full transition-[width] duration-300 ease-out"
                   style={{
                     width: `${(importProgress.current / importProgress.total) * 100}%`,
                     background:
                       importProgress.phase === "done"
-                        ? "linear-gradient(90deg, #22c55e, #16a34a)"
-                        : "linear-gradient(90deg, var(--color-primary), var(--color-primary-hover, var(--color-primary)))",
+                        ? "var(--color-success)"
+                        : "var(--color-primary)",
                   }}
                 />
               </div>
@@ -86,13 +86,12 @@ export default function ImportProgressModal({
 
         {/* Fetching indeterminate bar */}
         {importProgress.phase === "fetching" && (
-          <div className="w-full h-2.5 bg-black/10 dark:bg-white/10 rounded-full overflow-hidden">
+          <div className="w-full h-2.5 bg-border rounded-full overflow-hidden">
             <div
               className="h-full rounded-full animate-pulse"
               style={{
                 width: "60%",
-                background:
-                  "linear-gradient(90deg, var(--color-primary), var(--color-primary-hover, var(--color-primary)))",
+                background: "var(--color-primary)",
               }}
             />
           </div>
@@ -100,21 +99,21 @@ export default function ImportProgressModal({
 
         {/* Error message */}
         {importProgress.phase === "error" && importProgress.error && (
-          <div className="p-3 rounded-lg bg-red-500/10 border border-red-500/20">
-            <p className="text-sm text-red-400">{importProgress.error}</p>
+          <div className="p-3 rounded-lg bg-error/10 border border-error/20">
+            <p className="text-sm text-error">{importProgress.error}</p>
           </div>
         )}
 
         {/* Log list */}
         {importProgress.logs.length > 0 && (
-          <div className="max-h-48 overflow-y-auto rounded-lg bg-black/5 dark:bg-white/5 p-3 border border-black/5 dark:border-white/5">
+          <div className="max-h-48 overflow-y-auto rounded-lg bg-bg-subtle p-3 border border-border">
             <div className="flex flex-col gap-1">
               {importProgress.logs.map((log, i) => (
                 <p
                   key={i}
                   className={`text-xs font-mono ${
                     typeof log === "string" && log.startsWith("✓")
-                      ? "text-green-500 font-semibold"
+                      ? "text-success font-medium"
                       : "text-text-muted"
                   }`}
                 >
@@ -130,7 +129,7 @@ export default function ImportProgressModal({
           <div className="flex justify-center">
             <button
               onClick={onClose}
-              className="px-4 py-2 text-sm font-medium rounded-lg bg-primary text-white hover:opacity-90 transition-opacity"
+              className="px-4 py-2 text-sm font-medium rounded-control bg-contrast text-contrast-fg hover:bg-contrast-hover transition-colors"
             >
               {t("close")}
             </button>

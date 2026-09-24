@@ -273,12 +273,12 @@ export default function OnboardingWizard() {
           {STEPS.map((s, i) => (
             <div key={s.id} className="flex items-center gap-2">
               <div
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold transition-all duration-300 ${
+                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-medium tabular-nums transition-colors duration-300 ${
                   i < step
-                    ? "bg-green-500/20 text-green-400"
+                    ? "bg-success/10 text-success"
                     : i === step
-                      ? "bg-primary/20 text-primary ring-2 ring-primary/40"
-                      : "bg-white/5 text-text-muted"
+                      ? "bg-contrast text-contrast-fg"
+                      : "bg-bg-subtle text-text-muted"
                 }`}
               >
                 {i < step ? (
@@ -290,7 +290,7 @@ export default function OnboardingWizard() {
               {i < STEPS.length - 1 && (
                 <div
                   className={`w-8 h-0.5 rounded-full transition-colors ${
-                    i < step ? "bg-green-500/40" : "bg-white/10"
+                    i < step ? "bg-success/40" : "bg-border-strong"
                   }`}
                 />
               )}
@@ -299,17 +299,19 @@ export default function OnboardingWizard() {
         </div>
 
         {/* Card */}
-        <div className="bg-surface rounded-2xl border border-white/[0.06] p-8 shadow-xl">
+        <div className="bg-surface rounded-card border border-border p-6">
           {/* Step Header */}
           <div className="text-center mb-6">
             <span
-              className={`material-symbols-outlined text-[48px] mb-3 block ${
-                currentStep.id === "done" ? "text-green-400" : "text-primary"
+              className={`material-symbols-outlined text-[40px] mb-3 block ${
+                currentStep.id === "done" ? "text-success" : "text-text-main"
               }`}
             >
               {currentStep.icon}
             </span>
-            <h2 className="text-2xl font-bold text-text-main">{currentStep.title}</h2>
+            <h2 className="text-2xl font-semibold tracking-tight text-text-main">
+              {currentStep.title}
+            </h2>
             {currentStep.id === "tiers" && (
               <p className="mx-auto mt-2 max-w-md text-sm leading-relaxed text-text-muted text-balance">
                 {t("tier.subtitle")}
@@ -322,8 +324,8 @@ export default function OnboardingWizard() {
               which step's write actually failed (security step or the
               Finish/Skip-wizard buttons). */}
           {errorMessage && (
-            <div className="mb-4 p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg text-center animate-in fade-in duration-200">
-              <p className="text-sm text-amber-400">{errorMessage}</p>
+            <div className="mb-4 p-3 bg-warning/10 border border-warning/25 rounded-lg text-center animate-in fade-in duration-200">
+              <p className="text-sm text-warning">{errorMessage}</p>
               {needsBootstrapToken && (
                 <div className="mt-3 space-y-2">
                   <input
@@ -331,12 +333,12 @@ export default function OnboardingWizard() {
                     placeholder={t("bootstrapTokenLabel")}
                     value={bootstrapToken}
                     onChange={(e) => setBootstrapToken(e.target.value)}
-                    className="w-full px-4 py-2.5 bg-white/[0.04] border border-white/10 rounded-lg text-text-main text-sm placeholder:text-text-muted/50 focus:outline-none focus:ring-2 focus:ring-primary/40"
+                    className="w-full px-4 py-2.5 bg-surface border border-border-strong rounded-control text-text-main text-sm placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                   />
                   <button
                     onClick={isLastStep ? handleFinish : handleSetPassword}
                     disabled={!bootstrapToken}
-                    className="px-6 py-2 bg-primary rounded-lg text-white font-medium text-sm hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                    className="px-6 py-2 bg-contrast rounded-control text-contrast-fg font-medium text-sm hover:bg-contrast-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                   >
                     {t("retry")}
                   </button>
@@ -350,7 +352,7 @@ export default function OnboardingWizard() {
             {/* Welcome */}
             {currentStep.id === "welcome" && (
               <div className="text-center space-y-4">
-                <p className="text-text-muted">{t("welcomeDesc")}</p>
+                <p className="text-sm text-text-muted">{t("welcomeDesc")}</p>
                 <div className="mt-6 grid grid-cols-3 gap-3 items-stretch">
                   {[
                     { icon: "swap_horiz", label: t("multiProvider") },
@@ -359,10 +361,10 @@ export default function OnboardingWizard() {
                   ].map((f) => (
                     <div
                       key={f.icon}
-                      className="h-full bg-white/[0.03] rounded-xl p-3 text-center border border-white/[0.06]"
+                      className="h-full bg-surface-2 rounded-lg p-3 text-center border border-border"
                     >
                       <div className="flex h-full flex-col items-center justify-center">
-                        <span className="material-symbols-outlined text-primary text-[24px] mb-1 block">
+                        <span className="material-symbols-outlined text-text-muted text-[20px] mb-1 block">
                           {f.icon}
                         </span>
                         <span className="text-xs text-text-muted">{f.label}</span>
@@ -390,7 +392,7 @@ export default function OnboardingWizard() {
                   {t("skipPassword")}
                 </label>
                 {skipSecurity && (
-                  <p className="text-xs text-amber-400 text-center animate-in fade-in duration-200">
+                  <p className="text-xs text-warning text-center animate-in fade-in duration-200">
                     {t("securityDescSkipWarning")}
                   </p>
                 )}
@@ -403,7 +405,7 @@ export default function OnboardingWizard() {
                       onChange={(e) => setPassword(e.target.value)}
                       onKeyDown={(e) => setCapsLockOn(e.getModifierState("CapsLock"))}
                       onKeyUp={(e) => setCapsLockOn(e.getModifierState("CapsLock"))}
-                      className="w-full px-4 py-2.5 bg-white/[0.04] border border-white/10 rounded-lg text-text-main text-sm placeholder:text-text-muted/50 focus:outline-none focus:ring-2 focus:ring-primary/40"
+                      className="w-full px-4 py-2.5 bg-surface border border-border-strong rounded-control text-text-main text-sm placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
                     <input
                       type="password"
@@ -412,10 +414,10 @@ export default function OnboardingWizard() {
                       onChange={(e) => setConfirmPassword(e.target.value)}
                       onKeyDown={(e) => setCapsLockOn(e.getModifierState("CapsLock"))}
                       onKeyUp={(e) => setCapsLockOn(e.getModifierState("CapsLock"))}
-                      className="w-full px-4 py-2.5 bg-white/[0.04] border border-white/10 rounded-lg text-text-main text-sm placeholder:text-text-muted/50 focus:outline-none focus:ring-2 focus:ring-primary/40"
+                      className="w-full px-4 py-2.5 bg-surface border border-border-strong rounded-control text-text-main text-sm placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
                     {capsLockOn && (
-                      <p className="text-xs text-amber-500 dark:text-amber-400 flex items-center gap-1 animate-in fade-in duration-200">
+                      <p className="text-xs text-warning flex items-center gap-1 animate-in fade-in duration-200">
                         <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
                           keyboard_capslock
                         </span>
@@ -423,7 +425,7 @@ export default function OnboardingWizard() {
                       </p>
                     )}
                     {password && confirmPassword && password !== confirmPassword && (
-                      <p className="text-xs text-red-400">{t("passwordsMismatch")}</p>
+                      <p className="text-xs text-error">{t("passwordsMismatch")}</p>
                     )}
                   </div>
                 )}
@@ -435,16 +437,16 @@ export default function OnboardingWizard() {
               <div className="space-y-4">
                 <p className="text-sm text-text-muted text-center">{t("providerDesc")}</p>
                 {skipSecurity && (
-                  <div className="text-center p-3 bg-amber-500/10 border border-amber-500/30 rounded-lg animate-in fade-in duration-200">
-                    <p className="text-sm text-amber-400">{t("providerRequiresPassword")}</p>
+                  <div className="text-center p-3 bg-warning/10 border border-warning/25 rounded-lg animate-in fade-in duration-200">
+                    <p className="text-sm text-warning">{t("providerRequiresPassword")}</p>
                   </div>
                 )}
                 {!skipSecurity && <FreeProviderOnboardingCard />}
                 {!skipSecurity && (
                   <div className="flex items-center gap-3 text-[11px] text-text-muted">
-                    <span className="h-px flex-1 bg-white/10" />
+                    <span className="h-px flex-1 bg-border" />
                     <span>{t("freeProviders.orUseApiKey")}</span>
-                    <span className="h-px flex-1 bg-white/10" />
+                    <span className="h-px flex-1 bg-border" />
                   </div>
                 )}
                 {!skipSecurity && (
@@ -456,10 +458,10 @@ export default function OnboardingWizard() {
                           setSelectedProvider(p.id);
                           setProviderName(p.name);
                         }}
-                        className={`p-3 rounded-xl border text-center text-xs font-medium transition-all cursor-pointer ${
+                        className={`p-3 rounded-lg border text-center text-xs font-medium transition-colors cursor-pointer ${
                           selectedProvider === p.id
-                            ? "border-primary/60 bg-primary/10 text-primary"
-                            : "border-white/10 bg-white/[0.03] text-text-muted hover:border-white/20"
+                            ? "border-primary/50 bg-primary/10 text-primary"
+                            : "border-border bg-surface text-text-muted hover:border-border-strong hover:text-text-main"
                         }`}
                       >
                         {p.name}
@@ -474,14 +476,14 @@ export default function OnboardingWizard() {
                       placeholder={t("apiKeyRequired")}
                       value={providerKey}
                       onChange={(e) => setProviderKey(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-white/[0.04] border border-white/10 rounded-lg text-text-main text-sm placeholder:text-text-muted/50 focus:outline-none focus:ring-2 focus:ring-primary/40"
+                      className="w-full px-4 py-2.5 bg-surface border border-border-strong rounded-control text-text-main text-sm placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
                     <input
                       type="text"
                       placeholder={t("customUrlOptional")}
                       value={providerUrl}
                       onChange={(e) => setProviderUrl(e.target.value)}
-                      className="w-full px-4 py-2.5 bg-white/[0.04] border border-white/10 rounded-lg text-text-main text-sm placeholder:text-text-muted/50 focus:outline-none focus:ring-2 focus:ring-primary/40"
+                      className="w-full px-4 py-2.5 bg-surface border border-border-strong rounded-control text-text-main text-sm placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
                     />
                   </div>
                 )}
@@ -495,7 +497,7 @@ export default function OnboardingWizard() {
                 {testStatus === "idle" && (
                   <button
                     onClick={handleTestProvider}
-                    className="px-6 py-2.5 bg-primary rounded-lg text-white font-medium text-sm hover:bg-primary/90 transition-colors cursor-pointer"
+                    className="px-6 py-2.5 bg-contrast rounded-control text-contrast-fg font-medium text-sm hover:bg-contrast-hover transition-colors cursor-pointer"
                   >
                     {t("runTest")}
                   </button>
@@ -509,14 +511,14 @@ export default function OnboardingWizard() {
                   </div>
                 )}
                 {testStatus === "success" && (
-                  <div className="flex items-center justify-center gap-2 text-green-400">
+                  <div className="flex items-center justify-center gap-2 text-success">
                     <span className="material-symbols-outlined text-[20px]">check_circle</span>
                     <span className="text-sm">{testMessage}</span>
                   </div>
                 )}
                 {testStatus === "error" && (
                   <div className="space-y-3">
-                    <div className="flex items-center justify-center gap-2 text-amber-400">
+                    <div className="flex items-center justify-center gap-2 text-warning">
                       <span className="material-symbols-outlined text-[20px]">warning</span>
                       <span className="text-sm">{testMessage}</span>
                     </div>
@@ -534,17 +536,17 @@ export default function OnboardingWizard() {
             {/* Done */}
             {currentStep.id === "done" && (
               <div className="text-center space-y-4">
-                <p className="text-text-muted">{t("doneDesc")}</p>
-                <div className="bg-white/[0.03] rounded-xl p-4 border border-white/[0.06] text-left">
+                <p className="text-sm text-text-muted">{t("doneDesc")}</p>
+                <div className="bg-surface-2 rounded-lg p-4 border border-border text-left">
                   <p className="text-xs text-text-muted mb-2 font-medium">{t("yourEndpoint")}</p>
-                  <code className="text-sm text-primary">{apiEndpoint}</code>
+                  <code className="font-mono text-[13px] text-text-main">{apiEndpoint}</code>
                 </div>
               </div>
             )}
           </div>
 
           {/* Footer Actions */}
-          <div className="flex items-center justify-between mt-8 pt-6 border-t border-white/[0.06]">
+          <div className="flex items-center justify-between mt-6 pt-5 border-t border-border">
             <div>
               {step > 0 && !isLastStep && (
                 <button
@@ -567,7 +569,7 @@ export default function OnboardingWizard() {
               {currentStep.id === "welcome" && (
                 <button
                   onClick={handleNext}
-                  className="px-6 py-2.5 bg-primary rounded-lg text-white font-medium text-sm hover:bg-primary/90 transition-colors cursor-pointer"
+                  className="px-6 py-2.5 bg-contrast rounded-control text-contrast-fg font-medium text-sm hover:bg-contrast-hover transition-colors cursor-pointer"
                 >
                   {t("getStarted")}
                 </button>
@@ -575,7 +577,7 @@ export default function OnboardingWizard() {
               {currentStep.id === "tiers" && (
                 <button
                   onClick={handleNext}
-                  className="px-6 py-2.5 bg-primary rounded-lg text-white font-medium text-sm hover:bg-primary/90 transition-colors cursor-pointer"
+                  className="px-6 py-2.5 bg-contrast rounded-control text-contrast-fg font-medium text-sm hover:bg-contrast-hover transition-colors cursor-pointer"
                 >
                   {t("continue")}
                 </button>
@@ -584,7 +586,7 @@ export default function OnboardingWizard() {
                 <button
                   onClick={handleSetPassword}
                   disabled={!skipSecurity && (!password || password !== confirmPassword)}
-                  className="px-6 py-2.5 bg-primary rounded-lg text-white font-medium text-sm hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  className="px-6 py-2.5 bg-contrast rounded-control text-contrast-fg font-medium text-sm hover:bg-contrast-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {skipSecurity ? t("skipAndContinue") : t("setPassword")}
                 </button>
@@ -593,7 +595,7 @@ export default function OnboardingWizard() {
                 <button
                   onClick={handleAddProvider}
                   disabled={!selectedProvider || !providerKey}
-                  className="px-6 py-2.5 bg-primary rounded-lg text-white font-medium text-sm hover:bg-primary/90 transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
+                  className="px-6 py-2.5 bg-contrast rounded-control text-contrast-fg font-medium text-sm hover:bg-contrast-hover transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
                 >
                   {t("addProvider")}
                 </button>
@@ -601,7 +603,7 @@ export default function OnboardingWizard() {
               {currentStep.id === "test" && (
                 <button
                   onClick={handleNext}
-                  className="px-6 py-2.5 bg-primary rounded-lg text-white font-medium text-sm hover:bg-primary/90 transition-colors cursor-pointer"
+                  className="px-6 py-2.5 bg-contrast rounded-control text-contrast-fg font-medium text-sm hover:bg-contrast-hover transition-colors cursor-pointer"
                 >
                   {testStatus === "success" ? t("continue") : t("skip")}
                 </button>
@@ -609,7 +611,7 @@ export default function OnboardingWizard() {
               {isLastStep && (
                 <button
                   onClick={handleFinish}
-                  className="px-6 py-2.5 bg-green-500 rounded-lg text-white font-medium text-sm hover:bg-green-500/90 transition-colors cursor-pointer"
+                  className="px-6 py-2.5 bg-contrast rounded-control text-contrast-fg font-medium text-sm hover:bg-contrast-hover transition-colors cursor-pointer"
                 >
                   {t("goToDashboard")}
                 </button>
@@ -623,7 +625,7 @@ export default function OnboardingWizard() {
           <div className="text-center mt-4">
             <button
               onClick={handleFinish}
-              className="text-xs text-text-muted/60 hover:text-text-muted transition-colors cursor-pointer"
+              className="text-xs text-text-subtle hover:text-text-main transition-colors cursor-pointer"
             >
               {t("skipWizard")}
             </button>

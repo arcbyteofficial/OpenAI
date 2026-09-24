@@ -10,7 +10,7 @@ export function SecretMaskToggle({ masked, onToggle }: SecretMaskToggleProps) {
     <button
       type="button"
       onClick={onToggle}
-      className="inline-flex items-center gap-1 text-xs text-text-muted hover:text-text-main focus-ring rounded px-2 py-0.5 border border-border"
+      className="inline-flex items-center gap-1 text-xs text-text-muted hover:text-text-main hover:bg-bg-subtle transition-colors focus-ring rounded-control px-2 py-0.5 border border-border-strong"
       title={masked ? "Unmask secrets" : "Mask secrets"}
     >
       <span className="material-symbols-outlined text-[14px]" aria-hidden="true">

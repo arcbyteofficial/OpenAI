@@ -48,13 +48,15 @@ function Card({
       tabIndex={0}
       onClick={onClick}
       onKeyDown={(e) => e.key === "Enter" && onClick()}
-      className="rounded-lg border border-border bg-surface p-2.5 text-xs cursor-pointer hover:border-primary/50"
+      className="rounded-lg border border-border bg-surface p-2.5 text-xs cursor-pointer hover:border-border-strong hover:bg-bg-subtle transition-colors"
     >
       <div className="flex items-center justify-between gap-2">
-        <span className="font-medium truncate">{node.label}</span>
-        <span className="text-[9px] uppercase text-muted shrink-0">{node.source}</span>
+        <span className="font-medium text-text-main truncate">{node.label}</span>
+        <span className="text-[9px] uppercase tracking-wider text-text-subtle shrink-0">
+          {node.source}
+        </span>
       </div>
-      {node.sublabel && <div className="text-[10px] text-muted truncate">{node.sublabel}</div>}
+      {node.sublabel && <div className="text-[10px] text-text-muted truncate">{node.sublabel}</div>}
       <div className="flex items-center justify-between mt-1.5">
         <span className="text-[10px]" style={{ color }}>
           {node.state && t(STATE_KEY[node.state])}
@@ -64,7 +66,7 @@ function Card({
           {node.cost != null && ` · ${usd.format(node.cost)}`}
         </span>
         <button
-          className="text-[10px] underline text-muted"
+          className="text-[10px] underline underline-offset-2 text-text-muted hover:text-text-main transition-colors"
           onClick={(e) => {
             e.stopPropagation();
             onSeeInGraph();
@@ -116,19 +118,22 @@ export function OverviewTab({
           <button
             key={s}
             onClick={() => setFilter(filter === s ? null : s)}
-            className={`rounded-lg border p-2 text-center ${filter === s ? "border-primary" : "border-border"}`}
+            className={`rounded-card border bg-surface p-2 text-center transition-colors ${filter === s ? "border-primary" : "border-border hover:border-border-strong"}`}
           >
-            <div className="text-lg font-semibold" style={{ color: orchStateColor(s) }}>
+            <div
+              className="text-lg font-semibold tabular-nums"
+              style={{ color: orchStateColor(s) }}
+            >
               {counts[s]}
             </div>
-            <div className="text-[10px] text-muted">{t(STATE_KEY[s])}</div>
+            <div className="text-[11px] text-text-muted">{t(STATE_KEY[s])}</div>
           </button>
         ))}
       </div>
       <div className="grid grid-cols-1 md:grid-cols-4 gap-3 items-start">
         {(["queued", "running", "waiting_approval", "done"] as const).map((col) => (
           <div key={col} className="flex flex-col gap-2">
-            <div className="text-[10px] font-semibold uppercase text-muted">
+            <div className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
               {col === "done"
                 ? `${t("stateSucceeded")} / ${t("stateFailed")} / ${t("stateCancelled")}`
                 : t(STATE_KEY[col])}

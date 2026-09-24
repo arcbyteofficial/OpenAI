@@ -44,7 +44,7 @@ function StepRow({ step, maxTokens }: { step: CompressionEngineStep; maxTokens: 
           {step.engine}
         </span>
         {skipped && (
-          <span className="ml-1.5 text-[10px] text-muted bg-muted/10 px-1 rounded">
+          <span className="ml-1.5 text-[10px] text-text-muted bg-bg-subtle px-1 rounded">
             {t("skipped")}
           </span>
         )}
@@ -53,15 +53,15 @@ function StepRow({ step, maxTokens }: { step: CompressionEngineStep; maxTokens: 
       {/* Savings bar column */}
       <div className="flex-1 flex flex-col gap-1 min-w-0">
         {/* in bar */}
-        <div className="relative h-2 rounded-full bg-border/30 overflow-hidden">
+        <div className="relative h-2 rounded-full bg-bg-subtle overflow-hidden">
           <div
-            className="absolute inset-y-0 left-0 rounded-full bg-muted/40"
+            className="absolute inset-y-0 left-0 rounded-full bg-text-subtle/30"
             style={{ width: `${barWidthIn.toFixed(1)}%` }}
           />
         </div>
         {/* out bar */}
         {!skipped && (
-          <div className="relative h-2 rounded-full bg-border/30 overflow-hidden">
+          <div className="relative h-2 rounded-full bg-bg-subtle overflow-hidden">
             <div
               className="absolute inset-y-0 left-0 rounded-full"
               style={{ width: `${barWidthOut.toFixed(1)}%`, backgroundColor: color }}
@@ -72,12 +72,12 @@ function StepRow({ step, maxTokens }: { step: CompressionEngineStep; maxTokens: 
 
       {/* Token counts */}
       <div className="w-36 shrink-0 text-right">
-        <div className="text-[10px] text-muted">
+        <div className="text-[10px] text-text-muted tabular-nums">
           {fmt(step.originalTokens)} → {fmt(step.compressedTokens)}
         </div>
         {!skipped && (
           <div
-            className="text-[11px] font-bold"
+            className="text-[11px] font-semibold tabular-nums"
             style={{ color }}
             data-testid="waterfall-savings-text"
           >
@@ -85,7 +85,9 @@ function StepRow({ step, maxTokens }: { step: CompressionEngineStep; maxTokens: 
           </div>
         )}
         {step.durationMs != null && (
-          <div className="text-[9px] text-muted">{step.durationMs.toFixed(1)}ms</div>
+          <div className="text-[9px] text-text-subtle tabular-nums">
+            {step.durationMs.toFixed(1)}ms
+          </div>
         )}
       </div>
     </div>
@@ -117,11 +119,11 @@ export function WaterfallInspector({ run, className = "" }: WaterfallInspectorPr
   return (
     <div className={`flex flex-col ${className}`} data-testid="waterfall-inspector">
       {/* Header — INPUT */}
-      <div className="flex items-center gap-3 py-2 border-b border-border font-semibold text-xs text-muted">
-        <span className="w-28 shrink-0 text-primary">⌁ {t("input")}</span>
+      <div className="flex items-center gap-3 py-2 border-b border-border font-medium text-xs text-text-muted">
+        <span className="w-28 shrink-0 text-text-main">⌁ {t("input")}</span>
         <div className="flex-1">
-          <div className="h-2 rounded-full bg-muted/30 overflow-hidden">
-            <div className="h-full w-full rounded-full bg-muted/50" />
+          <div className="h-2 rounded-full bg-bg-subtle overflow-hidden">
+            <div className="h-full w-full rounded-full bg-text-subtle/30" />
           </div>
         </div>
         <span className="w-36 shrink-0 text-right">
@@ -136,21 +138,21 @@ export function WaterfallInspector({ run, className = "" }: WaterfallInspectorPr
 
       {/* Footer — OUTPUT */}
       <div className="flex items-center gap-3 py-2 border-t border-border mt-1">
-        <span className="w-28 shrink-0 text-xs font-semibold text-green-500">✦ {t("output")}</span>
+        <span className="w-28 shrink-0 text-xs font-semibold text-success">✦ {t("output")}</span>
         <div className="flex-1">
-          <div className="h-2 rounded-full bg-border/30 overflow-hidden">
+          <div className="h-2 rounded-full bg-bg-subtle overflow-hidden">
             <div
-              className="h-full rounded-full bg-green-500"
+              className="h-full rounded-full bg-success"
               style={{ width: pctWidth(run.originalTokens, run.compressedTokens) }}
             />
           </div>
         </div>
         <div className="w-36 shrink-0 text-right">
-          <div className="text-xs font-semibold text-green-500">
+          <div className="text-xs font-semibold text-success tabular-nums">
             {t("tokenCount", { count: run.compressedTokens })}
           </div>
           <div
-            className="text-[11px] font-bold"
+            className="text-[11px] font-semibold tabular-nums"
             style={{ color: "var(--orch-status-success)" }}
             data-testid="waterfall-total-savings"
           >
@@ -160,13 +162,15 @@ export function WaterfallInspector({ run, className = "" }: WaterfallInspectorPr
       </div>
 
       {/* Summary bar */}
-      <div className="flex items-center gap-3 px-3 py-2 rounded-lg bg-border/10 mt-2 text-[11px] text-muted">
+      <div className="flex items-center gap-3 px-3 py-2 rounded-lg bg-bg-subtle mt-2 text-[11px] text-text-muted">
         <span>
           {fmt(run.originalTokens)} → {fmt(run.compressedTokens)} {t("tokenShort")}
         </span>
-        <span className="text-green-500 font-bold">−{run.savingsPercent.toFixed(1)}%</span>
-        {run.comboId && <span className="font-mono opacity-70">{run.comboId}</span>}
-        <span className="ml-auto opacity-60">{run.mode}</span>
+        <span className="text-success font-semibold tabular-nums">
+          −{run.savingsPercent.toFixed(1)}%
+        </span>
+        {run.comboId && <span className="font-mono text-text-subtle">{run.comboId}</span>}
+        <span className="ml-auto text-text-subtle">{run.mode}</span>
       </div>
     </div>
   );

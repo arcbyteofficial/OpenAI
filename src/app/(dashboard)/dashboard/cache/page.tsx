@@ -88,11 +88,11 @@ function StatCard({
     <div
       className={
         isHero
-          ? "rounded-3xl border border-border/30 bg-gradient-to-br from-surface-raised via-surface-raised/80 to-surface/30 p-5"
-          : "rounded-2xl border border-border/30 bg-surface-raised/70 p-4"
+          ? "rounded-card border border-border bg-surface p-5"
+          : "rounded-card border border-border bg-surface p-4"
       }
     >
-      <div className="flex items-center gap-1.5 text-xs text-text-muted">
+      <div className="flex items-center gap-1.5 text-[13px] text-text-muted">
         <span
           className={`material-symbols-outlined leading-none ${isHero ? "text-[18px]" : "text-base"}`}
           aria-hidden="true"
@@ -102,7 +102,7 @@ function StatCard({
         <span>{label}</span>
       </div>
       <div
-        className={`mt-3 font-semibold tabular-nums ${accent} ${isHero ? "text-3xl" : "text-2xl"}`}
+        className={`mt-3 font-semibold tracking-tight tabular-nums ${accent} ${isHero ? "text-[28px]" : "text-2xl"}`}
       >
         {value}
       </div>
@@ -122,14 +122,14 @@ function SectionBadge({
 }) {
   const toneClass =
     tone === "green"
-      ? "border-green-500/20 bg-green-500/10 text-green-300"
+      ? "border-success/20 bg-success/10 text-success"
       : tone === "amber"
-        ? "border-amber-400/20 bg-amber-400/10 text-amber-300"
-        : "border-border/40 bg-surface/50 text-text-muted";
+        ? "border-warning/20 bg-warning/10 text-warning"
+        : "border-border bg-bg-subtle text-text-muted";
 
   return (
     <span
-      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium uppercase tracking-[0.12em] ${toneClass}`}
+      className={`inline-flex items-center gap-1.5 rounded-full border px-2.5 py-1 text-[11px] font-medium uppercase tracking-wider ${toneClass}`}
     >
       <span className="material-symbols-outlined text-sm leading-none" aria-hidden="true">
         {icon}
@@ -151,7 +151,7 @@ function LinearMeter({
   helper?: string;
 }) {
   const colorClass =
-    tone === "blue" ? "bg-blue-400" : tone === "amber" ? "bg-amber-400" : "bg-emerald-500";
+    tone === "blue" ? "bg-primary" : tone === "amber" ? "bg-warning" : "bg-success";
 
   return (
     <div className="space-y-1.5">
@@ -159,9 +159,9 @@ function LinearMeter({
         <span className="text-text-muted">{label}</span>
         <span className="font-semibold tabular-nums text-text-main">{value.toFixed(1)}%</span>
       </div>
-      <div className="h-2 overflow-hidden rounded-full bg-surface/60">
+      <div className="h-2 overflow-hidden rounded-full bg-bg-subtle">
         <div
-          className={`h-full rounded-full transition-all duration-500 ${colorClass}`}
+          className={`h-full rounded-full transition-[width] duration-500 ${colorClass}`}
           style={{ width: `${Math.min(value, 100)}%` }}
         />
       </div>
@@ -180,8 +180,8 @@ function DetailStat({
   accent?: string;
 }) {
   return (
-    <div className="rounded-xl bg-surface/45 px-3 py-2.5">
-      <div className="text-[11px] uppercase tracking-[0.12em] text-text-muted">{label}</div>
+    <div className="rounded-lg bg-bg-subtle px-3 py-2.5">
+      <div className="text-xs text-text-muted">{label}</div>
       <div className={`mt-1 text-sm font-semibold tabular-nums ${accent}`}>{value}</div>
     </div>
   );
@@ -191,7 +191,7 @@ function InfoRow({ icon, children }: { icon: string; children: ReactNode }) {
   return (
     <div className="flex gap-2 text-sm text-text-muted">
       <span
-        className="material-symbols-outlined shrink-0 text-base leading-5 text-blue-400"
+        className="material-symbols-outlined shrink-0 text-base leading-5 text-text-subtle"
         aria-hidden="true"
       >
         {icon}
@@ -240,12 +240,12 @@ function PromptTrendPanel({
 }) {
   if (trend.length === 0) {
     return (
-      <div className="rounded-3xl border border-border/30 bg-surface/20 p-5">
+      <div className="rounded-card border border-border bg-surface p-5">
         <div className="flex items-center gap-2">
           <span className="material-symbols-outlined text-base text-text-muted" aria-hidden="true">
             timeline
           </span>
-          <h3 className="text-sm font-medium text-text-main">{title}</h3>
+          <h3 className="text-sm font-semibold text-text-main">{title}</h3>
         </div>
         <p className="mt-2 text-sm text-text-muted">{noDataLabel}</p>
       </div>
@@ -265,7 +265,7 @@ function PromptTrendPanel({
   const maxRequests = Math.max(1, ...trend.map((point) => point.requests));
 
   return (
-    <div className="w-full self-start rounded-3xl border border-border/30 bg-surface/20 p-5">
+    <div className="w-full self-start rounded-card border border-border bg-surface p-5">
       <div className="flex flex-col gap-2 md:flex-row md:items-start md:justify-between">
         <div>
           <div className="flex items-center gap-2">
@@ -275,7 +275,7 @@ function PromptTrendPanel({
             >
               timeline
             </span>
-            <h3 className="text-sm font-medium text-text-main">{title}</h3>
+            <h3 className="text-sm font-semibold text-text-main">{title}</h3>
           </div>
           <p className="mt-2 text-sm text-text-muted">{description}</p>
         </div>
@@ -290,12 +290,12 @@ function PromptTrendPanel({
         <DetailStat
           label={peakCacheRateLabel}
           value={`${((peakCacheRatePoint.cachedRequests / Math.max(peakCacheRatePoint.requests, 1)) * 100).toFixed(1)}%`}
-          accent="text-emerald-500"
+          accent="text-text-main"
         />
       </div>
 
-      <div className="mt-5 overflow-hidden rounded-2xl border border-border/25 bg-surface">
-        <div className="grid grid-cols-[84px_minmax(0,1fr)_92px_120px] gap-3 border-b border-border/20 px-4 py-3 text-[11px] font-medium uppercase tracking-[0.12em] text-text-muted">
+      <div className="mt-5 overflow-hidden rounded-lg border border-border bg-surface">
+        <div className="grid grid-cols-[84px_minmax(0,1fr)_92px_120px] gap-3 border-b border-border px-4 py-3 text-xs font-medium text-text-muted">
           <span>{hourLabel}</span>
           <span>{activityLabel}</span>
           <span>{cacheRateLabel}</span>
@@ -313,15 +313,15 @@ function PromptTrendPanel({
               return (
                 <div
                   key={point.timestamp}
-                  className="grid grid-cols-[84px_minmax(0,1fr)_92px_120px] gap-3 border-b border-border/15 px-4 py-3 last:border-b-0"
+                  className="grid grid-cols-[84px_minmax(0,1fr)_92px_120px] gap-3 border-b border-border px-4 py-3 last:border-b-0"
                 >
-                  <div className="text-sm font-medium tabular-nums text-text-main">
+                  <div className="text-[13px] font-medium tabular-nums text-text-main">
                     {formatHour(point.timestamp)}
                   </div>
                   <div className="space-y-1.5">
-                    <div className="h-2 overflow-hidden rounded-full bg-surface/60">
+                    <div className="h-2 overflow-hidden rounded-full bg-bg-subtle">
                       <div
-                        className="h-full rounded-full bg-emerald-500/85"
+                        className="h-full rounded-full bg-primary"
                         style={{ width: `${volumeWidth}%` }}
                       />
                     </div>
@@ -329,10 +329,10 @@ function PromptTrendPanel({
                       {point.requests.toLocaleString()} {requestsLabel.toLowerCase()}
                     </div>
                   </div>
-                  <div className="text-sm font-semibold tabular-nums text-text-main">
+                  <div className="text-[13px] font-medium tabular-nums text-text-main">
                     {cacheRate.toFixed(1)}%
                   </div>
-                  <div className="text-sm font-semibold tabular-nums text-cyan-400">
+                  <div className="text-[13px] font-medium tabular-nums text-text-muted">
                     {point.cachedTokens.toLocaleString()}
                   </div>
                 </div>
@@ -445,14 +445,14 @@ export default function CachePage() {
         </Button>
       </div>
 
-      <div className="flex w-fit gap-1 rounded-lg bg-black/5 p-1 dark:bg-white/5">
+      <div className="flex w-fit gap-1 rounded-lg border border-border bg-bg-subtle p-1">
         <button
           type="button"
           onClick={() => setActiveView("prompt")}
           aria-pressed={activeView === "prompt"}
-          className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+          className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             activeView === "prompt"
-              ? "bg-white dark:bg-white/10 text-text-main shadow-sm"
+              ? "bg-surface text-text-main ring-1 ring-border"
               : "text-text-muted hover:text-text-main"
           }`}
         >
@@ -462,9 +462,9 @@ export default function CachePage() {
           type="button"
           onClick={() => setActiveView("semantic")}
           aria-pressed={activeView === "semantic"}
-          className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+          className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             activeView === "semantic"
-              ? "bg-white dark:bg-white/10 text-text-main shadow-sm"
+              ? "bg-surface text-text-main ring-1 ring-border"
               : "text-text-muted hover:text-text-main"
           }`}
         >
@@ -474,9 +474,9 @@ export default function CachePage() {
           type="button"
           onClick={() => setActiveView("reasoning")}
           aria-pressed={activeView === "reasoning"}
-          className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+          className={`px-4 py-2 rounded-md text-sm font-medium transition-colors ${
             activeView === "reasoning"
-              ? "bg-white dark:bg-white/10 text-text-main shadow-sm"
+              ? "bg-surface text-text-main ring-1 ring-border"
               : "text-text-muted hover:text-text-main"
           }`}
         >
@@ -486,7 +486,7 @@ export default function CachePage() {
 
       {loading && (
         <div className="grid grid-cols-1 gap-6" aria-busy="true" aria-label={t("loadingCacheAria")}>
-          <div className="h-96 rounded-3xl bg-surface-raised animate-pulse" />
+          <div className="h-96 rounded-card bg-bg-subtle animate-pulse" />
         </div>
       )}
 
@@ -502,14 +502,16 @@ export default function CachePage() {
 
       {!loading && stats && activeView === "prompt" && (
         <Card>
-          <div className="flex flex-col gap-6 p-5 md:p-6">
+          <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
               <div className="space-y-2">
                 <SectionBadge icon="bolt" tone="green">
                   {t("promptCache")}
                 </SectionBadge>
                 <div>
-                  <h2 className="text-lg font-semibold text-text-main">{t("promptCache")}</h2>
+                  <h2 className="text-lg font-semibold tracking-tight text-text-main">
+                    {t("promptCache")}
+                  </h2>
                   <p className="mt-1 max-w-3xl text-sm text-text-muted">
                     {t("promptCacheSectionDesc")}
                   </p>
@@ -530,7 +532,7 @@ export default function CachePage() {
                     label={t("cacheRate")}
                     value={`${promptCacheRate.toFixed(1)}%`}
                     sub={`${pc.requestsWithCacheControl.toLocaleString()} / ${pc.totalRequests.toLocaleString()} ${t("requests").toLowerCase()}`}
-                    accent="text-emerald-500"
+                    accent="text-text-main"
                     size="hero"
                   />
                   <StatCard
@@ -538,7 +540,7 @@ export default function CachePage() {
                     label={t("cacheReuseRatio")}
                     value={`${promptReuseRatio.toFixed(1)}%`}
                     sub={t("cacheReuseRatioDesc")}
-                    accent="text-blue-400"
+                    accent="text-text-main"
                     size="hero"
                   />
                   <StatCard
@@ -546,7 +548,7 @@ export default function CachePage() {
                     label={t("cachedTokens")}
                     value={pc.totalCachedTokens.toLocaleString()}
                     sub={t("cachedTokensRead")}
-                    accent="text-cyan-400"
+                    accent="text-text-main"
                     size="hero"
                   />
                   <StatCard
@@ -554,7 +556,7 @@ export default function CachePage() {
                     label={t("cacheCreationTokens")}
                     value={pc.totalCacheCreationTokens.toLocaleString()}
                     sub={t("cacheCreationWrite")}
-                    accent="text-purple-400"
+                    accent="text-text-main"
                     size="hero"
                   />
                   <StatCard
@@ -562,29 +564,29 @@ export default function CachePage() {
                     label={t("estCostSaved")}
                     value={`$${pc.estimatedCostSaved.toFixed(4)}`}
                     sub={t("promptCache")}
-                    accent="text-green-500"
+                    accent="text-text-main"
                     size="hero"
                   />
                 </div>
 
-                <div className="w-full rounded-3xl border border-border/30 bg-surface/20 p-5">
+                <div className="w-full rounded-card border border-border bg-surface p-5">
                   <div>
-                    <h3 className="text-sm font-medium text-text-main">{t("byProvider")}</h3>
+                    <h3 className="text-sm font-semibold text-text-main">{t("byProvider")}</h3>
                     <p className="mt-1 text-sm text-text-muted">{t("providerCacheRateDesc")}</p>
                   </div>
 
                   {providerEntries.length > 0 ? (
-                    <div className="mt-3 overflow-x-auto rounded-2xl border border-border/20 bg-surface">
-                      <table className="w-full text-sm">
+                    <div className="mt-3 overflow-x-auto rounded-lg border border-border bg-surface">
+                      <table className="w-full text-[13px]">
                         <thead>
-                          <tr className="border-b border-border/20 text-left text-[11px] uppercase tracking-[0.12em] text-text-muted">
-                            <th className="px-4 py-3">{t("provider")}</th>
-                            <th className="px-4 py-3">{t("inputTokens")}</th>
-                            <th className="px-4 py-3">{t("cachedTokensCol")}</th>
-                            <th className="px-4 py-3">{t("cacheCreation")}</th>
-                            <th className="px-4 py-3">{t("cacheReuseRatio")}</th>
-                            <th className="px-4 py-3">{t("cacheRate")}</th>
-                            <th className="px-4 py-3">{t("cachedRequests")}</th>
+                          <tr className="border-b border-border text-left text-xs text-text-muted">
+                            <th className="px-4 py-3 font-medium">{t("provider")}</th>
+                            <th className="px-4 py-3 font-medium">{t("inputTokens")}</th>
+                            <th className="px-4 py-3 font-medium">{t("cachedTokensCol")}</th>
+                            <th className="px-4 py-3 font-medium">{t("cacheCreation")}</th>
+                            <th className="px-4 py-3 font-medium">{t("cacheReuseRatio")}</th>
+                            <th className="px-4 py-3 font-medium">{t("cacheRate")}</th>
+                            <th className="px-4 py-3 font-medium">{t("cachedRequests")}</th>
                           </tr>
                         </thead>
                         <tbody>
@@ -599,10 +601,7 @@ export default function CachePage() {
                                 : 0;
 
                             return (
-                              <tr
-                                key={provider}
-                                className="border-b border-border/15 last:border-b-0"
-                              >
+                              <tr key={provider} className="border-b border-border last:border-b-0">
                                 <td className="px-4 py-3">
                                   <div className="font-medium text-text-main">
                                     {resolveProviderName(provider, nodeMap)}
@@ -614,16 +613,16 @@ export default function CachePage() {
                                 <td className="px-4 py-3 tabular-nums text-text-main">
                                   {data.inputTokens.toLocaleString()}
                                 </td>
-                                <td className="px-4 py-3 tabular-nums text-cyan-400">
+                                <td className="px-4 py-3 tabular-nums text-text-muted">
                                   {data.cachedTokens.toLocaleString()}
                                 </td>
-                                <td className="px-4 py-3 tabular-nums text-purple-400">
+                                <td className="px-4 py-3 tabular-nums text-text-muted">
                                   {data.cacheCreationTokens.toLocaleString()}
                                 </td>
-                                <td className="px-4 py-3 font-semibold tabular-nums text-blue-400">
+                                <td className="px-4 py-3 font-medium tabular-nums text-text-main">
                                   {reuseRatio.toFixed(1)}%
                                 </td>
-                                <td className="px-4 py-3 font-semibold tabular-nums text-emerald-500">
+                                <td className="px-4 py-3 font-medium tabular-nums text-text-main">
                                   {cacheRate.toFixed(1)}%
                                 </td>
                                 <td className="px-4 py-3 tabular-nums text-text-main">
@@ -637,7 +636,7 @@ export default function CachePage() {
                       </table>
                     </div>
                   ) : (
-                    <div className="mt-3 rounded-2xl border border-dashed border-border/40 bg-surface/10 px-4 py-6 text-sm text-text-muted">
+                    <div className="mt-3 rounded-lg border border-dashed border-border-strong px-4 py-6 text-sm text-text-muted">
                       {t("noPromptCacheData")}
                     </div>
                   )}
@@ -660,7 +659,7 @@ export default function CachePage() {
                 />
               </>
             ) : (
-              <div className="rounded-2xl border border-dashed border-border/40 bg-surface/10 px-4 py-6 text-sm text-text-muted">
+              <div className="rounded-lg border border-dashed border-border-strong px-4 py-6 text-sm text-text-muted">
                 {t("noPromptCacheData")}
               </div>
             )}
@@ -670,7 +669,7 @@ export default function CachePage() {
 
       {!loading && stats && activeView === "semantic" && (
         <Card>
-          <div className="flex flex-col gap-6 p-5 md:p-6">
+          <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-4 md:flex-row md:items-start md:justify-between">
               <div className="space-y-2">
                 <div className="flex flex-wrap items-center gap-2">
@@ -688,7 +687,9 @@ export default function CachePage() {
                   </SectionBadge>
                 </div>
                 <div>
-                  <h2 className="text-lg font-semibold text-text-main">{t("semanticCache")}</h2>
+                  <h2 className="text-lg font-semibold tracking-tight text-text-main">
+                    {t("semanticCache")}
+                  </h2>
                   <p className="mt-1 max-w-3xl text-sm text-text-muted">
                     {t("semanticCacheSectionDesc")}
                   </p>
@@ -709,7 +710,7 @@ export default function CachePage() {
             </div>
 
             {!semanticCacheEnabled && (
-              <div className="rounded-2xl border border-amber-400/20 bg-amber-400/10 px-4 py-3 text-sm text-amber-100">
+              <div className="rounded-lg border border-warning/20 bg-warning/10 px-4 py-3 text-sm text-warning">
                 {t("semanticCacheDisabledDesc")}
               </div>
             )}
@@ -732,28 +733,28 @@ export default function CachePage() {
                 label={t("cacheHits")}
                 value={sc?.hits ?? 0}
                 sub={t("cacheHitsSub", { total: semanticTotalRequests })}
-                accent="text-green-500"
+                accent="text-text-main"
               />
               <StatCard
                 icon="token"
                 label={t("tokensSaved")}
                 value={(sc?.tokensSaved ?? 0).toLocaleString()}
                 sub={t("tokensSavedSub")}
-                accent="text-blue-400"
+                accent="text-text-main"
               />
             </div>
 
             <div className="grid gap-4 xl:grid-cols-[minmax(0,1.1fr)_minmax(0,0.9fr)]">
-              <div className="rounded-2xl border border-border/30 bg-surface/20 p-5">
+              <div className="rounded-card border border-border bg-surface p-5">
                 <div className="flex items-center justify-between gap-4">
                   <div>
-                    <h3 className="text-sm font-medium text-text-main">{t("performance")}</h3>
+                    <h3 className="text-sm font-semibold text-text-main">{t("performance")}</h3>
                     <p className="mt-1 text-sm text-text-muted">
                       {t("autoRefresh", { seconds: REFRESH_INTERVAL_SECONDS })}
                     </p>
                   </div>
                   <div className="text-right">
-                    <div className="text-3xl font-semibold tabular-nums text-emerald-500">
+                    <div className="text-2xl font-semibold tracking-tight tabular-nums text-text-main">
                       {semanticHitRate.toFixed(1)}%
                     </div>
                     <div className="text-xs text-text-muted">{t("hitRate")}</div>
@@ -772,20 +773,20 @@ export default function CachePage() {
                   <DetailStat
                     label={t("hits")}
                     value={(sc?.hits ?? 0).toLocaleString()}
-                    accent="text-green-500"
+                    accent="text-success"
                   />
                   <DetailStat
                     label={t("misses")}
                     value={(sc?.misses ?? 0).toLocaleString()}
-                    accent="text-red-400"
+                    accent="text-error"
                   />
                   <DetailStat label={t("total")} value={semanticTotalRequests.toLocaleString()} />
                 </div>
               </div>
 
               <div className="space-y-4">
-                <div className="rounded-2xl border border-border/30 bg-surface/20 p-5">
-                  <h3 className="text-sm font-medium text-text-main">{t("behavior")}</h3>
+                <div className="rounded-card border border-border bg-surface p-5">
+                  <h3 className="text-sm font-semibold text-text-main">{t("behavior")}</h3>
                   <div className="mt-4 grid gap-3">
                     <InfoRow icon="info">{t("behaviorDeterministic")}</InfoRow>
                     <InfoRow icon="info">
@@ -798,7 +799,7 @@ export default function CachePage() {
                   </div>
                 </div>
 
-                <div className="rounded-2xl border border-border/30 bg-surface/20 p-5">
+                <div className="rounded-card border border-border bg-surface p-5">
                   <div className="flex items-center gap-2">
                     <span
                       className="material-symbols-outlined text-base text-text-muted"
@@ -806,7 +807,7 @@ export default function CachePage() {
                     >
                       fingerprint
                     </span>
-                    <h3 className="text-sm font-medium text-text-main">{t("idempotency")}</h3>
+                    <h3 className="text-sm font-semibold text-text-main">{t("idempotency")}</h3>
                   </div>
                   <div className="mt-4 grid gap-3 md:grid-cols-2">
                     <DetailStat
@@ -816,16 +817,16 @@ export default function CachePage() {
                     <DetailStat
                       label={t("dedupWindow")}
                       value={idp ? `${(idp.windowMs / 1000).toFixed(0)}s` : "0s"}
-                      accent="text-amber-300"
+                      accent="text-text-main"
                     />
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="rounded-2xl border border-border/30 bg-surface/20 p-5">
+            <div className="rounded-card border border-border bg-surface p-5">
               <div className="mb-4 flex flex-col gap-1">
-                <h3 className="text-sm font-medium text-text-main">{t("entries")}</h3>
+                <h3 className="text-sm font-semibold text-text-main">{t("entries")}</h3>
                 <p className="text-sm text-text-muted">{t("semanticEntriesDesc")}</p>
               </div>
               <CacheEntriesTab />
@@ -835,8 +836,8 @@ export default function CachePage() {
       )}
 
       {activeView === "reasoning" && (
-        <Card className="border border-border/30 bg-surface-raised/40 backdrop-blur-sm rounded-3xl overflow-hidden">
-          <div className="p-6">
+        <Card className="overflow-hidden p-0">
+          <div className="p-5">
             <ReasoningCacheTab />
           </div>
         </Card>

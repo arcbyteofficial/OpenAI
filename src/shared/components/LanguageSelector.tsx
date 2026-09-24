@@ -25,7 +25,7 @@ function CountryFlag({ emoji, alt }: { emoji: string; alt: string }) {
   return (
     <img
       src={`https://flagcdn.com/w40/${countryCode}.png`}
-      className="w-4.5 h-3 object-cover rounded-2xs shrink-0 shadow-2xs border border-black/5 dark:border-white/5"
+      className="w-4.5 h-3 object-cover rounded-xs shrink-0 border border-border"
       alt={alt}
       onError={() => setError(true)}
     />
@@ -67,13 +67,13 @@ export default function LanguageSelector() {
       {/* Trigger button */}
       <button
         onClick={() => setOpen(!open)}
-        className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-sm font-medium text-text-main hover:bg-surface-hover transition-all border border-transparent hover:border-border"
+        className="flex items-center gap-1.5 h-8 px-2 rounded-control text-[13px] font-medium text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors border border-transparent"
         title={currentLang.name}
       >
         <CountryFlag emoji={currentLang.flag} alt={currentLang.name} />
-        <span className="text-xs font-semibold tracking-wide">{currentLang.label}</span>
+        <span className="text-xs font-medium">{currentLang.label}</span>
         <span
-          className={`material-symbols-outlined text-[14px] text-text-muted transition-transform ${open ? "rotate-180" : ""}`}
+          className={`material-symbols-outlined text-[14px] text-text-subtle transition-transform ${open ? "rotate-180" : ""}`}
         >
           expand_more
         </span>
@@ -81,15 +81,15 @@ export default function LanguageSelector() {
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute end-0 top-full mt-1 w-56 max-h-80 rounded-xl border border-border bg-bg shadow-xl z-50 overflow-y-auto animate-in fade-in slide-in-from-top-1 duration-150">
+        <div className="absolute end-0 top-full mt-1 w-56 max-h-80 rounded-lg border border-border bg-surface p-1 shadow-[var(--shadow-elevated)] z-50 overflow-y-auto animate-in fade-in slide-in-from-top-1 duration-150">
           {LANGUAGES.map((lang) => (
             <button
               key={lang.code}
               onClick={() => handleSelect(lang.code)}
-              className={`w-full flex items-center gap-2.5 px-3 py-2.5 text-sm transition-colors ${
+              className={`w-full flex items-center gap-2.5 h-8 px-2 rounded-md text-[13px] transition-colors ${
                 lang.code === locale
-                  ? "bg-primary/10 text-primary font-semibold"
-                  : "text-text-main hover:bg-surface-hover"
+                  ? "bg-bg-subtle text-text-main font-medium"
+                  : "text-text-muted hover:bg-bg-subtle hover:text-text-main"
               }`}
             >
               <CountryFlag emoji={lang.flag} alt={lang.name} />

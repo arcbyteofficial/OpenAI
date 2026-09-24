@@ -96,7 +96,7 @@ export default function PluginsPage() {
   return (
     <div className="space-y-6 p-6">
       <div className="flex items-center justify-between">
-        <h1 className="text-2xl font-bold">{t("title")}</h1>
+        <h1 className="text-2xl font-semibold tracking-tight text-text-main">{t("title")}</h1>
       </div>
 
       <div className="flex items-center justify-end">
@@ -112,8 +112,8 @@ export default function PluginsPage() {
             <Card key={plugin.name} className="p-4">
               <div className="flex items-center justify-between">
                 <div>
-                  <h3 className="font-semibold">{plugin.name}</h3>
-                  <p className="text-sm text-gray-500">
+                  <h3 className="text-sm font-semibold text-text-main">{plugin.name}</h3>
+                  <p className="text-[13px] text-text-muted">
                     v{plugin.version}
                     {plugin.author ? ` by ${plugin.author}` : ""}
                     {plugin.description ? ` — ${plugin.description}` : ""}
@@ -122,7 +122,7 @@ export default function PluginsPage() {
                     {plugin.hooks.map((hook) => (
                       <span
                         key={hook}
-                        className="rounded bg-blue-100 px-2 py-0.5 text-xs text-blue-700"
+                        className="rounded-md border border-border bg-bg-subtle px-2 py-0.5 font-mono text-[11px] text-text-muted"
                       >
                         {hook}
                       </span>

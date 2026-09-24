@@ -21,10 +21,7 @@ export interface AdvancedSectionProps {
  * forceOpenSlug is forwarded as data-slug on the wrapper div so each
  * accordion child can read it via props passed down by F9's TranslateTab.
  */
-export default function AdvancedSection({
-  forceOpenSlug,
-  children,
-}: AdvancedSectionProps) {
+export default function AdvancedSection({ forceOpenSlug, children }: AdvancedSectionProps) {
   const t = useTranslations("translator");
 
   /** Safe i18n with inline fallback — pattern from TranslatorPageClient. */
@@ -40,24 +37,24 @@ export default function AdvancedSection({
   };
 
   return (
-    <Card id="translator-advanced-section" className="border-amber-500/10 bg-amber-500/[0.02]">
+    <Card id="translator-advanced-section" className="p-0">
       <div className="p-4 space-y-3">
         {/* Header */}
         <div className="flex items-start gap-3">
           <span
-            className="material-symbols-outlined text-amber-500 text-[20px] mt-0.5 shrink-0"
+            className="material-symbols-outlined text-text-muted text-[18px] mt-0.5 shrink-0"
             aria-hidden="true"
           >
             tune
           </span>
           <div className="min-w-0">
-            <h3 className="text-sm font-semibold text-text-main">
+            <h3 className="text-sm font-semibold tracking-tight text-text-main">
               {tr("advancedSectionTitle", "Advanced")}
             </h3>
             <p className="text-xs text-text-muted">
               {tr(
                 "advancedSectionSubtitle",
-                "Raw JSON, pipeline e ferramentas técnicas. Tudo aqui é igual às tabs antigas — apenas reorganizado.",
+                "Raw JSON, pipeline e ferramentas técnicas. Tudo aqui é igual às tabs antigas — apenas reorganizado."
               )}
             </p>
           </div>

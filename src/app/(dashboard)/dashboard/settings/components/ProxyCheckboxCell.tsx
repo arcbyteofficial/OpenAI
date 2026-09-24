@@ -11,7 +11,7 @@ export function ProxyCheckboxCell({ checked, onChange, label }: ProxyCheckboxCel
     <td className="py-2 pr-2 w-8">
       <input
         type="checkbox"
-        className="accent-blue-500 w-4 h-4 cursor-pointer"
+        className="accent-primary w-4 h-4 cursor-pointer"
         checked={checked}
         onChange={onChange}
         aria-label={label}

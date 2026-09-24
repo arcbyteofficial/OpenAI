@@ -227,7 +227,7 @@ export default function ModelSelectField({
             placeholder={placeholder || t("selectAModel")}
             aria-label={ariaLabel}
             onChange={(e) => onChange(e.target.value)}
-            className="w-full py-2 px-3 text-sm text-text-main bg-surface border border-black/10 dark:border-white/10 rounded-control focus:ring-1 focus:ring-accent/30 focus:border-accent/50 focus:outline-none transition-all disabled:opacity-50 disabled:cursor-not-allowed text-[16px] sm:text-sm"
+            className="w-full h-8 px-3 text-text-main bg-surface border border-border-strong rounded-control placeholder:text-text-subtle hover:border-text-subtle/50 focus:border-primary focus:ring-[3px] focus:ring-primary/15 focus:outline-none transition-[border-color,box-shadow] duration-150 disabled:opacity-50 disabled:cursor-not-allowed text-[16px] sm:text-[13px]"
           />
         </div>
       </div>

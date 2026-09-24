@@ -46,14 +46,14 @@ export default function Footer() {
           href={link.href}
           target="_blank"
           rel="noopener noreferrer"
-          className="hover:text-primary transition-colors"
+          className="hover:text-text-main transition-colors"
         >
           {t(link.key)}
         </a>
       );
     }
     return (
-      <Link href={link.href} className="hover:text-primary transition-colors">
+      <Link href={link.href} className="hover:text-text-main transition-colors">
         {link.label}
       </Link>
     );
@@ -66,7 +66,7 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-2">
             <div className="flex items-center gap-2 mb-6">
-              <div className="size-6 text-primary">
+              <div className="size-6 text-text-main">
                 <svg className="w-full h-full" fill="currentColor" viewBox="0 0 48 48">
                   <path
                     clipRule="evenodd"
@@ -75,16 +75,18 @@ export default function Footer() {
                   />
                 </svg>
               </div>
-              <span className="text-xl font-bold text-text-main">{APP_CONFIG.name}</span>
+              <span className="text-lg font-semibold tracking-tight text-text-main">
+                {APP_CONFIG.name}
+              </span>
             </div>
-            <p className="text-text-muted mb-6 max-w-sm font-light">{t("footerDescription")}</p>
+            <p className="text-sm text-text-muted mb-6 max-w-sm">{t("footerDescription")}</p>
             {/* Social links */}
             <div className="flex gap-4">
               <a
                 href="https://github.com/diegosouzapw/OmniRoute/discussions"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary transition-colors"
+                className="text-text-subtle hover:text-text-main transition-colors"
                 aria-label={t("communityDiscussions")}
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -95,7 +97,7 @@ export default function Footer() {
                 href="https://github.com/diegosouzapw/OmniRoute"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-gray-400 hover:text-primary transition-colors"
+                className="text-text-subtle hover:text-text-main transition-colors"
                 aria-label="GitHub"
               >
                 <svg className="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
@@ -107,8 +109,8 @@ export default function Footer() {
 
           {/* Product */}
           <div>
-            <h4 className="font-semibold text-text-main mb-4">{t("product")}</h4>
-            <ul className="flex flex-col gap-3 text-sm text-text-muted font-light">
+            <h4 className="text-sm font-medium text-text-main mb-4">{t("product")}</h4>
+            <ul className="flex flex-col gap-3 text-sm text-text-muted">
               {footerLinks.product.map((link) => (
                 <li key={link.key}>{renderFooterLink(link)}</li>
               ))}
@@ -117,8 +119,8 @@ export default function Footer() {
 
           {/* Resources */}
           <div>
-            <h4 className="font-semibold text-text-main mb-4">{t("resources")}</h4>
-            <ul className="flex flex-col gap-3 text-sm text-text-muted font-light">
+            <h4 className="text-sm font-medium text-text-main mb-4">{t("resources")}</h4>
+            <ul className="flex flex-col gap-3 text-sm text-text-muted">
               {footerLinks.resources.map((link) => (
                 <li key={link.key}>{renderFooterLink(link)}</li>
               ))}
@@ -127,8 +129,8 @@ export default function Footer() {
 
           {/* Company */}
           <div>
-            <h4 className="font-semibold text-text-main mb-4">{t("company")}</h4>
-            <ul className="flex flex-col gap-3 text-sm text-text-muted font-light">
+            <h4 className="text-sm font-medium text-text-main mb-4">{t("company")}</h4>
+            <ul className="flex flex-col gap-3 text-sm text-text-muted">
               {footerLinks.company.map((link) => (
                 <li key={link.key}>{renderFooterLink(link)}</li>
               ))}
@@ -142,20 +144,20 @@ export default function Footer() {
             {t("copyright", { year: new Date().getFullYear() })}
           </p>
           <div className="flex gap-6 text-sm text-text-muted">
-            <Link href="/docs" className="hover:text-primary transition-colors">
+            <Link href="/docs" className="hover:text-text-main transition-colors">
               {t("documentation")}
             </Link>
-            <Link href="/terms" className="hover:text-primary transition-colors">
+            <Link href="/terms" className="hover:text-text-main transition-colors">
               {t("terms")}
             </Link>
-            <Link href="/privacy" className="hover:text-primary transition-colors">
+            <Link href="/privacy" className="hover:text-text-main transition-colors">
               {t("privacy")}
             </Link>
             <a
               href="https://github.com/diegosouzapw/OmniRoute/blob/main/LICENSE"
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-primary transition-colors"
+              className="hover:text-text-main transition-colors"
             >
               {t("license")}
             </a>

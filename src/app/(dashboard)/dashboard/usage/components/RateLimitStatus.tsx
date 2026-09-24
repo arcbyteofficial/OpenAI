@@ -40,17 +40,17 @@ export default function RateLimitStatus() {
       {/* {t("modelLockouts")} */}
       <Card>
         <div className="flex items-center gap-3 mb-4">
-          <div className="p-2 rounded-lg bg-orange-500/10 text-orange-500">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="text-text-muted">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               lock_clock
             </span>
           </div>
           <div className="flex-1">
-            <h3 className="text-lg font-semibold">{t("modelLockouts")}</h3>
-            <p className="text-sm text-text-muted">{t("lockoutsAutoRefreshHint")}</p>
+            <h3 className="text-sm font-semibold text-text-main">{t("modelLockouts")}</h3>
+            <p className="text-[13px] text-text-muted">{t("lockoutsAutoRefreshHint")}</p>
           </div>
           {data.lockouts.length > 0 && (
-            <span className="px-2.5 py-1 rounded-full text-xs font-semibold bg-orange-500/10 text-orange-400 border border-orange-500/20">
+            <span className="px-2 py-0.5 rounded-full text-xs font-medium tabular-nums bg-warning/10 text-warning border border-warning/20">
               {t("lockedCount", { count: data.lockouts.length })}
             </span>
           )}
@@ -59,7 +59,7 @@ export default function RateLimitStatus() {
         {data.lockouts.length === 0 ? (
           <div className="text-center py-6 text-text-muted">
             <span
-              className="material-symbols-outlined text-[32px] mb-2 block opacity-40"
+              className="material-symbols-outlined text-[32px] mb-2 block text-text-subtle"
               aria-hidden="true"
             >
               lock_open
@@ -72,17 +72,17 @@ export default function RateLimitStatus() {
               <div
                 key={i}
                 className="flex items-center justify-between px-3 py-2.5 rounded-lg
-                           bg-orange-500/5 border border-orange-500/15"
+                           bg-bg-subtle border border-border"
               >
                 <div className="flex items-center gap-3">
                   <span
-                    className="material-symbols-outlined text-[16px] text-orange-400"
+                    className="material-symbols-outlined text-[16px] text-warning"
                     aria-hidden="true"
                   >
                     lock
                   </span>
                   <div>
-                    <p className="text-sm font-medium">{lock.model}</p>
+                    <p className="font-mono text-[13px] font-medium text-text-main">{lock.model}</p>
                     <p className="text-xs text-text-muted">
                       {t("account")}:{" "}
                       <span className="font-mono">
@@ -97,7 +97,7 @@ export default function RateLimitStatus() {
                     </p>
                   </div>
                 </div>
-                <span className="text-xs font-mono tabular-nums text-orange-400">
+                <span className="text-xs font-mono tabular-nums text-warning">
                   {t("timeLeft", { time: formatMs(lock.remainingMs) })}
                 </span>
               </div>

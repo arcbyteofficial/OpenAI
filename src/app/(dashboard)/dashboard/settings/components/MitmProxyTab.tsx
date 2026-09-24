@@ -193,15 +193,15 @@ export default function MitmProxyTab() {
   };
 
   const statusTone = status.running
-    ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600"
-    : "border-border bg-sidebar text-text-muted";
+    ? "border-success/30 bg-success/10 text-success"
+    : "border-border bg-bg-subtle text-text-muted";
 
   return (
     <Card className="p-6">
       <div className="mb-6 flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
         <div>
-          <h2 className="flex items-center gap-2 text-lg font-semibold text-text-main">
-            <span className="material-symbols-outlined text-[20px] text-primary">lan</span>
+          <h2 className="flex items-center gap-2 text-base font-semibold tracking-tight text-text-main">
+            <span className="material-symbols-outlined text-[18px] text-text-muted">lan</span>
             {t("title")}
           </h2>
           <p className="mt-1 text-sm text-text-muted">{t("description")}</p>
@@ -218,7 +218,7 @@ export default function MitmProxyTab() {
           <button
             onClick={() => void loadStatus()}
             disabled={loading}
-            className="rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar disabled:opacity-40"
+            className="rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-40"
           >
             {t("refresh")}
           </button>
@@ -229,8 +229,8 @@ export default function MitmProxyTab() {
         <div
           className={`mb-5 rounded-lg border px-4 py-3 text-sm ${
             feedback.type === "success"
-              ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600"
-              : "border-red-500/30 bg-red-500/10 text-red-600"
+              ? "border-success/30 bg-success/10 text-success"
+              : "border-error/30 bg-error/10 text-error"
           }`}
         >
           {feedback.message}
@@ -239,7 +239,7 @@ export default function MitmProxyTab() {
 
       <div className="grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
         <div className="space-y-4">
-          <div className="rounded-xl border border-border bg-surface/50 p-4">
+          <div className="rounded-lg border border-border bg-surface-2 p-4">
             <div className="mb-4 flex items-center justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold text-text-main">{t("enable")}</p>
@@ -248,8 +248,10 @@ export default function MitmProxyTab() {
               <button
                 onClick={toggleMitm}
                 disabled={saving || loading}
-                className={`inline-flex items-center gap-2 rounded-lg px-4 py-2 text-sm font-medium text-white transition-colors disabled:opacity-40 ${
-                  status.running ? "bg-red-500 hover:bg-red-600" : "bg-primary hover:bg-primary/90"
+                className={`inline-flex items-center gap-2 rounded-control px-3 py-1.5 text-[13px] font-medium transition-colors disabled:opacity-40 ${
+                  status.running
+                    ? "bg-error text-white hover:brightness-95"
+                    : "bg-contrast text-contrast-fg hover:bg-contrast-hover"
                 }`}
               >
                 <span className="material-symbols-outlined text-[18px]">
@@ -261,18 +263,18 @@ export default function MitmProxyTab() {
 
             <div className="grid gap-3 md:grid-cols-3">
               <label className="space-y-1">
-                <span className="text-xs font-medium uppercase tracking-wider text-text-muted">
+                <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {t("port")}
                 </span>
                 <input
                   value={port}
                   readOnly
                   disabled={status.running}
-                  className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40 disabled:opacity-60"
+                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-60"
                 />
               </label>
               <label className="space-y-1">
-                <span className="text-xs font-medium uppercase tracking-wider text-text-muted">
+                <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {t("apiKey")}
                 </span>
                 <input
@@ -280,11 +282,11 @@ export default function MitmProxyTab() {
                   value={apiKey}
                   onChange={(event) => setApiKey(event.target.value)}
                   placeholder={t("apiKeyPlaceholder")}
-                  className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40"
+                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                 />
               </label>
               <label className="space-y-1">
-                <span className="text-xs font-medium uppercase tracking-wider text-text-muted">
+                <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle">
                   {t("sudoPassword")}
                 </span>
                 <input
@@ -292,20 +294,20 @@ export default function MitmProxyTab() {
                   value={sudoPassword}
                   onChange={(event) => setSudoPassword(event.target.value)}
                   placeholder={status.hasCachedPassword ? t("cachedPassword") : t("sudoPassword")}
-                  className="w-full rounded-lg border border-border bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:ring-2 focus:ring-primary/40"
+                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
                 />
               </label>
             </div>
             <button
               onClick={savePort}
               disabled={saving || status.running}
-              className="mt-3 rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar disabled:opacity-40"
+              className="mt-3 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-40"
             >
               {t("saveSettings")}
             </button>
           </div>
 
-          <div className="rounded-xl border border-border bg-surface/50 p-4">
+          <div className="rounded-lg border border-border bg-surface-2 p-4">
             <div className="mb-3 flex items-center justify-between gap-3">
               <div>
                 <p className="text-sm font-semibold text-text-main">{t("certificate")}</p>
@@ -316,8 +318,8 @@ export default function MitmProxyTab() {
               <span
                 className={`rounded-full border px-2 py-1 text-xs ${
                   status.certExists
-                    ? "border-emerald-500/30 bg-emerald-500/10 text-emerald-600"
-                    : "border-amber-500/30 bg-amber-500/10 text-amber-600"
+                    ? "border-success/30 bg-success/10 text-success"
+                    : "border-warning/30 bg-warning/10 text-warning"
                 }`}
               >
                 {status.certExists ? t("available") : t("missing")}
@@ -326,21 +328,21 @@ export default function MitmProxyTab() {
             <div className="flex flex-wrap gap-2">
               <a
                 href="/api/settings/mitm?download=cert"
-                className={`inline-flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium transition-colors ${
+                className={`inline-flex items-center gap-2 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] font-medium transition-colors ${
                   status.certExists
-                    ? "text-text-main hover:bg-sidebar"
+                    ? "text-text-main hover:bg-bg-subtle"
                     : "pointer-events-none text-text-muted opacity-50"
                 }`}
               >
-                <span className="material-symbols-outlined text-[18px]">download</span>
+                <span className="material-symbols-outlined text-[16px]">download</span>
                 {t("downloadCert")}
               </a>
               <button
                 onClick={regenerateCertificate}
                 disabled={saving || status.running}
-                className="inline-flex items-center gap-2 rounded-lg border border-border px-3 py-2 text-sm font-medium text-text-main transition-colors hover:bg-sidebar disabled:opacity-40"
+                className="inline-flex items-center gap-2 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle disabled:opacity-40"
               >
-                <span className="material-symbols-outlined text-[18px]">autorenew</span>
+                <span className="material-symbols-outlined text-[16px]">autorenew</span>
                 {t("regenerateCert")}
               </button>
             </div>
@@ -370,24 +372,22 @@ export default function MitmProxyTab() {
               icon: "tag",
             },
           ].map((item) => (
-            <div key={item.label} className="rounded-xl border border-border bg-surface/50 p-4">
+            <div key={item.label} className="rounded-lg border border-border bg-surface-2 p-4">
               <div className="flex items-center justify-between gap-3">
                 <div>
-                  <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
-                    {item.label}
+                  <p className="text-[13px] text-text-muted">{item.label}</p>
+                  <p className="mt-1 text-2xl font-semibold tabular-nums tracking-tight text-text-main">
+                    {item.value}
                   </p>
-                  <p className="mt-1 text-xl font-semibold text-text-main">{item.value}</p>
                 </div>
-                <span className="material-symbols-outlined rounded-lg bg-primary/10 p-2 text-[20px] text-primary">
+                <span className="material-symbols-outlined text-[18px] text-text-subtle">
                   {item.icon}
                 </span>
               </div>
             </div>
           ))}
-          <div className="rounded-xl border border-border bg-surface/50 p-4 sm:col-span-2 lg:col-span-1">
-            <p className="text-xs font-medium uppercase tracking-wider text-text-muted">
-              {t("lastIntercept")}
-            </p>
+          <div className="rounded-lg border border-border bg-surface-2 p-4 sm:col-span-2 lg:col-span-1">
+            <p className="text-[13px] text-text-muted">{t("lastIntercept")}</p>
             <p className="mt-1 text-sm text-text-main">
               {formatDate(status.stats.lastInterceptAt)}
             </p>
@@ -395,22 +395,22 @@ export default function MitmProxyTab() {
         </div>
       </div>
 
-      <div className="mt-5 overflow-hidden rounded-xl border border-border">
-        <div className="border-b border-border bg-sidebar/40 px-4 py-3">
+      <div className="mt-5 overflow-hidden rounded-lg border border-border">
+        <div className="border-b border-border bg-surface-2 px-4 py-3">
           <h3 className="text-sm font-semibold text-text-main">{t("targetRoutes")}</h3>
         </div>
         {status.targets.length === 0 ? (
           <div className="p-6 text-center text-sm text-text-muted">{t("noTargets")}</div>
         ) : (
           <div className="overflow-x-auto">
-            <table className="w-full min-w-[760px] text-left text-sm">
-              <thead className="text-xs uppercase tracking-wider text-text-muted">
+            <table className="w-full min-w-[760px] text-left text-[13px]">
+              <thead className="border-b border-border text-xs text-text-muted">
                 <tr>
-                  <th className="px-4 py-3 font-medium">{t("target")}</th>
-                  <th className="px-4 py-3 font-medium">{t("host")}</th>
-                  <th className="px-4 py-3 font-medium">{t("localPort")}</th>
-                  <th className="px-4 py-3 font-medium">{t("endpoints")}</th>
-                  <th className="px-4 py-3 font-medium">{t("status")}</th>
+                  <th className="px-4 py-2.5 font-medium">{t("target")}</th>
+                  <th className="px-4 py-2.5 font-medium">{t("host")}</th>
+                  <th className="px-4 py-2.5 font-medium">{t("localPort")}</th>
+                  <th className="px-4 py-2.5 font-medium">{t("endpoints")}</th>
+                  <th className="px-4 py-2.5 font-medium">{t("status")}</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border">
@@ -428,7 +428,7 @@ export default function MitmProxyTab() {
                         {target.endpoints.map((endpoint) => (
                           <span
                             key={endpoint}
-                            className="rounded-full border border-border bg-surface px-2 py-0.5 text-xs text-text-muted"
+                            className="rounded-md border border-border bg-surface px-1.5 py-0.5 font-mono text-[12px] text-text-muted"
                           >
                             {endpoint}
                           </span>
@@ -436,7 +436,7 @@ export default function MitmProxyTab() {
                       </div>
                     </td>
                     <td className="px-4 py-3">
-                      <span className="rounded-full border border-border bg-sidebar px-2 py-1 text-xs text-text-muted">
+                      <span className="rounded-full border border-border bg-bg-subtle px-2 py-0.5 text-xs text-text-muted">
                         {target.enabled ? t("enabled") : t("configured")}
                       </span>
                     </td>

@@ -3,16 +3,16 @@
 import type { AgentId } from "@/mitm/types";
 
 const AGENT_COLORS: Record<AgentId, { emoji: string; label: string; color: string }> = {
-  antigravity: { emoji: "🔵", label: "AG", color: "text-blue-400" },
-  kiro: { emoji: "🟠", label: "KR", color: "text-orange-400" },
-  copilot: { emoji: "🟢", label: "CP", color: "text-green-400" },
-  "ghe-copilot": { emoji: "🟩", label: "GHE", color: "text-emerald-400" },
-  codex: { emoji: "🟣", label: "CD", color: "text-purple-400" },
-  cursor: { emoji: "🔶", label: "CU", color: "text-yellow-400" },
-  zed: { emoji: "🔷", label: "ZD", color: "text-sky-400" },
-  "claude-code": { emoji: "🟡", label: "CC", color: "text-yellow-300" },
-  "open-code": { emoji: "⚪", label: "OC", color: "text-gray-400" },
-  trae: { emoji: "⬛", label: "TR", color: "text-gray-500" },
+  antigravity: { emoji: "🔵", label: "AG", color: "text-text-muted" },
+  kiro: { emoji: "🟠", label: "KR", color: "text-text-muted" },
+  copilot: { emoji: "🟢", label: "CP", color: "text-text-muted" },
+  "ghe-copilot": { emoji: "🟩", label: "GHE", color: "text-text-muted" },
+  codex: { emoji: "🟣", label: "CD", color: "text-text-muted" },
+  cursor: { emoji: "🔶", label: "CU", color: "text-text-muted" },
+  zed: { emoji: "🔷", label: "ZD", color: "text-text-muted" },
+  "claude-code": { emoji: "🟡", label: "CC", color: "text-text-muted" },
+  "open-code": { emoji: "⚪", label: "OC", color: "text-text-muted" },
+  trae: { emoji: "⬛", label: "TR", color: "text-text-muted" },
 };
 
 interface AgentEmojiProps {

@@ -214,7 +214,7 @@ const ProviderModelPermissionList = memo(function ProviderModelPermissionList({
 
             return (
               <div key={provider} className="group">
-                <div className="w-full flex items-center gap-2 px-3 py-2 hover:bg-surface/50 transition-colors text-left">
+                <div className="w-full flex items-center gap-2 px-3 py-2 hover:bg-bg-subtle transition-colors text-left">
                   <button
                     type="button"
                     onClick={() => onToggleExpand(provider)}
@@ -222,7 +222,7 @@ const ProviderModelPermissionList = memo(function ProviderModelPermissionList({
                     aria-label={provider}
                   >
                     <span
-                      className={`material-symbols-outlined text-base transition-transform duration-200 ${
+                      className={`material-symbols-outlined text-base text-text-muted transition-transform duration-200 ${
                         expandedProviders.has(provider) ? "rotate-90" : ""
                       }`}
                     >
@@ -246,12 +246,12 @@ const ProviderModelPermissionList = memo(function ProviderModelPermissionList({
                     >
                       {provider}
                     </button>
-                    <span className="text-[10px] text-text-muted bg-surface px-1 py-0.5 rounded shrink-0">
+                    <span className="text-[10px] text-text-muted bg-bg-subtle px-1 py-0.5 rounded tabular-nums shrink-0">
                       {models.length}
                     </span>
                   </div>
                   {selectedCount > 0 && (
-                    <span className="text-[10px] font-medium text-primary bg-primary/10 px-1.5 py-0.5 rounded-full shrink-0">
+                    <span className="text-[10px] font-medium text-primary bg-primary/10 px-1.5 py-0.5 rounded-full tabular-nums shrink-0">
                       {selectedCount}
                     </span>
                   )}
@@ -275,10 +275,10 @@ const ProviderModelPermissionList = memo(function ProviderModelPermissionList({
                             type="button"
                             disabled={!isToggleable}
                             onClick={() => handleToggleModel(model)}
-                            className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-mono transition-all ${
+                            className={`inline-flex items-center gap-1 px-2 py-1 rounded-full text-[10px] font-mono transition-colors ${
                               isSelected
-                                ? "bg-primary text-white"
-                                : "bg-surface border border-border text-text-muted hover:border-primary/50 hover:text-text-main"
+                                ? "bg-primary/10 text-primary border border-primary/30"
+                                : "bg-surface border border-border text-text-muted hover:border-border-strong hover:text-text-main"
                             } ${isToggleable ? "" : "opacity-70 cursor-not-allowed"}`}
                             title={model.id}
                           >

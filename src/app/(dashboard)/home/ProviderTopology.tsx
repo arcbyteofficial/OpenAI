@@ -59,15 +59,15 @@ function ProviderNode({ data }: { data: ProviderNodeData }) {
 
   return (
     <div
-      className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg border-2 transition-all duration-300 bg-bg cursor-pointer hover:scale-105 active:scale-95 shadow-sm hover:shadow-md"
+      className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg border-2 transition-colors duration-150 bg-surface cursor-pointer hover:bg-bg-subtle"
       style={{
         borderColor: error ? RED : active ? color : healthy ? GREEN : "var(--color-border)",
         boxShadow: error
-          ? `0 0 12px ${flowColorAlpha(RED, 19)}`
+          ? `0 0 0 3px ${flowColorAlpha(RED, 19)}`
           : active
-            ? `0 0 12px ${color}30`
+            ? `0 0 0 3px ${color}30`
             : healthy
-              ? `0 0 10px ${flowColorAlpha(GREEN, 13)}`
+              ? `0 0 0 3px ${flowColorAlpha(GREEN, 13)}`
               : "none",
         minWidth: "136px",
       }}
@@ -124,7 +124,7 @@ type RouterNodeData = { activeCount: number };
 
 function RouterNode({ data }: { data: RouterNodeData }) {
   return (
-    <div className="flex items-center gap-2 px-5 py-3 rounded-xl border-2 border-primary bg-primary/8 shadow-lg min-w-[140px] justify-center">
+    <div className="flex items-center gap-2 px-5 py-3 rounded-card border border-border-strong bg-surface min-w-[140px] justify-center">
       <Handle
         type="source"
         position={Position.Top}
@@ -150,12 +150,12 @@ function RouterNode({ data }: { data: RouterNodeData }) {
         className="!bg-transparent !border-0 !w-0 !h-0"
       />
 
-      <div className="flex items-center justify-center size-7 rounded-md bg-primary/15 shrink-0">
-        <span className="material-symbols-outlined text-primary text-[16px]">route</span>
+      <div className="flex items-center justify-center size-7 rounded-md bg-contrast shrink-0">
+        <span className="material-symbols-outlined text-contrast-fg text-[16px]">route</span>
       </div>
-      <span className="text-sm font-bold text-primary">OmniRoute</span>
+      <span className="text-sm font-semibold tracking-tight text-text-main">OmniRoute</span>
       {data.activeCount > 0 && (
-        <span className="ml-1 px-1.5 py-0.5 rounded-full bg-primary text-white text-[10px] font-bold leading-none">
+        <span className="ml-1 px-1.5 py-0.5 rounded-full bg-primary text-white text-[10px] font-semibold tabular-nums leading-none">
           {data.activeCount}
         </span>
       )}
@@ -345,7 +345,7 @@ export default function ProviderTopology({
   );
 
   const containerClass =
-    "h-[300px] w-full min-w-0 rounded-xl border border-border bg-bg-subtle/20 overflow-hidden sm:h-[420px]";
+    "h-[300px] w-full min-w-0 rounded-card border border-border bg-surface overflow-hidden sm:h-[420px]";
 
   if (providers.length === 0) {
     return (

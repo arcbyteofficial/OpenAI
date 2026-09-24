@@ -124,7 +124,7 @@ export default function BuilderIntelligentStep({
               )}
             </p>
           </div>
-          <span className="inline-flex items-center gap-1 rounded-full bg-primary/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-primary">
+          <span className="inline-flex items-center gap-1 rounded-full bg-surface px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-text-muted ring-1 ring-inset ring-border">
             <span className="material-symbols-outlined text-[12px]">auto_awesome</span>
             Intelligent
           </span>
@@ -168,8 +168,8 @@ export default function BuilderIntelligentStep({
                 onClick={() => toggleCandidateProvider(provider.id)}
                 className={`rounded-full border px-3 py-1.5 text-xs transition-colors ${
                   isSelected
-                    ? "border-primary bg-primary/10 text-primary"
-                    : "border-black/10 dark:border-white/10 text-text-main hover:border-primary/40 hover:bg-primary/5"
+                    ? "border-primary/50 bg-primary/10 text-primary"
+                    : "border-border text-text-main hover:border-border-strong hover:bg-bg-subtle"
                 }`}
               >
                 {provider.label}
@@ -185,13 +185,13 @@ export default function BuilderIntelligentStep({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <Card.Section>
-          <label className="text-xs font-semibold text-text-main block mb-2">
+          <label className="text-xs font-medium text-text-main block mb-2">
             {getI18nOrFallback(t, "modePackLabel", "Mode Pack")}
           </label>
           <select
             value={normalizedConfig.modePack}
             onChange={(event) => updateConfig({ modePack: event.target.value })}
-            className="w-full text-xs py-2 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+            className="w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface focus:border-primary focus:outline-none"
           >
             {MODE_PACK_OPTIONS.map((modePack) => (
               <option key={modePack.id} value={modePack.id}>
@@ -206,13 +206,13 @@ export default function BuilderIntelligentStep({
         </Card.Section>
 
         <Card.Section>
-          <label className="text-xs font-semibold text-text-main block mb-2">
+          <label className="text-xs font-medium text-text-main block mb-2">
             {getI18nOrFallback(t, "routerStrategyLabel", "Router Strategy")}
           </label>
           <select
             value={normalizedConfig.routerStrategy}
             onChange={(event) => updateConfig({ routerStrategy: event.target.value })}
-            className="w-full text-xs py-2 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+            className="w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface focus:border-primary focus:outline-none"
           >
             {ROUTER_STRATEGY_OPTIONS.map((strategy) => (
               <option key={strategy.id} value={strategy.id}>
@@ -240,14 +240,14 @@ export default function BuilderIntelligentStep({
                 )}
               </p>
             </div>
-            <span className="inline-flex items-center gap-1 rounded-full bg-emerald-500/10 px-2 py-1 text-[10px] font-semibold uppercase tracking-wide text-emerald-600 dark:text-emerald-300">
+            <span className="inline-flex items-center gap-1 rounded-full bg-surface px-2 py-1 text-[10px] font-medium uppercase tracking-wide text-text-muted ring-1 ring-inset ring-border">
               <span className="material-symbols-outlined text-[12px]">verified</span>
               SLA
             </span>
           </div>
 
           <div className="mt-3 grid grid-cols-1 md:grid-cols-3 gap-3">
-            <label className="text-xs font-semibold text-text-main block">
+            <label className="text-xs font-medium text-text-main block">
               {getI18nOrFallback(t, "slaTargetP95Label", "Target p95 latency (ms)")}
               <input
                 type="number"
@@ -260,11 +260,11 @@ export default function BuilderIntelligentStep({
                     slaTargetP95Ms: event.target.value ? Number(event.target.value) : undefined,
                   })
                 }
-                className="mt-2 w-full text-xs py-2 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                className="mt-2 w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface focus:border-primary focus:outline-none"
               />
             </label>
 
-            <label className="text-xs font-semibold text-text-main block">
+            <label className="text-xs font-medium text-text-main block">
               {getI18nOrFallback(t, "slaMaxErrorRateLabel", "Max error rate")}
               <input
                 type="number"
@@ -278,11 +278,11 @@ export default function BuilderIntelligentStep({
                     slaMaxErrorRate: event.target.value ? Number(event.target.value) : undefined,
                   })
                 }
-                className="mt-2 w-full text-xs py-2 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                className="mt-2 w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface focus:border-primary focus:outline-none"
               />
             </label>
 
-            <label className="text-xs font-semibold text-text-main block">
+            <label className="text-xs font-medium text-text-main block">
               {getI18nOrFallback(t, "slaMaxCostLabel", "Max cost ($ / 1M tokens)")}
               <input
                 type="number"
@@ -297,7 +297,7 @@ export default function BuilderIntelligentStep({
                       : undefined,
                   })
                 }
-                className="mt-2 w-full text-xs py-2 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+                className="mt-2 w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface focus:border-primary focus:outline-none"
               />
             </label>
           </div>
@@ -320,7 +320,7 @@ export default function BuilderIntelligentStep({
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
         <Card.Section>
-          <label className="text-xs font-semibold text-text-main block">
+          <label className="text-xs font-medium text-text-main block">
             {getI18nOrFallback(t, "explorationRateLabel", "Exploration Rate")}
           </label>
           <input
@@ -346,7 +346,7 @@ export default function BuilderIntelligentStep({
         </Card.Section>
 
         <Card.Section>
-          <label className="text-xs font-semibold text-text-main block mb-2">
+          <label className="text-xs font-medium text-text-main block mb-2">
             {getI18nOrFallback(t, "budgetCapLabel", "Budget Cap (USD / request)")}
           </label>
           <input
@@ -360,21 +360,18 @@ export default function BuilderIntelligentStep({
                 budgetCap: event.target.value ? Number(event.target.value) : undefined,
               })
             }
-            className="w-full text-xs py-2 px-2 rounded border border-black/10 dark:border-white/10 bg-transparent focus:border-primary focus:outline-none"
+            className="w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface focus:border-primary focus:outline-none"
           />
         </Card.Section>
       </div>
 
-      <details className="rounded-lg border border-black/8 dark:border-white/8 bg-black/2 dark:bg-white/2 p-3">
-        <summary className="cursor-pointer text-xs font-semibold text-text-main">
+      <details className="rounded-lg border border-border bg-surface-2 p-3">
+        <summary className="cursor-pointer text-xs font-medium text-text-main">
           {getI18nOrFallback(t, "advancedWeightsTitle", "Advanced: Scoring Weights")}
         </summary>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-3">
           {Object.entries(normalizedConfig.weights).map(([weightKey, weightValue]) => (
-            <div
-              key={weightKey}
-              className="rounded-lg border border-black/6 dark:border-white/6 p-3"
-            >
+            <div key={weightKey} className="rounded-lg border border-border bg-surface p-3">
               <div className="flex items-center justify-between gap-2">
                 <label className="text-[11px] font-medium text-text-main">
                   {getI18nOrFallback(

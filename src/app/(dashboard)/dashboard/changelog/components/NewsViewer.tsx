@@ -38,7 +38,7 @@ export default function NewsViewer() {
   if (loading) {
     return (
       <div className="flex justify-center py-20">
-        <span className="material-symbols-outlined animate-spin text-[32px] text-text-muted">
+        <span className="material-symbols-outlined animate-spin text-[24px] text-text-subtle">
           sync
         </span>
       </div>
@@ -48,7 +48,7 @@ export default function NewsViewer() {
   if (error) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-text-muted">
-        <span className="material-symbols-outlined mb-4 text-[48px] text-red-500/50">
+        <span className="material-symbols-outlined mb-4 text-[40px] text-error/60">
           error_outline
         </span>
         <p>{t("announcementsLoadFailed")}</p>
@@ -59,7 +59,7 @@ export default function NewsViewer() {
   if (news.length === 0) {
     return (
       <div className="flex flex-col items-center justify-center py-20 text-text-muted">
-        <span className="material-symbols-outlined mb-4 text-[48px] opacity-50">
+        <span className="material-symbols-outlined mb-4 text-[40px] text-text-subtle">
           notifications_off
         </span>
         <p>{t("noAnnouncements")}</p>
@@ -68,20 +68,22 @@ export default function NewsViewer() {
   }
 
   return (
-    <div className="space-y-8 p-8">
+    <div className="space-y-6 p-6">
       {news.map((announcement) => (
         <article
           key={announcement.id}
-          className="flex flex-col gap-6 border-l-4 border-primary pl-5 md:flex-row md:items-center md:pl-6"
+          className="flex flex-col gap-5 border-l-2 border-border-strong pl-5 md:flex-row md:items-center md:pl-6"
         >
-          <div className="flex size-14 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-            <span className="material-symbols-outlined text-[30px] text-primary">
+          <div className="flex size-14 shrink-0 items-center justify-center rounded-lg border border-border bg-bg-subtle">
+            <span className="material-symbols-outlined text-[24px] text-text-muted">
               {announcement.icon}
             </span>
           </div>
 
           <div className="flex-1">
-            <h2 className="mb-2 text-xl font-bold text-text-main">{announcement.title}</h2>
+            <h2 className="mb-1.5 text-lg font-semibold tracking-tight text-text-main">
+              {announcement.title}
+            </h2>
             <p className="max-w-2xl text-sm leading-relaxed text-text-muted">
               {announcement.message}
             </p>
@@ -92,7 +94,7 @@ export default function NewsViewer() {
               <a href={announcement.link} target="_blank" rel="noopener noreferrer">
                 <Button variant="primary" className="gap-2">
                   {announcement.linkLabel ?? t("learnMore")}
-                  <span className="material-symbols-outlined text-[18px]">arrow_forward</span>
+                  <span className="material-symbols-outlined text-[16px]">arrow_forward</span>
                 </Button>
               </a>
             </div>

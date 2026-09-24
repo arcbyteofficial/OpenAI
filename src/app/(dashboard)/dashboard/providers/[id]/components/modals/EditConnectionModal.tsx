@@ -844,7 +844,7 @@ export default function EditConnectionModal({
           />
         )}
         {(isCcCompatible || openRouterPreset.input) && (
-          <div className="flex flex-col gap-4 rounded-lg border border-border/50 bg-surface/20 p-4">
+          <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-2 p-4">
             {isCcCompatible && (
               <CcCompatibleRequestDefaultsFields
                 values={formData}
@@ -854,7 +854,7 @@ export default function EditConnectionModal({
             {openRouterPreset.input}
           </div>
         )}
-        <div className="flex flex-col gap-4 rounded-lg border border-border/50 bg-surface/20 p-4">
+        <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-2 p-4">
           {showFreeModelsToggle && (
             <Toggle
               checked={formData.importFreeModelsOnly}
@@ -890,7 +890,7 @@ export default function EditConnectionModal({
           editMode
         />
         {isAntigravityFamily && (
-          <div className="flex flex-col gap-4 rounded-lg border border-border/50 bg-surface/20 p-4">
+          <div className="flex flex-col gap-4 rounded-lg border border-border bg-surface-2 p-4">
             <Select
               label={t("antigravityClientProfileLabel")}
               value={formData.antigravityClientProfile}
@@ -914,7 +914,7 @@ export default function EditConnectionModal({
           </div>
         )}
         {isOAuth && connection.email && (
-          <div className="bg-sidebar/50 p-3 rounded-lg">
+          <div className="bg-bg-subtle p-3 rounded-lg">
             <p className="text-sm text-text-muted mb-1">{t("email")}</p>
             <p className="font-medium" title={showEmail ? connection.email : undefined}>
               {showEmail ? connection.email : maskEmail(connection.email)}
@@ -942,9 +942,12 @@ export default function EditConnectionModal({
             setFormData({ ...formData, priority: Number.parseInt(e.target.value) || 1 })
           }
         />
-        <div className="flex flex-col gap-2 rounded-lg border border-primary/30 bg-primary/5 p-4">
-          <div className="flex items-center gap-1.5 text-sm font-semibold text-primary">
-            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
+        <div className="flex flex-col gap-2 rounded-lg border border-border bg-surface-2 p-4">
+          <div className="flex items-center gap-1.5 text-sm font-semibold text-text-main">
+            <span
+              className="material-symbols-outlined text-[18px] text-text-muted"
+              aria-hidden="true"
+            >
               dynamic_feed
             </span>
             {t("accountConcurrencyCapLabel")}
@@ -970,7 +973,7 @@ export default function EditConnectionModal({
           />
         </div>
         {saveError && (
-          <div className="text-sm text-red-500 bg-red-500/10 border border-red-500/20 rounded-lg px-3 py-2">
+          <div className="text-sm text-error bg-error/10 border border-error/20 rounded-lg px-3 py-2">
             {saveError}
           </div>
         )}
@@ -1026,7 +1029,7 @@ export default function EditConnectionModal({
               </div>
             )}
             {isChatGptWebCodex && (
-              <div className="space-y-3 rounded-lg border border-border bg-surface/40 p-3">
+              <div className="space-y-3 rounded-lg border border-border bg-surface-2 p-3">
                 <p className="text-sm font-medium text-text-main">Codex-Toolverbindung</p>
                 <Input
                   label="Tunnel-ID"
@@ -1095,7 +1098,7 @@ export default function EditConnectionModal({
                       </div>
                     )}
                     {doctorStatus.lastError && (
-                      <div className="col-span-2 break-words text-danger">
+                      <div className="col-span-2 break-words text-error">
                         Letzter Fehler: {String(doctorStatus.lastError)}
                       </div>
                     )}
@@ -1169,7 +1172,7 @@ export default function EditConnectionModal({
             )}
             <button
               type="button"
-              className="text-sm text-text-muted hover:text-text-primary flex items-center gap-1"
+              className="text-[13px] text-text-muted hover:text-text-main transition-colors flex items-center gap-1"
               onClick={() => setShowAdvanced(!showAdvanced)}
               aria-expanded={showAdvanced}
               aria-controls="edit-connection-advanced-settings"
@@ -1233,7 +1236,7 @@ export default function EditConnectionModal({
                   onChange={(patch) => setFormData({ ...formData, ...patch })}
                   t={t}
                 />
-                <div className="border-t border-border/30 pt-3 mt-1">
+                <div className="border-t border-border pt-3 mt-1">
                   <p className="text-xs font-medium text-text-muted mb-2">
                     {t("rateLimitOverridesSection")}
                   </p>
@@ -1400,7 +1403,7 @@ export default function EditConnectionModal({
               <select
                 value={formData.apiRegion}
                 onChange={(e) => setFormData({ ...formData, apiRegion: e.target.value })}
-                className="w-full px-3 py-2 text-sm border border-border rounded-lg bg-background focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-primary"
               >
                 <option value="international">{t("apiRegionInternational")}</option>
                 <option value="china">{t("apiRegionChina")}</option>
@@ -1423,9 +1426,9 @@ export default function EditConnectionModal({
                 const health = apiKeyHealth[keyId];
                 const statusColor =
                   health?.status === "invalid"
-                    ? "text-red-400"
+                    ? "text-error"
                     : health?.status === "warning"
-                      ? "text-yellow-400"
+                      ? "text-warning"
                       : "text-text-muted";
                 const statusIcon =
                   health?.status === "invalid" ? "🔴" : health?.status === "warning" ? "🟡" : "🟢";
@@ -1439,7 +1442,7 @@ export default function EditConnectionModal({
                 return (
                   <div className="flex items-center gap-2">
                     <span
-                      className={`flex-1 min-w-0 break-all font-mono text-xs bg-sidebar/50 px-3 py-2 rounded border border-border ${statusColor}`}
+                      className={`flex-1 min-w-0 break-all font-mono text-xs bg-bg-subtle px-3 py-2 rounded-md border border-border ${statusColor}`}
                     >
                       {statusIcon} {t("primaryKey")}: {connection.apiKey}
                     </span>
@@ -1475,7 +1478,7 @@ export default function EditConnectionModal({
                 <button
                   type="button"
                   onClick={() => setExtraApiKeys([])}
-                  className="px-2.5 py-1.5 rounded-md bg-red-500/10 text-red-400 hover:bg-red-500/20 hover:text-red-300 text-xs font-medium transition-colors"
+                  className="px-2.5 py-1.5 rounded-control bg-error/10 text-error hover:bg-error/15 text-xs font-medium transition-colors"
                 >
                   {t("deleteAllExtraApiKeys")}
                 </button>
@@ -1488,9 +1491,9 @@ export default function EditConnectionModal({
                   const health = apiKeyHealth[keyId];
                   const statusColor =
                     health?.status === "invalid"
-                      ? "text-red-400"
+                      ? "text-error"
                       : health?.status === "warning"
-                        ? "text-yellow-400"
+                        ? "text-warning"
                         : "text-text-muted";
                   const statusIcon =
                     health?.status === "invalid"
@@ -1508,7 +1511,7 @@ export default function EditConnectionModal({
                   return (
                     <div key={idx} className="flex items-center gap-2">
                       <span
-                        className={`flex-1 font-mono text-xs bg-sidebar/50 px-3 py-2 rounded border border-border truncate ${statusColor}`}
+                        className={`flex-1 font-mono text-xs bg-bg-subtle px-3 py-2 rounded-md border border-border truncate ${statusColor}`}
                       >
                         {statusIcon}{" "}
                         {t("extraApiKeyMasked", {
@@ -1532,7 +1535,7 @@ export default function EditConnectionModal({
                         )}
                         <button
                           onClick={() => setExtraApiKeys(extraApiKeys.filter((_, i) => i !== idx))}
-                          className="p-1.5 rounded hover:bg-red-500/10 text-red-400 hover:text-red-500"
+                          className="p-1.5 rounded-md hover:bg-error/10 text-error/80 hover:text-error transition-colors"
                           title={t("removeThisKey")}
                         >
                           <span className="material-symbols-outlined text-[16px]">close</span>
@@ -1549,7 +1552,7 @@ export default function EditConnectionModal({
                 value={newExtraKey}
                 onChange={(e) => setNewExtraKey(e.target.value)}
                 placeholder={t("addAnotherApiKey")}
-                className="flex-1 text-sm bg-sidebar/50 border border-border rounded px-3 py-2 text-text-main placeholder:text-text-muted focus:ring-1 focus:ring-primary outline-none"
+                className="flex-1 text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:border-primary focus:ring-1 focus:ring-primary outline-none"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && newExtraKey.trim()) {
                     setExtraApiKeys([...extraApiKeys, newExtraKey.trim()]);
@@ -1571,7 +1574,7 @@ export default function EditConnectionModal({
                   }
                 }}
                 disabled={!newExtraKey.trim()}
-                className="px-3 py-2 rounded bg-primary/10 text-primary hover:bg-primary/20 disabled:opacity-40 text-sm font-medium"
+                className="px-3 py-2 rounded-control border border-border-strong bg-surface text-text-main hover:bg-bg-subtle disabled:opacity-40 text-sm font-medium transition-colors"
               >
                 {t("add")}
               </button>

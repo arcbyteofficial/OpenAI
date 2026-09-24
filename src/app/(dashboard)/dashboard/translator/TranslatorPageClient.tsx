@@ -27,7 +27,7 @@ export default function TranslatorPageClient() {
 
 function TranslatorLoading() {
   const t = useTranslations("translator");
-  return <div className="p-8 text-text-muted">{t("loading")}</div>;
+  return <div className="p-6 text-sm text-text-muted">{t("loading")}</div>;
 }
 
 function TranslatorPageClientInner() {
@@ -197,7 +197,7 @@ function AutoFeaturesCard() {
   const [showFeatures, setShowFeatures] = useState(false);
 
   return (
-    <Card className="border-primary/10 bg-primary/5">
+    <Card className="p-0">
       <button
         type="button"
         onClick={() => setShowFeatures((prev) => !prev)}
@@ -206,8 +206,12 @@ function AutoFeaturesCard() {
         className="flex w-full items-center justify-between p-4 text-left"
       >
         <div className="flex items-center gap-2">
-          <span className="material-symbols-outlined text-[20px] text-primary">auto_fix_high</span>
-          <h3 className="text-sm font-semibold text-text-main">{t("autoFeaturesTitle")}</h3>
+          <span className="material-symbols-outlined text-[18px] text-text-muted">
+            auto_fix_high
+          </span>
+          <h3 className="text-sm font-semibold tracking-tight text-text-main">
+            {t("autoFeaturesTitle")}
+          </h3>
           <Badge variant="primary" size="sm">
             {t("autoFeaturesCount")}
           </Badge>
@@ -290,36 +294,36 @@ function FeatureChip({
 }) {
   const colorMap = {
     purple: {
-      shell: "border-purple-500/20 bg-purple-500/5",
-      icon: "text-purple-500",
+      shell: "border-border bg-surface-2",
+      icon: "text-text-muted",
     },
     blue: {
-      shell: "border-blue-500/20 bg-blue-500/5",
-      icon: "text-blue-500",
+      shell: "border-border bg-surface-2",
+      icon: "text-text-muted",
     },
     amber: {
-      shell: "border-amber-500/20 bg-amber-500/5",
-      icon: "text-amber-500",
+      shell: "border-border bg-surface-2",
+      icon: "text-text-muted",
     },
     emerald: {
-      shell: "border-emerald-500/20 bg-emerald-500/5",
-      icon: "text-emerald-500",
+      shell: "border-border bg-surface-2",
+      icon: "text-text-muted",
     },
     cyan: {
-      shell: "border-cyan-500/20 bg-cyan-500/5",
-      icon: "text-cyan-500",
+      shell: "border-border bg-surface-2",
+      icon: "text-text-muted",
     },
     orange: {
-      shell: "border-orange-500/20 bg-orange-500/5",
-      icon: "text-orange-500",
+      shell: "border-border bg-surface-2",
+      icon: "text-text-muted",
     },
     pink: {
-      shell: "border-pink-500/20 bg-pink-500/5",
-      icon: "text-pink-500",
+      shell: "border-border bg-surface-2",
+      icon: "text-text-muted",
     },
     indigo: {
-      shell: "border-indigo-500/20 bg-indigo-500/5",
-      icon: "text-indigo-500",
+      shell: "border-border bg-surface-2",
+      icon: "text-text-muted",
     },
   }[color];
 
@@ -329,7 +333,7 @@ function FeatureChip({
         <span className={`material-symbols-outlined text-[16px] ${colorMap.icon}`}>{icon}</span>
         <p className="text-xs font-semibold text-text-main">{title}</p>
       </div>
-      <p className="text-[10px] leading-relaxed text-text-muted">{description}</p>
+      <p className="text-[11px] leading-relaxed text-text-muted">{description}</p>
     </div>
   );
 }

@@ -42,7 +42,7 @@ test("ProviderTopology configures click-to-navigate on provider nodes", () => {
 
   assert.match(
     providerTopologySrc,
-    /cursor-pointer hover:scale-105/,
+    /cursor-pointer hover:bg-bg-subtle/,
     "ProviderNode must render with a pointer cursor and visual hover effect"
   );
 });

@@ -18,7 +18,7 @@ function renderPrefix(chunks: ReactNode) {
 }
 
 function renderSmallPrefix(chunks: ReactNode) {
-  return <code className="font-mono bg-bg-subtle px-1 rounded text-xs">{chunks}</code>;
+  return <code className="font-mono bg-bg-subtle px-1 rounded text-[12px]">{chunks}</code>;
 }
 
 export function NinerouterProviderExposureCard() {
@@ -57,11 +57,13 @@ export function NinerouterProviderExposureCard() {
   return (
     <Card padding="md">
       <div className="flex items-center gap-3 mb-3">
-        <div className="size-8 rounded-lg flex items-center justify-center bg-purple-500/10">
-          <span className="material-symbols-outlined text-purple-500 text-xl">hub</span>
+        <div className="size-8 rounded-lg flex items-center justify-center bg-bg-subtle border border-border">
+          <span className="material-symbols-outlined text-text-muted text-[18px]">hub</span>
         </div>
         <div>
-          <h3 className="font-medium text-sm">{t("providerExposure")}</h3>
+          <h3 className="font-semibold text-sm tracking-tight text-text-main">
+            {t("providerExposure")}
+          </h3>
           <p className="text-xs text-text-muted">
             {t.rich("providerExposureDescription", {
               prefix: renderPrefix,
@@ -72,10 +74,8 @@ export function NinerouterProviderExposureCard() {
 
       {msg && (
         <div
-          className={`flex items-center gap-1.5 mb-3 px-2 py-1.5 rounded text-xs ${
-            msg.ok
-              ? "bg-green-500/10 text-green-600 dark:text-green-400"
-              : "bg-red-500/10 text-red-600 dark:text-red-400"
+          className={`flex items-center gap-1.5 mb-3 px-2 py-1.5 rounded-md text-xs ${
+            msg.ok ? "bg-success/10 text-success" : "bg-error/10 text-error"
           }`}
         >
           <span className="material-symbols-outlined text-[12px]">
@@ -87,7 +87,7 @@ export function NinerouterProviderExposureCard() {
 
       <div className="flex items-center justify-between">
         <div>
-          <p className="text-sm">
+          <p className="text-sm text-text-main">
             {t.rich("providerExposureLabel", {
               prefix: renderSmallPrefix,
             })}

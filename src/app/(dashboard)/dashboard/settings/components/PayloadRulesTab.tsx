@@ -172,31 +172,31 @@ export default function PayloadRulesTab() {
     <Card>
       <div className="flex flex-col gap-5">
         <div className="flex items-start gap-3">
-          <div className="p-2 rounded-lg bg-indigo-500/10 text-indigo-500">
-            <span className="material-symbols-outlined text-[20px]" aria-hidden="true">
+          <div className="p-2 rounded-lg bg-bg-subtle text-text-muted">
+            <span className="material-symbols-outlined text-[18px]" aria-hidden="true">
               data_object
             </span>
           </div>
           <div className="flex-1">
-            <h3 className="text-lg font-semibold">{t("payloadRulesTitle")}</h3>
-            <p className="text-sm text-text-muted mt-1">{t("payloadRulesDesc")}</p>
+            <h3 className="text-sm font-semibold text-text-main">{t("payloadRulesTitle")}</h3>
+            <p className="text-[13px] text-text-muted mt-1">{t("payloadRulesDesc")}</p>
           </div>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-3">
-          <div className="rounded-lg border border-border bg-bg-secondary/40 p-3">
+          <div className="rounded-lg border border-border bg-surface-2 p-3">
             <p className="text-sm font-medium">{t("payloadRuleDefaultTitle")}</p>
             <p className="text-xs text-text-muted mt-1">{t("payloadRuleDefaultDesc")}</p>
           </div>
-          <div className="rounded-lg border border-border bg-bg-secondary/40 p-3">
+          <div className="rounded-lg border border-border bg-surface-2 p-3">
             <p className="text-sm font-medium">{t("payloadRuleOverrideTitle")}</p>
             <p className="text-xs text-text-muted mt-1">{t("payloadRuleOverrideDesc")}</p>
           </div>
-          <div className="rounded-lg border border-border bg-bg-secondary/40 p-3">
+          <div className="rounded-lg border border-border bg-surface-2 p-3">
             <p className="text-sm font-medium">{t("payloadRuleFilterTitle")}</p>
             <p className="text-xs text-text-muted mt-1">{t("payloadRuleFilterDesc")}</p>
           </div>
-          <div className="rounded-lg border border-border bg-bg-secondary/40 p-3">
+          <div className="rounded-lg border border-border bg-surface-2 p-3">
             <p className="text-sm font-medium">{t("payloadRuleDefaultRawTitle")}</p>
             <p className="text-xs text-text-muted mt-1">{t("payloadRuleDefaultRawDesc")}</p>
           </div>
@@ -221,10 +221,10 @@ export default function PayloadRulesTab() {
           <div
             className={`flex items-center gap-2 px-3 py-2 rounded-lg text-sm ${
               message.type === "success"
-                ? "bg-green-500/10 text-green-600 dark:text-green-400"
+                ? "bg-success/10 text-success"
                 : message.type === "info"
-                  ? "bg-blue-500/10 text-blue-600 dark:text-blue-400"
-                  : "bg-red-500/10 text-red-600 dark:text-red-400"
+                  ? "bg-bg-subtle text-text-muted"
+                  : "bg-error/10 text-error"
             }`}
           >
             <span className="material-symbols-outlined text-[16px]">
@@ -238,8 +238,8 @@ export default function PayloadRulesTab() {
           </div>
         )}
 
-        <div className="rounded-xl border border-border overflow-hidden">
-          <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-bg-secondary/30">
+        <div className="rounded-lg border border-border overflow-hidden">
+          <div className="flex items-center justify-between px-4 py-3 border-b border-border bg-surface-2">
             <div>
               <p className="text-sm font-medium">{t("payloadEditorTitle")}</p>
               <p className="text-xs text-text-muted">{t("payloadEditorDesc")}</p>
@@ -262,7 +262,7 @@ export default function PayloadRulesTab() {
         </div>
 
         {parsedEditor.error && (
-          <p className="text-sm text-red-500">
+          <p className="text-sm text-error">
             {t("payloadJsonParseError", { error: parsedEditor.error })}
           </p>
         )}

@@ -261,7 +261,7 @@ export default function ConnectionsListPanel({
         onChange={(e) => setAccountSearch(e.target.value)}
         placeholder={t("accountSearchPlaceholder", "Search accounts…")}
         aria-label={t("accountSearchPlaceholder", "Search accounts…")}
-        className="w-full rounded-lg border border-border bg-sidebar/50 py-1.5 pl-7 pr-3 text-xs text-text-main placeholder:text-text-muted focus:outline-none focus:ring-1 focus:ring-primary"
+        className="w-full rounded-control border border-border-strong bg-surface py-1.5 pl-7 pr-3 text-xs text-text-main placeholder:text-text-subtle transition-colors focus:outline-none focus:border-primary"
       />
     </div>
   );
@@ -278,8 +278,8 @@ export default function ConnectionsListPanel({
           }}
           className={`px-2.5 py-1 text-xs rounded-full font-medium transition-colors ${
             healthFilter === opt.value
-              ? "bg-primary text-white"
-              : "bg-muted/60 text-text-muted hover:bg-muted"
+              ? "bg-primary/10 text-primary"
+              : "text-text-muted hover:bg-bg-subtle hover:text-text-main"
           }`}
         >
           {opt.label}
@@ -323,7 +323,7 @@ export default function ConnectionsListPanel({
     const someSelectedPage = pageConnections.some((c) => selectedIds.has(c.id));
     return (
       <>
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-3 py-2 bg-muted/50 rounded-t-lg border border-b-0 border-border">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-3 py-2 bg-surface-2 rounded-t-lg border border-b-0 border-border">
           <div className="flex items-center gap-2 flex-wrap">
             <label className="flex items-center gap-2 cursor-pointer select-none">
               <input
@@ -348,7 +348,7 @@ export default function ConnectionsListPanel({
                     });
                   }
                 }}
-                className="w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer"
+                className="w-4 h-4 rounded border-border-strong text-primary focus:ring-primary/30 cursor-pointer"
               />
               <span className="text-sm font-medium text-text-muted">
                 {selectedIds.size > 0
@@ -375,7 +375,7 @@ export default function ConnectionsListPanel({
           {bulkActions}
         </div>
         {paginationBar}
-        <div className="flex flex-col divide-y divide-black/[0.03] dark:divide-white/[0.03] border border-t-0 border-border rounded-b-lg overflow-hidden">
+        <div className="flex flex-col divide-y divide-border border border-t-0 border-border rounded-b-lg overflow-hidden">
           {pageConnections.length === 0 ? (
             <div className="px-3 py-6 text-center text-sm text-text-muted">
               {t("noFilteredConnections", "No connections match the current filter.")}
@@ -508,7 +508,7 @@ export default function ConnectionsListPanel({
   return (
     <>
       {selectedIds.size > 0 || connections.length > 0 ? (
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-3 py-2 bg-muted/50 rounded-t-lg border border-b-0 border-border">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-2 px-3 py-2 bg-surface-2 rounded-t-lg border border-b-0 border-border">
           <div className="flex items-center gap-2 flex-wrap">
             <label className="flex items-center gap-2 cursor-pointer select-none">
               <input
@@ -518,7 +518,7 @@ export default function ConnectionsListPanel({
                   if (el) el.indeterminate = someSelected;
                 }}
                 onChange={handleToggleSelectAll}
-                className="w-4 h-4 rounded border-border text-primary focus:ring-primary/30 cursor-pointer"
+                className="w-4 h-4 rounded border-border-strong text-primary focus:ring-primary/30 cursor-pointer"
               />
               <span className="text-sm font-medium text-text-muted">
                 {selectedIds.size > 0
@@ -558,19 +558,17 @@ export default function ConnectionsListPanel({
           return (
             <div
               key={tag || "__untagged__"}
-              className={
-                gi > 0 ? "border-t border-black/[0.06] dark:border-white/[0.06] mt-1 pt-1" : ""
-              }
+              className={gi > 0 ? "border-t border-border mt-1 pt-1" : ""}
             >
               {tag && (
                 <div className="flex items-center gap-2 px-3 pt-2 pb-1">
-                  <span className="material-symbols-outlined text-[13px] text-text-muted/50">
+                  <span className="material-symbols-outlined text-[13px] text-text-subtle">
                     label
                   </span>
-                  <span className="text-[11px] font-semibold uppercase tracking-widest text-text-muted/60 select-none">
+                  <span className="text-[11px] font-medium uppercase tracking-wider text-text-subtle select-none">
                     {tag}
                   </span>
-                  <div className="flex-1 h-px bg-black/[0.04] dark:bg-white/[0.04]" />
+                  <div className="flex-1 h-px bg-border" />
                   <DistributeProxiesButton
                     onDistribute={async () => {
                       await handleDistributeProxies(tag);
@@ -578,10 +576,10 @@ export default function ConnectionsListPanel({
                     disabled={batchTesting || !!retestingId}
                     size="sm"
                   />
-                  <span className="text-[10px] text-text-muted/40">{groupTotal}</span>
+                  <span className="text-[10px] text-text-subtle tabular-nums">{groupTotal}</span>
                 </div>
               )}
-              <div className="flex flex-col divide-y divide-black/[0.03] dark:divide-white/[0.03]">
+              <div className="flex flex-col divide-y divide-border">
                 {groupConns.map((conn, index) => (
                   <ConnectionRow
                     key={conn.id}

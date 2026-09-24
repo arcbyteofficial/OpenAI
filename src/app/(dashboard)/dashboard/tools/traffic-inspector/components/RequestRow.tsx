@@ -15,13 +15,13 @@ interface RequestRowProps {
 }
 
 function statusColor(status: InterceptedRequest["status"]): string {
-  if (status === "in-flight") return "text-gray-400";
-  if (status === "error") return "text-red-400";
+  if (status === "in-flight") return "text-text-subtle";
+  if (status === "error") return "text-error";
   if (typeof status === "number") {
-    if (status < 300) return "text-green-400";
-    if (status < 400) return "text-yellow-400";
-    if (status < 500) return "text-orange-400";
-    return "text-red-400";
+    if (status < 300) return "text-success";
+    if (status < 400) return "text-primary";
+    if (status < 500) return "text-warning";
+    return "text-error";
   }
   return "text-text-muted";
 }
@@ -54,9 +54,9 @@ export function RequestRow({ request, selected, onClick, onSameContext, style }:
       onKeyDown={(e) => (e.key === "Enter" || e.key === " ") && onClick()}
       style={style}
       className={cn(
-        "flex items-stretch gap-1 border-b border-border/40 cursor-pointer hover:bg-bg-subtle",
-        "focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-500",
-        selected && "bg-surface"
+        "flex items-stretch gap-1 border-b border-border cursor-pointer hover:bg-bg-subtle transition-colors",
+        "focus:outline-none focus-visible:ring-1 focus-visible:ring-primary",
+        selected && "bg-primary/10"
       )}
     >
       <ContextColorBar contextKey={request.contextKey} />
@@ -66,7 +66,9 @@ export function RequestRow({ request, selected, onClick, onSameContext, style }:
             {formatTime(request.timestamp)}
           </span>
           <span className="font-mono font-medium text-text-main shrink-0">{request.method}</span>
-          <span className={cn("font-mono font-bold shrink-0", sc)}>{String(request.status)}</span>
+          <span className={cn("font-mono font-semibold tabular-nums shrink-0", sc)}>
+            {String(request.status)}
+          </span>
           <span className="text-text-muted shrink-0">{formatSize(request.responseSize)}</span>
           <span className="shrink-0">
             <AgentEmoji agentId={request.agent} />
@@ -87,7 +89,7 @@ export function RequestRow({ request, selected, onClick, onSameContext, style }:
         {request.contextKey && (
           <button
             type="button"
-            className="text-[10px] text-text-muted font-mono opacity-60 hover:opacity-100 hover:text-blue-400 focus:outline-none focus-visible:ring-1 focus-visible:ring-blue-500 rounded"
+            className="text-[10px] text-text-muted font-mono opacity-60 hover:opacity-100 hover:text-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded"
             title={t("filterByContext")}
             onClick={(e) => {
               e.stopPropagation();
