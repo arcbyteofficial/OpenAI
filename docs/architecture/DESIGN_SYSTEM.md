@@ -122,7 +122,32 @@ icons in the text color — no per-item colored accents), a translucent sticky h
   accent was `coral` — the previous default — migrates to `blue`.
 - `viewport.themeColor` in `src/app/layout.tsx` is a light/dark pair (`#fafafa` / `#0a0a0a`).
 
-## 5. Intentional exceptions
+## 5. Brand
+
+The product is branded **ArcByte | Open AI**. One constant, `BRAND` in
+`src/shared/constants/appConfig.ts`, feeds every surface:
+
+| Field       | Value                | Used for                                                 |
+| ----------- | -------------------- | -------------------------------------------------------- |
+| `name`      | `ArcByte \| Open AI` | page titles, lockups, PWA `name`, default `instanceName` |
+| `shortName` | `ArcByte`            | diagram/hub node labels, PWA `short_name`                |
+| `logoLight` | `/logo_white.png`    | logo on the light theme; favicon for light browser UI    |
+| `logoDark`  | `/logo_dark.png`     | logo on the dark theme; favicon for dark browser UI      |
+
+- **Components.** `BrandMark` (`src/shared/components/BrandLogo.tsx`) renders both logo files and
+  lets CSS (`dark:`) show the one for the active theme, so the server render already matches and
+  nothing flashes on hydration. `BrandWordmark` renders the name with a muted separator. The sidebar,
+  login, landing navigation/footer/hub, home topology hub and docs navigation use them.
+- **Favicons.** `src/app/layout.tsx` links the two logos with `prefers-color-scheme` media queries.
+  An operator's custom favicon (Settings → Appearance) still replaces them.
+- **Overrides.** Settings → Appearance keeps whitelabeling per instance: a custom `instanceName` or
+  logo replaces the default wordmark/mark in the sidebar and the page title.
+- **Copy.** Brand-only i18n strings (titles, the home greeting, diagram labels, copyright) carry the
+  new name in every locale. Body copy that mentions the upstream project, protocol identifiers
+  (`X-OmniRoute-*` headers, User-Agents, config markers) and the `omniroute` package/CLI name are
+  unchanged.
+
+## 6. Intentional exceptions
 
 - Categorical palettes stay colored: chart series, provider-category legend dots
   (`ProviderCard`, `ProviderSummaryCard`), combo weight bars (`WeightTotalBar`), gamification tiers,
@@ -131,16 +156,17 @@ icons in the text color — no per-item colored accents), a translucent sticky h
 - Provider and agent brand colors (logos, `tool.color` step markers) are kept.
 - The Monaco editor keeps its dark theme where configured.
 
-## 6. Reference index
+## 7. Reference index
 
-| Area                | Path                                                                                                                                              |
-| ------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Tokens & base rules | `src/app/globals.css`                                                                                                                             |
-| Fonts               | `src/app/fonts/`                                                                                                                                  |
-| Theme store         | `src/store/themeStore.ts`, `src/shared/components/ThemeProvider.tsx`, `src/shared/constants/appConfig.ts`                                         |
-| Appearance settings | `src/app/(dashboard)/dashboard/settings/components/AppearanceTab.tsx`                                                                             |
-| Shell               | `src/shared/components/{Sidebar,Header,CommandPalette,Breadcrumbs}.tsx`, `src/shared/components/layouts/`                                         |
-| Primitives          | `src/shared/components/{Button,Card,Input,Select,Textarea,Toggle,Checkbox,Badge,Modal,Tooltip,SegmentedControl,DataTable,EmptyState,Loading}.tsx` |
-| Status colors       | `src/shared/constants/statusColors.ts`, `src/shared/components/flow/edgeStyles.ts`                                                                |
-| `cn` util           | `src/shared/utils/cn.ts`                                                                                                                          |
-| Guards              | `tests/unit/design-system-identity.test.ts`, `tests/unit/theme-store-accent.test.ts`                                                              |
+| Area                | Path                                                                                                                                                           |
+| ------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Tokens & base rules | `src/app/globals.css`                                                                                                                                          |
+| Fonts               | `src/app/fonts/`                                                                                                                                               |
+| Brand               | `src/shared/constants/appConfig.ts` (`BRAND`), `src/shared/components/BrandLogo.tsx`, `public/logo_white.png`, `public/logo_dark.png`                          |
+| Theme store         | `src/store/themeStore.ts`, `src/shared/components/ThemeProvider.tsx`, `src/shared/constants/appConfig.ts`                                                      |
+| Appearance settings | `src/app/(dashboard)/dashboard/settings/components/AppearanceTab.tsx`                                                                                          |
+| Shell               | `src/shared/components/{Sidebar,Header,CommandPalette,Breadcrumbs}.tsx`, `src/shared/components/layouts/`                                                      |
+| Primitives          | `src/shared/components/{Button,Card,Input,Select,Textarea,Toggle,Checkbox,Badge,Modal,Tooltip,SegmentedControl,DataTable,EmptyState,Loading}.tsx`              |
+| Status colors       | `src/shared/constants/statusColors.ts`, `src/shared/components/flow/edgeStyles.ts`                                                                             |
+| `cn` util           | `src/shared/utils/cn.ts`                                                                                                                                       |
+| Guards              | `tests/unit/design-system-identity.test.ts`, `tests/unit/theme-store-accent.test.ts`, `tests/unit/brand-identity.test.ts`, `tests/unit/ui/brand-logo.test.tsx` |

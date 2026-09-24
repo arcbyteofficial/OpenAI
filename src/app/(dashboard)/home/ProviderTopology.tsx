@@ -6,6 +6,8 @@ import { useTranslations } from "next-intl";
 import { Handle, Position, type Node, type Edge, type NodeTypes } from "@xyflow/react";
 import { AI_PROVIDERS } from "@/shared/constants/providers";
 import ProviderIcon from "@/shared/components/ProviderIcon";
+import { BrandMark } from "@/shared/components/BrandLogo";
+import { BRAND } from "@/shared/constants/appConfig";
 import { FlowCanvas } from "@/shared/components/flow/FlowCanvas";
 import { StatusDot } from "@/shared/components/flow/StatusDot";
 import { edgeStyle, FLOW_EDGE_COLORS, flowColorAlpha } from "@/shared/components/flow/edgeStyles";
@@ -150,10 +152,8 @@ function RouterNode({ data }: { data: RouterNodeData }) {
         className="!bg-transparent !border-0 !w-0 !h-0"
       />
 
-      <div className="flex items-center justify-center size-7 rounded-md bg-contrast shrink-0">
-        <span className="material-symbols-outlined text-contrast-fg text-[16px]">route</span>
-      </div>
-      <span className="text-sm font-semibold tracking-tight text-text-main">OmniRoute</span>
+      <BrandMark size={28} className="rounded-md" />
+      <span className="text-sm font-semibold tracking-tight text-text-main">{BRAND.shortName}</span>
       {data.activeCount > 0 && (
         <span className="ml-1 px-1.5 py-0.5 rounded-full bg-primary text-white text-[10px] font-semibold tabular-nums leading-none">
           {data.activeCount}

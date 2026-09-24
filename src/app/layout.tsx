@@ -9,6 +9,7 @@ import type { Viewport } from "next";
 import { PwaRegister } from "@/shared/components/PwaRegister";
 import { LocaleAutoDetect } from "@/shared/components/LocaleAutoDetect";
 import { BasePathNetworkProvider } from "@/shared/components/BasePathNetworkProvider";
+import { BRAND } from "@/shared/constants/appConfig";
 
 export const viewport: Viewport = {
   themeColor: [
@@ -41,9 +42,9 @@ export async function generateMetadata() {
       icon: customFaviconUrl
         ? "/api/settings/favicon"
         : [
-            { url: "/favicon.ico", sizes: "any" },
-            { url: "/favicon.svg", type: "image/svg+xml" },
-            { url: "/icon-512.png", type: "image/png", sizes: "512x512" },
+            // The browser picks the variant that matches its own light/dark UI.
+            { url: BRAND.logoLight, type: "image/png", media: "(prefers-color-scheme: light)" },
+            { url: BRAND.logoDark, type: "image/png", media: "(prefers-color-scheme: dark)" },
           ],
       apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
     },

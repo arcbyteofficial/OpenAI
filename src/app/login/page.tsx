@@ -4,6 +4,8 @@ import { useTranslations } from "next-intl";
 
 import { useState, useEffect } from "react";
 import { Button, Input } from "@/shared/components";
+import { BrandMark, BrandWordmark } from "@/shared/components/BrandLogo";
+import { BRAND } from "@/shared/constants/appConfig";
 import { useRouter } from "next/navigation";
 
 export default function LoginPage() {
@@ -177,7 +179,7 @@ export default function LoginPage() {
           </div>
 
           <p className="text-center text-xs text-text-subtle mt-6">
-            OmniRoute — {t("unifiedProxy")}
+            {BRAND.name} — {t("unifiedProxy")}
           </p>
         </div>
       </div>
@@ -219,7 +221,7 @@ export default function LoginPage() {
           </div>
 
           <p className="text-center text-xs text-text-subtle mt-6">
-            OmniRoute — {t("unifiedAiApiProxy")}
+            {BRAND.name} — {t("unifiedAiApiProxy")}
           </p>
         </div>
       </div>
@@ -238,14 +240,8 @@ export default function LoginPage() {
           >
             <div className="mb-8">
               <div className="flex items-center gap-3 mb-8">
-                <div className="w-10 h-10 rounded-lg bg-contrast flex items-center justify-center">
-                  <span className="material-symbols-outlined text-contrast-fg text-[20px]">
-                    hub
-                  </span>
-                </div>
-                <span className="text-base font-semibold text-text-main tracking-tight">
-                  OmniRoute
-                </span>
+                <BrandMark size={40} className="rounded-lg" />
+                <BrandWordmark className="text-base" />
               </div>
               <h1 className="text-2xl font-semibold text-text-main tracking-tight">
                 {t("signIn")}

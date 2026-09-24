@@ -9,6 +9,7 @@
  */
 
 import { useEffect, useRef, useState } from "react";
+import { BRAND } from "@/shared/constants/appConfig";
 
 declare global {
   interface Window {
@@ -109,7 +110,7 @@ export default function TelegramMiniApp() {
         fontFamily: "system-ui, -apple-system, sans-serif",
       }}
     >
-      <h1 style={{ fontSize: 18, margin: "0 0 12px" }}>OmniRoute Mini App</h1>
+      <h1 style={{ fontSize: 18, margin: "0 0 12px" }}>{BRAND.name} Mini App</h1>
       {error && (
         <p style={{ color: "var(--color-error)", fontSize: 13, margin: "0 0 12px" }}>{error}</p>
       )}

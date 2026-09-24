@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 
 import ProviderIcon from "@/shared/components/ProviderIcon";
+import { BrandMark } from "@/shared/components/BrandLogo";
 
 export default function FlowAnimation() {
   const t = useTranslations("landing");
@@ -52,15 +53,10 @@ export default function FlowAnimation() {
   return (
     <div className="mt-16 w-full max-w-4xl overflow-hidden">
       <div className="relative h-[360px] hidden md:flex items-center justify-center overflow-hidden">
-        {/* OmniRoute Hub - Center */}
-        <div className="relative z-20 w-32 h-32 rounded-full bg-contrast border-2 border-contrast flex flex-col items-center justify-center gap-1 group cursor-pointer">
-          <span
-            className="material-symbols-outlined text-[32px] text-contrast-fg"
-            aria-hidden="true"
-          >
-            hub
-          </span>
-          <span className="text-[11px] font-semibold text-contrast-fg tracking-wider uppercase">
+        {/* Brand hub - Center */}
+        <div className="relative z-20 w-32 h-32 rounded-full bg-surface border border-border-strong flex flex-col items-center justify-center gap-1.5 group cursor-pointer">
+          <BrandMark size={40} className="rounded-lg" />
+          <span className="text-[11px] font-semibold text-text-main tracking-wider uppercase">
             {t("brandName")}
           </span>
         </div>

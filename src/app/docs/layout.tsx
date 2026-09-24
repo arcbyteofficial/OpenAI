@@ -5,6 +5,7 @@ import type { ReactNode } from "react";
 import type { BaseLayoutProps } from "fumadocs-ui/layouts/shared";
 import { Suspense } from "react";
 import LanguageSelector from "@/shared/components/LanguageSelector";
+import { BrandMark } from "@/shared/components/BrandLogo";
 import { getTranslations } from "next-intl/server";
 
 export async function generateMetadata() {
@@ -26,7 +27,12 @@ export default async function Layout({ children }: { children: ReactNode }) {
   const t = await getTranslations("docs");
   const docsLayoutOptions: BaseLayoutProps = {
     nav: {
-      title: t("layoutNavTitle"),
+      title: (
+        <span className="inline-flex items-center gap-2">
+          <BrandMark size={20} className="rounded" />
+          {t("layoutNavTitle")}
+        </span>
+      ),
       url: "/docs",
       children: (
         <Suspense fallback={<div className="w-24 h-8" />}>

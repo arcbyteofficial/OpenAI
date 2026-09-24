@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
+import { APP_CONFIG, BRAND } from "@/shared/constants/appConfig";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
-    name: "OmniRoute AI 网关",
-    short_name: "OmniRoute",
-    description: "OmniRoute 是一个面向多提供者 LLM 的 AI 网关。一个端点连接您所有的 AI 提供者。",
+    name: BRAND.name,
+    short_name: BRAND.shortName,
+    description: `${BRAND.name} — ${APP_CONFIG.description}. One endpoint for all your AI providers.`,
     start_url: "/dashboard",
     scope: "/",
     display: "standalone",
@@ -26,7 +27,7 @@ export default function manifest(): MetadataRoute.Manifest {
         src: "/icon-512.png",
         sizes: "512x512",
         type: "image/png",
-        purpose: "any maskable",
+        purpose: "any",
       },
       {
         src: "/icon-512.png",
@@ -46,7 +47,7 @@ export default function manifest(): MetadataRoute.Manifest {
         sizes: "1280x720",
         type: "image/png",
         form_factor: "wide",
-        label: "OmniRoute Dashboard",
+        label: `${BRAND.name} Dashboard`,
       },
     ],
   };

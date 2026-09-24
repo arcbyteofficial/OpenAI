@@ -5,6 +5,7 @@ import { Button, Card, Toggle } from "@/shared/components";
 import { useTheme } from "@/shared/hooks/useTheme";
 import useThemeStore, { COLOR_THEMES } from "@/store/themeStore";
 import { cn } from "@/shared/utils/cn";
+import { BRAND } from "@/shared/constants/appConfig";
 import { useTranslations } from "next-intl";
 import { useIsElectron } from "@/shared/hooks/useElectron";
 import {
@@ -527,9 +528,9 @@ export default function AppearanceTab() {
               </div>
               <input
                 type="text"
-                value={settings.instanceName || "OmniRoute"}
+                value={settings.instanceName || BRAND.name}
                 onChange={(e) => updateSetting("instanceName", e.target.value)}
-                placeholder="OmniRoute"
+                placeholder={BRAND.name}
                 maxLength={100}
                 className="h-10 px-3 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] w-48"
               />

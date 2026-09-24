@@ -1,4 +1,5 @@
 import { NextResponse } from "next/server";
+import { BRAND } from "@/shared/constants/appConfig";
 import { getSettings } from "@/lib/db/settings";
 import { SAFE_OUTBOUND_FETCH_PRESETS, safeOutboundFetch } from "@/shared/network/safeOutboundFetch";
 
@@ -83,12 +84,12 @@ export async function GET() {
     }
 
     if (!faviconData) {
-      return NextResponse.redirect("/favicon.svg");
+      return NextResponse.redirect(BRAND.logoLight);
     }
 
     const match = faviconData.match(/^data:([^;]+);base64,(.+)$/);
     if (!match) {
-      return NextResponse.redirect("/favicon.svg");
+      return NextResponse.redirect(BRAND.logoLight);
     }
 
     const contentType = match[1];
@@ -103,6 +104,6 @@ export async function GET() {
     });
   } catch (error) {
     console.error("Favicon API error:", error);
-    return NextResponse.redirect("/favicon.svg");
+    return NextResponse.redirect(BRAND.logoLight);
   }
 }

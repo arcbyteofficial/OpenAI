@@ -3,7 +3,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
-import OmniRouteLogo from "@/shared/components/OmniRouteLogo";
+import { BrandMark, BrandWordmark } from "@/shared/components/BrandLogo";
 
 export default function Navigation() {
   const t = useTranslations("landing");
@@ -20,11 +20,9 @@ export default function Navigation() {
           onClick={() => router.push("/")}
           aria-label={t("navigateHome")}
         >
-          <div className="size-8 rounded-lg bg-contrast flex items-center justify-center text-contrast-fg">
-            <OmniRouteLogo size={20} className="text-contrast-fg" />
-          </div>
+          <BrandMark size={32} className="rounded-lg" />
           <h2 className="text-text-main text-lg sm:text-xl font-semibold tracking-tight truncate sm:max-w-none max-w-[160px]">
-            {t("brandName")}
+            <BrandWordmark />
           </h2>
         </button>
 

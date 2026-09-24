@@ -12,7 +12,7 @@ import {
   toggleExpandedSection,
 } from "@/shared/utils/sidebarExpansionState";
 import { APP_CONFIG } from "@/shared/constants/appConfig";
-import OmniRouteLogo from "./OmniRouteLogo";
+import { BrandMark, BrandWordmark } from "./BrandLogo";
 import Button from "./Button";
 import Input from "./Input";
 import { ConfirmModal } from "./Modal";
@@ -670,21 +670,21 @@ export default function Sidebar({
             prefetch={false}
             className={cn("flex items-center", collapsed ? "justify-center" : "gap-2.5 px-2")}
           >
-            <div className="flex items-center justify-center size-7 rounded-md bg-contrast shrink-0">
-              {customLogo ? (
+            {customLogo ? (
+              <div className="flex items-center justify-center size-7 rounded-md bg-contrast shrink-0">
                 <img
                   src={customLogo}
                   alt={customAppName || APP_CONFIG.name}
                   className="size-5 object-contain"
                 />
-              ) : (
-                <OmniRouteLogo size={18} className="text-contrast-fg" />
-              )}
-            </div>
+              </div>
+            ) : (
+              <BrandMark size={28} className="rounded-md" />
+            )}
             {!collapsed && (
               <div className="flex flex-col min-w-0">
                 <h1 className="text-[13px] font-semibold tracking-tight text-text-main truncate">
-                  {customAppName || APP_CONFIG.name}
+                  {customAppName || <BrandWordmark />}
                 </h1>
                 <span className="text-[11px] text-text-subtle">v{APP_CONFIG.version}</span>
               </div>

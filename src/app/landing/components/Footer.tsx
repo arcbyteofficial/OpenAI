@@ -1,7 +1,7 @@
 "use client";
 import Link from "next/link";
 import { useTranslations } from "next-intl";
-import OmniRouteLogo from "@/shared/components/OmniRouteLogo";
+import { BrandMark, BrandWordmark } from "@/shared/components/BrandLogo";
 
 export default function Footer() {
   const t = useTranslations("landing");
@@ -14,11 +14,9 @@ export default function Footer() {
           {/* Brand */}
           <div className="col-span-2 lg:col-span-2">
             <div className="flex items-center gap-2.5 mb-4">
-              <div className="size-6 rounded-md bg-contrast flex items-center justify-center text-contrast-fg">
-                <OmniRouteLogo size={16} className="text-contrast-fg" />
-              </div>
+              <BrandMark size={24} className="rounded-md" />
               <h3 className="text-text-main text-base font-semibold tracking-tight">
-                {t("brandName")}
+                <BrandWordmark />
               </h3>
             </div>
             <p className="text-text-muted text-sm max-w-xs mb-6 break-words">
