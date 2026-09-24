@@ -100,8 +100,9 @@ contains.
 
 One-time setup on the GitHub repository:
 
-1. **Actions → enable workflows.** GitHub disables Actions on a new fork until
-   you enable them.
+1. Make sure GitHub Actions runs on the fork: if the **Actions** tab says
+   workflows are disabled for this fork, enable them. No image is built
+   otherwise.
 2. After the first successful run, open the `openai` package (profile →
    **Packages**) and set its visibility to **Public** — or run
    `docker login ghcr.io` on the server with a token that can read packages.
