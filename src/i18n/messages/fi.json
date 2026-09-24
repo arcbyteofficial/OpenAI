@@ -1178,7 +1178,7 @@
     "settingsResilience": "Vikasietoisuus",
     "modelLockout": "Mallin lukitus",
     "settingsAdvanced": "Lisäasetukset",
-    "omniProxySection": "OmniProxy",
+    "omniProxySection": "ArcByte Proxy",
     "quotaTracker": "Palveluntarjoajan kiintiö",
     "providerQuota": "Palveluntarjoajan kiintiö",
     "runtime": "Ajoympäristö",

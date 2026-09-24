@@ -146,6 +146,12 @@ The product is branded **ArcByte | Open AI**. One constant, `BRAND` in
   `img-src` allows `https:`), so an offline or air-gapped install shows the wordmark without the
   mark. The PWA manifest, `apple-touch-icon.png`, service-worker notification icons and the
   `/favicon.ico` liveness probe used by `omniroute doctor` still use the local files in `public/`.
+- **Upstream promotions.** `BRAND.showUpstreamPromotions` (off) hides what belongs to the upstream
+  OmniRoute project: the home-page partner banners (Kimi, Cheaper Inference, the VS Code
+  extension), its remote news feed (`NewsBanner`, fetched from the upstream `news.json`) and the
+  "Open Source Friend" chips on provider cards. The partner providers themselves still work.
+- **Sidebar.** The core gateway section (id `omni-proxy`) is labelled `ArcByte Proxy` in every
+  locale; saved sidebar preferences are keyed by section id, so they carry over.
 - **Overrides.** Settings → Appearance keeps whitelabeling per instance: a custom `instanceName` or
   logo replaces the default wordmark/mark in the sidebar and the page title.
 - **Copy.** Brand-only i18n strings (titles, the home greeting, diagram labels, copyright) carry the

@@ -1178,7 +1178,7 @@
     "settingsResilience": "Ausfallsicherheit",
     "modelLockout": "Modellsperre",
     "settingsAdvanced": "Erweitert",
-    "omniProxySection": "OmniProxy",
+    "omniProxySection": "ArcByte Proxy",
     "quotaTracker": "Anbieterkontingent",
     "providerQuota": "Anbieterkontingent",
     "runtime": "Laufzeitumgebung",

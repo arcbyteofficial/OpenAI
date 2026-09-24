@@ -140,3 +140,37 @@ test("brand-only i18n strings carry the new name in every locale", () => {
     }
   }
 });
+
+test("upstream OmniRoute promotions are off and gated in one place", () => {
+  assert.equal(BRAND.showUpstreamPromotions, false);
+
+  const home = read("src/app/(dashboard)/home/page.tsx");
+  const gate = home.indexOf("{BRAND.showUpstreamPromotions && (");
+  assert.ok(gate >= 0, "the home page gates the partner banners on the brand switch");
+  for (const banner of [
+    "<KimiSponsorBanner />",
+    "<CheaperInferenceSponsorBanner />",
+    "<VscodeCopilotBanner />",
+    "<NewsBanner />",
+  ]) {
+    const at = home.indexOf(banner);
+    assert.ok(at > gate, `${banner} renders only inside the gate`);
+    assert.equal(home.indexOf(banner, at + 1), -1, `${banner} is rendered once`);
+  }
+
+  const card = read("src/app/(dashboard)/dashboard/providers/components/ProviderCard.tsx");
+  assert.ok(card.includes("isKimiPartner && BRAND.showUpstreamPromotions ?"));
+  assert.ok(card.includes("isCheaperInferencePartner && BRAND.showUpstreamPromotions ?"));
+});
+
+test("the gateway sidebar section is named after the brand in every locale", () => {
+  const sections = read("src/shared/constants/sidebarVisibility/sections.ts");
+  assert.ok(sections.includes("titleFallback: `${BRAND.company} Proxy`"));
+  assert.ok(!sections.includes('"OmniProxy"'));
+
+  const dir = path.join(root, "src/i18n/messages");
+  for (const file of fs.readdirSync(dir).filter((f) => f.endsWith(".json"))) {
+    const messages = JSON.parse(fs.readFileSync(path.join(dir, file), "utf8"));
+    assert.equal(messages.sidebar.omniProxySection, `${BRAND.company} Proxy`, file);
+  }
+});

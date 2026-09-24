@@ -1178,7 +1178,7 @@
     "settingsResilience": "ความยืดหยุ่น",
     "modelLockout": "การล็อกโมเดล",
     "settingsAdvanced": "ขั้นสูง",
-    "omniProxySection": "OmniProxy",
+    "omniProxySection": "ArcByte Proxy",
     "quotaTracker": "โควตาของผู้ให้บริการ",
     "providerQuota": "โควตาของผู้ให้บริการ",
     "runtime": "รันไทม์",

@@ -1178,7 +1178,7 @@
     "settingsResilience": "耐障害性",
     "modelLockout": "モデルロックアウト",
     "settingsAdvanced": "詳細設定",
-    "omniProxySection": "OmniProxy",
+    "omniProxySection": "ArcByte Proxy",
     "quotaTracker": "プロバイダークォータ",
     "providerQuota": "プロバイダークォータ",
     "runtime": "ランタイム",

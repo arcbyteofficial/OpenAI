@@ -7,6 +7,7 @@ import CheaperInferenceSponsorBanner from "../dashboard/CheaperInferenceSponsorB
 import VscodeCopilotBanner from "../dashboard/VscodeCopilotBanner";
 import NewsBanner from "../dashboard/NewsBanner";
 import FirstRunReadinessCard from "../dashboard/FirstRunReadinessCard";
+import { BRAND } from "@/shared/constants/appConfig";
 
 export const dynamic = "force-dynamic";
 
@@ -18,10 +19,14 @@ export default async function HomePage() {
     <>
       {isBootstrapped && <BootstrapBanner />}
       <FirstRunReadinessCard setupComplete={Boolean(settings.setupComplete)} />
-      <KimiSponsorBanner />
-      <CheaperInferenceSponsorBanner />
-      <VscodeCopilotBanner />
-      <NewsBanner />
+      {BRAND.showUpstreamPromotions && (
+        <>
+          <KimiSponsorBanner />
+          <CheaperInferenceSponsorBanner />
+          <VscodeCopilotBanner />
+          <NewsBanner />
+        </>
+      )}
       <HomePageClient machineId={machineId} />
     </>
   );

@@ -16,6 +16,12 @@ export const BRAND = {
   shortName: "ArcByte",
   logoLight: "https://cdn.arcbyte.co/favicon_white.png",
   logoDark: "https://cdn.arcbyte.co/favicon_dark.png",
+  /**
+   * Promotions that belong to the upstream OmniRoute project: the home-page partner banners
+   * (Kimi, Cheaper Inference, the VS Code extension), its remote news feed and the
+   * "Open Source Friend" chips on provider cards. Off for this brand.
+   */
+  showUpstreamPromotions: false as boolean,
 } as const;
 
 export const APP_CONFIG = {

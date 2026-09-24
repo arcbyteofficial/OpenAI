@@ -1178,7 +1178,7 @@
     "settingsResilience": "Resilienza",
     "modelLockout": "Blocco del modello",
     "settingsAdvanced": "Avanzate",
-    "omniProxySection": "OmniProxy",
+    "omniProxySection": "ArcByte Proxy",
     "quotaTracker": "Quota del provider",
     "providerQuota": "Quota del provider",
     "runtime": "Runtime",

@@ -1178,7 +1178,7 @@
     "settingsResilience": "Отказоустойчивость",
     "modelLockout": "Блокировка моделей",
     "settingsAdvanced": "Расширенные настройки",
-    "omniProxySection": "OmniProxy",
+    "omniProxySection": "ArcByte Proxy",
     "quotaTracker": "Квота провайдера",
     "providerQuota": "Квота провайдера",
     "runtime": "Среда выполнения",

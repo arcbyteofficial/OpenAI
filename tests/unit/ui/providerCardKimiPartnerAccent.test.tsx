@@ -20,7 +20,7 @@
 import React from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { act } from "react";
-import { afterEach, describe, expect, it, vi } from "vitest";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import ProviderCard from "@/app/(dashboard)/dashboard/providers/components/ProviderCard";
 
 vi.mock("next-intl", () => ({ useTranslations: () => (k: string) => k }));
@@ -28,9 +28,48 @@ vi.mock("@/shared/components/ProviderTestSlideOver", () => ({ default: () => nul
 vi.mock("@/shared/components/ProviderIcon", () => ({ default: () => null }));
 vi.mock("next/navigation", () => ({ useRouter: () => ({ push: () => {} }) }));
 
+// The "Open Source Friend" chips are upstream OmniRoute promotions, hidden by default
+// (BRAND.showUpstreamPromotions). A getter lets each block pick the switch position.
+const promotions = vi.hoisted(() => ({ on: false }));
+vi.mock("@/shared/constants/appConfig", async (importOriginal) => {
+  const actual = await importOriginal<typeof import("@/shared/constants/appConfig")>();
+  return {
+    ...actual,
+    BRAND: {
+      ...actual.BRAND,
+      get showUpstreamPromotions() {
+        return promotions.on;
+      },
+    },
+  };
+});
+
+let container: HTMLDivElement | null = null;
+const mounted: { root: Root; container: HTMLDivElement }[] = [];
+
+function renderCard(providerId: string, name: string) {
+  container = document.createElement("div");
+  document.body.appendChild(container);
+  const root = createRoot(container);
+  mounted.push({ root, container });
+  act(() => {
+    root.render(
+      <ProviderCard
+        providerId={providerId}
+        provider={{ id: providerId, name }}
+        stats={{ total: 1, connected: 1, error: 0, warning: 0 }}
+        authType="apikey"
+        onToggle={() => {}}
+      />
+    );
+  });
+  return container;
+}
+
 describe("ProviderCard — Kimi (Moonshot AI) founding-friend accent", () => {
-  let container: HTMLDivElement | null = null;
-  const mounted: { root: Root; container: HTMLDivElement }[] = [];
+  beforeEach(() => {
+    promotions.on = true;
+  });
 
   afterEach(async () => {
     for (const instance of mounted.splice(0)) {
@@ -41,25 +80,6 @@ describe("ProviderCard — Kimi (Moonshot AI) founding-friend accent", () => {
       container = null;
     }
   });
-
-  function renderCard(providerId: string, name: string) {
-    container = document.createElement("div");
-    document.body.appendChild(container);
-    const root = createRoot(container);
-    mounted.push({ root, container });
-    act(() => {
-      root.render(
-        <ProviderCard
-          providerId={providerId}
-          provider={{ id: providerId, name }}
-          stats={{ total: 1, connected: 1, error: 0, warning: 0 }}
-          authType="apikey"
-          onToggle={() => {}}
-        />
-      );
-    });
-    return container;
-  }
 
   it("renders the Founding Friend badge + Kimi-blue accent for kimi-coding", () => {
     const el = renderCard("kimi-coding", "Kimi Code CLI");
@@ -95,5 +115,29 @@ describe("ProviderCard — Kimi (Moonshot AI) founding-friend accent", () => {
     // itself would still flag it correctly if it were ever rendered directly.
     const el = renderCard("kimi-coding-apikey", "Kimi Code API Key");
     expect(el.textContent).toContain("Founding Friend");
+  });
+});
+
+describe("ProviderCard — upstream promotion chips are hidden by default", () => {
+  beforeEach(() => {
+    promotions.on = false;
+  });
+
+  afterEach(async () => {
+    for (const instance of mounted.splice(0)) {
+      await act(async () => instance.root.unmount());
+      instance.container.remove();
+    }
+  });
+
+  it("hides the Founding Friend chip but keeps the Kimi card accent", () => {
+    const el = renderCard("kimi-coding", "Kimi Code CLI");
+    expect(el.textContent).not.toContain("Founding Friend");
+    expect(el.querySelector("[class*='1783FF']")).not.toBeNull();
+  });
+
+  it("hides the Cheaper Inference Open Source Friend chip", () => {
+    const el = renderCard("cheaperinference", "Cheaper Inference");
+    expect(el.textContent).not.toContain("Open Source Friend");
   });
 });

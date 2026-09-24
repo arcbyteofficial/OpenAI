@@ -1,3 +1,4 @@
+import { BRAND } from "@/shared/constants/appConfig";
 import type {
   SidebarItemDefinition,
   SidebarItemGroup,
@@ -819,7 +820,7 @@ export const SIDEBAR_SECTIONS: readonly SidebarSectionDefinition[] = [
   {
     id: "omni-proxy",
     titleKey: "omniProxySection",
-    titleFallback: "OmniProxy",
+    titleFallback: `${BRAND.company} Proxy`,
     children: [
       ...OMNI_PROXY_ITEMS,
       COMPRESSION_CONTEXT_GROUP,

@@ -18,6 +18,7 @@ import {
 
 import { CategoryDot } from "./CategoryDot";
 import { isCheaperInferenceProviderId, isKimiPartnerProviderId } from "../featuredProviders";
+import { BRAND } from "@/shared/constants/appConfig";
 import { useOpenRouterProviderStat } from "../context/openRouterProviderStatsContext";
 
 interface ProviderStats {
@@ -355,38 +356,40 @@ const ProviderCard = forwardRef<ProviderCardHandle, ProviderCardProps>(function 
 
   // Kimi (Moonshot AI) official-partnership badge — literal brand-blue Tailwind
   // arbitrary values must stay in sync with KIMI_BRAND_COLOR (featuredProviders.ts).
-  const kimiOfficialSupporterChip = isKimiPartner ? (
-    <span
-      key="kimi-official-supporter"
-      className="inline-flex items-center gap-0.5 rounded-full border border-[#1783FF]/30 bg-[#1783FF]/10 px-1.5 py-0 text-[9px] font-semibold uppercase tracking-wide leading-none text-[#1067CC] dark:text-[#7CB8FF]"
-      title={providerText(
-        t,
-        "kimiOfficialSupporterTooltip",
-        "Kimi (Moonshot AI) is OmniRoute's founding Open Source Friend"
-      )}
-    >
-      <span className="material-symbols-outlined text-[10px] leading-none">verified</span>
-      {providerText(t, "kimiOfficialSupporterBadge", "Founding Friend")}
-    </span>
-  ) : null;
+  const kimiOfficialSupporterChip =
+    isKimiPartner && BRAND.showUpstreamPromotions ? (
+      <span
+        key="kimi-official-supporter"
+        className="inline-flex items-center gap-0.5 rounded-full border border-[#1783FF]/30 bg-[#1783FF]/10 px-1.5 py-0 text-[9px] font-semibold uppercase tracking-wide leading-none text-[#1067CC] dark:text-[#7CB8FF]"
+        title={providerText(
+          t,
+          "kimiOfficialSupporterTooltip",
+          "Kimi (Moonshot AI) is OmniRoute's founding Open Source Friend"
+        )}
+      >
+        <span className="material-symbols-outlined text-[10px] leading-none">verified</span>
+        {providerText(t, "kimiOfficialSupporterBadge", "Founding Friend")}
+      </span>
+    ) : null;
 
   // Cheaper Inference Open Source Friend badge — brand green (#31f889) with a dark
   // foreground (the green is too bright for white text). Literal Tailwind arbitrary
   // values must stay in sync with CHEAPERINFERENCE_BRAND_COLOR (featuredProviders.ts).
-  const cheaperInferenceSupporterChip = isCheaperInferencePartner ? (
-    <span
-      key="cheaperinference-supporter"
-      className="inline-flex items-center gap-0.5 rounded-full border border-[#31f889]/40 bg-[#31f889]/15 px-1.5 py-0 text-[9px] font-semibold uppercase tracking-wide leading-none text-[#0b7a45] dark:text-[#5CF0A6]"
-      title={providerText(
-        t,
-        "cheaperInferenceSupporterTooltip",
-        "Cheaper Inference backs OmniRoute as an Open Source Friend"
-      )}
-    >
-      <span className="material-symbols-outlined text-[10px] leading-none">verified</span>
-      {providerText(t, "cheaperInferenceSupporterBadge", "Open Source Friend")}
-    </span>
-  ) : null;
+  const cheaperInferenceSupporterChip =
+    isCheaperInferencePartner && BRAND.showUpstreamPromotions ? (
+      <span
+        key="cheaperinference-supporter"
+        className="inline-flex items-center gap-0.5 rounded-full border border-[#31f889]/40 bg-[#31f889]/15 px-1.5 py-0 text-[9px] font-semibold uppercase tracking-wide leading-none text-[#0b7a45] dark:text-[#5CF0A6]"
+        title={providerText(
+          t,
+          "cheaperInferenceSupporterTooltip",
+          "Cheaper Inference backs OmniRoute as an Open Source Friend"
+        )}
+      >
+        <span className="material-symbols-outlined text-[10px] leading-none">verified</span>
+        {providerText(t, "cheaperInferenceSupporterBadge", "Open Source Friend")}
+      </span>
+    ) : null;
 
   const openRouterTooltipBits: string[] = [];
   if (openRouterStat?.headquarters)

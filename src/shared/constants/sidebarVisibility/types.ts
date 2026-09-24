@@ -1,7 +1,7 @@
 export const HIDEABLE_SIDEBAR_ITEM_IDS = [
   // Home
   "home",
-  // OmniProxy — flat
+  // ArcByte Proxy — flat
   "api-manager",
   "endpoints",
   "providers",
@@ -9,7 +9,7 @@ export const HIDEABLE_SIDEBAR_ITEM_IDS = [
   "combos",
   "combos-live",
   "quota",
-  // OmniProxy > Compression Context (Settings → Combos → engines → Studio)
+  // ArcByte Proxy > Compression Context (Settings → Combos → engines → Studio)
   "context-settings",
   "context-combos",
   "context-caveman",
@@ -24,7 +24,7 @@ export const HIDEABLE_SIDEBAR_ITEM_IDS = [
   "context-omniglyph",
   "compression-studio",
   "compression-exclusions",
-  // OmniProxy > Tools
+  // ArcByte Proxy > Tools
   "cli-code",
   "cli-agents",
   "acp-agents",
@@ -34,11 +34,11 @@ export const HIDEABLE_SIDEBAR_ITEM_IDS = [
   "agent-bridge",
   "traffic-inspector",
   "discovery",
-  // OmniProxy > Integrations
+  // ArcByte Proxy > Integrations
   "api-endpoints",
   "webhooks",
   "log-export",
-  // OmniProxy — proxy tools
+  // ArcByte Proxy — proxy tools
   "mitm-proxy",
   "1proxy",
   // Analytics
