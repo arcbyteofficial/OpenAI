@@ -42,7 +42,7 @@ test("the image workflow publishes that image from master", () => {
 
   const build = steps.find((s) => s.uses?.startsWith("docker/build-push-action@"));
   assert.ok(build?.with, "the build job builds the image");
-  assert.equal(build.with.target, "runner-base");
+  assert.equal(build.with.target, "runner-arcbyte");
   assert.equal(build.with.tags, "${{ env.IMAGE }}");
   // Webpack with upstream's CI heap: Turbopack's native memory cannot be capped, and the
   // Dockerfile's 6 GB default heap runs out under webpack.
@@ -73,4 +73,18 @@ test("every action the image workflow runs is pinned to a commit", () => {
       assert.match(ref, /^[0-9a-f]{40}$/, `${jobName}: ${action} is pinned to a commit`);
     }
   }
+});
+
+test("the published target is runner-base plus a pinned qodercli for Qoder PAT auth", () => {
+  // Without the binary every Qoder "Check" fails with "spawn qodercli ENOENT": PAT auth is
+  // driven through the local CLI (open-sse/services/qoderCli.ts).
+  const dockerfile = read("Dockerfile");
+  const stage = dockerfile.slice(dockerfile.indexOf("FROM runner-base AS runner-arcbyte"));
+  assert.ok(stage.startsWith("FROM runner-base AS runner-arcbyte"), "the stage exists");
+  const install = stage.match(/npm install -g [^\n]*@qoder-ai\/qodercli@(\S+)/);
+  assert.ok(install, "installs @qoder-ai/qodercli globally");
+  assert.match(install[1], /^\d+\.\d+\.\d+$/, "pinned to an exact version");
+  assert.ok(install[0].includes("--ignore-scripts"), "no install scripts run");
+  assert.ok(stage.includes("&& qodercli --version"), "the build fails if the CLI is unusable");
+  assert.match(stage, /\nUSER node\s*$/, "drops back to the non-root runtime user");
 });

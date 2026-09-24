@@ -98,6 +98,10 @@ upstream's code, so they never show this fork's UI or branding: a server that
 still pulls them keeps serving upstream's dashboard no matter what `master`
 contains.
 
+The image is the Dockerfile's `runner-arcbyte` target: the lean `runner-base`
+plus `qodercli`, which the Qoder provider needs to authenticate a Personal
+Access Token.
+
 One-time setup on the GitHub repository:
 
 1. Make sure GitHub Actions runs on the fork: if the **Actions** tab says

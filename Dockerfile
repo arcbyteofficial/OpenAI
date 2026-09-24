@@ -360,3 +360,20 @@ RUN --mount=type=cache,id=s/92ca8a61-c1ba-421f-a389-d48ac7258c2d-npm-cache,targe
     openclaw@2026.9.1
 
 USER node
+
+# ── Runner ArcByte (the image this fork publishes) ──────────────────────────
+# runner-base plus the provider CLIs this deployment drives. qodercli is how the
+# Qoder provider authenticates a Personal Access Token: OmniRoute spawns it with
+# QODER_PERSONAL_ACCESS_TOKEN (open-sse/services/qoderCli.ts), and without the
+# binary every Qoder check fails with "spawn qodercli ENOENT".
+#
+# --ignore-scripts, as for the app's own dependencies: the package's postinstall
+# only registers a PATH helper for interactive shells, and its native modules
+# (sharp, ripgrep) ship prebuilt per platform. Pinned like the runner-cli tools;
+# `qodercli --version` fails the build if the install is unusable.
+FROM runner-base AS runner-arcbyte
+USER root
+RUN --mount=type=cache,id=s/92ca8a61-c1ba-421f-a389-d48ac7258c2d-npm-cache,target=/root/.npm \
+  npm install -g --no-audit --no-fund --ignore-scripts @qoder-ai/qodercli@1.1.63 \
+  && qodercli --version
+USER node
