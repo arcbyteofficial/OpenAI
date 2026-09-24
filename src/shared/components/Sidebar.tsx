@@ -7,7 +7,8 @@ import { cn } from "@/shared/utils/cn";
 import { getActiveSidebarHref } from "@/shared/utils/sidebarRouteMatch";
 import { filterSidebarSectionsByQuery } from "@/shared/utils/sidebarSearch";
 import {
-  EXPANDED_SECTIONS_STORAGE_KEY,
+  COLLAPSED_SECTIONS_STORAGE_KEY,
+  collapsedSections,
   expandActiveSection,
   hydrateExpandedSections,
   toggleExpandedSection,
@@ -41,9 +42,10 @@ import {
 } from "@/shared/constants/sidebarVisibility";
 
 const isE2EMode = process.env.NEXT_PUBLIC_OMNIROUTE_E2E_MODE === "1";
-const EXPANDED_SECTIONS_KEY = EXPANDED_SECTIONS_STORAGE_KEY;
+const COLLAPSED_SECTIONS_KEY = COLLAPSED_SECTIONS_STORAGE_KEY;
 const PINNED_SECTIONS_KEY = "sidebar-pinned-sections";
 const PINNED_ITEMS_KEY = "sidebar-pinned-items";
+const ALL_SECTION_IDS = SIDEBAR_SECTIONS.map((section) => section.id as SidebarSectionId);
 
 type SidebarProps = {
   onClose?: () => void;
@@ -78,9 +80,9 @@ const noopSubscribe = () => () => {};
 const getServerSnapshotNull = () => null;
 const getHydratedSnapshot = () => true;
 const getServerHydratedSnapshot = () => false;
-function readStoredExpandedRaw() {
+function readStoredCollapsedRaw() {
   try {
-    return localStorage.getItem(EXPANDED_SECTIONS_KEY);
+    return localStorage.getItem(COLLAPSED_SECTIONS_KEY);
   } catch {
     return null;
   }
@@ -127,8 +129,10 @@ export default function Sidebar({
   const [sidebarItemOrder, setSidebarItemOrder] = useState<SidebarItemOrder>({});
   const [customAppName, setCustomAppName] = useState<string | null>(null);
   const [customLogo, setCustomLogo] = useState<string | null>(null);
-  // Every section starts collapsed; only the visitor's own choices (and pins) open one.
-  const [expandedSections, setExpandedSections] = useState<Set<SidebarSectionId>>(new Set());
+  // Every section starts expanded; only the visitor collapses one (see sidebarExpansionState).
+  const [expandedSections, setExpandedSections] = useState<Set<SidebarSectionId>>(
+    () => new Set(ALL_SECTION_IDS)
+  );
   const [pinnedSections, setPinnedSections] = useState<Set<SidebarSectionId>>(new Set());
   const [pinnedItems, setPinnedItems] = useState<Set<string>>(new Set());
   const [pinnedSectionCollapsed, setPinnedSectionCollapsed] = useState(false);
@@ -137,8 +141,8 @@ export default function Sidebar({
   const [hoveredItem, setHoveredItem] = useState<HoveredItem>(null);
   const [searchQuery, setSearchQuery] = useState("");
 
-  // Load persisted state once the client has hydrated. A stored [] intentionally
-  // means "all sections collapsed". localStorage is read through
+  // Load persisted state once the client has hydrated. The stored list holds the sections the
+  // visitor collapsed; everything else is open. localStorage is read through
   // useSyncExternalStore snapshots (server snapshot: null) and the states are
   // adjusted during render (react.dev "You Might Not Need an Effect") so the
   // stored expansion applies before paint without a synchronous effect setState.
@@ -147,9 +151,9 @@ export default function Sidebar({
     getHydratedSnapshot,
     getServerHydratedSnapshot
   );
-  const storedExpandedRaw = useSyncExternalStore(
+  const storedCollapsedRaw = useSyncExternalStore(
     noopSubscribe,
-    readStoredExpandedRaw,
+    readStoredCollapsedRaw,
     getServerSnapshotNull
   );
   const storedPinnedRaw = useSyncExternalStore(
@@ -163,7 +167,7 @@ export default function Sidebar({
     getServerSnapshotNull
   );
   if (hydrated && !sidebarExpansionLoaded) {
-    const storedExpanded = parseStoredArray<SidebarSectionId[]>(storedExpandedRaw, []);
+    const storedCollapsed = parseStoredArray<SidebarSectionId[]>(storedCollapsedRaw, []);
     const storedPinned: SidebarSectionId[] =
       storedPinnedRaw !== null
         ? parseStoredArray<SidebarSectionId[]>(storedPinnedRaw, [])
@@ -171,9 +175,15 @@ export default function Sidebar({
     const storedPinnedItems = parseStoredArray<string[]>(storedPinnedItemsRaw, []);
 
     const initialPinned = new Set<SidebarSectionId>(storedPinned);
-    const initialExpanded = hydrateExpandedSections(storedExpanded, initialPinned);
+    const initialExpanded = hydrateExpandedSections(
+      ALL_SECTION_IDS,
+      storedCollapsed,
+      initialPinned
+    );
 
-    setSkipInitialActiveExpansion(storedExpanded.length === 0);
+    // On load, a section the visitor collapsed stays collapsed even if it holds the current
+    // page; later navigation opens the destination's section.
+    setSkipInitialActiveExpansion(true);
     setExpandedSections(initialExpanded);
     setPinnedSections(initialPinned);
     setPinnedItems(new Set(storedPinnedItems));
@@ -351,8 +361,8 @@ export default function Sidebar({
     ? filterSidebarSectionsByQuery(sectionsWithPinned, searchQuery)
     : sectionsWithPinned;
 
-  // Keep the active page visible while preserving accordion semantics for
-  // unpinned sections. Render-time adjustment (react.dev "You Might Not Need
+  // Keep the active page visible after navigation: open its section, never close another.
+  // Render-time adjustment (react.dev "You Might Not Need
   // an Effect"): the composite key mirrors the old effect's
   // [activeHref, collapsed, pinnedSections, sidebarExpansionLoaded] deps.
   const activeExpansionKey = `${collapsed}|${sidebarExpansionLoaded}|${activeHref ?? ""}|${[
@@ -372,11 +382,11 @@ export default function Sidebar({
             child.type === "group" ? child.items : [child]
           );
           if (sectionItems.some((item: any) => !item.external && item.href === activeHref)) {
-            setExpandedSections((prev) => {
-              const next = expandActiveSection(pinnedSections, section.id as SidebarSectionId);
-              if ([...next].every((id) => prev.has(id)) && next.size === prev.size) return prev;
-              return next;
-            });
+            setExpandedSections((prev) =>
+              prev.has(section.id as SidebarSectionId)
+                ? prev
+                : expandActiveSection(prev, section.id as SidebarSectionId)
+            );
             break;
           }
         }
@@ -384,25 +394,22 @@ export default function Sidebar({
     }
   }
 
-  // Persist the expanded-section set whenever it changes after hydration —
+  // Persist the collapsed sections whenever the expansion changes after hydration —
   // single writer replacing the saveToStorage calls that used to run inside
   // setState updaters (side effects belong outside updaters).
   useEffect(() => {
     if (!sidebarExpansionLoaded) return;
-    saveToStorage(EXPANDED_SECTIONS_KEY, [...expandedSections]);
+    saveToStorage(COLLAPSED_SECTIONS_KEY, collapsedSections(ALL_SECTION_IDS, expandedSections));
   }, [expandedSections, sidebarExpansionLoaded]);
 
-  // Accordion toggle: opening a section closes all non-pinned sections
-  const toggleSection = useCallback(
-    (sectionId: SidebarSectionId) => {
-      if (sectionId === "pinned") {
-        setPinnedSectionCollapsed((prev) => !prev);
-        return;
-      }
-      setExpandedSections((prev) => toggleExpandedSection(prev, pinnedSections, sectionId));
-    },
-    [pinnedSections]
-  );
+  // Toggle one section; the others keep their state.
+  const toggleSection = useCallback((sectionId: SidebarSectionId) => {
+    if (sectionId === "pinned") {
+      setPinnedSectionCollapsed((prev) => !prev);
+      return;
+    }
+    setExpandedSections((prev) => toggleExpandedSection(prev, sectionId));
+  }, []);
 
   const togglePin = useCallback((sectionId: SidebarSectionId) => {
     setPinnedSections((prev) => {

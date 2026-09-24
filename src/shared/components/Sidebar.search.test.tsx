@@ -3,7 +3,6 @@ import React from "react";
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { EXPANDED_SECTIONS_STORAGE_KEY } from "@/shared/utils/sidebarExpansionState";
 
 // Skip CloudSyncStatus entirely (it polls /api/sync/cloud + uses next/navigation's
 // useRouter, which we don't otherwise need to mock for this component).
@@ -76,8 +75,6 @@ describe("Sidebar search/filter (#4013)", () => {
   }, 20000);
 
   it("filters visible nav items down to those matching the typed query", async () => {
-    // Sections start collapsed; open one so there are links to filter.
-    localStorage.setItem(EXPANDED_SECTIONS_STORAGE_KEY, JSON.stringify(["omni-proxy"]));
     const { default: Sidebar } = await import("@/shared/components/Sidebar");
     const container = makeContainer();
     root = createRoot(container);

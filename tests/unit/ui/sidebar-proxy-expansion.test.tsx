@@ -8,10 +8,13 @@ import {
   type SidebarSectionId,
 } from "../../../src/shared/constants/sidebarVisibility";
 import {
+  collapsedSections,
   expandActiveSection,
   hydrateExpandedSections,
   toggleExpandedSection,
 } from "../../../src/shared/utils/sidebarExpansionState";
+
+const ALL: SidebarSectionId[] = ["omni-proxy", "analytics", "configuration", "monitoring"];
 
 describe("sidebar proxy expansion", () => {
   it("proxy navigation is always present and cannot be hidden by legacy settings", () => {
@@ -22,25 +25,40 @@ describe("sidebar proxy expansion", () => {
     expect(normalizeHiddenSidebarItems(["proxy", "logs"])).toEqual(["logs"]);
   });
 
-  it("opening another section closes all unpinned siblings", () => {
+  it("toggling a section leaves every other section as it was", () => {
     const expanded = new Set<SidebarSectionId>(["omni-proxy", "analytics"]);
-    const next = toggleExpandedSection(expanded, new Set(), "configuration");
-    expect([...next]).toEqual(["configuration"]);
+    expect([...toggleExpandedSection(expanded, "configuration")]).toEqual([
+      "omni-proxy",
+      "analytics",
+      "configuration",
+    ]);
+    expect([...toggleExpandedSection(expanded, "analytics")]).toEqual(["omni-proxy"]);
   });
 
-  it("hydration preserves a stored all-collapsed state", () => {
-    const expanded = hydrateExpandedSections([], new Set());
-    expect([...expanded]).toEqual([]);
+  it("hydration opens every section when nothing is stored", () => {
+    expect([...hydrateExpandedSections(ALL, [], new Set())]).toEqual(ALL);
   });
 
-  it("hydration expands only sections explicitly pinned by the user", () => {
-    const expanded = hydrateExpandedSections([], new Set<SidebarSectionId>(["monitoring"]));
+  it("hydration keeps the sections the visitor collapsed closed", () => {
+    const expanded = hydrateExpandedSections(ALL, ["analytics", "monitoring"], new Set());
+    expect([...expanded]).toEqual(["omni-proxy", "configuration"]);
+  });
+
+  it("hydration keeps pinned sections open even when stored as collapsed", () => {
+    const expanded = hydrateExpandedSections(ALL, ALL, new Set<SidebarSectionId>(["monitoring"]));
     expect([...expanded]).toEqual(["monitoring"]);
   });
 
-  it("route changes replace stale unpinned sections but retain explicit pins", () => {
-    const pinned = new Set<SidebarSectionId>(["configuration"]);
-    const next = expandActiveSection(pinned, "monitoring");
-    expect([...next]).toEqual(["configuration", "monitoring"]);
+  it("route changes open the destination section without closing the others", () => {
+    const expanded = new Set<SidebarSectionId>(["configuration"]);
+    expect([...expandActiveSection(expanded, "monitoring")]).toEqual([
+      "configuration",
+      "monitoring",
+    ]);
+  });
+
+  it("persists the collapsed sections, so sections added later start open", () => {
+    const expanded = new Set<SidebarSectionId>(["omni-proxy", "configuration"]);
+    expect(collapsedSections(ALL, expanded)).toEqual(["analytics", "monitoring"]);
   });
 });

@@ -2,7 +2,7 @@
 import React, { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { EXPANDED_SECTIONS_STORAGE_KEY } from "@/shared/utils/sidebarExpansionState";
+import { COLLAPSED_SECTIONS_STORAGE_KEY } from "@/shared/utils/sidebarExpansionState";
 
 // Skip CloudSyncStatus (it polls the cloud-sync API and needs a router).
 process.env.NEXT_PUBLIC_OMNIROUTE_E2E_MODE = "1";
@@ -58,28 +58,48 @@ describe("dashboard sidebar", () => {
   }
 
   const sectionToggles = () => [...container.querySelectorAll("nav [aria-expanded]")];
-  const openSections = () =>
-    sectionToggles().filter((el) => el.getAttribute("aria-expanded") === "true");
+  const expandedState = () => sectionToggles().map((el) => el.getAttribute("aria-expanded"));
+  const header = (title: string) =>
+    sectionToggles().find((el) => el.textContent?.trim().startsWith(title)) as HTMLElement;
 
-  it("opens no section on a first visit, not even the one holding the current page", async () => {
+  it("opens every section on a first visit", async () => {
     await render();
     expect(sectionToggles().length).toBeGreaterThan(1);
-    expect(openSections()).toEqual([]);
-    // Home is a standalone item, not a dropdown; every section item stays hidden.
-    const links = [...container.querySelectorAll("nav a")].map((a) => a.getAttribute("href"));
-    expect(links).toEqual(["/home"]);
+    expect(expandedState().every((state) => state === "true")).toBe(true);
   });
 
-  it("ignores the unversioned key, which saved the old proxy-open default", async () => {
-    localStorage.setItem("sidebar-expanded-sections", JSON.stringify(["omni-proxy"]));
+  it("ignores the older keys, which stored the open set under the accordion", async () => {
+    localStorage.setItem("sidebar-expanded-sections", JSON.stringify(["costs"]));
+    localStorage.setItem("sidebar-expanded-sections-v2", JSON.stringify([]));
     await render();
-    expect(openSections()).toEqual([]);
+    expect(expandedState().every((state) => state === "true")).toBe(true);
   });
 
-  it("still remembers a section the visitor opened", async () => {
-    localStorage.setItem(EXPANDED_SECTIONS_STORAGE_KEY, JSON.stringify(["omni-proxy"]));
+  it("closes only the section the visitor collapses, and remembers it", async () => {
     await render();
-    expect(openSections().length).toBeGreaterThan(0);
+    const costs = header("Costs");
+    await act(async () => {
+      costs.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+
+    expect(costs.getAttribute("aria-expanded")).toBe("false");
+    // No accordion: every other section stays open.
+    expect(expandedState().filter((state) => state === "false")).toHaveLength(1);
+    expect(JSON.parse(localStorage.getItem(COLLAPSED_SECTIONS_STORAGE_KEY) || "[]")).toEqual([
+      "costs",
+    ]);
+
+    await act(async () => {
+      costs.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+    });
+    expect(expandedState().every((state) => state === "true")).toBe(true);
+  });
+
+  it("restores the collapsed sections on the next visit", async () => {
+    localStorage.setItem(COLLAPSED_SECTIONS_STORAGE_KEY, JSON.stringify(["analytics"]));
+    await render();
+    expect(header("Analytics").getAttribute("aria-expanded")).toBe("false");
+    expect(expandedState().filter((state) => state === "false")).toHaveLength(1);
   });
 
   it("keeps the collapse toggle on the brand row, level with the logo", async () => {

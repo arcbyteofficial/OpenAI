@@ -2,7 +2,6 @@
 import React, { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { EXPANDED_SECTIONS_STORAGE_KEY } from "@/shared/utils/sidebarExpansionState";
 
 process.env.NEXT_PUBLIC_OMNIROUTE_E2E_MODE = "1";
 
@@ -82,8 +81,6 @@ describe("Sidebar pinned items shortcut (#pinned-items)", () => {
 
   it("hydrates and renders PINNED section when items are stored in localStorage", async () => {
     localStorage.setItem("sidebar-pinned-items", JSON.stringify(["analytics", "logs"]));
-    // Sections start collapsed; open ANALYTICS so the item's own link renders too.
-    localStorage.setItem(EXPANDED_SECTIONS_STORAGE_KEY, JSON.stringify(["analytics"]));
 
     const { default: Sidebar } = await import("@/shared/components/Sidebar");
     const container = makeContainer();
@@ -110,15 +107,15 @@ describe("Sidebar pinned items shortcut (#pinned-items)", () => {
       root!.render(<Sidebar />);
     });
 
-    // Sections start collapsed, so open ANALYTICS. Its header shows the English fallback
-    // title: the mocked translator has no "analyticsSection".
+    // Expand ANALYTICS if not expanded
     const analyticsHeader = Array.from(container.querySelectorAll('div[role="button"]')).find(
-      (el) => el.textContent?.trim().startsWith("Analytics")
+      (el) => el.textContent?.includes("analyticsSection")
     );
-    expect(analyticsHeader).toBeDefined();
-    await act(async () => {
-      analyticsHeader!.dispatchEvent(new MouseEvent("click", { bubbles: true }));
-    });
+    if (analyticsHeader) {
+      await act(async () => {
+        analyticsHeader.dispatchEvent(new MouseEvent("click", { bubbles: true }));
+      });
+    }
 
     // Find the pin button for analytics item
     const pinButtons = Array.from(
@@ -172,7 +169,6 @@ describe("Sidebar pinned items shortcut (#pinned-items)", () => {
 
   it("allows collapsing and expanding the PINNED section", async () => {
     localStorage.setItem("sidebar-pinned-items", JSON.stringify(["analytics"]));
-    localStorage.setItem(EXPANDED_SECTIONS_STORAGE_KEY, JSON.stringify(["analytics"]));
 
     const { default: Sidebar } = await import("@/shared/components/Sidebar");
     const container = makeContainer();

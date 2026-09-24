@@ -3,7 +3,6 @@ import React from "react";
 import { act } from "react";
 import { createRoot, type Root } from "react-dom/client";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { EXPANDED_SECTIONS_STORAGE_KEY } from "@/shared/utils/sidebarExpansionState";
 
 process.env.NEXT_PUBLIC_OMNIROUTE_E2E_MODE = "1";
 
@@ -38,7 +37,7 @@ describe("G17 Radar Admin owner-only sidebar link", () => {
       globalThis as typeof globalThis & { IS_REACT_ACT_ENVIRONMENT?: boolean }
     ).IS_REACT_ACT_ENVIRONMENT = true;
     localStorage.clear();
-    localStorage.setItem(EXPANDED_SECTIONS_STORAGE_KEY, JSON.stringify(["costs"]));
+    localStorage.setItem("sidebar-expanded-sections", JSON.stringify(["costs"]));
     container = document.createElement("div");
     document.body.appendChild(container);
   });
