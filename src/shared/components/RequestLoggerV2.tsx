@@ -891,7 +891,7 @@ const RequestLoggerV2 = forwardRef<RequestLoggerV2Handle, { initialSelectedId?: 
           {/* Recording Toggle */}
           <button
             onClick={() => setRecording(!recording)}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-control text-sm font-medium border transition-colors ${
+            className={`flex items-center gap-2 h-8 px-3 rounded-control text-[13px] font-medium border transition-colors ${
               recording
                 ? "bg-error/10 border-error/20 text-error"
                 : "bg-surface border-border-strong text-text-muted hover:text-text-main"
@@ -906,7 +906,7 @@ const RequestLoggerV2 = forwardRef<RequestLoggerV2Handle, { initialSelectedId?: 
           <button
             onClick={toggleDetailLogging}
             disabled={detailLoggingLoading}
-            className={`flex items-center gap-2 px-3 py-1.5 rounded-control text-sm font-medium border transition-colors disabled:opacity-60 ${
+            className={`flex items-center gap-2 h-8 px-3 rounded-control text-[13px] font-medium border transition-colors disabled:opacity-60 ${
               detailLoggingEnabled
                 ? "bg-warning/10 border-warning/20 text-warning"
                 : "bg-surface border-border-strong text-text-muted hover:text-text-main"
@@ -933,7 +933,7 @@ const RequestLoggerV2 = forwardRef<RequestLoggerV2Handle, { initialSelectedId?: 
               placeholder={t("searchPlaceholder")}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+              className="w-full h-8 pl-10 pr-4 rounded-control bg-surface border border-border-strong text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
             />
           </div>
 
@@ -947,14 +947,14 @@ const RequestLoggerV2 = forwardRef<RequestLoggerV2Handle, { initialSelectedId?: 
               placeholder={t("correlationId")}
               value={correlationIdFilter}
               onChange={(e) => setCorrelationIdFilter(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 rounded-control bg-surface border border-border-strong text-[13px] text-text-main font-mono placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+              className="w-full h-8 pl-9 pr-3 rounded-control bg-surface border border-border-strong text-[13px] text-text-main font-mono placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
             />
           </div>
 
           {/* Group by CID toggle */}
           <button
             onClick={() => setGroupedView((v) => !v)}
-            className={`flex items-center gap-1.5 px-3 py-2 rounded-control text-sm font-medium border transition-colors ${
+            className={`flex items-center gap-1.5 h-8 px-3 rounded-control text-[13px] font-medium border transition-colors ${
               groupedView
                 ? "bg-bg-subtle border-border-strong text-text-main"
                 : "bg-surface border-border-strong text-text-muted hover:text-text-main"
@@ -971,7 +971,7 @@ const RequestLoggerV2 = forwardRef<RequestLoggerV2Handle, { initialSelectedId?: 
           <select
             value={selectedProvider}
             onChange={(e) => setSelectedProvider(e.target.value)}
-            className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 appearance-none cursor-pointer min-w-[140px]"
+            className="h-8 px-2.5 rounded-control bg-surface border border-border-strong text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 appearance-none cursor-pointer min-w-[140px]"
           >
             <option value="">{t("allProviders")}</option>
             {uniqueProviders.map((p) => {
@@ -989,7 +989,7 @@ const RequestLoggerV2 = forwardRef<RequestLoggerV2Handle, { initialSelectedId?: 
           <select
             value={selectedModel}
             onChange={(e) => setSelectedModel(e.target.value)}
-            className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 appearance-none cursor-pointer min-w-[180px]"
+            className="h-8 px-2.5 rounded-control bg-surface border border-border-strong text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 appearance-none cursor-pointer min-w-[180px]"
           >
             <option value="">{t("allModels")}</option>
             {uniqueModels.map((model) => (
@@ -1003,7 +1003,7 @@ const RequestLoggerV2 = forwardRef<RequestLoggerV2Handle, { initialSelectedId?: 
           <select
             value={selectedAccount}
             onChange={(e) => setSelectedAccount(e.target.value)}
-            className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 appearance-none cursor-pointer min-w-[140px]"
+            className="h-8 px-2.5 rounded-control bg-surface border border-border-strong text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 appearance-none cursor-pointer min-w-[140px]"
           >
             <option value="">{t("allAccounts")}</option>
             {uniqueAccounts.map((a) => (
@@ -1017,7 +1017,7 @@ const RequestLoggerV2 = forwardRef<RequestLoggerV2Handle, { initialSelectedId?: 
           <select
             value={selectedApiKey}
             onChange={(e) => setSelectedApiKey(e.target.value)}
-            className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 appearance-none cursor-pointer min-w-[160px]"
+            className="h-8 px-2.5 rounded-control bg-surface border border-border-strong text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 appearance-none cursor-pointer min-w-[160px]"
           >
             <option value="">{t("allApiKeys")}</option>
             {uniqueApiKeys.map((value) => {
@@ -1068,7 +1068,7 @@ const RequestLoggerV2 = forwardRef<RequestLoggerV2Handle, { initialSelectedId?: 
           <select
             value={sortBy}
             onChange={(e) => setSortBy(e.target.value)}
-            className="px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 appearance-none cursor-pointer min-w-[150px]"
+            className="h-8 px-2.5 rounded-control bg-surface border border-border-strong text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 appearance-none cursor-pointer min-w-[150px]"
             title={t("sortLogs")}
           >
             <option value="newest">{t("sortNewest")}</option>
