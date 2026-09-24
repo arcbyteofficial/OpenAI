@@ -100,6 +100,19 @@ NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FO
 DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT
 OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
+## Geist and Geist Mono fonts
+
+The dashboard's UI typefaces `src/app/fonts/Geist-Variable.woff2` and
+`src/app/fonts/GeistMono-Variable.woff2` are copied unmodified from the `dist/fonts/` directory of
+the [`geist`](https://github.com/vercel/geist-font) npm package, version `1.7.2`
+(tarball <https://registry.npmjs.org/geist/-/geist-1.7.2.tgz>, npm integrity
+`sha512-Gu5lDFa3pLRyoBlBPf0QIFHVdWAnpco7fS1bJm41jyLPFoguBgiubseUN2oLXMgqZ7uxAxDoXcHMhCY/fOTTgg==`).
+
+Copyright (c) 2023 Vercel, in collaboration with basement.studio. The fonts are licensed under the
+SIL Open Font License, Version 1.1; the full license text ships beside the font files in
+[`src/app/fonts/OFL.txt`](src/app/fonts/OFL.txt) and is available with a FAQ at
+<https://openfontlicense.org>.
+
 ## lipis/flag-icons
 
 The country flag SVGs in `docs/assets/flags/` are copied from the `flags/4x3/` directory of
