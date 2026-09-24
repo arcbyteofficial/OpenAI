@@ -28,8 +28,8 @@ export default function Card({
     none: "",
     xs: "p-3",
     sm: "p-4",
-    md: "p-6",
-    lg: "p-8",
+    md: "p-5",
+    lg: "p-7",
   };
 
   return (
@@ -37,24 +37,24 @@ export default function Card({
       className={cn(
         "bg-surface",
         "border border-border",
-        "rounded-card shadow-sm",
-        hover && "hover:shadow-md hover:border-primary/30 transition-all cursor-pointer",
+        "rounded-card",
+        hover && "hover:border-border-strong transition-colors cursor-pointer",
         paddings[padding],
         className
       )}
       {...props}
     >
       {(title || action) && (
-        <div className="flex items-center justify-between mb-4">
-          <div className="flex items-center gap-3">
+        <div className="flex items-center justify-between gap-3 mb-4">
+          <div className="flex items-center gap-2.5 min-w-0">
             {icon && (
-              <div className="p-2 rounded-lg bg-bg text-text-muted">
-                <span className="material-symbols-outlined text-[20px]">{icon}</span>
-              </div>
+              <span className="material-symbols-outlined text-[18px] text-text-muted">{icon}</span>
             )}
-            <div>
-              {title && <h3 className="text-text-main font-semibold">{title}</h3>}
-              {subtitle && <p className="text-sm text-text-muted">{subtitle}</p>}
+            <div className="min-w-0">
+              {title && (
+                <h3 className="text-sm font-semibold tracking-tight text-text-main">{title}</h3>
+              )}
+              {subtitle && <p className="text-[13px] text-text-muted">{subtitle}</p>}
             </div>
           </div>
           {action}
@@ -73,12 +73,7 @@ interface CardSectionProps extends React.HTMLAttributes<HTMLDivElement> {
 Card.Section = function CardSection({ children, className, ...props }: CardSectionProps) {
   return (
     <div
-      className={cn(
-        "p-4 rounded-lg",
-        "bg-black/[0.02] dark:bg-white/[0.02]",
-        "border border-border",
-        className
-      )}
+      className={cn("p-4 rounded-lg", "bg-surface-2", "border border-border", className)}
       {...props}
     >
       {children}
@@ -97,7 +92,7 @@ Card.Row = function CardRow({ children, className, ...props }: CardRowProps) {
       className={cn(
         "p-3 -mx-3 px-3 transition-colors",
         "border-b border-border last:border-b-0",
-        "hover:bg-black/[0.02] dark:hover:bg-white/[0.02]",
+        "hover:bg-bg-subtle",
         className
       )}
       {...props}
@@ -123,8 +118,8 @@ Card.ListItem = function CardListItem({
     <div
       className={cn(
         "group flex items-center justify-between p-3 -mx-3 px-3",
-        "border-b border-black/[0.03] dark:border-white/[0.03] last:border-b-0",
-        "hover:bg-black/[0.02] dark:hover:bg-white/[0.02]",
+        "border-b border-border last:border-b-0",
+        "hover:bg-bg-subtle",
         "transition-colors",
         className
       )}

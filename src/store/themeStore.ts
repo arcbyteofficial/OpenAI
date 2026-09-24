@@ -15,11 +15,16 @@ interface ThemeState {
   initTheme: () => void;
 }
 
+// The default accent has no inline override: globals.css defines a theme-aware
+// value (#0070f3 light / #3291ff dark) that a single inline hex would flatten.
+export const DEFAULT_COLOR_THEME = "blue";
+const THEME_STORE_VERSION = 1;
+
 const useThemeStore = create<ThemeState>()(
   persist(
     (set, get) => ({
       theme: THEME_CONFIG.defaultTheme,
-      colorTheme: "coral",
+      colorTheme: DEFAULT_COLOR_THEME,
       customColor: "#3b82f6",
 
       setTheme: (theme) => {
@@ -53,13 +58,26 @@ const useThemeStore = create<ThemeState>()(
     }),
     {
       name: THEME_CONFIG.storageKey,
+      version: THEME_STORE_VERSION,
+      migrate: (persisted, version) => migrateThemeState(persisted, version),
     }
   )
 );
 
+// v0 → v1: "coral" was the store default before the neutral redesign, so a persisted
+// "coral" almost always means "never picked one" — move it to the new default accent.
+export function migrateThemeState(persisted: unknown, version: number) {
+  if (!persisted || typeof persisted !== "object") return persisted as ThemeState;
+  const state = { ...(persisted as Partial<ThemeState>) };
+  if (version < 1 && state.colorTheme === "coral") {
+    state.colorTheme = DEFAULT_COLOR_THEME;
+  }
+  return state as ThemeState;
+}
+
 export const COLOR_THEMES: Record<string, string> = {
+  blue: "#0070f3",
   coral: "#e54d5e",
-  blue: "#3b82f6",
   red: "#ef4444",
   green: "#22c55e",
   violet: "#8b5cf6",
@@ -82,18 +100,29 @@ function applyTheme(theme: string) {
   }
 }
 
+// Returns the inline accent override for a color theme, or null when the theme-aware
+// CSS default from globals.css should apply (the default theme or an unknown id).
+export function resolveColorThemeOverride(colorTheme: string, customColor: string) {
+  if (colorTheme !== "custom" && !Object.hasOwn(COLOR_THEMES, colorTheme)) return null;
+  if (colorTheme === DEFAULT_COLOR_THEME) return null;
+  const baseColor =
+    colorTheme === "custom" ? normalizeHexColor(customColor) : COLOR_THEMES[colorTheme];
+  return { primary: baseColor, hover: shadeHexColor(baseColor, -0.14) };
+}
+
 function applyColorTheme(colorTheme: string, customColor: string) {
   if (typeof window === "undefined") return;
 
   const root = document.documentElement;
-  const baseColor =
-    colorTheme === "custom"
-      ? normalizeHexColor(customColor)
-      : COLOR_THEMES[colorTheme] || COLOR_THEMES.coral;
-  const hoverColor = shadeHexColor(baseColor, -0.14);
+  const override = resolveColorThemeOverride(colorTheme, customColor);
+  if (!override) {
+    root.style.removeProperty("--color-primary");
+    root.style.removeProperty("--color-primary-hover");
+    return;
+  }
 
-  root.style.setProperty("--color-primary", baseColor);
-  root.style.setProperty("--color-primary-hover", hoverColor);
+  root.style.setProperty("--color-primary", override.primary);
+  root.style.setProperty("--color-primary-hover", override.hover);
 }
 
 function normalizeHexColor(color: string) {
