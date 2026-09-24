@@ -3,9 +3,10 @@
 // The home topology painted the most recently routed provider as an idle grey node with
 // no status dot, while its edge was amber — so the provider you had just used looked
 // *less* connected than an untouched one. `last` was ANDed into `healthy`, and the node
-// component had no `last` state to fall back on. Health now owns the border and recency
-// owns the dot; this renders the real ProviderNode and reads the computed styles rather
-// than pattern-matching the source.
+// component had no `last` state to fall back on. Health owns the node state and recency
+// owns the dot; this renders the real ProviderNode and reads its state and dot rather
+// than pattern-matching the source. (The cards are neutral since the minimal redesign:
+// only errors and live traffic tint the outline.)
 import React from "react";
 import { act } from "react";
 import { createRoot } from "react-dom/client";
@@ -93,11 +94,11 @@ function render(providers: Entry[], lastProvider = "") {
 
 const node = (provider: string) =>
   container.querySelector(`[data-testid="provider-${provider}"]`) as HTMLElement;
-const box = (provider: string) => node(provider).querySelector("div.border-2") as HTMLElement;
+const box = (provider: string) => node(provider).querySelector("[data-state]") as HTMLElement;
 const dot = (provider: string) =>
   node(provider).querySelector("span.rounded-full:not(.animate-ping)") as HTMLElement | null;
 
-it("keeps the connected border on the last-routed provider and marks recency on the dot", () => {
+it("keeps the last-routed provider connected and marks recency on the dot", () => {
   render(
     [
       { id: "a", provider: "devin-cli", name: "Devin CLI", status: "active" },
@@ -106,26 +107,32 @@ it("keeps the connected border on the last-routed provider and marks recency on 
     "devin-cli"
   );
 
-  // The just-used provider: still green (connected), amber dot (most recent).
-  expect(box("devin-cli").style.borderColor).toBe(GREEN);
+  // The just-used provider: still connected, amber dot (most recent).
+  expect(box("devin-cli").dataset.state).toBe("healthy");
+  expect(box("devin-cli").dataset.last).toBe("true");
   expect(dot("devin-cli")).not.toBeNull();
   expect(dot("devin-cli")!.style.backgroundColor).toBe(AMBER);
   // Its edge keeps the amber last-used stroke (raw attribute, not a normalised style).
   expect(node("devin-cli").dataset.edgeStroke).toBe(FLOW_EDGE_COLORS.last);
 
-  // An untouched but connected peer is unchanged: green border, green dot.
-  expect(box("claude").style.borderColor).toBe(GREEN);
+  // An untouched but connected peer: connected, green dot, neutral outline.
+  expect(box("claude").dataset.state).toBe("healthy");
+  expect(box("claude").dataset.last).toBeUndefined();
   expect(dot("claude")!.style.backgroundColor).toBe(GREEN);
+  expect(box("claude").style.borderColor).toBe("var(--color-border-strong)");
 });
 
 it("still greys out a provider that is genuinely idle", () => {
   render([{ id: "a", provider: "kimi-coding", name: "Kimi", status: "idle" }]);
-  expect(box("kimi-coding").style.borderColor).toBe("var(--color-border)");
+  expect(box("kimi-coding").dataset.state).toBe("idle");
+  expect(box("kimi-coding").querySelector(".text-text-muted")).not.toBeNull();
   expect(dot("kimi-coding")).toBeNull();
 });
 
 it("shows an errored connection as red even when it was the last one routed", () => {
   render([{ id: "a", provider: "agy", name: "Antigravity", status: "error" }], "agy");
-  expect(box("agy").style.borderColor).toBe(RED);
+  expect(box("agy").dataset.state).toBe("error");
+  expect(box("agy").style.borderColor).toContain(RED);
+  expect(dot("agy")!.style.backgroundColor).toBe(RED);
   expect(node("agy").dataset.edgeStroke).toBe(FLOW_EDGE_COLORS.error);
 });

@@ -32,7 +32,20 @@ function CountryFlag({ emoji, alt }: { emoji: string; alt: string }) {
   );
 }
 
-export default function LanguageSelector() {
+/** Where the language menu opens relative to its trigger. */
+type MenuPosition = "below-end" | "above-start";
+
+const MENU_POSITION_CLASSES: Record<MenuPosition, string> = {
+  "below-end": "end-0 top-full mt-1 slide-in-from-top-1",
+  // For triggers at the bottom of a sidebar: open upward, aligned to the trigger's start.
+  "above-start": "start-0 bottom-full mb-1 slide-in-from-bottom-1",
+};
+
+export default function LanguageSelector({
+  menuPosition = "below-end",
+}: {
+  menuPosition?: MenuPosition;
+} = {}) {
   const locale = useLocale();
   const router = useRouter();
   const [open, setOpen] = useState(false);
@@ -81,7 +94,9 @@ export default function LanguageSelector() {
 
       {/* Dropdown */}
       {open && (
-        <div className="absolute end-0 top-full mt-1 w-56 max-h-80 rounded-lg border border-border bg-surface p-1 shadow-[var(--shadow-elevated)] z-50 overflow-y-auto animate-in fade-in slide-in-from-top-1 duration-150">
+        <div
+          className={`absolute ${MENU_POSITION_CLASSES[menuPosition]} w-56 max-h-80 rounded-lg border border-border bg-surface p-1 shadow-[var(--shadow-elevated)] z-50 overflow-y-auto animate-in fade-in duration-150`}
+        >
           {LANGUAGES.map((lang) => (
             <button
               key={lang.code}

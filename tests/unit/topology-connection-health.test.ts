@@ -7,8 +7,7 @@ import { fileURLToPath } from "node:url";
 // (and right after a restart) the map went blank even though connections were healthy.
 // These guard the connection-health base layer that keeps "what is connected" visible.
 
-const read = (rel: string) =>
-  readFileSync(fileURLToPath(new URL(rel, import.meta.url)), "utf8");
+const read = (rel: string) => readFileSync(fileURLToPath(new URL(rel, import.meta.url)), "utf8");
 
 const homePageClientSrc = read("../../src/app/(dashboard)/dashboard/HomePageClient.tsx");
 const providerTopologySrc = read("../../src/app/(dashboard)/home/ProviderTopology.tsx");
@@ -59,11 +58,11 @@ test("ProviderTopology renders a connection-health base layer under the traffic 
   );
   assert.match(
     providerTopologySrc,
-    /edgeStyle\(active, last, error, healthy\)/,
+    /topologyEdgeStyle\(active, last, error, healthy\)/,
     "the healthy state must reach the edge palette"
   );
 
-  // The node must render the health state (green border / static dot) — a non-pulsing dot
+  // The node must render the health state (a static green dot) — a non-pulsing dot
   // distinguishes "connected" from "active".
   assert.match(providerTopologySrc, /pulse=\{active \|\| error\}/);
   assert.match(providerTopologySrc, /active \|\| error \|\| healthy \|\| last/);
@@ -77,12 +76,12 @@ test("ProviderTopology marks the last-routed provider with an amber dot, not a g
   );
   assert.match(
     providerTopologySrc,
-    /const dotColor = active \? color : last \? AMBER : GREEN/,
-    "the dot encodes recency while the border keeps encoding health"
+    /const dotColor = last && !active \? AMBER : GREEN/,
+    "the dot encodes recency; health stays in the node state"
   );
   assert.match(
     providerTopologySrc,
-    /borderColor: error \? RED : active \? color : healthy \? GREEN : "var\(--color-border\)"/,
-    "border stays health-driven — grey is reserved for genuinely idle/unconfigured"
+    /const state = error \? "error" : active \? "active" : healthy \? "healthy" : "idle"/,
+    "the node state is health-driven — idle is reserved for genuinely idle/unconfigured"
   );
 });

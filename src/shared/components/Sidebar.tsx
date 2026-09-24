@@ -7,6 +7,7 @@ import { cn } from "@/shared/utils/cn";
 import { getActiveSidebarHref } from "@/shared/utils/sidebarRouteMatch";
 import { filterSidebarSectionsByQuery } from "@/shared/utils/sidebarSearch";
 import {
+  EXPANDED_SECTIONS_STORAGE_KEY,
   expandActiveSection,
   hydrateExpandedSections,
   toggleExpandedSection,
@@ -40,8 +41,7 @@ import {
 } from "@/shared/constants/sidebarVisibility";
 
 const isE2EMode = process.env.NEXT_PUBLIC_OMNIROUTE_E2E_MODE === "1";
-const DEFAULT_EXPANDED: SidebarSectionId = "omni-proxy";
-const EXPANDED_SECTIONS_KEY = "sidebar-expanded-sections";
+const EXPANDED_SECTIONS_KEY = EXPANDED_SECTIONS_STORAGE_KEY;
 const PINNED_SECTIONS_KEY = "sidebar-pinned-sections";
 const PINNED_ITEMS_KEY = "sidebar-pinned-items";
 
@@ -127,9 +127,8 @@ export default function Sidebar({
   const [sidebarItemOrder, setSidebarItemOrder] = useState<SidebarItemOrder>({});
   const [customAppName, setCustomAppName] = useState<string | null>(null);
   const [customLogo, setCustomLogo] = useState<string | null>(null);
-  const [expandedSections, setExpandedSections] = useState<Set<SidebarSectionId>>(
-    new Set([DEFAULT_EXPANDED])
-  );
+  // Every section starts collapsed; only the visitor's own choices (and pins) open one.
+  const [expandedSections, setExpandedSections] = useState<Set<SidebarSectionId>>(new Set());
   const [pinnedSections, setPinnedSections] = useState<Set<SidebarSectionId>>(new Set());
   const [pinnedItems, setPinnedItems] = useState<Set<string>>(new Set());
   const [pinnedSectionCollapsed, setPinnedSectionCollapsed] = useState(false);
@@ -164,9 +163,7 @@ export default function Sidebar({
     getServerSnapshotNull
   );
   if (hydrated && !sidebarExpansionLoaded) {
-    const storedExpanded = parseStoredArray<SidebarSectionId[]>(storedExpandedRaw, [
-      DEFAULT_EXPANDED,
-    ]);
+    const storedExpanded = parseStoredArray<SidebarSectionId[]>(storedExpandedRaw, []);
     const storedPinned: SidebarSectionId[] =
       storedPinnedRaw !== null
         ? parseStoredArray<SidebarSectionId[]>(storedPinnedRaw, [])
@@ -634,41 +631,22 @@ export default function Sidebar({
           {t("skipToContent")}
         </a>
 
-        {(onToggleCollapse || !isMacElectron) && (
-          <div
-            className={cn(
-              "flex items-center gap-2 pb-0",
-              isMacElectron ? "pt-3" : "pt-2",
-              collapsed ? "px-3 justify-center" : "px-3"
-            )}
-            aria-hidden="true"
-          >
-            {!collapsed && <div className="flex-1" />}
-            {onToggleCollapse && (
-              <button
-                onClick={onToggleCollapse}
-                title={collapsed ? t("expandSidebar") : t("collapseSidebar")}
-                aria-expanded={!collapsed}
-                aria-label={collapsed ? t("expandSidebar") : t("collapseSidebar")}
-                className={cn(
-                  "rounded-md p-1 text-text-subtle transition-colors hover:bg-text-main/[0.04] hover:text-text-main",
-                  collapsed && !isMacElectron && "mt-0",
-                  isMacElectron && "ms-auto"
-                )}
-              >
-                <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
-                  {collapsed ? "chevron_right" : "chevron_left"}
-                </span>
-              </button>
-            )}
-          </div>
-        )}
-
-        <div className={cn("py-2", collapsed ? "px-2" : "px-3")}>
+        {/* Brand row: the collapse toggle sits at the row's end, level with the logo; in the
+            collapsed rail it stacks under the logo. */}
+        <div
+          className={cn(
+            "flex items-center pb-2",
+            isMacElectron ? "pt-3" : "pt-2",
+            collapsed ? "flex-col gap-1 px-2" : "gap-1 px-3"
+          )}
+        >
           <Link
             href="/home"
             prefetch={false}
-            className={cn("flex items-center", collapsed ? "justify-center" : "gap-2.5 px-2")}
+            className={cn(
+              "flex min-w-0 items-center",
+              collapsed ? "justify-center" : "flex-1 gap-2.5 ps-2"
+            )}
           >
             {customLogo ? (
               <div className="flex items-center justify-center size-7 rounded-md bg-contrast shrink-0">
@@ -690,6 +668,20 @@ export default function Sidebar({
               </div>
             )}
           </Link>
+          {onToggleCollapse && (
+            <button
+              type="button"
+              onClick={onToggleCollapse}
+              title={collapsed ? t("expandSidebar") : t("collapseSidebar")}
+              aria-expanded={!collapsed}
+              aria-label={collapsed ? t("expandSidebar") : t("collapseSidebar")}
+              className="shrink-0 rounded-md p-1 text-text-subtle transition-colors hover:bg-text-main/[0.04] hover:text-text-main"
+            >
+              <span className="material-symbols-outlined text-[16px]" aria-hidden="true">
+                {collapsed ? "chevron_right" : "chevron_left"}
+              </span>
+            </button>
+          )}
         </div>
 
         {!collapsed && (

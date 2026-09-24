@@ -10,7 +10,8 @@ import { BrandMark } from "@/shared/components/BrandLogo";
 import { BRAND } from "@/shared/constants/appConfig";
 import { FlowCanvas } from "@/shared/components/flow/FlowCanvas";
 import { StatusDot } from "@/shared/components/flow/StatusDot";
-import { edgeStyle, FLOW_EDGE_COLORS, flowColorAlpha } from "@/shared/components/flow/edgeStyles";
+import { FLOW_EDGE_COLORS, flowColorAlpha } from "@/shared/components/flow/edgeStyles";
+import { cn } from "@/shared/utils/cn";
 import { getFallbackProviderColor } from "@/shared/utils/providerFallbackColor";
 import { resolveTopologyNodeLabel } from "./topologyLabel";
 
@@ -50,27 +51,56 @@ type ProviderNodeData = {
   last: boolean;
 };
 
+/**
+ * The topology's edge palette. Connections read as thin neutral lines; only live traffic
+ * (green, animated), errors (red, dashed) and the last-routed provider (amber) add color.
+ * The other flow graphs keep the shared `edgeStyle` palette.
+ */
+export function topologyEdgeStyle(
+  active: boolean,
+  last: boolean,
+  error: boolean,
+  healthy: boolean
+): { stroke: string; strokeWidth: number; opacity: number; strokeDasharray?: string } {
+  if (error)
+    return {
+      stroke: FLOW_EDGE_COLORS.error,
+      strokeWidth: 1.25,
+      opacity: 0.9,
+      strokeDasharray: "4 4",
+    };
+  if (active) return { stroke: FLOW_EDGE_COLORS.active, strokeWidth: 1.5, opacity: 1 };
+  if (last) return { stroke: FLOW_EDGE_COLORS.last, strokeWidth: 1.25, opacity: 0.9 };
+  if (healthy) return { stroke: "var(--color-text-subtle)", strokeWidth: 1, opacity: 0.45 };
+  return {
+    stroke: "var(--color-text-subtle)",
+    strokeWidth: 1,
+    opacity: 0.25,
+    strokeDasharray: "3 4",
+  };
+}
+
 function ProviderNode({ data }: { data: ProviderNodeData }) {
   const { label, color, providerId, active, error, healthy, last } = data;
   const GREEN = FLOW_EDGE_COLORS.active;
-  const RED = FLOW_EDGE_COLORS.error;
   const AMBER = FLOW_EDGE_COLORS.last;
-  // "Last routed" is a traffic annotation, not a health state: the border keeps saying
-  // whether the connection is up, and only the dot turns amber to mark recency.
-  const dotColor = active ? color : last ? AMBER : GREEN;
+  // Neutral cards; the state lives on the dot. Green = connected (pulsing while a request is
+  // in flight), amber = last routed (recency only, health unchanged), red = error. Only
+  // errors and live traffic tint the outline; an idle provider recedes to muted text.
+  const state = error ? "error" : active ? "active" : healthy ? "healthy" : "idle";
+  const dotColor = last && !active ? AMBER : GREEN;
 
   return (
     <div
-      className="flex items-center gap-2 px-2.5 py-1.5 rounded-lg border-2 transition-colors duration-150 bg-surface cursor-pointer hover:bg-bg-subtle"
+      data-state={state}
+      data-last={last ? "true" : undefined}
+      className="flex h-9 items-center gap-2 rounded-lg border bg-surface ps-1.5 pe-2.5 transition-colors duration-150 cursor-pointer hover:bg-bg-subtle"
       style={{
-        borderColor: error ? RED : active ? color : healthy ? GREEN : "var(--color-border)",
-        boxShadow: error
-          ? `0 0 0 3px ${flowColorAlpha(RED, 19)}`
+        borderColor: error
+          ? flowColorAlpha(FLOW_EDGE_COLORS.error, 55)
           : active
-            ? `0 0 0 3px ${color}30`
-            : healthy
-              ? `0 0 0 3px ${flowColorAlpha(GREEN, 13)}`
-              : "none",
+            ? flowColorAlpha(GREEN, 55)
+            : "var(--color-border-strong)",
         minWidth: "136px",
       }}
     >
@@ -100,17 +130,17 @@ function ProviderNode({ data }: { data: ProviderNodeData }) {
       />
 
       <div
-        className="size-6 rounded flex items-center justify-center shrink-0"
-        style={{ backgroundColor: `${color}18` }}
+        className="size-6 rounded-md flex items-center justify-center shrink-0"
+        style={{ backgroundColor: flowColorAlpha(color, 12) }}
       >
         <ProviderIcon providerId={providerId} size={16} type="color" />
       </div>
 
       <span
-        className="text-xs font-medium truncate flex-1"
-        style={{
-          color: active ? color : error ? RED : healthy ? GREEN : "var(--color-text-main)",
-        }}
+        className={cn(
+          "text-xs font-medium truncate flex-1",
+          state === "idle" ? "text-text-muted" : "text-text-main"
+        )}
       >
         {label}
       </span>
@@ -189,7 +219,7 @@ function buildLayout(
   errorSet: Set<string>
 ): { nodes: Node[]; edges: Edge[] } {
   const nodeW = 156;
-  const nodeH = 28;
+  const nodeH = 36;
   const routerW = 148;
   const routerH = 44;
 
@@ -273,7 +303,7 @@ function buildLayout(
         target: nodeId,
         targetHandle,
         animated: active,
-        style: edgeStyle(active, last, error, healthy),
+        style: topologyEdgeStyle(active, last, error, healthy),
       });
     }
   }
