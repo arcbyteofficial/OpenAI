@@ -1,0 +1,1 @@
+- **fix(dashboard):** the Endpoint page's tunnel (Cloudflare, Tailscale, ngrok) and cloud actions show the server's message instead of "[object Object]" when the request is rejected by the auth layer, whose bodies are `{ error: { code, message } }` — e.g. LOCAL_ONLY, since starting a tunnel spawns a process and is only allowed from the server itself.

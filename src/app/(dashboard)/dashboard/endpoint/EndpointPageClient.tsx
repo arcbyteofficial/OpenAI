@@ -6,11 +6,15 @@ import Toggle from "@/shared/components/Toggle";
 import { useCopyToClipboard } from "@/shared/hooks/useCopyToClipboard";
 import { isPublicDisplayBaseUrl, useDisplayBaseUrl } from "@/shared/hooks";
 import { useTranslations } from "next-intl";
+import { getErrorMessage } from "@/shared/utils/api";
 import A2ADashboardPage from "./components/A2ADashboard";
 import McpDashboardPage from "./components/MCPDashboard";
 import NotionSourceCard from "./components/NotionSourceCard";
 import ObsidianSourceCard from "./components/ObsidianSourceCard";
 import VscodeTokenAliasCard from "./VscodeTokenAliasCard";
+
+// Routes answer { error: "…" }; the auth layer rejects with { error: { message } } (LOCAL_ONLY).
+const errorOf = (data: unknown) => getErrorMessage(data, undefined, "");
 
 const BUILD_TIME_CLOUD_URL = process.env.NEXT_PUBLIC_CLOUD_URL || null;
 const CLOUD_ACTION_TIMEOUT_MS = 15000;
@@ -213,7 +217,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         const data = await res.json().catch(() => null);
         if (!res.ok) {
           throw new Error(
-            data?.error ||
+            errorOf(data) ||
               translateOrFallback(
                 "cloudflaredRequestFailed",
                 "Failed to load Cloudflare tunnel status"
@@ -249,7 +253,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         const data = await res.json().catch(() => null);
         if (!res.ok) {
           throw new Error(
-            data?.error ||
+            errorOf(data) ||
               translateOrFallback("tailscaleRequestFailed", "Failed to load Tailscale status")
           );
         }
@@ -279,7 +283,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         const data = await res.json().catch(() => null);
         if (!res.ok) {
           throw new Error(
-            data?.error || translateOrFallback("ngrokRequestFailed", "Failed to load ngrok status")
+            errorOf(data) ||
+              translateOrFallback("ngrokRequestFailed", "Failed to load ngrok status")
           );
         }
 
@@ -647,7 +652,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         await loadCloudSettings();
       } else {
         // Sync failed — provide a helpful error message
-        let errorMessage = data.error || t("failedEnable");
+        let errorMessage = errorOf(data) || t("failedEnable");
         if (status === 502 || status === 408) {
           errorMessage = t("cloudWorkerUnreachable");
         }
@@ -683,7 +688,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         dispatchCloudChange();
         await loadCloudSettings();
       } else {
-        setCloudStatus({ type: "error", message: data.error || t("failedDisable") });
+        setCloudStatus({ type: "error", message: errorOf(data) || t("failedDisable") });
       }
     } catch (error) {
       console.log("Error disabling cloud:", error);
@@ -708,7 +713,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
 
       if (!res.ok) {
         throw new Error(
-          data?.error ||
+          errorOf(data) ||
             translateOrFallback("cloudflaredRequestFailed", "Failed to update Cloudflare tunnel")
         );
       }
@@ -752,7 +757,8 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
 
       if (!res.ok) {
         throw new Error(
-          data?.error || translateOrFallback("ngrokRequestFailed", "Failed to update ngrok tunnel")
+          errorOf(data) ||
+            translateOrFallback("ngrokRequestFailed", "Failed to update ngrok tunnel")
         );
       }
 
@@ -826,7 +832,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
       });
       if (!res.ok) {
         throw new Error(
-          data?.error ||
+          errorOf(data) ||
             translateOrFallback("tailscaleEnableFailed", "Failed to enable Tailscale Funnel")
         );
       }
@@ -853,7 +859,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
         }));
         if (!res.ok) {
           throw new Error(
-            data?.error ||
+            errorOf(data) ||
               translateOrFallback("tailscaleEnableFailed", "Failed to enable Tailscale Funnel")
           );
         }
@@ -877,7 +883,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
           });
           if (!next.res.ok) {
             throw new Error(
-              next.data?.error ||
+              errorOf(next.data) ||
                 translateOrFallback("tailscaleEnableFailed", "Failed to enable Tailscale Funnel")
             );
           }
@@ -905,7 +911,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
 
       if (!data?.success) {
         throw new Error(
-          data?.error ||
+          errorOf(data) ||
             translateOrFallback("tailscaleEnableFailed", "Failed to enable Tailscale Funnel")
         );
       }
@@ -951,7 +957,7 @@ export default function APIPageClient({ machineId }: Readonly<APIPageClientProps
 
       if (!res.ok) {
         throw new Error(
-          data?.error ||
+          errorOf(data) ||
             translateOrFallback("tailscaleDisableFailed", "Failed to disable Tailscale Funnel")
         );
       }
