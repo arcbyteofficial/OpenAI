@@ -40,7 +40,7 @@ export function RequestStreamingList({
             <button
               type="button"
               onClick={onClearContextFilter}
-              className="ml-1 underline hover:text-text-main focus:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+              className="ml-1 underline hover:text-text-main focus:outline-none focus-visible:ring-1 focus-visible:ring-focus"
             >
               [{t("clear")}]
             </button>
@@ -73,7 +73,7 @@ export function RequestStreamingList({
           <button
             type="button"
             onClick={onClearContextFilter}
-            className="ml-1 underline hover:text-text-main focus:outline-none focus-visible:ring-1 focus-visible:ring-primary"
+            className="ml-1 underline hover:text-text-main focus:outline-none focus-visible:ring-1 focus-visible:ring-focus"
           >
             [{t("clear")}]
           </button>

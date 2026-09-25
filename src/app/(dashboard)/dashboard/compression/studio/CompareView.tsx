@@ -88,7 +88,7 @@ function VerifyControls({
       <label className="text-[11px] text-text-muted">
         {t("provider")}
         <input
-          className="ml-1 w-24 rounded-control border border-border-strong bg-surface px-1.5 py-0.5 text-xs text-text-main focus:border-primary focus:outline-none"
+          className="ml-1 w-24 rounded-control border border-border-strong bg-surface px-1.5 py-0.5 text-xs text-text-main focus:border-focus focus:outline-none"
           value={provider}
           onChange={(e) => onProvider(e.target.value)}
         />
@@ -97,7 +97,7 @@ function VerifyControls({
         {t("judgeModel")}
         <input
           data-testid="verify-model"
-          className="ml-1 w-32 rounded-control border border-border-strong bg-surface px-1.5 py-0.5 text-xs text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none"
+          className="ml-1 w-32 rounded-control border border-border-strong bg-surface px-1.5 py-0.5 text-xs text-text-main placeholder:text-text-subtle focus:border-focus focus:outline-none"
           value={judgeModel}
           onChange={(e) => onJudgeModel(e.target.value)}
           placeholder={t("judgeModelPlaceholder")}
@@ -109,7 +109,7 @@ function VerifyControls({
           type="number"
           step="0.01"
           min="0"
-          className="ml-1 w-16 rounded-control border border-border-strong bg-surface px-1.5 py-0.5 text-xs text-text-main tabular-nums focus:border-primary focus:outline-none"
+          className="ml-1 w-16 rounded-control border border-border-strong bg-surface px-1.5 py-0.5 text-xs text-text-main tabular-nums focus:border-focus focus:outline-none"
           value={capUsd}
           onChange={(e) => onCapUsd(Number(e.target.value))}
         />

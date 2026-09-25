@@ -126,7 +126,7 @@ export default function ZedImportCard({ fetchConnections, notify }: ZedImportCar
               </p>
               <div className="flex gap-2 flex-col sm:flex-row">
                 <select
-                  className="input input-sm rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[13px] text-text-main focus:outline-none focus:border-primary"
+                  className="input input-sm rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[13px] text-text-main focus:outline-none focus:border-focus"
                   value={zedManualProvider}
                   onChange={(e) => setZedManualProvider(e.target.value)}
                 >
@@ -140,7 +140,7 @@ export default function ZedImportCard({ fetchConnections, notify }: ZedImportCar
                 </select>
                 <input
                   type="password"
-                  className="input input-sm flex-1 rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
+                  className="input input-sm flex-1 rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus"
                   placeholder={t("zedPasteApiKey")}
                   value={zedManualToken}
                   onChange={(e) => setZedManualToken(e.target.value)}

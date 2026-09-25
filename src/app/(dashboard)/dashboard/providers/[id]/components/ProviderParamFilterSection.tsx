@@ -238,7 +238,7 @@ function ParamListField({ label, hint, value, placeholder, onChange }: ParamList
         value={value}
         onChange={(e) => onChange(e.target.value)}
         placeholder={placeholder}
-        className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+        className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-1 focus:ring-focus"
       />
       <p className="text-[11px] text-text-muted mt-1">{hint}</p>
     </div>
@@ -259,7 +259,7 @@ function AutoLearnToggle({ t, checked, onChange }: AutoLearnToggleProps) {
           type="checkbox"
           checked={checked}
           onChange={(e) => onChange(e.target.checked)}
-          className="rounded border-border text-primary focus:ring-primary"
+          className="rounded border-border text-primary focus:ring-focus"
         />
         <span className="text-xs font-medium text-text-main">
           {t("paramFiltersAutoLearnLabel")}

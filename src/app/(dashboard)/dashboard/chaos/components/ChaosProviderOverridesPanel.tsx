@@ -41,7 +41,7 @@ function ChaosProviderOverrideRow({
           placeholder={t("providerIdPlaceholder")}
           value={override.providerId}
           onChange={(e) => onUpdate(index, "providerId", e.target.value)}
-          className="w-full px-2 py-1 rounded-control border border-border-strong bg-surface text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+          className="w-full px-2 py-1 rounded-control border border-border-strong bg-surface text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
         />
         <datalist id={`provider-list-${index}`}>
           {availableProviders.map((p) => (
@@ -54,7 +54,7 @@ function ChaosProviderOverrideRow({
         placeholder={t("modelIdPlaceholder")}
         value={override.modelId || ""}
         onChange={(e) => onUpdate(index, "modelId", e.target.value)}
-        className="flex-1 px-2 py-1 rounded-control border border-border-strong bg-surface text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+        className="flex-1 px-2 py-1 rounded-control border border-border-strong bg-surface text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
       />
       <button
         type="button"

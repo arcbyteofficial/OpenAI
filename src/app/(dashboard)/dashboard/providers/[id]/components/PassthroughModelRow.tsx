@@ -251,7 +251,7 @@ export default function PassthroughModelRow({
                 placeholder={t("contextWindowOverridePlaceholder")}
                 title={t("contextWindowOverrideHint")}
                 aria-label={t("contextWindowOverrideLabel")}
-                className="w-28 rounded-md border border-border-strong bg-surface px-1.5 py-0.5 text-[11px] outline-none focus:border-primary"
+                className="w-28 rounded-md border border-border-strong bg-surface px-1.5 py-0.5 text-[11px] outline-none focus:border-focus"
               />
               <button
                 onClick={() => void submitContextOverride()}

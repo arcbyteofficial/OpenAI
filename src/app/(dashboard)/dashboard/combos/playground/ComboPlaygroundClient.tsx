@@ -138,7 +138,7 @@ export default function ComboPlaygroundClient() {
                 {t("comboLabel")}
               </label>
               <select
-                className="w-full border border-border-strong rounded-control px-3 py-1.5 bg-surface text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                className="w-full border border-border-strong rounded-control px-3 py-1.5 bg-surface text-sm text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                 value={selectedComboId}
                 onChange={(e) => setSelectedComboId(e.target.value)}
               >

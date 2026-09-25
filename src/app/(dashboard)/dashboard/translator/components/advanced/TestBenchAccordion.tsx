@@ -279,7 +279,7 @@ function TestBenchContent() {
                 onChange={(e) => setModel(e.target.value)}
                 list="testbench-acc-model-suggestions"
                 placeholder={t("modelPlaceholder")}
-                className="w-full bg-surface border border-border-strong rounded-control px-3 py-2 font-mono text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors"
+                className="w-full bg-surface border border-border-strong rounded-control px-3 py-2 font-mono text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus transition-colors"
               />
               <datalist id="testbench-acc-model-suggestions">
                 {availableModels.map((m) => (

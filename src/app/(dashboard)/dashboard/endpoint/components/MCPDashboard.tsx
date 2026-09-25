@@ -460,7 +460,7 @@ export default function McpDashboardPage() {
           <div className="rounded-lg border border-border p-3 space-y-3">
             <p className="text-sm font-semibold">{t("switchCombo")}</p>
             <select
-              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
               value={selectedComboId}
               onChange={(event) => setSelectedComboId(event.target.value)}
             >
@@ -483,7 +483,7 @@ export default function McpDashboardPage() {
           <div className="rounded-lg border border-border p-3 space-y-3">
             <p className="text-sm font-semibold">{t("applyResilienceProfile")}</p>
             <select
-              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
               value={selectedProfile}
               onChange={(event) =>
                 setSelectedProfile(event.target.value as keyof typeof RESILIENCE_PRESETS)
@@ -568,7 +568,7 @@ export default function McpDashboardPage() {
           </div>
           <div className="flex flex-wrap gap-2">
             <select
-              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
               value={toolFilter}
               onChange={(event) => {
                 setAuditOffset(0);
@@ -583,7 +583,7 @@ export default function McpDashboardPage() {
               ))}
             </select>
             <select
-              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
               value={successFilter}
               onChange={(event) => {
                 setAuditOffset(0);
@@ -595,7 +595,7 @@ export default function McpDashboardPage() {
               <option value="false">{t("failure")}</option>
             </select>
             <input
-              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
               placeholder={t("apiKeyIdPlaceholder")}
               value={apiKeyFilter}
               onChange={(event) => {

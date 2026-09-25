@@ -116,7 +116,7 @@ export default function DatabaseBackupRetentionCard({
                 keepLatest: Number.isFinite(parsed) ? Math.max(1, parsed) : 1,
               }));
             }}
-            className="h-9 w-32 rounded-control border border-border-strong bg-surface px-3 text-sm text-text-main tabular-nums focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+            className="h-9 w-32 rounded-control border border-border-strong bg-surface px-3 text-sm text-text-main tabular-nums focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
           />
         </label>
         <label className="flex flex-col gap-1 text-xs text-text-muted">
@@ -134,7 +134,7 @@ export default function DatabaseBackupRetentionCard({
                 retentionDays: Number.isFinite(parsed) ? Math.max(0, parsed) : 0,
               }));
             }}
-            className="h-9 w-32 rounded-control border border-border-strong bg-surface px-3 text-sm text-text-main tabular-nums focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+            className="h-9 w-32 rounded-control border border-border-strong bg-surface px-3 text-sm text-text-main tabular-nums focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
           />
         </label>
         <Button

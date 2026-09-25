@@ -119,7 +119,7 @@ function NumberField({
               onChange(nextValue);
             }
           }}
-          className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:border-primary focus:outline-none"
+          className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:border-focus focus:outline-none"
         />
         {suffix ? <span className="text-xs text-text-muted">{suffix}</span> : null}
       </div>
@@ -433,7 +433,7 @@ export default function ModelLockoutCard() {
                 }
               }}
               placeholder={t("addErrorCode")}
-              className="w-32 rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main outline-none focus:border-primary transition-colors placeholder:text-text-subtle"
+              className="w-32 rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main outline-none focus:border-focus transition-colors placeholder:text-text-subtle"
             />
             <button
               type="button"

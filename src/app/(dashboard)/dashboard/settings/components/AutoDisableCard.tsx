@@ -133,7 +133,7 @@ export default function AutoDisableCard() {
                 checked={current.enabled}
                 onChange={(e) => setDraft((prev) => ({ ...prev, enabled: e.target.checked }))}
                 disabled={!editMode}
-                className="w-4 h-4 accent-primary text-primary bg-surface border-border-strong rounded focus:ring-primary/40"
+                className="w-4 h-4 accent-primary text-primary bg-surface border-border-strong rounded focus:ring-focus/40"
               />
               <span className="text-sm font-medium">{t("autoDisableBannedAccounts")}</span>
             </label>
@@ -182,7 +182,7 @@ export default function AutoDisableCard() {
                   checked={current.scope === scope}
                   onChange={() => setDraft((prev) => ({ ...prev, scope }))}
                   disabled={!editMode || !current.enabled}
-                  className="mt-1 w-4 h-4 accent-primary text-primary bg-surface border-border-strong focus:ring-primary/40"
+                  className="mt-1 w-4 h-4 accent-primary text-primary bg-surface border-border-strong focus:ring-focus/40"
                 />
                 <span>
                   <span className="block text-sm font-medium">

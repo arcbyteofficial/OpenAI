@@ -106,7 +106,7 @@ export function PlaygroundInput({
     <div className="flex flex-col gap-3">
       <textarea
         data-testid="play-input"
-        className="min-h-[160px] w-full rounded-control border border-border-strong bg-surface p-2 font-mono text-xs text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none focus:ring-[3px] focus:ring-primary/15"
+        className="min-h-[160px] w-full rounded-control border border-border-strong bg-surface p-2 font-mono text-xs text-text-main placeholder:text-text-subtle focus:border-focus focus:outline-none focus:ring-[3px] focus:ring-focus/15"
         value={text}
         onChange={(e) => onText(e.target.value)}
         placeholder={t("inputPlaceholder")}

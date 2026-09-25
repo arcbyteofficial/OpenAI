@@ -453,7 +453,7 @@ export default function CloudAgentsPage() {
                   <select
                     value={newTask.providerId}
                     onChange={(e) => setNewTask({ ...newTask, providerId: e.target.value })}
-                    className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                    className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
                   >
                     {CLOUD_AGENTS.map((agent) => (
                       <option key={agent.id} value={agent.id}>
@@ -471,7 +471,7 @@ export default function CloudAgentsPage() {
                   placeholder={t("taskDescriptionPlaceholder")}
                   value={newTask.prompt}
                   onChange={(e) => setNewTask({ ...newTask, prompt: e.target.value })}
-                  className="min-h-24 w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                  className="min-h-24 w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
                   required
                 />
               </div>
@@ -522,7 +522,7 @@ export default function CloudAgentsPage() {
             <select
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value as TaskStatus | "all")}
-              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
             >
               {STATUS_OPTIONS.map((opt) => (
                 <option key={opt.value} value={opt.value}>
@@ -533,7 +533,7 @@ export default function CloudAgentsPage() {
             <select
               value={providerFilter}
               onChange={(e) => setProviderFilter(e.target.value)}
-              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
             >
               <option value="all">{t("filterAllProviders") || "All Providers"}</option>
               {CLOUD_AGENTS.map((agent) => (

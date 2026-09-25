@@ -2413,7 +2413,7 @@ const PermissionsModal = memo(function PermissionsModal({
                     type="time"
                     value={scheduleFrom}
                     onChange={(e) => setScheduleFrom(e.target.value)}
-                    className="w-full px-2 py-1.5 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-primary"
+                    className="w-full px-2 py-1.5 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-focus"
                   />
                 </div>
                 <div>
@@ -2422,7 +2422,7 @@ const PermissionsModal = memo(function PermissionsModal({
                     type="time"
                     value={scheduleUntil}
                     onChange={(e) => setScheduleUntil(e.target.value)}
-                    className="w-full px-2 py-1.5 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-primary"
+                    className="w-full px-2 py-1.5 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-focus"
                   />
                 </div>
               </div>
@@ -2473,7 +2473,7 @@ const PermissionsModal = memo(function PermissionsModal({
                   value={scheduleTz}
                   onChange={(e) => setScheduleTz(e.target.value)}
                   placeholder={t("apiManagerTimezonePlaceholder")}
-                  className="w-full px-2 py-1.5 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-primary font-mono"
+                  className="w-full px-2 py-1.5 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-focus font-mono"
                 />
                 <p className="text-[10px] text-text-muted mt-1">{t("scheduleTimezoneHint")}</p>
               </div>
@@ -2624,7 +2624,7 @@ const PermissionsModal = memo(function PermissionsModal({
                   setExpiresAt(date.toISOString());
                 }
               }}
-              className="min-w-0 flex-1 px-2 py-1.5 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-primary"
+              className="min-w-0 flex-1 px-2 py-1.5 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-focus"
             />
             <button
               type="button"

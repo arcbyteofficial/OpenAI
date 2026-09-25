@@ -151,7 +151,7 @@ export default function CustomRangePicker({
             type="datetime-local"
             value={localStart}
             onChange={(e) => setLocalStart(e.target.value)}
-            className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary"
+            className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-focus"
           />
         </div>
         <div>
@@ -162,7 +162,7 @@ export default function CustomRangePicker({
             type="datetime-local"
             value={localEnd}
             onChange={(e) => setLocalEnd(e.target.value)}
-            className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-primary"
+            className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:outline-none focus:border-focus"
           />
         </div>
       </div>

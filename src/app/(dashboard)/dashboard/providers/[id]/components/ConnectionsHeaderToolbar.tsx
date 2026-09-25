@@ -182,7 +182,7 @@ export default function ConnectionsHeaderToolbar({
               }
               disabled={savingCodexGlobalServiceMode || !codexSettingsLoaded}
               aria-label={providerText(t, "globalCodexServiceMode", "Global Codex service mode")}
-              className="rounded-control border border-border-strong bg-surface px-2 py-1 text-xs text-text-main outline-none transition-colors focus:border-primary disabled:opacity-60"
+              className="rounded-control border border-border-strong bg-surface px-2 py-1 text-xs text-text-main outline-none transition-colors focus:border-focus disabled:opacity-60"
             >
               {codexGlobalServiceModeOptions.map((option) => (
                 <option key={option.value} value={option.value}>

@@ -28,7 +28,7 @@ export default function MitmProxyError({
         )}
         <button
           onClick={reset}
-          className="px-3 py-1.5 text-[13px] font-medium bg-contrast text-contrast-fg rounded-control hover:bg-contrast-hover transition-colors focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="px-3 py-1.5 text-[13px] font-medium bg-contrast text-contrast-fg rounded-control hover:bg-contrast-hover transition-colors focus:outline-2 focus:outline-offset-2 focus:outline-focus"
         >
           Try Again
         </button>

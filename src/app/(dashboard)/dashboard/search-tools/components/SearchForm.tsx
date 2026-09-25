@@ -111,7 +111,7 @@ export default function SearchForm({
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t("queryPlaceholder")}
-          className="w-full bg-surface border border-border-strong rounded-control p-2.5 text-sm text-text-main resize-none h-16 placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+          className="w-full bg-surface border border-border-strong rounded-control p-2.5 text-sm text-text-main resize-none h-16 placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
           onKeyDown={(e) => {
             if (e.key === "Enter" && !e.shiftKey) {
               e.preventDefault();
@@ -209,7 +209,7 @@ export default function SearchForm({
             onChange={(e) => setMaxResults(parseInt(e.target.value) || 5)}
             min={1}
             max={100}
-            className="w-full bg-surface border border-border-strong rounded-control px-2.5 py-1.5 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+            className="w-full bg-surface border border-border-strong rounded-control px-2.5 py-1.5 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
           />
         </div>
       </div>
@@ -234,7 +234,7 @@ export default function SearchForm({
                   value={country}
                   onChange={(e) => setCountry(e.target.value)}
                   placeholder={t("optionAny")}
-                  className="w-full bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="w-full bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                 />
               </div>
               <div className="flex-1">
@@ -243,7 +243,7 @@ export default function SearchForm({
                   value={language}
                   onChange={(e) => setLanguage(e.target.value)}
                   placeholder={t("optionAny")}
-                  className="w-full bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="w-full bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                 />
               </div>
             </div>
@@ -271,7 +271,7 @@ export default function SearchForm({
                   value={domainInput}
                   onChange={(e) => setDomainInput(e.target.value)}
                   placeholder={t("domainPlaceholder")}
-                  className="flex-1 bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="flex-1 bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                   onKeyDown={(e) => e.key === "Enter" && addDomain("include")}
                 />
                 <button
@@ -309,7 +309,7 @@ export default function SearchForm({
                   value={excludeDomainInput}
                   onChange={(e) => setExcludeDomainInput(e.target.value)}
                   placeholder={t("domainPlaceholder")}
-                  className="flex-1 bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="flex-1 bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                   onKeyDown={(e) => e.key === "Enter" && addDomain("exclude")}
                 />
                 <button

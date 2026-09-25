@@ -649,7 +649,7 @@ export default function ApiTab(_props: ApiTabProps) {
                   type="file"
                   accept="audio/*,video/*"
                   onChange={handleAudioFileChange}
-                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-[13px] file:font-medium"
+                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-focus/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-[13px] file:font-medium"
                 />
                 {uploadedFile && (
                   <p className="text-xs text-text-muted mt-1 flex items-center gap-1">
@@ -674,7 +674,7 @@ export default function ApiTab(_props: ApiTabProps) {
                   accept="image/*"
                   multiple
                   onChange={(e) => void handleImageFileChange(e)}
-                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-[13px] file:font-medium"
+                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-focus/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-[13px] file:font-medium"
                 />
                 {uploadedImages.length > 0 && (
                   <div className="flex gap-2 mt-2 flex-wrap">

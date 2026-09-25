@@ -109,14 +109,14 @@ export function TopBarControls({
         placeholder={t("filterHost")}
         defaultValue={filters.host ?? ""}
         onChange={(e) => onHostChange(e.target.value || undefined)}
-        className="rounded-control border border-border-strong bg-surface px-2 py-1 text-xs text-text-main placeholder:text-text-subtle w-32 focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+        className="rounded-control border border-border-strong bg-surface px-2 py-1 text-xs text-text-main placeholder:text-text-subtle w-32 focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
       />
 
       {/* Status filter */}
       <select
         value={filters.status ?? ""}
         onChange={(e) => onStatusChange((e.target.value as ListFilters["status"]) || undefined)}
-        className="rounded-control border border-border-strong bg-surface px-2 py-1 text-xs text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+        className="rounded-control border border-border-strong bg-surface px-2 py-1 text-xs text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
       >
         <option value="">{t("anyStatus")}</option>
         <option value="2xx">2xx</option>

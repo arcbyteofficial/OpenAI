@@ -38,7 +38,7 @@ export function SkillCard({ skill, selected, onClick }: SkillCardProps): JSX.Ele
       onClick={onClick}
       onKeyDown={handleKeyDown}
       data-testid={`skill-card-${skill.id}`}
-      className={`flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-colors outline-none focus-visible:ring-2 focus-visible:ring-primary/40 ${
+      className={`flex items-start gap-3 rounded-lg border p-3 cursor-pointer transition-colors outline-none focus-visible:ring-2 focus-visible:ring-focus/40 ${
         selected
           ? "border-border-strong bg-bg-subtle"
           : "border-border bg-surface hover:bg-bg-subtle hover:border-border-strong"

@@ -101,6 +101,8 @@
   --color-text-primary: #171717;
   --color-text-muted: #666666;
   --color-text-subtle: #8f8f8f;
+  /* Focus: neutral grey, not the blue accent (field borders, halos, the keyboard ring). */
+  --color-focus: #8f8f8f;
 
   /* Fumadocs light theme */
   --color-fd-background: #fafafa;
@@ -173,6 +175,7 @@
   --color-text-primary: #ededed;
   --color-text-muted: #a1a1a1;
   --color-text-subtle: #737373;
+  --color-focus: #737373;
 
   /* Orchestration status tokens — dark values (previous STATUS_HEX constants) */
   --orch-status-success: #22c55e;
@@ -245,6 +248,7 @@
   --color-text-primary: var(--color-text-primary);
   --color-text-muted: var(--color-text-muted);
   --color-text-subtle: var(--color-text-subtle);
+  --color-focus: var(--color-focus);
 
   /* Static colors (for explicit light/dark usage) */
   --color-bg-light: #fafafa;
@@ -286,7 +290,7 @@
 @layer base {
   /* ── Focus Indicators (U-3) ── */
   :root {
-    --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-primary);
+    --focus-ring: 0 0 0 2px var(--color-bg), 0 0 0 4px var(--color-focus);
   }
 
   /* Visible focus ring on keyboard navigation only */

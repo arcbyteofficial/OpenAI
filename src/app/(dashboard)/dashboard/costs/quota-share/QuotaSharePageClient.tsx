@@ -475,7 +475,7 @@ export default function QuotaSharePageClient() {
           value={selectedGroupId}
           onChange={(e) => setSelectedGroupId(e.target.value)}
           title={t("groupSelectHint")}
-          className="px-2 py-1 rounded-control border border-border-strong bg-surface text-sm text-text-main min-w-[120px] focus:border-primary focus:outline-none"
+          className="px-2 py-1 rounded-control border border-border-strong bg-surface text-sm text-text-main min-w-[120px] focus:border-focus focus:outline-none"
         >
           <option value="all">{t("allGroups")}</option>
           {groups.map((g) => (
@@ -499,7 +499,7 @@ export default function QuotaSharePageClient() {
               }}
               placeholder={t("groupNamePrompt")}
               autoFocus
-              className="px-2 py-1 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle w-36 focus:border-primary focus:outline-none"
+              className="px-2 py-1 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle w-36 focus:border-focus focus:outline-none"
             />
             <button
               type="button"

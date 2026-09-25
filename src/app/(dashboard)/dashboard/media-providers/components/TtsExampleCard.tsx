@@ -160,7 +160,7 @@ export function TtsExampleCard({ providerId }: Props) {
           <select
             value={model || firstModel}
             onChange={(e) => setModel(e.target.value)}
-            className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+            className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
           >
             {modelOptions.map((m) => (
               <option key={m.id} value={m.id}>
@@ -174,7 +174,7 @@ export function TtsExampleCard({ providerId }: Props) {
           <select
             value={voice}
             onChange={(e) => setVoice(e.target.value)}
-            className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+            className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
           >
             {VOICES.map((v) => (
               <option key={v} value={v}>
@@ -207,7 +207,7 @@ export function TtsExampleCard({ providerId }: Props) {
           onChange={(e) => setInputText(e.target.value)}
           rows={2}
           placeholder={t("ttsSample")}
-          className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 resize-none"
+          className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 resize-none"
         />
       </div>
     </PlaygroundCard>

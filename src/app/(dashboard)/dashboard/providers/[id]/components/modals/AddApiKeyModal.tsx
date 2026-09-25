@@ -588,7 +588,7 @@ export default function AddApiKeyModal({
             {openRouterPreset.input}
             {freeModelsToggle}
             <textarea
-              className="w-full rounded-control border border-border-strong bg-surface p-2 text-[13px] font-mono text-text-main placeholder:text-text-subtle resize-y min-h-[140px] focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary"
+              className="w-full rounded-control border border-border-strong bg-surface p-2 text-[13px] font-mono text-text-main placeholder:text-text-subtle resize-y min-h-[140px] focus:outline-none focus:border-focus focus:ring-1 focus:ring-focus"
               placeholder={
                 isCloudflare
                   ? "name1|account-id-1|cf-token-1\nname2|account-id-2|cf-token-2"
@@ -611,7 +611,7 @@ export default function AddApiKeyModal({
                       priority: Number.parseInt(e.target.value) || 1,
                     })
                   }
-                  className="w-20 px-2 py-1 text-sm tabular-nums border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-primary"
+                  className="w-20 px-2 py-1 text-sm tabular-nums border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-focus"
                 />
               </div>
               <label className="flex items-center gap-2 text-sm text-text-muted cursor-pointer">
@@ -1142,7 +1142,7 @@ export default function AddApiKeyModal({
                   <select
                     value={formData.apiRegion}
                     onChange={(e) => setFormData({ ...formData, apiRegion: e.target.value })}
-                    className="w-full px-3 py-2 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-primary"
+                    className="w-full px-3 py-2 text-sm border border-border-strong rounded-control bg-surface text-text-main focus:outline-none focus:border-focus"
                   >
                     <option value="international">{t("apiRegionInternational")}</option>
                     <option value="china">{t("apiRegionChina")}</option>

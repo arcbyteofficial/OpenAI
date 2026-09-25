@@ -405,7 +405,7 @@ export default function NoAuthAccountCard({
                   value={manualApiKey}
                   onChange={(e) => setManualApiKey(e.target.value)}
                   placeholder="Paste API key..."
-                  className="rounded-control border border-border-strong bg-surface px-2 py-1 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
+                  className="rounded-control border border-border-strong bg-surface px-2 py-1 text-xs placeholder:text-text-subtle focus:outline-none focus:border-focus"
                   disabled={addingManualKey || !enabled}
                 />
                 <Button
@@ -545,7 +545,7 @@ export default function NoAuthAccountCard({
                   <select
                     value={selectedProxyId}
                     onChange={(e) => setSelectedProxyId(e.target.value)}
-                    className="w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
+                    className="w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-focus"
                   >
                     <option value="">
                       {savedProxies.length === 0 ? t("noSavedProxies") : t("directConnection")}
@@ -562,7 +562,7 @@ export default function NoAuthAccountCard({
                       <select
                         value={proxyType}
                         onChange={(e) => setProxyType(e.target.value)}
-                        className="flex-shrink-0 rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
+                        className="flex-shrink-0 rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-focus"
                       >
                         {PROXY_TYPES.map((t) => (
                           <option key={t.value} value={t.value}>
@@ -575,14 +575,14 @@ export default function NoAuthAccountCard({
                         value={proxyHost}
                         onChange={(e) => setProxyHost(e.target.value)}
                         placeholder={t("host")}
-                        className="flex-1 rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
+                        className="flex-1 rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-focus"
                       />
                       <input
                         type="text"
                         value={proxyPort}
                         onChange={(e) => setProxyPort(e.target.value)}
                         placeholder={t("port")}
-                        className="w-16 rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
+                        className="w-16 rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-focus"
                       />
                     </div>
                     <input
@@ -590,14 +590,14 @@ export default function NoAuthAccountCard({
                       value={proxyUsername}
                       onChange={(e) => setProxyUsername(e.target.value)}
                       placeholder={t("usernameOptional")}
-                      className="w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
+                      className="w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-focus"
                     />
                     <input
                       type="password"
                       value={proxyPassword}
                       onChange={(e) => setProxyPassword(e.target.value)}
                       placeholder={t("passwordOptional")}
-                      className="w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-primary"
+                      className="w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs placeholder:text-text-subtle focus:outline-none focus:border-focus"
                     />
                   </>
                 )}

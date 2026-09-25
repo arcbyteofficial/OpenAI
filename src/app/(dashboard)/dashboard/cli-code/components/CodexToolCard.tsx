@@ -539,7 +539,7 @@ openai_base_url = "${getEffectiveBaseUrl()}"
                     value={getDisplayUrl()}
                     onChange={(e) => setCustomBaseUrl(e.target.value)}
                     placeholder={t("baseUrlPlaceholder")}
-                    className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-focus/50"
                   />
                   {customBaseUrl && getDisplayUrl() !== normalizeCodexBaseUrl(baseUrl, wireApi) && (
                     <button
@@ -564,7 +564,7 @@ openai_base_url = "${getEffectiveBaseUrl()}"
                     <select
                       value={effectiveApiKey}
                       onChange={(e) => setSelectedApiKey(e.target.value)}
-                      className="flex-1 px-2 py-1.5 bg-surface rounded-control text-xs border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                      className="flex-1 px-2 py-1.5 bg-surface rounded-control text-xs border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                     >
                       {apiKeys.map((key) => (
                         <option key={key.id} value={key.id}>
@@ -602,7 +602,7 @@ openai_base_url = "${getEffectiveBaseUrl()}"
                     value={selectedModel}
                     onChange={(e) => setSelectedModel(e.target.value)}
                     placeholder="gpt-5.6-sol"
-                    className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-focus/50"
                   />
                   {selectedModel && (
                     <button
@@ -626,7 +626,7 @@ openai_base_url = "${getEffectiveBaseUrl()}"
                   <select
                     value={reasoningEffort}
                     onChange={(e) => setReasoningEffort(e.target.value)}
-                    className="flex-1 px-2 py-1.5 bg-surface rounded-control text-xs border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    className="flex-1 px-2 py-1.5 bg-surface rounded-control text-xs border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                   >
                     <option value="none">{t("effortNone")}</option>
                     <option value="low">{t("effortLow")}</option>
@@ -649,7 +649,7 @@ openai_base_url = "${getEffectiveBaseUrl()}"
                   <select
                     value={wireApi}
                     onChange={(e) => setWireApi(e.target.value)}
-                    className="flex-1 px-2 py-1.5 bg-surface rounded-control text-xs border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    className="flex-1 px-2 py-1.5 bg-surface rounded-control text-xs border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                   >
                     <option value="chat">{t("wireApiChatCompletions")}</option>
                     <option value="responses">{t("wireApiResponses")}</option>
@@ -686,7 +686,7 @@ openai_base_url = "${getEffectiveBaseUrl()}"
                         setModelMappings({ ...modelMappings, [defaultModel]: e.target.value })
                       }
                       placeholder={t("routeModelPlaceholder", { model: defaultModel })}
-                      className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
+                      className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-focus/50"
                     />
                     {modelMappings[defaultModel] && (
                       <button
@@ -824,7 +824,7 @@ openai_base_url = "${getEffectiveBaseUrl()}"
                       value={newProfileName}
                       onChange={(e) => setNewProfileName(e.target.value)}
                       placeholder={t("profileNamePlaceholder")}
-                      className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
+                      className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-focus/50"
                       onKeyDown={(e) => e.key === "Enter" && handleSaveProfile()}
                     />
                     <Button

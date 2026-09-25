@@ -343,7 +343,7 @@ export default function ClineToolCard({
                         value={selectedModel}
                         onChange={(e) => setSelectedModel(e.target.value)}
                         placeholder={t("providerModelPlaceholder")}
-                        className="flex-1 px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                        className="flex-1 px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                       />
                       <Button
                         variant="outline"
@@ -370,7 +370,7 @@ export default function ClineToolCard({
                       <select
                         value={effectiveApiKeyId}
                         onChange={(e) => setSelectedApiKeyId(e.target.value)}
-                        className="px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                        className="px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                       >
                         {apiKeys.map((key) => (
                           <option key={key.id} value={key.id}>

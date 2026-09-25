@@ -224,7 +224,7 @@ function TestToolbar({
         <select
           value={model}
           onChange={(e) => onModelChange(e.target.value)}
-          className="min-w-0 flex-1 rounded-control border border-border-strong bg-surface text-xs px-2 py-1 text-text-main focus:outline-none focus:ring-1 focus:ring-primary"
+          className="min-w-0 flex-1 rounded-control border border-border-strong bg-surface text-xs px-2 py-1 text-text-main focus:outline-none focus:ring-1 focus:ring-focus"
         >
           {modelOptions.length === 0 && <option value="">—</option>}
           {modelOptions.map((m) => (
@@ -240,7 +240,7 @@ function TestToolbar({
           <select
             value={selectedKey}
             onChange={(e) => onSelectedKeyChange(e.target.value)}
-            className="rounded-control border border-border-strong bg-surface text-xs px-2 py-1 text-text-main focus:outline-none focus:ring-1 focus:ring-primary"
+            className="rounded-control border border-border-strong bg-surface text-xs px-2 py-1 text-text-main focus:outline-none focus:ring-1 focus:ring-focus"
           >
             <option value="">({t("defaultKey")})</option>
             {keys.map((k) => (

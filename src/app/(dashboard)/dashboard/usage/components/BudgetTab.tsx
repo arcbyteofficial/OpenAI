@@ -507,7 +507,7 @@ export default function BudgetTab() {
               placeholder={t("budgetSearchKeysPlaceholder")}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-3 py-2 bg-surface border border-border-strong rounded-control placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 text-sm"
+              className="w-full pl-10 pr-3 py-2 bg-surface border border-border-strong rounded-control placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-2 focus:ring-focus/20 text-sm"
             />
           </div>
           <select

@@ -164,7 +164,7 @@ export function OmniMarketplaceTab({
               (skillsProvider === "skillsmp" ? searchMarketplace() : searchSkillsSh())
             }
             placeholder={t("searchMarketplacePlaceholder")}
-            className="flex-1 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+            className="flex-1 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
           />
           <button
             onClick={() => (skillsProvider === "skillsmp" ? searchMarketplace() : searchSkillsSh())}

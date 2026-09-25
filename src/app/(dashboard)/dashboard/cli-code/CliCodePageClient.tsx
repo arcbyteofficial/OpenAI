@@ -189,7 +189,7 @@ export default function CliCodePageClient({
           <select
             value={detectionFilter}
             onChange={handleDetectionChange}
-            className="h-8 px-2 text-[13px] rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-2 focus:ring-primary/30"
+            className="h-8 px-2 text-[13px] rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-2 focus:ring-focus/30"
           >
             <option value="all">{t("detectionAll")}</option>
             <option value="installed">{t("detectionInstalled")}</option>
@@ -205,7 +205,7 @@ export default function CliCodePageClient({
           <select
             value={baseUrlFilter}
             onChange={handleBaseUrlChange}
-            className="h-8 px-2 text-[13px] rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-2 focus:ring-primary/30"
+            className="h-8 px-2 text-[13px] rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-2 focus:ring-focus/30"
           >
             <option value="all">{t("baseUrlAll")}</option>
             <option value="full">{t("baseUrlFull")}</option>

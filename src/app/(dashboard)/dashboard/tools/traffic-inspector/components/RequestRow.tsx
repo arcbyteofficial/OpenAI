@@ -55,7 +55,7 @@ export function RequestRow({ request, selected, onClick, onSameContext, style }:
       style={style}
       className={cn(
         "flex items-stretch gap-1 border-b border-border cursor-pointer hover:bg-bg-subtle transition-colors",
-        "focus:outline-none focus-visible:ring-1 focus-visible:ring-primary",
+        "focus:outline-none focus-visible:ring-1 focus-visible:ring-focus",
         selected && "bg-primary/10"
       )}
     >
@@ -89,7 +89,7 @@ export function RequestRow({ request, selected, onClick, onSameContext, style }:
         {request.contextKey && (
           <button
             type="button"
-            className="text-[10px] text-text-muted font-mono opacity-60 hover:opacity-100 hover:text-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-primary rounded"
+            className="text-[10px] text-text-muted font-mono opacity-60 hover:opacity-100 hover:text-primary focus:outline-none focus-visible:ring-1 focus-visible:ring-focus rounded"
             title={t("filterByContext")}
             onClick={(e) => {
               e.stopPropagation();

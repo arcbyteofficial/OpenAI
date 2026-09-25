@@ -480,7 +480,7 @@ function OpEditor({
               value={op.text || ""}
               disabled={disabled}
               onChange={(e) => updateField("text", e.target.value)}
-              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main font-mono focus:ring-1 focus:ring-primary/30 focus:border-primary/50 focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main font-mono focus:ring-1 focus:ring-focus/30 focus:border-focus/50 focus:outline-none transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             />
             <p className="text-xs text-text-muted">{t(FIELD_HINTS.blockText)}</p>
           </div>

@@ -296,7 +296,7 @@ export function SetupWizard({
                           type="checkbox"
                           checked={selectedModels.has(model)}
                           onChange={() => toggleModelSelection(model)}
-                          className="rounded border-border-strong text-primary accent-primary focus:ring-2 focus:ring-primary/30"
+                          className="rounded border-border-strong text-primary accent-primary focus:ring-2 focus:ring-focus/30"
                         />
                         <span className="font-mono text-xs text-text-main">{model}</span>
                       </label>

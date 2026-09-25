@@ -189,7 +189,7 @@ export default function CustomCliCard({
                   value={cliName}
                   onChange={(e) => setCliName(e.target.value)}
                   placeholder={translateOrFallback("customCliNamePlaceholder", "e.g. My Team CLI")}
-                  className="w-full px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                  className="w-full px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                 />
               </div>
 
@@ -201,7 +201,7 @@ export default function CustomCliCard({
                   value={effectiveDefaultModel}
                   onChange={(e) => setDefaultModel(e.target.value)}
                   disabled={!hasActiveProviders}
-                  className="w-full px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50 disabled:opacity-60"
+                  className="w-full px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50 disabled:opacity-60"
                 >
                   <option value="">
                     {translateOrFallback("modelPlaceholder", "Select a model")}
@@ -228,7 +228,7 @@ export default function CustomCliCard({
                   <select
                     value={effectiveSelectedApiKeyId}
                     onChange={(e) => setSelectedApiKeyId(e.target.value)}
-                    className="w-full px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    className="w-full px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                   >
                     {apiKeys.map((key) => (
                       <option key={key.id} value={key.id}>
@@ -291,13 +291,13 @@ export default function CustomCliCard({
                           "customCliAliasPlaceholder",
                           "e.g. review"
                         )}
-                        className="px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                        className="px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                       />
                       <select
                         value={mapping.model}
                         onChange={(e) => handleUpdateMapping(mapping.id, "model", e.target.value)}
                         disabled={!hasActiveProviders}
-                        className="px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50 disabled:opacity-60"
+                        className="px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50 disabled:opacity-60"
                       >
                         <option value="">
                           {translateOrFallback("customCliTargetModelLabel", "Target model")}

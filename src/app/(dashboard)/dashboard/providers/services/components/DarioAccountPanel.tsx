@@ -366,7 +366,7 @@ export function DarioAccountPanel() {
               placeholder="alias (optional)"
               value={aliasInput}
               onChange={(e) => setAliasInput(e.target.value)}
-              className="flex-1 min-w-[140px] bg-surface text-xs text-text-main border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+              className="flex-1 min-w-[140px] bg-surface text-xs text-text-main border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
             />
             <Button size="sm" disabled={busy !== null} onClick={startLogin}>
               {busy === "start" ? "Starting…" : "Start Login"}
@@ -406,7 +406,7 @@ export function DarioAccountPanel() {
                 placeholder="code#state or bare code"
                 value={codeInput}
                 onChange={(e) => setCodeInput(e.target.value)}
-                className="flex-1 min-w-[180px] bg-surface text-xs text-text-main border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] font-mono"
+                className="flex-1 min-w-[180px] bg-surface text-xs text-text-main border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow] font-mono"
               />
               <Button
                 size="sm"

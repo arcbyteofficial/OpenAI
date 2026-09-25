@@ -42,7 +42,7 @@ type Props = {
 };
 
 const SELECT_CLASS =
-  "rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[13px] text-text-main focus:border-primary focus:outline-none transition-colors w-full";
+  "rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[13px] text-text-main focus:border-focus focus:outline-none transition-colors w-full";
 
 function SortableRow(props: {
   id: string;

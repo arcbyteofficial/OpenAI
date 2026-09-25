@@ -413,7 +413,7 @@ export function EngineConfigPage({ engineId }: { engineId: string }) {
       <div className="flex flex-col gap-3 rounded-card border border-border bg-surface p-5">
         <h2 className="text-sm font-semibold tracking-tight text-text-main">{t("preview")}</h2>
         <textarea
-          className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none transition-colors resize-y min-h-[80px]"
+          className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:border-focus focus:outline-none transition-colors resize-y min-h-[80px]"
           value={previewText}
           onChange={(e) => setPreviewText(e.target.value)}
           aria-label={t("previewInput")}

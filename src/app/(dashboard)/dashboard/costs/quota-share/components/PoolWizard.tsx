@@ -722,7 +722,7 @@ export default function PoolWizard({
                   placeholder={
                     selectedConn ? selectedConn.provider : t("wizardPoolNamePlaceholder")
                   }
-                  className="w-full px-3 py-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-sm"
+                  className="w-full px-3 py-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none text-sm"
                 />
               </div>
             )}
@@ -736,7 +736,7 @@ export default function PoolWizard({
                 <select
                   value={groupId}
                   onChange={(e) => setGroupId(e.target.value)}
-                  className="w-full px-3 py-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-sm"
+                  className="w-full px-3 py-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none text-sm"
                 >
                   {groups.map((g) => (
                     <option key={g.id} value={g.id}>
@@ -831,7 +831,7 @@ export default function PoolWizard({
                     <select
                       value={dim.unit}
                       onChange={(e) => updateDimension(i, { unit: e.target.value as QuotaUnit })}
-                      className="px-2 py-1.5 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-xs"
+                      className="px-2 py-1.5 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none text-xs"
                     >
                       {UNIT_OPTIONS.map((u) => (
                         <option key={u} value={u}>
@@ -844,7 +844,7 @@ export default function PoolWizard({
                       onChange={(e) =>
                         updateDimension(i, { window: e.target.value as QuotaWindow })
                       }
-                      className="px-2 py-1.5 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-xs"
+                      className="px-2 py-1.5 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none text-xs"
                     >
                       {WINDOW_OPTIONS.map((w) => (
                         <option key={w} value={w}>
@@ -858,7 +858,7 @@ export default function PoolWizard({
                       value={dim.limit}
                       onChange={(e) => updateDimension(i, { limit: Number(e.target.value) })}
                       placeholder={tPlans("limitLabel")}
-                      className="px-2 py-1.5 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-xs tabular-nums text-right"
+                      className="px-2 py-1.5 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none text-xs tabular-nums text-right"
                     />
                     <button
                       type="button"
@@ -940,7 +940,7 @@ export default function PoolWizard({
                         max={100}
                         value={a.weight}
                         onChange={(e) => updateWeight(a.apiKeyId, Number(e.target.value))}
-                        className="px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-sm text-right tabular-nums"
+                        className="px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none text-sm text-right tabular-nums"
                         title={t("weightPercent")}
                       />
                       <input
@@ -954,7 +954,7 @@ export default function PoolWizard({
                           )
                         }
                         placeholder={t("policyCapAbsolutePlaceholder")}
-                        className="px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-xs tabular-nums"
+                        className="px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none text-xs tabular-nums"
                         title={t("policyCapAbsoluteLabel")}
                       />
                       <select
@@ -962,7 +962,7 @@ export default function PoolWizard({
                         onChange={(e) =>
                           updateAllocationPolicy(a.apiKeyId, e.target.value as Policy)
                         }
-                        className="px-1 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-xs"
+                        className="px-1 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none text-xs"
                       >
                         <option value="hard">{t("policyHard")}</option>
                         <option value="soft">{t("policySoft")}</option>
@@ -1000,7 +1000,7 @@ export default function PoolWizard({
                   <select
                     value=""
                     onChange={(e) => e.target.value && addKey(e.target.value)}
-                    className="px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none text-xs"
+                    className="px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none text-xs"
                   >
                     <option value="">{t("addKey")}</option>
                     {availableKeys.map((k) => (

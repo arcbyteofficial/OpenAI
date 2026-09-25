@@ -51,7 +51,7 @@ export function FilterSelect({
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main cursor-pointer focus:outline-none focus:border-primary"
+        className="bg-surface border border-border-strong rounded-control px-2 py-1.5 text-xs text-text-main cursor-pointer focus:outline-none focus:border-focus"
       >
         {options.map((option) => (
           <option key={option.value} value={option.value}>

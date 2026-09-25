@@ -399,7 +399,7 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                   onChange={(e) => handleSinglePasteChange(e.target.value)}
                   rows={7}
                   placeholder='{ "auth_mode": "chatgpt", ... }'
-                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[12px] font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] resize-none"
+                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[12px] font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow] resize-none"
                 />
               </div>
             )}
@@ -422,7 +422,7 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                   value={singleEmail}
                   onChange={(e) => setSingleEmail(e.target.value)}
                   placeholder="user@example.com"
-                  className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                 />
                 <p className="text-xs text-text-muted">
                   {t("codexImportEmailHint") || "Auto-detected from the file; edit if needed."}
@@ -437,7 +437,7 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                   value={singleName}
                   onChange={(e) => setSingleName(e.target.value)}
                   placeholder={singleEmail || "Codex (imported)"}
-                  className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                 />
               </div>
               <label className="flex items-center gap-2 cursor-pointer">
@@ -526,7 +526,7 @@ export function ImportCodexAuthModal({ onClose, onSuccess }: ImportCodexAuthModa
                   onChange={(e) => handleBulkPasteChange(e.target.value)}
                   rows={7}
                   placeholder={'[{ "auth_mode": "chatgpt", ... }, ...]'}
-                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[12px] font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] resize-none"
+                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[12px] font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow] resize-none"
                 />
                 <p className="text-xs text-text-muted">
                   {t("codexImportBulkPasteHint") || "JSON array or multiple JSONs separated by ---"}

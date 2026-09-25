@@ -113,7 +113,7 @@ export function WebFetchExampleCard({ providerId }: Props) {
           value={url}
           onChange={(e) => setUrl(e.target.value)}
           placeholder="https://example.com/article"
-          className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+          className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
         />
       </div>
       {/* Format + Depth row */}
@@ -123,7 +123,7 @@ export function WebFetchExampleCard({ providerId }: Props) {
           <select
             value={format}
             onChange={(e) => setFormat(e.target.value as FetchFormat)}
-            className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+            className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
           >
             {FORMAT_OPTIONS.map((f) => (
               <option key={f} value={f}>
@@ -137,7 +137,7 @@ export function WebFetchExampleCard({ providerId }: Props) {
           <select
             value={depth}
             onChange={(e) => setDepth(Number(e.target.value))}
-            className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+            className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
           >
             {DEPTH_OPTIONS.map((d) => (
               <option key={d} value={d}>

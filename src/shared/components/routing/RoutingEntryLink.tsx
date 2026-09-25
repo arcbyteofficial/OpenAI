@@ -17,7 +17,7 @@ export default function RoutingEntryLink({ apiKeyId }: { apiKeyId?: string }) {
             ? "/dashboard/api-manager/routing?apiKeyId=" + encodeURIComponent(apiKeyId)
             : "/dashboard/api-manager/routing"
         }
-        className="inline-flex shrink-0 items-center gap-1.5 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle focus-visible:outline-2 focus-visible:outline-primary"
+        className="inline-flex shrink-0 items-center gap-1.5 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-[13px] font-medium text-text-main transition-colors hover:bg-bg-subtle focus-visible:outline-2 focus-visible:outline-focus"
       >
         <span className="material-symbols-outlined text-[16px] text-text-muted" aria-hidden="true">
           route

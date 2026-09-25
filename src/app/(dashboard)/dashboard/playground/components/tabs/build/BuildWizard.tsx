@@ -279,7 +279,7 @@ export default function BuildWizard({
                 }}
                 placeholder={tb("promptPlaceholder")}
                 rows={2}
-                className="flex-1 text-sm bg-surface border border-border-strong rounded-control px-3 py-2 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main resize-none"
+                className="flex-1 text-sm bg-surface border border-border-strong rounded-control px-3 py-2 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-focus text-text-main resize-none"
               />
             </div>
           </div>

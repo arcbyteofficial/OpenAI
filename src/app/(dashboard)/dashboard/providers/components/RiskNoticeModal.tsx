@@ -57,7 +57,7 @@ export default function RiskNoticeModal({
               setDontShowAgain(checked);
               if (checked) acknowledge();
             }}
-            className="size-4 rounded border-border text-primary focus:ring-primary/30"
+            className="size-4 rounded border-border text-primary focus:ring-focus/30"
           />
           {t("dontShowAgain")}
         </label>

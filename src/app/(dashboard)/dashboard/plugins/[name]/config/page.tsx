@@ -114,7 +114,7 @@ export default function PluginConfigPage({ params }: { params: Promise<{ name: s
                   <select
                     value={String(value)}
                     onChange={(e) => handleChange(key, e.target.value)}
-                    className="w-full rounded-control border border-border-strong bg-surface p-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                    className="w-full rounded-control border border-border-strong bg-surface p-2 text-sm text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
                   >
                     {field.enum.map((opt) => (
                       <option key={opt} value={opt}>
@@ -129,14 +129,14 @@ export default function PluginConfigPage({ params }: { params: Promise<{ name: s
                     min={field.min}
                     max={field.max}
                     onChange={(e) => handleChange(key, Number(e.target.value))}
-                    className="w-full rounded-control border border-border-strong bg-surface p-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                    className="w-full rounded-control border border-border-strong bg-surface p-2 text-sm text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
                   />
                 ) : (
                   <input
                     type="text"
                     value={String(value)}
                     onChange={(e) => handleChange(key, e.target.value)}
-                    className="w-full rounded-control border border-border-strong bg-surface p-2 text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                    className="w-full rounded-control border border-border-strong bg-surface p-2 text-sm text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
                   />
                 )}
               </div>

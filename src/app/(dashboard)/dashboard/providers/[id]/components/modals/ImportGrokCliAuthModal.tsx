@@ -165,7 +165,7 @@ export default function ImportGrokCliAuthModal({
         {tab === "paste" && (
           <div className="flex flex-col gap-3">
             <textarea
-              className="w-full h-32 p-3 text-[13px] font-mono text-text-main bg-surface border border-border-strong rounded-control resize-none placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+              className="w-full h-32 p-3 text-[13px] font-mono text-text-main bg-surface border border-border-strong rounded-control resize-none placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
               placeholder='{"https://auth.x.ai::clientId": {"key": "eyJ...", ...}}'
               value={pasteText}
               onChange={(e) => handlePasteChange(e.target.value)}
@@ -196,7 +196,7 @@ export default function ImportGrokCliAuthModal({
               placeholder={t("grokConnectionName")}
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-2 text-sm text-text-main bg-surface border border-border-strong rounded-control placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+              className="w-full p-2 text-sm text-text-main bg-surface border border-border-strong rounded-control placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
             />
           </div>
         )}

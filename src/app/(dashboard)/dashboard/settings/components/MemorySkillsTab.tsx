@@ -548,7 +548,7 @@ export default function MemorySkillsTab() {
               value={qdrant.host}
               onChange={(e) => setQdrant((s) => ({ ...s, host: e.target.value }))}
               placeholder="http://127.0.0.1"
-              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono focus:outline-none focus:ring-1 focus:ring-focus focus:border-focus"
             />
             <p className="text-xs text-text-muted mt-2">{t("qdrantHostHint")}</p>
           </div>
@@ -564,7 +564,7 @@ export default function MemorySkillsTab() {
                 }))
               }
               placeholder="6333"
-              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono focus:outline-none focus:ring-1 focus:ring-focus focus:border-focus"
             />
             <p className="text-xs text-text-muted mt-2">{t("qdrantPortHint")}</p>
           </div>
@@ -575,7 +575,7 @@ export default function MemorySkillsTab() {
               value={qdrant.collection}
               onChange={(e) => setQdrant((s) => ({ ...s, collection: e.target.value }))}
               placeholder="omniroute_memory"
-              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono focus:outline-none focus:ring-1 focus:ring-focus focus:border-focus"
             />
             <p className="text-xs text-text-muted mt-2">{t("qdrantCollectionHint")}</p>
           </div>
@@ -608,7 +608,7 @@ export default function MemorySkillsTab() {
                 const value = e.target.value;
                 if (value) setQdrant((s) => ({ ...s, embeddingModel: value }));
               }}
-              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm mb-2 focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm mb-2 focus:outline-none focus:ring-1 focus:ring-focus focus:border-focus"
             >
               <option value="">{t("qdrantEmbeddingQuickSelect")}</option>
               {embeddingOptions.map((opt) => (
@@ -621,7 +621,7 @@ export default function MemorySkillsTab() {
               value={qdrant.embeddingModel}
               onChange={(e) => setQdrant((s) => ({ ...s, embeddingModel: e.target.value }))}
               placeholder={t("qdrantEmbeddingInputPlaceholder")}
-              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono focus:outline-none focus:ring-1 focus:ring-focus focus:border-focus"
             />
             <p className="text-xs text-text-muted mt-2">{t("qdrantEmbeddingHint")}</p>
           </div>
@@ -645,7 +645,7 @@ export default function MemorySkillsTab() {
                     ? t("qdrantApiKeyPlaceholderKeep")
                     : t("qdrantApiKeyPlaceholderOptional")
                 }
-                className="flex-1 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+                className="flex-1 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono focus:outline-none focus:ring-1 focus:ring-focus focus:border-focus"
               />
               {qdrant.hasApiKey && (
                 <button
@@ -691,7 +691,7 @@ export default function MemorySkillsTab() {
               value={qdrantQuery}
               onChange={(e) => setQdrantQuery(e.target.value)}
               placeholder={t("qdrantSearchPlaceholder")}
-              className="flex-1 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+              className="flex-1 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm focus:outline-none focus:ring-1 focus:ring-focus focus:border-focus"
             />
           </div>
           {qdrantResults.length > 0 && (
@@ -809,7 +809,7 @@ export default function MemorySkillsTab() {
               value={skillsmpApiKey}
               onChange={(e) => setSkillsmpApiKey(e.target.value)}
               placeholder="sk_live_..."
-              className="flex-1 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono focus:outline-none focus:ring-1 focus:ring-primary focus:border-primary"
+              className="flex-1 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono focus:outline-none focus:ring-1 focus:ring-focus focus:border-focus"
             />
             <button
               onClick={saveSkillsmpApiKey}

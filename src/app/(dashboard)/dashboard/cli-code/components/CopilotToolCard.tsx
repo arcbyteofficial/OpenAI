@@ -250,7 +250,7 @@ export default function CopilotToolCard({
                 <select
                   value={selectedApiKeyId}
                   onChange={(e) => handleApiKeyChange(e.target.value)}
-                  className="w-full px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                  className="w-full px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                 >
                   {apiKeys.map((key: any) => (
                     <option key={key.id} value={key.id}>
@@ -301,7 +301,7 @@ export default function CopilotToolCard({
                   value={searchFilter}
                   onChange={(e) => setSearchFilter(e.target.value)}
                   placeholder={t("copilotFilterModelsPlaceholder")}
-                  className="w-full px-3 py-1.5 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                  className="w-full px-3 py-1.5 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                 />
               </div>
 
@@ -354,7 +354,7 @@ export default function CopilotToolCard({
                     type="number"
                     value={maxInputTokens}
                     onChange={(e) => setMaxInputTokens(Number(e.target.value) || 128000)}
-                    className="w-full px-3 py-1.5 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    className="w-full px-3 py-1.5 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                   />
                 </div>
                 <div>
@@ -365,7 +365,7 @@ export default function CopilotToolCard({
                     type="number"
                     value={maxOutputTokens}
                     onChange={(e) => setMaxOutputTokens(Number(e.target.value) || 16000)}
-                    className="w-full px-3 py-1.5 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    className="w-full px-3 py-1.5 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                   />
                 </div>
                 <label className="flex items-center gap-2 cursor-pointer">

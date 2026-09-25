@@ -89,7 +89,7 @@ export default function RerankConfigCard({ settings, providers, onSave, saving }
                   onChange={(e) => handleProviderModelChange(e.target.value)}
                   disabled={saving}
                   data-testid="rerank-provider-model-select"
-                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
                 >
                   <option value="">{t("rerank.selectProviderModel")}</option>
                   {rerankProviders.map((p) =>
@@ -115,7 +115,7 @@ export default function RerankConfigCard({ settings, providers, onSave, saving }
                   disabled={saving}
                   placeholder="provider/model — e.g. groq/my-reranker"
                   data-testid="rerank-provider-model-input"
-                  className="w-full mt-2 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                  className="w-full mt-2 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
                 />
               </>
             )}

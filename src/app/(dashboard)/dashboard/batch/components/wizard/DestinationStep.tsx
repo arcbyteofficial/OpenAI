@@ -90,7 +90,7 @@ export default function DestinationStep({
   const selectClass =
     "w-full rounded-control border border-border-strong bg-surface " +
     "px-3 py-2 text-sm text-text-main focus:outline-none " +
-    "focus:border-primary focus:ring-[3px] focus:ring-primary/15 disabled:opacity-50";
+    "focus:border-focus focus:ring-[3px] focus:ring-focus/15 disabled:opacity-50";
 
   return (
     <div className="flex flex-col gap-6">

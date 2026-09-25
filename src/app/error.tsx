@@ -53,20 +53,20 @@ export default function Error({ error, reset }: ErrorProps) {
         <button
           onClick={reset}
           aria-label={t("error.retryAriaLabel")}
-          className="px-4 py-2.5 rounded-control bg-contrast text-contrast-fg text-sm font-medium cursor-pointer transition-colors duration-150 motion-reduce:transition-none hover:bg-contrast-hover focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="px-4 py-2.5 rounded-control bg-contrast text-contrast-fg text-sm font-medium cursor-pointer transition-colors duration-150 motion-reduce:transition-none hover:bg-contrast-hover focus:outline-2 focus:outline-offset-2 focus:outline-focus"
         >
           {t("error.tryAgain")}
         </button>
         <a
           href="/dashboard"
-          className="px-4 py-2.5 rounded-control text-text-main text-sm font-medium cursor-pointer transition-colors duration-150 motion-reduce:transition-none border border-border-strong hover:bg-bg-subtle no-underline focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="px-4 py-2.5 rounded-control text-text-main text-sm font-medium cursor-pointer transition-colors duration-150 motion-reduce:transition-none border border-border-strong hover:bg-bg-subtle no-underline focus:outline-2 focus:outline-offset-2 focus:outline-focus"
           aria-label={t("error.dashboardAriaLabel")}
         >
           {tc("goToDashboard")}
         </a>
         <a
           href="/status"
-          className="px-4 py-2.5 rounded-control text-text-muted text-sm font-medium cursor-pointer transition-colors duration-150 motion-reduce:transition-none hover:bg-bg-subtle hover:text-text-main no-underline focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="px-4 py-2.5 rounded-control text-text-muted text-sm font-medium cursor-pointer transition-colors duration-150 motion-reduce:transition-none hover:bg-bg-subtle hover:text-text-main no-underline focus:outline-2 focus:outline-offset-2 focus:outline-focus"
           aria-label={t("error.statusAriaLabel")}
         >
           {t("error.systemStatus")}

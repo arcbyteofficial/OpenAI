@@ -30,7 +30,7 @@ export function AnnotationField({ requestId, initialValue = "" }: AnnotationFiel
         placeholder={t("annotationPlaceholder")}
         rows={3}
         maxLength={10_000}
-        className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle resize-none focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+        className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle resize-none focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
       />
       {saving && (
         <span className="absolute right-2 bottom-2 text-xs text-text-muted animate-pulse">

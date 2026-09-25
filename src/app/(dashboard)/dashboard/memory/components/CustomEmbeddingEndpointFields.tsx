@@ -68,7 +68,7 @@ export default function CustomEmbeddingEndpointFields({ settings, onSave, saving
           placeholder="http://localhost:8000/v1"
           disabled={saving}
           data-testid="embedding-custom-base-url"
-          className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+          className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
         />
       </div>
       <div>
@@ -81,7 +81,7 @@ export default function CustomEmbeddingEndpointFields({ settings, onSave, saving
           placeholder="my-embedding-model"
           disabled={saving}
           data-testid="embedding-custom-model-id"
-          className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+          className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
         />
       </div>
       <p className="text-xs text-text-muted">{t("embedding.customEndpointHelp")}</p>

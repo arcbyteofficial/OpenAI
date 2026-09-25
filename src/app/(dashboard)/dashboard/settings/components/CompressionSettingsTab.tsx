@@ -364,7 +364,7 @@ export default function CompressionSettingsTab() {
                   max={100000}
                   value={config.autoTriggerTokens}
                   onChange={(e) => save({ autoTriggerTokens: parseInt(e.target.value) || 0 })}
-                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                 />
                 <span className="text-xs text-text-muted">{t("tokens")}</span>
               </div>
@@ -377,7 +377,7 @@ export default function CompressionSettingsTab() {
               <select
                 value={config.autoTriggerMode ?? "lite"}
                 onChange={(e) => save({ autoTriggerMode: e.target.value as CompressionMode })}
-                className="w-36 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                className="w-36 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
               >
                 {MODES.filter((mode) => mode.value !== "off").map((mode) => (
                   <option key={mode.value} value={mode.value}>
@@ -396,7 +396,7 @@ export default function CompressionSettingsTab() {
                   max={1440}
                   value={config.cacheMinutes}
                   onChange={(e) => save({ cacheMinutes: parseInt(e.target.value) || 5 })}
-                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                 />
                 <span className="text-xs text-text-muted">{t("minutes")}</span>
               </div>
@@ -414,7 +414,7 @@ export default function CompressionSettingsTab() {
                     preserveSystemPromptMode: e.target.value as "always" | "whenNoCache" | "never",
                   })
                 }
-                className="w-36 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                className="w-36 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                 data-testid="preserve-system-mode-select"
               >
                 <option value="always">{t("compressionPreserveSystemAlways")}</option>
@@ -503,7 +503,7 @@ export default function CompressionSettingsTab() {
                         },
                       })
                     }
-                    className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                    className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                   />
                 </label>
 
@@ -550,7 +550,7 @@ export default function CompressionSettingsTab() {
                       });
                     }}
                     placeholder="https?://\S+\n```[\s\S]*?```"
-                    className="w-full min-h-[80px] px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main font-mono resize-y placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                    className="w-full min-h-[80px] px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main font-mono resize-y placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                   />
                 </div>
               </>
@@ -648,7 +648,7 @@ export default function CompressionSettingsTab() {
                       },
                     })
                   }
-                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                 />
                 <span className="text-xs text-text-muted">{t("tokens")}</span>
               </div>
@@ -671,7 +671,7 @@ export default function CompressionSettingsTab() {
                       },
                     })
                   }
-                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                 />
                 <span className="text-xs text-text-muted">%</span>
               </div>
@@ -707,7 +707,7 @@ export default function CompressionSettingsTab() {
                           },
                         })
                       }
-                      className="w-16 px-2 py-1 text-xs rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                      className="w-16 px-2 py-1 text-xs rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                     />
                   </label>
                 ))}
@@ -794,7 +794,7 @@ export default function CompressionSettingsTab() {
                     },
                   })
                 }
-                className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
               />
             </label>
 
@@ -814,7 +814,7 @@ export default function CompressionSettingsTab() {
                     },
                   })
                 }
-                className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
               />
             </label>
 
@@ -834,7 +834,7 @@ export default function CompressionSettingsTab() {
                       },
                     })
                   }
-                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="w-24 px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                 />
                 <span className="text-xs text-text-muted">{t("tokens")}</span>
               </div>
@@ -877,7 +877,7 @@ export default function CompressionSettingsTab() {
                   })
                 }
                 placeholder="/path/to/model.onnx"
-                className="w-full px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main font-mono focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                className="w-full px-2 py-1 text-sm rounded-control border border-border-strong bg-surface text-text-main font-mono focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
               />
             </label>
           </div>

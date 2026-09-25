@@ -324,7 +324,7 @@ export default function DefaultToolCard({
             <select
               value={selectedApiKeyId}
               onChange={(e) => handleApiKeyChange(e.target.value)}
-              className="flex-1 px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+              className="flex-1 px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
             >
               {apiKeys.map((key) => (
                 <option key={key.id} value={key.id}>
@@ -373,7 +373,7 @@ export default function DefaultToolCard({
               : handleModelChange(e.target.value)
           }
           placeholder={t("modelPlaceholder")}
-          className="flex-1 px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+          className="flex-1 px-3 py-2 bg-surface rounded-control text-sm border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
         />
         <button
           onClick={() => setShowModelModal(true)}

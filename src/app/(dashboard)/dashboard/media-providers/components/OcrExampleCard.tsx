@@ -110,7 +110,7 @@ export function OcrExampleCard({ providerId }: Props) {
         <select
           value={model || firstModel}
           onChange={(e) => setModel(e.target.value)}
-          className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+          className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
         >
           {modelOptions.map((m) => (
             <option key={m.id} value={m.id}>
@@ -127,7 +127,7 @@ export function OcrExampleCard({ providerId }: Props) {
           value={documentUrl}
           onChange={(e) => setDocumentUrl(e.target.value)}
           placeholder={SAMPLE_DOCUMENT_URL}
-          className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+          className="w-full rounded-control border border-border-strong bg-surface text-sm px-2 py-1.5 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
         />
       </div>
     </PlaygroundCard>

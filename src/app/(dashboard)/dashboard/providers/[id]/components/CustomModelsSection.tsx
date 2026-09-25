@@ -431,7 +431,7 @@ export default function CustomModelsSection({
               onChange={(e) => setNewModelId(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleAdd()}
               placeholder={t("customModelPlaceholder")}
-              className="w-full px-3 py-2 text-sm text-text-main border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-primary"
+              className="w-full px-3 py-2 text-sm text-text-main border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-focus"
             />
           </div>
           <div className="w-40">
@@ -445,7 +445,7 @@ export default function CustomModelsSection({
               onChange={(e) => setNewModelName(e.target.value)}
               onKeyDown={(e) => e.key === "Enter" && handleAdd()}
               placeholder={t("optional")}
-              className="w-full px-3 py-2 text-sm text-text-main border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-primary"
+              className="w-full px-3 py-2 text-sm text-text-main border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-focus"
             />
           </div>
           <Button size="sm" icon="add" onClick={handleAdd} disabled={!newModelId.trim() || adding}>
@@ -463,7 +463,7 @@ export default function CustomModelsSection({
               id="custom-api-format"
               value={newApiFormat}
               onChange={(e) => setNewApiFormat(e.target.value)}
-              className="w-full px-3 py-2 text-sm text-text-main border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-primary"
+              className="w-full px-3 py-2 text-sm text-text-main border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-focus"
             >
               <option value="chat-completions">{t("chatCompletions")}</option>
               <option value="responses">{t("responsesApi")}</option>
@@ -484,7 +484,7 @@ export default function CustomModelsSection({
               value={newTargetFormat}
               onChange={(e) => setNewTargetFormat(e.target.value)}
               title={t("targetFormatHint")}
-              className="w-full px-3 py-2 text-sm text-text-main border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-primary"
+              className="w-full px-3 py-2 text-sm text-text-main border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-focus"
             >
               <option value="">{t("targetFormatAuto")}</option>
               <option value="openai">{t("compatProtocolOpenAI")}</option>
@@ -704,7 +704,7 @@ export default function CustomModelsSection({
                           <select
                             value={editingApiFormat}
                             onChange={(e) => setEditingApiFormat(e.target.value)}
-                            className="w-full px-2.5 py-2 text-xs border border-border-strong rounded-control bg-surface text-text-main transition-colors focus:outline-none focus:border-primary"
+                            className="w-full px-2.5 py-2 text-xs border border-border-strong rounded-control bg-surface text-text-main transition-colors focus:outline-none focus:border-focus"
                           >
                             <option value="chat-completions">{t("chatCompletions")}</option>
                             <option value="responses">{t("responsesApi")}</option>
@@ -724,7 +724,7 @@ export default function CustomModelsSection({
                             value={editingTargetFormat}
                             onChange={(e) => setEditingTargetFormat(e.target.value)}
                             title={t("targetFormatHint")}
-                            className="w-full px-2.5 py-2 text-xs border border-border-strong rounded-control bg-surface text-text-main transition-colors focus:outline-none focus:border-primary"
+                            className="w-full px-2.5 py-2 text-xs border border-border-strong rounded-control bg-surface text-text-main transition-colors focus:outline-none focus:border-focus"
                           >
                             <option value="">{t("targetFormatAuto")}</option>
                             <option value="openai">{t("compatProtocolOpenAI")}</option>
@@ -747,7 +747,7 @@ export default function CustomModelsSection({
                             onChange={(e) => setEditingContextWindowOverride(e.target.value)}
                             placeholder={t("contextWindowOverridePlaceholder")}
                             title={t("contextWindowOverrideHint")}
-                            className="w-full px-2.5 py-2 text-xs border border-border-strong rounded-control bg-surface text-text-main transition-colors focus:outline-none focus:border-primary"
+                            className="w-full px-2.5 py-2 text-xs border border-border-strong rounded-control bg-surface text-text-main transition-colors focus:outline-none focus:border-focus"
                           />
                         </div>
                         <div className="w-[9rem] shrink-0 min-w-0">

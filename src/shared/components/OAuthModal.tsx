@@ -1045,7 +1045,7 @@ export default function OAuthModal({
             </p>
             {provider === "grok-cli" ? (
               <textarea
-                className="w-full h-32 p-3 text-[13px] font-mono bg-surface border border-border-strong rounded-control resize-none placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                className="w-full h-32 p-3 text-[13px] font-mono bg-surface border border-border-strong rounded-control resize-none placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                 value={pasteToken}
                 onChange={(e) => setPasteToken(e.target.value)}
                 placeholder={t("grokAuthJsonPlaceholder")}

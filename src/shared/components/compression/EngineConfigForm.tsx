@@ -38,7 +38,7 @@ export function EngineConfigForm({ schema, value, onChange }: EngineConfigFormPr
                       : Number(e.target.value)
                   )
                 }
-                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main focus:border-primary focus:outline-none transition-colors"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main focus:border-focus focus:outline-none transition-colors"
               />
             )}
             {f.type === "string" && (
@@ -46,14 +46,14 @@ export function EngineConfigForm({ schema, value, onChange }: EngineConfigFormPr
                 type="text"
                 value={(v as string) ?? ""}
                 onChange={(e) => set(f.key, e.target.value)}
-                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main focus:border-primary focus:outline-none transition-colors"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main focus:border-focus focus:outline-none transition-colors"
               />
             )}
             {f.type === "select" && (
               <select
                 value={v as string}
                 onChange={(e) => set(f.key, e.target.value)}
-                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main focus:border-primary focus:outline-none transition-colors"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1 text-sm text-text-main focus:border-focus focus:outline-none transition-colors"
               >
                 {(f.options ?? []).map((o) => (
                   <option key={o.value} value={o.value}>

@@ -186,7 +186,7 @@ function WarningBadge({
       onKeyDown={(e) => {
         if (e.key === "Enter" || e.key === " ") activate(e);
       }}
-      className="cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-primary/50"
+      className="cursor-pointer rounded-full outline-none focus-visible:ring-2 focus-visible:ring-focus/50"
     >
       <Badge variant="warning" size="sm" icon="warning">
         {t("warningCount", { count })}
@@ -460,7 +460,7 @@ const ProviderCard = forwardRef<ProviderCardHandle, ProviderCardProps>(function 
       <Link
         ref={linkElementRef}
         href={`/dashboard/providers/${providerId}`}
-        className="group flex-1 flex flex-col focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60"
+        className="group flex-1 flex flex-col focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus/60"
         onClick={handleCardClick}
       >
         <Card
@@ -533,7 +533,7 @@ const ProviderCard = forwardRef<ProviderCardHandle, ProviderCardProps>(function 
                 {provider.subscriptionRisk === true && (
                   <button
                     type="button"
-                    className="material-symbols-outlined text-[16px] leading-none text-warning underline decoration-dotted decoration-1 underline-offset-2 hover:text-warning/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary/60 transition-colors"
+                    className="material-symbols-outlined text-[16px] leading-none text-warning underline decoration-dotted decoration-1 underline-offset-2 hover:text-warning/80 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus/60 transition-colors"
                     title={t("riskNotice.tooltip")}
                     aria-label={t("riskNotice.tooltip")}
                     aria-haspopup="dialog"

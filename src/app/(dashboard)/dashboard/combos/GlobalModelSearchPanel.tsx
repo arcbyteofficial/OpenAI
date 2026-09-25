@@ -94,7 +94,7 @@ export default function GlobalModelSearchPanel({
                   "builderGlobalSearchPlaceholder",
                   "Search models across all providers (e.g. opus, sonnet, deepseek, kimi, qwen)..."
                 )}
-                className="w-full text-xs py-2 pl-3 pr-7 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none"
+                className="w-full text-xs py-2 pl-3 pr-7 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none"
               />
               {globalSearchQuery && (
                 <button

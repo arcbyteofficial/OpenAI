@@ -99,7 +99,7 @@ export default function CliAgentsPageClient({ machineId: _machineId }: CliAgents
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             placeholder={t("searchPlaceholder")}
-            className="w-full pl-8 pr-3 py-1.5 text-sm text-text-main bg-surface border border-border-strong rounded-control placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+            className="w-full pl-8 pr-3 py-1.5 text-sm text-text-main bg-surface border border-border-strong rounded-control placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
             aria-label={t("searchPlaceholder")}
           />
         </div>
@@ -107,7 +107,7 @@ export default function CliAgentsPageClient({ machineId: _machineId }: CliAgents
         <select
           value={detectionFilter}
           onChange={(e) => setDetectionFilter(e.target.value)}
-          className="px-2.5 py-1.5 text-sm text-text-main bg-surface border border-border-strong rounded-control focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+          className="px-2.5 py-1.5 text-sm text-text-main bg-surface border border-border-strong rounded-control focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
           aria-label={t("detectionFilterLabel")}
         >
           <option value={DETECTION_ALL}>{t("detectionAll")}</option>

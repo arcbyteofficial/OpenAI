@@ -129,7 +129,7 @@ export function OrchestrationToolbar({
         onChange={(e) => handleSearchChange(e.target.value)}
         placeholder={t("searchPlaceholder")}
         aria-label={t("searchPlaceholder")}
-        className="text-xs px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none transition-colors min-w-[160px]"
+        className="text-xs px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:border-focus focus:outline-none transition-colors min-w-[160px]"
       />
       <ChipGroup
         label={t("filterStates")}

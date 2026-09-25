@@ -290,7 +290,7 @@ export default function SubscriptionTab() {
             <label className="flex flex-col gap-1 text-sm">
               <span className="text-text-muted">{t("proxySubscription.name")}</span>
               <input
-                className="rounded-control border border-border-strong bg-surface px-2 py-1.5 text-text-main placeholder:text-text-subtle outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1.5 text-text-main placeholder:text-text-subtle outline-none focus:border-focus/50 focus:ring-1 focus:ring-focus/30"
                 value={form.name}
                 onChange={(e) => setForm({ ...form, name: e.target.value })}
                 placeholder={t("proxySubscription.namePlaceholder")}
@@ -300,7 +300,7 @@ export default function SubscriptionTab() {
             <label className="flex flex-col gap-1 text-sm">
               <span className="text-text-muted">{t("proxySubscription.url")}</span>
               <input
-                className="rounded-control border border-border-strong bg-surface px-2 py-1.5 text-text-main placeholder:text-text-subtle outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1.5 text-text-main placeholder:text-text-subtle outline-none focus:border-focus/50 focus:ring-1 focus:ring-focus/30"
                 value={form.url}
                 onChange={(e) => setForm({ ...form, url: e.target.value })}
                 placeholder={t("proxySubscription.urlPlaceholder")}
@@ -340,7 +340,7 @@ export default function SubscriptionTab() {
               <span className="text-text-muted">{t("proxySubscription.localCoreEndpoint")}</span>
               <textarea
                 rows={3}
-                className="rounded-control border border-border-strong bg-surface px-2 py-1.5 text-text-main placeholder:text-text-subtle outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1.5 text-text-main placeholder:text-text-subtle outline-none focus:border-focus/50 focus:ring-1 focus:ring-focus/30"
                 value={form.localCoreEndpoint}
                 onChange={(e) => setForm({ ...form, localCoreEndpoint: e.target.value })}
                 placeholder={t("proxySubscription.localCoreEndpointPlaceholder")}
@@ -395,7 +395,7 @@ export default function SubscriptionTab() {
               <input
                 type="number"
                 min={5}
-                className="rounded-control border border-border-strong bg-surface px-2 py-1.5 text-text-main placeholder:text-text-subtle outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
+                className="rounded-control border border-border-strong bg-surface px-2 py-1.5 text-text-main placeholder:text-text-subtle outline-none focus:border-focus/50 focus:ring-1 focus:ring-focus/30"
                 value={form.updateIntervalMinutes}
                 onChange={(e) =>
                   setForm({ ...form, updateIntervalMinutes: Number(e.target.value) || 60 })

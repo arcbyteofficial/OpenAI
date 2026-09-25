@@ -201,7 +201,7 @@ export default function GlobalConfigTab() {
               value={targetUrl}
               onChange={(e) => setTargetUrl(e.target.value)}
               placeholder="https://api.openai.com/v1/models"
-              className="flex-1 px-3 py-2 rounded-control bg-surface border border-border-strong text-[13px] font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
+              className="flex-1 px-3 py-2 rounded-control bg-surface border border-border-strong text-[13px] font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-focus/30 focus:border-focus/50"
             />
             <Button
               size="sm"

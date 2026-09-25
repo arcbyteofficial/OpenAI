@@ -75,7 +75,7 @@ export default function ScrapeTab({ configState, onMetrics }: ScrapeTabProps) {
               if (urlError) setUrlError(null);
             }}
             placeholder="https://example.com/article"
-            className="flex-1 bg-surface border border-border-strong rounded-control px-3 py-1.5 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+            className="flex-1 bg-surface border border-border-strong rounded-control px-3 py-1.5 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
             onKeyDown={(e) => {
               if (e.key === "Enter") void handleSubmit();
             }}

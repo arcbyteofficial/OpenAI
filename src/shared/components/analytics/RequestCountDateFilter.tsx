@@ -28,7 +28,7 @@ export default function RequestCountDateFilter({
           value={value}
           onChange={(e) => onChange(e.target.value)}
           aria-label={dateLabel}
-          className="px-2 py-1 rounded-control text-xs text-text-main bg-surface border border-border-strong focus:outline-none focus:border-primary"
+          className="px-2 py-1 rounded-control text-xs text-text-main bg-surface border border-border-strong focus:outline-none focus:border-focus"
         />
         {value && (
           <button

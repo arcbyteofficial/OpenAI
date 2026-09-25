@@ -131,7 +131,7 @@ export default function RequestLimitsTab() {
             onKeyDown={(event) => {
               if (event.key === "Enter" && dirty) void saveLimit();
             }}
-            className="w-32 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main tabular-nums focus:outline-none focus:border-primary"
+            className="w-32 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main tabular-nums focus:outline-none focus:border-focus"
             disabled={loading || saving}
           />
           <span className="text-xs text-text-muted">MB</span>

@@ -32,7 +32,7 @@ export default function SettingsError({
         )}
         <button
           onClick={reset}
-          className="px-3 py-1.5 bg-contrast text-contrast-fg text-[13px] font-medium rounded-control hover:bg-contrast-hover transition-colors focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="px-3 py-1.5 bg-contrast text-contrast-fg text-[13px] font-medium rounded-control hover:bg-contrast-hover transition-colors focus:outline-2 focus:outline-offset-2 focus:outline-focus"
         >
           {t("errorPage.retry")}
         </button>

@@ -123,7 +123,7 @@ export default function ApiKeyFilterDropdown({
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder={t("filterSearchKeys")}
-                className="w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
+                className="w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus"
                 autoFocus
               />
             </div>

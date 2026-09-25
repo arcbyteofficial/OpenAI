@@ -630,7 +630,7 @@ export default function PricingTab() {
               placeholder={t("searchProvidersModels")}
               value={searchQuery}
               onChange={(event) => setSearchQuery(event.target.value)}
-              className="w-full pl-10 pr-3 py-2 bg-surface border border-border-strong rounded-control text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary text-sm"
+              className="w-full pl-10 pr-3 py-2 bg-surface border border-border-strong rounded-control text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus text-sm"
             />
           </div>
 
@@ -996,7 +996,7 @@ function ModelRow({
             min="0"
             value={pricing?.[field] || 0}
             onChange={(event) => onPricingChange(field, event.target.value)}
-            className="w-full px-2 py-1 text-right text-xs bg-transparent border border-transparent hover:border-border-strong focus:border-primary focus:bg-surface rounded-md transition-colors outline-none tabular-nums text-text-main"
+            className="w-full px-2 py-1 text-right text-xs bg-transparent border border-transparent hover:border-border-strong focus:border-focus focus:bg-surface rounded-md transition-colors outline-none tabular-nums text-text-main"
           />
         </td>
       ))}

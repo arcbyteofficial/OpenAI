@@ -489,7 +489,7 @@ export default function CacheSettingsTab() {
                       max={10080}
                       value={semTtlMinutes}
                       onChange={(e) => setSemTtlMinutes(Math.max(1, parseInt(e.target.value) || 1))}
-                      className="w-28 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                      className="w-28 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                       disabled={semSaving}
                     />
                     <span className="text-xs text-text-muted">minutes</span>
@@ -525,7 +525,7 @@ export default function CacheSettingsTab() {
                       max={100000}
                       value={semMaxSize}
                       onChange={(e) => setSemMaxSize(parseInt(e.target.value) || 100)}
-                      className="w-32 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                      className="w-32 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                       disabled={semSaving}
                     />
                   </div>
@@ -540,7 +540,7 @@ export default function CacheSettingsTab() {
                         placeholder="redis://127.0.0.1:6379"
                         value={semRedisUrl}
                         onChange={(e) => setSemRedisUrl(e.target.value)}
-                        className="w-full px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                        className="w-full px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                         disabled={semSaving}
                       />
                     </div>
@@ -552,7 +552,7 @@ export default function CacheSettingsTab() {
                         type="text"
                         value={semRedisPrefix}
                         onChange={(e) => setSemRedisPrefix(e.target.value)}
-                        className="w-full px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                        className="w-full px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                         disabled={semSaving}
                       />
                     </div>
@@ -601,7 +601,7 @@ export default function CacheSettingsTab() {
                         placeholder="https://custom-embedding.internal/v1"
                         value={semBaseUrl}
                         onChange={(e) => setSemBaseUrl(e.target.value)}
-                        className="w-full px-3 py-1.5 rounded-control bg-surface border border-border-strong text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                        className="w-full px-3 py-1.5 rounded-control bg-surface border border-border-strong text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                       />
                     </div>
                     <div>
@@ -613,7 +613,7 @@ export default function CacheSettingsTab() {
                         placeholder="Bearer token or API key"
                         value={semApiKey}
                         onChange={(e) => setSemApiKey(e.target.value)}
-                        className="w-full px-3 py-1.5 rounded-control bg-surface border border-border-strong text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                        className="w-full px-3 py-1.5 rounded-control bg-surface border border-border-strong text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                       />
                     </div>
                   </div>
@@ -725,7 +725,7 @@ export default function CacheSettingsTab() {
               onKeyDown={(event) => {
                 if (event.key === "Enter" && catalogDirty) void saveCatalogTtl();
               }}
-              className="w-32 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+              className="w-32 px-3 py-1.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
               disabled={catalogLoading || catalogSaving}
             />
             <span className="text-xs text-text-muted">ms</span>

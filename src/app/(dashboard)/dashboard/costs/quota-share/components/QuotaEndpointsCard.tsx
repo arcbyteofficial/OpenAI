@@ -302,7 +302,7 @@ export default function QuotaEndpointsCard({
               <select
                 value={selectedKeyId}
                 onChange={(e) => void handleKeyChange(e.target.value)}
-                className="px-2 py-1 rounded-control border border-border-strong bg-surface text-xs text-text-main min-w-[140px] focus:border-primary focus:outline-none"
+                className="px-2 py-1 rounded-control border border-border-strong bg-surface text-xs text-text-main min-w-[140px] focus:border-focus focus:outline-none"
               >
                 <option value="">{t("previewKeyNone")}</option>
                 {apiKeys.map((k) => (

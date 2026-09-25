@@ -58,7 +58,7 @@ export default function ProvidersError({
         )}
         <button
           onClick={reset}
-          className="px-4 py-2 text-sm font-medium bg-contrast text-contrast-fg rounded-control hover:bg-contrast-hover transition-colors focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="px-4 py-2 text-sm font-medium bg-contrast text-contrast-fg rounded-control hover:bg-contrast-hover transition-colors focus:outline-2 focus:outline-offset-2 focus:outline-focus"
         >
           {providerText(t, "pageLoadErrorRetry", "Try Again")}
         </button>

@@ -99,7 +99,7 @@ export default function EmbeddingSourceSelector({ settings, providers, onSave, s
                 onChange={(e) => handleProviderModelChange(e.target.value)}
                 disabled={saving}
                 data-testid="embedding-provider-model-select"
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
               >
                 <option value="">{t("embedding.selectProviderModel")}</option>
                 {remoteProviders.map((p) =>
@@ -126,7 +126,7 @@ export default function EmbeddingSourceSelector({ settings, providers, onSave, s
                 disabled={saving}
                 placeholder="provider/model — e.g. mistral/mistral-embed"
                 data-testid="embedding-provider-model-input"
-                className="w-full mt-2 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                className="w-full mt-2 px-3 py-2 rounded-control bg-surface border border-border-strong text-sm font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
               />
             </>
           )}

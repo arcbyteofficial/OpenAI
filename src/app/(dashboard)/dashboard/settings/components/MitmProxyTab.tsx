@@ -270,7 +270,7 @@ export default function MitmProxyTab() {
                   value={port}
                   readOnly
                   disabled={status.running}
-                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20 disabled:opacity-60"
+                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus/20 disabled:opacity-60"
                 />
               </label>
               <label className="space-y-1">
@@ -282,7 +282,7 @@ export default function MitmProxyTab() {
                   value={apiKey}
                   onChange={(event) => setApiKey(event.target.value)}
                   placeholder={t("apiKeyPlaceholder")}
-                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus/20"
                 />
               </label>
               <label className="space-y-1">
@@ -294,7 +294,7 @@ export default function MitmProxyTab() {
                   value={sudoPassword}
                   onChange={(event) => setSudoPassword(event.target.value)}
                   placeholder={status.hasCachedPassword ? t("cachedPassword") : t("sudoPassword")}
-                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                  className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus/20"
                 />
               </label>
             </div>

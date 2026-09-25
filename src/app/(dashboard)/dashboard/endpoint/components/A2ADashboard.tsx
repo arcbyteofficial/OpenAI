@@ -400,7 +400,7 @@ export default function A2ADashboardPage() {
           </div>
           <div className="flex flex-wrap gap-2">
             <select
-              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
               value={stateFilter}
               onChange={(event) => {
                 setOffset(0);
@@ -414,7 +414,7 @@ export default function A2ADashboardPage() {
               ))}
             </select>
             <select
-              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
               value={skillFilter}
               onChange={(event) => {
                 setOffset(0);

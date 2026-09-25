@@ -402,7 +402,7 @@ export default function PassthroughModelsSection({
             onChange={(e) => setNewModel(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleAdd()}
             placeholder={inputPlaceholder}
-            className="w-full px-3 py-2 text-sm border border-border-strong rounded-control bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary transition-colors"
+            className="w-full px-3 py-2 text-sm border border-border-strong rounded-control bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus transition-colors"
           />
         </div>
         <Button size="sm" icon="add" onClick={handleAdd} disabled={!newModel.trim() || adding}>

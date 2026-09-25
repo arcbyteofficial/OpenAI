@@ -44,7 +44,7 @@ export default function ReasoningControls({ spec, params, setParams }: Reasoning
           aria-checked={params.thinking}
           aria-label={t("thinking")}
           onClick={() => update("thinking", !params.thinking)}
-          className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-primary/30 ${
+          className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus:outline-none focus:ring-2 focus:ring-focus/30 ${
             params.thinking ? "bg-primary" : "bg-border-strong"
           }`}
         >
@@ -62,7 +62,7 @@ export default function ReasoningControls({ spec, params, setParams }: Reasoning
         <select
           value={params.effort}
           onChange={(e) => update("effort", e.target.value)}
-          className="w-full text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+          className="w-full text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-focus text-text-main"
         >
           <option value="">{t("effortDefault")}</option>
           {spec.effortOptions.map((opt) => (

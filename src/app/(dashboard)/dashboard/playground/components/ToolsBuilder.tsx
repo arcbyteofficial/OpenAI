@@ -163,14 +163,14 @@ export default function ToolsBuilder({ toolsBuilder }: ToolsBuilderProps) {
                       value={editDraft.name}
                       onChange={(e) => setEditDraft({ ...editDraft, name: e.target.value })}
                       placeholder={t("toolNamePlaceholder")}
-                      className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+                      className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-focus text-text-main"
                     />
                     <input
                       type="text"
                       value={editDraft.description}
                       onChange={(e) => setEditDraft({ ...editDraft, description: e.target.value })}
                       placeholder={t("toolDescPlaceholder")}
-                      className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+                      className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-focus text-text-main"
                     />
                     <textarea
                       value={editDraft.parametersRaw}
@@ -178,7 +178,7 @@ export default function ToolsBuilder({ toolsBuilder }: ToolsBuilderProps) {
                         setEditDraft({ ...editDraft, parametersRaw: e.target.value })
                       }
                       rows={6}
-                      className="text-xs font-mono bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main resize-y"
+                      className="text-xs font-mono bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-focus text-text-main resize-y"
                       aria-label={t("toolParamsJsonSchema")}
                     />
                     {toolError && <p className="text-xs text-error">{toolError}</p>}
@@ -215,7 +215,7 @@ export default function ToolsBuilder({ toolsBuilder }: ToolsBuilderProps) {
           value={form.name}
           onChange={(e) => setForm({ ...form, name: e.target.value })}
           placeholder={t("toolNameRequiredPlaceholder")}
-          className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+          className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-focus text-text-main"
         />
 
         <input
@@ -223,7 +223,7 @@ export default function ToolsBuilder({ toolsBuilder }: ToolsBuilderProps) {
           value={form.description}
           onChange={(e) => setForm({ ...form, description: e.target.value })}
           placeholder={t("toolDescPlaceholder")}
-          className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+          className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-focus text-text-main"
         />
 
         <div className="flex flex-col gap-1">
@@ -234,7 +234,7 @@ export default function ToolsBuilder({ toolsBuilder }: ToolsBuilderProps) {
             value={form.parametersRaw}
             onChange={(e) => setForm({ ...form, parametersRaw: e.target.value })}
             rows={6}
-            className="text-xs font-mono bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main resize-y"
+            className="text-xs font-mono bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-focus text-text-main resize-y"
             aria-label={t("toolParamsJsonSchema")}
           />
         </div>

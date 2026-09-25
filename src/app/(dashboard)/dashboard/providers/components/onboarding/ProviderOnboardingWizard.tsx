@@ -792,7 +792,7 @@ export default function ProviderOnboardingWizard() {
               <label className="flex flex-col gap-1 text-sm font-medium text-text-main">
                 {text("onboardingProtocol", "Protocol")}
                 <select
-                  className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                   value={customForm.mode}
                   onChange={(event) =>
                     setCustomForm({

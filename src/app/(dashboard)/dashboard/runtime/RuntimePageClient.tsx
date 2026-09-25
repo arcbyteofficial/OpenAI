@@ -821,7 +821,7 @@ export default function RuntimePageClient() {
                 <select
                   value={feedFilter}
                   onChange={(e) => setFeedFilter(e.target.value as FeedFilter)}
-                  className="text-[10px] bg-surface border border-border-strong rounded-md px-1.5 py-1 cursor-pointer text-text-main focus:outline-none focus:border-primary"
+                  className="text-[10px] bg-surface border border-border-strong rounded-md px-1.5 py-1 cursor-pointer text-text-main focus:outline-none focus:border-focus"
                 >
                   <option value="all">{t("feedFilterAll")}</option>
                   <option value="circuits">{t("feedFilterCircuits")}</option>

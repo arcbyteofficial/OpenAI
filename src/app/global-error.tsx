@@ -73,13 +73,13 @@ function GlobalErrorContent({ error, reset }: GlobalErrorProps) {
         <button
           onClick={reset}
           aria-label={t("globalError.retryAriaLabel")}
-          className="px-4 py-2.5 rounded-control bg-contrast text-contrast-fg border-none text-sm font-medium cursor-pointer transition-colors duration-150 motion-reduce:transition-none hover:bg-contrast-hover focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="px-4 py-2.5 rounded-control bg-contrast text-contrast-fg border-none text-sm font-medium cursor-pointer transition-colors duration-150 motion-reduce:transition-none hover:bg-contrast-hover focus:outline-2 focus:outline-offset-2 focus:outline-focus"
         >
           {t("globalError.tryAgain")}
         </button>
         <a
           href="/status"
-          className="px-4 py-2.5 rounded-control text-sm font-medium text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors duration-150 motion-reduce:transition-none no-underline focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="px-4 py-2.5 rounded-control text-sm font-medium text-text-muted hover:bg-bg-subtle hover:text-text-main transition-colors duration-150 motion-reduce:transition-none no-underline focus:outline-2 focus:outline-offset-2 focus:outline-focus"
           aria-label={t("globalError.statusAriaLabel")}
         >
           {t("globalError.systemStatus")}

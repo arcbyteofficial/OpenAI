@@ -149,12 +149,12 @@ export default function FilesListTab({
           placeholder={t("batchFilesListSearchPlaceholder")}
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
-          className="flex-1 min-w-[200px] px-3 py-2 rounded-control text-[13px] bg-surface border border-border-strong text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+          className="flex-1 min-w-[200px] px-3 py-2 rounded-control text-[13px] bg-surface border border-border-strong text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
         />
         <select
           value={purposeFilter}
           onChange={(e) => setPurposeFilter(e.target.value)}
-          className="px-3 py-2 rounded-control text-[13px] bg-surface border border-border-strong text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+          className="px-3 py-2 rounded-control text-[13px] bg-surface border border-border-strong text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
         >
           {purposes.map((p) => (
             <option key={p} value={p}>

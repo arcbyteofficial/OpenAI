@@ -720,7 +720,7 @@ export default function MediaPageClient() {
             <select
               value={selectedProvider}
               onChange={(e) => handleProviderChange(e.target.value)}
-              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-focus/30"
             >
               {currentProviders.map((p) => (
                 <option key={p.id} value={p.id}>
@@ -736,7 +736,7 @@ export default function MediaPageClient() {
             <select
               value={selectedModel}
               onChange={(e) => setSelectedModel(e.target.value)}
-              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-focus/30"
             >
               {currentModels.map((m) => (
                 <option key={m.id} value={m.id}>
@@ -773,7 +773,7 @@ export default function MediaPageClient() {
               <select
                 value={speechVoice}
                 onChange={(e) => setSpeechVoice(e.target.value)}
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-focus/30"
               >
                 {voiceList.map((v) => (
                   <option key={v.id} value={v.id}>
@@ -787,7 +787,7 @@ export default function MediaPageClient() {
               <select
                 value={speechFormat}
                 onChange={(e) => setSpeechFormat(e.target.value)}
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-focus/30"
               >
                 {currentSpeechFormats.map((f) => (
                   <option key={f} value={f}>
@@ -821,7 +821,7 @@ export default function MediaPageClient() {
                 }
                 setAudioFile(file);
               }}
-              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-sm"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-focus/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-sm"
             />
             {fileSizeError && (
               <p className="text-xs text-error mt-1 flex items-center gap-1">
@@ -848,7 +848,7 @@ export default function MediaPageClient() {
                     type="file"
                     accept="image/*"
                     onChange={(e) => setImageInputFile(e.target.files?.[0] ?? null)}
-                    className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-sm"
+                    className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-focus/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-sm"
                   />
                   {imageInputFile && (
                     <p className="text-xs text-text-muted mt-1">
@@ -865,7 +865,7 @@ export default function MediaPageClient() {
                     type="file"
                     accept="image/*"
                     onChange={(e) => setImageMaskFile(e.target.files?.[0] ?? null)}
-                    className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-primary/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-sm"
+                    className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm focus:outline-none focus:ring-2 focus:ring-focus/30 file:mr-3 file:py-1 file:px-3 file:rounded-md file:border-0 file:bg-bg-subtle file:text-text-main file:text-sm"
                   />
                   {imageMaskFile && (
                     <p className="text-xs text-text-muted mt-1">
@@ -897,7 +897,7 @@ export default function MediaPageClient() {
                       ? t(config.placeholderKey)
                       : undefined
                 }
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm placeholder:text-text-subtle focus:outline-none focus:ring-2 focus:ring-primary/30 resize-none"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-text-main text-sm placeholder:text-text-subtle focus:outline-none focus:ring-2 focus:ring-focus/30 resize-none"
               />
             </div>
           </>

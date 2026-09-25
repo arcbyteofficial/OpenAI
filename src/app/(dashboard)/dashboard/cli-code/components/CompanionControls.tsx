@@ -33,7 +33,7 @@ export default function CompanionControls(props: Props) {
           id={id}
           value={props.selected.id}
           onChange={(event) => props.onTarget(event.target.value)}
-          className="h-10 w-full rounded-control border border-border-strong bg-surface px-3 text-sm text-text-main focus-visible:outline-2 focus-visible:outline-primary"
+          className="h-10 w-full rounded-control border border-border-strong bg-surface px-3 text-sm text-text-main focus-visible:outline-2 focus-visible:outline-focus"
         >
           {props.targets.map((target) => (
             <option key={target.id} value={target.id}>

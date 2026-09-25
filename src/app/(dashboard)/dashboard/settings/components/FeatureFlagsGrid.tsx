@@ -296,7 +296,7 @@ export default function FeatureFlagsGrid() {
               placeholder={t("searchPlaceholder")}
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full rounded-control border border-border-strong bg-surface py-1.5 pl-8 pr-4 text-sm text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/15 sm:w-64"
+              className="w-full rounded-control border border-border-strong bg-surface py-1.5 pl-8 pr-4 text-sm text-text-main placeholder:text-text-subtle focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus/15 sm:w-64"
             />
           </div>
 
@@ -304,7 +304,7 @@ export default function FeatureFlagsGrid() {
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="w-full rounded-control border border-border-strong bg-surface px-3 py-1.5 text-sm text-text-main focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/15 sm:w-auto"
+            className="w-full rounded-control border border-border-strong bg-surface px-3 py-1.5 text-sm text-text-main focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus/15 sm:w-auto"
           >
             {CATEGORIES.map((cat) => (
               <option key={cat.value} value={cat.value} className="bg-surface text-text-main">

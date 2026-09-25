@@ -132,7 +132,7 @@ export function ModelVisibilityToolbar({
           value={filterValue}
           onChange={(e) => onFilterChange(e.target.value)}
           placeholder={providerText(t, "filterModels", "Filter models…")}
-          className="w-full rounded-control border border-border-strong bg-surface py-1.5 pl-7 pr-3 text-xs text-text-main placeholder:text-text-subtle transition-colors focus:outline-none focus:border-primary"
+          className="w-full rounded-control border border-border-strong bg-surface py-1.5 pl-7 pr-3 text-xs text-text-main placeholder:text-text-subtle transition-colors focus:outline-none focus:border-focus"
         />
       </div>
       {visibilityFilter !== undefined && onVisibilityFilterChange && (

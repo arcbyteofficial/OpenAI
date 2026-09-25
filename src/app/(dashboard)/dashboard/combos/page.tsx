@@ -1934,7 +1934,7 @@ function ComboCardInner({
               <ComboCompressionModeSelect
                 combo={combo}
                 title={t("compressionOverride")}
-                className="text-xs py-1 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none transition-colors disabled:opacity-50 max-w-[130px] md:max-w-none"
+                className="text-xs py-1 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none transition-colors disabled:opacity-50 max-w-[130px] md:max-w-none"
               />
             )}
             <Link
@@ -3298,7 +3298,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                     "comboDescriptionPlaceholder",
                     "Optional note describing this combo"
                   )}
-                  className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none resize-none"
+                  className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none resize-none"
                 />
               </div>
 
@@ -3499,7 +3499,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                         }}
                         placeholder="provider/model"
                         data-testid="combo-manual-model-input"
-                        className="flex-1 text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none font-mono"
+                        className="flex-1 text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none font-mono"
                       />
                       <Button
                         onClick={handleAddManualModel}
@@ -3546,7 +3546,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                           value={builderProviderId}
                           onChange={handleBuilderProviderChange}
                           data-testid="combo-builder-provider"
-                          className="w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none"
                         >
                           <option value="">
                             {builderLoading
@@ -3575,7 +3575,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                           onChange={handleBuilderModelChange}
                           disabled={!selectedBuilderProvider}
                           data-testid="combo-builder-model"
-                          className="w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none disabled:opacity-50"
+                          className="w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none disabled:opacity-50"
                         >
                           <option value="">
                             {selectedBuilderProvider
@@ -3604,7 +3604,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                           onChange={handleBuilderConnectionChange}
                           disabled={!selectedBuilderModel}
                           data-testid="combo-builder-account"
-                          className="w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none disabled:opacity-50"
+                          className="w-full text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none disabled:opacity-50"
                         >
                           <option value={COMBO_BUILDER_AUTO_CONNECTION}>
                             {getI18nOrFallback(
@@ -3738,7 +3738,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                         <select
                           value={builderComboRefName}
                           onChange={(e) => setBuilderComboRefName(e.target.value)}
-                          className="flex-1 text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none"
+                          className="flex-1 text-xs py-2 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none"
                         >
                           <option value="">
                             {getI18nOrFallback(
@@ -3865,7 +3865,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             max="100"
                             value={entry.weight}
                             onChange={(e) => handleWeightChange(index, e.target.value)}
-                            className="w-10 text-[11px] text-center py-0.5 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                            className="w-10 text-[11px] text-center py-0.5 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                           />
                           <span className="text-[10px] text-text-muted">%</span>
                         </div>
@@ -4062,7 +4062,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             maxRetries: e.target.value ? Number(e.target.value) : undefined,
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                       />
                     </div>
                     <div>
@@ -4088,7 +4088,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             retryDelayMs: e.target.value ? Number(e.target.value) : undefined,
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                       />
                     </div>
                     <ComboTimeoutFields
@@ -4161,7 +4161,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                               e.target.value === "skip" ? "skip" : undefined,
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-surface focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-surface focus:border-focus focus:outline-none"
                       >
                         <option value="skip">
                           {getI18nOrFallback(
@@ -4201,7 +4201,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             maxSetRetries: e.target.value ? Number(e.target.value) : undefined,
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                       />
                     </div>
                     <div>
@@ -4227,7 +4227,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             setRetryDelayMs: e.target.value ? Number(e.target.value) : undefined,
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                       />
                     </div>
                   </div>
@@ -4257,7 +4257,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                                 : undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                         />
                       </div>
                       <div>
@@ -4283,7 +4283,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                               queueTimeoutMs: e.target.value ? Number(e.target.value) : undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                         />
                       </div>
                       <div className="col-span-2">
@@ -4310,7 +4310,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                                 : undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                         />
                       </div>
                     </div>
@@ -4345,7 +4345,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                                 : undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                         />
                       </div>
                     </div>
@@ -4369,7 +4369,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                             nestedComboMode: e.target.value === "execute" ? "execute" : "flatten",
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-surface focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-surface focus:border-focus focus:outline-none"
                       >
                         <option value="flatten">
                           {getI18nOrFallback(t, "nestedComboFlatten", "Flatten nested combos")}
@@ -4418,7 +4418,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                                   : undefined,
                           })
                         }
-                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-surface focus:border-primary focus:outline-none"
+                        className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-surface focus:border-focus focus:outline-none"
                       >
                         <option value="inherit">
                           {getI18nOrFallback(t, "stickyLimitInherit", "inherit")}
@@ -4461,7 +4461,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                               handoffThreshold: e.target.value ? Number(e.target.value) : undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                         />
                       </div>
                       <div>
@@ -4492,7 +4492,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                                 : undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                         />
                       </div>
                       <div>
@@ -4515,7 +4515,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                               handoffModel: e.target.value || undefined,
                             })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                         />
                       </div>
                       {!isExpertMode && (
@@ -4550,7 +4550,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                           onChange={(e) =>
                             setConfig({ ...config, judgeModel: e.target.value || undefined })
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                         />
                       </div>
                       <div>
@@ -4572,7 +4572,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                           onChange={(e) =>
                             setConfig(updateFusionTuning(config, "minPanel", e.target.value))
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                         />
                       </div>
                       <div>
@@ -4600,7 +4600,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                               updateFusionTuning(config, "stragglerGraceMs", e.target.value)
                             )
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                         />
                       </div>
                       <div className="md:col-span-2">
@@ -4628,7 +4628,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                               updateFusionTuning(config, "panelHardTimeoutMs", e.target.value)
                             )
                           }
-                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                          className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                         />
                       </div>
                     </div>
@@ -4697,7 +4697,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                     "agentFeaturesSystemMessagePlaceholder",
                     "Optional system instructions for this combo"
                   )}
-                  className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none resize-none"
+                  className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none resize-none"
                 />
                 {!isExpertMode && (
                   <p className="text-[10px] text-text-muted mt-0.5">
@@ -4720,7 +4720,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                   value={agentToolFilter}
                   onChange={(e) => setAgentToolFilter(e.target.value)}
                   placeholder="e.g. ^(bash|computer)$"
-                  className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none font-mono"
+                  className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none font-mono"
                 />
                 {!isExpertMode && (
                   <p className="text-[10px] text-text-muted mt-0.5">
@@ -4795,7 +4795,7 @@ function ComboFormModal({ isOpen, combo, onClose, onSave, activeProviders, combo
                     "agentFeaturesContextLengthPlaceholder",
                     "e.g. 128000"
                   )}
-                  className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-primary focus:outline-none"
+                  className="w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-transparent focus:border-focus focus:outline-none"
                 />
                 {contextLengthError && (
                   <p className="text-[10px] text-error mt-0.5">{contextLengthError}</p>

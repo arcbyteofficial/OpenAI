@@ -405,7 +405,7 @@ export function LlmChatCard({
               value={model || firstModel}
               onChange={(e) => setModel(e.target.value)}
               disabled={loading}
-              className="min-w-0 flex-1 rounded-control border border-border-strong bg-surface text-xs px-2 py-1 text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 disabled:opacity-60"
+              className="min-w-0 flex-1 rounded-control border border-border-strong bg-surface text-xs px-2 py-1 text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 disabled:opacity-60"
             >
               {modelOptions.length === 0 && !loading && (
                 <option value="">{initialModel || "—"}</option>
@@ -439,7 +439,7 @@ export function LlmChatCard({
               <select
                 value={selectedKey}
                 onChange={(e) => setSelectedKey(e.target.value)}
-                className="rounded-control border border-border-strong bg-surface text-xs px-2 py-1 text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                className="rounded-control border border-border-strong bg-surface text-xs px-2 py-1 text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
               >
                 <option value="">{t("defaultKey")}</option>
                 {keys.map((k) => (
@@ -552,7 +552,7 @@ export function LlmChatCard({
       </div>
 
       {/* Input row */}
-      <div className="relative flex items-end gap-2 rounded-lg border border-border-strong bg-surface px-3 py-2 focus-within:border-primary focus-within:ring-[3px] focus-within:ring-primary/15 transition-[border-color,box-shadow]">
+      <div className="relative flex items-end gap-2 rounded-lg border border-border-strong bg-surface px-3 py-2 focus-within:border-focus focus-within:ring-[3px] focus-within:ring-focus/15 transition-[border-color,box-shadow]">
         <textarea
           ref={textareaRef}
           value={input}

@@ -172,7 +172,7 @@ export default function ConsoleLogViewer() {
           value={levelFilter}
           onChange={(e) => setLevelFilter(e.target.value)}
           aria-label={tv("filterByLevel")}
-          className="px-3 py-2 rounded-control text-sm bg-surface border border-border-strong text-text-main focus:outline-2 focus:outline-primary"
+          className="px-3 py-2 rounded-control text-sm bg-surface border border-border-strong text-text-main focus:outline-2 focus:outline-focus"
         >
           <option value="all">{t("allLevels")}</option>
           <option value="debug">Debug+</option>
@@ -188,7 +188,7 @@ export default function ConsoleLogViewer() {
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
           aria-label={tv("searchAria")}
-          className="flex-1 min-w-[200px] px-3 py-2 rounded-control text-sm bg-surface border border-border-strong text-text-main placeholder:text-text-subtle focus:outline-2 focus:outline-primary"
+          className="flex-1 min-w-[200px] px-3 py-2 rounded-control text-sm bg-surface border border-border-strong text-text-main placeholder:text-text-subtle focus:outline-2 focus:outline-focus"
         />
 
         {/* Auto-scroll toggle */}

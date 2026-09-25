@@ -68,7 +68,7 @@ export function CustomConfigForm({ value, onChange, t, isEditing }: CustomConfig
           value={value.endpointUrl}
           onChange={(e) => onChange({ ...value, endpointUrl: e.target.value })}
           placeholder={t("custom.endpointUrlPlaceholder")}
-          className="mt-1 w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          className="mt-1 w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus/20"
         />
         {urlHint && (
           <p
@@ -92,7 +92,7 @@ export function CustomConfigForm({ value, onChange, t, isEditing }: CustomConfig
           onChange={(e) => onChange({ ...value, secretKey: e.target.value })}
           placeholder={isEditing ? t("secretEditPlaceholder") : t("custom.secretKeyPlaceholder")}
           autoComplete="new-password"
-          className="mt-1 w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          className="mt-1 w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus/20"
         />
         <p className="mt-1 text-xs text-text-muted">{t("custom.secretKeyHint")}</p>
       </div>

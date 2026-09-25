@@ -417,7 +417,7 @@ export function ApiKeyTable({ byApiKey }) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder={t("filterSearchKeys")}
-          className="w-full max-w-[220px] px-3 py-1.5 rounded-control bg-surface border border-border-strong text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
+          className="w-full max-w-[220px] px-3 py-1.5 rounded-control bg-surface border border-border-strong text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus"
         />
       </div>
       <div className="overflow-x-auto">

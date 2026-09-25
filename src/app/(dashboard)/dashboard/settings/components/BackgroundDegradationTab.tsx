@@ -206,7 +206,7 @@ export default function BackgroundDegradationTab() {
                 placeholder={t("newPattern")}
                 value={newPattern}
                 onChange={(e) => setNewPattern(e.target.value)}
-                className="flex-1 px-3 py-2 rounded-control text-sm text-text-main bg-surface border border-border-strong placeholder:text-text-subtle focus:border-primary focus:ring-[3px] focus:ring-primary/15 focus:outline-none transition-[border-color,box-shadow]"
+                className="flex-1 px-3 py-2 rounded-control text-sm text-text-main bg-surface border border-border-strong placeholder:text-text-subtle focus:border-focus focus:ring-[3px] focus:ring-focus/15 focus:outline-none transition-[border-color,box-shadow]"
               />
               <button
                 onClick={addPattern}

@@ -74,7 +74,7 @@ export default function Toggle({
           "relative inline-flex items-center shrink-0 cursor-pointer rounded-full",
           "transition-colors duration-200 ease-in-out",
           "focus:outline-none",
-          "focus-visible:ring-[3px] focus-visible:ring-primary/25",
+          "focus-visible:ring-[3px] focus-visible:ring-focus/25",
           checked ? "bg-primary" : "bg-border-strong",
           sizes[size].track,
           disabled && "cursor-not-allowed"

@@ -284,7 +284,7 @@ export function RadarCatalogTable({ entries, refreshCatalog, onError }: RadarCat
                           onChange={(event) => setDisplayName(event.target.value)}
                           aria-label={t("modelDisplayName")}
                           maxLength={160}
-                          className="w-full min-w-[180px] px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                          className="w-full min-w-[180px] px-2 py-1 rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                         />
                       ) : (
                         <span className="block truncate">{entry.displayName}</span>

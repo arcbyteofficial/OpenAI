@@ -108,7 +108,7 @@ export function CustomHostsManager({ onClose }: CustomHostsManagerProps) {
             onChange={(e) => setInput(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && addHost()}
             placeholder={t("hostPlaceholder")}
-            className="flex-1 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-sm font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+            className="flex-1 rounded-control border border-border-strong bg-surface px-3 py-1.5 text-sm font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
           />
           <button
             type="button"

@@ -108,7 +108,7 @@ export default function A2aAuditTab() {
                 setSkillFilter(e.target.value);
               }}
               placeholder={t("a2aSkillPlaceholder")}
-              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
             />
           </label>
           <label className="space-y-1">
@@ -121,7 +121,7 @@ export default function A2aAuditTab() {
                 setOffset(0);
                 setStateFilter(e.target.value as TaskState | "all");
               }}
-              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
             >
               <option value="all">{t("a2aAllStates")}</option>
               <option value="submitted">{t("a2aStateSubmitted")}</option>

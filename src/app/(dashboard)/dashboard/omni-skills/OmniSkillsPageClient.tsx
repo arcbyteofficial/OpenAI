@@ -336,7 +336,7 @@ export function OmniSkillsPageClient(): JSX.Element {
               value={installJson}
               onChange={(e) => setInstallJson(e.target.value)}
               placeholder={t("installJsonPlaceholder")}
-              className="w-full h-48 p-3 rounded-control bg-surface border border-border-strong text-[13px] font-mono text-text-main placeholder:text-text-subtle resize-none focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="w-full h-48 p-3 rounded-control bg-surface border border-border-strong text-[13px] font-mono text-text-main placeholder:text-text-subtle resize-none focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
             />
             <div className="flex items-center gap-3 mt-3">
               <input

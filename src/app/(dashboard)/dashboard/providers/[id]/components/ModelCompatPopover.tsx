@@ -565,7 +565,7 @@ export default function ModelCompatPopover({
                 value={protocol}
                 onChange={(e) => handleProtocolChange(e.target.value)}
                 disabled={disabled}
-                className="mb-4 w-full rounded-control border border-border-strong bg-surface px-2.5 py-2 text-xs text-text-main transition-colors focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+                className="mb-4 w-full rounded-control border border-border-strong bg-surface px-2.5 py-2 text-xs text-text-main transition-colors focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus/20"
               >
                 {MODEL_COMPAT_PROTOCOL_KEYS.map((p) => (
                   <option key={p} value={p}>
@@ -609,7 +609,7 @@ export default function ModelCompatPopover({
                     onBlur={() => saveModelParamFilters()}
                     placeholder={t("compatBlockedParamsPlaceholder")}
                     disabled={disabled}
-                    className="mb-1 w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[11px] font-mono text-text-main placeholder:text-text-subtle transition-colors focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/30"
+                    className="mb-1 w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[11px] font-mono text-text-main placeholder:text-text-subtle transition-colors focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus/30"
                   />
                   <p className="text-[10px] text-text-muted">
                     {providerText(
@@ -637,7 +637,7 @@ export default function ModelCompatPopover({
                     onBlur={() => saveModelParamFilters()}
                     placeholder={t("compatAllowedParamsPlaceholder")}
                     disabled={disabled}
-                    className="mb-1 w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[11px] font-mono text-text-main placeholder:text-text-subtle transition-colors focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary/30"
+                    className="mb-1 w-full rounded-control border border-border-strong bg-surface px-2.5 py-1.5 text-[11px] font-mono text-text-main placeholder:text-text-subtle transition-colors focus:border-focus focus:outline-none focus:ring-1 focus:ring-focus/30"
                   />
                   <p className="text-[10px] text-text-muted">
                     {providerText(

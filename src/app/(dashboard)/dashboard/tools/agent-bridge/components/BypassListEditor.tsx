@@ -55,7 +55,7 @@ export function BypassListEditor({ patterns, onSave }: BypassListEditorProps) {
           {t("bypassUserLabel") || "Custom bypass patterns (one per line, glob or regex)"}
         </label>
         <textarea
-          className="w-full min-h-[80px] rounded-control border border-border-strong bg-surface px-3 py-2 text-sm font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+          className="w-full min-h-[80px] rounded-control border border-border-strong bg-surface px-3 py-2 text-sm font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
           placeholder="*.internal.corp&#10;sso.example.com"
           value={userInput}
           onChange={(e) => setUserInput(e.target.value)}

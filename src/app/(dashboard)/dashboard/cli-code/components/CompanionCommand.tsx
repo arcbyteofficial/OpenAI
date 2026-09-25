@@ -35,7 +35,7 @@ export default function CompanionCommand({
           disabled={copying}
           onClick={handleCopy}
           aria-label={`${common("copy")}: ${title}`}
-          className="focus-visible:outline-2 focus-visible:outline-primary motion-reduce:transition-none"
+          className="focus-visible:outline-2 focus-visible:outline-focus motion-reduce:transition-none"
         >
           {common("copy")}
         </Button>

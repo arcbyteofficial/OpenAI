@@ -962,7 +962,7 @@ export default function ProxyRegistryManager({
               <label className="text-xs text-text-muted mb-1 block">{t("labelName")}</label>
               <input
                 data-testid="proxy-registry-name-input"
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                 value={form.name}
                 onChange={(e) => setForm((prev) => ({ ...prev, name: e.target.value }))}
               />
@@ -970,7 +970,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelType")}</label>
               <select
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                 value={form.type}
                 onChange={(e) => setForm((prev) => ({ ...prev, type: e.target.value }))}
               >
@@ -982,7 +982,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelFamily")}</label>
               <select
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                 value={form.family}
                 onChange={(e) => setForm((prev) => ({ ...prev, family: e.target.value }))}
               >
@@ -996,7 +996,7 @@ export default function ProxyRegistryManager({
               <label className="text-xs text-text-muted mb-1 block">{t("labelHost")}</label>
               <input
                 data-testid="proxy-registry-host-input"
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                 value={form.host}
                 onChange={(e) => setForm((prev) => ({ ...prev, host: e.target.value }))}
               />
@@ -1004,7 +1004,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelPort")}</label>
               <input
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                 value={form.port}
                 onChange={(e) => setForm((prev) => ({ ...prev, port: e.target.value }))}
               />
@@ -1012,7 +1012,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelUsername")}</label>
               <input
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                 value={form.username}
                 autoComplete="off"
                 data-1p-ignore="true"
@@ -1025,7 +1025,7 @@ export default function ProxyRegistryManager({
               <label className="text-xs text-text-muted mb-1 block">{t("labelPassword")}</label>
               <input
                 type="password"
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                 value={form.password}
                 autoComplete="new-password"
                 data-1p-ignore="true"
@@ -1037,7 +1037,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelRegion")}</label>
               <input
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                 value={form.region}
                 onChange={(e) => setForm((prev) => ({ ...prev, region: e.target.value }))}
               />
@@ -1045,7 +1045,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelStatus")}</label>
               <select
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                 value={form.status}
                 onChange={(e) => setForm((prev) => ({ ...prev, status: e.target.value }))}
                 data-testid="proxy-registry-status-select"
@@ -1060,7 +1060,7 @@ export default function ProxyRegistryManager({
           <div>
             <label className="text-xs text-text-muted mb-1 block">{t("labelNotes")}</label>
             <textarea
-              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
               value={form.notes}
               onChange={(e) => setForm((prev) => ({ ...prev, notes: e.target.value }))}
               rows={3}
@@ -1091,7 +1091,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelScope")}</label>
               <select
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                 value={bulkScope}
                 onChange={(e) => setBulkScope(e.target.value)}
               >
@@ -1104,7 +1104,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelProxy")}</label>
               <select
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                 value={bulkProxyId}
                 onChange={(e) => setBulkProxyId(e.target.value)}
               >
@@ -1123,7 +1123,7 @@ export default function ProxyRegistryManager({
               <label className="text-xs text-text-muted mb-1 block">{t("bulkLabelScopeIds")}</label>
               <textarea
                 data-testid="proxy-registry-bulk-scopeids-input"
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                 rows={5}
                 value={bulkScopeIds}
                 onChange={(e) => setBulkScopeIds(e.target.value)}
@@ -1165,7 +1165,7 @@ export default function ProxyRegistryManager({
             <div>
               <label className="text-xs text-text-muted mb-1 block">{t("labelScope")}</label>
               <select
-                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                 value={poolScope}
                 onChange={(e) => {
                   setPoolScope(e.target.value);
@@ -1186,7 +1186,7 @@ export default function ProxyRegistryManager({
                   {t("poolScopeIdLabel")}
                 </label>
                 <input
-                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                   value={poolScopeId}
                   onChange={(e) => {
                     setPoolScopeId(e.target.value);
@@ -1220,7 +1220,7 @@ export default function ProxyRegistryManager({
                   {t("poolStrategyLabel")}
                 </label>
                 <select
-                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                  className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                   value={poolStrategy}
                   onChange={(e) =>
                     handlePoolStrategyChange(e.target.value as "round-robin" | "random" | "sticky")
@@ -1280,7 +1280,7 @@ export default function ProxyRegistryManager({
                 <div className="flex-1">
                   <label className="text-xs text-text-muted mb-1 block">{t("poolAddLabel")}</label>
                   <select
-                    className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary"
+                    className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus"
                     value={poolAddProxyId}
                     onChange={(e) => setPoolAddProxyId(e.target.value)}
                     data-testid="proxy-registry-pool-add-select"
@@ -1336,7 +1336,7 @@ export default function ProxyRegistryManager({
           <div>
             <textarea
               data-testid="proxy-registry-bulk-import-textarea"
-              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong font-mono text-xs leading-relaxed text-text-main focus:outline-none focus:border-primary placeholder:whitespace-pre-wrap placeholder:text-text-subtle"
+              className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong font-mono text-xs leading-relaxed text-text-main focus:outline-none focus:border-focus placeholder:whitespace-pre-wrap placeholder:text-text-subtle"
               rows={14}
               value={bulkImportText}
               placeholder={BULK_IMPORT_PLACEHOLDER}

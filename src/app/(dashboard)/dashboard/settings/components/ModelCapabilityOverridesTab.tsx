@@ -246,7 +246,7 @@ function ModelOverrideTargetList({
           value={search}
           onChange={(event) => setSearch(event.target.value)}
           placeholder={t("searchModelOverrideTargets")}
-          className="w-full px-3 py-2 text-xs bg-surface border border-border-strong rounded-control focus:outline-none focus:border-primary"
+          className="w-full px-3 py-2 text-xs bg-surface border border-border-strong rounded-control focus:outline-none focus:border-focus"
         />
       </div>
       <div className="max-h-56 overflow-y-auto divide-y divide-border">
@@ -342,7 +342,7 @@ function ModelOverrideForm({
       <select
         value={key}
         onChange={(event) => setKey(event.target.value as ModelOverrideKey)}
-        className="sm:w-40 px-2 py-2 text-xs bg-surface border border-border-strong rounded-control focus:outline-none focus:border-primary"
+        className="sm:w-40 px-2 py-2 text-xs bg-surface border border-border-strong rounded-control focus:outline-none focus:border-focus"
       >
         <option value="context_length">context_length</option>
         <option value="max_input_tokens">max_input_tokens</option>
@@ -360,7 +360,7 @@ function ModelOverrideForm({
             ? "modelOverrideReasoningEffortsPlaceholder"
             : "modelOverrideValuePlaceholder"
         )}
-        className="flex-1 px-3 py-2 text-xs bg-surface border border-border-strong rounded-control focus:outline-none focus:border-primary"
+        className="flex-1 px-3 py-2 text-xs bg-surface border border-border-strong rounded-control focus:outline-none focus:border-focus"
       />
       <Button
         variant="primary"

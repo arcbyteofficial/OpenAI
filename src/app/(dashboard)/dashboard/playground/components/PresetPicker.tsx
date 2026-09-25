@@ -106,7 +106,7 @@ export default function PresetPicker({ configState, setConfigState }: PresetPick
               }
             }}
             defaultValue=""
-            className="flex-1 text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main disabled:opacity-50 disabled:cursor-not-allowed"
+            className="flex-1 text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-focus text-text-main disabled:opacity-50 disabled:cursor-not-allowed"
             aria-label={t("loadPreset")}
           >
             <option value="" disabled>
@@ -187,7 +187,7 @@ export default function PresetPicker({ configState, setConfigState }: PresetPick
                 }}
                 placeholder={t("presetNamePlaceholder")}
                 autoFocus
-                className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+                className="text-xs bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-focus text-text-main"
               />
 
               {saveError && <p className="text-xs text-error">{saveError}</p>}

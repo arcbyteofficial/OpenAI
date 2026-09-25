@@ -613,7 +613,7 @@ export default function ProxyConfigModal({
               <select
                 value={selectedProxyId}
                 onChange={(e) => setSelectedProxyId(e.target.value)}
-                className="w-full px-3 py-2.5 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                className="w-full px-3 py-2.5 rounded-control bg-surface border border-border-strong text-sm text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
               >
                 <option value="">{t("selectSavedProxyPlaceholder")}</option>
                 {sortedSavedProxies.map((item: any) => (
@@ -659,7 +659,7 @@ export default function ProxyConfigModal({
                     value={host}
                     onChange={(e) => setHost(e.target.value)}
                     placeholder={t("hostPlaceholder")}
-                    className="w-full px-3 py-2.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                    className="w-full px-3 py-2.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                   />
                 </div>
                 <div>
@@ -671,7 +671,7 @@ export default function ProxyConfigModal({
                     value={port}
                     onChange={(e) => setPort(e.target.value)}
                     placeholder={getDefaultPort(proxyType)}
-                    className="w-full px-3 py-2.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                    className="w-full px-3 py-2.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                   />
                 </div>
               </div>
@@ -698,7 +698,7 @@ export default function ProxyConfigModal({
                         value={username}
                         onChange={(e) => setUsername(e.target.value)}
                         placeholder={t("usernamePlaceholder")}
-                        className="w-full px-3 py-2.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                        className="w-full px-3 py-2.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                       />
                     </div>
                     <div>
@@ -710,7 +710,7 @@ export default function ProxyConfigModal({
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder={t("passwordPlaceholder")}
-                        className="w-full px-3 py-2.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                        className="w-full px-3 py-2.5 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                       />
                     </div>
                   </div>

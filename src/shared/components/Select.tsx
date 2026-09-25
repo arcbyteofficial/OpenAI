@@ -69,7 +69,7 @@ export default function Select({
           className={cn(
             "w-full h-8 px-3 pe-10 text-text-main",
             "bg-surface border border-border-strong rounded-control appearance-none cursor-pointer hover:border-text-subtle/50",
-            "focus:border-primary focus:ring-[3px] focus:ring-primary/15 focus:outline-none",
+            "focus:border-focus focus:ring-[3px] focus:ring-focus/15 focus:outline-none",
             "transition-[border-color,box-shadow] duration-150 disabled:opacity-50 disabled:cursor-not-allowed",
             "text-[16px] sm:text-[13px]",
             error ? "border-error hover:border-error focus:border-error focus:ring-error/15" : "",

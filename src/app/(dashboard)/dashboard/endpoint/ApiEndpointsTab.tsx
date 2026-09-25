@@ -411,7 +411,7 @@ export default function ApiEndpointsTab() {
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
                 placeholder={t("apiEndpointsSearchPlaceholder")}
-                className="w-full pl-9 pr-3 py-2 text-[13px] rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                className="w-full pl-9 pr-3 py-2 text-[13px] rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
               />
             </div>
             <div className="flex gap-1 flex-wrap">
@@ -631,13 +631,13 @@ export default function ApiEndpointsTab() {
                                       value={manualApiKey}
                                       onChange={(e) => setManualApiKey(e.target.value)}
                                       placeholder={t("pasteApiKey")}
-                                      className="w-full px-3 py-2 text-[12px] font-mono rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                                      className="w-full px-3 py-2 text-[12px] font-mono rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
                                     />
                                   ) : availableApiKeys.length > 0 ? (
                                     <select
                                       value={selectedApiKeyId}
                                       onChange={(e) => setSelectedApiKeyId(e.target.value)}
-                                      className="w-full px-3 py-2 text-[12px] font-mono rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                                      className="w-full px-3 py-2 text-[12px] font-mono rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
                                     >
                                       {availableApiKeys.map((apiKey) => (
                                         <option key={apiKey.id} value={apiKey.id}>
@@ -661,7 +661,7 @@ export default function ApiEndpointsTab() {
                                     value={tryBody}
                                     onChange={(e) => setTryBody(e.target.value)}
                                     rows={8}
-                                    className="w-full mt-1 px-3 py-2 text-[12px] font-mono rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 resize-none"
+                                    className="w-full mt-1 px-3 py-2 text-[12px] font-mono rounded-control border border-border-strong bg-surface text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 resize-none"
                                     placeholder='{ "model": "gpt-4o", "messages": [...] }'
                                   />
                                 </div>

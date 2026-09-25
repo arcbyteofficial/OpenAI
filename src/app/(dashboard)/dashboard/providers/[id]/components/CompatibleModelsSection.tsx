@@ -484,7 +484,7 @@ export default function CompatibleModelsSection({
             onChange={(e) => setNewModel(e.target.value)}
             onKeyDown={(e) => e.key === "Enter" && handleAdd()}
             placeholder={inputPlaceholder}
-            className="w-full px-3 py-2 text-sm text-text-main placeholder:text-text-subtle border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-primary"
+            className="w-full px-3 py-2 text-sm text-text-main placeholder:text-text-subtle border border-border-strong rounded-control bg-surface transition-colors focus:outline-none focus:border-focus"
           />
         </div>
         <Button size="sm" icon="add" onClick={handleAdd} disabled={!newModel.trim() || adding}>

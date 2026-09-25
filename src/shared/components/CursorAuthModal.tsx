@@ -328,7 +328,7 @@ export default function CursorAuthModal({
                 onChange={(e) => setAccessToken(e.target.value)}
                 placeholder={t("accessTokenPlaceholder")}
                 rows={3}
-                className="w-full px-3 py-2 text-[13px] font-mono border border-border-strong rounded-control bg-surface placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] resize-none"
+                className="w-full px-3 py-2 text-[13px] font-mono border border-border-strong rounded-control bg-surface placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow] resize-none"
               />
             </div>
 
@@ -341,7 +341,7 @@ export default function CursorAuthModal({
                 onChange={(e) => setRefreshToken(e.target.value)}
                 placeholder={t("refreshTokenPlaceholder")}
                 rows={2}
-                className="w-full px-3 py-2 text-[13px] font-mono border border-border-strong rounded-control bg-surface placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] resize-none"
+                className="w-full px-3 py-2 text-[13px] font-mono border border-border-strong rounded-control bg-surface placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow] resize-none"
               />
             </div>
 

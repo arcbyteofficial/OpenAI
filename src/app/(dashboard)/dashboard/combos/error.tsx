@@ -28,7 +28,7 @@ export default function CombosError({
         )}
         <button
           onClick={reset}
-          className="px-4 py-2 bg-contrast text-contrast-fg text-sm font-medium rounded-control hover:bg-contrast-hover transition-colors focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="px-4 py-2 bg-contrast text-contrast-fg text-sm font-medium rounded-control hover:bg-contrast-hover transition-colors focus:outline-2 focus:outline-offset-2 focus:outline-focus"
         >
           {t("errorRetry")}
         </button>

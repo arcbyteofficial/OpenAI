@@ -182,7 +182,7 @@ export function CliproxyModelMappingEditor() {
         className={`w-full font-mono text-[12px] text-text-main rounded-control border px-3 py-2 resize-y min-h-[120px] bg-surface focus:outline-none focus:ring-[3px] transition-[border-color,box-shadow] ${
           !isValid && rawText !== EMPTY_MAPPING
             ? "border-error focus:ring-error/15"
-            : "border-border-strong focus:border-primary focus:ring-primary/15"
+            : "border-border-strong focus:border-focus focus:ring-focus/15"
         }`}
         value={rawText}
         onChange={(e) => {

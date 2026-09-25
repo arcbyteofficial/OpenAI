@@ -40,7 +40,7 @@ export function NumberField({
               onChange(clamped);
             }
           }}
-          className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main tabular-nums focus:border-primary focus:outline-none"
+          className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main tabular-nums focus:border-focus focus:outline-none"
         />
         {suffix ? <span className="text-xs text-text-muted">{suffix}</span> : null}
       </div>

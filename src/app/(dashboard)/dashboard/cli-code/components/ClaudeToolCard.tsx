@@ -438,7 +438,7 @@ export default function ClaudeToolCard({
                     value={getDisplayUrl()}
                     onChange={(e) => setCustomBaseUrl(e.target.value)}
                     placeholder={t("baseUrlPlaceholder")}
-                    className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-focus/50"
                   />
                   {customBaseUrl && customBaseUrl !== baseUrl && (
                     <button
@@ -463,7 +463,7 @@ export default function ClaudeToolCard({
                     <select
                       value={effectiveApiKey}
                       onChange={(e) => setSelectedApiKey(e.target.value)}
-                      className="flex-1 px-2 py-1.5 bg-surface rounded-control text-xs border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                      className="flex-1 px-2 py-1.5 bg-surface rounded-control text-xs border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                     >
                       {apiKeys.map((key) => (
                         <option key={key.id} value={key.id}>
@@ -499,7 +499,7 @@ export default function ClaudeToolCard({
                       value={modelMappings[model.alias] || ""}
                       onChange={(e) => onModelMappingChange(model.alias, e.target.value)}
                       placeholder={t("providerModelPlaceholder")}
-                      className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
+                      className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-focus/50"
                     />
                     {modelMappings[model.alias] && (
                       <button

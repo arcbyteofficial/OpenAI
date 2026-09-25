@@ -25,7 +25,7 @@ function ChaosSystemPromptField({
         value={value || ""}
         onChange={(e) => onChange(e.target.value)}
         rows={3}
-        className="w-full px-3 py-1.5 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] resize-y"
+        className="w-full px-3 py-1.5 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow] resize-y"
         placeholder={t("systemPromptPlaceholder")}
       />
     </div>
@@ -88,7 +88,7 @@ export function ChaosBasicSettingsFields({
               timeoutMs: Math.max(5000, Math.min(600000, Number(e.target.value) || 120000)),
             })
           }
-          className="w-full px-3 py-1.5 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+          className="w-full px-3 py-1.5 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
         />
       </div>
 
@@ -107,7 +107,7 @@ export function ChaosBasicSettingsFields({
               maxTokens: Math.max(256, Math.min(128000, Number(e.target.value) || 4096)),
             })
           }
-          className="w-full px-3 py-1.5 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+          className="w-full px-3 py-1.5 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
         />
       </div>
 

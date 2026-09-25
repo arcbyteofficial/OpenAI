@@ -219,7 +219,7 @@ export default function FaroChat() {
 
         <div className="flex items-center gap-2">
           <input
-            className="flex-1 rounded-control border border-border-strong bg-transparent px-2 py-1 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
+            className="flex-1 rounded-control border border-border-strong bg-transparent px-2 py-1 text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-1 focus:ring-focus/30 transition-colors"
             placeholder={t("faroPlaceholder")}
             value={input}
             onChange={(e) => setInput(e.target.value)}
@@ -261,7 +261,7 @@ export default function FaroChat() {
             <label className="flex-1">
               STT
               <input
-                className="w-full rounded-control border border-border-strong bg-transparent px-2 py-1 font-mono text-[12px] text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
+                className="w-full rounded-control border border-border-strong bg-transparent px-2 py-1 font-mono text-[12px] text-text-main focus:outline-none focus:border-focus focus:ring-1 focus:ring-focus/30 transition-colors"
                 value={sttModel}
                 onChange={(e) => persistModels(e.target.value, ttsModel)}
               />
@@ -269,7 +269,7 @@ export default function FaroChat() {
             <label className="flex-1">
               TTS
               <input
-                className="w-full rounded-control border border-border-strong bg-transparent px-2 py-1 font-mono text-[12px] text-text-main focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary/30 transition-colors"
+                className="w-full rounded-control border border-border-strong bg-transparent px-2 py-1 font-mono text-[12px] text-text-main focus:outline-none focus:border-focus focus:ring-1 focus:ring-focus/30 transition-colors"
                 value={ttsModel}
                 onChange={(e) => persistModels(sttModel, e.target.value)}
               />

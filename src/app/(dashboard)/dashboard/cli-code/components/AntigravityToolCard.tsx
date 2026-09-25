@@ -346,7 +346,7 @@ export default function AntigravityToolCard({
                   <select
                     value={effectiveApiKeyId}
                     onChange={(e) => setSelectedApiKeyId(e.target.value)}
-                    className="flex-1 px-2 py-1.5 bg-surface rounded-control text-xs border border-border-strong focus:outline-none focus:ring-1 focus:ring-primary/50"
+                    className="flex-1 px-2 py-1.5 bg-surface rounded-control text-xs border border-border-strong focus:outline-none focus:ring-1 focus:ring-focus/50"
                   >
                     {apiKeys.map((key) => (
                       <option key={key.id} value={key.id}>
@@ -376,14 +376,14 @@ export default function AntigravityToolCard({
                       value={entry.model || ""}
                       onChange={(e) => handleModelMappingChange(model.alias, e.target.value)}
                       placeholder={t("modelPlaceholder")}
-                      className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
+                      className="flex-1 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-focus/50"
                     />
                     <select
                       value={entry.reasoningEffort || ""}
                       onChange={(e) => handleReasoningEffortChange(model.alias, e.target.value)}
                       title={t("reasoningEffortHint")}
                       aria-label={t("reasoningEffort", { model: model.name })}
-                      className="w-28 shrink-0 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-primary/50"
+                      className="w-28 shrink-0 px-2 py-1.5 bg-surface rounded-control border border-border-strong text-xs focus:outline-none focus:ring-1 focus:ring-focus/50"
                     >
                       {REASONING_EFFORT_OPTIONS.map((tier) => (
                         <option key={tier || "default"} value={tier}>

@@ -106,7 +106,7 @@ export default function CloudflareRelayModal({
               type="text"
               value={accountId}
               onChange={(e) => setAccountId(e.target.value)}
-              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
+              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus/50 focus:ring-1 focus:ring-focus/30"
               placeholder="your-cloudflare-account-id"
               autoComplete="off"
             />
@@ -121,7 +121,7 @@ export default function CloudflareRelayModal({
               type="password"
               value={apiToken}
               onChange={(e) => setApiToken(e.target.value)}
-              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
+              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus/50 focus:ring-1 focus:ring-focus/30"
               placeholder="cloudflare-api-token"
               autoComplete="off"
             />
@@ -136,7 +136,7 @@ export default function CloudflareRelayModal({
               type="text"
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
-              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
+              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus/50 focus:ring-1 focus:ring-focus/30"
               placeholder="omniroute-relay"
             />
           </div>

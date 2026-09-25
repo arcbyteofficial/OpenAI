@@ -427,7 +427,7 @@ export default function ChatTab({ configState, onMetricsUpdate }: ChatTabProps) 
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={handleKeyDown}
           placeholder={t("typeMessageWithShortcut")}
-          className="flex-1 min-h-[44px] max-h-[120px] bg-surface border border-border-strong rounded-control px-3 py-2 text-sm placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary resize-y"
+          className="flex-1 min-h-[44px] max-h-[120px] bg-surface border border-border-strong rounded-control px-3 py-2 text-sm placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-focus resize-y"
           rows={1}
           disabled={loading}
         />

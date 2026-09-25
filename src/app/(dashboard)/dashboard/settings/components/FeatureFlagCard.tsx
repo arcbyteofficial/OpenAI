@@ -153,7 +153,7 @@ export default function FeatureFlagCard({
               aria-label={flag.label}
               disabled={saving}
               onClick={() => onToggle(flag.key, enabled ? "false" : "true")}
-              className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary disabled:cursor-not-allowed disabled:opacity-50 ${
+              className={`relative inline-flex h-5 w-9 items-center rounded-full transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus disabled:cursor-not-allowed disabled:opacity-50 ${
                 enabled ? "bg-primary" : "bg-border-strong"
               }`}
             >
@@ -170,7 +170,7 @@ export default function FeatureFlagCard({
               disabled={saving}
               value={flag.effectiveValue}
               onChange={(e) => onToggle(flag.key, e.target.value)}
-              className="rounded-control border border-border-strong bg-surface px-2 py-0.5 text-xs text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] disabled:cursor-not-allowed disabled:opacity-50"
+              className="rounded-control border border-border-strong bg-surface px-2 py-0.5 text-xs text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow] disabled:cursor-not-allowed disabled:opacity-50"
             >
               {(flag.enumValues ?? []).map((val) => (
                 <option key={val} value={val} className="bg-surface text-text-main">
@@ -230,7 +230,7 @@ export default function FeatureFlagCard({
             aria-label={t("resetFlag", { label: flag.label })}
             disabled={saving}
             onClick={() => onReset(flag.key)}
-            className="inline-flex items-center gap-1 rounded text-xs text-text-muted transition-colors hover:text-text-primary disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+            className="inline-flex items-center gap-1 rounded text-xs text-text-muted transition-colors hover:text-text-primary disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-focus"
           >
             <span className="material-symbols-outlined text-[14px]" aria-hidden="true">
               refresh

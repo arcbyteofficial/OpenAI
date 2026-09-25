@@ -360,7 +360,7 @@ export default function GrokBuildToolCard({
   const rowClass = "flex items-center gap-2";
   const labelClass = "w-32 shrink-0 text-right text-sm font-semibold text-text-main";
   const inputClass =
-    "min-w-0 flex-1 rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-primary/50";
+    "min-w-0 flex-1 rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs focus:outline-none focus:ring-1 focus:ring-focus/50";
 
   return (
     <Card padding="sm" className="overflow-hidden">

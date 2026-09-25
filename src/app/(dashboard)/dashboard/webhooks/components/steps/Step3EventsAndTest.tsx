@@ -78,7 +78,7 @@ export function Step3EventsAndTest({
           value={description}
           onChange={(e) => onChangeDescription(e.target.value)}
           placeholder={t("namePlaceholder")}
-          className="mt-1 w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none focus:ring-2 focus:ring-primary/20"
+          className="mt-1 w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-sm text-text-main placeholder:text-text-subtle focus:border-focus focus:outline-none focus:ring-2 focus:ring-focus/20"
         />
       </div>
 

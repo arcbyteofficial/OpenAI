@@ -877,7 +877,7 @@ export default function ComboDefaultsTab() {
                       setSearchQuery(e.target.value);
                       setHighlightedIdx(0);
                     }}
-                    className="w-full px-2 py-1.5 text-xs rounded-md border border-border-strong bg-transparent text-text-main placeholder:text-text-subtle outline-none focus:border-primary transition-colors"
+                    className="w-full px-2 py-1.5 text-xs rounded-md border border-border-strong bg-transparent text-text-main placeholder:text-text-subtle outline-none focus:border-focus transition-colors"
                     placeholder={t("searchProviderPlaceholder") || "Search providers..."}
                     aria-label={t("searchProviderAria") || "Search providers"}
                     onKeyDown={handleDropdownKeyDown}

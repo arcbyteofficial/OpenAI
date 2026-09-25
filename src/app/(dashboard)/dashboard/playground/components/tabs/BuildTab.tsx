@@ -272,7 +272,7 @@ export default function BuildTab({ configState }: BuildTabProps) {
                     }
                     rows={3}
                     placeholder={t("enterToolResult")}
-                    className="text-xs font-mono bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main resize-y"
+                    className="text-xs font-mono bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-focus text-text-main resize-y"
                   />
                   <button
                     onClick={() => void sendToolResult(tc.id)}

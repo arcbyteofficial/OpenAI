@@ -177,7 +177,7 @@ export function ApiKeyUsageLimitCard({
             step="0.01"
             value={dailyLimit}
             onChange={(event) => setDailyLimit(event.target.value)}
-            className="mt-2 w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 font-mono text-sm tabular-nums text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none transition-colors"
+            className="mt-2 w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 font-mono text-sm tabular-nums text-text-main placeholder:text-text-subtle focus:border-focus focus:outline-none transition-colors"
             placeholder="0.00"
           />
         </div>
@@ -189,7 +189,7 @@ export function ApiKeyUsageLimitCard({
             step="0.01"
             value={weeklyLimit}
             onChange={(event) => setWeeklyLimit(event.target.value)}
-            className="mt-2 w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 font-mono text-sm tabular-nums text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none transition-colors"
+            className="mt-2 w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 font-mono text-sm tabular-nums text-text-main placeholder:text-text-subtle focus:border-focus focus:outline-none transition-colors"
             placeholder="0.00"
           />
           <p className="mt-1 text-[11px] text-text-subtle">

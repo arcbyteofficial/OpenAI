@@ -211,7 +211,7 @@ export default function SimpleControls({
           value={inputText}
           onChange={(e) => onInputChange(e.target.value)}
           placeholder={tr("simpleInputPanelHint", "Free-text message or ready-made example")}
-          className="w-full resize-y rounded-control border border-border-strong bg-surface px-3 py-2 font-mono text-[13px] text-text-main placeholder:text-text-subtle transition-colors focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20"
+          className="w-full resize-y rounded-control border border-border-strong bg-surface px-3 py-2 font-mono text-[13px] text-text-main placeholder:text-text-subtle transition-colors focus:outline-none focus:border-focus focus:ring-2 focus:ring-focus/20"
         />
       </div>
 

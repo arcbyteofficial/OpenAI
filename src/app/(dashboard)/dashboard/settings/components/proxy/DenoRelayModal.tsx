@@ -103,7 +103,7 @@ export default function DenoRelayModal({ isOpen, onClose, onDeployed }: DenoRela
               type="password"
               value={denoToken}
               onChange={(e) => setDenoToken(e.target.value)}
-              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
+              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus/50 focus:ring-1 focus:ring-focus/30"
               placeholder="ddo_..."
               autoComplete="off"
             />
@@ -118,7 +118,7 @@ export default function DenoRelayModal({ isOpen, onClose, onDeployed }: DenoRela
               type="text"
               value={orgDomain}
               onChange={(e) => setOrgDomain(e.target.value)}
-              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
+              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus/50 focus:ring-1 focus:ring-focus/30"
               placeholder="your-org.deno.net"
             />
             <p className="text-xs text-text-muted mt-1">{t("denoRelayOrgDomainHint")}</p>
@@ -132,7 +132,7 @@ export default function DenoRelayModal({ isOpen, onClose, onDeployed }: DenoRela
               type="text"
               value={projectName}
               onChange={(e) => setProjectName(e.target.value)}
-              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary/50 focus:ring-1 focus:ring-primary/30"
+              className="w-full text-sm bg-surface border border-border-strong rounded-control px-3 py-2 text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus/50 focus:ring-1 focus:ring-focus/30"
               placeholder="omniroute-deno-relay"
             />
           </div>

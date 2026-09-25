@@ -103,7 +103,7 @@ export default function SystemPromptTab() {
                 onChange={(e) => handleFieldChange("prefixPrompt", e.target.value)}
                 placeholder={t("beforePromptPlaceholder")}
                 rows={9}
-                className="w-full px-4 py-3 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle resize-y min-h-[220px] focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50 transition-colors"
+                className="w-full px-4 py-3 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle resize-y min-h-[220px] focus:outline-none focus:ring-1 focus:ring-focus/30 focus:border-focus/50 transition-colors"
                 disabled={loading}
               />
               <div className="absolute bottom-2 right-3 text-xs text-text-subtle tabular-nums">
@@ -127,7 +127,7 @@ export default function SystemPromptTab() {
                 onChange={(e) => handleFieldChange("suffixPrompt", e.target.value)}
                 placeholder={t("afterPromptPlaceholder")}
                 rows={9}
-                className="w-full px-4 py-3 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle resize-y min-h-[220px] focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50 transition-colors"
+                className="w-full px-4 py-3 rounded-control border border-border-strong bg-surface text-sm text-text-main placeholder:text-text-subtle resize-y min-h-[220px] focus:outline-none focus:ring-1 focus:ring-focus/30 focus:border-focus/50 transition-colors"
                 disabled={loading}
               />
               <div className="absolute bottom-2 right-3 text-xs text-text-subtle tabular-nums">

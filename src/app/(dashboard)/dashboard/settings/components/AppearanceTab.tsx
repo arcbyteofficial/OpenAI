@@ -431,7 +431,7 @@ export default function AppearanceTab() {
                     await updateSetting("autoRefreshProviderQuotaInterval", next);
                   }}
                   disabled={loading || !autoRefreshProviderQuota}
-                  className="h-10 w-28 px-3 rounded-control bg-surface border border-border-strong text-sm text-text-main tabular-nums focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] disabled:opacity-50"
+                  className="h-10 w-28 px-3 rounded-control bg-surface border border-border-strong text-sm text-text-main tabular-nums focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow] disabled:opacity-50"
                 />
                 <span className="text-xs text-text-muted">{t("seconds")}</span>
               </div>
@@ -499,7 +499,7 @@ export default function AppearanceTab() {
               onChange={(e) => setCustomThemeColor(e.target.value)}
               placeholder="#3b82f6"
               maxLength={7}
-              className={`flex-1 h-10 px-3 rounded-control bg-surface border font-mono text-sm text-text-main focus:outline-none focus:ring-[3px] transition-[border-color,box-shadow] ${isValidHex ? "border-border-strong focus:border-primary focus:ring-primary/15" : "border-error focus:border-error focus:ring-error/15"}`}
+              className={`flex-1 h-10 px-3 rounded-control bg-surface border font-mono text-sm text-text-main focus:outline-none focus:ring-[3px] transition-[border-color,box-shadow] ${isValidHex ? "border-border-strong focus:border-focus focus:ring-focus/15" : "border-error focus:border-error focus:ring-error/15"}`}
             />
             <Button onClick={() => setCustomColorTheme(customThemeColor)} disabled={!isValidHex}>
               {t("themeCreate")}
@@ -532,7 +532,7 @@ export default function AppearanceTab() {
                 onChange={(e) => updateSetting("instanceName", e.target.value)}
                 placeholder={BRAND.name}
                 maxLength={100}
-                className="h-10 px-3 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow] w-48"
+                className="h-10 px-3 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow] w-48"
               />
             </div>
 
@@ -546,7 +546,7 @@ export default function AppearanceTab() {
                   type="text"
                   value={settings.customLogoUrl || ""}
                   onChange={(e) => updateSetting("customLogoUrl", e.target.value)}
-                  className="flex-1 h-10 px-3 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="flex-1 h-10 px-3 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                   placeholder="https://example.com/logo.png"
                   maxLength={2000}
                 />
@@ -640,7 +640,7 @@ export default function AppearanceTab() {
                   type="text"
                   value={settings.customFaviconUrl || ""}
                   onChange={(e) => updateSetting("customFaviconUrl", e.target.value)}
-                  className="flex-1 h-10 px-3 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 transition-[border-color,box-shadow]"
+                  className="flex-1 h-10 px-3 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 transition-[border-color,box-shadow]"
                   placeholder="https://example.com/favicon.ico"
                   maxLength={2000}
                 />

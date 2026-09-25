@@ -992,7 +992,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-focus/30 focus:border-focus/50"
               />
             </div>
           ))}
@@ -1058,7 +1058,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-focus/30 focus:border-focus/50"
               >
                 <option value="NONE">{t("storageJournalModeNone")}</option>
                 <option value="FULL">{t("storageJournalModeFull")}</option>
@@ -1080,7 +1080,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-focus/30 focus:border-focus/50"
               >
                 <option value="never">{t("storageVacuumNever")}</option>
                 <option value="daily">{t("storageVacuumDaily")}</option>
@@ -1104,7 +1104,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-focus/30 focus:border-focus/50"
               />
             </div>
             <div>
@@ -1124,7 +1124,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-focus/30 focus:border-focus/50"
               />
             </div>
             <div>
@@ -1145,7 +1145,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-focus/30 focus:border-focus/50"
               />
             </div>
           </div>
@@ -1163,7 +1163,7 @@ export default function SystemStorageTab() {
                   },
                 })
               }
-              className="w-4 h-4 rounded border-border text-primary focus:ring-2 focus:ring-primary"
+              className="w-4 h-4 rounded border-border text-primary focus:ring-2 focus:ring-focus"
             />
             <label htmlFor="optimize-on-startup" className="text-sm">
               {t("storageOptimizeOnStartup")}
@@ -1210,7 +1210,7 @@ export default function SystemStorageTab() {
                   aggregation: { ...dbSettings.aggregation, enabled: e.target.checked },
                 })
               }
-              className="w-4 h-4 rounded border-border text-primary focus:ring-2 focus:ring-primary"
+              className="w-4 h-4 rounded border-border text-primary focus:ring-2 focus:ring-focus"
             />
             <label htmlFor="aggregation-enabled" className="text-sm">
               {t("storageEnableAggregation")}
@@ -1235,7 +1235,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-focus/30 focus:border-focus/50"
               />
             </div>
             <div>
@@ -1253,7 +1253,7 @@ export default function SystemStorageTab() {
                     },
                   })
                 }
-                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-primary/30 focus:border-primary/50"
+                className="w-full px-3 py-2 text-sm rounded-control border border-border-strong bg-surface text-text-main focus:outline-none focus:ring-1 focus:ring-focus/30 focus:border-focus/50"
               >
                 <option value="hourly">{t("storageHourly")}</option>
                 <option value="daily">{t("storageDaily")}</option>

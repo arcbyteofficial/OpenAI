@@ -146,7 +146,7 @@ export default function EditMemoryModal({ memory, isOpen, onClose, onSaved }: Pr
             onChange={(e) => setContent(e.target.value)}
             placeholder={t("contentPlaceholder")}
             rows={4}
-            className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 resize-y"
+            className="w-full px-3 py-2 rounded-control bg-surface border border-border-strong text-sm text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 resize-y"
           />
         </div>
         <div>
@@ -158,7 +158,7 @@ export default function EditMemoryModal({ memory, isOpen, onClose, onSaved }: Pr
             onChange={(e) => handleMetadataChange(e.target.value)}
             rows={4}
             spellCheck={false}
-            className={`w-full px-3 py-2 rounded-control bg-surface border text-xs font-mono text-text-main focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15 resize-y ${
+            className={`w-full px-3 py-2 rounded-control bg-surface border text-xs font-mono text-text-main focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15 resize-y ${
               metadataError ? "border-error" : "border-border-strong"
             }`}
           />

@@ -536,7 +536,7 @@ export default function ConnectionRow({
             type="checkbox"
             checked={isSelected}
             onChange={onToggleSelect}
-            className="w-4 h-4 shrink-0 rounded border-border-strong text-primary focus:ring-primary/30 cursor-pointer"
+            className="w-4 h-4 shrink-0 rounded border-border-strong text-primary focus:ring-focus/30 cursor-pointer"
           />
         )}
         {/* Priority arrows */}
@@ -701,7 +701,7 @@ export default function ConnectionRow({
                       e.target.value as "native" | "cliproxyapi" | "dario" | "fallback"
                     )
                   }
-                  className="text-xs font-medium rounded px-1.5 py-0.5 border-0 bg-bg-subtle text-text-muted hover:text-text-main cursor-pointer focus:outline-none focus:ring-1 focus:ring-primary/30"
+                  className="text-xs font-medium rounded px-1.5 py-0.5 border-0 bg-bg-subtle text-text-muted hover:text-text-main cursor-pointer focus:outline-none focus:ring-1 focus:ring-focus/30"
                   title="Upstream proxy routing for Claude Code traffic"
                 >
                   <option value="native">Native</option>
@@ -718,7 +718,7 @@ export default function ConnectionRow({
                         e.target.value as "cliproxyapi" | "dario"
                       )
                     }
-                    className="text-xs font-medium rounded px-1.5 py-0.5 border-0 bg-bg-subtle text-text-muted hover:text-text-main cursor-pointer focus:outline-none focus:ring-1 focus:ring-primary/30"
+                    className="text-xs font-medium rounded px-1.5 py-0.5 border-0 bg-bg-subtle text-text-muted hover:text-text-main cursor-pointer focus:outline-none focus:ring-1 focus:ring-focus/30"
                     title="Fallback retry backend"
                   >
                     <option value="cliproxyapi">→ CLIProxyAPI</option>

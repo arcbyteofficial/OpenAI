@@ -208,7 +208,7 @@ export default function ComplianceTab() {
                 setEventType(event.target.value);
               }}
               placeholder={t("eventTypePlaceholder")}
-              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
             />
             <datalist id="compliance-event-types">
               {eventTypes.map((type) => (
@@ -228,7 +228,7 @@ export default function ComplianceTab() {
                 setActor(event.target.value);
               }}
               placeholder={t("actorPlaceholder")}
-              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
             />
             <datalist id="compliance-actors">
               {actors.map((a) => (
@@ -246,7 +246,7 @@ export default function ComplianceTab() {
                 setOffset(0);
                 setSeverity(event.target.value as "all" | Severity);
               }}
-              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
             >
               <option value="all">{t("allSeverities")}</option>
               <option value="info">{t("info")}</option>
@@ -265,7 +265,7 @@ export default function ComplianceTab() {
                 setOffset(0);
                 setFrom(event.target.value);
               }}
-              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
             />
           </label>
           <label className="space-y-1">
@@ -279,7 +279,7 @@ export default function ComplianceTab() {
                 setOffset(0);
                 setTo(event.target.value);
               }}
-              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+              className="w-full rounded-control border border-border-strong bg-surface px-3 py-2 text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
             />
           </label>
           <div className="flex items-end">

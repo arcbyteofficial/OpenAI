@@ -444,7 +444,7 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
                   value={singlePasteText}
                   onChange={(e) => setSinglePasteText(e.target.value)}
                   rows={6}
-                  className="w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
+                  className="w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus"
                   placeholder='{ "claudeAiOauth": { ... } }'
                 />
               </div>
@@ -461,7 +461,7 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
                   value={singleEmail}
                   onChange={(e) => setSingleEmail(e.target.value)}
                   placeholder="auto-detected"
-                  className="w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
+                  className="w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus"
                 />
               </div>
               <div>
@@ -475,7 +475,7 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
                   value={singleName}
                   onChange={(e) => setSingleName(e.target.value)}
                   placeholder={t("providerDetailMyClaudeAccountPlaceholder")}
-                  className="w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
+                  className="w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus"
                 />
               </div>
             </div>
@@ -560,7 +560,7 @@ export function ImportClaudeAuthModal({ onClose, onSuccess }: ImportClaudeAuthMo
                   value={bulkPasteText}
                   onChange={(e) => handleBulkPasteChange(e.target.value)}
                   rows={6}
-                  className="w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
+                  className="w-full rounded-control border border-border-strong bg-surface px-2 py-1.5 text-xs font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus"
                   placeholder="[{ ... }, { ... }]"
                 />
               </div>

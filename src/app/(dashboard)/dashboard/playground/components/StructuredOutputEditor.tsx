@@ -95,7 +95,7 @@ export default function StructuredOutputEditor({ structuredOutput }: StructuredO
               value={nameField}
               onChange={(e) => setNameField(e.target.value)}
               placeholder="my_schema"
-              className="text-xs font-mono bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-primary text-text-main"
+              className="text-xs font-mono bg-surface border border-border-strong rounded-control px-2 py-1.5 placeholder:text-text-subtle focus:outline-none focus:ring-1 focus:ring-focus text-text-main"
             />
           </div>
 
@@ -108,7 +108,7 @@ export default function StructuredOutputEditor({ structuredOutput }: StructuredO
               value={schemaRaw}
               onChange={(e) => setSchemaRaw(e.target.value)}
               rows={8}
-              className="text-xs font-mono bg-surface border border-border-strong rounded-control px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-primary text-text-main resize-y"
+              className="text-xs font-mono bg-surface border border-border-strong rounded-control px-2 py-1.5 focus:outline-none focus:ring-1 focus:ring-focus text-text-main resize-y"
               aria-label={t("jsonSchemaEditor")}
             />
           </div>

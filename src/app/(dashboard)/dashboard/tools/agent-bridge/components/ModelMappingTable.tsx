@@ -91,7 +91,7 @@ export function ModelMappingTable({ agentId, mappings, onSave }: ModelMappingTab
                         value={row.source}
                         onChange={(e) => updateSource(i, e.target.value)}
                         placeholder="e.g., gemini-3.6-flash-medium, or * for all unmapped"
-                        className="w-full rounded-md border border-border-strong bg-surface px-2 py-1 text-xs font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary focus:ring-[3px] focus:ring-primary/15"
+                        className="w-full rounded-md border border-border-strong bg-surface px-2 py-1 text-xs font-mono text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus focus:ring-[3px] focus:ring-focus/15"
                       />
                     </td>
                     <td className="px-3 py-2">

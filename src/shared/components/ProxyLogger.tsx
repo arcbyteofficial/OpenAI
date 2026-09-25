@@ -220,7 +220,7 @@ export default function ProxyLogger() {
             placeholder={t("searchPlaceholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
-            className="w-full h-8 pl-10 pr-4 rounded-control bg-surface border border-border-strong text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-primary"
+            className="w-full h-8 pl-10 pr-4 rounded-control bg-surface border border-border-strong text-[13px] text-text-main placeholder:text-text-subtle focus:outline-none focus:border-focus"
           />
         </div>
 
@@ -228,7 +228,7 @@ export default function ProxyLogger() {
         <select
           value={selectedType}
           onChange={(e) => setSelectedType(e.target.value)}
-          className="h-8 px-2.5 rounded-control bg-surface border border-border-strong text-[13px] text-text-main focus:outline-none focus:border-primary appearance-none cursor-pointer min-w-[120px]"
+          className="h-8 px-2.5 rounded-control bg-surface border border-border-strong text-[13px] text-text-main focus:outline-none focus:border-focus appearance-none cursor-pointer min-w-[120px]"
         >
           <option value="">{t("allTypes")}</option>
           {uniqueTypes.map((t) => (
@@ -242,7 +242,7 @@ export default function ProxyLogger() {
         <select
           value={selectedLevel}
           onChange={(e) => setSelectedLevel(e.target.value)}
-          className="h-8 px-2.5 rounded-control bg-surface border border-border-strong text-[13px] text-text-main focus:outline-none focus:border-primary appearance-none cursor-pointer min-w-[120px]"
+          className="h-8 px-2.5 rounded-control bg-surface border border-border-strong text-[13px] text-text-main focus:outline-none focus:border-focus appearance-none cursor-pointer min-w-[120px]"
         >
           <option value="">{t("allLevels")}</option>
           {uniqueLevels.map((l) => (
@@ -256,7 +256,7 @@ export default function ProxyLogger() {
         <select
           value={selectedProvider}
           onChange={(e) => setSelectedProvider(e.target.value)}
-          className="h-8 px-2.5 rounded-control bg-surface border border-border-strong text-[13px] text-text-main focus:outline-none focus:border-primary appearance-none cursor-pointer min-w-[140px]"
+          className="h-8 px-2.5 rounded-control bg-surface border border-border-strong text-[13px] text-text-main focus:outline-none focus:border-focus appearance-none cursor-pointer min-w-[140px]"
         >
           <option value="">{t("allProviders")}</option>
           {uniqueProviders.map((p) => {
@@ -303,7 +303,7 @@ export default function ProxyLogger() {
         <select
           value={sortBy}
           onChange={(e) => setSortBy(e.target.value)}
-          className="h-8 px-2.5 rounded-control bg-surface border border-border-strong text-[13px] text-text-main focus:outline-none focus:border-primary appearance-none cursor-pointer min-w-[140px]"
+          className="h-8 px-2.5 rounded-control bg-surface border border-border-strong text-[13px] text-text-main focus:outline-none focus:border-focus appearance-none cursor-pointer min-w-[140px]"
         >
           <option value="newest">{t("newest")}</option>
           <option value="oldest">{t("oldest")}</option>

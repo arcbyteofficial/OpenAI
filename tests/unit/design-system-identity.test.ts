@@ -102,7 +102,7 @@ test("base element rules are layered so utilities can override them", () => {
   const layerBody = layer.slice(0, layer.indexOf("\n}\n"));
   assert.ok(layerBody.includes(":focus-visible {"), ":focus-visible lives in @layer base");
   assert.ok(layerBody.includes("  body {"), "body base styles live in @layer base");
-  assert.match(layerBody, /--focus-ring:.*var\(--color-primary\)/);
+  assert.match(layerBody, /--focus-ring:.*var\(--color-focus\)/);
 });
 
 test("Button: monochrome primary, blue accent variant, control radius", () => {
@@ -130,7 +130,7 @@ test("Card is a border-only surface; Modal/Input/Select use the radius scale", (
 test("form controls focus on the accent ring; errors keep a distinct error ring", () => {
   for (const name of ["Input", "Select", "Textarea"]) {
     const src = read(`src/shared/components/${name}.tsx`);
-    assert.ok(src.includes("focus:ring-primary/15"), `${name} focuses on the accent ring`);
+    assert.ok(src.includes("focus:ring-focus/15"), `${name} focuses on the neutral ring`);
     assert.ok(src.includes("focus:ring-error/15"), `${name} keeps the error ring`);
   }
 });

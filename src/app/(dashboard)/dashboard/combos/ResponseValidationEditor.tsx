@@ -38,7 +38,7 @@ const linesToArray = (text: string): string[] =>
 const arrayToLines = (arr?: string[]): string => (arr ?? []).join("\n");
 
 const INPUT_CLASS =
-  "w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-primary focus:outline-none";
+  "w-full text-xs py-1.5 px-2 rounded-control border border-border-strong bg-surface text-text-main focus:border-focus focus:outline-none";
 const LABEL_CLASS = "text-[11px] font-medium text-text-muted block mb-0.5";
 
 const CONDITIONS: JsonPathCondition[] = ["exists", "nonEmpty", "equals", "notEquals"];

@@ -1053,7 +1053,7 @@ function CostExplorerCard({
               value={searchQuery}
               onChange={(event) => onSearchChange(event.target.value)}
               placeholder={t("filterRows")}
-              className="w-full rounded-control border border-border-strong bg-surface py-2 pl-9 pr-3 text-sm text-text-main placeholder:text-text-subtle focus:border-primary focus:outline-none transition-colors"
+              className="w-full rounded-control border border-border-strong bg-surface py-2 pl-9 pr-3 text-sm text-text-main placeholder:text-text-subtle focus:border-focus focus:outline-none transition-colors"
               aria-label={t("filterCostExplorerRows")}
             />
           </label>

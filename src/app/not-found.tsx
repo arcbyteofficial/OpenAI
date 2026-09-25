@@ -28,14 +28,14 @@ export default function NotFound() {
       <div className="flex flex-col sm:flex-row items-center gap-3">
         <Link
           href="/dashboard"
-          className="px-4 py-2.5 rounded-control bg-contrast text-contrast-fg text-sm font-medium no-underline hover:bg-contrast-hover transition-colors duration-150 motion-reduce:transition-none focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="px-4 py-2.5 rounded-control bg-contrast text-contrast-fg text-sm font-medium no-underline hover:bg-contrast-hover transition-colors duration-150 motion-reduce:transition-none focus:outline-2 focus:outline-offset-2 focus:outline-focus"
           aria-label={t("notFound.dashboardAriaLabel")}
         >
           {tc("goToDashboard")}
         </Link>
         <Link
           href="/status"
-          className="px-4 py-2.5 rounded-control text-sm font-medium text-text-muted no-underline hover:bg-bg-subtle hover:text-text-main transition-colors duration-150 motion-reduce:transition-none focus:outline-2 focus:outline-offset-2 focus:outline-primary"
+          className="px-4 py-2.5 rounded-control text-sm font-medium text-text-muted no-underline hover:bg-bg-subtle hover:text-text-main transition-colors duration-150 motion-reduce:transition-none focus:outline-2 focus:outline-offset-2 focus:outline-focus"
           aria-label={t("notFound.statusAriaLabel")}
         >
           {t("notFound.systemStatus")}
